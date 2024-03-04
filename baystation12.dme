@@ -1775,6 +1775,7 @@
 #include "code\modules\clothing\underwear\base.dm"
 #include "code\modules\codex\codex_atom.dm"
 #include "code\modules\codex\codex_client.dm"
+#include "code\modules\codex\codex_component.dm"
 #include "code\modules\codex\codex_implant.dm"
 #include "code\modules\codex\codex_mob.dm"
 #include "code\modules\codex\categories\_category.dm"

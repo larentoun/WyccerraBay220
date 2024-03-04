@@ -9,10 +9,8 @@ SUBSYSTEM_DEF(codex)
 	var/list/index_file =        list()
 	var/list/search_cache =      list()
 
-
 /datum/controller/subsystem/codex/UpdateStat(time)
 	return
-
 
 /datum/controller/subsystem/codex/Initialize(start_uptime)
 	// Codex link syntax is such:
@@ -21,7 +19,7 @@ SUBSYSTEM_DEF(codex)
 	linkRegex = regex(@"<(span|l)(\s+codexlink='([^>]*)'|)>([^<]+)</(span|l)>","g")
 
 	// Create general hardcoded entries.
-	for(var/ctype in typesof(/datum/codex_entry))
+	for(var/ctype in subtypesof(/datum/codex_entry))
 		var/datum/codex_entry/centry = ctype
 		if(initial(centry.display_name) || initial(centry.associated_paths) || initial(centry.associated_strings))
 			centry = new centry()
@@ -81,9 +79,7 @@ SUBSYSTEM_DEF(codex)
 
 /datum/controller/subsystem/codex/proc/present_codex_entry(mob/presenting_to, datum/codex_entry/entry)
 	if(entry && istype(presenting_to) && presenting_to.client)
-		var/datum/browser/popup = new(presenting_to, "codex", "Codex", nheight=425)
-		popup.set_content(parse_links(entry.get_text(presenting_to), presenting_to))
-		popup.open()
+		presenting_to.AddComponent(/datum/component/codex, entry)
 
 /datum/controller/subsystem/codex/proc/retrieve_entries_for_string(searching)
 
