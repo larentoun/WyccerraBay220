@@ -691,8 +691,11 @@ h2.alert {
   margin-left: 3em;
 }
 
+/**************
+   SierraBay
+**************/
+
 /**
- * SierraBay
  * LANGUAGES
  */
 .german {
@@ -705,6 +708,10 @@ h2.alert {
 
 .alain {
   color: #6a1b9a;
+}
+
+.adherent {
+  color: #526c7a;
 }
 
 /* DON_LOADOUT */
@@ -763,4 +770,27 @@ h2.alert {
 
 .boxed_message.thick_border {
   border-width: thick;
+}
+
+.cultannounce {
+  color: #800080;
+  font-style: italic;
+  font-size: 175%;
+}
+
+.staffwarn {
+  color: #ff0000;
+  font-weight: bold;
+  font-size: 150%;
+}
+
+.mfauna {
+  color: #884422;
+  font-weight: bold;
+  font-size: 125%;
+}
+
+.antagdesc {
+  color: #ff0033;
+  font-size: 125%;
 }
