@@ -36,7 +36,7 @@
 
 /obj/decal/writing/examine(mob/user)
 	. = ..(user)
-	. += SPAN_NOTICE("It reads \"[message]\".")
+	. += span_notice("It reads \"[message]\".")
 
 /obj/decal/writing/welder_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
@@ -46,8 +46,8 @@
 	if(!tool.use_as_tool(src, user, 1 SECONDS, 1, 50, SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] clears away [src] with [tool]."),
-		SPAN_NOTICE("You clear away [src] with [tool].")
+		span_notice("[user] clears away [src] with [tool]."),
+		span_notice("You clear away [src] with [tool].")
 	)
 	qdel(src)
 

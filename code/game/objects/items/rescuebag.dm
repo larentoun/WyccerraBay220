@@ -55,10 +55,10 @@
 /obj/item/bodybag/rescue/examine(mob/user)
 	. = ..()
 	if(airtank)
-		. += SPAN_NOTICE("The pressure meter on [airtank] shows '[airtank.air_contents.return_pressure()] kPa'.")
-		. += SPAN_NOTICE("The distribution valve on [airtank] is set to '[airtank.distribute_pressure] kPa'.")
+		. += span_notice("The pressure meter on [airtank] shows '[airtank.air_contents.return_pressure()] kPa'.")
+		. += span_notice("The distribution valve on [airtank] is set to '[airtank.distribute_pressure] kPa'.")
 	else
-		. += SPAN_WARNING("The air tank is missing.")
+		. += span_warning("The air tank is missing.")
 
 /obj/structure/closet/body_bag/rescue
 	name = "rescue bag"
@@ -115,8 +115,8 @@
 			return TRUE
 		set_tank(tool)
 		user.visible_message(
-			SPAN_NOTICE("[user] installs [tool] into [src]."),
-			SPAN_NOTICE("You install [tool] into [src].")
+			span_notice("[user] installs [tool] into [src]."),
+			span_notice("You install [tool] into [src].")
 		)
 		return TRUE
 
@@ -150,12 +150,12 @@
 /obj/structure/closet/body_bag/rescue/examine(mob/user)
 	. = ..()
 	if(airtank)
-		. += SPAN_NOTICE("The pressure meter on [airtank] shows '[airtank.air_contents.return_pressure()] kPa'.")
-		. += SPAN_NOTICE("The distribution valve on [airtank] is set to '[airtank.distribute_pressure] kPa'.")
+		. += span_notice("The pressure meter on [airtank] shows '[airtank.air_contents.return_pressure()] kPa'.")
+		. += span_notice("The distribution valve on [airtank] is set to '[airtank.distribute_pressure] kPa'.")
 	else
-		. += SPAN_WARNING("The air tank is missing.")
-	. += SPAN_NOTICE("The pressure meter on [src] shows '[atmo.return_pressure()] kPa'.")
+		. += span_warning("The air tank is missing.")
+	. += span_notice("The pressure meter on [src] shows '[atmo.return_pressure()] kPa'.")
 	if(Adjacent(user)) //The bag's rather thick and opaque from a distance.
-		. += SPAN_INFO("You peer into [src].")
+		. += span_info("You peer into [src].")
 		for(var/mob/living/L in contents)
 			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(examinate), user, L), 0.1 SECONDS)

@@ -26,7 +26,7 @@
 /obj/item/rsf/examine(mob/user, distance)
 	. = ..()
 	if (distance <= 0)
-		. += SPAN_NOTICE("It currently holds [stored_matter]/[max_stored_matter] fabrication units.")
+		. += span_notice("It currently holds [stored_matter]/[max_stored_matter] fabrication units.")
 
 
 /obj/item/rsf/attack_self(mob/living/user)
@@ -37,7 +37,7 @@
 	if (!choice || !user.use_sanity_check(src))
 		return
 	mode = choice
-	to_chat(user, SPAN_NOTICE("Changed dispensing mode to \"[choice]\"."))
+	to_chat(user, span_notice("Changed dispensing mode to \"[choice]\"."))
 	playsound(src, 'sound/effects/pop.ogg', 50, FALSE)
 
 
@@ -48,20 +48,20 @@
 	if (!into)
 		return FALSE
 	if (!(mode in modes))
-		to_chat(user, SPAN_WARNING("\The [src] is not set to dispense anything."))
+		to_chat(user, span_warning("\The [src] is not set to dispense anything."))
 		return TRUE
 	var/details = modes[mode]
 	if (isrobot(user))
 		var/mob/living/silicon/robot/robot = user
 		if (robot.stat || !robot.cell)
-			to_chat(user, SPAN_WARNING("You're in no condition to do that."))
+			to_chat(user, span_warning("You're in no condition to do that."))
 			return TRUE
 		var/cost = details[2]
 		if (!robot.cell.checked_use(cost))
-			to_chat(user, SPAN_WARNING("You don't have enough energy to do that."))
+			to_chat(user, span_warning("You don't have enough energy to do that."))
 			return TRUE
 	else if (stored_matter < 1)
-		to_chat(user, SPAN_WARNING("\The [src] is empty."))
+		to_chat(user, span_warning("\The [src] is empty."))
 		return TRUE
 	else
 		stored_matter--

@@ -13,9 +13,9 @@
 		return
 	owner.psi.use_psi_armour = !owner.psi.use_psi_armour
 	if(owner.psi.use_psi_armour)
-		to_chat(owner, SPAN_NOTICE("You will now use your psionics to deflect or block incoming attacks."))
+		to_chat(owner, span_notice("You will now use your psionics to deflect or block incoming attacks."))
 	else
-		to_chat(owner, SPAN_NOTICE("You will no longer use your psionics to deflect or block incoming attacks."))
+		to_chat(owner, span_notice("You will no longer use your psionics to deflect or block incoming attacks."))
 	update_icon()
 
 // End psi armour toggle.

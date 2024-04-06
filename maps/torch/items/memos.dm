@@ -159,7 +159,7 @@
 /obj/item/paper/memo/examine(mob/user, distance)
 	. = ..()
 	if (distance < 2)
-		. += SPAN_NOTICE(info)
+		. += span_notice(info)
 
 // generic memos
 

@@ -3,38 +3,38 @@
 	. = ..(user, distance, is_adjacent, infix = custom_infix)
 	if (src.getBruteLoss())
 		if (src.getBruteLoss() < 75)
-			. += SPAN_WARNING("It looks slightly dented.")
+			. += span_warning("It looks slightly dented.")
 		else
-			. += SPAN_WARNING("<B>It looks severely dented!</B>")
+			. += span_warning("<B>It looks severely dented!</B>")
 	if (src.getFireLoss())
 		if (src.getFireLoss() < 75)
-			. += SPAN_WARNING("It looks slightly charred.")
+			. += span_warning("It looks slightly charred.")
 		else
-			. += SPAN_WARNING("<B>It looks severely burnt and heat-warped!</B>")
+			. += span_warning("<B>It looks severely burnt and heat-warped!</B>")
 
 	if(opened)
-		. += SPAN_WARNING("Its cover is open and the power cell is [cell ? "installed" : "missing"].")
+		. += span_warning("Its cover is open and the power cell is [cell ? "installed" : "missing"].")
 	else
-		. += SPAN_NOTICE("Its cover is closed.")
+		. += span_notice("Its cover is closed.")
 
 	if(!has_power)
-		. += SPAN_WARNING("It appears to be running on backup power.")
+		. += span_warning("It appears to be running on backup power.")
 
 	switch(src.stat)
 		if(CONSCIOUS)
 			if(!src.client)
-				. += SPAN_NOTICE("It appears to be in stand-by mode.")
+				. += span_notice("It appears to be in stand-by mode.")
 		if(UNCONSCIOUS)
-			. += SPAN_WARNING("It doesn't seem to be responding.")
+			. += span_warning("It doesn't seem to be responding.")
 		if(DEAD)
 			. += SPAN_CLASS("deadsay", "It looks completely unsalvageable.")
 
 	if(print_flavor_text())
-		. += SPAN_NOTICE("[print_flavor_text()]")
+		. += span_notice("[print_flavor_text()]")
 
 	if (pose)
 		if( findtext(pose,".",length(pose)) == 0 && findtext(pose,"!",length(pose)) == 0 && findtext(pose,"?",length(pose)) == 0 )
 			pose = addtext(pose,".") //Makes sure all emotes end with a period.
-		. += SPAN_NOTICE("It [pose]")
+		. += span_notice("It [pose]")
 	user.showLaws(src)
 	return

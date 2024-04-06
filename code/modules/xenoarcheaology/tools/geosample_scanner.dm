@@ -65,7 +65,7 @@
 
 /obj/machinery/radiocarbon_spectrometer/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(scanning)
-		to_chat(user, SPAN_WARNING("You can't do that while [src] is scanning!"))
+		to_chat(user, span_warning("You can't do that while [src] is scanning!"))
 		return TRUE
 
 	if ((. = ..()))
@@ -86,24 +86,24 @@
 			var/obj/item/reagent_containers/glass/G = I
 			var/amount_transferred = min(reagents.maximum_volume - reagents.total_volume, G.reagents.total_volume)
 			G.reagents.trans_to(src, amount_transferred)
-			to_chat(user, SPAN_INFO("You empty [amount_transferred]u of coolant into \the [src]."))
+			to_chat(user, span_info("You empty [amount_transferred]u of coolant into \the [src]."))
 			update_coolant()
 			return TRUE
 		else if(choice == "Empty coolant")
 			var/obj/item/reagent_containers/glass/G = I
 			var/amount_transferred = min(G.reagents.maximum_volume - G.reagents.total_volume, src.reagents.total_volume)
 			reagents.trans_to(G, amount_transferred)
-			to_chat(user, SPAN_INFO("You remove [amount_transferred]u of coolant from \the [src]."))
+			to_chat(user, span_info("You remove [amount_transferred]u of coolant from \the [src]."))
 			update_coolant()
 			return TRUE
 
 	if (scanned_item)
-		to_chat(user, SPAN_WARNING("\The [src] already has \a [scanned_item] inside!"))
+		to_chat(user, span_warning("\The [src] already has \a [scanned_item] inside!"))
 		return TRUE
 	if (!user.unEquip(I, src))
 		return TRUE
 	scanned_item = I
-	to_chat(user, SPAN_NOTICE("You put \the [I] into \the [src]."))
+	to_chat(user, span_notice("You put \the [I] into \the [src]."))
 	return TRUE
 
 /obj/machinery/radiocarbon_spectrometer/proc/update_coolant()
@@ -241,16 +241,16 @@
 			//emergency stop if seal integrity reaches 0
 			if(scanner_seal_integrity <= 0 || (scanner_temperature >= 1273 && !rad_shield))
 				stop_scanning()
-				src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] buzzes unhappily. It has failed mid-scan!"), 2)
+				src.visible_message(span_notice("[icon2html(src, viewers(get_turf(src)))] buzzes unhappily. It has failed mid-scan!"), 2)
 
 			if(prob(5))
-				src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [pick("whirrs","chuffs","clicks")][pick(" excitedly"," energetically"," busily")]."), 2)
+				src.visible_message(span_notice("[icon2html(src, viewers(get_turf(src)))] [pick("whirrs","chuffs","clicks")][pick(" excitedly"," energetically"," busily")]."), 2)
 	else
 		//gradually cool down over time
 		if(scanner_temperature > 0)
 			scanner_temperature = max(scanner_temperature - 5 - 10 * rand(), 0)
 		if(prob(0.75))
-			src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [pick("plinks","hisses")][pick(" quietly"," softly"," sadly"," plaintively")]."), 2)
+			src.visible_message(span_notice("[icon2html(src, viewers(get_turf(src)))] [pick("plinks","hisses")][pick(" quietly"," softly"," sadly"," plaintively")]."), 2)
 	last_process_worldtime = world.time
 
 /obj/machinery/radiocarbon_spectrometer/proc/stop_scanning()
@@ -268,7 +268,7 @@
 		used_coolant = 0
 
 /obj/machinery/radiocarbon_spectrometer/proc/complete_scan()
-	src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] makes an insistent chime."), 2)
+	src.visible_message(span_notice("[icon2html(src, viewers(get_turf(src)))] makes an insistent chime."), 2)
 
 	if(scanned_item)
 		//create report
@@ -338,11 +338,11 @@
 					scanner_progress = 0
 					scanning = 1
 					t_left_radspike = pick(5,10,15)
-					to_chat(user, SPAN_NOTICE("Scan initiated."))
+					to_chat(user, span_notice("Scan initiated."))
 				else
-					to_chat(user, SPAN_WARNING("Could not initiate scan, seal requires replacing."))
+					to_chat(user, span_warning("Could not initiate scan, seal requires replacing."))
 			else
-				to_chat(user, SPAN_WARNING("Insert an item to scan."))
+				to_chat(user, span_warning("Insert an item to scan."))
 		. = TOPIC_REFRESH
 
 	else if(href_list["maserWavelength"])

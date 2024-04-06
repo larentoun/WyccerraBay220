@@ -28,14 +28,14 @@
 	. = ..()
 	if (beaker)
 		if (beaker.reagents)
-			. += SPAN_NOTICE("The loaded [beaker.name] has about [beaker.reagents.total_volume] unit\s left.")
+			. += span_notice("The loaded [beaker.name] has about [beaker.reagents.total_volume] unit\s left.")
 		else
-			. += SPAN_NOTICE("The loaded [beaker.name] is empty.")
+			. += span_notice("The loaded [beaker.name] is empty.")
 	else
-		. += SPAN_NOTICE("[src] has no fuel container loaded!.")
+		. += span_notice("[src] has no fuel container loaded!.")
 
 	if (lit)
-		. += SPAN_NOTICE("[src] is lit!")
+		. += span_notice("[src] is lit!")
 
 
 /obj/item/flamethrower/Destroy()
@@ -49,7 +49,7 @@
 		STOP_PROCESSING(SSobj, src)
 		return null
 	else if (!beaker || beaker.reagents.total_volume == 0)
-		visible_message(SPAN_WARNING("[src] sputters and goes out!"))
+		visible_message(span_warning("[src] sputters and goes out!"))
 		playsound(loc, 'sound/items/welderdeactivate.ogg', 50, TRUE)
 		STOP_PROCESSING(SSobj,src)
 		set_light(0)
@@ -81,7 +81,7 @@
 /obj/item/flamethrower/afterattack(atom/target, mob/user, proximity)
 	// Make sure our user is still holding us
 	if(user.a_intent == I_HELP) //don't shoot if we're on help intent
-		to_chat(user, SPAN_WARNING("You refrain from firing [src] as your intent is set to help."))
+		to_chat(user, span_warning("You refrain from firing [src] as your intent is set to help."))
 		return
 	var/turf/target_turf = get_turf(target)
 	if(target_turf)
@@ -93,7 +93,7 @@
 		if(beaker && CanPhysicallyInteract(user))
 			user.put_in_hands(beaker)
 			beaker = null
-			to_chat(user, SPAN_NOTICE("You remove the fuel container from [src]!"))
+			to_chat(user, span_notice("You remove the fuel container from [src]!"))
 			update_icon()
 	else
 		return ..()
@@ -105,7 +105,7 @@
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	status = !status
-	to_chat(user, SPAN_NOTICE("[igniter] is now [status ? "secured" : "unsecured"]!"))
+	to_chat(user, span_notice("[igniter] is now [status ? "secured" : "unsecured"]!"))
 	update_icon()
 
 /obj/item/flamethrower/wrench_act(mob/living/user, obj/item/tool)
@@ -143,7 +143,7 @@
 		if(user.unEquip(W, src))
 			if(beaker)
 				beaker.forceMove(get_turf(src))
-				to_chat(user, SPAN_NOTICE("You swap the fuel container in [src]!"))
+				to_chat(user, span_notice("You swap the fuel container in [src]!"))
 			beaker = W
 			update_icon()
 		return
@@ -157,12 +157,12 @@
 
 /obj/item/flamethrower/proc/toggle_igniter(mob/user)
 	if(!beaker || beaker.reagents.total_volume == 0)
-		to_chat(user, SPAN_NOTICE("There isn't enough fuel!"))
+		to_chat(user, span_notice("There isn't enough fuel!"))
 		return
 	if(!status)
-		to_chat(user,SPAN_NOTICE("Secure the igniter first!"))
+		to_chat(user,span_notice("Secure the igniter first!"))
 		return
-	to_chat(user, SPAN_NOTICE("You [lit ? "extinguish" : "ignite"] [src]!"))
+	to_chat(user, span_notice("You [lit ? "extinguish" : "ignite"] [src]!"))
 	lit = !lit
 	if(lit)
 		playsound(loc, 'sound/items/welderactivate.ogg', 50, TRUE)
@@ -204,7 +204,7 @@
 			fire_colour = R.fire_colour
 
 	if(power < REQUIRED_POWER_TO_FIRE_FLAMETHROWER)
-		audible_message(SPAN_DANGER("[src] sputters."))
+		audible_message(span_danger("[src] sputters."))
 		playsound(src, 'sound/weapons/guns/flamethrower_empty.ogg', 50, TRUE, -3)
 		return
 	playsound(src, pick('sound/weapons/guns/flamethrower1.ogg','sound/weapons/guns/flamethrower2.ogg','sound/weapons/guns/flamethrower3.ogg' ), 50, TRUE, -3)

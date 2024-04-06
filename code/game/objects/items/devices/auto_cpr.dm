@@ -22,9 +22,9 @@
 	. = FALSE
 	if (istype(M) && user.a_intent == I_HELP)
 		if (M.wear_suit)
-			to_chat(user, SPAN_WARNING("Their [M.wear_suit] is in the way, remove it first!"))
+			to_chat(user, span_warning("Their [M.wear_suit] is in the way, remove it first!"))
 			return TRUE
-		user.visible_message(SPAN_NOTICE("[user] starts fitting [src] onto the [M]'s chest."))
+		user.visible_message(span_notice("[user] starts fitting [src] onto the [M]'s chest."))
 
 		if (!do_after(user, 2 SECONDS, M, DO_EQUIP))
 			return TRUE
@@ -60,7 +60,7 @@
 		if(!skilled_setup && prob(20))
 			var/obj/item/organ/external/E = H.get_organ(BP_CHEST)
 			E.add_pain(15)
-			to_chat(H, SPAN_DANGER("Your [E] is compressed painfully!"))
+			to_chat(H, span_danger("Your [E] is compressed painfully!"))
 			if(prob(5))
 				E.fracture()
 		else

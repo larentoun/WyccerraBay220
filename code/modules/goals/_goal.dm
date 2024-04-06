@@ -58,7 +58,7 @@
 /datum/goal/proc/on_failure()
 	if(failure_message && !check_success() && istype(owner, /datum/mind))
 		var/datum/mind/mind = owner
-		to_chat(mind.current, SPAN_DANGER(failure_message))
+		to_chat(mind.current, span_danger(failure_message))
 
 /datum/goal/proc/is_valid()
 	return TRUE

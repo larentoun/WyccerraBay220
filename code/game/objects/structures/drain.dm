@@ -18,8 +18,8 @@
 	var/obj/item/drain/drain_item = new(loc)
 	transfer_fingerprints_to(drain_item)
 	user.visible_message(
-		SPAN_NOTICE("[user] unwrenches [src] from the floor with [tool]."),
-		SPAN_NOTICE("You unwrench [src] from the floor with [tool].")
+		span_notice("[user] unwrenches [src] from the floor with [tool]."),
+		span_notice("You unwrench [src] from the floor with [tool].")
 	)
 	qdel(src)
 
@@ -44,7 +44,7 @@
 /obj/structure/hygiene/drain/examine(mob/user)
 	. = ..()
 	if(welded)
-		. += SPAN_NOTICE("It is welded shut.")
+		. += span_notice("It is welded shut.")
 
 //for construction.
 /obj/item/drain
@@ -62,7 +62,7 @@
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	new constructed_type(src.loc)
-	to_chat(user, SPAN_WARNING("[user] wrenches the [src] down."))
+	to_chat(user, span_warning("[user] wrenches the [src] down."))
 	qdel(src)
 
 /obj/structure/hygiene/drain/bath
@@ -75,7 +75,7 @@
 	. = ..()
 	if(!welded)
 		closed = !closed
-		user.visible_message(SPAN_NOTICE("[user] has [closed ? "closed" : "opened"] the drain."))
+		user.visible_message(span_notice("[user] has [closed ? "closed" : "opened"] the drain."))
 	update_icon()
 
 /obj/structure/hygiene/drain/bath/on_update_icon()
@@ -86,7 +86,7 @@
 
 /obj/structure/hygiene/drain/bath/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("It is [closed ? "closed" : "open"]")
+	. += span_notice("It is [closed ? "closed" : "open"]")
 
 /obj/structure/hygiene/drain/bath/Process()
 	if(closed)

@@ -26,8 +26,8 @@
 		coat = tool
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] hangs \a [tool] on \the [src]."),
-			SPAN_NOTICE("You hang \the [tool] on \the [src].")
+			span_notice("\The [user] hangs \a [tool] on \the [src]."),
+			span_notice("You hang \the [tool] on \the [src].")
 		)
 		return TRUE
 

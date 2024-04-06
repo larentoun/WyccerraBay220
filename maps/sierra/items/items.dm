@@ -371,7 +371,7 @@ Passports
 		var/obj/item/card/id/ID = tool
 		if((ID.access && region_access) && (ID.access & region_access))
 			safety = !safety
-			to_chat(user, SPAN_NOTICE("You swipe your indefication card on \the [src]. The safety lock [safety ? "has been reset" : "off"]."))
+			to_chat(user, span_notice("You swipe your indefication card on \the [src]. The safety lock [safety ? "has been reset" : "off"]."))
 			var/static/list/beepsounds = list(
 				'sound/effects/compbeep1.ogg',
 				'sound/effects/compbeep2.ogg',

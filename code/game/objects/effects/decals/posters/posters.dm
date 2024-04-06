@@ -60,14 +60,14 @@
 	// Wirecutters - Remove poster
 	if(ruined)
 		user.visible_message(
-			SPAN_NOTICE("[user] removes the remnants of [src] with [tool]."),
-			SPAN_NOTICE("You remove the remnants of [src] with [tool].")
+			span_notice("[user] removes the remnants of [src] with [tool]."),
+			span_notice("You remove the remnants of [src] with [tool].")
 		)
 		qdel(src)
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] removes [src] with [tool]."),
-		SPAN_NOTICE("You remove [src] with [tool].")
+		span_notice("[user] removes [src] with [tool]."),
+		span_notice("You remove [src] with [tool].")
 	)
 	roll_and_drop(user.loc)
 
@@ -80,7 +80,7 @@
 		if(ruined || !user.Adjacent(src))
 			return
 
-		visible_message(SPAN_WARNING("[user] rips [src] in a single, decisive motion!") )
+		visible_message(span_warning("[user] rips [src] in a single, decisive motion!") )
 		playsound(src.loc, 'sound/items/poster_ripped.ogg', 100, 1)
 		ruined = 1
 		icon_state = "poster_ripped"

@@ -122,21 +122,21 @@
 	. = ..()
 	if(distance <= 1)
 		if(length(needs_signed))
-			. += SPAN_WARNING("It needs [length(needs_signed)] more signature\s before it can be filed: [english_list(needs_signed)].")
+			. += span_warning("It needs [length(needs_signed)] more signature\s before it can be filed: [english_list(needs_signed)].")
 		if(length(has_signed))
-			. += SPAN_NOTICE("It has been signed by: [english_list(has_signed)].")
+			. += span_notice("It has been signed by: [english_list(has_signed)].")
 
 /obj/item/paperwork/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/pen))
 		if(user.real_name in has_signed)
-			to_chat(user, SPAN_WARNING("You have already signed \the [src]."))
+			to_chat(user, span_warning("You have already signed \the [src]."))
 			return
 		if(!(user.real_name in needs_signed))
-			to_chat(user, SPAN_WARNING("You can't see anywhere on \the [src] for you to sign; it doesn't need your signature."))
+			to_chat(user, span_warning("You can't see anywhere on \the [src] for you to sign; it doesn't need your signature."))
 			return
 		LAZYADD(has_signed, user.real_name)
 		LAZYREMOVE(needs_signed, user.real_name)
-		user.visible_message(SPAN_NOTICE("\The [user] signs \the [src] with \the [W]."))
+		user.visible_message(span_notice("\The [user] signs \the [src] with \the [W]."))
 		associated_goal?.update_strings()
 		update_icon()
 		return TRUE

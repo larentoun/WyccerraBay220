@@ -61,8 +61,8 @@
 		mytape = tool
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] inserts [tool] into [src]."),
-			SPAN_NOTICE("You insert [tool] into [src].")
+			span_notice("[user] inserts [tool] into [src]."),
+			span_notice("You insert [tool] into [src].")
 		)
 		return TRUE
 
@@ -90,15 +90,15 @@
 	if(usr.incapacitated())
 		return
 	if(!mytape)
-		to_chat(usr, SPAN_NOTICE("There's no tape in [src]."))
+		to_chat(usr, span_notice("There's no tape in [src]."))
 		return
 	if(emagged)
-		to_chat(usr, SPAN_NOTICE("The tape seems to be stuck inside."))
+		to_chat(usr, span_notice("The tape seems to be stuck inside."))
 		return
 
 	if(playing || recording)
 		stop()
-	to_chat(usr, SPAN_NOTICE("You remove [mytape] from [src]."))
+	to_chat(usr, span_notice("You remove [mytape] from [src]."))
 	usr.put_in_hands(mytape)
 	mytape = null
 	update_icon()
@@ -106,7 +106,7 @@
 /obj/item/device/taperecorder/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1 && maintenance)
-		. += SPAN_NOTICE("The wires are exposed.")
+		. += span_notice("The wires are exposed.")
 
 /obj/item/device/taperecorder/hear_talk(mob/living/M as mob, msg, verb="says", datum/language/speaking=null)
 	var/speaker = null
@@ -145,17 +145,17 @@
 	if(!emagged)
 		emagged = TRUE
 		recording = 0
-		to_chat(user, SPAN_WARNING("PZZTTPFFFT"))
+		to_chat(user, span_warning("PZZTTPFFFT"))
 		update_icon()
 		return 1
 	else
-		to_chat(user, SPAN_WARNING("It is already emagged!"))
+		to_chat(user, span_warning("It is already emagged!"))
 
 /obj/item/device/taperecorder/proc/explode()
 	var/turf/T = get_turf(loc)
 	if(ismob(loc))
 		var/mob/M = loc
-		to_chat(M, SPAN_DANGER("[src] explodes!"))
+		to_chat(M, span_danger("[src] explodes!"))
 	if(T)
 		T.hotspot_expose(700,125)
 		explosion(T, 1, EX_ACT_LIGHT)
@@ -170,19 +170,19 @@
 		return
 	playsound(src, 'sound/machines/click.ogg', 10, 1)
 	if(!mytape)
-		to_chat(usr, SPAN_NOTICE("There's no tape!"))
+		to_chat(usr, span_notice("There's no tape!"))
 		return
 	if(mytape.ruined || emagged)
-		audible_message(SPAN_WARNING("The tape recorder makes a scratchy noise."))
+		audible_message(span_warning("The tape recorder makes a scratchy noise."))
 		return
 	if(recording)
-		to_chat(usr, SPAN_NOTICE("You're already recording!"))
+		to_chat(usr, span_notice("You're already recording!"))
 		return
 	if(playing)
-		to_chat(usr, SPAN_NOTICE("You can't record when playing!"))
+		to_chat(usr, span_notice("You can't record when playing!"))
 		return
 	if(mytape.used_capacity < mytape.max_capacity)
-		to_chat(usr, SPAN_NOTICE("Recording started."))
+		to_chat(usr, span_notice("Recording started."))
 		recording = 1
 		update_icon()
 
@@ -194,14 +194,14 @@
 			if (!mytape)
 				if(ismob(loc))
 					var/mob/M = loc
-					to_chat(M, SPAN_NOTICE("[src]'s tape has been removed."))
+					to_chat(M, span_notice("[src]'s tape has been removed."))
 				stop_recording()
 				break
 			mytape.used_capacity++
 			if(mytape.used_capacity >= mytape.max_capacity)
 				if(ismob(loc))
 					var/mob/M = loc
-					to_chat(M, SPAN_NOTICE("The tape is full."))
+					to_chat(M, span_notice("The tape is full."))
 				stop_recording()
 				break
 
@@ -209,7 +209,7 @@
 		update_icon()
 		return
 	else
-		to_chat(usr, SPAN_NOTICE("The tape is full."))
+		to_chat(usr, span_notice("The tape is full."))
 
 
 /obj/item/device/taperecorder/proc/stop_recording()
@@ -220,7 +220,7 @@
 		mytape.record_speech("Recording stopped.")
 	if(ismob(loc))
 		var/mob/M = loc
-		to_chat(M, SPAN_NOTICE("Recording stopped."))
+		to_chat(M, span_notice("Recording stopped."))
 
 
 /obj/item/device/taperecorder/verb/stop()
@@ -236,10 +236,10 @@
 	else if(playing)
 		playing = 0
 		update_icon()
-		to_chat(usr, SPAN_NOTICE("Playback stopped."))
+		to_chat(usr, span_notice("Playback stopped."))
 		return
 	else
-		to_chat(usr, SPAN_NOTICE("Stop what?"))
+		to_chat(usr, span_notice("Stop what?"))
 
 
 /obj/item/device/taperecorder/verb/wipe_tape()
@@ -251,16 +251,16 @@
 	if(!mytape)
 		return
 	if(emagged || mytape.ruined)
-		audible_message(SPAN_WARNING("The tape recorder makes a scratchy noise."))
+		audible_message(span_warning("The tape recorder makes a scratchy noise."))
 		return
 	if(recording || playing)
-		to_chat(usr, SPAN_NOTICE("You can't wipe the tape while playing or recording!"))
+		to_chat(usr, span_notice("You can't wipe the tape while playing or recording!"))
 		return
 	else
 		if(mytape.storedinfo)	mytape.storedinfo.Cut()
 		if(mytape.timestamp)	mytape.timestamp.Cut()
 		mytape.used_capacity = 0
-		to_chat(usr, SPAN_NOTICE("You wipe the tape."))
+		to_chat(usr, span_notice("You wipe the tape."))
 		return
 
 
@@ -274,20 +274,20 @@
 
 /obj/item/device/taperecorder/proc/play(mob/user)
 	if(!mytape)
-		to_chat(user, SPAN_NOTICE("There's no tape!"))
+		to_chat(user, span_notice("There's no tape!"))
 		return
 	if(mytape.ruined)
-		audible_message(SPAN_WARNING("The tape recorder makes a scratchy noise."))
+		audible_message(span_warning("The tape recorder makes a scratchy noise."))
 		return
 	if(recording)
-		to_chat(user, SPAN_NOTICE("You can't playback when recording!"))
+		to_chat(user, span_notice("You can't playback when recording!"))
 		return
 	if(playing)
-		to_chat(user, SPAN_NOTICE("You're already playing!"))
+		to_chat(user, span_notice("You're already playing!"))
 		return
 	playing = 1
 	update_icon()
-	to_chat(user, SPAN_NOTICE("Audio playback started."))
+	to_chat(user, span_notice("Audio playback started."))
 	playsound(src, 'sound/machines/click.ogg', 10, 1)
 	for(var/i=1 , i < mytape?.max_capacity , i++)
 		if(!mytape || !playing)
@@ -348,19 +348,19 @@
 	if(usr.incapacitated())
 		return
 	if(!mytape)
-		to_chat(usr, SPAN_NOTICE("There's no tape!"))
+		to_chat(usr, span_notice("There's no tape!"))
 		return
 	if(mytape.ruined || emagged)
-		audible_message(SPAN_WARNING("The tape recorder makes a scratchy noise."))
+		audible_message(span_warning("The tape recorder makes a scratchy noise."))
 		return
 	if(!canprint)
-		to_chat(usr, SPAN_NOTICE("The recorder can't print that fast!"))
+		to_chat(usr, span_notice("The recorder can't print that fast!"))
 		return
 	if(recording || playing)
-		to_chat(usr, SPAN_NOTICE("You can't print the transcript while playing or recording!"))
+		to_chat(usr, span_notice("You can't print the transcript while playing or recording!"))
 		return
 
-	to_chat(usr, SPAN_NOTICE("Transcript printed."))
+	to_chat(usr, span_notice("Transcript printed."))
 	var/obj/item/paper/P = new /obj/item/paper(get_turf(src))
 	var/t1 = "<B>Transcript:</B><BR><BR>"
 	for(var/i=1,length(mytape.storedinfo) >= i,i++)
@@ -428,7 +428,7 @@
 
 /obj/item/device/tape/attack_self(mob/user)
 	if(!ruined)
-		to_chat(user, SPAN_NOTICE("You pull out all the tape!"))
+		to_chat(user, span_notice("You pull out all the tape!"))
 		get_loose_tape(user, length(storedinfo))
 		ruin()
 
@@ -487,15 +487,15 @@
 			return TRUE
 		SetName("[initial(name)] - '[input]'")
 		user.visible_message(
-			SPAN_NOTICE("[user] labels [src] with [tool]."),
-			SPAN_NOTICE("You label [src] with [tool].")
+			span_notice("[user] labels [src] with [tool]."),
+			span_notice("You label [src] with [tool].")
 		)
 		return TRUE
 	. = ..()
 
 /obj/item/device/tape/proc/cut(mob/user)
 	if(!LAZYLEN(timestamp))
-		to_chat(user, SPAN_NOTICE("There's nothing on this tape!"))
+		to_chat(user, span_notice("There's nothing on this tape!"))
 		return
 	var/list/output = list("<center>")
 	for(var/i=1, i < length(timestamp), i++)
@@ -509,10 +509,10 @@
 
 /obj/item/device/tape/proc/join(mob/user, obj/item/device/tape/other)
 	if(max_capacity + other.max_capacity > initial(max_capacity))
-		to_chat(user, SPAN_NOTICE("You can't fit this much tape in!"))
+		to_chat(user, span_notice("You can't fit this much tape in!"))
 		return
 	if(user.unEquip(other))
-		to_chat(user, SPAN_NOTICE("You join ends of the tape together."))
+		to_chat(user, span_notice("You join ends of the tape together."))
 		max_capacity += other.max_capacity
 		used_capacity = min(used_capacity + other.used_capacity, max_capacity)
 		timestamp += other.timestamp
@@ -528,7 +528,7 @@
 		if(index >= length(timestamp))
 			return
 
-		to_chat(user, SPAN_NOTICE("You remove part of the tape off."))
+		to_chat(user, span_notice("You remove part of the tape off."))
 		get_loose_tape(user, index)
 		cut(user)
 		return TOPIC_REFRESH
@@ -572,6 +572,6 @@
 /obj/item/device/tape/loose/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
-		. += SPAN_NOTICE("It looks long enough to hold [max_capacity] seconds worth of recording.")
+		. += span_notice("It looks long enough to hold [max_capacity] seconds worth of recording.")
 		if(doctored && user.skill_check(SKILL_FORENSICS, SKILL_MASTER))
-			. += SPAN_NOTICE("It has been tampered with...")
+			. += span_notice("It has been tampered with...")

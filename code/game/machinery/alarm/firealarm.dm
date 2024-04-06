@@ -107,8 +107,8 @@
 	if(buildstage == 2)
 		detecting = !detecting
 		user.visible_message(
-			SPAN_NOTICE("[user] has [detecting? "re" : "dis"]connected [src]'s detecting unit!"),
-			SPAN_NOTICE("You have [detecting? "re" : "dis"]connected [src]'s detecting unit.")
+			span_notice("[user] has [detecting? "re" : "dis"]connected [src]'s detecting unit!"),
+			span_notice("You have [detecting? "re" : "dis"]connected [src]'s detecting unit.")
 		)
 
 /obj/machinery/firealarm/screwdriver_act(mob/living/user, obj/item/tool)
@@ -137,8 +137,8 @@
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] has cut the wires inside [src]!"),
-		SPAN_NOTICE("You have cut the wires inside [src].")
+		span_notice("[user] has cut the wires inside [src]!"),
+		span_notice("You have cut the wires inside [src].")
 	)
 	new/obj/item/stack/cable_coil(get_turf(src), 5)
 	buildstage = 1
@@ -153,12 +153,12 @@
 				if(istype(W, /obj/item/stack/cable_coil))
 					var/obj/item/stack/cable_coil/C = W
 					if (C.use(5))
-						to_chat(user, SPAN_NOTICE("You wire [src]."))
+						to_chat(user, span_notice("You wire [src]."))
 						buildstage = 2
 						update_icon()
 						return TRUE
 					else
-						to_chat(user, SPAN_WARNING("You need 5 pieces of cable to wire [src]."))
+						to_chat(user, span_warning("You need 5 pieces of cable to wire [src]."))
 						return TRUE
 			if(0)
 				if(istype(W, /obj/item/firealarm_electronics))
@@ -168,7 +168,7 @@
 					update_icon()
 					return TRUE
 
-	to_chat(user, SPAN_WARNING("You fumble with [W] and trigger the alarm!"))
+	to_chat(user, span_warning("You fumble with [W] and trigger the alarm!"))
 	alarm()
 	return TRUE
 

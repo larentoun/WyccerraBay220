@@ -19,7 +19,7 @@
 	if(open != 1)
 		return
 	. = ITEM_INTERACT_SUCCESS
-	user.show_message(SPAN_NOTICE("Now attempting to reset internal memory, please hold."), 1)
+	user.show_message(span_notice("Now attempting to reset internal memory, please hold."), 1)
 	if(!tool.use_as_tool(src, user, 10 SECONDS, volume = 50, skill_path = list(SKILL_DEVICES, SKILL_CONSTRUCTION), do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	if(!prob(40))
@@ -27,7 +27,7 @@
 		return
 	l_setshort = 1
 	l_set = 0
-	to_chat(user, SPAN_NOTICE("Internal memory reset. Please give it a few seconds to reinitialize."))
+	to_chat(user, span_notice("Internal memory reset. Please give it a few seconds to reinitialize."))
 	addtimer(CALLBACK(src, PROC_REF(update_setshort), FALSE), 8 SECONDS)
 
 /obj/item/storage/secure/screwdriver_act(mob/living/user, obj/item/tool)
@@ -50,7 +50,7 @@
 		return TRUE
 
 	else
-		to_chat(user, SPAN_WARNING("\The [src] is locked and cannot be opened!"))
+		to_chat(user, span_warning("\The [src] is locked and cannot be opened!"))
 		return TRUE
 
 /obj/item/storage/secure/proc/update_setshort(new_value)
@@ -115,7 +115,7 @@
 /obj/item/storage/secure/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
-		. += SPAN_NOTICE("The service panel is [src.open ? "open" : "closed"].")
+		. += span_notice("The service panel is [src.open ? "open" : "closed"].")
 
 
 /obj/item/storage/secure/emag_act(remaining_charges, mob/user, feedback)
@@ -149,7 +149,7 @@
 
 /obj/item/storage/secure/briefcase/attack_hand(mob/user)
 	if ((loc == user) && (locked == 1))
-		to_chat(usr, SPAN_WARNING("[src] is locked and cannot be opened!"))
+		to_chat(usr, span_warning("[src] is locked and cannot be opened!"))
 	else if ((loc == user) && (!locked))
 		open(usr)
 	else

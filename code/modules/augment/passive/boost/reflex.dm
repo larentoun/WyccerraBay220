@@ -8,10 +8,10 @@
 /obj/item/organ/internal/augment/boost/reflex/buff()
 	. = ..()
 	if (.)
-		to_chat(owner, SPAN_NOTICE("Notice: Close combat heuristics recalibrated."))
+		to_chat(owner, span_notice("Notice: Close combat heuristics recalibrated."))
 
 
 /obj/item/organ/internal/augment/boost/reflex/debuff()
 	. = ..()
 	if (.)
-		to_chat(owner, SPAN_WARNING("E%r00r: dAmage detect-ted to synapse connections."))
+		to_chat(owner, span_warning("E%r00r: dAmage detect-ted to synapse connections."))

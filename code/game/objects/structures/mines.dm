@@ -18,9 +18,9 @@
 	if (!istype(M))
 		return
 	M.show_message(
-		SPAN_WARNING("Your foot steps down on \the [src]... Uh oh..."),
+		span_warning("Your foot steps down on \the [src]... Uh oh..."),
 		VISIBLE_MESSAGE,
-		SPAN_WARNING("You feel your foot step down on something, and get a very bad feeling...")
+		span_warning("You feel your foot step down on something, and get a very bad feeling...")
 	)
 	if (!activated)
 		activate()
@@ -42,8 +42,8 @@
 /obj/structure/mine/use_weapon(obj/item/weapon, mob/user, list/click_params)
 	SHOULD_CALL_PARENT(FALSE)
 	user.visible_message(
-		SPAN_WARNING("\The [user] hits \the [src] with \a [weapon]!"),
-		SPAN_DANGER("You hit \the [src] with \the [weapon]. This was a bad idea.")
+		span_warning("\The [user] hits \the [src] with \a [weapon]!"),
+		span_danger("You hit \the [src] with \the [weapon]. This was a bad idea.")
 	)
 	if (!activated)
 		activate()
@@ -53,8 +53,8 @@
 /obj/structure/mine/proc/activate(mob/living/victim)
 	activated = TRUE
 	visible_message(
-		SPAN_DANGER("\The [src] explodes!"),
-		SPAN_DANGER("You hear an explosion!")
+		span_danger("\The [src] explodes!"),
+		span_danger("You hear an explosion!")
 	)
 	explosion(get_turf(src), 3, EX_ACT_HEAVY)
 	qdel_self()

@@ -19,11 +19,11 @@
 
 /obj/item/organ/internal/augment/active/nanounit/proc/catastrophic_failure()
 	playsound(owner,'sound/mecha/internaldmgalarm.ogg',25,1)
-	owner.visible_message(SPAN_WARNING("The nanites attempt to harden. But they seem... brittle."))
+	owner.visible_message(span_warning("The nanites attempt to harden. But they seem... brittle."))
 	for(var/obj/item/organ/external/E in owner.organs)
 		if (prob(25))
 			E.status |= ORGAN_BRITTLE
-			to_chat(owner, SPAN_DANGER("Your [E.name] feels cold and rigid"))
+			to_chat(owner, span_danger("Your [E.name] feels cold and rigid"))
 	QDEL_NULL(aura)
 
 
@@ -32,10 +32,10 @@
 		return
 	if(aura.active)
 		aura.active = FALSE
-		to_chat(owner, SPAN_NOTICE("Nanites entering sleep mode."))
+		to_chat(owner, span_notice("Nanites entering sleep mode."))
 	else
 		aura.active = TRUE
-		to_chat(owner, SPAN_NOTICE("Activation sequence in progress."))
+		to_chat(owner, span_notice("Activation sequence in progress."))
 	playsound(owner, 'sound/weapons/flash.ogg', 35, 1)
 
 
@@ -54,24 +54,24 @@
 	. = ..()
 	unit = holder
 	playsound(loc, 'sound/weapons/flash.ogg',35,1)
-	to_chat(loc, SPAN_NOTICE("Your skin tingles as the nanites spread over your body."))
+	to_chat(loc, span_notice("Your skin tingles as the nanites spread over your body."))
 
 
 /obj/aura/nanoaura/aura_check_bullet(obj/item/projectile/proj, def_zone)
 	if (!active)
 		return EMPTY_BITFIELD
 	if (unit.charges > 0)
-		user.visible_message(SPAN_WARNING("The nanomachines harden as a response to physical trauma!"))
+		user.visible_message(span_warning("The nanomachines harden as a response to physical trauma!"))
 		playsound(user, 'sound/effects/basscannon.ogg',35,1)
 		unit.charges -= 1
 		if (unit.charges <= 0)
-			to_chat(user, SPAN_DANGER("Warning: Critical damage treshold passed. Shut down unit to avoid further damage"))
+			to_chat(user, span_danger("Warning: Critical damage treshold passed. Shut down unit to avoid further damage"))
 		return AURA_FALSE | AURA_CANCEL
 	unit.catastrophic_failure()
 	return EMPTY_BITFIELD
 
 
 /obj/aura/nanoaura/Destroy()
-	to_chat(user, SPAN_WARNING("The nanites dissolve!"))
+	to_chat(user, span_warning("The nanites dissolve!"))
 	unit = null
 	return ..()

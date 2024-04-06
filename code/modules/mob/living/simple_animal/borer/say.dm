@@ -14,7 +14,7 @@
 
 	if (src.client)
 		if(client.prefs.muted & MUTE_IC)
-			to_chat(src, SPAN_WARNING("You cannot speak in IC (muted)."))
+			to_chat(src, span_warning("You cannot speak in IC (muted)."))
 			return
 
 	if (copytext_char(message, 1, 2) == get_prefix_key(/singleton/prefix/custom_emote))

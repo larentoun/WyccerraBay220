@@ -41,8 +41,8 @@
 		return
 	if(is_valid_scan_target(target))
 		user.visible_message(
-			SPAN_NOTICE("\The [user] runs \the [src] over \the [target]."),
-			SPAN_NOTICE("You run \the [src] over \the [target]."),
+			span_notice("\The [user] runs \the [src] over \the [target]."),
+			span_notice("You run \the [src] over \the [target]."),
 			range = 2
 		)
 		if(scan_sound)

@@ -30,7 +30,7 @@
 	. = ..()
 
 	if(holder.stat == CONSCIOUS && prob(50))
-		holder.visible_message(SPAN_WARNING("\The [holder] gets an evil-looking gleam in their eye."))
+		holder.visible_message(span_warning("\The [holder] gets an evil-looking gleam in their eye."))
 
 
 /mob/living/simple_animal/hostile/retaliate/goat/Initialize(mapload)
@@ -55,7 +55,7 @@
 			if(length(ai_holder.attackers) && prob(10))
 				ai_holder.attackers = list()
 				ai_holder.lose_target()
-				src.visible_message(SPAN_NOTICE("\The [src] calms down."))
+				src.visible_message(span_notice("\The [src] calms down."))
 
 		if(stat == CONSCIOUS)
 			if(udder && prob(5))
@@ -64,13 +64,13 @@
 		if(locate(/obj/vine) in loc)
 			var/obj/vine/SV = locate() in loc
 			if(prob(60))
-				src.visible_message(SPAN_NOTICE("\The [src] eats the plants."))
+				src.visible_message(span_notice("\The [src] eats the plants."))
 				SV.kill_health(1)
 				if(locate(/obj/machinery/portable_atmospherics/hydroponics/soil/invisible) in loc)
 					var/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/SP = locate() in loc
 					qdel(SP)
 			else if(prob(20))
-				src.visible_message(SPAN_NOTICE("\The [src] chews on the plants."))
+				src.visible_message(span_notice("\The [src] chews on the plants."))
 			return
 
 		if(!pulledby)
@@ -103,11 +103,11 @@
 			USE_FEEDBACK_FAILURE("\The [src]'s udder is dry. Try again later.")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] milks \the [src] with \a [tool]."),
-			SPAN_NOTICE("You milk \the [src] with \the [tool]."),
+			span_notice("\The [user] milks \the [src] with \a [tool]."),
+			span_notice("You milk \the [src] with \the [tool]."),
 			exclude_mobs = src
 		)
-		to_chat(src, SPAN_NOTICE("\The [user] milks you with \a [tool]."))
+		to_chat(src, span_notice("\The [user] milks you with \a [tool]."))
 		return TRUE
 
 	return ..()
@@ -169,11 +169,11 @@
 			USE_FEEDBACK_FAILURE("\The [src]'s udder is dry. Try again later.")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] milks \the [src] with \a [tool]."),
-			SPAN_NOTICE("You milk \the [src] with \the [tool]."),
+			span_notice("\The [user] milks \the [src] with \a [tool]."),
+			span_notice("You milk \the [src] with \the [tool]."),
 			exclude_mobs = src
 		)
-		to_chat(src, SPAN_NOTICE("\The [user] milks you with \a [tool]."))
+		to_chat(src, span_notice("\The [user] milks you with \a [tool]."))
 		return TRUE
 
 	return ..()
@@ -188,7 +188,7 @@
 
 /mob/living/simple_animal/passive/cow/attack_hand(mob/living/carbon/M as mob)
 	if(!stat && M.a_intent == I_DISARM && icon_state != icon_dead)
-		M.visible_message(SPAN_WARNING("[M] tips over [src]."),SPAN_NOTICE("You tip over [src]."))
+		M.visible_message(span_warning("[M] tips over [src]."),span_notice("You tip over [src]."))
 		Weaken(30)
 		icon_state = icon_dead
 		spawn(rand(20,50))
@@ -319,11 +319,11 @@ var/global/chicken_count = 0
 			return TRUE
 		eggsleft += rand(1, 4)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] feeds \the [src] \a [tool]. It clucks happily."),
-			SPAN_NOTICE("You feed \the [src] \the [tool]. It clucks happily."),
+			span_notice("\The [user] feeds \the [src] \a [tool]. It clucks happily."),
+			span_notice("You feed \the [src] \the [tool]. It clucks happily."),
 			exclude_mobs = src
 		)
-		to_chat(src, SPAN_NOTICE("\The [user] feeds you \a [tool]."))
+		to_chat(src, span_notice("\The [user] feeds you \a [tool]."))
 		qdel(tool)
 		return TRUE
 
@@ -451,11 +451,11 @@ var/global/chicken_count = 0
 			USE_FEEDBACK_FAILURE("\The [src]'s gland is dry. Try again later.")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] milks \the [src] with \a [tool]."),
-			SPAN_NOTICE("You milk \the [src] with \the [tool]."),
+			span_notice("\The [user] milks \the [src] with \a [tool]."),
+			span_notice("You milk \the [src] with \the [tool]."),
 			exclude_mobs = src
 		)
-		to_chat(src, SPAN_NOTICE("\The [user] milks you with \a [tool]."))
+		to_chat(src, span_notice("\The [user] milks you with \a [tool]."))
 		return TRUE
 
 	return ..()
@@ -471,8 +471,8 @@ var/global/chicken_count = 0
 /mob/living/simple_animal/passive/thoom/attack_hand(mob/living/carbon/M)
 	if(!stat && M.a_intent == I_DISARM && icon_state != icon_dead)
 		M.visible_message(
-			SPAN_WARNING("\The [M] tips over \the [src]."),
-			SPAN_NOTICE("You tip over \the [src].")
+			span_warning("\The [M] tips over \the [src]."),
+			span_notice("You tip over \the [src].")
 		)
 		Weaken(30)
 		icon_state = icon_dead

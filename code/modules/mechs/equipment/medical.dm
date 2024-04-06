@@ -38,9 +38,9 @@
 	. = ..()
 	if(.)
 		if(ishuman(target) && !sleeper.occupant)
-			owner.visible_message(SPAN_NOTICE("\The [src] is lowered down to load [target]"))
+			owner.visible_message(span_notice("\The [src] is lowered down to load [target]"))
 			sleeper.go_in(target, user)
-		else to_chat(user, SPAN_WARNING("You cannot load that in!"))
+		else to_chat(user, span_warning("You cannot load that in!"))
 
 /obj/item/mech_equipment/sleeper/get_hardpoint_maptext()
 	if(sleeper && sleeper.occupant)
@@ -87,9 +87,9 @@
 
 		if(beaker)
 			beaker.forceMove(get_turf(src))
-			user.visible_message(SPAN_NOTICE("\The [user] removes \the [beaker] from \the [src]."), SPAN_NOTICE("You remove \the [beaker] from \the [src]."))
+			user.visible_message(span_notice("\The [user] removes \the [beaker] from \the [src]."), span_notice("You remove \the [beaker] from \the [src]."))
 		beaker = I
-		user.visible_message(SPAN_NOTICE("\The [user] adds \a [I] to \the [src]."), SPAN_NOTICE("You add \a [I] to \the [src]."))
+		user.visible_message(span_notice("\The [user] adds \a [I] to \the [src]."), span_notice("You add \a [I] to \the [src]."))
 		return TRUE
 
 	return ..()
@@ -114,7 +114,7 @@
 	if(!.)
 		return
 	mode = mode == MEDIGEL_SALVE ? MEDIGEL_SCAN : MEDIGEL_SALVE
-	to_chat(user, SPAN_NOTICE("You set \the [src] to [mode == MEDIGEL_SALVE ? "dispense medigel" : "scan for injuries"]."))
+	to_chat(user, span_notice("You set \the [src] to [mode == MEDIGEL_SALVE ? "dispense medigel" : "scan for injuries"]."))
 	update_icon()
 
 /obj/item/mech_equipment/mender/afterattack(atom/target, mob/living/user, inrange, params)
@@ -127,11 +127,11 @@
 			var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 
 			if(affecting.is_bandaged() && affecting.is_disinfected() && affecting.is_salved())
-				to_chat(user, SPAN_WARNING("The wounds on \the [H]'s [affecting.name] have already been treated."))
+				to_chat(user, span_warning("The wounds on \the [H]'s [affecting.name] have already been treated."))
 			else
 				if(!LAZYLEN(affecting.wounds))
 					return
-				owner.visible_message(SPAN_NOTICE("\The [owner] extends \the [src] towards \the [H]'s [affecting.name]."))
+				owner.visible_message(span_notice("\The [owner] extends \the [src] towards \the [H]'s [affecting.name]."))
 				var/large_wound = FALSE
 				for (var/datum/wound/W as anything in affecting.wounds)
 					if (W.bandaged && W.disinfected && W.salved)
@@ -148,20 +148,20 @@
 						return //Early out, cell is gone
 
 					if (W.current_stage <= W.max_bleeding_stage)
-						owner.visible_message(SPAN_NOTICE("\The [owner] covers \a [W.desc] on \the [H]'s [affecting.name] with large globs of medigel."))
+						owner.visible_message(span_notice("\The [owner] covers \a [W.desc] on \the [H]'s [affecting.name] with large globs of medigel."))
 						large_wound = TRUE
 					else if (W.damage_type == INJURY_TYPE_BRUISE)
-						owner.visible_message(SPAN_NOTICE("\The [owner] sprays \a [W.desc] on \the [H]'s [affecting.name] with a fine layer of medigel."))
+						owner.visible_message(span_notice("\The [owner] sprays \a [W.desc] on \the [H]'s [affecting.name] with a fine layer of medigel."))
 					else
-						owner.visible_message(SPAN_NOTICE("\The [owner] drizzles some medigel over \a [W.desc] on \the [H]'s [affecting.name]."))
+						owner.visible_message(span_notice("\The [owner] drizzles some medigel over \a [W.desc] on \the [H]'s [affecting.name]."))
 					playsound(owner, pick(apply_sounds), 20)
 					W.bandage()
 					W.disinfect()
 					W.salve()
 					if (H.stat == UNCONSCIOUS && prob(25))
-						to_chat(H, SPAN_NOTICE(SPAN_BOLD("... [pick("feels better", "hurts less")] ...")))
+						to_chat(H, span_notice(span_bold("... [pick("feels better", "hurts less")] ...")))
 				if(large_wound)
-					owner.visible_message(SPAN_NOTICE("\The [src]'s UV matrix glows faintly as it cures the medigel."))
+					owner.visible_message(span_notice("\The [src]'s UV matrix glows faintly as it cures the medigel."))
 					playsound(owner, 'sound/items/Welder2.ogg', 10)
 				affecting.update_damages()
 				H.update_bandages(TRUE)

@@ -39,14 +39,14 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 	known_sectors[S.name] = R
 
 	if (notify)
-		audible_message(SPAN_NOTICE("\The [src] pings with a new known sector: [S] at coordinates [S.x] by [S.y]."))
+		audible_message(span_notice("\The [src] pings with a new known sector: [S] at coordinates [S.x] by [S.y]."))
 
 /obj/machinery/computer/ship/helm/Process()
 	..()
 
 	if (current_operator)
 		if (!linked)
-			to_chat(current_operator, SPAN_DANGER("\The [src]'s controls lock up with an error flashing across the screen: Connection to vessel lost!"))
+			to_chat(current_operator, span_danger("\The [src]'s controls lock up with an error flashing across the screen: Connection to vessel lost!"))
 			set_operator(null, TRUE)
 		else if (!Adjacent(current_operator) || CanUseTopic(current_operator) != STATUS_INTERACTIVE || !viewing_overmap(current_operator))
 			set_operator(null)
@@ -76,7 +76,7 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 				linked.accelerate(direction, accellimit)
 
 		if (current_operator)
-			to_chat(current_operator, SPAN_DANGER("\The [src]'s autopilot is active and wrests control from you!"))
+			to_chat(current_operator, span_danger("\The [src]'s autopilot is active and wrests control from you!"))
 			set_operator(null, TRUE, TRUE)
 
 		return
@@ -119,7 +119,7 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 
 		var/speed = round(linked.get_speed()*1000, 0.01)
 		if(linked.get_speed() < SHIP_SPEED_SLOW)
-			speed = SPAN_GOOD("[speed]")
+			speed = span_good("[speed]")
 		if(linked.get_speed() > SHIP_SPEED_FAST)
 			speed = SPAN_CLASS("average", "[speed]")
 		data["speed"] = speed
@@ -164,7 +164,7 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 			sec_name = "Sector #[length(known_sectors)]"
 		R.fields["name"] = sec_name
 		if(sec_name in known_sectors)
-			to_chat(user, SPAN_WARNING("Sector with that name already exists, please input a different name."))
+			to_chat(user, span_warning("Sector with that name already exists, please input a different name."))
 			return TOPIC_REFRESH
 		switch(href_list["add"])
 			if("current")
@@ -286,24 +286,24 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 /obj/machinery/computer/ship/helm/proc/display_operator_change_message(mob/old_operator, mob/new_operator, autopilot)
 	if (!old_operator)
 		new_operator.visible_message(
-			SPAN_NOTICE("\The [new_operator] takes \the [src]'s controls."),
-			SPAN_NOTICE("You take \the [src]'s controls.")
+			span_notice("\The [new_operator] takes \the [src]'s controls."),
+			span_notice("You take \the [src]'s controls.")
 		)
 	else if (!new_operator)
 		if (autopilot)
 			old_operator.visible_message(
-				SPAN_NOTICE("\The [old_operator] engages \the [src]'s autopilot and releases the controls."),
-				SPAN_NOTICE("You engage \the [src]'s autopilot and release the controls.")
+				span_notice("\The [old_operator] engages \the [src]'s autopilot and releases the controls."),
+				span_notice("You engage \the [src]'s autopilot and release the controls.")
 			)
 		else
 			old_operator.visible_message(
-				SPAN_WARNING("\The [old_operator] releases \the [src]'s controls."),
-				SPAN_WARNING("You release \the [src]'s controls.")
+				span_warning("\The [old_operator] releases \the [src]'s controls."),
+				span_warning("You release \the [src]'s controls.")
 			)
 	else
 		old_operator.visible_message(
-			SPAN_WARNING("\The [new_operator] takes \the [src]'s controls from \the [old_operator]."),
-			SPAN_DANGER("\The [new_operator] takes \the [src]'s controls from you!")
+			span_warning("\The [new_operator] takes \the [src]'s controls from \the [old_operator]."),
+			span_danger("\The [new_operator] takes \the [src]'s controls from you!")
 		)
 
 
@@ -311,11 +311,11 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 	if (user)
 		var/user_message = "You swipe \the [emag_source] against \the [src],"
 		if (emagged)
-			user_message = SPAN_WARNING("[user_message] achieving nothing new.")
+			user_message = span_warning("[user_message] achieving nothing new.")
 		else
-			user_message = SPAN_NOTICE("[user_message] frying the access locks.")
+			user_message = span_notice("[user_message] frying the access locks.")
 		user.visible_message(
-			SPAN_ITALIC("\The [user] swipes \an [emag_source] against \the [src]."),
+			span_italic("\The [user] swipes \an [emag_source] against \the [src]."),
 			user_message,
 			range = 5
 		)

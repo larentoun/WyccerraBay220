@@ -100,7 +100,7 @@
 		if (EMP_ACT_LIGHT)
 			fail_counter = max(fail_counter, 10)
 			if (ismob(loc))
-				to_chat(loc, SPAN_WARNING("\The [src] feels pleasantly warm."))
+				to_chat(loc, span_warning("\The [src] feels pleasantly warm."))
 
 /obj/item/gun/energy/gun/nuclear/proc/get_charge_overlay()
 	var/power_remaining = power_supply.percent()

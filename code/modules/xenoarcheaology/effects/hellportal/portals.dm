@@ -38,7 +38,7 @@
 		parent.register_mob(T)
 
 	playsound(T, pick(mob_spawn_sounds), 100)
-	visible_message(SPAN_WARNING("\The [src] widens for a moment as a horrific monster forces its way through, before it blinks out of existence."))
+	visible_message(span_warning("\The [src] widens for a moment as a horrific monster forces its way through, before it blinks out of existence."))
 	qdel(src)
 
 //Spawns after the artifact is destroyed
@@ -88,13 +88,13 @@
 		playsound(loc, pick(sounds), 75, 1)
 
 		if (health <= 0)
-			visible_message(SPAN_DANGER("\The [src] shrieks and contorts as it finally collapses in on itself!"))
+			visible_message(span_danger("\The [src] shrieks and contorts as it finally collapses in on itself!"))
 			qdel(src)
 			return
 
-		visible_message(SPAN_WARNING("\The [src] lets out an agonized wail, contorting as \the [T] crawls through!"))
+		visible_message(span_warning("\The [src] lets out an agonized wail, contorting as \the [T] crawls through!"))
 	else
-		visible_message(SPAN_WARNING("\The [src] deposits \the [T] into the world!"))
+		visible_message(span_warning("\The [src] deposits \the [T] into the world!"))
 
 
 	addtimer(CALLBACK(src, PROC_REF(spawn_monster)), rand(15, 30) SECONDS)

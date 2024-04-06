@@ -16,7 +16,7 @@
 /obj/structure/mopbucket/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
-		. += SPAN_NOTICE("[src] [icon2html(src, user)] contains [reagents.total_volume] unit\s of water!")
+		. += span_notice("[src] [icon2html(src, user)] contains [reagents.total_volume] unit\s of water!")
 
 
 /obj/structure/mopbucket/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -28,8 +28,8 @@
 		reagents.trans_to_obj(tool, 5)
 		playsound(src, 'sound/effects/slosh.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] wets \a [tool] in \the [src]."),
-			SPAN_NOTICE("You wet \the [tool] in \the [src].")
+			span_notice("\The [user] wets \a [tool] in \the [src]."),
+			span_notice("You wet \the [tool] in \the [src].")
 		)
 		return TRUE
 

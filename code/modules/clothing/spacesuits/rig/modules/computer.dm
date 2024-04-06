@@ -167,9 +167,9 @@
 		if(istype(ai_card, /obj/item/aicard))
 			if(integrated_ai && !integrated_ai.stat)
 				if(user)
-					to_chat(user, SPAN_DANGER("You cannot eject your currently stored AI. Purge it manually."))
+					to_chat(user, span_danger("You cannot eject your currently stored AI. Purge it manually."))
 				return 0
-			to_chat(user, SPAN_DANGER("You purge the remaining scraps of data from your previous AI, freeing it for use."))
+			to_chat(user, span_danger("You purge the remaining scraps of data from your previous AI, freeing it for use."))
 			if(integrated_ai)
 				integrated_ai.ghostize()
 				qdel(integrated_ai)
@@ -210,8 +210,8 @@
 					return 0
 			else if(user.unEquip(ai, src))
 				ai_card = ai
-				to_chat(ai_mob, SPAN_NOTICE("You have been transferred to \the [holder]'s [src.name]."))
-				to_chat(user, SPAN_NOTICE("You load \the [ai_mob] into \the [holder]'s [src.name]."))
+				to_chat(ai_mob, span_notice("You have been transferred to \the [holder]'s [src.name]."))
+				to_chat(user, span_notice("You load \the [ai_mob] into \the [holder]'s [src.name]."))
 
 			integrated_ai = ai_mob
 
@@ -219,9 +219,9 @@
 				integrated_ai = null
 				eject_ai()
 		else
-			to_chat(user, SPAN_WARNING("There is no active AI within \the [ai]."))
+			to_chat(user, span_warning("There is no active AI within \the [ai]."))
 	else
-		to_chat(user, SPAN_WARNING("There is no active AI within \the [ai]."))
+		to_chat(user, span_warning("There is no active AI within \the [ai]."))
 	update_verb_holder()
 	return
 
@@ -263,12 +263,12 @@
 		var/obj/item/disk/tech_disk/disk = input_device
 		if(disk.stored)
 			if(load_data(disk.stored))
-				to_chat(user, SPAN_INFO("Download successful; disk erased."))
+				to_chat(user, span_info("Download successful; disk erased."))
 				disk.stored = null
 			else
-				to_chat(user, SPAN_WARNING("The disk is corrupt. It is useless to you."))
+				to_chat(user, span_warning("The disk is corrupt. It is useless to you."))
 		else
-			to_chat(user, SPAN_WARNING("The disk is blank. It is useless to you."))
+			to_chat(user, span_warning("The disk is blank. It is useless to you."))
 		return 1
 
 	// I fucking hate R&D code. This typecheck spam would be totally unnecessary in a sane setup.
@@ -282,13 +282,13 @@
 			incoming_files = input_machine.files
 
 		if(!incoming_files || !length(incoming_files.known_tech))
-			to_chat(user, SPAN_WARNING("Memory failure. There is nothing accessible stored on this terminal."))
+			to_chat(user, span_warning("Memory failure. There is nothing accessible stored on this terminal."))
 		else
 			// Maybe consider a way to drop all your data into a target repo in the future.
 			if(load_data(incoming_files.known_tech))
-				to_chat(user, SPAN_INFO("Download successful; local and remote repositories synchronized."))
+				to_chat(user, span_info("Download successful; local and remote repositories synchronized."))
 			else
-				to_chat(user, SPAN_WARNING("Scan complete. There is nothing useful stored on this terminal."))
+				to_chat(user, span_warning("Scan complete. There is nothing useful stored on this terminal."))
 		return 1
 	return 0
 
@@ -370,7 +370,7 @@
 
 	if(interfaced_with)
 		if(holder && holder.wearer)
-			to_chat(holder.wearer, SPAN_WARNING("Your power sink retracts as the module deactivates."))
+			to_chat(holder.wearer, span_warning("Your power sink retracts as the module deactivates."))
 		drain_complete()
 	interfaced_with = null
 	total_power_drained = 0
@@ -439,12 +439,12 @@
 		return
 
 	if(!interfaced_with || !interfaced_with.Adjacent(H) || !(interfaced_with.loc == drain_loc))
-		to_chat(H, SPAN_WARNING("Your power sink retracts into its casing."))
+		to_chat(H, span_warning("Your power sink retracts into its casing."))
 		drain_complete(H)
 		return
 
 	if(holder.cell.fully_charged())
-		to_chat(H, SPAN_WARNING("Your power sink flashes an amber light; your rig cell is full."))
+		to_chat(H, span_warning("Your power sink flashes an amber light; your rig cell is full."))
 		drain_complete(H)
 		return
 
@@ -462,9 +462,9 @@
 /obj/item/rig_module/power_sink/proc/drain_complete(mob/living/M)
 
 	if(!interfaced_with)
-		if(M) to_chat(M, SPAN_INFO("<b>Total power drained:</b> [round(total_power_drained*CELLRATE)] Wh."))
+		if(M) to_chat(M, span_info("<b>Total power drained:</b> [round(total_power_drained*CELLRATE)] Wh."))
 	else
-		if(M) to_chat(M, SPAN_INFO("<b>Total power drained from [interfaced_with]:</b> [round(total_power_drained*CELLRATE)] Wh."))
+		if(M) to_chat(M, span_info("<b>Total power drained from [interfaced_with]:</b> [round(total_power_drained*CELLRATE)] Wh."))
 		interfaced_with.drain_power(0,1,0) // Damage the victim.
 
 	drain_loc = null

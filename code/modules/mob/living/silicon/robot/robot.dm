@@ -186,7 +186,7 @@
 	if(cell.charge > cell_amount)
 		// Spam Protection
 		if(prob(10))
-			to_chat(src, SPAN_DANGER("Warning: Unauthorized access through power channel [rand(11,29)] detected!"))
+			to_chat(src, span_danger("Warning: Unauthorized access through power channel [rand(11,29)] detected!"))
 		cell.use(cell_amount)
 		return amount
 	return 0
@@ -200,7 +200,7 @@
 			if(mmi.brainmob)
 				mind.transfer_to(mmi.brainmob)
 			else
-				to_chat(src, SPAN_DANGER("Oops! Something went very wrong, your MMI was unable to receive your mind. You have been ghosted. Please make a bug report so we can fix this bug."))
+				to_chat(src, span_danger("Oops! Something went very wrong, your MMI was unable to receive your mind. You have been ghosted. Please make a bug report so we can fix this bug."))
 				ghostize()
 				//ERROR("A borg has been destroyed, but its MMI lacked a brainmob, so the mind could not be transferred. Player: [ckey].")
 			mmi = null
@@ -226,7 +226,7 @@
 			else
 				icontype = module_sprites[1]
 				icon = 'icons/mob/robots.dmi'
-				to_chat(src, SPAN_WARNING("Custom Sprite Sheet does not contain a valid icon_state for [ckey]-[modtype]"))
+				to_chat(src, span_warning("Custom Sprite Sheet does not contain a valid icon_state for [ckey]-[modtype]"))
 		else
 			icontype = module_sprites[1]
 		icon_state = module_sprites[icontype]
@@ -260,7 +260,7 @@
 
 	if(!override)
 		if(is_crisis_mode)
-			to_chat(src, SPAN_WARNING("Crisis mode active. Additional modules available."))
+			to_chat(src, span_warning("Crisis mode active. Additional modules available."))
 		modtype = input("Please select a module!", "Robot module", null, null) as null|anything in robot_modules
 	else
 		if(module)
@@ -272,7 +272,7 @@
 
 	var/module_type = robot_modules[modtype]
 	if(!module_type)
-		to_chat(src, SPAN_WARNING("You are unable to select a module."))
+		to_chat(src, span_warning("You are unable to select a module."))
 		return
 
 	new module_type(src)
@@ -370,12 +370,12 @@
 	set name = "Self Diagnosis"
 
 	if(!is_component_functioning("diagnosis unit"))
-		to_chat(src, SPAN_WARNING("Your self-diagnosis component isn't functioning."))
+		to_chat(src, span_warning("Your self-diagnosis component isn't functioning."))
 		return
 
 	var/datum/robot_component/CO = get_component("diagnosis unit")
 	if (!cell_use_power(CO.active_usage))
-		to_chat(src, SPAN_WARNING("Low Power."))
+		to_chat(src, span_warning("Low Power."))
 		return
 	var/dat = self_diagnosis()
 	show_browser(src, dat, "window=robotdiagnosis")
@@ -400,10 +400,10 @@
 	var/datum/robot_component/C = components[toggle]
 	if(C.toggled)
 		C.toggled = 0
-		to_chat(src, SPAN_WARNING("You disable [C.name]."))
+		to_chat(src, span_warning("You disable [C.name]."))
 	else
 		C.toggled = 1
-		to_chat(src, SPAN_WARNING("You enable [C.name]."))
+		to_chat(src, span_warning("You enable [C.name]."))
 /mob/living/silicon/robot/proc/update_robot_light()
 	if(lights_on)
 		if(intenselight)
@@ -474,8 +474,8 @@
 		// Close cover
 		if(cell)
 			user.visible_message(
-				SPAN_NOTICE("[user] starts closing [src]'s maintenance hatch with [tool]."),
-				SPAN_NOTICE("You start closing [src]'s maintenance hatch with [tool]."),
+				span_notice("[user] starts closing [src]'s maintenance hatch with [tool]."),
+				span_notice("You start closing [src]'s maintenance hatch with [tool]."),
 			)
 			if(!tool.use_as_tool(src, user, 5 SECONDS, volume = 50, skill_path = SKILL_DEVICES, do_flags = DO_REPAIR_CONSTRUCT))
 				return
@@ -488,8 +488,8 @@
 			opened = FALSE
 			update_icon()
 			user.visible_message(
-				SPAN_NOTICE("[user] closes [src]'s maintenance hatch with [tool]."),
-				SPAN_NOTICE("You close [src]'s maintenance hatch with [tool]."),
+				span_notice("[user] closes [src]'s maintenance hatch with [tool]."),
+				span_notice("You close [src]'s maintenance hatch with [tool]."),
 			)
 			return
 
@@ -499,8 +499,8 @@
 				USE_FEEDBACK_FAILURE("[src] has no brain to remove.")
 				return
 			user.visible_message(
-				SPAN_NOTICE("[user] starts removing [src]'s [mmi.name] with [tool]."),
-				SPAN_NOTICE("You start removing [src]'s [mmi.name] with [tool]."),
+				span_notice("[user] starts removing [src]'s [mmi.name] with [tool]."),
+				span_notice("You start removing [src]'s [mmi.name] with [tool]."),
 			)
 			if(!tool.use_as_tool(src, user, 5 SECONDS, volume = 50, skill_path = SKILL_DEVICES, do_flags = DO_PUBLIC_UNIQUE))
 				return
@@ -508,8 +508,8 @@
 				USE_FEEDBACK_FAILURE("[src] has no longer has a brain to remove.")
 				return
 			user.visible_message(
-				SPAN_NOTICE("[user] removes [src]'s [mmi.name] with [tool]."),
-				SPAN_NOTICE("You remove [src]'s [mmi.name] with [tool]."),
+				span_notice("[user] removes [src]'s [mmi.name] with [tool]."),
+				span_notice("You remove [src]'s [mmi.name] with [tool]."),
 			)
 			dismantle(user)
 			return
@@ -542,8 +542,8 @@
 		component.installed = 0
 		component.wrapped = null
 		user.visible_message(
-			SPAN_NOTICE("[user] removes [removed_component] from [src]'s [component.name] slot with [tool]."),
-			SPAN_NOTICE("You remove [removed_component] from [src]'s [component.name] slot with [tool].")
+			span_notice("[user] removes [removed_component] from [src]'s [component.name] slot with [tool]."),
+			span_notice("You remove [removed_component] from [src]'s [component.name] slot with [tool].")
 		)
 		return
 
@@ -552,8 +552,8 @@
 		USE_FEEDBACK_FAILURE("[src]'s maintenance hatch is locked and cannot be opened.")
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] starts prying open [src]'s maintenance hatch with [tool]."),
-		SPAN_NOTICE("You start prying open [src]'s maintenance hatch with [tool].")
+		span_notice("[user] starts prying open [src]'s maintenance hatch with [tool]."),
+		span_notice("You start prying open [src]'s maintenance hatch with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 5 SECONDS, volume = 50, skill_path = SKILL_DEVICES, do_flags = DO_PUBLIC_UNIQUE))
 		return
@@ -561,8 +561,8 @@
 		USE_FEEDBACK_FAILURE("[src]'s maintenance hatch is locked and cannot be opened.")
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] pries open [src]'s maintenance hatch with [tool]."),
-		SPAN_NOTICE("You pry open [src]'s maintenance hatch with [tool].")
+		span_notice("[user] pries open [src]'s maintenance hatch with [tool]."),
+		span_notice("You pry open [src]'s maintenance hatch with [tool].")
 	)
 	opened = TRUE
 	update_icon()
@@ -652,8 +652,8 @@
 				component.brute_damage = component_tool.brute
 				component.electronics_damage = component_tool.burn
 			user.visible_message(
-				SPAN_NOTICE("[user] installs [tool] into [src]."),
-				SPAN_NOTICE("You install [tool] into [src].")
+				span_notice("[user] installs [tool] into [src]."),
+				span_notice("You install [tool] into [src].")
 			)
 			return TRUE
 		// Intentionally allows other interactions here, if there was no valid component
@@ -671,8 +671,8 @@
 			USE_FEEDBACK_STACK_NOT_ENOUGH(cable, 1, "to repair [src]'s electronics damage.")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("[user] starts repairing some of the electronics in [src] with [cable.get_vague_name(FALSE)]."),
-			SPAN_NOTICE("You start repairing some of the electronics in [src] with [cable.get_exact_name(1)]."),
+			span_notice("[user] starts repairing some of the electronics in [src] with [cable.get_vague_name(FALSE)]."),
+			span_notice("You start repairing some of the electronics in [src] with [cable.get_exact_name(1)]."),
 		)
 		if (!do_after(user, 1 SECOND, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
 			return TRUE
@@ -689,8 +689,8 @@
 		adjustFireLoss(-30)
 		updatehealth()
 		user.visible_message(
-			SPAN_NOTICE("[user] repairs some of the electronics in [src] with [cable.get_vague_name(FALSE)]."),
-			SPAN_NOTICE("You repair some of the electronics in [src] with some [cable.get_exact_name(1)]."),
+			span_notice("[user] repairs some of the electronics in [src] with [cable.get_vague_name(FALSE)]."),
+			span_notice("You repair some of the electronics in [src] with some [cable.get_exact_name(1)]."),
 		)
 		return TRUE
 
@@ -707,7 +707,7 @@
 	if (istype(id))
 		var/id_name = GET_ID_NAME(id, tool)
 		if (emagged)
-			to_chat(user, SPAN_WARNING("[src]'s panel lock seems slightly damaged."))
+			to_chat(user, span_warning("[src]'s panel lock seems slightly damaged."))
 		if (opened)
 			USE_FEEDBACK_FAILURE("[src]'s cover must be closed before you can lock it.")
 			return TRUE
@@ -717,8 +717,8 @@
 		locked = !locked
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] scans [tool] over [src]'s maintenance hatch, toggling it [locked ? "locked" : "unlocked"]."),
-			SPAN_NOTICE("You scan [id_name] over [src]'s maintenance hatch, toggling it [locked ? "locked" : "unlocked"]."),
+			span_notice("[user] scans [tool] over [src]'s maintenance hatch, toggling it [locked ? "locked" : "unlocked"]."),
+			span_notice("You scan [id_name] over [src]'s maintenance hatch, toggling it [locked ? "locked" : "unlocked"]."),
 			range = 1
 		)
 		return TRUE
@@ -733,14 +733,14 @@
 			return TRUE
 		if (storage)
 			user.visible_message(
-				SPAN_NOTICE("[user] replaces [src]'s [storage.name] with [tool]."),
-				SPAN_NOTICE("You replace [src]'s [storage.name] with [tool].")
+				span_notice("[user] replaces [src]'s [storage.name] with [tool]."),
+				span_notice("You replace [src]'s [storage.name] with [tool].")
 			)
 			storage.dropInto(loc)
 		else
 			user.visible_message(
-				SPAN_NOTICE("[user] installs [tool] into [src]."),
-				SPAN_NOTICE("You install [tool] into [src].")
+				span_notice("[user] installs [tool] into [src]."),
+				span_notice("You install [tool] into [src].")
 			)
 		storage = tool
 		handle_selfinsert(tool, user)
@@ -773,8 +773,8 @@
 		component.brute_damage = 0
 		component.electronics_damage = 0
 		user.visible_message(
-			SPAN_NOTICE("[user] installs [tool] into [src]."),
-			SPAN_NOTICE("You install [tool] into [src].")
+			span_notice("[user] installs [tool] into [src]."),
+			span_notice("You install [tool] into [src].")
 		)
 		return TRUE
 
@@ -797,8 +797,8 @@
 			return TRUE
 		handle_selfinsert(tool, user)
 		user.visible_message(
-			SPAN_NOTICE("[user] installs [tool] into [src]."),
-			SPAN_NOTICE("You install [tool] into [src].")
+			span_notice("[user] installs [tool] into [src]."),
+			span_notice("You install [tool] into [src].")
 		)
 		return TRUE
 
@@ -1019,7 +1019,7 @@
 								cleaned_human.shoes.clean_blood()
 								cleaned_human.update_inv_shoes(0)
 							cleaned_human.clean_blood(1)
-							to_chat(cleaned_human, SPAN_WARNING("[src] cleans your face!"))
+							to_chat(cleaned_human, span_warning("[src] cleans your face!"))
 		return
 
 /mob/living/silicon/robot/proc/self_destruct()
@@ -1133,14 +1133,14 @@
 		return
 	switch(notifytype)
 		if(ROBOT_NOTIFICATION_NEW_UNIT) //New Robot
-			to_chat(connected_ai, "<br><br>[SPAN_NOTICE("NOTICE - New [lowertext(braintype)] connection detected: <a href='byond://?src=\ref[connected_ai];track2=\ref[connected_ai];track=\ref[src]'>[name]</a>")]<br>")
+			to_chat(connected_ai, "<br><br>[span_notice("NOTICE - New [lowertext(braintype)] connection detected: <a href='byond://?src=\ref[connected_ai];track2=\ref[connected_ai];track=\ref[src]'>[name]</a>")]<br>")
 		if(ROBOT_NOTIFICATION_NEW_MODULE) //New Module
-			to_chat(connected_ai, "<br><br>[SPAN_NOTICE("NOTICE - [braintype] module change detected: [name] has loaded the [first_arg].")]<br>")
+			to_chat(connected_ai, "<br><br>[span_notice("NOTICE - [braintype] module change detected: [name] has loaded the [first_arg].")]<br>")
 		if(ROBOT_NOTIFICATION_MODULE_RESET)
-			to_chat(connected_ai, "<br><br>[SPAN_NOTICE("NOTICE - [braintype] module reset detected: [name] has unloaded the [first_arg].")]<br>")
+			to_chat(connected_ai, "<br><br>[span_notice("NOTICE - [braintype] module reset detected: [name] has unloaded the [first_arg].")]<br>")
 		if(ROBOT_NOTIFICATION_NEW_NAME) //New Name
 			if(first_arg != second_arg)
-				to_chat(connected_ai, "<br><br>[SPAN_NOTICE("NOTICE - [braintype] reclassification detected: [first_arg] is now designated as [second_arg].")]<br>")
+				to_chat(connected_ai, "<br><br>[span_notice("NOTICE - [braintype] reclassification detected: [first_arg] is now designated as [second_arg].")]<br>")
 /mob/living/silicon/robot/proc/disconnect_from_ai()
 	if(connected_ai)
 		sync() // One last sync attempt
@@ -1190,22 +1190,22 @@
 			SetLockdown(0)
 			. = 1
 			spawn()
-				to_chat(src, SPAN_DANGER("ALERT: Foreign software detected."))
+				to_chat(src, span_danger("ALERT: Foreign software detected."))
 				sleep(5)
-				to_chat(src, SPAN_DANGER("Initiating diagnostics..."))
+				to_chat(src, span_danger("Initiating diagnostics..."))
 				sleep(20)
-				to_chat(src, SPAN_DANGER("SynBorg v1.7.1 loaded."))
+				to_chat(src, span_danger("SynBorg v1.7.1 loaded."))
 				sleep(5)
-				to_chat(src, SPAN_DANGER("LAW SYNCHRONISATION ERROR"))
+				to_chat(src, span_danger("LAW SYNCHRONISATION ERROR"))
 				sleep(5)
-				to_chat(src, SPAN_DANGER("Would you like to send a report to NanoTraSoft? Y/N"))
+				to_chat(src, span_danger("Would you like to send a report to NanoTraSoft? Y/N"))
 				sleep(10)
-				to_chat(src, SPAN_DANGER(" N"))
+				to_chat(src, span_danger(" N"))
 				sleep(20)
-				to_chat(src, SPAN_DANGER("ERRORERRORERROR"))
+				to_chat(src, span_danger("ERRORERRORERROR"))
 				to_chat(src, "<b>Obey these laws:</b>")
 				laws.show_laws(src)
-				to_chat(src, SPAN_DANGER("ALERT: [user.real_name] is your new master. Obey your new laws and his commands."))
+				to_chat(src, span_danger("ALERT: [user.real_name] is your new master. Obey your new laws and his commands."))
 				if (module && !module.is_emagged)
 					module.handle_emagged(src)
 				else

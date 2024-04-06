@@ -49,8 +49,8 @@
 				USE_FEEDBACK_FAILURE("You can't lift [dropped] onto [src]. [has_blocker] is in the way.")
 				return TRUE
 			user.visible_message(
-				SPAN_NOTICE("[user] starts lifting [dropped] onto [src]."),
-				SPAN_NOTICE("You start lifting [dropped] onto [src].")
+				span_notice("[user] starts lifting [dropped] onto [src]."),
+				span_notice("You start lifting [dropped] onto [src].")
 			)
 			if (!user.do_skilled(6 SECONDS, SKILL_HAULING, src, do_flags = DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, dropped))
 				return TRUE
@@ -78,8 +78,8 @@
 				return TRUE
 			object.forceMove(loc)
 			user.visible_message(
-				SPAN_NOTICE("[user] lifts [dropped] onto [src]."),
-				SPAN_NOTICE("You lift [dropped] onto [src].")
+				span_notice("[user] lifts [dropped] onto [src]."),
+				span_notice("You lift [dropped] onto [src].")
 			)
 			return TRUE
 
@@ -169,7 +169,7 @@
 /*
 	var/mob/mo = locate(/mob) in src
 	if(mo)
-		var/rendered = SPAN_CLASS("game say", "[SPAN_CLASS("name", "[M.name]: ")] [SPAN_CLASS("message", text))]"
+		var/rendered = SPAN_CLASS("game say", "[span_name("[M.name]: ")] [SPAN_CLASS("message", text))]"
 		mo.show_message(rendered, 2)
 		*/
 	return
@@ -213,14 +213,14 @@
 		return
 	. = ITEM_INTERACT_SUCCESS
 	user.visible_message(
-		SPAN_NOTICE("[user] begins [anchored ? "un" : ""]securing [src] [anchored ? "from" : "to"] the floor with [tool]."),
-		SPAN_NOTICE("You begin [anchored ? "un" : ""]securing [src] [anchored ? "from" : "to"] the floor with [tool].")
+		span_notice("[user] begins [anchored ? "un" : ""]securing [src] [anchored ? "from" : "to"] the floor with [tool]."),
+		span_notice("You begin [anchored ? "un" : ""]securing [src] [anchored ? "from" : "to"] the floor with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, delay SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] [anchored ? "un" : ""]secures [src] [anchored ? "from" : "to"] the floor with [tool]."),
-		SPAN_NOTICE("You [anchored ? "un" : ""]secure [src] [anchored ? "from" : "to"] the floor with [tool].")
+		span_notice("[user] [anchored ? "un" : ""]secures [src] [anchored ? "from" : "to"] the floor with [tool]."),
+		span_notice("You [anchored ? "un" : ""]secure [src] [anchored ? "from" : "to"] the floor with [tool].")
 	)
 	anchored = !anchored
 	post_anchor_change()
@@ -257,8 +257,8 @@
 		if (!can_damage_health(damage, attack.get_damage_type()))
 			playsound(loc, use_weapon_hitsound? attack.attack_sound : damage_hitsound, 25, TRUE, -1)
 			user.visible_message(
-				SPAN_WARNING("[user] hits [src], but doesn't even leave a dent!"),
-				SPAN_WARNING("You hit [src], but cause no visible damage and hurt yourself!")
+				span_warning("[user] hits [src], but doesn't even leave a dent!"),
+				span_warning("You hit [src], but cause no visible damage and hurt yourself!")
 			)
 			if (!(MUTATION_FERAL in user.mutations))
 				user.apply_damage(3, DAMAGE_BRUTE, user.hand ? BP_L_HAND : BP_R_HAND)
@@ -266,8 +266,8 @@
 
 		playsound(loc, use_weapon_hitsound? attack.attack_sound : damage_hitsound, 25, TRUE, -1)
 		assailant.visible_message(
-				SPAN_WARNING("[assailant] [attack_verb] [src]!"),
-				SPAN_WARNING("You [attack_verb] [src]!")
+				span_warning("[assailant] [attack_verb] [src]!"),
+				span_warning("You [attack_verb] [src]!")
 				)
 		damage_health(damage, attack.get_damage_type(), attack.damage_flags())
 		return TRUE
@@ -287,17 +287,17 @@
 /obj/examine(mob/user)
 	. = ..()
 	if((obj_flags & OBJ_FLAG_ROTATABLE))
-		. += SPAN_SUBTLE("Can be rotated with alt-click.")
+		. += span_subtle("Can be rotated with alt-click.")
 	if((obj_flags & OBJ_FLAG_ANCHORABLE))
-		. += SPAN_SUBTLE("Can be [anchored? "unsecured from the floor" : "secured to the floor"] using a wrench.")
+		. += span_subtle("Can be [anchored? "unsecured from the floor" : "secured to the floor"] using a wrench.")
 
 /obj/proc/rotate(mob/user)
 	if(!CanPhysicallyInteract(user))
-		to_chat(user, SPAN_NOTICE("You can't interact with [src] right now!"))
+		to_chat(user, span_notice("You can't interact with [src] right now!"))
 		return
 
 	if(anchored)
-		to_chat(user, SPAN_NOTICE("[src] is secured to the floor!"))
+		to_chat(user, span_notice("[src] is secured to the floor!"))
 		return
 
 	set_dir(turn(dir, 90))

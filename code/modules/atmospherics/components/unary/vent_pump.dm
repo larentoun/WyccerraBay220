@@ -265,11 +265,11 @@
 /obj/machinery/atmospherics/unary/vent_pump/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
-		. += SPAN_NOTICE("A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W")
+		. += span_notice("A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W")
 	else
-		. += SPAN_NOTICE("You are too far away to read the gauge.")
+		. += span_notice("You are too far away to read the gauge.")
 	if(welded)
-		. += SPAN_NOTICE("It seems welded shut.")
+		. += span_notice("It seems welded shut.")
 
 /obj/machinery/atmospherics/unary/vent_pump/multitool_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
@@ -280,23 +280,23 @@
 /obj/machinery/atmospherics/unary/vent_pump/wrench_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
 	if(is_powered() && use_power)
-		to_chat(user, SPAN_WARNING("You cannot unwrench [src], turn it off first."))
+		to_chat(user, span_warning("You cannot unwrench [src], turn it off first."))
 		return
 	var/turf/T = src.loc
 	if(node && node.level==ATOM_LEVEL_UNDER_TILE && isturf(T) && !T.is_plating())
-		to_chat(user, SPAN_WARNING("You must remove the plating first."))
+		to_chat(user, span_warning("You must remove the plating first."))
 		return
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()
 	if((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-		to_chat(user, SPAN_WARNING("You cannot unwrench [src], it is too exerted due to internal pressure."))
+		to_chat(user, span_warning("You cannot unwrench [src], it is too exerted due to internal pressure."))
 		return
-	to_chat(user, SPAN_NOTICE("You begin to unfasten [src]..."))
+	to_chat(user, span_notice("You begin to unfasten [src]..."))
 	if(!tool.use_as_tool(src, user, 4 SECONDS, volume = 50, skill_path = SKILL_ATMOS, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	user.visible_message( \
-		SPAN_NOTICE("[user] unfastens [src]."), \
-		SPAN_NOTICE("You have unfastened [src]."), \
+		span_notice("[user] unfastens [src]."), \
+		span_notice("You have unfastened [src]."), \
 		"You hear a ratchet.")
 	new /obj/item/pipe(loc, src)
 	qdel(src)
@@ -324,7 +324,7 @@
 		return
 	if(href_list["switchMode"])
 		pump_direction = !pump_direction
-		to_chat(user, SPAN_NOTICE("The multitool emits a short beep confirming the change."))
+		to_chat(user, span_notice("The multitool emits a short beep confirming the change."))
 		queue_icon_update() //force the icon to refresh after changing directional mode.
 		return TOPIC_REFRESH
 

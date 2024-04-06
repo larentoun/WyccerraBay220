@@ -30,7 +30,7 @@
 /obj/machinery/computer/shuttle_control/explore/handle_topic_href(datum/shuttle/autodock/overmap/shuttle, list/href_list)
 	if (!shuttle)
 		crash_with("Shuttle controller tried to handle topic with no shuttle provided.")
-		to_chat(usr, SPAN_DEBUG("Shuttle controller tried to handle topic with no shuttle provided. This is a bug and should be reported immediately, something's probably horribly broken."))
+		to_chat(usr, span_debug("Shuttle controller tried to handle topic with no shuttle provided. This is a bug and should be reported immediately, something's probably horribly broken."))
 		return TOPIC_HANDLED
 	if(ismob(usr))
 		var/mob/user = usr
@@ -45,7 +45,7 @@
 		if(length(possible_d))
 			D = input("Choose shuttle destination", "Shuttle Destination") as null|anything in possible_d
 		else
-			to_chat(usr,SPAN_WARNING("No valid landing sites in range."))
+			to_chat(usr,span_warning("No valid landing sites in range."))
 		possible_d = shuttle.get_possible_destinations()
 		if(CanInteract(usr, GLOB.default_state) && (D in possible_d))
 			shuttle.set_destination(possible_d[D])

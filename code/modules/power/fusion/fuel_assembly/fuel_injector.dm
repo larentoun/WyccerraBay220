@@ -67,14 +67,14 @@
 /obj/machinery/fusion_fuel_injector/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/fuel_assembly))
 		if(injecting)
-			to_chat(user, SPAN_WARNING("Shut [src] off before playing with the fuel rod!"))
+			to_chat(user, span_warning("Shut [src] off before playing with the fuel rod!"))
 			return TRUE
 		if(!user.unEquip(W, src))
 			return TRUE
 		if(cur_assembly)
-			visible_message(SPAN_NOTICE("[user] swaps [src]'s [cur_assembly] for \a [W]."))
+			visible_message(span_notice("[user] swaps [src]'s [cur_assembly] for \a [W]."))
 		else
-			visible_message(SPAN_NOTICE("[user] inserts \a [W] into [src]."))
+			visible_message(span_notice("[user] inserts \a [W] into [src]."))
 		if(cur_assembly)
 			cur_assembly.dropInto(loc)
 			user.put_in_hands(cur_assembly)
@@ -85,17 +85,17 @@
 
 /obj/machinery/fusion_fuel_injector/physical_attack_hand(mob/user)
 	if(injecting)
-		to_chat(user, SPAN_WARNING("Shut [src] off before playing with the fuel rod!"))
+		to_chat(user, span_warning("Shut [src] off before playing with the fuel rod!"))
 		return TRUE
 
 	if(cur_assembly)
 		cur_assembly.dropInto(loc)
 		user.put_in_hands(cur_assembly)
-		visible_message(SPAN_NOTICE("[user] removes [cur_assembly] from [src]."))
+		visible_message(span_notice("[user] removes [cur_assembly] from [src]."))
 		cur_assembly = null
 		return TRUE
 	else
-		to_chat(user, SPAN_WARNING("There is no fuel rod in [src]."))
+		to_chat(user, span_warning("There is no fuel rod in [src]."))
 		return TRUE
 
 /obj/machinery/fusion_fuel_injector/proc/BeginInjecting()

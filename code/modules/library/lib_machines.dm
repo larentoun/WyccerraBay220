@@ -76,17 +76,17 @@
 		if(!user.unEquip(O, src))
 			return TRUE
 		if (binding)
-			to_chat(user, SPAN_WARNING("\The [src] is currently busy printing a book."))
+			to_chat(user, span_warning("\The [src] is currently busy printing a book."))
 			return TRUE
 
 		user.visible_message(
-			SPAN_NOTICE("\The [user] loads some paper into \the [src]."),
-			SPAN_NOTICE("You load some paper into \the [src].")
+			span_notice("\The [user] loads some paper into \the [src]."),
+			span_notice("You load some paper into \the [src].")
 		)
-		visible_message(SPAN_NOTICE("\The [src] begins to hum as it warms up its printing drums."))
+		visible_message(span_notice("\The [src] begins to hum as it warms up its printing drums."))
 		binding = TRUE
 		sleep(rand(200,400))
-		visible_message(SPAN_NOTICE("\The [src] whirs as it prints and binds a new book."))
+		visible_message(span_notice("\The [src] whirs as it prints and binds a new book."))
 		binding = FALSE
 		var/obj/item/book/b = new(loc)
 		b.dat = O:info

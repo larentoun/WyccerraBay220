@@ -147,29 +147,29 @@
 	if(!locked)
 		return
 
-	to_chat(user, SPAN_NOTICE("The crate is locked with a Deca-code lock."))
+	to_chat(user, span_notice("The crate is locked with a Deca-code lock."))
 	var/input = input(user, "Enter [codelen] digits.", "Deca-Code Lock", "") as text
 	if(!Adjacent(user))
 		return
 
 	if(isnull(input) || length(input) != codelen)
-		to_chat(user, SPAN_NOTICE("You leave the crate alone."))
+		to_chat(user, span_notice("You leave the crate alone."))
 	else if(check_input(input) && locked)
-		to_chat(user, SPAN_NOTICE("The crate unlocks!"))
+		to_chat(user, span_notice("The crate unlocks!"))
 		playsound(user, 'sound/machines/lockreset.ogg', 50, 1)
 		..()
 	else
-		visible_message(SPAN_WARNING("A red light on \the [src]'s control panel flashes briefly."))
+		visible_message(span_warning("A red light on \the [src]'s control panel flashes briefly."))
 		attempts--
 		if (attempts == 0)
-			to_chat(user, SPAN_DANGER("The crate's anti-tamper system activates!"))
+			to_chat(user, span_danger("The crate's anti-tamper system activates!"))
 			var/turf/T = get_turf(src.loc)
 			explosion(T, 1, EX_ACT_LIGHT)
 			qdel(src)
 
 /obj/structure/closet/crate/secure/loot/emag_act(remaining_charges, mob/user)
 	if (locked)
-		to_chat(user, SPAN_NOTICE("The crate unlocks!"))
+		to_chat(user, span_notice("The crate unlocks!"))
 		locked = 0
 
 /obj/structure/closet/crate/secure/loot/proc/check_input(input)
@@ -192,8 +192,8 @@
 		USE_FEEDBACK_FAILURE("\The [src] is not locked.")
 		return
 	user.visible_message(
-		SPAN_NOTICE("\The [user] scans \the [src] with \a [tool]."),
-		SPAN_NOTICE("You scan \the [src] with \the [tool].")
+		span_notice("\The [user] scans \the [src] with \a [tool]."),
+		span_notice("You scan \the [src] with \the [tool].")
 	)
 	var/data = "<h2>DECA-CODE LOCK ANALYSIS:</h2>"
 	if (attempts == 1)

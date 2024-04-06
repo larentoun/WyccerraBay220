@@ -17,7 +17,7 @@
 
 /obj/item/grenade/proc/clown_check(mob/living/user)
 	if((MUTATION_CLUMSY in user.mutations) && prob(50))
-		to_chat(user, SPAN_WARNING("Huh? How does this thing work?"))
+		to_chat(user, span_warning("Huh? How does this thing work?"))
 		det_time = fail_det_time
 		activate(user)
 		add_fingerprint(user)
@@ -29,17 +29,17 @@
 	. = ..()
 	if(distance <= 0)
 		if(det_time > 1)
-			. += SPAN_NOTICE("The timer is set to [det_time/10] seconds.")
+			. += span_notice("The timer is set to [det_time/10] seconds.")
 			return
 		if(isnull(det_time))
 			return
-		. += SPAN_NOTICE("[src] is set for instant detonation.")
+		. += span_notice("[src] is set for instant detonation.")
 
 
 /obj/item/grenade/attack_self(mob/living/user)
 	if(!active)
 		if(clown_check(user))
-			to_chat(user, SPAN_WARNING("You prime \the [name]! [det_time/10] seconds!"))
+			to_chat(user, span_warning("You prime \the [name]! [det_time/10] seconds!"))
 			activate(user)
 			add_fingerprint(user)
 			if(iscarbon(user))

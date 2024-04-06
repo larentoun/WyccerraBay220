@@ -54,7 +54,7 @@
 /obj/item/extinguisher/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 0)
-		. += SPAN_NOTICE(text("[icon2html(src, viewers(get_turf(src)))] [] contains [] units of fluid left!", src, src.reagents.total_volume))
+		. += span_notice(text("[icon2html(src, viewers(get_turf(src)))] [] contains [] units of fluid left!", src, src.reagents.total_volume))
 
 /obj/item/extinguisher/attack_self(mob/user as mob)
 	safety = !safety
@@ -93,20 +93,20 @@
 
 	else
 		if (amount <= 0)
-			to_chat(user, SPAN_WARNING("\The [src] is already full."))
+			to_chat(user, span_warning("\The [src] is already full."))
 			return TRUE
 		if (target.reagents.total_volume <= 0)
-			to_chat(user, SPAN_WARNING("\The [target] is empty."))
+			to_chat(user, span_warning("\The [target] is empty."))
 			return TRUE
 		amount = target.reagents.trans_to_obj(src, max_water)
 
 	if (istype(target, /obj/structure/reagent_dispensers/acid))
-		to_chat(user, SPAN_DANGER("The acid violently eats away at \the [src]!"))
+		to_chat(user, span_danger("The acid violently eats away at \the [src]!"))
 		do_spray(user)
 		qdel(src)
 		return TRUE
 
-	to_chat(user, SPAN_NOTICE("You fill \the [src] with [amount] unit\s from \the [target]."))
+	to_chat(user, span_notice("You fill \the [src] with [amount] unit\s from \the [target]."))
 	playsound(loc, 'sound/effects/refill.ogg', 50, 1, -6)
 	return TRUE
 
@@ -114,21 +114,21 @@
 	if (istype(item, /obj/item/reagent_containers/glass))
 		var/obj/item/reagent_containers/container = item
 		if (container.reagents.total_volume <= 0)
-			to_chat(user, SPAN_WARNING("\The [item] is empty."))
+			to_chat(user, span_warning("\The [item] is empty."))
 			return TRUE
 		if (reagents.get_free_space() <= 0)
-			to_chat(user, SPAN_WARNING("\The [src] is already full"))
+			to_chat(user, span_warning("\The [src] is already full"))
 			return TRUE
 		var/trans_amount = container.amount_per_transfer_from_this
 		var/amount = container.reagents.trans_to_obj(src, trans_amount)
 
 		if (reagents.has_reagent(/datum/reagent/acid))
-			to_chat(user, SPAN_DANGER("The acid violently eats away at \the [src]!"))
+			to_chat(user, span_danger("The acid violently eats away at \the [src]!"))
 			do_spray(user)
 			qdel(src)
 			return TRUE
 
-		to_chat(user, SPAN_NOTICE("You fill \the [src] with [amount] unit\s from \the [container]."))
+		to_chat(user, span_notice("You fill \the [src] with [amount] unit\s from \the [container]."))
 		playsound(src, 'sound/effects/pour.ogg', 25, 1)
 		return TRUE
 	else return ..()
@@ -136,11 +136,11 @@
 /obj/item/extinguisher/afterattack(atom/target, mob/user, flag)
 	if (!safety)
 		if (src.reagents.total_volume < 1)
-			to_chat(usr, SPAN_NOTICE("\The [src] is empty."))
+			to_chat(usr, span_notice("\The [src] is empty."))
 			return
 
 		if (broken)
-			to_chat(user, SPAN_WARNING("The nozzle of \the [src] is gunked up beyond repair!"))
+			to_chat(user, span_warning("The nozzle of \the [src] is gunked up beyond repair!"))
 			return
 
 		if (world.time < src.last_use + 20)
@@ -155,7 +155,7 @@
 		if(user.buckled && isobj(user.buckled))
 			addtimer(CALLBACK(src, PROC_REF(propel_object), user.buckled, user, direction), 0)
 
-		visible_message(SPAN_NOTICE("\The [user] sprays towards \the [target] with \the [src]."))
+		visible_message(span_notice("\The [user] sprays towards \the [target] with \the [src]."))
 		addtimer(CALLBACK(src, PROC_REF(do_spray), target), 0)
 
 		if(!user.check_space_footing())
@@ -163,7 +163,7 @@
 
 		if (reagents.has_other_reagent(preferred_reagent) && prob(15))
 			broken = TRUE
-			to_chat(user, SPAN_WARNING("The foreign reagents gunked up the spraying mechanism, breaking \the [src]."))
+			to_chat(user, span_warning("The foreign reagents gunked up the spraying mechanism, breaking \the [src]."))
 
 	else
 		return ..()

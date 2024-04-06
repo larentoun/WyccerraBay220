@@ -10,7 +10,7 @@
 /mob/living/examine(mob/user, distance, is_adjacent, infix, suffix)
 	. = ..()
 	if(admin_paralyzed)
-		. += SPAN_DEBUG("OOC: They have been paralyzed by staff. Please avoid interacting with them unless cleared to do so by staff.")
+		. += span_debug("OOC: They have been paralyzed by staff. Please avoid interacting with them unless cleared to do so by staff.")
 
 //mob verbs are faster than object verbs. See mob/verb/examine.
 /mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
@@ -85,12 +85,12 @@ default behaviour is:
 			for(var/mob/living/M in range(tmob, 1))
 				if(length(tmob.pinned) ||  ((M.pulling == tmob && ( tmob.restrained() && !( M.restrained() ) && M.stat == 0)) || locate(/obj/item/grab, length(tmob.grabbed_by))) )
 					if ( !(world.time % 5) )
-						to_chat(src, SPAN_WARNING("[tmob] is restrained, you cannot push past"))
+						to_chat(src, span_warning("[tmob] is restrained, you cannot push past"))
 					now_pushing = 0
 					return
 				if( tmob.pulling == M && ( M.restrained() && !( tmob.restrained() ) && tmob.stat == 0) )
 					if ( !(world.time % 5) )
-						to_chat(src, SPAN_WARNING("[tmob] is restraining [M], you cannot push past"))
+						to_chat(src, span_warning("[tmob] is restraining [M], you cannot push past"))
 					now_pushing = 0
 					return
 
@@ -113,7 +113,7 @@ default behaviour is:
 			if(tmob.a_intent != I_HELP)
 				if(istype(tmob, /mob/living/carbon/human) && (MUTATION_FAT in tmob.mutations))
 					if(prob(40) && !(MUTATION_FAT in src.mutations))
-						to_chat(src, SPAN_DANGER("You fail to push [tmob]'s fat ass out of the way."))
+						to_chat(src, span_danger("You fail to push [tmob]'s fat ass out of the way."))
 						now_pushing = 0
 						return
 				if (tmob.IsHolding(/obj/item/shield/riot))
@@ -127,7 +127,7 @@ default behaviour is:
 		if(isobj(AM) && !AM.anchored)
 			var/obj/I = AM
 			if(!can_pull_size || can_pull_size < I.w_class)
-				to_chat(src, SPAN_WARNING("It won't budge!"))
+				to_chat(src, span_warning("It won't budge!"))
 				now_pushing = 0
 				return
 
@@ -568,11 +568,11 @@ default behaviour is:
 		if(length(M.grabbed_by))
 			var/obj/item/grab/G = pick(M.grabbed_by)
 			if (G.current_grab.shield_assailant)
-				visible_message(SPAN_WARNING("\The [G.assailant] stops \the [src] from pulling \the [G.affecting] from their grip!"), SPAN_WARNING("\The [G.assailant] is holding \the [G.affecting] too tight for you to pull them away!"))
+				visible_message(span_warning("\The [G.assailant] stops \the [src] from pulling \the [G.affecting] from their grip!"), span_warning("\The [G.assailant] is holding \the [G.affecting] too tight for you to pull them away!"))
 				return
 			if (prob(75))
 				if(istype(G))
-					M.visible_message(SPAN_WARNING("[G.affecting] has been pulled from [G.assailant]'s grip by [src]!"), SPAN_WARNING("[G.affecting] has been pulled from your grip by [src]!"))
+					M.visible_message(span_warning("[G.affecting] has been pulled from [G.assailant]'s grip by [src]!"), span_warning("[G.affecting] has been pulled from your grip by [src]!"))
 					G.current_grab.let_go(G)
 		if (!length(M.grabbed_by))
 			M.handle_pull_damage(src)
@@ -652,12 +652,12 @@ default behaviour is:
 
 	var/mob/M = H.loc //Get our mob holder (if any).
 	if(istype(H.loc, /obj/item/organ/internal/stomach))
-		to_chat(src, SPAN_WARNING("You are stuck inside of \the [H]!"))
+		to_chat(src, span_warning("You are stuck inside of \the [H]!"))
 		return
 	else if(istype(M))
 		M.drop_from_inventory(H)
-		to_chat(M, SPAN_WARNING("\The [H] wriggles out of your grip!"))
-		to_chat(src, SPAN_WARNING("You wriggle out of \the [M]'s grip!"))
+		to_chat(M, span_warning("\The [H] wriggles out of your grip!"))
+		to_chat(src, span_warning("You wriggle out of \the [M]'s grip!"))
 
 		// Update whether or not this mob needs to pass emotes to contents.
 		for(var/atom/A in M.contents)
@@ -668,10 +668,10 @@ default behaviour is:
 		var/datum/extension/holster/holster = get_extension(H.loc, /datum/extension/holster)
 		if(holster.holstered == H)
 			holster.clear_holster()
-		to_chat(src, SPAN_WARNING("You extricate yourself from \the [holster]."))
+		to_chat(src, span_warning("You extricate yourself from \the [holster]."))
 		H.forceMove(get_turf(H))
 	else if(istype(H.loc,/obj))
-		to_chat(src, SPAN_WARNING("You struggle free of \the [H.loc]."))
+		to_chat(src, span_warning("You struggle free of \the [H.loc]."))
 		H.forceMove(get_turf(H))
 
 	if(loc != H)
@@ -685,7 +685,7 @@ default behaviour is:
 			var/obj/vine/V = buckled
 			spawn() V.manual_unbuckle(src)
 		else
-			to_chat(usr, SPAN_WARNING("You can't seem to escape from \the [buckled]!"))
+			to_chat(usr, span_warning("You can't seem to escape from \the [buckled]!"))
 			return
 
 /mob/living/proc/resist_grab()
@@ -694,7 +694,7 @@ default behaviour is:
 		resisting++
 		G.handle_resist()
 	if(resisting)
-		visible_message(SPAN_DANGER("[src] resists!"))
+		visible_message(span_danger("[src] resists!"))
 
 /mob/living/verb/lay_down()
 	set name = "Rest"
@@ -702,7 +702,7 @@ default behaviour is:
 
 	resting = !resting
 	UpdateLyingBuckledAndVerbStatus()
-	to_chat(src, SPAN_NOTICE("You are now [resting ? "resting" : "getting up"]"))
+	to_chat(src, span_notice("You are now [resting ? "resting" : "getting up"]"))
 
 //called when the mob receives a bright flash
 /mob/living/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
@@ -764,10 +764,10 @@ default behaviour is:
 	if(!..())
 		return 0
 	if(!possession_candidate)
-		to_chat(possessor, SPAN_WARNING("That animal cannot be possessed."))
+		to_chat(possessor, span_warning("That animal cannot be possessed."))
 		return 0
 	if(jobban_isbanned(possessor, "Animal"))
-		to_chat(possessor, SPAN_WARNING("You are banned from animal roles."))
+		to_chat(possessor, span_warning("You are banned from animal roles."))
 		return 0
 	if(!possessor.MayRespawn(1,ANIMAL_SPAWN_DELAY))
 		return 0
@@ -779,7 +779,7 @@ default behaviour is:
 		return 0
 
 	if(src.ckey || src.client)
-		to_chat(possessor, SPAN_WARNING("\The [src] already has a player."))
+		to_chat(possessor, span_warning("\The [src] already has a player."))
 		return 0
 
 	var/ask = alert(possessor, "Are you sure you want to possess [src.name]?", "Possess mob?", "Yes", "No")
@@ -792,16 +792,16 @@ default behaviour is:
 	qdel(possessor)
 
 	if(round_is_spooky(6)) // Six or more active cultists.
-		to_chat(src, SPAN_NOTICE("You reach out with tendrils of ectoplasm and invade the mind of \the [src]..."))
+		to_chat(src, span_notice("You reach out with tendrils of ectoplasm and invade the mind of \the [src]..."))
 		to_chat(src, "<b>You have assumed direct control of \the [src].</b>")
-		to_chat(src, SPAN_NOTICE("Due to the spookiness of the round, you have taken control of the poor animal as an invading, possessing spirit - roleplay accordingly."))
+		to_chat(src, span_notice("Due to the spookiness of the round, you have taken control of the poor animal as an invading, possessing spirit - roleplay accordingly."))
 		src.universal_speak = TRUE
 		src.universal_understand = TRUE
 		//src.cultify() // Maybe another time.
 		return
 
 	to_chat(src, "<b>You are now \the [src]!</b>")
-	to_chat(src, SPAN_NOTICE("Remember to stay in character for a mob of this type!"))
+	to_chat(src, span_notice("Remember to stay in character for a mob of this type!"))
 	return 1
 
 /mob/living/reset_layer()
@@ -872,7 +872,7 @@ default behaviour is:
 	if(!lying && T.above && !T.above.is_flooded() && T.above.CanZPass(src, UP) && can_overcome_gravity())
 		return FALSE
 	if(prob(5))
-		to_chat(src, SPAN_DANGER("You choke and splutter as you inhale water!"))
+		to_chat(src, span_danger("You choke and splutter as you inhale water!"))
 	T.show_bubbles()
 	return TRUE // Presumably chemical smoke can't be breathed while you're underwater.
 
@@ -895,7 +895,7 @@ default behaviour is:
 	set waitfor = 0
 	sleep(rand(5,10))
 	if(!paralysis && stat == CONSCIOUS)
-		visible_message(SPAN_DANGER("\The [src] starts having a seizure!"))
+		visible_message(span_danger("\The [src] starts having a seizure!"))
 		Paralyse(rand(8,16))
 		make_jittery(rand(150,200))
 		adjustHalLoss(rand(50,60))

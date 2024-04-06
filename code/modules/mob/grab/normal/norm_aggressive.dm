@@ -27,7 +27,7 @@
 	var/mob/living/carbon/human/assailant = G.assailant
 
 	if (assailant.incapacitated(INCAPACITATION_ALL))
-		affecting.visible_message(SPAN_WARNING("[assailant] lets go of \his grab!"))
+		affecting.visible_message(span_warning("[assailant] lets go of \his grab!"))
 		qdel(G)
 		return
 
@@ -41,11 +41,11 @@
 
 /datum/grab/normal/aggressive/can_upgrade(obj/item/grab/G)
 	if(!(G.target_zone in list(BP_CHEST, BP_HEAD)))
-		to_chat(G.assailant, SPAN_WARNING("You need to be grabbing their torso or head for this!"))
+		to_chat(G.assailant, span_warning("You need to be grabbing their torso or head for this!"))
 		return FALSE
 	var/obj/item/clothing/C = G.affecting.head
 	if(istype(C)) //hardsuit helmets etc
 		if((C.max_pressure_protection) && C.armor["melee"] > 20)
-			to_chat(G.assailant, SPAN_WARNING("\The [C] is in the way!"))
+			to_chat(G.assailant, span_warning("\The [C] is in the way!"))
 			return FALSE
 	return TRUE

@@ -95,11 +95,11 @@
 		var/initial_damage_percentage = Percent(get_max_health() - prior_health, get_max_health(), 0)
 		var/damage_percentage = get_damage_percentage()
 		if (damage_percentage >= 75 && initial_damage_percentage < 75)
-			visible_message(SPAN_DANGER("\The [src] looks like it's about to break!"))
+			visible_message(span_danger("\The [src] looks like it's about to break!"))
 		else if (damage_percentage >= 50 && initial_damage_percentage < 50)
-			visible_message(SPAN_DANGER("\The [src] looks seriously damaged!" ))
+			visible_message(span_danger("\The [src] looks seriously damaged!" ))
 		else if (damage_percentage >= 25 && initial_damage_percentage < 25)
-			visible_message(SPAN_DANGER("\The [src] shows signs of damage!" ))
+			visible_message(span_danger("\The [src] shows signs of damage!" ))
 
 /obj/machinery/Destroy()
 	if(istype(wires))
@@ -138,11 +138,11 @@
 		if (prob(100 / severity) && istype(wires))
 			if (prob(20))
 				wires.RandomCut()
-				visible_message(SPAN_DANGER("A shower of sparks sprays out of \the [src]'s wiring panel!"))
+				visible_message(span_danger("A shower of sparks sprays out of \the [src]'s wiring panel!"))
 				sparks(3, 0, get_turf(src))
 			else
 				wires.RandomPulse()
-				visible_message(SPAN_WARNING("Something sparks inside \the [src]'s wiring panel!"))
+				visible_message(span_warning("Something sparks inside \the [src]'s wiring panel!"))
 				new /obj/sparks(get_turf(src))
 
 		..()
@@ -178,7 +178,7 @@
 		var/mob/living/silicon/silicon = user
 		if (silicon_restriction && ismachinerestricted(silicon))
 			if (silicon_restriction == STATUS_CLOSE)
-				to_chat(user, SPAN_WARNING("Remote AI systems detected. Firewall protections forbid remote AI access."))
+				to_chat(user, span_warning("Remote AI systems detected. Firewall protections forbid remote AI access."))
 			return silicon_restriction
 
 		return ..()
@@ -252,7 +252,7 @@
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.getBrainLoss() >= 80)
-			visible_message(SPAN_WARNING("\The [H] stares cluelessly at \the [src]."))
+			visible_message(span_warning("\The [H] stares cluelessly at \the [src]."))
 			return TRUE
 	if((. = component_attack_hand(user)))
 		return TRUE
@@ -279,23 +279,23 @@
 	if (!user.use_sanity_check(src, target))
 		return FALSE
 	if (!istype(target))
-		to_chat(user, SPAN_WARNING("\The [src] cannot handle such a lifeform!"))
+		to_chat(user, span_warning("\The [src] cannot handle such a lifeform!"))
 		return FALSE
 	if (user.incapacitated() || !istype(user))
 		return FALSE
 	if (!target.simulated)
 		return FALSE
 	if (inoperable())
-		to_chat(user, SPAN_WARNING("\The [src] is not functioning."))
+		to_chat(user, span_warning("\The [src] is not functioning."))
 		return FALSE
 	if (target.abiotic())
-		to_chat(user, SPAN_WARNING("[user == target ? "You" : "[target]"] can't enter \the [src] while wearing abiotic items."))
+		to_chat(user, span_warning("[user == target ? "You" : "[target]"] can't enter \the [src] while wearing abiotic items."))
 		return FALSE
 	if (target.buckled)
-		to_chat(user, SPAN_WARNING("Unbuckle [user == target ? "yourself" : "\the [target]"] before attempting to [user == target ? "enter \the [src]" : "move them"]."))
+		to_chat(user, span_warning("Unbuckle [user == target ? "yourself" : "\the [target]"] before attempting to [user == target ? "enter \the [src]" : "move them"]."))
 		return FALSE
 	if (panel_open)
-		to_chat(user, SPAN_WARNING("Close the maintenance panel before attempting to place [user == target ? "yourself" : "\the [target]"] in \the [src]."))
+		to_chat(user, span_warning("Close the maintenance panel before attempting to place [user == target ? "yourself" : "\the [target]"] in \the [src]."))
 		return FALSE
 	for (var/mob/living/carbon/slime/slime in range(0,target))
 		if (slime.Victim == target)
@@ -304,7 +304,7 @@
 	for (var/obj/item/grab/grab in target.grabbed_by)
 		if (grab.assailant == user || grab.assailant == target)
 			continue
-		to_chat(user, SPAN_WARNING("\The [target] is being grabbed by [grab.assailant] and can't be placed in \the [src]."))
+		to_chat(user, span_warning("\The [target] is being grabbed by [grab.assailant] and can't be placed in \the [src]."))
 		return FALSE
 	return TRUE
 
@@ -337,7 +337,7 @@
 /// Displays a message for mobs in range.
 /obj/machinery/proc/state(msg)
 	for(var/mob/O in hearers(src, null))
-		O.show_message("[icon2html(src, O)] " + SPAN_NOTICE(msg), AUDIBLE_MESSAGE)
+		O.show_message("[icon2html(src, O)] " + span_notice(msg), AUDIBLE_MESSAGE)
 
 /// Displays a ping message and sound effect.
 /obj/machinery/proc/ping(text)
@@ -421,37 +421,37 @@
 /// Displays all components in the machine to the user.
 /obj/machinery/proc/display_parts(mob/user)
 	. = list()
-	. += SPAN_NOTICE("Following parts detected in the machine:")
+	. += span_notice("Following parts detected in the machine:")
 	for(var/obj/item/C in component_parts)
-		. += SPAN_NOTICE("	[C.name]")
+		. += span_notice("	[C.name]")
 	for(var/path in uncreated_component_parts)
 		var/obj/item/thing = path
-		. += SPAN_NOTICE("	[initial(thing.name)] ([uncreated_component_parts[path] || 1])")
+		. += span_notice("	[initial(thing.name)] ([uncreated_component_parts[path] || 1])")
 
 /obj/machinery/examine(mob/user)
 	. = ..()
 	if(panel_open)
-		. += SPAN_NOTICE("The service panel is open.")
+		. += span_notice("The service panel is open.")
 	if(component_parts && hasHUD(user, HUD_SCIENCE))
 		. += display_parts(user)
 	if(GET_FLAGS(stat, MACHINE_STAT_NOSCREEN))
-		. += SPAN_WARNING("It is missing a screen, making it hard to interact with.")
+		. += span_warning("It is missing a screen, making it hard to interact with.")
 	else if(GET_FLAGS(stat, MACHINE_STAT_NOINPUT))
-		. += SPAN_WARNING("It is missing any input device.")
+		. += span_warning("It is missing any input device.")
 	else if((!is_powered()) && !interact_offline)
-		. += SPAN_WARNING("It is not receiving power.")
+		. += span_warning("It is not receiving power.")
 	if(construct_state && construct_state.mechanics_info())
-		. += SPAN_NOTICE("It can be <a href='?src=\ref[src];mechanics_text=1'>manipulated</a> using tools.")
+		. += span_notice("It can be <a href='?src=\ref[src];mechanics_text=1'>manipulated</a> using tools.")
 	var/list/missing = missing_parts()
 	if(missing)
 		var/list/parts = list()
 		for(var/type in missing)
 			var/obj/item/fake_thing = type
 			parts += "[num2text(missing[type])] [initial(fake_thing.name)]"
-		. += SPAN_WARNING("[src] is missing [english_list(parts)], rendering it inoperable.")
+		. += span_warning("[src] is missing [english_list(parts)], rendering it inoperable.")
 	if (user.skill_check(SKILL_CONSTRUCTION, SKILL_BASIC) || isobserver(user))
 		if(machine_desc)
-			. += SPAN_NOTICE(machine_desc)
+			. += span_notice(machine_desc)
 
 /obj/machinery/get_mechanics_info()
 	. = ..()

@@ -18,8 +18,8 @@
 			FEEDBACK_UNEQUIP_FAILURE(user, tool)
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] inserts \a [tool] into \the [src]."),
-			SPAN_NOTICE("You insert \the [tool] into \the [src].")
+			span_notice("\The [user] inserts \a [tool] into \the [src]."),
+			span_notice("You insert \the [tool] into \the [src].")
 		)
 		qdel(tool)
 		var/obj/item/card/id/id = user.GetIdCard()
@@ -47,7 +47,7 @@
 
 /obj/structure/undies_wardrobe/attack_hand(mob/user)
 	if(!human_who_can_use_underwear(user))
-		to_chat(user, SPAN_WARNING("Sadly there's nothing in here for you to wear."))
+		to_chat(user, span_warning("Sadly there's nothing in here for you to wear."))
 		return
 	interact(user)
 

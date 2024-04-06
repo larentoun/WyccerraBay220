@@ -87,7 +87,7 @@ var/global/list/ghost_traps
 		if(!assess_candidate(O, target, FALSE))
 			continue
 		if(O.client)
-			to_chat(O, SPAN_BOLD(FONT_LARGE("[request_string] <a href='?src=\ref[src];candidate=\ref[O];target=\ref[target]'>(Occupy)</a> ([ghost_follow_link(target, O)])")))
+			to_chat(O, span_bold(FONT_LARGE("[request_string] <a href='?src=\ref[src];candidate=\ref[O];target=\ref[target]'>(Occupy)</a> ([ghost_follow_link(target, O)])")))
 			sound_to(O, 'sound/effects/ding2.ogg')
 
 /datum/ghosttrap/proc/unregister_target(target)
@@ -149,14 +149,14 @@ var/global/list/ghost_traps
 	ghost_trap_role = "Positronic Brain"
 
 /datum/ghosttrap/positronic/welcome_candidate(mob/target)
-	to_chat(target, SPAN_BOLD("You are a positronic brain, activated on [station_name()]."))
+	to_chat(target, span_bold("You are a positronic brain, activated on [station_name()]."))
 	to_chat(target, "As a newborn synthetic intelligence, you answer to everyone, including the AI.")
 	to_chat(target, "Remember, the purpose of your existence is to learn and serve the one who activated you.")
 	to_chat(target, "Use say [target.get_language_prefix()]b to speak to other artificial intelligences.\n")
 	var/obj/item/organ/internal/posibrain/P = target.loc
 	if (!istype(P))
 		return
-	P.visible_message(SPAN_ITALIC("The [P] chimes quietly."), range = 3)
+	P.visible_message(span_italic("The [P] chimes quietly."), range = 3)
 	deltimer(P.searching)
 	P.searching = null
 	P.update_icon()
@@ -195,7 +195,7 @@ var/global/list/ghost_traps
 	can_set_own_name = FALSE
 
 /datum/ghosttrap/borer/welcome_candidate(mob/target)
-	to_chat(target, "[SPAN_NOTICE("You are a cortical borer!")] You are a brain slug that worms its way \
+	to_chat(target, "[span_notice("You are a cortical borer!")] You are a brain slug that worms its way \
 	into the head of its victim. Use stealth, persuasion and your powers of mind control to keep you, \
 	your host and your eventual spawn safe and warm.")
 	to_chat(target, "You can speak to your victim with <b>say</b>, to other borers with <b>say [target.get_language_prefix()]x</b>, and use your Abilities tab to access powers.")

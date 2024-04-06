@@ -567,7 +567,7 @@
 		return STATUS_CLOSE
 
 	if(aidisabled && issilicon(user))
-		to_chat(user, SPAN_WARNING("AI control for [src] interface has been disabled."))
+		to_chat(user, span_warning("AI control for [src] interface has been disabled."))
 		return STATUS_CLOSE
 
 	. = shorted ? STATUS_DISABLED : STATUS_INTERACTIVE
@@ -772,7 +772,7 @@
 		return
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
-	user.visible_message(SPAN_WARNING("[user] has cut the wires inside [src]!"), "You have cut the wires inside [src].")
+	user.visible_message(span_warning("[user] has cut the wires inside [src]!"), "You have cut the wires inside [src].")
 	new/obj/item/stack/cable_coil(get_turf(src), 5)
 	buildstage = 1
 	update_icon()
@@ -788,12 +788,12 @@
 			if (isCoil(W))
 				var/obj/item/stack/cable_coil/C = W
 				if (C.use(5))
-					to_chat(user, SPAN_NOTICE("You wire [src]."))
+					to_chat(user, span_notice("You wire [src]."))
 					buildstage = 2
 					update_icon()
 					return TRUE
 				else
-					to_chat(user, SPAN_WARNING("You need 5 pieces of cable to do wire [src]."))
+					to_chat(user, span_warning("You need 5 pieces of cable to do wire [src]."))
 					return TRUE
 
 		if(0)
@@ -944,7 +944,7 @@
 		USE_FEEDBACK_FAILURE("Access denied.")
 		return FALSE
 	locked = !locked
-	to_chat(user, SPAN_NOTICE("You [ locked ? "lock" : "unlock"] the Air Alarm interface."))
+	to_chat(user, span_notice("You [ locked ? "lock" : "unlock"] the Air Alarm interface."))
 	update_icon()
 
 /obj/machinery/alarm/cold

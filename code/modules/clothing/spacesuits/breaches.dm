@@ -78,8 +78,8 @@
 			B.update_descriptor()
 
 	user.visible_message(
-		SPAN_NOTICE("[user] patches some of the damage on [src]."),
-		SPAN_NOTICE("You patch some of the damage on [src].")
+		span_notice("[user] patches some of the damage on [src]."),
+		span_notice("You patch some of the damage on [src].")
 	)
 	calc_breach_damage()
 
@@ -115,10 +115,10 @@
 
 			if (existing.damtype == DAMAGE_BRUTE)
 				var/message = "[existing.descriptor] on [src] gapes wider[existing.patched ? ", tearing the patch" : ""]!"
-				visible_message(SPAN_WARNING(message))
+				visible_message(span_warning(message))
 			else if (existing.damtype == DAMAGE_BURN)
 				var/message = "[existing.descriptor] on [src] widens[existing.patched ? ", ruining the patch" : ""]!"
-				visible_message(SPAN_WARNING(message))
+				visible_message(span_warning(message))
 
 			existing.patched = FALSE
 
@@ -134,9 +134,9 @@
 		B.holder = src
 
 		if (B.damtype == DAMAGE_BRUTE)
-			visible_message(SPAN_WARNING("[B.descriptor] opens up on [src]!"))
+			visible_message(span_warning("[B.descriptor] opens up on [src]!"))
 		else if (B.damtype == DAMAGE_BURN)
-			visible_message(SPAN_WARNING("[B.descriptor] marks the surface of [src]!"))
+			visible_message(span_warning("[B.descriptor] marks the surface of [src]!"))
 
 	calc_breach_damage()
 
@@ -212,7 +212,7 @@
 		if(istype(loc,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = loc
 			if(H.wear_suit == src)
-				to_chat(user, SPAN_WARNING("You cannot repair [src] while it is being worn."))
+				to_chat(user, span_warning("You cannot repair [src] while it is being worn."))
 				return
 
 		if(burn_damage <= 0)
@@ -242,8 +242,8 @@
 			var/is_worn = istype(loc, /mob/living)
 			if(do_after(user, (H.wear_suit == src ? 6 : 3) SECONDS, is_worn ? loc : src, is_worn ? DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS : DO_PUBLIC_UNIQUE)) //Sealing a breach on your own suit is awkward and time consuming
 				user.visible_message(
-					SPAN_NOTICE("[user] uses [W] to seal [target_breach.descriptor] on [src]."),
-					SPAN_NOTICE("You use [W] to seal [target_breach.descriptor] on [src].")
+					span_notice("[user] uses [W] to seal [target_breach.descriptor] on [src]."),
+					span_notice("You use [W] to seal [target_breach.descriptor] on [src].")
 				)
 				target_breach.patched = TRUE
 				target_breach.update_descriptor()
@@ -256,7 +256,7 @@
 	. = ..()
 	if(can_breach && breaches && length(breaches))
 		for(var/datum/breach/B in breaches)
-			. += SPAN_DANGER("It has [B.descriptor].")
+			. += span_danger("It has [B.descriptor].")
 
 /obj/item/clothing/suit/space/get_pressure_weakness(pressure)
 	. = ..()

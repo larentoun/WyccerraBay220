@@ -105,6 +105,6 @@
 			msg += line
 
 	if(config.admin_discord)
-		to_chat(src, SPAN_INFO("Adminhelps are also sent to Discord. If no admins are available in game try anyway and an admin on Discord may see it and respond."))
+		to_chat(src, span_info("Adminhelps are also sent to Discord. If no admins are available in game try anyway and an admin on Discord may see it and respond."))
 	to_chat(src, "<b>Current Staff ([active_staff]/[total_staff]):</b>")
 	to_chat(src, jointext(msg,"\n"))

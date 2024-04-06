@@ -18,15 +18,15 @@
 /obj/item/storage/lockbox/attackby(obj/item/I, mob/user)
 	if (istype(I, /obj/item/card/id))
 		if (broken)
-			to_chat(user, SPAN_WARNING("It seems to be broken!"))
+			to_chat(user, span_warning("It seems to be broken!"))
 		else if (!allowed(user))
-			to_chat(user, SPAN_WARNING("Access denied!"))
+			to_chat(user, span_warning("Access denied!"))
 		else if ((locked = !locked))
-			to_chat(user, SPAN_NOTICE("You lock \the [src]!"))
+			to_chat(user, span_notice("You lock \the [src]!"))
 			close_all()
 		else
 			icon_state = icon_closed
-			to_chat(user, SPAN_NOTICE("You lock \the [src]!"))
+			to_chat(user, span_notice("You lock \the [src]!"))
 		return
 	else if (!broken && istype(I, /obj/item/melee/energy/blade))
 		var/success = emag_act(INFINITY, user, I, null, "You hear metal being sliced and sparks flying.")
@@ -37,14 +37,14 @@
 			playsound(loc, 'sound/weapons/blade1.ogg', 50, 1)
 			playsound(loc, "sparks", 50, 1)
 	if (locked)
-		to_chat(user, SPAN_WARNING("It's locked!"))
+		to_chat(user, span_warning("It's locked!"))
 		return
 	..()
 
 
 /obj/item/storage/lockbox/show_to(mob/user)
 	if (locked)
-		to_chat(user, SPAN_WARNING("It's locked!"))
+		to_chat(user, span_warning("It's locked!"))
 	else
 		..()
 
@@ -59,10 +59,10 @@
 	if (user)
 		if (!visual_feedback)
 			visual_feedback = "\The [src] has been sliced open by \the [user] with \an [emag_source]!"
-		visual_feedback = SPAN_WARNING(visual_feedback)
+		visual_feedback = span_warning(visual_feedback)
 		if (!audible_feedback)
 			audible_feedback = "You hear a faint electrical spark."
-		audible_feedback = SPAN_WARNING(audible_feedback)
+		audible_feedback = span_warning(audible_feedback)
 		visible_message(visual_feedback, audible_feedback)
 	return TRUE
 

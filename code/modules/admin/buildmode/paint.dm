@@ -6,7 +6,7 @@
 
 
 /datum/build_mode/paint/Help()
-	to_chat(user, SPAN_NOTICE({"\
+	to_chat(user, span_notice({"\
 		Paint mode allows you to easily set colors of atoms and turfs.<br />\
 		- Left Mouse Button On Atom         = Paint selected atom with saved color<br />\
 		- Left Click + Shift OR Right Click = Set selected atom to default color<br />\
@@ -20,7 +20,7 @@
 	if (!new_color)
 		return
 	selected_color = new_color
-	to_chat(user, SPAN_NOTICE("Color set to <span style='color:[selected_color]'>[selected_color]</span>."))
+	to_chat(user, span_notice("Color set to <span style='color:[selected_color]'>[selected_color]</span>."))
 
 
 /datum/build_mode/paint/OnClick(atom/A, params)
@@ -33,7 +33,7 @@
 		else if (LAZYACCESS(modifiers, CTRL_CLICK))
 			result = clone_color(A)
 			if (!result)
-				to_chat(user, SPAN_NOTICE("Selected paint mode color is now <span style='color:[selected_color]'>[selected_color]</span>."))
+				to_chat(user, span_notice("Selected paint mode color is now <span style='color:[selected_color]'>[selected_color]</span>."))
 				return
 
 		else
@@ -43,7 +43,7 @@
 		result = clear_color(A)
 
 	if (result)
-		to_chat(user, SPAN_WARNING("Paint mode operation failed: [result]"))
+		to_chat(user, span_warning("Paint mode operation failed: [result]"))
 
 
 

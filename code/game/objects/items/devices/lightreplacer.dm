@@ -54,16 +54,16 @@
 /obj/item/device/lightreplacer/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 2)
-		. += SPAN_NOTICE("It has [uses] light\s remaining.")
+		. += span_notice("It has [uses] light\s remaining.")
 		switch (lighting_tone)
 			if (LIGHT_REPLACE_AREA)
-				. += SPAN_NOTICE("It is configured to match the room's blueprints for bulb color and tone.")
+				. += span_notice("It is configured to match the room's blueprints for bulb color and tone.")
 			if (LIGHT_REPLACE_EXISTING)
-				. += SPAN_NOTICE("It is configured to match the replaced bulb's color and tone.")
+				. += span_notice("It is configured to match the replaced bulb's color and tone.")
 			if (LIGHT_REPLACE_RANDOM)
-				. += SPAN_NOTICE("It is configured to print bulbs in random tones.")
+				. += span_notice("It is configured to print bulbs in random tones.")
 			else
-				. += SPAN_NOTICE("It is configured to print bulbs in this color: <span style='color: [lighting_tone];'>■</span>")
+				. += span_notice("It is configured to print bulbs in this color: <span style='color: [lighting_tone];'>■</span>")
 
 /obj/item/device/lightreplacer/resolve_attackby(atom/A, mob/user)
 
@@ -110,8 +110,8 @@
 			return TRUE
 		AddUses(1)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] adds \a [tool] to \a [src]."),
-			SPAN_NOTICE("You add \the [tool] to \the [src]. It now has [uses] light\s remaining.")
+			span_notice("\The [user] adds \a [tool] to \a [src]."),
+			span_notice("You add \the [tool] to \the [src]. It now has [uses] light\s remaining.")
 		)
 		qdel(tool)
 		return TRUE
@@ -130,8 +130,8 @@
 			return TRUE
 		AddUses(16)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] loads \a [src] with [material_stack.get_vague_name(FALSE)]."),
-			SPAN_NOTICE("You load \the [src] with [material_stack.get_exact_name(1)]. It now has [uses] light\s remaining.")
+			span_notice("\The [user] loads \a [src] with [material_stack.get_vague_name(FALSE)]."),
+			span_notice("You load \the [src] with [material_stack.get_exact_name(1)]. It now has [uses] light\s remaining.")
 		)
 		return TRUE
 
@@ -160,28 +160,28 @@
 	switch (selection)
 		if ("Random (Default)")
 			lighting_tone = LIGHT_REPLACE_RANDOM
-			to_chat(user, SPAN_NOTICE("You configure \the [src] to print bulbs in random tones."))
+			to_chat(user, span_notice("You configure \the [src] to print bulbs in random tones."))
 		if ("Match Blueprint")
 			lighting_tone = LIGHT_REPLACE_AREA
-			to_chat(user, SPAN_NOTICE("You configure \the [src] to match the room's blueprints for bulb color and tone."))
+			to_chat(user, span_notice("You configure \the [src] to match the room's blueprints for bulb color and tone."))
 		if ("Match Existing")
 			lighting_tone = LIGHT_REPLACE_EXISTING
-			to_chat(user, SPAN_NOTICE("You configure \the [src] to match the replaced bulb's color and tone."))
+			to_chat(user, span_notice("You configure \the [src] to match the replaced bulb's color and tone."))
 		if ("Warm")
 			lighting_tone = LIGHT_COLOUR_WARM
-			to_chat(user, SPAN_NOTICE("You configure \the [src] to print bulbs in warm tones."))
+			to_chat(user, span_notice("You configure \the [src] to print bulbs in warm tones."))
 		if ("Cool")
 			lighting_tone = LIGHT_COLOUR_COOL
-			to_chat(user, SPAN_NOTICE("You configure \the [src] to print bulbs in cool tones."))
+			to_chat(user, span_notice("You configure \the [src] to print bulbs in cool tones."))
 		if ("White")
 			lighting_tone = LIGHT_COLOUR_WHITE
-			to_chat(user, SPAN_NOTICE("You configure \the [src] to print bulbs in white tones."))
+			to_chat(user, span_notice("You configure \the [src] to print bulbs in white tones."))
 		if ("Custom")
 			var/new_lighting_tone = input(user, "Select a color:", "Light Replace Color") as color
 			if (!new_lighting_tone)
 				return
 			lighting_tone = new_lighting_tone
-			to_chat(user, SPAN_NOTICE("You configure \the [src] to print bulbs in the color: <span style='color: [lighting_tone];'>■</span>"))
+			to_chat(user, span_notice("You configure \the [src] to print bulbs in the color: <span style='color: [lighting_tone];'>■</span>"))
 
 
 /obj/item/device/lightreplacer/use(mob/user)
@@ -206,7 +206,7 @@
 	else if(!CanUse(U))
 		to_chat(U, "\The [src]'s refill light blinks red.")
 	else if(use(U))
-		to_chat(U, SPAN_NOTICE("You replace the [target.get_fitting_name()] with the [src]."))
+		to_chat(U, span_notice("You replace the [target.get_fitting_name()] with the [src]."))
 
 		var/bulb_color = null
 		if (lighting_tone == LIGHT_REPLACE_AREA)

@@ -214,7 +214,7 @@
 	if(!mob)
 		return // Paranoid.
 	if(isnull(slot) || !isnum(slot))
-		to_chat(src,SPAN_WARNING(".activate_ability requires a number as input, corrisponding to the slot you wish to use."))
+		to_chat(src,span_warning(".activate_ability requires a number as input, corrisponding to the slot you wish to use."))
 		return // Bad input.
 	if(!mob.ability_master)
 		return // No abilities.

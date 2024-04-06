@@ -30,7 +30,7 @@
 
 /turf/simulated/floor/fixed/alium/crowbar_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_BLOCKING
-	to_chat(user, SPAN_NOTICE("There aren't any openings big enough to pry it away..."))
+	to_chat(user, span_notice("There aren't any openings big enough to pry it away..."))
 
 /turf/simulated/floor/fixed/alium/Initialize(mapload, added_to_area_cache)
 	. = ..()

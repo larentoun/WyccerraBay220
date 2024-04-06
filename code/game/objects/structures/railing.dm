@@ -84,7 +84,7 @@
 
 
 /obj/structure/railing/on_death()
-	visible_message(SPAN_DANGER("[src] [material.destruction_desc]!"))
+	visible_message(span_danger("[src] [material.destruction_desc]!"))
 	playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
 	material.place_shard(get_turf(usr))
 	qdel(src)
@@ -183,11 +183,11 @@
 		return 0
 
 	if (anchored)
-		to_chat(usr, SPAN_WARNING("It is fastened to the floor and cannot be flipped."))
+		to_chat(usr, span_warning("It is fastened to the floor and cannot be flipped."))
 		return 0
 
 	if (!turf_is_crowded())
-		to_chat(usr, SPAN_WARNING("You can't flip [src] - something is in the way."))
+		to_chat(usr, span_warning("You can't flip [src] - something is in the way."))
 		return 0
 
 	forceMove(get_step(src, src.dir))
@@ -207,7 +207,7 @@
 /obj/structure/railing/use_grab(obj/item/grab/grab, list/click_params)
 	var/obj/occupied = turf_is_crowded()
 	if (occupied)
-		USE_FEEDBACK_GRAB_FAILURE(SPAN_WARNING("There's [occupied] blocking [src]."))
+		USE_FEEDBACK_GRAB_FAILURE(span_warning("There's [occupied] blocking [src]."))
 		return TRUE
 
 	if (!grab.force_danger())
@@ -223,8 +223,8 @@
 		grab.affecting.apply_damage(8, DAMAGE_BRUTE, BP_HEAD)
 		playsound(src, 'sound/effects/grillehit.ogg', 50, 1)
 		grab.assailant.visible_message(
-			SPAN_WARNING("[grab.assailant] slams [grab.affecting]'s face against [src]!"),
-			SPAN_DANGER("You slam [grab.affecting]'s face against [src]!")
+			span_warning("[grab.assailant] slams [grab.affecting]'s face against [src]!"),
+			span_danger("You slam [grab.affecting]'s face against [src]!")
 		)
 		return TRUE
 
@@ -234,8 +234,8 @@
 		grab.affecting.dropInto(loc)
 	grab.affecting.Weaken(5)
 	grab.assailant.visible_message(
-		SPAN_WARNING("[grab.assailant] throws [grab.affecting] over [src]."),
-		SPAN_WARNING("You throw [grab.affecting] over [src]."),
+		span_warning("[grab.assailant] throws [grab.affecting] over [src]."),
+		span_warning("You throw [grab.affecting] over [src]."),
 	)
 	return TRUE
 
@@ -252,8 +252,8 @@
 	if(!tool.use_as_tool(src, user, 1 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT) || !density)
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] [anchored ? "un" : null]fastens [src] [anchored ? "from" : "to"] the floor with [tool]."),
-		SPAN_NOTICE("You [anchored ? "un" : null]fasten [src] [anchored ? "from" : "to"] the floor with [tool].")
+		span_notice("[user] [anchored ? "un" : null]fastens [src] [anchored ? "from" : "to"] the floor with [tool]."),
+		span_notice("You [anchored ? "un" : null]fasten [src] [anchored ? "from" : "to"] the floor with [tool].")
 	)
 	anchored = !anchored
 	USE_FEEDBACK_NEW_ANCHOR_FINISH(user, anchored)
@@ -270,22 +270,22 @@
 		set_density(!density)
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] [density ? "closes" : "opens"] [src] with [tool]."),
-			SPAN_NOTICE("You [density ? "close" : "open"] [src] with [tool].")
+			span_notice("[user] [density ? "closes" : "opens"] [src] with [tool]."),
+			span_notice("You [density ? "close" : "open"] [src] with [tool].")
 		)
 		return
 	// Dismantle
 	user.visible_message(
-		SPAN_NOTICE("[user] starts dismantling [src] with [tool]."),
-		SPAN_NOTICE("You start dismantling [src] with [tool].")
+		span_notice("[user] starts dismantling [src] with [tool]."),
+		span_notice("You start dismantling [src] with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 2 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT) || anchored)
 		return
 	var/obj/new_sheet = material.place_sheet(loc, 2)
 	transfer_fingerprints_to(new_sheet)
 	user.visible_message(
-		SPAN_NOTICE("[user] dismantles [src] with [tool]."),
-		SPAN_NOTICE("You dismantle [src] with [tool].")
+		span_notice("[user] dismantles [src] with [tool]."),
+		span_notice("You dismantle [src] with [tool].")
 	)
 	qdel(src)
 
@@ -308,7 +308,7 @@
 	if (. && get_turf(user) == get_turf(src))
 		var/turf/T = get_step(src, src.dir)
 		if (T.density || T.turf_is_crowded(user))
-			to_chat(user, SPAN_WARNING("You can't climb there, the way is blocked."))
+			to_chat(user, span_warning("You can't climb there, the way is blocked."))
 			return 0
 
 
@@ -328,7 +328,7 @@
 		target_turf = get_step(src, dir)
 	if (!target_turf.density && !target_turf.turf_is_crowded(L))
 		L.forceMove(target_turf)
-		L.visible_message(SPAN_WARNING("[L] [pick("falls", "flies")] over [src]!"))
+		L.visible_message(span_warning("[L] [pick("falls", "flies")] over [src]!"))
 		L.Weaken(2)
 		playsound(L, 'sound/effects/grillehit.ogg', 25, 1, FALSE)
 	else

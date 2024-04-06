@@ -43,7 +43,7 @@
 				continue
 			limb.take_external_damage(0, 10)
 			if (prob(5))
-				to_chat(H, SPAN_DANGER("You feel a sharp, burning pain in your [limb]!"))
+				to_chat(H, span_danger("You feel a sharp, burning pain in your [limb]!"))
 		else if (istype(AM, /mob/living/exosuit))
 			var/mob/living/exosuit/suit = AM
 			suit.apply_damage(200, DAMAGE_BRUTE, BP_LEGS_FEET)
@@ -51,7 +51,7 @@
 		else
 			if (!AM.damage_health(10, DAMAGE_BURN))
 				if (!istype(AM, /obj/sparks) && !istype(AM, /obj/effect))
-					visible_message(SPAN_DANGER("\The [AM] disintegrates in a flash of blue light!"))
+					visible_message(span_danger("\The [AM] disintegrates in a flash of blue light!"))
 					playsound(AM.loc, 'sound/magic/summon_carp.ogg', 50, 1)
 				qdel(AM)
 	if(!LAZYLEN(victims))

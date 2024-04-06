@@ -121,9 +121,9 @@
 		. = TOPIC_HANDLED
 		muted = !muted
 		if (muted)
-			computer.visible_notification(SPAN_NOTICE("Channel notifications have been disabled."))
+			computer.visible_notification(span_notice("Channel notifications have been disabled."))
 			return
-		computer.visible_notification(SPAN_NOTICE("Channel notifications have been enabled."))
+		computer.visible_notification(span_notice("Channel notifications have been enabled."))
 
 	if(href_list["PRG_savelog"])
 		. = TOPIC_HANDLED
@@ -206,7 +206,7 @@
 	for (var/datum/computer_file/program/chatclient/client in channel.clients)
 		if (client == src || client.muted)
 			continue
-		client.computer.visible_notification(SPAN_NOTICE(message))
+		client.computer.visible_notification(span_notice(message))
 		client.computer.audible_notification("sound/machines/ping.ogg")
 
 /datum/nano_module/program/computer_chatclient

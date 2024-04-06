@@ -187,7 +187,7 @@
 
 
 /obj/structure/deity/on_death()
-	visible_message(SPAN_DANGER("\The [src] crumbles!"))
+	visible_message(span_danger("\The [src] crumbles!"))
 	qdel(src)
 
 /obj/structure/deity/bullet_act(obj/item/projectile/P)

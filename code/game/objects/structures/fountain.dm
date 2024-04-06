@@ -44,7 +44,7 @@
 	for(var/mob/living/L in oviewers(7, src))
 		L.flash_eyes(3)
 		L.eye_blurry += 9
-	visible_message(SPAN_WARNING("\The [src] erupts in a bright flash of light!"))
+	visible_message(span_warning("\The [src] erupts in a bright flash of light!"))
 	playsound(src,'sound/items/time.ogg',100)
 	if(rand(1, 6) == 1 || user.age < 18)
 		to_chat(user, SPAN_CLASS("cultannounce", "You touch the fountain. All the memories of your life seem to fade into the distant past as seconds drag like years. You feel the inexplicable sensation of your skin tightening and thinning across your entire body as your muscles degrade and your joints weaken. Time returns to its 'normal' pace. You can only just barely remember touching the fountain."))

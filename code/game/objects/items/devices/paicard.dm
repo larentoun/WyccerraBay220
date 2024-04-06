@@ -249,13 +249,13 @@
 			return
 		var/mob/M = usr
 		if(!istype(M, /mob/living/carbon))
-			to_chat(usr, SPAN_NOTICE("You don't have any DNA, or your DNA is incompatible with this device."))
+			to_chat(usr, span_notice("You don't have any DNA, or your DNA is incompatible with this device."))
 		else
 			var/datum/dna/dna = usr.dna
 			pai.master = M.real_name
 			pai.master_dna = dna.unique_enzymes
 			pai.faction = M.faction
-			to_chat(pai, SPAN_WARNING("You have been bound to a new master."))
+			to_chat(pai, span_warning("You have been bound to a new master."))
 	if(href_list["request"])
 		src.looking_for_personality = 1
 		paiController.findPAI(src, usr)
@@ -324,7 +324,7 @@
 /obj/item/device/paicard/proc/alertUpdate()
 	var/turf/T = get_turf_or_move(src.loc)
 	for (var/mob/M in viewers(T))
-		M.show_message(SPAN_NOTICE("\The [src] flashes a message across its screen, \"Additional personalities available for download.\""), 3, SPAN_NOTICE("\The [src] bleeps electronically."), 2)
+		M.show_message(span_notice("\The [src] flashes a message across its screen, \"Additional personalities available for download.\""), 3, span_notice("\The [src] bleeps electronically."), 2)
 
 /obj/item/device/paicard/emp_act(severity)
 	SHOULD_CALL_PARENT(FALSE)

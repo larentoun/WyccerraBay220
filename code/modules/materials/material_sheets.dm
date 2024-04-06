@@ -162,7 +162,7 @@
 		return
 	if(!use(2))
 		return
-	to_chat(user,SPAN_NOTICE("You recover some [reinf_material.use_name] from [src]."))
+	to_chat(user,span_notice("You recover some [reinf_material.use_name] from [src]."))
 	reinf_material.place_sheet(get_turf(user), 1)
 
 /obj/item/stack/material/use_tool(obj/item/W, mob/living/user, list/click_params)

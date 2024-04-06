@@ -22,11 +22,11 @@
 /obj/item/mech_component/sensors/show_missing_parts(mob/user)
 	. = ..()
 	if(!radio)
-		. += SPAN_WARNING("It is missing a radio.")
+		. += span_warning("It is missing a radio.")
 	if(!camera)
-		. += SPAN_WARNING("It is missing a camera.")
+		. += span_warning("It is missing a camera.")
 	if(!software)
-		. += SPAN_WARNING("It is missing a software control module.")
+		. += span_warning("It is missing a software control module.")
 
 /obj/item/mech_component/sensors/prebuild()
 	radio = new(src)
@@ -60,17 +60,17 @@
 /obj/item/mech_component/sensors/attackby(obj/item/thing, mob/user)
 	if(istype(thing, /obj/item/mech_component/control_module))
 		if(software)
-			to_chat(user, SPAN_WARNING("\The [src] already has a control modules installed."))
+			to_chat(user, span_warning("\The [src] already has a control modules installed."))
 			return
 		if(install_component(thing, user)) software = thing
 	else if(istype(thing,/obj/item/robot_parts/robot_component/radio))
 		if(radio)
-			to_chat(user, SPAN_WARNING("\The [src] already has a radio installed."))
+			to_chat(user, span_warning("\The [src] already has a radio installed."))
 			return
 		if(install_component(thing, user)) radio = thing
 	else if(istype(thing,/obj/item/robot_parts/robot_component/camera))
 		if(camera)
-			to_chat(user, SPAN_WARNING("\The [src] already has a camera installed."))
+			to_chat(user, span_warning("\The [src] already has a camera installed."))
 			return
 		if(install_component(thing, user)) camera = thing
 	else
@@ -79,19 +79,19 @@
 /obj/item/mech_component/sensors/return_diagnostics(mob/user)
 	..()
 	if(software)
-		to_chat(user, SPAN_NOTICE(" Installed Software"))
+		to_chat(user, span_notice(" Installed Software"))
 		for(var/exosystem_software in software.installed_software)
-			to_chat(user, SPAN_NOTICE(" - <b>[capitalize(exosystem_software)]</b>"))
+			to_chat(user, span_notice(" - <b>[capitalize(exosystem_software)]</b>"))
 	else
-		to_chat(user, SPAN_WARNING(" Control Module Missing or Non-functional."))
+		to_chat(user, span_warning(" Control Module Missing or Non-functional."))
 	if(radio)
-		to_chat(user, SPAN_NOTICE(" Radio Integrity: <b>[round((((radio.max_dam - radio.total_dam) / radio.max_dam)) * 100)]%</b>"))
+		to_chat(user, span_notice(" Radio Integrity: <b>[round((((radio.max_dam - radio.total_dam) / radio.max_dam)) * 100)]%</b>"))
 	else
-		to_chat(user, SPAN_WARNING(" Radio Missing or Non-functional."))
+		to_chat(user, span_warning(" Radio Missing or Non-functional."))
 	if(camera)
-		to_chat(user, SPAN_NOTICE(" Camera Integrity: <b>[round((((camera.max_dam - camera.total_dam) / camera.max_dam)) * 100)]%</b>"))
+		to_chat(user, span_notice(" Camera Integrity: <b>[round((((camera.max_dam - camera.total_dam) / camera.max_dam)) * 100)]%</b>"))
 	else
-		to_chat(user, SPAN_WARNING(" Camera Missing or Non-functional."))
+		to_chat(user, span_warning(" Camera Missing or Non-functional."))
 
 
 /obj/item/mech_component/control_module
@@ -106,7 +106,7 @@
 
 /obj/item/mech_component/control_module/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("It has [max_installed_software - LAZYLEN(installed_software)] empty slot\s remaining out of [max_installed_software].")
+	. += span_notice("It has [max_installed_software - LAZYLEN(installed_software)] empty slot\s remaining out of [max_installed_software].")
 
 /obj/item/mech_component/control_module/screwdriver_act(mob/living/user, obj/item/tool)
 	. = ..()
@@ -121,13 +121,13 @@
 /obj/item/mech_component/control_module/proc/install_software(obj/item/circuitboard/exosystem/software, mob/user)
 	if(length(installed_software) >= max_installed_software)
 		if(user)
-			to_chat(user, SPAN_WARNING("\The [src] can only hold [max_installed_software] software modules."))
+			to_chat(user, span_warning("\The [src] can only hold [max_installed_software] software modules."))
 		return
 	if(user && !user.unEquip(software))
 		return
 
 	if(user)
-		to_chat(user, SPAN_NOTICE("You load \the [software] into \the [src]'s memory."))
+		to_chat(user, span_notice("You load \the [software] into \the [src]'s memory."))
 
 	software.forceMove(src)
 	update_software()

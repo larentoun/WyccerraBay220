@@ -15,7 +15,7 @@
 /obj/item/organ/internal/augment/active/item/adaptive_binoculars/emp_act(severity)
 	. = ..()
 	if (item?.zoom)
-		to_chat(owner, SPAN_WARNING("Your eyes fill with static as \the [item.name] malfunction\s!"))
+		to_chat(owner, span_warning("Your eyes fill with static as \the [item.name] malfunction\s!"))
 		owner.eye_blind += 10
 		owner.eye_blurry += 20
 		item.unzoom()

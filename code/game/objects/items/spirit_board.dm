@@ -10,7 +10,7 @@
 
 /obj/item/spirit_board/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("The planchette is sitting at \"[planchette]\".")
+	. += span_notice("The planchette is sitting at \"[planchette]\".")
 
 /obj/item/spirit_board/attack_hand(mob/user)
 	if (user.a_intent == I_GRAB)
@@ -36,7 +36,7 @@
 		return	next_use = world.time + rand(30,50)
 	lastuser = M.ckey
 	//blind message is the same because not everyone brings night vision to seances
-	visible_message(SPAN_NOTICE("The planchette slowly moves... and stops at the letter \"[planchette]\"."))
+	visible_message(span_notice("The planchette slowly moves... and stops at the letter \"[planchette]\"."))
 
 /obj/item/spirit_board/proc/spirit_board_checks(mob/M)
 	//cooldown
@@ -56,7 +56,7 @@
 
 
 	if(light_amount > 0.2)
-		to_chat(M, SPAN_WARNING("It's too bright here to use \the [src.name]!"))
+		to_chat(M, span_warning("It's too bright here to use \the [src.name]!"))
 		return 0
 
 	//mobs in range check
@@ -64,12 +64,12 @@
 	for(var/mob/living/L in orange(1,src))
 		if(L.ckey && L.client)
 			if(L.client.is_afk(300) || L.incapacitated())//no playing with braindeads or corpses or handcuffed dudes.
-				to_chat(M, SPAN_WARNING("[L] doesn't seem to be paying attention..."))
+				to_chat(M, span_warning("[L] doesn't seem to be paying attention..."))
 			else
 				users_in_range++
 
 	if(users_in_range < 2)
-		to_chat(M, SPAN_WARNING("There aren't enough people to use \the [src.name]!"))
+		to_chat(M, span_warning("There aren't enough people to use \the [src.name]!"))
 		return 0
 
 	return 1

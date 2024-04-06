@@ -147,7 +147,7 @@
 	var/newname = input(user, "Choose a new name, or leave blank to use the default", "Choose item name") as null|text
 	var/newdesc = input(user, "Choose a new description, or leave blank to use the default", "Choose item description") as null|text
 	if(!CanPhysicallyInteractWith(user, holder))
-		to_chat(user, SPAN_WARNING("You can't reach \the [holder]."))
+		to_chat(user, span_warning("You can't reach \the [holder]."))
 		return
 	Disguise(chameleon_choices[choice], newname, newdesc)
 
@@ -170,7 +170,7 @@
 	if (!choice)
 		return
 	if(!CanPhysicallyInteractWith(user, holder))
-		to_chat(user, SPAN_WARNING("You can't reach \the [holder]."))
+		to_chat(user, span_warning("You can't reach \the [holder]."))
 		return
 	SetOutfitAppearance(user, list(src), choice)
 
@@ -193,7 +193,7 @@
 	if (!choice)
 		return
 	if(!CanPhysicallyInteractWith(user, holder))
-		to_chat(usr, SPAN_WARNING("You can't reach \the [holder]."))
+		to_chat(usr, span_warning("You can't reach \the [holder]."))
 		return
 
 	var/list/extensions = list()
@@ -208,10 +208,10 @@
 	for (var/datum/extension/chameleon/chameleon_extension as anything in chameleon_extensions)
 		var/outfit_type = chameleon_extension.GetItemDisguiseType(outfit)
 		if (outfit_type)
-			to_chat(user, SPAN_NOTICE("The outfit '[outfit]' appearance was applied to \the [chameleon_extension.holder]."));
+			to_chat(user, span_notice("The outfit '[outfit]' appearance was applied to \the [chameleon_extension.holder]."));
 			chameleon_extension.Disguise(outfit_type)
 		else
-			to_chat(user, SPAN_WARNING("The outfit '[outfit]' had no suitable appearance for \the [chameleon_extension.holder]."));
+			to_chat(user, span_warning("The outfit '[outfit]' had no suitable appearance for \the [chameleon_extension.holder]."));
 
 /********************
 * Subtype overrides *

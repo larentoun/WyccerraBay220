@@ -126,7 +126,7 @@
 
 /obj/item/clothing/head/det/attack_self(mob/user)
 	flags_inv ^= BLOCKHEADHAIR
-	to_chat(user, SPAN_NOTICE("[src] will now [flags_inv & BLOCKHEADHAIR ? "hide" : "show"] hair."))
+	to_chat(user, span_notice("[src] will now [flags_inv & BLOCKHEADHAIR ? "hide" : "show"] hair."))
 	..()
 
 /obj/item/clothing/head/det/grey

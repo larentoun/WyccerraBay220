@@ -148,7 +148,7 @@
 					updated_stacks = TRUE
 
 		if(updated_stacks && prob(5))
-			to_chat(owner, SPAN_NOTICE("Your [name] churns as it digests some material into a usable form."))
+			to_chat(owner, span_notice("Your [name] churns as it digests some material into a usable form."))
 
 /obj/item/organ/internal/hindtongue
 	name = "hindtongue"
@@ -185,11 +185,11 @@
 	if (istype(backup))
 		var/owner_viable = find_dead_player(ownerckey, TRUE)
 		if (user_vox)
-			. += SPAN_NOTICE("The integrity light on [src] blinks [owner_viable ? "rapidly. It can be implanted." : "slowly. It is dormant."]")
+			. += span_notice("The integrity light on [src] blinks [owner_viable ? "rapidly. It can be implanted." : "slowly. It is dormant."]")
 		else
-			. += SPAN_NOTICE("A light on [src] blinks [owner_viable ? "rapidly" : "slowly"].")
+			. += span_notice("A light on [src] blinks [owner_viable ? "rapidly" : "slowly"].")
 	else if (user_vox)
-		. += SPAN_NOTICE("The integrity light on [src] is off. It is empty and lifeless.")
+		. += span_notice("The integrity light on [src] is off. It is empty and lifeless.")
 
 /obj/item/organ/internal/voxstack/emp_act()
 	SHOULD_CALL_PARENT(FALSE)
@@ -227,7 +227,7 @@
 
 /obj/item/organ/internal/voxstack/removed()
 	var/obj/item/organ/external/head = owner.get_organ(parent_organ)
-	owner.visible_message(SPAN_DANGER("\The [src] rips gaping holes in \the [owner]'s [head.name] as it is torn loose!"))
+	owner.visible_message(span_danger("\The [src] rips gaping holes in \the [owner]'s [head.name] as it is torn loose!"))
 	head.take_external_damage(rand(15,20))
 	for(var/obj/item/organ/internal/O in head.contents)
 		O.take_internal_damage(rand(30,70))
@@ -238,14 +238,14 @@
 	if(owner.mind && owner.ckey) //Someone is already in this body!
 		if(owner.mind == backup) // Oh, it's the same mind in the backup. Someone must've spammed the 'Start Procedure' button in a panic.
 			return
-		owner.visible_message(SPAN_DANGER("\The [owner] spasms violently!"))
+		owner.visible_message(span_danger("\The [owner] spasms violently!"))
 		owner.ghostize()
 	backup.active = 1
 	backup.transfer_to(owner)
 	if (default_language)
 		owner.default_language = default_language
 	owner.languages = languages.Copy()
-	to_chat(owner, SPAN_NOTICE("Consciousness slowly creeps over you as your new body awakens."))
+	to_chat(owner, span_notice("Consciousness slowly creeps over you as your new body awakens."))
 
 /datum/species/vox/handle_death(mob/living/carbon/human/H)
 	..()

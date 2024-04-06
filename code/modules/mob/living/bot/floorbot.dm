@@ -94,7 +94,7 @@
 	if(!emagged)
 		emagged = TRUE
 		if(user)
-			to_chat(user, SPAN_NOTICE("The [src] buzzes and beeps."))
+			to_chat(user, span_notice("The [src] buzzes and beeps."))
 		return 1
 
 /mob/living/bot/floorbot/handleRegular()
@@ -157,12 +157,12 @@
 		busy = 1
 		update_icons()
 		if(F.flooring)
-			visible_message(SPAN_WARNING("[src] begins to tear the floor tile from the floor."))
+			visible_message(span_warning("[src] begins to tear the floor tile from the floor."))
 			if(do_after(src, 5 SECONDS, F, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 				F.break_tile_to_plating()
 				addTiles(1)
 		else
-			visible_message(SPAN_DANGER("[src] begins to tear through the floor!"))
+			visible_message(span_danger("[src] begins to tear through the floor!"))
 			if(do_after(src, 15 SECONDS, F, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS)) // Extra time because this can and will kill.
 				F.ReplaceWithLattice()
 				addTiles(1)
@@ -173,7 +173,7 @@
 		if(F.broken || F.burnt)
 			busy = 1
 			update_icons()
-			visible_message(SPAN_NOTICE("[src] begins to remove the broken floor."))
+			visible_message(span_notice("[src] begins to remove the broken floor."))
 			anchored = TRUE
 			if(do_after(src, 5 SECONDS, F, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 				if(F.broken || F.burnt)
@@ -185,7 +185,7 @@
 		else if(!F.flooring && amount)
 			busy = 1
 			update_icons()
-			visible_message(SPAN_NOTICE("[src] begins to improve the floor."))
+			visible_message(span_notice("[src] begins to improve the floor."))
 			anchored = TRUE
 			if(do_after(src, 5 SECONDS, F, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 				if(!F.flooring)
@@ -196,7 +196,7 @@
 			update_icons()
 	else if(istype(target, /obj/item/stack/tile/floor) && amount < maxAmount)
 		var/obj/item/stack/tile/floor/T = target
-		visible_message(SPAN_NOTICE("\The [src] begins to collect tiles."))
+		visible_message(span_notice("\The [src] begins to collect tiles."))
 		busy = 1
 		update_icons()
 		anchored = TRUE
@@ -211,7 +211,7 @@
 	else if(istype(target, /obj/item/stack/material) && amount + 4 <= maxAmount)
 		var/obj/item/stack/material/M = target
 		if(M.get_material_name() == MATERIAL_STEEL)
-			visible_message(SPAN_NOTICE("\The [src] begins to make tiles."))
+			visible_message(span_notice("\The [src] begins to make tiles."))
 			busy = 1
 			anchored = TRUE
 			update_icons()
@@ -223,7 +223,7 @@
 
 /mob/living/bot/floorbot/explode()
 	turn_off()
-	visible_message(SPAN_DANGER("[src] blows apart!"))
+	visible_message(span_danger("[src] blows apart!"))
 	var/turf/Tsec = get_turf(src)
 
 

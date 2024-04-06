@@ -37,7 +37,7 @@
 			var/datum/extension/holster/E = get_extension(S, /datum/extension/holster)
 			if(!E.holstered)
 				if(!H.get_active_hand())
-					to_chat(H, SPAN_WARNING("You're not holding anything to holster."))
+					to_chat(H, span_warning("You're not holding anything to holster."))
 					return
 				E.holster(H.get_active_hand(), H)
 				return
@@ -50,7 +50,7 @@
 		var/datum/extension/holster/E = get_extension(B, /datum/extension/holster)
 		if(!E.holstered)
 			if(!H.get_active_hand())
-				to_chat(H, SPAN_WARNING("You're not holding anything to holster."))
+				to_chat(H, span_warning("You're not holding anything to holster."))
 				return
 			E.holster(H.get_active_hand(), H)
 			return

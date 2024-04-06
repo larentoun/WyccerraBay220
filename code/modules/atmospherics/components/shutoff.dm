@@ -27,7 +27,7 @@
 
 /obj/machinery/atmospherics/valve/shutoff/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("The automatic shutoff circuit is [close_on_leaks ? "enabled" : "disabled"].")
+	. += span_notice("The automatic shutoff circuit is [close_on_leaks ? "enabled" : "disabled"].")
 
 /obj/machinery/atmospherics/valve/shutoff/Initialize()
 	. = ..()
@@ -42,7 +42,7 @@
 	if(CanInteract(user, DefaultTopicState()))
 		close_on_leaks = !close_on_leaks
 		update_icon()
-		to_chat(user, SPAN_NOTICE("You [close_on_leaks ? "enable" : "disable"] the automatic shutoff circuit."))
+		to_chat(user, span_notice("You [close_on_leaks ? "enable" : "disable"] the automatic shutoff circuit."))
 		CouldUseTopic(user)
 		return TRUE
 

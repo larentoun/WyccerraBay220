@@ -11,27 +11,27 @@
 
 /datum/extension/local_network_member/proc/set_tag(mob/user, new_ident)
 	if(id_tag == new_ident)
-		to_chat(user, SPAN_WARNING("\The [holder] is already part of the [new_ident] local network."))
+		to_chat(user, span_warning("\The [holder] is already part of the [new_ident] local network."))
 		return FALSE
 
 	if(id_tag)
 		var/datum/local_network/old_lan = GLOB.local_networks[id_tag]
 		if(old_lan)
 			if(!old_lan.remove_device(holder))
-				to_chat(user, SPAN_WARNING("You encounter an error when trying to unregister \the [holder] from the [id_tag] local network."))
+				to_chat(user, span_warning("You encounter an error when trying to unregister \the [holder] from the [id_tag] local network."))
 				return FALSE
-			to_chat(user, SPAN_NOTICE("You unregister \the [holder] from the [id_tag] local network."))
+			to_chat(user, span_notice("You unregister \the [holder] from the [id_tag] local network."))
 
 	var/datum/local_network/lan = GLOB.local_networks[new_ident]
 	if(!lan)
 		lan = new(new_ident)
 		lan.add_device(holder)
-		to_chat(user, SPAN_NOTICE("You create a new [new_ident] local network and register \the [holder] with it."))
+		to_chat(user, span_notice("You create a new [new_ident] local network and register \the [holder] with it."))
 	else if(lan.within_radius(holder))
 		lan.add_device(holder)
-		to_chat(user, SPAN_NOTICE("You register \the [holder] with the [new_ident] local network."))
+		to_chat(user, span_notice("You register \the [holder] with the [new_ident] local network."))
 	else
-		to_chat(user, SPAN_WARNING("\The [holder] is out of range of the [new_ident] local network."))
+		to_chat(user, span_warning("\The [holder] is out of range of the [new_ident] local network."))
 		return FALSE
 	id_tag = new_ident
 	return TRUE
@@ -58,27 +58,27 @@
 
 /datum/extension/local_network_member/multilevel/set_tag(mob/user, new_ident)
 	if(id_tag == new_ident)
-		to_chat(user, SPAN_WARNING("\The [holder] is already part of the [new_ident] local network."))
+		to_chat(user, span_warning("\The [holder] is already part of the [new_ident] local network."))
 		return FALSE
 
 	if(id_tag)
 		var/datum/local_network/multilevel/old_lan = GLOB.multilevel_local_networks[id_tag]
 		if(old_lan)
 			if(!old_lan.remove_device(holder))
-				to_chat(user, SPAN_WARNING("You encounter an error when trying to unregister \the [holder] from the [id_tag] local network."))
+				to_chat(user, span_warning("You encounter an error when trying to unregister \the [holder] from the [id_tag] local network."))
 				return FALSE
-			to_chat(user, SPAN_NOTICE("You unregister \the [holder] from the [id_tag] local network."))
+			to_chat(user, span_notice("You unregister \the [holder] from the [id_tag] local network."))
 
 	var/datum/local_network/multilevel/lan = GLOB.multilevel_local_networks[new_ident]
 	if(!lan)
 		lan = new(new_ident)
 		lan.add_device(holder)
-		to_chat(user, SPAN_NOTICE("You create a new [new_ident] local network and register \the [holder] with it."))
+		to_chat(user, span_notice("You create a new [new_ident] local network and register \the [holder] with it."))
 	else if(lan.within_radius(holder))
 		lan.add_device(holder)
-		to_chat(user, SPAN_NOTICE("You register \the [holder] with the [new_ident] local network."))
+		to_chat(user, span_notice("You register \the [holder] with the [new_ident] local network."))
 	else
-		to_chat(user, SPAN_WARNING("\The [holder] is out of range of the [new_ident] local network."))
+		to_chat(user, span_warning("\The [holder] is out of range of the [new_ident] local network."))
 		return FALSE
 	id_tag = new_ident
 	return TRUE

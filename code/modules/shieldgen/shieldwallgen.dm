@@ -79,13 +79,13 @@
 
 /obj/machinery/shieldwallgen/CanUseTopic(mob/user)
 	if(!anchored)
-		to_chat(user, SPAN_WARNING("The shield generator needs to be firmly secured to the floor first."))
+		to_chat(user, span_warning("The shield generator needs to be firmly secured to the floor first."))
 		return STATUS_CLOSE
 	if(src.locked && !istype(user, /mob/living/silicon))
-		to_chat(user, SPAN_WARNING("The controls are locked!"))
+		to_chat(user, span_warning("The controls are locked!"))
 		return STATUS_CLOSE
 	if(power != 1)
-		to_chat(user, SPAN_WARNING("The shield generator needs to be powered by wire underneath."))
+		to_chat(user, span_warning("The shield generator needs to be powered by wire underneath."))
 		return STATUS_CLOSE
 	return ..()
 
@@ -144,7 +144,7 @@
 		src.active = 2
 	if(src.active >= 1)
 		if(src.power == 0)
-			src.visible_message(SPAN_WARNING("The [src.name] shuts down due to lack of power!"), \
+			src.visible_message(span_warning("The [src.name] shuts down due to lack of power!"), \
 				"You hear heavy droning fade out")
 			src.active = 0
 			update_icon()
@@ -196,7 +196,7 @@
 
 /obj/machinery/shieldwallgen/can_anchor(obj/item/tool, mob/user, silent)
 	if (active)
-		to_chat(user, SPAN_WARNING("Turn off \the [src] first."))
+		to_chat(user, span_warning("Turn off \the [src] first."))
 		return FALSE
 	..()
 
@@ -206,7 +206,7 @@
 			locked = !locked
 			to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")
 		else
-			to_chat(user, SPAN_WARNING("Access denied."))
+			to_chat(user, span_warning("Access denied."))
 		return TRUE
 
 	return ..()
@@ -278,7 +278,7 @@
 /obj/machinery/shieldwall/use_weapon(obj/item/I, mob/living/user, list/click_params)
 	var/obj/machinery/shieldwallgen/G = prob(50) ? gen_primary : gen_secondary
 	G.storedpower -= I.force*2500
-	user.visible_message(SPAN_DANGER("\The [user] hits \the [src] with \the [I]!"))
+	user.visible_message(span_danger("\The [user] hits \the [src] with \the [I]!"))
 	user.setClickCooldown(user.get_attack_speed(I))
 	user.do_attack_animation(src)
 	playsound(loc, 'sound/weapons/smash.ogg', 75, 1)

@@ -80,8 +80,8 @@
 		tank = tool
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] jams \a [tool] into \a [src]'s valve and twists it closed."),
-			SPAN_NOTICE("You jam \the [tool] into \the [src]'s valve and twist it closed.")
+			span_notice("\The [user] jams \a [tool] into \a [src]'s valve and twists it closed."),
+			span_notice("You jam \the [tool] into \the [src]'s valve and twist it closed.")
 		)
 		return TRUE
 
@@ -122,11 +122,11 @@
 	. = ..()
 	if(distance > 2)
 		return
-	. += SPAN_NOTICE("The valve is dialed to [pressure_setting]%.")
+	. += span_notice("The valve is dialed to [pressure_setting]%.")
 	if(tank)
-		. += SPAN_NOTICE("The tank dial reads [tank.air_contents.return_pressure()] kPa.")
+		. += span_notice("The tank dial reads [tank.air_contents.return_pressure()] kPa.")
 	else
-		. += SPAN_NOTICE("Nothing is attached to the tank valve!")
+		. += span_notice("Nothing is attached to the tank valve!")
 
 /obj/item/gun/launcher/pneumatic/update_release_force(obj/item/projectile)
 	if(tank)

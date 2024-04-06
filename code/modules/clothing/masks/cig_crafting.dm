@@ -12,7 +12,7 @@
 /obj/item/clothing/mask/smokable/cigarette/rolled/examine(mob/user)
 	. = ..()
 	if(filter)
-		. += SPAN_NOTICE("One of the ends is capped off by a filter.")
+		. += span_notice("One of the ends is capped off by a filter.")
 
 /obj/item/clothing/mask/smokable/cigarette/rolled/on_update_icon()
 	. = ..()
@@ -59,13 +59,13 @@
 /obj/item/clothing/mask/smokable/cigarette/rolled/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/paper/cig/filter))
 		if(filter)
-			to_chat(user, SPAN_WARNING("[src] already has a filter!"))
+			to_chat(user, span_warning("[src] already has a filter!"))
 			return
 		if(lit)
-			to_chat(user, SPAN_WARNING("[src] is lit already!"))
+			to_chat(user, span_warning("[src] is lit already!"))
 			return
 		if(user.unEquip(I))
-			to_chat(user, SPAN_NOTICE("You stick [I] onto \the [src]."))
+			to_chat(user, span_notice("You stick [I] onto \the [src]."))
 			filter = 1
 			SetName("filtered [name]")
 			brand = "[brand] with a filter"
@@ -77,14 +77,14 @@
 /obj/item/reagent_containers/food/snacks/grown/attackby(obj/item/I, mob/user)
 	if(is_type_in_list(I, list(/obj/item/paper/cig, /obj/item/paper, /obj/item/teleportation_scroll)))
 		if(!dry)
-			to_chat(user, SPAN_WARNING("You need to dry [src] first!"))
+			to_chat(user, span_warning("You need to dry [src] first!"))
 			return
 		if(user.unEquip(I))
 			var/obj/item/clothing/mask/smokable/cigarette/rolled/R = new(get_turf(src))
 			R.chem_volume = reagents.total_volume
 			R.brand = "[src] handrolled in \the [I]."
 			reagents.trans_to_holder(R.reagents, R.chem_volume)
-			to_chat(user, SPAN_NOTICE("You roll \the [src] into \the [I]."))
+			to_chat(user, span_notice("You roll \the [src] into \the [I]."))
 			user.put_in_active_hand(R)
 			qdel(I)
 			qdel(src)

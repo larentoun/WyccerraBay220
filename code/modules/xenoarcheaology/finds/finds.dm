@@ -35,9 +35,9 @@
 	var/obj/item/inside = locate() in src
 	if(inside)
 		inside.dropInto(loc)
-		visible_message(SPAN_INFO(" [src] burns away revealing [inside]."))
+		visible_message(span_info(" [src] burns away revealing [inside]."))
 	else
-		visible_message(SPAN_INFO(" [src] burns away into nothing."))
+		visible_message(span_info(" [src] burns away into nothing."))
 	qdel(src)
 
 /obj/item/ore/strangerock/attackby(obj/item/I, mob/user)
@@ -45,9 +45,9 @@
 		var/obj/item/inside = locate() in src
 		if(inside)
 			inside.dropInto(loc)
-			visible_message(SPAN_INFO(" [src] is brushed away, revealing [inside]."))
+			visible_message(span_info(" [src] is brushed away, revealing [inside]."))
 		else
-			visible_message(SPAN_INFO(" [src] is brushed away into nothing."))
+			visible_message(span_info(" [src] is brushed away into nothing."))
 		qdel(src)
 		return
 
@@ -59,5 +59,5 @@
 	..()
 
 	if(prob(33))
-		src.visible_message(SPAN_WARNING("[src] crumbles away, leaving some dust and gravel behind."))
+		src.visible_message(span_warning("[src] crumbles away, leaving some dust and gravel behind."))
 		qdel(src)

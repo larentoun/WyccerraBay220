@@ -44,11 +44,11 @@
 /obj/machinery/space_heater/examine(mob/user)
 	. = ..()
 
-	. += SPAN_NOTICE("The heater is [on ? "on" : "off"] and the hatch is [panel_open ? "open" : "closed"].")
+	. += span_notice("The heater is [on ? "on" : "off"] and the hatch is [panel_open ? "open" : "closed"].")
 	if(panel_open)
-		. += SPAN_NOTICE("The power cell is [cell ? "installed" : "missing"].")
+		. += span_notice("The power cell is [cell ? "installed" : "missing"].")
 	else
-		. += SPAN_NOTICE("The charge meter reads [cell ? round(cell.percent(),1) : 0]%")
+		. += span_notice("The charge meter reads [cell ? round(cell.percent(),1) : 0]%")
 
 /obj/machinery/space_heater/emp_act(severity)
 	if(inoperable())
@@ -80,7 +80,7 @@
 				if(!user.unEquip(I, src))
 					return TRUE
 				cell = I
-				user.visible_message(SPAN_NOTICE("[user] inserts a power cell into [src]."), SPAN_NOTICE("You insert the power cell into [src]."))
+				user.visible_message(span_notice("[user] inserts a power cell into [src]."), span_notice("You insert the power cell into [src]."))
 				power_change()
 				return TRUE
 		else
@@ -121,8 +121,8 @@
 	if(!panel_open)
 		on = !on
 		user.visible_message(
-			SPAN_NOTICE("[user] switches [on ? "on" : "off"] the [src]."),
-			SPAN_NOTICE("You switch [on ? "on" : "off"] the [src].")
+			span_notice("[user] switches [on ? "on" : "off"] the [src]."),
+			span_notice("You switch [on ? "on" : "off"] the [src].")
 		)
 		update_icon()
 		return TRUE
@@ -143,7 +143,7 @@
 
 		if("cellremove")
 			if(panel_open && cell && !usr.get_active_hand())
-				usr.visible_message(SPAN_NOTICE("[usr] removes [cell] from [src]."), SPAN_NOTICE("You remove [cell] from [src]."))
+				usr.visible_message(span_notice("[usr] removes [cell] from [src]."), span_notice("You remove [cell] from [src]."))
 				cell.update_icon()
 				usr.put_in_hands(cell)
 				cell.add_fingerprint(usr)
@@ -159,7 +159,7 @@
 					cell = C
 					C.add_fingerprint(usr)
 					power_change()
-					usr.visible_message(SPAN_NOTICE("[usr] inserts [C] into [src]."), SPAN_NOTICE("You insert [C] into [src]."))
+					usr.visible_message(span_notice("[usr] inserts [C] into [src]."), span_notice("You insert [C] into [src]."))
 
 	updateDialog()
 

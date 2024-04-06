@@ -91,7 +91,7 @@
 
 /obj/machinery/reagent_temperature/wrench_act(mob/living/user, obj/item/tool)
 	if(use_power == POWER_USE_ACTIVE)
-		to_chat(user, SPAN_WARNING("Turn [src] off first!"))
+		to_chat(user, span_warning("Turn [src] off first!"))
 		return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/reagent_temperature/use_tool(obj/item/thing, mob/living/user, list/click_params)
@@ -99,14 +99,14 @@
 		for(var/checktype in permitted_types)
 			if(istype(thing, checktype))
 				if(container)
-					to_chat(user, SPAN_WARNING("[src] is already holding [container]."))
+					to_chat(user, span_warning("[src] is already holding [container]."))
 				else if(user.unEquip(thing))
 					thing.forceMove(src)
 					container = thing
-					visible_message(SPAN_NOTICE("[user] places [container] on [src]."))
+					visible_message(span_notice("[user] places [container] on [src]."))
 					update_icon()
 				return TRUE
-		to_chat(user, SPAN_WARNING("[src] cannot accept [thing]."))
+		to_chat(user, span_warning("[src] cannot accept [thing]."))
 		return TRUE
 
 	. = ..()
@@ -178,7 +178,7 @@
 	if(href_list && href_list["remove_container"])
 		. = ..(user, GLOB.physical_state, href_list)
 		if(. == STATUS_CLOSE)
-			to_chat(user, SPAN_WARNING("You are too far away."))
+			to_chat(user, span_warning("You are too far away."))
 		return
 	return ..()
 
@@ -208,7 +208,7 @@
 	if(href_list["toggle_power"])
 		. = ToggleUsePower()
 		if(. != TOPIC_REFRESH)
-			to_chat(user, SPAN_WARNING("The button clicks, but nothing happens."))
+			to_chat(user, span_warning("The button clicks, but nothing happens."))
 
 	if(href_list["remove_container"])
 		eject_beaker(user)

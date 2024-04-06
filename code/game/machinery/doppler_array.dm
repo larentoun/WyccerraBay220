@@ -40,7 +40,7 @@ var/global/list/doppler_arrays = list()
 
 	var/message = "Explosive disturbance detected - Epicenter at: grid ([x0],[y0]). Epicenter radius: [devastation_range]. Outer radius: [heavy_impact_range]. Shockwave radius: [light_impact_range]. Temporal displacement of tachyons: [took] seconds."
 
-	audible_message(SPAN_CLASS("game say", "[SPAN_CLASS("name", "\The [src]")] states coldly, \"[message]\""))
+	audible_message(SPAN_CLASS("game say", "[span_name("\The [src]")] states coldly, \"[message]\""))
 
 /obj/machinery/doppler_array/on_update_icon()
 	ClearOverlays()
@@ -64,5 +64,5 @@ var/global/list/doppler_arrays = list()
 
 /obj/machinery/doppler_array/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("The stabilizing bolts are currently [anchored ? "deployed" : "retracted"].")
-	. += SPAN_NOTICE("The sensor array is currently facing [currentlyfacing].")
+	. += span_notice("The stabilizing bolts are currently [anchored ? "deployed" : "retracted"].")
+	. += span_notice("The sensor array is currently facing [currentlyfacing].")

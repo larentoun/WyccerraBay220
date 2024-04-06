@@ -35,13 +35,13 @@
 /// Handles displaying emotes for `custom_pain()`. Separated into its own proc to account for subtype overrides.
 /mob/living/carbon/proc/custom_pain_emote(message, power)
 	if(power >= 70)
-		to_chat(src, SPAN_DANGER(FONT_LARGE(message)))
+		to_chat(src, span_danger(FONT_LARGE(message)))
 	else if(power >= 40)
-		to_chat(src, SPAN_DANGER(FONT_NORMAL(message)))
+		to_chat(src, span_danger(FONT_NORMAL(message)))
 	else if(power >= 10)
-		to_chat(src, SPAN_DANGER(message))
+		to_chat(src, span_danger(message))
 	else
-		to_chat(src, SPAN_WARNING(message))
+		to_chat(src, span_warning(message))
 
 
 // Separated out as only human subtypes define `species`

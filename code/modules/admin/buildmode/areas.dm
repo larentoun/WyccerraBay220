@@ -25,7 +25,7 @@ Shift + Right Click - Select point B
 	. = ..()
 
 /datum/build_mode/areas/Help()
-	to_chat(user, SPAN_NOTICE(help_text))
+	to_chat(user, span_notice(help_text))
 
 /datum/build_mode/areas/Selected()
 	if (!overlay)
@@ -59,14 +59,14 @@ Shift + Right Click - Select point B
 
 		if (LAZYACCESS(modifiers, LEFT_CLICK) && LAZYACCESS(modifiers, SHIFT_CLICK))
 			coordinate_A = get_turf(A)
-			to_chat(user, SPAN_NOTICE("Defined [coordinate_A] ([coordinate_A.type]) as point A."))
+			to_chat(user, span_notice("Defined [coordinate_A] ([coordinate_A.type]) as point A."))
 
 		if (LAZYACCESS(modifiers, RIGHT_CLICK) && LAZYACCESS(modifiers, SHIFT_CLICK))
 			coordinate_B = get_turf(A)
-			to_chat(user, SPAN_NOTICE("Defined [coordinate_B] ([coordinate_B.type]) as point B."))
+			to_chat(user, span_notice("Defined [coordinate_B] ([coordinate_B.type]) as point B."))
 
 		if (coordinate_A && coordinate_B)
-			to_chat(user, SPAN_NOTICE("Area coordinates set. Defining area."))
+			to_chat(user, span_notice("Area coordinates set. Defining area."))
 			Log("Created an area with name [selected_area] from [log_info_line(coordinate_A)] to [log_info_line(coordinate_B)]")
 			var/list/coords = make_rectangle(coordinate_A, coordinate_B)
 			make_area(coords[1], coords[2], coords[3], coords[4], coords[5], selected_area)

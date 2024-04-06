@@ -37,8 +37,8 @@
 		shock_kit.master = electric_chair
 		transfer_fingerprints_to(electric_chair)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] attaches \a [tool] to \the [src], creating \a [electric_chair]."),
-			SPAN_NOTICE("You attach \the [tool] to \the [src], creating \a [electric_chair].")
+			span_notice("\The [user] attaches \a [tool] to \the [src], creating \a [electric_chair]."),
+			span_notice("You attach \the [tool] to \the [src], creating \a [electric_chair].")
 		)
 		qdel_self()
 		return TRUE
@@ -93,7 +93,7 @@
 
 /obj/structure/bed/chair/rotate(mob/user)
 	if(!CanPhysicallyInteract(user))
-		to_chat(user, SPAN_NOTICE("You can't interact with \the [src] right now!"))
+		to_chat(user, span_notice("You can't interact with \the [src] right now!"))
 		return
 
 	set_dir(turn(dir, 90))
@@ -264,7 +264,7 @@
 			victim.apply_effect(6, EFFECT_WEAKEN, blocked)
 			victim.apply_effect(6, EFFECT_STUTTER, blocked)
 			victim.apply_damage(10, DAMAGE_BRUTE, def_zone)
-		occupant.visible_message(SPAN_DANGER("[occupant] crashed into \the [A]!"))
+		occupant.visible_message(span_danger("[occupant] crashed into \the [A]!"))
 
 /obj/structure/bed/chair/office/light/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
 	..(newloc, newmaterial, MATERIAL_CLOTH)

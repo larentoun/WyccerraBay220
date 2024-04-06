@@ -18,7 +18,7 @@
 /obj/item/mech_component/manipulators/show_missing_parts(mob/user)
 	. = ..()
 	if(!motivator)
-		. += SPAN_WARNING("It is missing an actuator.")
+		. += span_warning("It is missing an actuator.")
 
 /obj/item/mech_component/manipulators/ready_to_install()
 	return motivator
@@ -29,7 +29,7 @@
 /obj/item/mech_component/manipulators/attackby(obj/item/thing, mob/user)
 	if(istype(thing,/obj/item/robot_parts/robot_component/actuator))
 		if(motivator)
-			to_chat(user, SPAN_WARNING("\The [src] already has an actuator installed."))
+			to_chat(user, span_warning("\The [src] already has an actuator installed."))
 			return
 		if(install_component(thing, user)) motivator = thing
 	else
@@ -40,15 +40,15 @@
 
 /obj/item/mech_component/manipulators/get_damage_string()
 	if(!motivator || !motivator.is_functional())
-		return SPAN_DANGER("disabled")
+		return span_danger("disabled")
 	return ..()
 
 /obj/item/mech_component/manipulators/return_diagnostics(mob/user)
 	..()
 	if(motivator)
-		to_chat(user, SPAN_NOTICE(" Actuator Integrity: <b>[round((((motivator.max_dam - motivator.total_dam) / motivator.max_dam)) * 100)]%</b>"))
+		to_chat(user, span_notice(" Actuator Integrity: <b>[round((((motivator.max_dam - motivator.total_dam) / motivator.max_dam)) * 100)]%</b>"))
 	else
-		to_chat(user, SPAN_WARNING(" Actuator Missing or Non-functional."))
+		to_chat(user, span_warning(" Actuator Missing or Non-functional."))
 
 /obj/item/mech_component/manipulators/powerloader
 	name = "exosuit arms"

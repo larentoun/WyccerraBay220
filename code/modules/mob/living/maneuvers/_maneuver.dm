@@ -10,27 +10,27 @@
 		return FALSE
 	if(user.buckled)
 		if(!silent)
-			to_chat(user, SPAN_WARNING("You are buckled down and cannot maneuver!"))
+			to_chat(user, span_warning("You are buckled down and cannot maneuver!"))
 		return FALSE
 	if(!user.has_gravity())
 		if(!silent)
-			to_chat(user, SPAN_WARNING("You cannot maneuver in zero gravity!"))
+			to_chat(user, span_warning("You cannot maneuver in zero gravity!"))
 		return FALSE
 	if(user.incapacitated(INCAPACITATION_DISABLED|INCAPACITATION_DISRUPTED) || user.lying || !istype(user.loc, /turf))
 		if(!silent)
-			to_chat(user, SPAN_WARNING("You are not in position for maneuvering."))
+			to_chat(user, span_warning("You are not in position for maneuvering."))
 		return FALSE
 	if(world.time < user.last_special)
 		if(!silent)
-			to_chat(user, SPAN_WARNING("You cannot maneuver again for another [floor((user.last_special - world.time)*0.1)] second\s."))
+			to_chat(user, span_warning("You cannot maneuver again for another [floor((user.last_special - world.time)*0.1)] second\s."))
 		return FALSE
 	if(user.get_stamina() < stamina_cost)
 		if(!silent)
-			to_chat(user, SPAN_WARNING("You are too exhausted to maneuver right now."))
+			to_chat(user, span_warning("You are too exhausted to maneuver right now."))
 		return FALSE
 	if (target && user.z != target.z)
 		if (!silent)
-			to_chat(user, SPAN_WARNING("You cannot manuever to a different z-level!"))
+			to_chat(user, span_warning("You cannot manuever to a different z-level!"))
 		return FALSE
 	return TRUE
 

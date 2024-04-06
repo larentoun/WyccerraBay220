@@ -30,7 +30,7 @@
 /obj/item/organ/internal/augment/active/hud/emp_act(severity)
 	if (istype(src.loc, /mob/living/carbon/human))
 		var/mob/living/carbon/human/M = src.loc
-		to_chat(M, SPAN_DANGER("Your [name] malfunctions, blinding you!"))
+		to_chat(M, span_danger("Your [name] malfunctions, blinding you!"))
 		M.eye_blind = 4
 		M.eye_blurry = 8
 		if (active)
@@ -42,7 +42,7 @@
 	if (!can_activate())
 		return
 	active = !active
-	to_chat(owner, SPAN_NOTICE("You [active ? "enable" : "disable"] \the [src]."))
+	to_chat(owner, span_notice("You [active ? "enable" : "disable"] \the [src]."))
 
 
 /obj/item/organ/internal/augment/active/hud/health

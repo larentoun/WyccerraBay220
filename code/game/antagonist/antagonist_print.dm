@@ -11,7 +11,7 @@
 		var/datum/goal/ambition = SSgoals.ambitions[P]
 		if(ambition)
 			text += "<br>Their goals for today were..."
-			text += "<br>[SPAN_NOTICE("[ambition.summarize()]")]"
+			text += "<br>[span_notice("[ambition.summarize()]")]"
 		if(P.current?.stat == DEAD && P.last_words)
 			text += "<br><b>Their last words were:</b> '[P.last_words]'"
 		if(!length(global_objectives) && length(P.objectives))

@@ -37,15 +37,15 @@
 	var/mob/found_mob = get_container(/mob)
 	if (found_mob)
 		found_mob.visible_message(
-			SPAN_NOTICE("\The [found_mob]'s [name] [display]."),
-			SPAN_NOTICE("Your [name] [display]."),
-			SPAN_NOTICE("You hear a soft ping."),
+			span_notice("\The [found_mob]'s [name] [display]."),
+			span_notice("Your [name] [display]."),
+			span_notice("You hear a soft ping."),
 			1
 		)
 		return
 	visible_message(
-		SPAN_NOTICE("\The [src] [display]."),
-		SPAN_NOTICE("You hear a soft ping."),
+		span_notice("\The [src] [display]."),
+		span_notice("You hear a soft ping."),
 		1
 	)
 

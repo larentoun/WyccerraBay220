@@ -241,7 +241,7 @@
 								no_mask = 1
 
 						if(no_mask)
-							to_chat(C, SPAN_NOTICE("You are not wearing a suitable mask or helmet."))
+							to_chat(C, span_notice("You are not wearing a suitable mask or helmet."))
 							return 1
 						else
 							var/list/nicename = null
@@ -304,7 +304,7 @@
 								// There's no need to check that the gas contents are safe, because its internal logic always make sure it is
 								var/obj/item/organ/internal/augment/active/internal_air_system/IAS = locate() in C.internal_organs
 								if (!IAS?.activate())
-									to_chat(C, SPAN_WARNING("You don't have \a [breathes] tank."))
+									to_chat(C, span_warning("You don't have \a [breathes] tank."))
 		if("act_intent")
 			usr.a_intent_change("right")
 

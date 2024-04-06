@@ -86,7 +86,7 @@
 		return
 
 	var/wheelstat = haswheels ? "folded" : "released"
-	usr.visible_message(SPAN_NOTICE("[usr] [wheelstat] wheels on [src]"), SPAN_NOTICE("You have [wheelstat] wheels."))
+	usr.visible_message(span_notice("[usr] [wheelstat] wheels on [src]"), span_notice("You have [wheelstat] wheels."))
 	desc = initial(desc)
 	desc += "\nNow the wheels are [wheelstat]."
 	haswheels = !haswheels

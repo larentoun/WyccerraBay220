@@ -37,7 +37,7 @@
 
 /obj/structure/fireaxecabinet/attack_hand(mob/user)
 	if(!unlocked)
-		to_chat(user, SPAN_WARNING("[src] is locked."))
+		to_chat(user, span_warning("[src] is locked."))
 		return
 	toggle_open(user)
 
@@ -48,11 +48,11 @@
 			return
 
 		if(!open)
-			to_chat(user, SPAN_WARNING("[src] is closed."))
+			to_chat(user, span_warning("[src] is closed."))
 			return
 
 		if(!fireaxe)
-			to_chat(user, SPAN_WARNING("[src] is empty."))
+			to_chat(user, span_warning("[src] is empty."))
 			return
 
 		user.put_in_hands(fireaxe)
@@ -76,8 +76,8 @@
 		USE_FEEDBACK_FAILURE("[src] is shattered and the lock doesn't function.")
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] begins toggling [src]'s maglock with [tool]."),
-		SPAN_NOTICE("You begin [unlocked ? "locking" : "unlocking"] [src]'s maglock with [tool].")
+		span_notice("[user] begins toggling [src]'s maglock with [tool]."),
+		span_notice("You begin [unlocked ? "locking" : "unlocking"] [src]'s maglock with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 2 SECONDS, volume = 50, skill_path = list(SKILL_DEVICES, SKILL_CONSTRUCTION), do_flags = DO_PUBLIC_UNIQUE))
 		return
@@ -85,8 +85,8 @@
 	unlocked = !unlocked
 	update_icon()
 	user.visible_message(
-		SPAN_NOTICE("[user] [unlocked ? "unlocks" : "locks"] [src]'s maglock with [tool]."),
-		SPAN_NOTICE("You [unlocked ? "unlock" : "lock"] [src]'s maglock with [tool].")
+		span_notice("[user] [unlocked ? "unlocks" : "locks"] [src]'s maglock with [tool]."),
+		span_notice("You [unlocked ? "unlock" : "lock"] [src]'s maglock with [tool].")
 	)
 
 /obj/structure/fireaxecabinet/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -104,8 +104,8 @@
 		fireaxe = tool
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] places [tool] into [src]."),
-			SPAN_NOTICE("You place [tool] into [src].")
+			span_notice("[user] places [tool] into [src]."),
+			span_notice("You place [tool] into [src].")
 		)
 		return TRUE
 
@@ -124,8 +124,8 @@
 			USE_FEEDBACK_STACK_NOT_ENOUGH(stack, 1, "to repair [src].")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("[user] repairs [src]'s damage with [stack.get_vague_name(FALSE)]."),
-			SPAN_NOTICE("You repair [src]'s damage with [stack.get_exact_name(1)].")
+			span_notice("[user] repairs [src]'s damage with [stack.get_vague_name(FALSE)]."),
+			span_notice("You repair [src]'s damage with [stack.get_exact_name(1)].")
 		)
 		revive_health()
 		return TRUE
@@ -137,5 +137,5 @@
 	else
 		user.setClickCooldown(10)
 		open = !open
-		to_chat(user, SPAN_NOTICE("You [open ? "open" : "close"] [src]."))
+		to_chat(user, span_notice("You [open ? "open" : "close"] [src]."))
 	update_icon()

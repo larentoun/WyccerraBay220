@@ -262,8 +262,8 @@
 			for (var/obj/item/rig_module/actuators/R in rig.installed_modules)
 				if (R.active && R.combatType)
 					visible_message(
-						SPAN_WARNING("\The [lunger] latches onto \the [victim]!"),
-						SPAN_WARNING("You latch onto \the [victim] at the end of your lunge!")
+						span_warning("\The [lunger] latches onto \the [victim]!"),
+						span_warning("You latch onto \the [victim] at the end of your lunge!")
 					)
 					lunger.species.attempt_grab(lunger, victim)
 					if(istype(lunger.get_active_hand(), /obj/item/grab/normal))

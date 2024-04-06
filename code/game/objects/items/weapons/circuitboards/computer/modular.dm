@@ -20,4 +20,4 @@
 		return ..()
 	else
 		emagged = TRUE
-		to_chat(user, SPAN_WARNING("You disable the factory safeties on \the [src]."))
+		to_chat(user, span_warning("You disable the factory safeties on \the [src]."))

@@ -233,7 +233,7 @@
 // Harvest an animal's delicious byproducts
 /mob/living/simple_animal/proc/harvest(mob/user, skill_level)
 	var/actual_meat_amount = round(max(1,(meat_amount / 2) + skill_level / 2))
-	user.visible_message(SPAN_DANGER("\The [user] chops up \the [src]!"))
+	user.visible_message(span_danger("\The [user] chops up \the [src]!"))
 	if(meat_type && actual_meat_amount > 0 && (stat == DEAD))
 		for(var/i=0;i<actual_meat_amount;i++)
 			var/obj/item/meat = new meat_type(get_turf(src))
@@ -247,7 +247,7 @@
 /mob/living/simple_animal/proc/subtract_meat(mob/user)
 	meat_amount--
 	if(meat_amount <= 0)
-		to_chat(user, SPAN_NOTICE("\The [src] carcass is ruined beyond use."))
+		to_chat(user, span_notice("\The [src] carcass is ruined beyond use."))
 
 /mob/living/simple_animal/bullet_impact_visuals(obj/item/projectile/P, def_zone)
 	..()
@@ -354,14 +354,14 @@
 
 /mob/living/simple_animal/proc/pry_door(mob/user, delay, obj/machinery/door/pesky_door)
 	set waitfor = FALSE
-	visible_message(SPAN_WARNING("\The [user] begins [pry_desc] at \the [pesky_door]!"))
+	visible_message(span_warning("\The [user] begins [pry_desc] at \the [pesky_door]!"))
 	set_AI_busy(TRUE)
 	if(do_after(user, delay, pesky_door, DO_DEFAULT | DO_PUBLIC_PROGRESS))
 		pesky_door.open(1)
 		ai_holder.prying = FALSE
 		set_AI_busy(FALSE)
 	else
-		visible_message(SPAN_NOTICE("\The [user] is interrupted."))
+		visible_message(span_notice("\The [user] is interrupted."))
 		set_AI_busy(FALSE)
 
 /mob/living/simple_animal/rejuvenate()

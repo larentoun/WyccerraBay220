@@ -20,7 +20,7 @@
 
 			log_and_message_admins("Spacevines spawned in \the [get_area(T)]", location = T)
 			return
-		log_and_message_admins(SPAN_NOTICE("Event: Spacevines failed to find a viable turf."))
+		log_and_message_admins(span_notice("Event: Spacevines failed to find a viable turf."))
 
 /obj/dead_plant
 	anchored = TRUE
@@ -35,8 +35,8 @@
 /obj/dead_plant/use_tool(obj/item/weapon, mob/user, list/click_params)
 	SHOULD_CALL_PARENT(FALSE)
 	user.visible_message(
-		SPAN_WARNING("\The [user] hits \the [src] with \a [weapon], and it falls to pieces!"),
-		SPAN_WARNING("You hit \the [src] with \the [weapon], and it falls to pieces!")
+		span_warning("\The [user] hits \the [src] with \a [weapon], and it falls to pieces!"),
+		span_warning("You hit \the [src] with \the [weapon], and it falls to pieces!")
 	)
 	qdel(src)
 	return TRUE
@@ -81,7 +81,7 @@
 	. = ..()
 
 	if(!SSplants)
-		log_error(SPAN_DANGER("Plant controller does not exist and [src] requires it. Aborting."))
+		log_error(span_danger("Plant controller does not exist and [src] requires it. Aborting."))
 		return INITIALIZE_HINT_QDEL
 	if(!istype(seed))
 		seed = SSplants.seeds[DEFAULT_SEED]
@@ -210,8 +210,8 @@
 			USE_FEEDBACK_FAILURE("\The [weapon] is too small to chop down \the [src].")
 			return TRUE
 		user.visible_message(
-			SPAN_WARNING("\The [user] starts chopping down \the [src] with \a [weapon]!"),
-			SPAN_WARNING("You start chopping down \the [src] with \the [weapon]!")
+			span_warning("\The [user] starts chopping down \the [src] with \a [weapon]!"),
+			span_warning("You start chopping down \the [src] with \the [weapon]!")
 		)
 		playsound(src, weapon.hitsound, 50, TRUE)
 		var/chop_time = (get_current_health() / weapon.force) * 0.5 SECONDS
@@ -220,8 +220,8 @@
 		if (!do_after(user, round(chop_time), src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, weapon))
 			return TRUE
 		user.visible_message(
-			SPAN_WARNING("\The [user] chops down \the [src] with \a [weapon]!"),
-			SPAN_WARNING("You chop down \the [src] with \the [weapon]!")
+			span_warning("\The [user] chops down \the [src] with \a [weapon]!"),
+			span_warning("You chop down \the [src] with \the [weapon]!")
 		)
 		playsound(src, weapon.hitsound, 50, TRUE)
 		kill_health()

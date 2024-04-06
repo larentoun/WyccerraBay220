@@ -43,23 +43,23 @@
 /obj/structure/heavy_vehicle_frame/examine(mob/user)
 	. = ..()
 	if(!arms)
-		. += SPAN_WARNING("It is missing manipulators.")
+		. += span_warning("It is missing manipulators.")
 	if(!legs)
-		. += SPAN_WARNING("It is missing propulsion.")
+		. += span_warning("It is missing propulsion.")
 	if(!head)
-		. += SPAN_WARNING("It is missing sensors.")
+		. += span_warning("It is missing sensors.")
 	if(!body)
-		. += SPAN_WARNING("It is missing a chassis.")
+		. += span_warning("It is missing a chassis.")
 	if(is_wired == FRAME_WIRED)
-		. += SPAN_WARNING("It has not had its wiring adjusted.")
+		. += span_warning("It has not had its wiring adjusted.")
 	else if(!is_wired)
-		. += SPAN_WARNING("It has not yet been wired.")
+		. += span_warning("It has not yet been wired.")
 	if(is_reinforced == FRAME_REINFORCED)
-		. += SPAN_WARNING("It has not had its internal reinforcement secured.")
+		. += span_warning("It has not had its internal reinforcement secured.")
 	else if(is_reinforced == FRAME_REINFORCED_SECURE)
-		. += SPAN_WARNING("It has not had its internal reinforcement welded in.")
+		. += span_warning("It has not had its internal reinforcement welded in.")
 	else if(!is_reinforced)
-		. += SPAN_WARNING("It does not have any internal reinforcement.")
+		. += span_warning("It does not have any internal reinforcement.")
 
 /obj/structure/heavy_vehicle_frame/on_update_icon()
 	var/list/new_overlays = get_mech_images(list(legs, head, body, arms), layer)
@@ -82,8 +82,8 @@
 	// Remove reinforcement
 	if(is_reinforced == FRAME_REINFORCED)
 		user.visible_message(
-			SPAN_NOTICE("[user] starts removing [src]'s reinforcements with [tool]."),
-			SPAN_NOTICE("You start removing [src]'s reinforcements with [tool].")
+			span_notice("[user] starts removing [src]'s reinforcements with [tool]."),
+			span_notice("You start removing [src]'s reinforcements with [tool].")
 		)
 		if(!tool.use_as_tool(src, user, 0.5 SECONDS, volume = 50, skill_path = SKILL_DEVICES, do_flags = DO_REPAIR_CONSTRUCT) || is_reinforced != FRAME_REINFORCED)
 			return
@@ -91,8 +91,8 @@
 		material = null
 		is_reinforced = FALSE
 		user.visible_message(
-			SPAN_NOTICE("[user] removes [src]'s reinforcements with [tool]."),
-			SPAN_NOTICE("You remove [src]'s reinforcements with [tool].")
+			span_notice("[user] removes [src]'s reinforcements with [tool]."),
+			span_notice("You remove [src]'s reinforcements with [tool].")
 		)
 		return
 	// Remove component
@@ -143,8 +143,8 @@
 	head = null
 	body = null
 	user.visible_message(
-		SPAN_NOTICE("[user] finishes constructing [exosuit] with [tool]."),
-		SPAN_NOTICE("You finish constructing [exosuit] with [tool].")
+		span_notice("[user] finishes constructing [exosuit] with [tool]."),
+		span_notice("You finish constructing [exosuit] with [tool].")
 	)
 	qdel(src)
 
@@ -168,8 +168,8 @@
 			USE_FEEDBACK_FAILURE("[src]'s state has changed.")
 			return
 	user.visible_message(
-		SPAN_NOTICE("[user] starts [input == "Secure Reinforcements" ? "securing" : "removing"] [src]'s internal reinforcements with [tool]."),
-		SPAN_NOTICE("You start [input == "Secure Reinforcements" ? "securing" : "removing"] [src]'s internal reinforcements with [tool].")
+		span_notice("[user] starts [input == "Secure Reinforcements" ? "securing" : "removing"] [src]'s internal reinforcements with [tool]."),
+		span_notice("You start [input == "Secure Reinforcements" ? "securing" : "removing"] [src]'s internal reinforcements with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 4 SECONDS, volume = 50, skill_path = SKILL_DEVICES, do_flags = DO_REPAIR_CONSTRUCT) || current_state != is_reinforced)
 		return
@@ -179,8 +179,8 @@
 		material = null
 	update_icon()
 	user.visible_message(
-		SPAN_NOTICE("[user] [input == "Secure Reinforcements" ? "secures" : "removes"] [src]'s internal reinforcements with [tool]."),
-		SPAN_NOTICE("You [input == "Secure Reinforcements" ? "secure" : "remove"] [src]'s internal reinforcements with [tool].")
+		span_notice("[user] [input == "Secure Reinforcements" ? "secures" : "removes"] [src]'s internal reinforcements with [tool]."),
+		span_notice("You [input == "Secure Reinforcements" ? "secure" : "remove"] [src]'s internal reinforcements with [tool].")
 	)
 
 /obj/structure/heavy_vehicle_frame/wirecutter_act(mob/living/user, obj/item/tool)
@@ -200,8 +200,8 @@
 			USE_FEEDBACK_FAILURE("[src]'s state has changed.")
 			return
 	user.visible_message(
-		SPAN_NOTICE("[user] starts [input == "Adjust Wiring" ? "adjusting" : "removing"] the wiring in [src] with [tool]."),
-		SPAN_NOTICE("You start [input == "Adjust Wiring" ? "adjusting" : "removing"] the wiring in [src] with [tool].")
+		span_notice("[user] starts [input == "Adjust Wiring" ? "adjusting" : "removing"] the wiring in [src] with [tool]."),
+		span_notice("You start [input == "Adjust Wiring" ? "adjusting" : "removing"] the wiring in [src] with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 3 SECONDS, volume = 50, skill_path = SKILL_ELECTRICAL, do_flags = DO_REPAIR_CONSTRUCT) || is_wired != current_state)
 		return
@@ -210,8 +210,8 @@
 	if(input == "Remove Wiring")
 		new /obj/item/stack/cable_coil(loc, 10)
 	user.visible_message(
-		SPAN_NOTICE("[user] [input == "Adjust Wiring" ? "adjusts" : "removes"] the wiring in [src] with [tool]."),
-		SPAN_NOTICE("You [input == "Adjust Wiring" ? "adjust" : "remove"] the wiring in [src] with [tool].")
+		span_notice("[user] [input == "Adjust Wiring" ? "adjusts" : "removes"] the wiring in [src] with [tool]."),
+		span_notice("You [input == "Adjust Wiring" ? "adjust" : "remove"] the wiring in [src] with [tool].")
 	)
 
 /obj/structure/heavy_vehicle_frame/welder_act_secondary(mob/living/user, obj/item/tool)
@@ -264,8 +264,8 @@
 			return TRUE
 		playsound(src, 'sound/items/Deconstruct.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] starts wiring [src] with [tool]."),
-			SPAN_NOTICE("You start wiring [src] with [tool].")
+			span_notice("[user] starts wiring [src] with [tool]."),
+			span_notice("You start wiring [src] with [tool].")
 		)
 		if (!user.do_skilled(3 SECONDS, SKILL_ELECTRICAL, src) || !user.use_sanity_check(src, tool))
 			return TRUE
@@ -279,8 +279,8 @@
 		is_wired = FRAME_WIRED
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] wires [src] with [tool]."),
-			SPAN_NOTICE("You wires [src] with [tool].")
+			span_notice("[user] wires [src] with [tool]."),
+			span_notice("You wires [src] with [tool].")
 		)
 		return TRUE
 
@@ -298,8 +298,8 @@
 			return TRUE
 		playsound(src, 'sound/items/Deconstruct.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] starts reinforcing [src] with [tool]."),
-			SPAN_NOTICE("You start reinforcing [src] with [tool].")
+			span_notice("[user] starts reinforcing [src] with [tool]."),
+			span_notice("You start reinforcing [src] with [tool].")
 		)
 		if (!user.do_skilled(3 SECONDS, SKILL_DEVICES, src) || !user.use_sanity_check(src, tool))
 			return TRUE
@@ -314,8 +314,8 @@
 		is_reinforced = FRAME_REINFORCED
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] reinforces [src] with [tool]."),
-			SPAN_NOTICE("You reinforce [src] with [tool].")
+			span_notice("[user] reinforces [src] with [tool]."),
+			span_notice("You reinforce [src] with [tool].")
 		)
 		return TRUE
 
@@ -363,16 +363,16 @@
 /obj/structure/heavy_vehicle_frame/proc/install_component(obj/item/thing, mob/user)
 	var/obj/item/mech_component/MC = thing
 	if(istype(MC) && !MC.ready_to_install())
-		to_chat(user, SPAN_WARNING("[MC] [MC.gender == PLURAL ? "are" : "is"] not ready to install."))
+		to_chat(user, span_warning("[MC] [MC.gender == PLURAL ? "are" : "is"] not ready to install."))
 		return 0
 	if(user)
-		visible_message(SPAN_NOTICE("[user] begins installing [thing] into [src]."))
+		visible_message(span_notice("[user] begins installing [thing] into [src]."))
 		if(!user.canUnEquip(thing) || !do_after(user, 3 SECONDS * user.skill_delay_mult(SKILL_DEVICES), src, DO_PUBLIC_UNIQUE) || user.get_active_hand() != thing)
 			return
 		if(!user.unEquip(thing))
 			return
 	thing.forceMove(src)
-	visible_message(SPAN_NOTICE("[user] installs [thing] into [src]."))
+	visible_message(span_notice("[user] installs [thing] into [src]."))
 	playsound(user.loc, 'sound/machines/click.ogg', 50, 1)
 	return 1
 
@@ -381,7 +381,7 @@
 		return FALSE
 	if(!do_after(user, 4 SECONDS * user.skill_delay_mult(SKILL_DEVICES), src, DO_PUBLIC_UNIQUE) || component.loc != src)
 		return FALSE
-	user.visible_message(SPAN_NOTICE("[user] crowbars [component] off [src]."))
+	user.visible_message(span_notice("[user] crowbars [component] off [src]."))
 	component.forceMove(get_turf(src))
 	user.put_in_hands(component)
 	playsound(user.loc, 'sound/items/Deconstruct.ogg', 50, 1)

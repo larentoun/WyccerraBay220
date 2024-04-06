@@ -154,8 +154,8 @@
 	playsound(src, opened ? 'sound/effects/locker_open.ogg' : 'sound/effects/locker_close.ogg', 50, TRUE)
 	update_icon()
 	user.visible_message(
-		SPAN_NOTICE("[user] [opened ? "opens" : "closes"] [src] with [tool]."),
-		SPAN_NOTICE("You [opened ? "open" : "close"] [src] with [tool].")
+		span_notice("[user] [opened ? "opens" : "closes"] [src] with [tool]."),
+		span_notice("You [opened ? "open" : "close"] [src] with [tool].")
 	)
 
 /obj/structure/fuel_port/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -173,8 +173,8 @@
 			return TRUE
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] inserts [tool] in [src]."),
-			SPAN_NOTICE("You insert [tool] in [src].")
+			span_notice("[user] inserts [tool] in [src]."),
+			span_notice("You insert [tool] in [src].")
 		)
 		return TRUE
 

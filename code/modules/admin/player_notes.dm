@@ -44,7 +44,7 @@
 	infos += P
 	to_save(info, infos)
 
-	message_staff(SPAN_NOTICE("[P.author] has edited [target]'s notes."))
+	message_staff(span_notice("[P.author] has edited [target]'s notes."))
 	log_admin("[P.author] has edited [target]'s notes.")
 
 	del(info) // savefile, so NOT qdel
@@ -70,7 +70,7 @@
 	infos.Remove(item)
 	to_save(info, infos)
 
-	message_staff(SPAN_NOTICE("[key_name_admin(usr)] deleted one of [target]'s notes."))
+	message_staff(span_notice("[key_name_admin(usr)] deleted one of [target]'s notes."))
 	log_admin("[key_name(usr)] deleted one of [target]'s notes.")
 
 	del(info) // savefile, so NOT qdel

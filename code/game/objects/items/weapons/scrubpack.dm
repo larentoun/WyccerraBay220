@@ -43,7 +43,7 @@
 /obj/item/scrubpack/examine(mob/user, distance)
 	. = ..()
 	if (distance < 5)
-		. += SPAN_NOTICE("It [cell ? "has" : "is missing"] a cell and [tank ? "has" : "is missing"] a tank.")
+		. += span_notice("It [cell ? "has" : "is missing"] a cell and [tank ? "has" : "is missing"] a tank.")
 	if (distance < 2)
 		if (tank)
 			var/datum/gas_mixture/air = tank.return_air()
@@ -59,7 +59,7 @@
 						display = "low ([display])"
 					else
 						display = "very low ([display])"
-			. += SPAN_NOTICE("[tank] pressure is [display]")
+			. += span_notice("[tank] pressure is [display]")
 		if (cell)
 			var/display = cell.percent()
 			if (user.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
@@ -72,7 +72,7 @@
 						display = "low ([display]%)"
 			else
 				display = "[display]%"
-			. += SPAN_NOTICE("[cell] charge is [display]")
+			. += span_notice("[cell] charge is [display]")
 
 /obj/item/scrubpack/screwdriver_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
@@ -102,26 +102,26 @@
 		removed = tank
 		tank = null
 	user.visible_message(
-		SPAN_ITALIC("[user] removes [removed] from [src]."),
-		SPAN_ITALIC("You remove the [selection] from [src]."),
-		SPAN_ITALIC("You can hear metal scratching on metal."),
+		span_italic("[user] removes [removed] from [src]."),
+		span_italic("You remove the [selection] from [src]."),
+		span_italic("You can hear metal scratching on metal."),
 		range = 5
 	)
 
 /obj/item/scrubpack/attackby(obj/item/W, mob/user)
 	if (istype(W, /obj/item/cell))
 		if (cell)
-			to_chat(user, SPAN_WARNING("[src] already has \an [cell]."))
+			to_chat(user, span_warning("[src] already has \an [cell]."))
 			return TRUE
 		if (istype(W, /obj/item/cell/device))
-			to_chat(user, SPAN_WARNING("[W] is too small for [src]."))
+			to_chat(user, span_warning("[W] is too small for [src]."))
 			return TRUE
 		if (!user.unEquip(W, src))
 			return
 		user.visible_message(
-			SPAN_ITALIC("[user] fits [W] to [src]."),
-			SPAN_ITALIC("You fit [W] to [src]."),
-			SPAN_ITALIC("You can hear metal scratching on metal."),
+			span_italic("[user] fits [W] to [src]."),
+			span_italic("You fit [W] to [src]."),
+			span_italic("You can hear metal scratching on metal."),
 			range = 5
 		)
 		cell = W
@@ -129,17 +129,17 @@
 
 	if (istype(W, /obj/item/tank))
 		if (tank)
-			to_chat(user, SPAN_WARNING("[src] already has \an [tank]."))
+			to_chat(user, span_warning("[src] already has \an [tank]."))
 			return TRUE
 		if (!istype(W, tank_permit))
-			to_chat(user, SPAN_WARNING("[src] can't fit [W]."))
+			to_chat(user, span_warning("[src] can't fit [W]."))
 			return TRUE
 		if (!user.unEquip(W, src))
 			return
 		user.visible_message(
-			SPAN_ITALIC("[user] fits [W] to [src]."),
-			SPAN_ITALIC("You fit [W] to [src]."),
-			SPAN_ITALIC("You can hear metal scratching on metal."),
+			span_italic("[user] fits [W] to [src]."),
+			span_italic("You fit [W] to [src]."),
+			span_italic("You can hear metal scratching on metal."),
 			range = 5
 		)
 		tank = W
@@ -166,19 +166,19 @@
 		if (!cell) mods += "a cell"
 		if (!tank) mods += "a tank"
 		if (length(mods))
-			to_chat(user, SPAN_WARNING("You try to turn on [src], but it's missing [english_list(mods)]."))
+			to_chat(user, span_warning("You try to turn on [src], but it's missing [english_list(mods)]."))
 			enabled = FALSE
 			return
 		if (cell.charge < charge_cost)
-			to_chat(user, SPAN_WARNING("You try to turn on [src], but it's out of charge."))
+			to_chat(user, span_warning("You try to turn on [src], but it's out of charge."))
 			enabled = FALSE
 			return
-		to_chat(user, SPAN_ITALIC("You turn on [src]."))
+		to_chat(user, span_italic("You turn on [src]."))
 		START_PROCESSING(SSobj, src)
 		icon_state = "scrubpack_on"
 		set_sound_state(TRUE)
 	else
-		to_chat(user, SPAN_ITALIC("You turn off [src]."))
+		to_chat(user, span_italic("You turn off [src]."))
 		STOP_PROCESSING(SSobj, src)
 		icon_state = "scrubpack"
 		set_sound_state(FALSE)
@@ -186,7 +186,7 @@
 /obj/item/scrubpack/Process()
 	var/datum/gas_mixture/tank_air = tank.return_air()
 	if (tank_air.return_pressure() > TANK_LEAK_PRESSURE * 0.8)
-		audible_message(SPAN_ITALIC("[src] beeps stridently and stops working."))
+		audible_message(span_italic("[src] beeps stridently and stops working."))
 		STOP_PROCESSING(SSobj, src)
 		icon_state = "scrubpack"
 		set_sound_state(FALSE)
@@ -224,7 +224,7 @@
 
 	var/final_cost = max(charge_cost * 0.1, total_filter_moles / volume_rate)
 	if (!cell.checked_use(final_cost))
-		audible_message(SPAN_ITALIC("[src] beeps stridently and stops working."))
+		audible_message(span_italic("[src] beeps stridently and stops working."))
 		STOP_PROCESSING(SSobj, src)
 		icon_state = "scrubpack"
 		set_sound_state(FALSE)

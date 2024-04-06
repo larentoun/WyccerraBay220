@@ -18,7 +18,7 @@
 	update_icon()
 
 /obj/machinery/nuke_cylinder_dispenser/emag_act(remaining_charges, mob/user, emag_source)
-	to_chat(user, SPAN_NOTICE("The card fails to do anything. It seems this device has an advanced encryption system."))
+	to_chat(user, span_notice("The card fails to do anything. It seems this device has an advanced encryption system."))
 	return NO_EMAG_ACT
 
 /obj/machinery/nuke_cylinder_dispenser/physical_attack_hand(mob/user)
@@ -46,8 +46,8 @@
 
 	if(open && istype(O, /obj/item/nuclear_cylinder) && (length(cylinders) < 6))
 		user.visible_message(
-			SPAN_NOTICE("\The [user] begins inserting \the [O] into storage."),
-			SPAN_NOTICE("You begin inserting \the [O] into storage.")
+			span_notice("\The [user] begins inserting \the [O] into storage."),
+			span_notice("You begin inserting \the [O] into storage.")
 		)
 		if(do_after(user, 8 SECONDS, src, DO_PUBLIC_UNIQUE) && open && (length(cylinders) < 6) && user.unEquip(O, src))
 			user.visible_message("[user] places \the [O] into storage.", "You place \the [O] into storage.")

@@ -39,39 +39,39 @@
 	if(next)
 		grenades -= next //Remove grenade from loaded list.
 		chambered = next
-		to_chat(M, SPAN_WARNING("You pump [src], loading \a [next] into the chamber."))
+		to_chat(M, span_warning("You pump [src], loading \a [next] into the chamber."))
 	else
-		to_chat(M, SPAN_WARNING("You pump [src], but the magazine is empty."))
+		to_chat(M, span_warning("You pump [src], but the magazine is empty."))
 	update_icon()
 
 /obj/item/gun/launcher/grenade/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 2)
 		var/grenade_count = length(grenades) + (chambered? 1 : 0)
-		. += SPAN_NOTICE("Has [grenade_count] grenade\s remaining.")
+		. += span_notice("Has [grenade_count] grenade\s remaining.")
 		if(chambered)
-			. += SPAN_NOTICE("[chambered] is chambered.")
+			. += span_notice("[chambered] is chambered.")
 
 /obj/item/gun/launcher/grenade/proc/load(obj/item/grenade/G, mob/user)
 	if(!can_load_grenade_type(G, user))
 		return
 
 	if(length(grenades) >= max_grenades)
-		to_chat(user, SPAN_WARNING("\The [src] is full."))
+		to_chat(user, span_warning("\The [src] is full."))
 		return
 	if(!user.unEquip(G, src))
 		return
 	grenades.Insert(1, G) //add to the head of the list, so that it is loaded on the next pump
-	user.visible_message("\The [user] inserts \a [G] into \the [src].", SPAN_NOTICE("You insert \a [G] into \the [src]."))
+	user.visible_message("\The [user] inserts \a [G] into \the [src].", span_notice("You insert \a [G] into \the [src]."))
 
 /obj/item/gun/launcher/grenade/proc/unload(mob/user)
 	if(length(grenades))
 		var/obj/item/grenade/G = grenades[length(grenades)]
 		LIST_DEC(grenades)
 		user.put_in_hands(G)
-		user.visible_message("\The [user] removes \a [G] from [src].", SPAN_NOTICE("You remove \a [G] from \the [src]."))
+		user.visible_message("\The [user] removes \a [G] from [src].", span_notice("You remove \a [G] from \the [src]."))
 	else
-		to_chat(user, SPAN_WARNING("\The [src] is empty."))
+		to_chat(user, span_warning("\The [src] is empty."))
 
 /obj/item/gun/launcher/grenade/attack_self(mob/user)
 	pump(user)
@@ -106,7 +106,7 @@
 
 /obj/item/gun/launcher/grenade/proc/can_load_grenade_type(obj/item/grenade/G, mob/user)
 	if(is_type_in_list(G, blacklisted_grenades) && ! is_type_in_list(G, whitelisted_grenades))
-		to_chat(user, SPAN_WARNING("\The [G] doesn't seem to fit in \the [src]!"))
+		to_chat(user, span_warning("\The [G] doesn't seem to fit in \the [src]!"))
 		return FALSE
 	return TRUE
 
@@ -155,20 +155,20 @@
 		return
 
 	if(chambered)
-		to_chat(user, SPAN_WARNING("\The [src] is already loaded."))
+		to_chat(user, span_warning("\The [src] is already loaded."))
 		return
 	if(!user.unEquip(G, src))
 		return
 	chambered = G
-	user.visible_message("\The [user] load \a [G] into \the [src].", SPAN_NOTICE("You load \a [G] into \the [src]."))
+	user.visible_message("\The [user] load \a [G] into \the [src].", span_notice("You load \a [G] into \the [src]."))
 
 /obj/item/gun/launcher/grenade/underslung/unload(mob/user)
 	if(chambered)
 		user.put_in_hands(chambered)
-		user.visible_message("\The [user] removes \a [chambered] from \the[src].", SPAN_NOTICE("You remove \a [chambered] from \the [src]."))
+		user.visible_message("\The [user] removes \a [chambered] from \the[src].", span_notice("You remove \a [chambered] from \the [src]."))
 		chambered = null
 	else
-		to_chat(user, SPAN_WARNING("\The [src] is empty."))
+		to_chat(user, span_warning("\The [src] is empty."))
 
 
 /obj/item/gun/launcher/grenade/foam/Initialize()

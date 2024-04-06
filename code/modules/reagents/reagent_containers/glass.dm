@@ -50,19 +50,19 @@
 		return
 
 	if(reagents && length(reagents.reagent_list))
-		. += SPAN_NOTICE("It contains [reagents.total_volume] units of liquid.")
+		. += span_notice("It contains [reagents.total_volume] units of liquid.")
 	else
-		. += SPAN_NOTICE("It is empty.")
+		. += span_notice("It is empty.")
 	if(!is_open_container())
-		. += SPAN_NOTICE("The airtight lid seals it completely.")
+		. += span_notice("The airtight lid seals it completely.")
 
 /obj/item/reagent_containers/glass/attack_self()
 	..()
 	if(is_open_container())
-		to_chat(usr, SPAN_NOTICE("You put the lid on \the [src]."))
+		to_chat(usr, span_notice("You put the lid on \the [src]."))
 		atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
 	else
-		to_chat(usr, SPAN_NOTICE("You take the lid off \the [src]."))
+		to_chat(usr, span_notice("You take the lid off \the [src]."))
 		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 	update_icon()
 
@@ -75,14 +75,14 @@
 
 /obj/item/reagent_containers/glass/standard_feed_mob(mob/user, mob/target)
 	if(!is_open_container())
-		to_chat(user, SPAN_NOTICE("You need to open \the [src] first."))
+		to_chat(user, span_notice("You need to open \the [src] first."))
 		return TRUE
 	if(user.a_intent == I_HURT)
 		return FALSE
 	return ..()
 
 /obj/item/reagent_containers/glass/self_feed_message(mob/user)
-	to_chat(user, SPAN_NOTICE("You swallow a gulp from \the [src]."))
+	to_chat(user, span_notice("You swallow a gulp from \the [src]."))
 	if(user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
 		for(var/datum/reagent/R in reagents.reagent_list)
 			user.update_personal_goal(/datum/goal/achievement/specific_object/drink, R.type)
@@ -96,14 +96,14 @@
 	if (prob(80))
 		if (length(reagents.reagent_list) > 0)
 			visible_message(
-				SPAN_DANGER("\The [src] shatters from the impact and spills all its contents!"),
-				SPAN_DANGER("You hear the sound of glass shattering!")
+				span_danger("\The [src] shatters from the impact and spills all its contents!"),
+				span_danger("You hear the sound of glass shattering!")
 			)
 			reagents.splash(hit_atom, reagents.total_volume)
 		else
 			visible_message(
-				SPAN_DANGER("\The [src] shatters from the impact!"),
-				SPAN_DANGER("You hear the sound of glass shattering!")
+				span_danger("\The [src] shatters from the impact!"),
+				span_danger("You hear the sound of glass shattering!")
 			)
 		playsound(src.loc, pick(GLOB.shatter_sound), 100)
 		new /obj/item/material/shard(src.loc)
@@ -111,14 +111,14 @@
 	else
 		if (length(reagents.reagent_list) > 0)
 			visible_message(
-				SPAN_DANGER("\The [src] bounces and spills all its contents!"),
-				SPAN_WARNING("You hear the sound of glass hitting something.")
+				span_danger("\The [src] bounces and spills all its contents!"),
+				span_warning("You hear the sound of glass hitting something.")
 			)
 			reagents.splash(hit_atom, reagents.total_volume)
 		else
 			visible_message(
-				SPAN_WARNING("\The [src] bounces dangerously. Luckily it didn't break."),
-				SPAN_WARNING("You hear the sound of glass hitting something.")
+				span_warning("\The [src] bounces dangerously. Luckily it didn't break."),
+				span_warning("You hear the sound of glass hitting something.")
 			)
 		playsound(src.loc, "sound/effects/Glasshit.ogg", 50)
 
@@ -302,10 +302,10 @@
 /obj/item/reagent_containers/glass/bucket/attackby(obj/D, mob/user as mob)
 	if(istype(D, /obj/item/mop))
 		if(reagents.total_volume < 1)
-			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
+			to_chat(user, span_warning("\The [src] is empty!"))
 		else
 			reagents.trans_to_obj(D, 5)
-			to_chat(user, SPAN_NOTICE("You wet \the [D] in \the [src]."))
+			to_chat(user, span_notice("You wet \the [D] in \the [src]."))
 			playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 		return
 	else

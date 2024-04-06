@@ -114,8 +114,8 @@
 		USE_FEEDBACK_FAILURE("[src] has no circuit to remove.")
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] starts removing [src]'s [electronics.name] with [tool]."),
-		SPAN_NOTICE("You start removing [src]'s [electronics.name] with [tool].")
+		span_notice("[user] starts removing [src]'s [electronics.name] with [tool]."),
+		span_notice("You start removing [src]'s [electronics.name] with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 4 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT) || !electronics)
 		return
@@ -125,8 +125,8 @@
 	update_state()
 	electronics = null
 	user.visible_message(
-		SPAN_NOTICE("[user] removes [src]'s [electronics.name] with [tool]."),
-		SPAN_NOTICE("You remove [src]'s [electronics.name] with [tool].")
+		span_notice("[user] removes [src]'s [electronics.name] with [tool]."),
+		span_notice("You remove [src]'s [electronics.name] with [tool].")
 	)
 
 /obj/structure/door_assembly/screwdriver_act(mob/living/user, obj/item/tool)
@@ -135,8 +135,8 @@
 		balloon_alert(user, "нет платы!")
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] starts finishing [src] with [tool]."),
-		SPAN_NOTICE("You start finishing [src] with [tool].")
+		span_notice("[user] starts finishing [src] with [tool]."),
+		span_notice("You start finishing [src] with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 5 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT) || state != ASSEMBLY_STATE_CIRCUIT)
 		return
@@ -151,8 +151,8 @@
 	transfer_fingerprints_to(airlock)
 	airlock.add_fingerprint(user, tool = tool)
 	user.visible_message(
-		SPAN_NOTICE("[user] finishes [airlock] with [tool]."),
-		SPAN_NOTICE("You finishes [airlock] with [tool].")
+		span_notice("[user] finishes [airlock] with [tool]."),
+		span_notice("You finishes [airlock] with [tool].")
 	)
 	qdel(src)
 
@@ -164,8 +164,8 @@
 	if(state > ASSEMBLY_STATE_WIRED)
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] starts cutting [src]'s wires with [tool]."),
-		SPAN_NOTICE("You start cutting [src]'s wires with [tool].")
+		span_notice("[user] starts cutting [src]'s wires with [tool]."),
+		span_notice("You start cutting [src]'s wires with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 4 SECONDS, volume = 50, skill_path = SKILL_ELECTRICAL, do_flags = DO_REPAIR_CONSTRUCT) || state != ASSEMBLY_STATE_WIRED)
 		return
@@ -174,8 +174,8 @@
 	state = ASSEMBLY_STATE_FRAME
 	update_state()
 	user.visible_message(
-		SPAN_NOTICE("[user] cuts [src]'s wires with [tool]."),
-		SPAN_NOTICE("You cut [src]'s wires with [tool].")
+		span_notice("[user] cuts [src]'s wires with [tool]."),
+		span_notice("You cut [src]'s wires with [tool].")
 	)
 
 /obj/structure/door_assembly/welder_act(mob/living/user, obj/item/tool)
@@ -198,8 +198,8 @@
 		glass = null
 		update_state()
 		user.visible_message(
-			SPAN_NOTICE("[user] welds [src]'s [glass_noun] off with [tool]."),
-			SPAN_NOTICE("You weld [src]'s [glass_noun] off with [tool].")
+			span_notice("[user] welds [src]'s [glass_noun] off with [tool]."),
+			span_notice("You weld [src]'s [glass_noun] off with [tool].")
 		)
 		return
 
@@ -216,8 +216,8 @@
 	transfer_fingerprints_to(stack)
 	stack.add_fingerprint(user, tool = tool)
 	user.visible_message(
-		SPAN_NOTICE("[user] dismantles [src] with [tool]."),
-		SPAN_NOTICE("You dismantle [src] with [tool].")
+		span_notice("[user] dismantles [src] with [tool]."),
+		span_notice("You dismantle [src] with [tool].")
 	)
 	qdel(src)
 
@@ -235,8 +235,8 @@
 			return TRUE
 		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] starts installing [tool] into [src]."),
-			SPAN_NOTICE("You start installing [tool] into [src].")
+			span_notice("[user] starts installing [tool] into [src]."),
+			span_notice("You start installing [tool] into [src].")
 		)
 		if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
@@ -254,8 +254,8 @@
 		update_state()
 		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] installs [tool] into [src]."),
-			SPAN_NOTICE("You install [tool] into [src].")
+			span_notice("[user] installs [tool] into [src]."),
+			span_notice("You install [tool] into [src].")
 		)
 		return TRUE
 
@@ -272,8 +272,8 @@
 			USE_FEEDBACK_STACK_NOT_ENOUGH(cable, 1, "to wire [src].")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("[user] starts wiring [src] with [tool]."),
-			SPAN_NOTICE("You start wiring [src] with [tool].")
+			span_notice("[user] starts wiring [src] with [tool]."),
+			span_notice("You start wiring [src] with [tool].")
 		)
 		if (!user.do_skilled(4 SECONDS, SKILL_ELECTRICAL, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
@@ -289,8 +289,8 @@
 		state = ASSEMBLY_STATE_WIRED
 		update_state()
 		user.visible_message(
-			SPAN_NOTICE("[user] wires [src] with [tool]."),
-			SPAN_NOTICE("You wire [src] with [tool].")
+			span_notice("[user] wires [src] with [tool]."),
+			span_notice("You wire [src] with [tool].")
 		)
 		return TRUE
 
@@ -311,8 +311,8 @@
 				return TRUE
 			playsound(src, 'sound/items/Crowbar.ogg', 50, TRUE)
 			user.visible_message(
-				SPAN_NOTICE("[user] starts installing a glass panel into [src]."),
-				SPAN_NOTICE("You start installing a glass panel into [src].")
+				span_notice("[user] starts installing a glass panel into [src]."),
+				span_notice("You start installing a glass panel into [src].")
 			)
 			if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 				return TRUE
@@ -329,8 +329,8 @@
 			update_state()
 			playsound(src, 'sound/items/Crowbar.ogg', 50, TRUE)
 			user.visible_message(
-				SPAN_NOTICE("[user] starts installing a glass panel into [src]."),
-				SPAN_NOTICE("You start installing a glass panel into [src].")
+				span_notice("[user] starts installing a glass panel into [src]."),
+				span_notice("You start installing a glass panel into [src].")
 			)
 			return TRUE
 		// Plating
@@ -340,8 +340,8 @@
 				return TRUE
 			playsound(src, 'sound/items/Crowbar.ogg', 50, TRUE)
 			user.visible_message(
-				SPAN_NOTICE("[user] starts installing [material_name] plating into [src]."),
-				SPAN_NOTICE("You start installing [material_name] plating into [src].")
+				span_notice("[user] starts installing [material_name] plating into [src]."),
+				span_notice("You start installing [material_name] plating into [src].")
 			)
 			if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 				return TRUE
@@ -355,8 +355,8 @@
 			update_state()
 			playsound(src, 'sound/items/Crowbar.ogg', 50, TRUE)
 			user.visible_message(
-				SPAN_NOTICE("[user] installs [material_name] plating into [src]."),
-				SPAN_NOTICE("You install [material_name] plating into [src].")
+				span_notice("[user] installs [material_name] plating into [src]."),
+				span_notice("You install [material_name] plating into [src].")
 			)
 			return TRUE
 		USE_FEEDBACK_FAILURE("[src] can't be reinforced with [material_name].")
@@ -371,8 +371,8 @@
 		created_name = input
 		update_state()
 		user.visible_message(
-			SPAN_NOTICE("[user] names [src] to '[created_name]' with [tool]."),
-			SPAN_NOTICE("You name [src] to '[created_name]' with [tool].")
+			span_notice("[user] names [src] to '[created_name]' with [tool]."),
+			span_notice("You name [src] to '[created_name]' with [tool].")
 		)
 		return TRUE
 

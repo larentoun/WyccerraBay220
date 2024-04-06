@@ -57,14 +57,14 @@
 
 /singleton/surgery_step/robotics/unscrew_hatch/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_NOTICE("[user] has opened the maintenance hatch on [target]'s [affected.name] with [tool]."), \
-	SPAN_NOTICE("You have opened the maintenance hatch on [target]'s [affected.name] with [tool]."),)
+	user.visible_message(span_notice("[user] has opened the maintenance hatch on [target]'s [affected.name] with [tool]."), \
+	span_notice("You have opened the maintenance hatch on [target]'s [affected.name] with [tool]."),)
 	affected.hatch_state = HATCH_UNSCREWED
 
 /singleton/surgery_step/robotics/unscrew_hatch/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_WARNING("[user]'s [tool.name] slips, failing to unscrew [target]'s [affected.name]."), \
-	SPAN_WARNING("Your [tool.name] slips, failing to unscrew [target]'s [affected.name]."))
+	user.visible_message(span_warning("[user]'s [tool.name] slips, failing to unscrew [target]'s [affected.name]."), \
+	span_warning("Your [tool.name] slips, failing to unscrew [target]'s [affected.name]."))
 
 //////////////////////////////////////////////////////////////////
 //	 screw robotic limb hatch surgery step
@@ -94,14 +94,14 @@
 
 /singleton/surgery_step/robotics/screw_hatch/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_NOTICE("[user] has screwed down the maintenance hatch on [target]'s [affected.name] with [tool]."), \
-	SPAN_NOTICE("You have screwed down the maintenance hatch on [target]'s [affected.name] with [tool]."),)
+	user.visible_message(span_notice("[user] has screwed down the maintenance hatch on [target]'s [affected.name] with [tool]."), \
+	span_notice("You have screwed down the maintenance hatch on [target]'s [affected.name] with [tool]."),)
 	affected.hatch_state = HATCH_CLOSED
 
 /singleton/surgery_step/robotics/screw_hatch/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_WARNING("[user]'s [tool.name] slips, failing to screw down [target]'s [affected.name]."), \
-	SPAN_WARNING("Your [tool] slips, failing to screw down [target]'s [affected.name]."))
+	user.visible_message(span_warning("[user]'s [tool.name] slips, failing to screw down [target]'s [affected.name]."), \
+	span_warning("Your [tool] slips, failing to screw down [target]'s [affected.name]."))
 
 //////////////////////////////////////////////////////////////////
 //	open robotic limb surgery step
@@ -132,14 +132,14 @@
 
 /singleton/surgery_step/robotics/open_hatch/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_NOTICE("[user] opens the maintenance hatch on [target]'s [affected.name] with [tool]."), \
-	SPAN_NOTICE("You open the maintenance hatch on [target]'s [affected.name] with [tool]."))
+	user.visible_message(span_notice("[user] opens the maintenance hatch on [target]'s [affected.name] with [tool]."), \
+	span_notice("You open the maintenance hatch on [target]'s [affected.name] with [tool]."))
 	affected.hatch_state = HATCH_OPENED
 
 /singleton/surgery_step/robotics/open_hatch/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_WARNING("[user]'s [tool.name] slips, failing to open the hatch on [target]'s [affected.name]."),
-	SPAN_WARNING("Your [tool] slips, failing to open the hatch on [target]'s [affected.name]."))
+	user.visible_message(span_warning("[user]'s [tool.name] slips, failing to open the hatch on [target]'s [affected.name]."),
+	span_warning("Your [tool] slips, failing to open the hatch on [target]'s [affected.name]."))
 
 //////////////////////////////////////////////////////////////////
 //	close robotic limb surgery step
@@ -170,15 +170,15 @@
 
 /singleton/surgery_step/robotics/close_hatch/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_NOTICE("[user] closes the hatch on [target]'s [affected.name] with [tool]."), \
-	SPAN_NOTICE("You close the hatch on [target]'s [affected.name] with [tool]."))
+	user.visible_message(span_notice("[user] closes the hatch on [target]'s [affected.name] with [tool]."), \
+	span_notice("You close the hatch on [target]'s [affected.name] with [tool]."))
 	affected.hatch_state = HATCH_UNSCREWED
 	affected.germ_level = 0
 
 /singleton/surgery_step/robotics/close_hatch/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_WARNING("[user]'s [tool.name] slips, failing to close the hatch on [target]'s [affected.name]."),
-	SPAN_WARNING("Your [tool.name] slips, failing to close the hatch on [target]'s [affected.name]."))
+	user.visible_message(span_warning("[user]'s [tool.name] slips, failing to close the hatch on [target]'s [affected.name]."),
+	span_warning("Your [tool.name] slips, failing to close the hatch on [target]'s [affected.name]."))
 
 //////////////////////////////////////////////////////////////////
 //	robotic limb brute damage repair surgery step
@@ -208,10 +208,10 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(affected)
 		if(!affected.brute_dam)
-			to_chat(user, SPAN_WARNING("There is no damage to repair."))
+			to_chat(user, span_warning("There is no damage to repair."))
 			return FALSE
 		if(BP_IS_BRITTLE(affected))
-			to_chat(user, SPAN_WARNING("[target]'s [affected.name] is too brittle to be repaired normally."))
+			to_chat(user, span_warning("[target]'s [affected.name] is too brittle to be repaired normally."))
 			return FALSE
 		if(tool.tool_behaviour == TOOL_WELDER)
 			if(!tool.use_as_tool(src, user, amount = 1, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
@@ -233,15 +233,15 @@
 
 /singleton/surgery_step/robotics/repair_brute/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_NOTICE("[user] finishes patching damage to [target]'s [affected.name] with [tool]."), \
-	SPAN_NOTICE("You finish patching damage to [target]'s [affected.name] with [tool]."))
+	user.visible_message(span_notice("[user] finishes patching damage to [target]'s [affected.name] with [tool]."), \
+	span_notice("You finish patching damage to [target]'s [affected.name] with [tool]."))
 	affected.heal_damage(rand(30,50),0,1,1)
 	affected.status &= ~ORGAN_DISFIGURED
 
 /singleton/surgery_step/robotics/repair_brute/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_WARNING("[user]'s [tool.name] slips, damaging the internal structure of [target]'s [affected.name]."),
-	SPAN_WARNING("Your [tool.name] slips, damaging the internal structure of [target]'s [affected.name]."))
+	user.visible_message(span_warning("[user]'s [tool.name] slips, damaging the internal structure of [target]'s [affected.name]."),
+	span_warning("Your [tool.name] slips, damaging the internal structure of [target]'s [affected.name]."))
 	target.apply_damage(rand(5,10), DAMAGE_BURN, affected)
 
 //////////////////////////////////////////////////////////////////
@@ -276,14 +276,14 @@
 
 /singleton/surgery_step/robotics/repair_brittle/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_NOTICE("[user] finishes repairing the brittle interior of [target]'s [affected.name]."), \
-	SPAN_NOTICE("You finish repairing the brittle interior of [target]'s [affected.name]."))
+	user.visible_message(span_notice("[user] finishes repairing the brittle interior of [target]'s [affected.name]."), \
+	span_notice("You finish repairing the brittle interior of [target]'s [affected.name]."))
 	affected.status &= ~ORGAN_BRITTLE
 
 /singleton/surgery_step/robotics/repair_brittle/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_WARNING("[user] causes some of [target]'s [affected.name] to crumble!"),
-	SPAN_WARNING("You cause some of [target]'s [affected.name] to crumble!"))
+	user.visible_message(span_warning("[user] causes some of [target]'s [affected.name] to crumble!"),
+	span_warning("You cause some of [target]'s [affected.name] to crumble!"))
 	target.apply_damage(rand(5,10), DAMAGE_BRUTE, affected)
 
 //////////////////////////////////////////////////////////////////
@@ -311,15 +311,15 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(affected)
 		if(!affected.burn_dam)
-			to_chat(user, SPAN_WARNING("There is no damage to repair."))
+			to_chat(user, span_warning("There is no damage to repair."))
 			return FALSE
 		if(BP_IS_BRITTLE(affected))
-			to_chat(user, SPAN_WARNING("[target]'s [affected.name] is too brittle for this kind of repair."))
+			to_chat(user, span_warning("[target]'s [affected.name] is too brittle for this kind of repair."))
 		else
 			var/obj/item/stack/cable_coil/C = tool
 			if(istype(C))
 				if(!C.use(3))
-					to_chat(user, SPAN_WARNING("You need three or more cable pieces to repair this damage."))
+					to_chat(user, span_warning("You need three or more cable pieces to repair this damage."))
 				else
 					return TRUE
 	return FALSE
@@ -338,15 +338,15 @@
 
 /singleton/surgery_step/robotics/repair_burn/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_NOTICE("[user] finishes splicing cable into [target]'s [affected.name]."), \
-	SPAN_NOTICE("You finishes splicing new cable into [target]'s [affected.name]."))
+	user.visible_message(span_notice("[user] finishes splicing cable into [target]'s [affected.name]."), \
+	span_notice("You finishes splicing new cable into [target]'s [affected.name]."))
 	affected.heal_damage(0,rand(30,50),1,1)
 	affected.status &= ~ORGAN_DISFIGURED
 
 /singleton/surgery_step/robotics/repair_burn/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_WARNING("[user] causes a short circuit in [target]'s [affected.name]!"),
-	SPAN_WARNING("You cause a short circuit in [target]'s [affected.name]!"))
+	user.visible_message(span_warning("[user] causes a short circuit in [target]'s [affected.name]!"),
+	span_warning("You cause a short circuit in [target]'s [affected.name]!"))
 	target.apply_damage(rand(5,10), DAMAGE_BURN, affected)
 
 //////////////////////////////////////////////////////////////////
@@ -403,14 +403,14 @@
 	for(var/obj/item/organ/I in affected.internal_organs)
 		if(I && I.damage > 0)
 			if(BP_IS_ROBOTIC(I))
-				user.visible_message(SPAN_NOTICE("[user] repairs [target]'s [I.name] with [tool]."), \
-				SPAN_NOTICE("You repair [target]'s [I.name] with [tool].") )
+				user.visible_message(span_notice("[user] repairs [target]'s [I.name] with [tool]."), \
+				span_notice("You repair [target]'s [I.name] with [tool].") )
 				I.damage = 0
 
 /singleton/surgery_step/robotics/fix_organ_robotic/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_WARNING("[user]'s hand slips, gumming up the mechanisms inside of [target]'s [affected.name] with [tool]!"), \
-	SPAN_WARNING("Your hand slips, gumming up the mechanisms inside of [target]'s [affected.name] with [tool]!"))
+	user.visible_message(span_warning("[user]'s hand slips, gumming up the mechanisms inside of [target]'s [affected.name] with [tool]!"), \
+	span_warning("Your hand slips, gumming up the mechanisms inside of [target]'s [affected.name] with [tool]!"))
 	target.adjustToxLoss(5)
 	affected.createwound(INJURY_TYPE_CUT, 5)
 	for(var/internal in affected.internal_organs)
@@ -439,7 +439,7 @@
 			radial_button.name = "Detach [I.name]"
 			LAZYSET(attached_organs, I.organ_tag, radial_button)
 	if(!LAZYLEN(attached_organs))
-		to_chat(user, SPAN_WARNING("There are no appropriate internal components to decouple."))
+		to_chat(user, span_warning("There are no appropriate internal components to decouple."))
 		return FALSE
 	if (length(attached_organs) == 1 && user.get_preference_value(/datum/client_preference/surgery_skip_radial))
 		return attached_organs[1]
@@ -459,16 +459,16 @@
 /singleton/surgery_step/robotics/detatch_organ_robotic/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/affected = target.get_organ(target_zone)
 	var/obj/removing = target.internal_organs_by_name[LAZYACCESS(target.surgeries_in_progress, target_zone)]
-	user.visible_message(SPAN_NOTICE("[user] has decoupled [removing] from [target]'s [affected.name] with [tool].") , \
-	SPAN_NOTICE("You have decoupled [removing] from [target]'s [affected.name] with [tool]."))
+	user.visible_message(span_notice("[user] has decoupled [removing] from [target]'s [affected.name] with [tool].") , \
+	span_notice("You have decoupled [removing] from [target]'s [affected.name] with [tool]."))
 
 	var/obj/item/organ/internal/I = target.internal_organs_by_name[LAZYACCESS(target.surgeries_in_progress, target_zone)]
 	if(I && istype(I))
 		I.cut_away(user)
 
 /singleton/surgery_step/robotics/detatch_organ_robotic/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message(SPAN_WARNING("[user]'s hand slips, disconnecting [tool]."), \
-	SPAN_WARNING("Your hand slips, disconnecting [tool]."))
+	user.visible_message(span_warning("[user]'s hand slips, disconnecting [tool]."), \
+	span_warning("Your hand slips, disconnecting [tool]."))
 
 //////////////////////////////////////////////////////////////////
 //	robotic organ transplant finalization surgery step
@@ -509,7 +509,7 @@
 	if (istype(selected, /obj/item/organ/internal/augment))
 		var/obj/item/organ/internal/augment/augment = selected
 		if (~augment.augment_flags & AUGMENT_MECHANICAL)
-			to_chat(user, SPAN_WARNING("[augment] cannot function within a robotic limb."))
+			to_chat(user, span_warning("[augment] cannot function within a robotic limb."))
 			return FALSE
 	return selected
 
@@ -529,14 +529,14 @@
 	attaching.status &= ~ORGAN_CUT_AWAY
 	attaching.replaced(target, affected)
 	user.visible_message(
-		SPAN_NOTICE("[user] has reattached \a [target]'s [attaching] with \a [tool]."),
-		SPAN_NOTICE("You have reattached [target]'s [attaching] with [tool].")
+		span_notice("[user] has reattached \a [target]'s [attaching] with \a [tool]."),
+		span_notice("You have reattached [target]'s [attaching] with [tool].")
 	)
 
 
 /singleton/surgery_step/robotics/attach_organ_robotic/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message(SPAN_WARNING("[user]'s hand slips, disconnecting [tool]."), \
-	SPAN_WARNING("Your hand slips, disconnecting [tool]."))
+	user.visible_message(span_warning("[user]'s hand slips, disconnecting [tool]."), \
+	span_warning("Your hand slips, disconnecting [tool]."))
 
 //////////////////////////////////////////////////////////////////
 //	mmi installation surgery step
@@ -555,15 +555,15 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(affected && istype(M))
 		if(!M.brainmob || !M.brainmob.client || !M.brainmob.ckey || M.brainmob.stat >= DEAD)
-			to_chat(user, SPAN_WARNING("That brain is not usable."))
+			to_chat(user, span_warning("That brain is not usable."))
 		else if(BP_IS_CRYSTAL(affected))
-			to_chat(user, SPAN_WARNING("The crystalline interior of [affected] is incompatible with [M]."))
+			to_chat(user, span_warning("The crystalline interior of [affected] is incompatible with [M]."))
 		else if(!target.isSynthetic())
-			to_chat(user, SPAN_WARNING("You cannot install a computer brain into a meat body."))
+			to_chat(user, span_warning("You cannot install a computer brain into a meat body."))
 		else if(!target.should_have_organ(BP_BRAIN))
-			to_chat(user, SPAN_WARNING("You're pretty sure [target.species.name_plural] don't normally have a brain."))
+			to_chat(user, span_warning("You're pretty sure [target.species.name_plural] don't normally have a brain."))
 		else if(target.internal_organs[BP_BRAIN])
-			to_chat(user, SPAN_WARNING("Your subject already has a brain."))
+			to_chat(user, span_warning("Your subject already has a brain."))
 		else
 			return TRUE
 	return FALSE
@@ -584,8 +584,8 @@
 	if(!user.unEquip(tool))
 		return
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_NOTICE("[user] has installed [tool] into [target]'s [affected.name]."), \
-	SPAN_NOTICE("You have installed [tool] into [target]'s [affected.name]."))
+	user.visible_message(span_notice("[user] has installed [tool] into [target]'s [affected.name]."), \
+	span_notice("You have installed [tool] into [target]'s [affected.name]."))
 
 	var/obj/item/device/mmi/M = tool
 	var/obj/item/organ/internal/mmi_holder/holder = new(target, 1)
@@ -598,8 +598,8 @@
 		M.brainmob.mind.transfer_to(target)
 
 /singleton/surgery_step/robotics/install_mmi/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message(SPAN_WARNING("[user]'s hand slips."), \
-	SPAN_WARNING("Your hand slips."))
+	user.visible_message(span_warning("[user]'s hand slips."), \
+	span_warning("Your hand slips."))
 
 /singleton/surgery_step/internal/remove_organ/robotic
 	name = "Remove robotic component"
@@ -647,19 +647,19 @@
 		var/obj/item/device/mmi/mmi = locate() in affected.implants
 		if(affected && mmi)
 			user.visible_message( \
-			SPAN_NOTICE("[user] removes [mmi] from [target]'s [affected.name] with [tool]."), \
-			SPAN_NOTICE("You  remove [mmi] from [target]'s [affected.name] with [tool]."))
+			span_notice("[user] removes [mmi] from [target]'s [affected.name] with [tool]."), \
+			span_notice("You  remove [mmi] from [target]'s [affected.name] with [tool]."))
 			target.remove_implant(mmi, TRUE, affected)
 		else
 			user.visible_message( \
-			SPAN_NOTICE("[user] could not find anything inside [target]'s [affected.name]."), \
-			SPAN_NOTICE("You could not find anything inside [target]'s [affected.name]."))
+			span_notice("[user] could not find anything inside [target]'s [affected.name]."), \
+			span_notice("You could not find anything inside [target]'s [affected.name]."))
 
 /singleton/surgery_step/remove_mmi/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message( \
-	SPAN_WARNING("[user]'s hand slips, damaging [target]'s [affected.name] with [tool]!"), \
-	SPAN_WARNING("Your hand slips, damaging [target]'s [affected.name] with [tool]!"))
+	span_warning("[user]'s hand slips, damaging [target]'s [affected.name] with [tool]!"), \
+	span_warning("Your hand slips, damaging [target]'s [affected.name] with [tool]!"))
 	affected.take_external_damage(3, 0, used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
@@ -699,8 +699,8 @@
 	var/prosthetic = affected.encased ? "[target]'s [affected.encased]" : "structural support in [target]'s [affected.name]"
 	if (affected.stage == 0)
 		user.visible_message(
-			SPAN_NOTICE("[user] starts mending [prosthetic] with [tool]."),
-			SPAN_NOTICE("You start mending [prosthetic] with [tool].")
+			span_notice("[user] starts mending [prosthetic] with [tool]."),
+			span_notice("You start mending [prosthetic] with [tool].")
 		)
 	playsound(target.loc, 'sound/items/Welder.ogg', 15, 1)
 	..()
@@ -709,8 +709,8 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	var/prosthetic = affected.encased ? "[target]'s [affected.encased]" : "structural support in [target]'s [affected.name]"
 	user.visible_message(
-		SPAN_INFO("[user] finishes mending [prosthetic] with [tool.name]"),
-		SPAN_INFO("You finish mending [prosthetic] with [tool.name].")
+		span_info("[user] finishes mending [prosthetic] with [tool.name]"),
+		span_info("You finish mending [prosthetic] with [tool.name].")
 	)
 	if(affected.stage == 0)
 		affected.stage = 1
@@ -719,8 +719,8 @@
 /singleton/surgery_step/robotics/robone/weld/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message(
-		SPAN_WARNING("[user]'s hand slips, causing damage with [tool] in the open panel on [target]'s [affected.name]!"),
-		SPAN_WARNING("Your hand slips, causing damage with [tool] in the open panel on [target]'s [affected.name]!")
+		span_warning("[user]'s hand slips, causing damage with [tool] in the open panel on [target]'s [affected.name]!"),
+		span_warning("Your hand slips, causing damage with [tool] in the open panel on [target]'s [affected.name]!")
 	)
 	affected.take_external_damage(5, 0, used_weapon = tool)
 
@@ -746,13 +746,13 @@
 	var/prosthetic = affected.encased ? "[target]'s [affected.encased]" : "structural support in [target]'s [affected.name]"
 	if(affected.encased == "skull")
 		user.visible_message(
-			SPAN_NOTICE("[user] begins to piece [prosthetic] back together with [tool]."),
-			SPAN_NOTICE("You begin to piece [prosthetic] back together with [tool].")
+			span_notice("[user] begins to piece [prosthetic] back together with [tool]."),
+			span_notice("You begin to piece [prosthetic] back together with [tool].")
 		)
 	else
 		user.visible_message(
-			SPAN_NOTICE("[user] is beginning to twist [prosthetic] in place with [tool]."),
-			SPAN_NOTICE("You are beginning to twist [prosthetic] in place with [tool].")
+			span_notice("[user] is beginning to twist [prosthetic] in place with [tool]."),
+			span_notice("You are beginning to twist [prosthetic] in place with [tool].")
 		)
 	playsound(target.loc, 'sound/items/bonesetter.ogg', 50, TRUE)
 	..()
@@ -763,27 +763,27 @@
 	if (affected.status & ORGAN_BROKEN)
 		if(affected.encased == "skull")
 			user.visible_message(
-				SPAN_INFO("[user] pieces [prosthetic] back together with [tool]."),
-				SPAN_INFO("You piece [prosthetic] back together with [tool].")
+				span_info("[user] pieces [prosthetic] back together with [tool]."),
+				span_info("You piece [prosthetic] back together with [tool].")
 			)
 		else
 			user.visible_message(
-				SPAN_INFO("[user] twists [prosthetic] in place with [tool]."),
-				SPAN_INFO("You twist [prosthetic] in place with [tool].")
+				span_info("[user] twists [prosthetic] in place with [tool]."),
+				span_info("You twist [prosthetic] in place with [tool].")
 			)
 		affected.stage = 2
 	else
 		user.visible_message(
-			SPAN_WARNING("[user] twists [prosthetic] in the WRONG place with [tool]!."),
-			SPAN_WARNING("You twist [prosthetic] in the WRONG place with [tool]!.")
+			span_warning("[user] twists [prosthetic] in the WRONG place with [tool]!."),
+			span_warning("You twist [prosthetic] in the WRONG place with [tool]!.")
 		)
 		affected.fracture()
 
 /singleton/surgery_step/robotics/robone/realign_support/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message(
-		SPAN_WARNING("[user]'s hand slips, damaging the [affected.encased ? affected.encased : "structural support"] in [target]'s [affected.name] with [tool]!"),
-		SPAN_WARNING("Your hand slips, damaging the [affected.encased ? affected.encased : "structural support"] in [target]'s [affected.name] with [tool]!")
+		span_warning("[user]'s hand slips, damaging the [affected.encased ? affected.encased : "structural support"] in [target]'s [affected.name] with [tool]!"),
+		span_warning("Your hand slips, damaging the [affected.encased ? affected.encased : "structural support"] in [target]'s [affected.name] with [tool]!")
 	)
 	affected.fracture()
 	affected.take_external_damage(5, used_weapon = tool)
@@ -806,8 +806,8 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	var/prosthetic = affected.encased ? "[target]'s damaged [affected.encased]" : "structural support in [target]'s [affected.name]"
 	user.visible_message(
-		SPAN_NOTICE("[user] starts to finish mending [prosthetic] with [tool]."),
-		SPAN_NOTICE("You start to finish mending [prosthetic] with [tool].")
+		span_notice("[user] starts to finish mending [prosthetic] with [tool]."),
+		span_notice("You start to finish mending [prosthetic] with [tool].")
 	)
 	playsound(target.loc, 'sound/items/Welder.ogg', 15, 1)
 	..()
@@ -816,8 +816,8 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	var/prosthetic = affected.encased ? "[target]'s damaged [affected.encased]" : "structural support in [target]'s [affected.name]"
 	user.visible_message(
-		SPAN_INFO("[user] has finished mending [prosthetic] with [tool]."),
-		SPAN_INFO("You have finished mending [prosthetic] with [tool]." )
+		span_info("[user] has finished mending [prosthetic] with [tool]."),
+		span_info("You have finished mending [prosthetic] with [tool]." )
 	)
 	affected.status &= ~ORGAN_BROKEN
 	affected.stage = 0
@@ -826,7 +826,7 @@
 /singleton/surgery_step/robotics/robone/finish/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message(
-		SPAN_WARNING("[user]'s hand slips, causing damage with [tool] in the open panel in [target]'s [affected.name]!"),
-		SPAN_WARNING("Your hand slips, causing damage with [tool] in the open panel in [target]'s [affected.name]!")
+		span_warning("[user]'s hand slips, causing damage with [tool] in the open panel in [target]'s [affected.name]!"),
+		span_warning("Your hand slips, causing damage with [tool] in the open panel in [target]'s [affected.name]!")
 	)
 	affected.take_external_damage(5, 0, used_weapon = tool)

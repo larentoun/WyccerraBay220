@@ -60,10 +60,10 @@
 		return
 	if (user.skill_check(SKILL_DEVICES, SKILL_TRAINED))
 		if (status & ORGAN_DEAD || !brainmob)
-			to_chat(user, SPAN_WARNING("\The [src] is ruined; it will never turn on again."))
+			to_chat(user, span_warning("\The [src] is ruined; it will never turn on again."))
 			return
 		if (damage)
-			to_chat(user, SPAN_WARNING("\The [src] is damaged and requires repair first."))
+			to_chat(user, span_warning("\The [src] is damaged and requires repair first."))
 			return
 		if (searching)
 			visible_message("\The [user] flicks the activation switch on \the [src]. The lights go dark.", range = 3)
@@ -72,7 +72,7 @@
 		start_search(user)
 	else
 		if ((status & ORGAN_DEAD) || !brainmob || damage || searching)
-			to_chat(user, SPAN_WARNING("\The [src] doesn't respond to your pokes and prods."))
+			to_chat(user, span_warning("\The [src] doesn't respond to your pokes and prods."))
 			return
 		start_search(user)
 
@@ -81,7 +81,7 @@
 		return
 	if (user)
 		if ((world.time - last_search) < (30 SECONDS))
-			to_chat(user, SPAN_WARNING("\The [src] doesn't react; wait a few seconds before trying again."))
+			to_chat(user, span_warning("\The [src] doesn't react; wait a few seconds before trying again."))
 			return
 		last_search = world.time
 		if (brainmob && brainmob.key)
@@ -94,7 +94,7 @@
 	if (has_mind)
 		var/actor = user ? "\The [user]" : "Your brain"
 		var/sneaky = protected ? "However, you are beyond such things." : "This might be the end!"
-		to_chat(brainmob, SPAN_WARNING("[actor] is trying to overwrite you! [sneaky]"))
+		to_chat(brainmob, span_warning("[actor] is trying to overwrite you! [sneaky]"))
 	if (!protected)
 		var/datum/ghosttrap/T = get_ghost_trap("positronic brain")
 		T.request_player(brainmob, "Someone is requesting a personality for a positronic brain.", 60 SECONDS)
@@ -102,7 +102,7 @@
 	icon_state = "posibrain-searching"
 
 /obj/item/organ/internal/posibrain/proc/cancel_search()
-	visible_message(SPAN_ITALIC("\The [src] buzzes quietly and returns to an idle state."), range = 3)
+	visible_message(span_italic("\The [src] buzzes quietly and returns to an idle state."), range = 3)
 	if (searching)
 		deltimer(searching)
 	searching = null
@@ -114,7 +114,7 @@
 				brainmob.SetName(brainmob.real_name)
 				UpdateNames()
 		else
-			to_chat(brainmob, SPAN_NOTICE("You're safe! Your brain didn't manage to replace you. This time."))
+			to_chat(brainmob, span_notice("You're safe! Your brain didn't manage to replace you. This time."))
 	else
 		icon_state = "posibrain"
 	update_icon()
@@ -133,7 +133,7 @@
 	if (possess != "Yes")
 		return
 	if (brainmob.key)
-		to_chat(brainmob, SPAN_DANGER("Your thoughts shatter into nothingness, quickly subsumed by a new identity. \"You\" have died."))
+		to_chat(brainmob, span_danger("Your thoughts shatter into nothingness, quickly subsumed by a new identity. \"You\" have died."))
 		var/mob/observer/ghost/G = brainmob.ghostize(FALSE)
 		G.timeofdeath = world.time
 	T.transfer_personality(user, brainmob)
@@ -145,37 +145,37 @@
 	if (isghost(user) || user.skill_check(SKILL_DEVICES, SKILL_TRAINED))
 		if ((status & ORGAN_DEAD) || damage)
 			if ((status & ORGAN_DEAD))
-				. += SPAN_NOTICE(SPAN_ITALIC("It is ruined and lifeless, damaged beyond hope of recovery."))
+				. += span_notice(span_italic("It is ruined and lifeless, damaged beyond hope of recovery."))
 			else if (damage > min_broken_damage)
-				. += SPAN_NOTICE(SPAN_ITALIC("It is seriously damaged and requires repair to work properly."))
+				. += span_notice(span_italic("It is seriously damaged and requires repair to work properly."))
 			else if (damage > min_bruised_damage)
-				. += SPAN_NOTICE(SPAN_ITALIC("It has taken some damage and is in need of repair."))
+				. += span_notice(span_italic("It has taken some damage and is in need of repair."))
 			else
-				. += SPAN_NOTICE(SPAN_ITALIC("It has superficial wear and should work normally."))
+				. += span_notice(span_italic("It has superficial wear and should work normally."))
 		if (!(status & ORGAN_DEAD))
 			if (brainmob && brainmob.key)
 				var/msg
-				msg += SPAN_ITALIC("It blinks with activity.")
+				msg += span_italic("It blinks with activity.")
 				if (brainmob.stat || !brainmob.client)
-					msg += SPAN_ITALIC(" The responsiveness fault indicator is lit.")
-				. += SPAN_NOTICE(msg)
+					msg += span_italic(" The responsiveness fault indicator is lit.")
+				. += span_notice(msg)
 			else if (damage)
-				. += SPAN_NOTICE(SPAN_ITALIC("The red integrity fault indicator pulses slowly."))
+				. += span_notice(span_italic("The red integrity fault indicator pulses slowly."))
 			else
-				. += SPAN_NOTICE(SPAN_ITALIC("The golden ready indicator [searching ? "flickers quickly as it tries to generate a personality" : "pulses lazily"]."))
+				. += span_notice(span_italic("The golden ready indicator [searching ? "flickers quickly as it tries to generate a personality" : "pulses lazily"]."))
 	else
 		if ((status & ORGAN_DEAD) || damage > min_broken_damage)
-			. += SPAN_NOTICE(SPAN_ITALIC("It looks wrecked."))
+			. += span_notice(span_italic("It looks wrecked."))
 		else if (damage > min_bruised_damage)
-			. += SPAN_NOTICE(SPAN_ITALIC("It looks damaged."))
+			. += span_notice(span_italic("It looks damaged."))
 		if (!(status & ORGAN_DEAD))
 			if (brainmob && brainmob.key)
-				. += SPAN_NOTICE(SPAN_ITALIC("Little lights flicker on its surface."))
+				. += span_notice(span_italic("Little lights flicker on its surface."))
 			else
 				if (damage)
-					. += SPAN_NOTICE(SPAN_ITALIC("A lone red light pulses malevolently on its surface."))
+					. += span_notice(span_italic("A lone red light pulses malevolently on its surface."))
 				else
-					. += SPAN_NOTICE(SPAN_ITALIC("A lone golden light [searching ? "flickers quickly" : "pulses lazily"]."))
+					. += span_notice(span_italic("A lone golden light [searching ? "flickers quickly" : "pulses lazily"]."))
 
 /obj/item/organ/internal/posibrain/emp_act(severity)
 	damage += rand(15 - severity * 5, 20 - severity * 5)
@@ -219,7 +219,7 @@
 
 	update_icon()
 
-	to_chat(brainmob, SPAN_NOTICE("You feel slightly disoriented. That's normal when you're just \a [initial(src.name)]."))
+	to_chat(brainmob, span_notice("You feel slightly disoriented. That's normal when you're just \a [initial(src.name)]."))
 	callHook("debrain", list(brainmob))
 
 /obj/item/organ/internal/posibrain/Process()
@@ -231,33 +231,33 @@
 		return
 	if (damage > min_bruised_damage)
 		if (prob(1) && !owner.is_confused())
-			to_chat(owner, SPAN_WARNING("Your comprehension of spacial positioning goes temporarily awry."))
+			to_chat(owner, span_warning("Your comprehension of spacial positioning goes temporarily awry."))
 			owner.set_confused(3)
 		if (prob(1) && owner.eye_blurry < 1)
-			to_chat(owner, SPAN_WARNING("Your optical interpretations become transiently erratic."))
+			to_chat(owner, span_warning("Your optical interpretations become transiently erratic."))
 			owner.eye_blurry += 6
 		if (prob(1) && owner.ear_deaf < 1)
-			to_chat(owner, SPAN_WARNING("Your capacity to differentiate audio signals briefly fails you."))
+			to_chat(owner, span_warning("Your capacity to differentiate audio signals briefly fails you."))
 			owner.ear_deaf += 6
 		if (prob(1) && owner.slurring < 1)
-			to_chat(owner, SPAN_WARNING("Your ability to form coherent speech struggles to keep up."))
+			to_chat(owner, span_warning("Your ability to form coherent speech struggles to keep up."))
 			owner.slurring += 6
 		if (damage > min_broken_damage)
 			if (prob(2))
 				if (prob(15) && owner.sleeping < 1)
-					owner.visible_message(SPAN_ITALIC("\The [owner] suddenly halts all activity."))
+					owner.visible_message(span_italic("\The [owner] suddenly halts all activity."))
 					owner.sleeping += 10
 				else if (owner.anchored || isspace(get_turf(owner)))
-					owner.visible_message(SPAN_ITALIC("\The [owner] seizes and twitches!"))
+					owner.visible_message(span_italic("\The [owner] seizes and twitches!"))
 					owner.Stun(2)
 				else
-					owner.visible_message(SPAN_ITALIC("\The [owner] seizes and clatters down in a heap!"), null, pick("Clang!", "Crash!", "Clunk!"))
+					owner.visible_message(span_italic("\The [owner] seizes and clatters down in a heap!"), null, pick("Clang!", "Crash!", "Clunk!"))
 					owner.Weaken(2)
 			if (prob(2))
 				var/obj/item/organ/internal/cell/C = owner.internal_organs_by_name[BP_CELL]
 				if (C && C.get_charge() > 25)
 					C.use(25)
-					to_chat(owner, SPAN_WARNING("Your chassis power routine fluctuates wildly."))
+					to_chat(owner, span_warning("Your chassis power routine fluctuates wildly."))
 					var/datum/effect/spark_spread/S = new
 					S.set_up(2, 0, loc)
 					S.start()

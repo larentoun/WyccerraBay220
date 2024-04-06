@@ -10,18 +10,18 @@
 /obj/machinery/disperser/examine(mob/user)
 	. = ..()
 	if(panel_open)
-		. += SPAN_NOTICE("The maintenance panel is open.")
+		. += span_notice("The maintenance panel is open.")
 
 /obj/machinery/disperser/wrench_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
 	if(!panel_open)
-		to_chat(user,SPAN_NOTICE("The maintenance panel must be screwed open for this!"))
+		to_chat(user,span_notice("The maintenance panel must be screwed open for this!"))
 		return
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] rotates [src] with [tool]."),
-		SPAN_NOTICE("You rotate [src] with [tool].")
+		span_notice("[user] rotates [src] with [tool]."),
+		span_notice("You rotate [src] with [tool].")
 	)
 	set_dir(turn(dir, 90))
 

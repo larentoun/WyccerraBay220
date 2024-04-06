@@ -23,12 +23,12 @@
 
 /obj/item/passport/attack_self(mob/user as mob)
 	user.visible_message(
-		SPAN_ITALIC("[user] opens and checks [src]."),
-		SPAN_ITALIC("You open [src] and check for some main information."),
-		SPAN_ITALIC("You hear the faint rustle of pages."),
+		span_italic("[user] opens and checks [src]."),
+		span_italic("You open [src] and check for some main information."),
+		span_italic("You hear the faint rustle of pages."),
 		5
 	)
-	to_chat(user, info || SPAN_WARNING("[src] is completely blank!"))
+	to_chat(user, info || span_warning("[src] is completely blank!"))
 
 /obj/item/passport/scg
 	name = "\improper SCG passport"

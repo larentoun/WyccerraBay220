@@ -80,7 +80,7 @@
 
 /turf/simulated/floor/grass/use_tool(obj/item/I, mob/user)
 	if(I.tool_behaviour == TOOL_WIRECUTTER)
-		user.visible_message(SPAN_NOTICE("\The [user] trims \the [src] with \the [I]."), SPAN_NOTICE("You trim \the [src] with \the [I]."))
+		user.visible_message(span_notice("\The [user] trims \the [src] with \the [I]."), span_notice("You trim \the [src] with \the [I]."))
 		ChangeTurf(/turf/simulated/floor/grass/cut)
 		return TRUE
 	return ..()
@@ -412,7 +412,7 @@
 
 	if(istype(L) && prob(75))
 		L.visible_message(
-			SPAN_WARNING("\The [L] starts flickering in and out of existence as they step onto the bluespace!"),
-			SPAN_WARNING("You feel your entire body tingle, and something pulling you away!")
+			span_warning("\The [L] starts flickering in and out of existence as they step onto the bluespace!"),
+			span_warning("You feel your entire body tingle, and something pulling you away!")
 		)
 		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(do_unstable_teleport_safe), L, GetConnectedZlevels(L.z)), rand(5, 15))

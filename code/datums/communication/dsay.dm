@@ -36,7 +36,7 @@
 	if(!istype(communicator))
 		return FALSE
 	if(communicator.mob.stat != DEAD)
-		to_chat(communicator, SPAN_WARNING("You're not sufficiently dead to use DSAY!"))
+		to_chat(communicator, span_warning("You're not sufficiently dead to use DSAY!"))
 		return FALSE
 	return DSAY_ASK_BASE
 
@@ -87,7 +87,7 @@
 			lname = "[keyname] ([name])"
 		else										// Everyone else (dead people who didn't ghost yet, etc.)
 			lname = name
-	return SPAN_CLASS("name", "[lname]")
+	return span_name("[lname]")
 
 /singleton/dsay_communication/proc/get_message(client/C, mob/M, message)
 	var say_verb = pick("complains","moans","whines","laments","blubbers")
@@ -111,13 +111,13 @@
 	if(!istype(communicator))
 		return FALSE
 	if(!communicator.holder)
-		to_chat(communicator, SPAN_WARNING("You do not have sufficent permissions to use DSAY!"))
+		to_chat(communicator, span_warning("You do not have sufficent permissions to use DSAY!"))
 		return FALSE
 	return DSAY_ASK_BASE
 
 /singleton/dsay_communication/admin/get_message(client/communicator, mob/M, message)
 	var/stafftype = uppertext(communicator.holder.rank)
-	return "[SPAN_CLASS("name", "[stafftype]([communicator.key])")] says, [SPAN_CLASS("message linkify", "\"[message]\"")]"
+	return "[span_name("[stafftype]([communicator.key])")] says, [SPAN_CLASS("message linkify", "\"[message]\"")]"
 
 /singleton/dsay_communication/admin/adjust_channel(singleton/communication_channel/dsay)
 	dsay.log_proc = /proc/log_say

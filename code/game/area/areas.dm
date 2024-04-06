@@ -329,7 +329,7 @@
 		mob_to_thunk.AdjustStunned(1.5)
 		mob_to_thunk.AdjustWeakened(1.5)
 
-	to_chat(mob_to_thunk, SPAN_NOTICE("The sudden appearance of gravity makes you fall to the floor!"))
+	to_chat(mob_to_thunk, span_notice("The sudden appearance of gravity makes you fall to the floor!"))
 
 /// Trigger for the prison break event. Causes lighting to overload and dooes to open. Has no effect if the area lacks an APC or the APC is turned off.
 /area/proc/prison_break()

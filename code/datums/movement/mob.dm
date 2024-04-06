@@ -107,7 +107,7 @@
 	if (isturf(mob.loc))
 		var/turf/turf = mob.loc
 		if (!turf.has_gravity())
-			DoFeedback(SPAN_WARNING("You need gravity to move!"))
+			DoFeedback(span_warning("You need gravity to move!"))
 			return
 	if (istype(mob.pulledby, /obj/structure/bed/chair/wheelchair))
 		. = MOVEMENT_HANDLED
@@ -118,12 +118,12 @@
 		if(ishuman(mob))
 			var/mob/living/carbon/human/driver = mob
 			if (!isnull(driver.l_hand) && !isnull(driver.r_hand))
-				DoFeedback(SPAN_WARNING("You need at least one free hand to move!"))
+				DoFeedback(span_warning("You need at least one free hand to move!"))
 				return
 			var/obj/item/organ/external/l_hand = driver.get_organ(BP_L_HAND)
 			var/obj/item/organ/external/r_hand = driver.get_organ(BP_R_HAND)
 			if (!l_hand && !r_hand || l_hand?.is_stump() && r_hand?.is_stump())
-				DoFeedback(SPAN_WARNING("You need at least one free hand to move!"))
+				DoFeedback(span_warning("You need at least one free hand to move!"))
 				return
 		direction = mob.AdjustMovementDirection(direction)
 		mob.buckled.DoMove(direction, mob)
@@ -201,23 +201,23 @@
 /datum/movement_handler/mob/physically_restrained/MayMove(mob/mover)
 	if(mob.anchored)
 		if(mover == mob)
-			to_chat(mob, SPAN_NOTICE("You're anchored down!"))
+			to_chat(mob, span_notice("You're anchored down!"))
 		return MOVEMENT_STOP
 
 	if(istype(mob.buckled) && !mob.buckled.buckle_movable)
 		if(mover == mob)
-			to_chat(mob, SPAN_NOTICE("You're buckled to \the [mob.buckled]!"))
+			to_chat(mob, span_notice("You're buckled to \the [mob.buckled]!"))
 		return MOVEMENT_STOP
 
 	if(LAZYLEN(mob.pinned))
 		if(mover == mob)
-			to_chat(mob, SPAN_NOTICE("You're pinned down by \a [mob.pinned[1]]!"))
+			to_chat(mob, span_notice("You're pinned down by \a [mob.pinned[1]]!"))
 		return MOVEMENT_STOP
 
 	for(var/obj/item/grab/G in mob.grabbed_by)
 		if(G.assailant != mob && G.stop_move())
 			if(mover == mob)
-				to_chat(mob, SPAN_NOTICE("You're stuck in a grab!"))
+				to_chat(mob, span_notice("You're stuck in a grab!"))
 			mob.ProcessGrabs()
 			return MOVEMENT_STOP
 
@@ -226,7 +226,7 @@
 			if(M.pulling == mob)
 				if(!M.incapacitated() && mob.Adjacent(M))
 					if(mover == mob)
-						to_chat(mob, SPAN_NOTICE("You're restrained! You can't move!"))
+						to_chat(mob, span_notice("You're restrained! You can't move!"))
 					return MOVEMENT_STOP
 				else
 					M.stop_pulling()
@@ -261,7 +261,7 @@
 
 	if(direction & (UP|DOWN))
 		var/txt_dir = direction & UP ? "upwards" : "downwards"
-		old_turf.visible_message(SPAN_NOTICE("[mob] moves [txt_dir]."))
+		old_turf.visible_message(span_notice("[mob] moves [txt_dir]."))
 		if(mob.pulling)
 			mob.zPull(direction)
 

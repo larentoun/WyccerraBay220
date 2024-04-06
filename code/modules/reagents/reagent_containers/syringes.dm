@@ -56,7 +56,7 @@
 
 /obj/item/reagent_containers/syringe/use_after(obj/target, mob/living/user, click_parameters)
 	if(mode == SYRINGE_BROKEN)
-		to_chat(user, SPAN_WARNING("This syringe is broken."))
+		to_chat(user, span_warning("This syringe is broken."))
 		return TRUE
 
 	if(istype(target, /obj/structure/closet/body_bag))
@@ -113,22 +113,22 @@
 
 /obj/item/reagent_containers/syringe/proc/drawReagents(atom/target, mob/user)
 	if(!reagents.get_free_space())
-		to_chat(user, SPAN_WARNING("The syringe is full."))
+		to_chat(user, span_warning("The syringe is full."))
 		mode = SYRINGE_INJECT
 		return
 
 	if(ismob(target))//Blood!
 		if(reagents.has_reagent(/datum/reagent/blood))
-			to_chat(user, SPAN_NOTICE("There is already a blood sample in this syringe."))
+			to_chat(user, span_notice("There is already a blood sample in this syringe."))
 			return
 		if(istype(target, /mob/living/carbon))
 			if(istype(target, /mob/living/carbon/slime))
-				to_chat(user, SPAN_WARNING("You are unable to locate any blood."))
+				to_chat(user, span_warning("You are unable to locate any blood."))
 				return
 			var/amount = min(reagents.get_free_space(), amount_per_transfer_from_this)
 			var/mob/living/carbon/T = target
 			if(!T.dna)
-				to_chat(user, SPAN_WARNING("You are unable to locate any blood."))
+				to_chat(user, span_warning("You are unable to locate any blood."))
 				if(istype(target, /mob/living/carbon/human))
 					CRASH("[T] \[[T.type]\] was missing their dna datum!")
 				return
@@ -140,9 +140,9 @@
 
 			if(allow == INJECTION_PORT) // Taking a blood sample through a hardsuit takes longer due to needing to find a port first.
 				if(target != user)
-					user.visible_message(SPAN_WARNING("\The [user] begins hunting for an injection port on \the [target]'s suit!"))
+					user.visible_message(span_warning("\The [user] begins hunting for an injection port on \the [target]'s suit!"))
 				else
-					to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
+					to_chat(user, span_notice("You begin hunting for an injection port on your suit."))
 				if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, target, do_flags = DO_MEDICAL))
 					return
 
@@ -150,12 +150,12 @@
 					return
 
 			if(target != user)
-				user.visible_message(SPAN_WARNING("\The [user] is trying to take a blood sample from \the [target]."))
+				user.visible_message(span_warning("\The [user] is trying to take a blood sample from \the [target]."))
 			else
-				to_chat(user, SPAN_NOTICE("You start trying to take a blood sample from yourself."))
+				to_chat(user, span_notice("You start trying to take a blood sample from yourself."))
 
 			if(prob(user.skill_fail_chance(SKILL_MEDICAL, 60, SKILL_BASIC)))
-				to_chat(user, SPAN_WARNING("You miss the vein!"))
+				to_chat(user, span_warning("You miss the vein!"))
 				var/target_zone = check_zone(user.zone_sel.selecting)
 				T.apply_damage(3, DAMAGE_BRUTE, target_zone, damage_flags=DAMAGE_FLAG_SHARP)
 				return
@@ -170,25 +170,25 @@
 				return
 
 			T.take_blood(src, amount)
-			to_chat(user, SPAN_NOTICE("You take a blood sample from [target]."))
+			to_chat(user, span_notice("You take a blood sample from [target]."))
 			for(var/mob/O in viewers(4, user))
-				O.show_message(SPAN_NOTICE("[user] takes a blood sample from [target]."), 1)
+				O.show_message(span_notice("[user] takes a blood sample from [target]."), 1)
 
 			if(ishuman(target))
 				var/mob/living/carbon/human/H = target
-				H.custom_pain(SPAN_WARNING("The needle stings a bit."), 2, TRUE, H.get_organ(user.zone_sel.selecting))
+				H.custom_pain(span_warning("The needle stings a bit."), 2, TRUE, H.get_organ(user.zone_sel.selecting))
 
 	else //if not mob
 		if(!target.reagents.total_volume)
-			to_chat(user, SPAN_NOTICE("[target] is empty."))
+			to_chat(user, span_notice("[target] is empty."))
 			return
 
 		if(!target.is_open_container() && !istype(target, /obj/structure/reagent_dispensers) && !istype(target, /obj/item/slime_extract))
-			to_chat(user, SPAN_NOTICE("You cannot directly remove reagents from this object."))
+			to_chat(user, span_notice("You cannot directly remove reagents from this object."))
 			return
 
 		var/trans = target.reagents.trans_to_obj(src, amount_per_transfer_from_this)
-		to_chat(user, SPAN_NOTICE("You fill the syringe with [trans] units of the solution."))
+		to_chat(user, span_notice("You fill the syringe with [trans] units of the solution."))
 		update_icon()
 
 	if(!reagents.get_free_space())
@@ -200,17 +200,17 @@
 		syringestab(target, user)
 
 	if(!reagents?.total_volume)
-		to_chat(user, SPAN_NOTICE("The syringe is empty."))
+		to_chat(user, span_notice("The syringe is empty."))
 		mode = SYRINGE_DRAW
 		return
 	if(istype(target, /obj/item/implantcase/chem))
 		return
 
 	if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/reagent_containers/food) && !istype(target, /obj/item/slime_extract) && !istype(target, /obj/item/clothing/mask/smokable/cigarette) && !istype(target, /obj/item/storage/fancy/smokable))
-		to_chat(user, SPAN_NOTICE("You cannot directly fill this object."))
+		to_chat(user, span_notice("You cannot directly fill this object."))
 		return
 	if(!target.reagents.get_free_space())
-		to_chat(user, SPAN_NOTICE("[target] is full."))
+		to_chat(user, span_notice("[target] is full."))
 		return
 
 	if(isliving(target))
@@ -218,7 +218,7 @@
 		return
 
 	var/trans = reagents.trans_to(target, amount_per_transfer_from_this)
-	to_chat(user, SPAN_NOTICE("You inject \the [target] with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units."))
+	to_chat(user, span_notice("You inject \the [target] with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units."))
 	if(reagents.total_volume <= 0 && mode == SYRINGE_INJECT)
 		mode = SYRINGE_DRAW
 		update_icon()
@@ -241,16 +241,16 @@
 
 	if(allow == INJECTION_PORT) // Injecting through a hardsuit takes longer due to needing to find a port first.
 		if(target != user)
-			user.visible_message(SPAN_WARNING("\The [user] begins hunting for an injection port on \the [target]'s suit!"))
+			user.visible_message(span_warning("\The [user] begins hunting for an injection port on \the [target]'s suit!"))
 		else
-			to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
+			to_chat(user, span_notice("You begin hunting for an injection port on your suit."))
 		if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, trackTarget, do_flags = DO_MEDICAL))
 			return
 
 	if(target != user)
-		user.visible_message(SPAN_WARNING("\The [user] is trying to inject \the [target] with [visible_name]!"))
+		user.visible_message(span_warning("\The [user] is trying to inject \the [target] with [visible_name]!"))
 	else
-		to_chat(user, SPAN_NOTICE("You begin injecting yourself with [visible_name]."))
+		to_chat(user, span_notice("You begin injecting yourself with [visible_name]."))
 
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	user.do_attack_animation(trackTarget)
@@ -265,13 +265,13 @@
 	var/trans = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_BLOOD)
 
 	if(target != user)
-		user.visible_message(SPAN_WARNING("\the [user] injects \the [target] with [visible_name]!"), SPAN_NOTICE("You inject \the [target] with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units."))
+		user.visible_message(span_warning("\the [user] injects \the [target] with [visible_name]!"), span_notice("You inject \the [target] with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units."))
 	else
-		to_chat(user, SPAN_NOTICE("You inject yourself with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units."))
+		to_chat(user, span_notice("You inject yourself with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units."))
 
 	if(ishuman(target))
 		var/mob/living/carbon/human/T = target
-		T.custom_pain(SPAN_WARNING("The needle stings a bit."), 2, TRUE, T.get_organ(user.zone_sel.selecting))
+		T.custom_pain(span_warning("The needle stings a bit."), 2, TRUE, T.get_organ(user.zone_sel.selecting))
 
 	if(reagents.total_volume <= 0 && mode == SYRINGE_INJECT)
 		mode = SYRINGE_DRAW
@@ -287,7 +287,7 @@
 		var/obj/item/organ/external/affecting = H.get_organ(target_zone)
 
 		if (!affecting || affecting.is_stump())
-			to_chat(user, SPAN_DANGER("They are missing that limb!"))
+			to_chat(user, span_danger("They are missing that limb!"))
 			return
 
 		var/hit_area = affecting.name
@@ -297,17 +297,17 @@
 
 		if (target != user && H.get_blocked_ratio(target_zone, DAMAGE_BRUTE, damage_flags=DAMAGE_FLAG_SHARP) > 0.1 && prob(50))
 			for(var/mob/O in viewers(world.view, user))
-				O.show_message(text(SPAN_DANGER("[user] tries to stab [target] in \the [hit_area] with [src.name], but the attack is deflected by armor!")), 1)
+				O.show_message(text(span_danger("[user] tries to stab [target] in \the [hit_area] with [src.name], but the attack is deflected by armor!")), 1)
 			qdel(src)
 
 			admin_attack_log(user, target, "Attacked using \a [src]", "Was attacked with \a [src]", "used \a [src] to attack")
 			return
 
-		user.visible_message(SPAN_DANGER("[user] stabs [target] in \the [hit_area] with [src.name]!"))
+		user.visible_message(span_danger("[user] stabs [target] in \the [hit_area] with [src.name]!"))
 		target.apply_damage(3, DAMAGE_BRUTE, target_zone, damage_flags=DAMAGE_FLAG_SHARP)
 
 	else
-		user.visible_message(SPAN_DANGER("[user] stabs [target] with [src.name]!"))
+		user.visible_message(span_danger("[user] stabs [target] with [src.name]!"))
 		target.apply_damage(3, DAMAGE_BRUTE)
 
 	var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
@@ -336,12 +336,12 @@
 	time = 300
 
 /obj/item/reagent_containers/syringe/ld50_syringe/syringestab(mob/living/carbon/target, mob/living/carbon/user)
-	to_chat(user, SPAN_NOTICE("This syringe is too big to stab someone with it."))
+	to_chat(user, span_notice("This syringe is too big to stab someone with it."))
 	return // No instant injecting
 
 /obj/item/reagent_containers/syringe/ld50_syringe/drawReagents(target, mob/user)
 	if(ismob(target)) // No drawing 60 units of blood at once
-		to_chat(user, SPAN_NOTICE("This needle isn't designed for drawing blood."))
+		to_chat(user, span_notice("This needle isn't designed for drawing blood."))
 		return
 	..()
 

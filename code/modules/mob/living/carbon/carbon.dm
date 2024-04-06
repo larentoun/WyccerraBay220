@@ -58,7 +58,7 @@
 	if((user in contents) && istype(user))
 		if(user.last_special <= world.time)
 			user.last_special = world.time + 50
-			src.visible_message(SPAN_DANGER("You hear something rumbling inside [src]'s stomach..."))
+			src.visible_message(span_danger("You hear something rumbling inside [src]'s stomach..."))
 			var/obj/item/I = user.get_active_hand()
 			if(I && I.force)
 				var/d = rand(round(I.force / 4), I.force)
@@ -70,7 +70,7 @@
 					H.updatehealth()
 				else
 					src.take_organ_damage(d, 0)
-				user.visible_message(SPAN_DANGER("[user] attacks [src]'s stomach wall with the [I.name]!"))
+				user.visible_message(span_danger("[user] attacks [src]'s stomach wall with the [I.name]!"))
 				playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
 
 				if(prob(src.getBruteLoss() - 50))
@@ -81,7 +81,7 @@
 		if(is_species(SPECIES_DIONA) && istype(M, /mob/living/carbon/alien/diona) && (M.stat != DEAD))
 			continue
 		M.dropInto(loc)
-		visible_message(SPAN_DANGER("\The [M] bursts out of \the [src]!"))
+		visible_message(span_danger("\The [M] bursts out of \the [src]!"))
 	..()
 
 /mob/living/carbon/proc/clear_coughedtime()
@@ -95,7 +95,7 @@
 		if (H.hand)
 			temp = H.organs_by_name[BP_L_HAND]
 		if(temp && !temp.is_usable())
-			to_chat(H, SPAN_WARNING("You can't use your [temp.name]"))
+			to_chat(H, span_warning("You can't use your [temp.name]"))
 			return
 
 	return
@@ -124,15 +124,15 @@
 	playsound(loc, "sparks", 50, 1, -1)
 	if (shock_damage > 15)
 		src.visible_message(
-			SPAN_WARNING("[src] was electrocuted[source ? " by the [source]" : ""]!"), \
-			SPAN_DANGER("You feel a powerful shock course through your body!"), \
-			SPAN_WARNING("You hear a heavy electrical crack.") \
+			span_warning("[src] was electrocuted[source ? " by the [source]" : ""]!"), \
+			span_danger("You feel a powerful shock course through your body!"), \
+			span_warning("You hear a heavy electrical crack.") \
 		)
 	else
 		src.visible_message(
-			SPAN_WARNING("[src] was shocked[source ? " by the [source]" : ""]."), \
-			SPAN_WARNING("You feel a shock course through your body."), \
-			SPAN_WARNING("You hear a zapping sound.") \
+			span_warning("[src] was shocked[source ? " by the [source]" : ""]."), \
+			span_warning("You feel a shock course through your body."), \
+			span_warning("You hear a zapping sound.") \
 		)
 
 	switch(shock_damage)
@@ -200,24 +200,24 @@
 		if (on_fire)
 			playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			if (M.on_fire)
-				M.visible_message(SPAN_WARNING("[M] tries to pat out [src]'s flames, but to no avail!"),
-				SPAN_WARNING("You try to pat out [src]'s flames, but to no avail! Put yourself out first!"))
+				M.visible_message(span_warning("[M] tries to pat out [src]'s flames, but to no avail!"),
+				span_warning("You try to pat out [src]'s flames, but to no avail! Put yourself out first!"))
 			else
-				M.visible_message(SPAN_WARNING("[M] tries to pat out [src]'s flames!"),
-				SPAN_WARNING("You try to pat out [src]'s flames! Hot!"))
+				M.visible_message(span_warning("[M] tries to pat out [src]'s flames!"),
+				span_warning("You try to pat out [src]'s flames! Hot!"))
 				if(do_after(M, 1.5 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 					src.fire_stacks -= 0.5
 					if (prob(10) && (M.fire_stacks <= 0))
 						M.fire_stacks += 1
 					M.IgniteMob()
 					if (M.on_fire)
-						M.visible_message(SPAN_DANGER("The fire spreads from [src] to [M]!"),
-						SPAN_DANGER("The fire spreads to you as well!"))
+						M.visible_message(span_danger("The fire spreads from [src] to [M]!"),
+						span_danger("The fire spreads to you as well!"))
 					else
 						src.fire_stacks -= 0.5 //Less effective than stop, drop, and roll - also accounting for the fact that it takes half as long.
 						if (src.fire_stacks <= 0)
-							M.visible_message(SPAN_WARNING("[M] successfully pats out [src]'s flames."),
-							SPAN_WARNING("You successfully pat out [src]'s flames."))
+							M.visible_message(span_warning("[M] successfully pats out [src]'s flames."),
+							span_warning("You successfully pat out [src]'s flames."))
 							src.ExtinguishMob()
 							src.fire_stacks = 0
 		else
@@ -229,20 +229,20 @@
 			var/mob/living/carbon/human/H = src
 			if(istype(H)) show_ssd = H.species.show_ssd
 			if(show_ssd && ssd_check())
-				M.visible_message(SPAN_NOTICE("[M] shakes [src] trying to wake [p_them()] up!"), \
-				SPAN_NOTICE("You shake [src], but they do not respond... Maybe they have S.S.D?"))
+				M.visible_message(span_notice("[M] shakes [src] trying to wake [p_them()] up!"), \
+				span_notice("You shake [src], but they do not respond... Maybe they have S.S.D?"))
 			else if(lying || src.sleeping || player_triggered_sleeping)
 				src.player_triggered_sleeping = 0
 				AdjustSleeping(-5)
-				M.visible_message(SPAN_NOTICE("[M] shakes [src] trying to wake [p_them()] up!"), \
-									SPAN_NOTICE("You shake [src] trying to wake [p_them()] up!"))
+				M.visible_message(span_notice("[M] shakes [src] trying to wake [p_them()] up!"), \
+									span_notice("You shake [src] trying to wake [p_them()] up!"))
 			else
 				var/mob/living/carbon/human/hugger = M
 				if(istype(hugger))
 					hugger.species.hug(hugger,src)
 				else
-					M.visible_message(SPAN_NOTICE("[M] hugs [src] to make [p_them()] feel better!"), \
-								SPAN_NOTICE("You hug [src] to make [p_them()] feel better!"))
+					M.visible_message(span_notice("[M] hugs [src] to make [p_them()] feel better!"), \
+								span_notice("You hug [src] to make [p_them()] feel better!"))
 				if(M.fire_stacks >= (src.fire_stacks + 3))
 					src.fire_stacks += 1
 					M.fire_stacks -= 1
@@ -330,7 +330,7 @@
 	throw_range *= skill_mod
 
 	//actually throw it!
-	src.visible_message(SPAN_WARNING("[message]"), range = min(itemsize*2,world.view))
+	src.visible_message(span_warning("[message]"), range = min(itemsize*2,world.view))
 
 	if(!src.lastarea)
 		src.lastarea = get_area(src.loc)
@@ -394,7 +394,7 @@
 		return FALSE
 
 	stop_pulling()
-	to_chat(src, SPAN_WARNING("You slipped on [slipped_on]!"))
+	to_chat(src, span_warning("You slipped on [slipped_on]!"))
 	playsound(loc, 'sound/misc/slip.ogg', 50, 1, -3)
 	Weaken(floor(stun_duration/2))
 	return TRUE
@@ -519,10 +519,10 @@
 	if(!old_internal && internal)
 		if(!source_string)
 			source_string = source.name
-		to_chat(src, SPAN_NOTICE("You are now running on internals from \the [source_string]."))
+		to_chat(src, span_notice("You are now running on internals from \the [source_string]."))
 		playsound(src, 'sound/effects/internals.ogg', 50, 0)
 	if(old_internal && !internal)
-		to_chat(src, SPAN_WARNING("You are no longer running on internals."))
+		to_chat(src, span_warning("You are no longer running on internals."))
 	if(internals)
 		internals.icon_state = "internal[!!internal]"
 

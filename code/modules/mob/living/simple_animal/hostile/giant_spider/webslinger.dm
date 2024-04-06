@@ -83,8 +83,8 @@
 
 
 		user.visible_message(
-			SPAN_WARNING("\The [user] is cocooned by all the webbing!"),
-			SPAN_WARNING("You are cocooned by all the webbing!"),
+			span_warning("\The [user] is cocooned by all the webbing!"),
+			span_warning("You are cocooned by all the webbing!"),
 			)
 
 		for (var/mob/living/simple_animal/A in oview(user))
@@ -133,31 +133,31 @@
 		var/do_flags = EMPTY_BITFIELD
 		if (M == user)
 			user.visible_message(
-			SPAN_WARNING("\The [M] starts tearing at the webbing on their [body_type]!"),
-			SPAN_WARNING("You start tearing at the webbing on your [body_type]!"),
-			SPAN_WARNING("You hear the sound of something being torn up.")
+			span_warning("\The [M] starts tearing at the webbing on their [body_type]!"),
+			span_warning("You start tearing at the webbing on your [body_type]!"),
+			span_warning("You hear the sound of something being torn up.")
 			)
 			do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS
 		else
 			user.visible_message(
-			SPAN_WARNING("\The [M] starts tearing at the webbing on \the [user]'s [body_type]!"),
-			SPAN_WARNING("\The [M] starts tearing off the webbing on you!"),
-			SPAN_WARNING("You hear the sound of something being torn up.")
+			span_warning("\The [M] starts tearing at the webbing on \the [user]'s [body_type]!"),
+			span_warning("\The [M] starts tearing off the webbing on you!"),
+			span_warning("You hear the sound of something being torn up.")
 			)
 			do_flags = DO_PUBLIC_UNIQUE
 
 		if (do_after(M, 2 SECONDS, user, do_flags))
 			if (stacks <= 1)
 				user.visible_message(
-					SPAN_WARNING("\The [user] is freed from the webs!"),
-					SPAN_WARNING("You are freed from the webs!"),
-					SPAN_WARNING("You hear the sound of something being torn free.")
+					span_warning("\The [user] is freed from the webs!"),
+					span_warning("You are freed from the webs!"),
+					span_warning("You hear the sound of something being torn free.")
 				)
 			else
 				user.visible_message(
-					SPAN_WARNING("\The [M] tears some of the webbing off of [M == user ? "themselves" : "\the [user]"]!"),
-					SPAN_WARNING("You feel some of the webbing get torn away, but you aren't free yet!"),
-					SPAN_WARNING("You hear the sound of something being torn up.")
+					span_warning("\The [M] tears some of the webbing off of [M == user ? "themselves" : "\the [user]"]!"),
+					span_warning("You feel some of the webbing get torn away, but you aren't free yet!"),
+					span_warning("You hear the sound of something being torn up.")
 				)
 			remove_stack()
 

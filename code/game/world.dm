@@ -501,7 +501,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 	rustg_log_close_all()
 	if(config.wait_for_sigusr1_reboot && reason != 3)
 		text2file("foo", "reboot_called")
-		to_world(SPAN_DANGER("World reboot waiting for external scripts. Please be patient."))
+		to_world(span_danger("World reboot waiting for external scripts. Please be patient."))
 		return
 
 	// [SIERRA-ADD]

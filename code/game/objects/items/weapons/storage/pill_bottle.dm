@@ -23,10 +23,10 @@
 /obj/item/storage/pill_bottle/use_before(atom/target, mob/living/user)
 	if (istype(user) && target == user && user.can_eat())
 		if (!length(contents))
-			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
+			to_chat(user, span_warning("\The [src] is empty!"))
 			return TRUE
 
-		user.visible_message(SPAN_NOTICE("[user] pops a pill from \the [src]."))
+		user.visible_message(span_notice("[user] pops a pill from \the [src]."))
 		playsound(get_turf(src), 'sound/effects/peelz.ogg', 50)
 		var/list/peelz = filter_list(contents,/obj/item/reagent_containers/pill)
 		if (length(peelz))
@@ -37,10 +37,10 @@
 
 	if (isobj(target) && target.is_open_container() && target.reagents)
 		if (!length(contents))
-			to_chat(user, SPAN_WARNING("\The [src] is empty!"))
+			to_chat(user, span_warning("\The [src] is empty!"))
 			return TRUE
 		if (!target.reagents.total_volume)
-			to_chat(user, SPAN_NOTICE("[target] is empty. Can't dissolve a pill."))
+			to_chat(user, span_notice("[target] is empty. Can't dissolve a pill."))
 			return TRUE
 
 		var/list/peelz = filter_list(contents,/obj/item/reagent_containers/pill)
@@ -55,22 +55,22 @@
 
 /obj/item/storage/pill_bottle/attack_self(mob/living/user)
 	if(user.get_inactive_hand())
-		to_chat(user, SPAN_NOTICE("You need an empty hand to take something out."))
+		to_chat(user, span_notice("You need an empty hand to take something out."))
 		return
 	if(length(contents))
 		var/obj/item/I = contents[1]
 		if(!remove_from_storage(I,user))
 			return
 		if(user.put_in_inactive_hand(I))
-			to_chat(user, SPAN_NOTICE("You take \the [I] out of \the [src]."))
+			to_chat(user, span_notice("You take \the [I] out of \the [src]."))
 			if(iscarbon(user))
 				var/mob/living/carbon/C = user
 				C.swap_hand()
 		else
 			I.dropInto(loc)
-			to_chat(user, SPAN_NOTICE("You fumble around with \the [src] and drop \the [I] on the floor."))
+			to_chat(user, span_notice("You fumble around with \the [src] and drop \the [I] on the floor."))
 	else
-		to_chat(user, SPAN_WARNING("\The [src] is empty."))
+		to_chat(user, span_warning("\The [src] is empty."))
 
 
 /obj/item/storage/pill_bottle/Initialize()

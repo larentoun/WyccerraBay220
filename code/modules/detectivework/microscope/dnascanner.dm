@@ -21,21 +21,21 @@
 
 	var/obj/item/forensics/swab/swab = W
 	if(bloodsamp)
-		to_chat(user, SPAN_WARNING("There is already a sample in the machine."))
+		to_chat(user, span_warning("There is already a sample in the machine."))
 		return TRUE
 
 	if(closed)
-		to_chat(user, SPAN_WARNING("Open the cover before inserting the sample."))
+		to_chat(user, span_warning("Open the cover before inserting the sample."))
 		return TRUE
 
 	if(istype(swab) && swab.is_used())
 		if(!user.unEquip(W, src))
 			return TRUE
 		bloodsamp = swab
-		to_chat(user, SPAN_NOTICE("You insert \the [W] into \the [src]."))
+		to_chat(user, span_notice("You insert \the [W] into \the [src]."))
 		return TRUE
 	else
-		to_chat(user, SPAN_WARNING("\The [src] only accepts used swabs."))
+		to_chat(user, span_warning("\The [src] only accepts used swabs."))
 		return TRUE
 
 /obj/machinery/dnaforensics/ui_interact(mob/user, ui_key = "main",datum/nanoui/ui = null)
@@ -70,12 +70,12 @@
 				if(closed == 1)
 					scanner_progress = 0
 					scanning = 1
-					to_chat(usr, SPAN_NOTICE("Scan initiated."))
+					to_chat(usr, span_notice("Scan initiated."))
 					update_icon()
 				else
-					to_chat(usr, SPAN_NOTICE("Please close sample lid before initiating scan."))
+					to_chat(usr, span_notice("Please close sample lid before initiating scan."))
 			else
-				to_chat(usr, SPAN_WARNING("Insert an item to scan."))
+				to_chat(usr, span_warning("Insert an item to scan."))
 
 	if(href_list["ejectItem"])
 		if(bloodsamp)
@@ -102,7 +102,7 @@
 	last_process_worldtime = world.time
 
 /obj/machinery/dnaforensics/proc/complete_scan()
-	src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] makes an insistent chime."), 2)
+	src.visible_message(span_notice("[icon2html(src, viewers(get_turf(src)))] makes an insistent chime."), 2)
 	update_icon()
 	if(bloodsamp)
 		var/obj/item/paper/P = new(src)
@@ -112,9 +112,9 @@
 		if(bloodsamp.dna != null || bloodsamp.trace_dna != null)
 			data = "Spectometric analysis on provided sample has determined the presence of DNA.<br><br>"
 			for(var/blood in bloodsamp.dna)
-				data += "[SPAN_NOTICE("Blood type: [bloodsamp.dna[blood]]<br>DNA: [blood]")]<br><br>"
+				data += "[span_notice("Blood type: [bloodsamp.dna[blood]]<br>DNA: [blood]")]<br><br>"
 			for(var/trace in bloodsamp.trace_dna)
-				data += "[SPAN_NOTICE("Trace DNA: [trace]")]<br><br>"
+				data += "[span_notice("Trace DNA: [trace]")]<br><br>"
 		else
 			data += "No DNA found.<br>"
 		P.info = "<b>[src] analysis report #[report_num]</b><br>"
@@ -138,7 +138,7 @@
 		return
 
 	if(scanning)
-		to_chat(usr, SPAN_WARNING("You can't do that while [src] is scanning!"))
+		to_chat(usr, span_warning("You can't do that while [src] is scanning!"))
 		return
 
 	closed = !closed

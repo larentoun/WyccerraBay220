@@ -24,7 +24,7 @@
 
 /obj/item/flame/lighter/proc/light(mob/user)
 	if(submerged())
-		to_chat(user, SPAN_WARNING("You cannot light \the [src] underwater."))
+		to_chat(user, span_warning("You cannot light \the [src] underwater."))
 		return
 	lit = 1
 	update_icon()
@@ -34,14 +34,14 @@
 
 /obj/item/flame/lighter/proc/light_effects(mob/living/carbon/user)
 	if(prob(95))
-		user.visible_message(SPAN_NOTICE("After a few attempts, [user] manages to light \the [src]."))
+		user.visible_message(span_notice("After a few attempts, [user] manages to light \the [src]."))
 	else
-		to_chat(user, SPAN_WARNING("You burn yourself while lighting the lighter."))
+		to_chat(user, span_warning("You burn yourself while lighting the lighter."))
 		if (user.l_hand == src)
 			user.apply_damage(2, DAMAGE_BURN, BP_L_HAND)
 		else
 			user.apply_damage(2, DAMAGE_BURN, BP_R_HAND)
-		user.visible_message(SPAN_NOTICE("After a few attempts, [user] manages to light \the [src], burning their finger in the process."))
+		user.visible_message(span_notice("After a few attempts, [user] manages to light \the [src], burning their finger in the process."))
 	playsound(src.loc, "light_bic", 100, 1, -4)
 
 /obj/item/flame/lighter/extinguish(mob/user, no_message)
@@ -50,18 +50,18 @@
 	if(user)
 		shutoff_effects(user)
 	else if(!no_message)
-		visible_message(SPAN_NOTICE("[src] goes out."))
+		visible_message(span_notice("[src] goes out."))
 	set_light(0)
 
 /obj/item/flame/lighter/proc/shutoff_effects(mob/user)
-	user.visible_message(SPAN_NOTICE("[user] quietly shuts off the [src]."))
+	user.visible_message(span_notice("[user] quietly shuts off the [src]."))
 
 /obj/item/flame/lighter/attack_self(mob/living/user)
 	if(!lit)
 		if(reagents.has_reagent(/datum/reagent/fuel))
 			light(user)
 		else
-			to_chat(user, SPAN_WARNING("\The [src] won't ignite - it must be out of fuel."))
+			to_chat(user, span_warning("\The [src] won't ignite - it must be out of fuel."))
 	else
 		extinguish(user)
 
@@ -86,13 +86,13 @@
 			if (M == user)
 				resolve_attackby(cig, user)
 			else
-				cig.light(SPAN_NOTICE("[user] holds the [name] out for [M], and lights the [cig.name]."))
+				cig.light(span_notice("[user] holds the [name] out for [M], and lights the [cig.name]."))
 			return TRUE
 
 /obj/item/flame/lighter/Process()
 	if(!submerged() && reagents.has_reagent(/datum/reagent/fuel))
 		if(ismob(loc) && prob(10) && reagents.get_reagent_amount(/datum/reagent/fuel) < 1)
-			to_chat(loc, SPAN_WARNING("\The [src]'s flame flickers."))
+			to_chat(loc, span_warning("\The [src]'s flame flickers."))
 			set_light(0)
 			addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, set_light), 2), 4)
 		reagents.remove_reagent(/datum/reagent/fuel, 0.05)
@@ -166,7 +166,7 @@
 /obj/item/flame/lighter/zippo/use_after(atom/O, mob/living/user, click_parameters)
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && !lit)
 		O.reagents.trans_to_obj(src, max_fuel)
-		to_chat(user, SPAN_NOTICE("You refuel [src] from \the [O]"))
+		to_chat(user, span_notice("You refuel [src] from \the [O]"))
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return TRUE
 

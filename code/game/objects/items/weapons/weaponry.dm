@@ -24,23 +24,23 @@
 	user.do_attack_animation(M)
 	//if(user != M)
 	if (!user.IsAdvancedToolUser())
-		to_chat(user, SPAN_DANGER("You don't have the dexterity to do this!"))
+		to_chat(user, span_danger("You don't have the dexterity to do this!"))
 		return TRUE
 
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
-		to_chat(user, SPAN_DANGER("The rod slips out of your hand and hits your head."))
+		to_chat(user, span_danger("The rod slips out of your hand and hits your head."))
 		user.take_organ_damage(10, 0)
 		user.Paralyse(20)
 		return TRUE
 
 	if (M.mind && LAZYLEN(M.mind.learned_spells))
 		M.silence_spells(300) //30 seconds
-		M.visible_message(SPAN_NOTICE("\The [user] waves \the [src] over \the [M]'s head."))
-		to_chat(M, SPAN_DANGER("You've been silenced!"))
+		M.visible_message(span_notice("\The [user] waves \the [src] over \the [M]'s head."))
+		to_chat(M, span_danger("You've been silenced!"))
 		return TRUE
 
 	if(GLOB.cult && iscultist(M))
-		M.visible_message(SPAN_NOTICE("\The [user] waves \the [src] over \the [M]'s head."))
+		M.visible_message(span_notice("\The [user] waves \the [src] over \the [M]'s head."))
 		GLOB.cult.offer_uncult(M)
 		return TRUE
 
@@ -137,7 +137,7 @@
 	if(get_turf(src) != get_turf(captured))  //just in case they somehow teleport around or
 		countdown = 0
 	if(countdown <= 0)
-		visible_message(SPAN_WARNING("\The [src] fades away!"))
+		visible_message(span_warning("\The [src] fades away!"))
 		qdel(src)
 
 /obj/energy_net/Move()
@@ -165,11 +165,11 @@
 		layer = ABOVE_HUMAN_LAYER
 		visible_message("\The [M] was caught in [src]!")
 	else
-		to_chat(M,SPAN_WARNING("You are free of the net!"))
+		to_chat(M,span_warning("You are free of the net!"))
 		reset_plane_and_layer()
 
 /obj/energy_net/on_death()
-	visible_message(SPAN_DANGER("\The [src] is torn apart!"))
+	visible_message(span_danger("\The [src] is torn apart!"))
 	qdel(src)
 
 /obj/energy_net/attack_hand(mob/user)
@@ -177,8 +177,8 @@
 		return ..()
 
 	user.visible_message(
-		SPAN_WARNING("\The [user] claws at \the [src]!"),
-		SPAN_WARNING("You claw at \the [src]!")
+		span_warning("\The [user] claws at \the [src]!"),
+		span_warning("You claw at \the [src]!")
 	)
 	var/mob/living/carbon/human/H = user
 	if(istype(H))
@@ -196,8 +196,8 @@
 
 /obj/energy_net/proc/escape_net(mob/user as mob)
 	visible_message(
-		SPAN_WARNING("\The [user] attempts to free themselves from \the [src]!"),
-		SPAN_WARNING("You attempt to free yourself from \the [src]!")
+		span_warning("\The [user] attempts to free themselves from \the [src]!"),
+		span_warning("You attempt to free yourself from \the [src]!")
 	)
 	if (do_after(user, rand(min_free_time, max_free_time), src, DO_PUBLIC_UNIQUE, INCAPACITATION_DISABLED))
 		kill_health()

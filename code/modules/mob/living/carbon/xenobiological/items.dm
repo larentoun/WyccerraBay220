@@ -16,10 +16,10 @@
 /obj/item/slime_extract/attackby(obj/item/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/slimesteroid2))
 		if(enhanced == 1)
-			to_chat(user, SPAN_WARNING(" This extract has already been enhanced!"))
+			to_chat(user, span_warning(" This extract has already been enhanced!"))
 			return ..()
 		if(Uses == 0)
-			to_chat(user, SPAN_WARNING(" You can't enhance a used extract!"))
+			to_chat(user, span_warning(" You can't enhance a used extract!"))
 			return ..()
 		to_chat(user, "You apply the enhancer. It now has triple the amount of uses.")
 		Uses = 3
@@ -137,13 +137,13 @@
 	if (!istype(M, /mob/living/carbon/slime))
 		return FALSE
 	if (M.is_adult) //Can't tame adults
-		to_chat(user, SPAN_WARNING(" Only baby slimes can be tamed!"))
+		to_chat(user, span_warning(" Only baby slimes can be tamed!"))
 		return TRUE
 	if (M.stat)
-		to_chat(user, SPAN_WARNING(" The slime is dead!"))
+		to_chat(user, span_warning(" The slime is dead!"))
 		return TRUE
 	if (M.mind)
-		to_chat(user, SPAN_WARNING(" The slime resists!"))
+		to_chat(user, span_warning(" The slime resists!"))
 		return TRUE
 	var/mob/living/simple_animal/slime/pet = new /mob/living/simple_animal/slime(M.loc)
 	pet.icon_state = "[M.colour] baby slime"
@@ -172,10 +172,10 @@
 	if (!istype(M, /mob/living/carbon/slime))
 		return FALSE
 	if (M.stat)
-		to_chat(user, SPAN_WARNING(" The slime is dead!"))
+		to_chat(user, span_warning(" The slime is dead!"))
 		return TRUE
 	if (M.mind)
-		to_chat(user, SPAN_WARNING(" The slime resists!"))
+		to_chat(user, span_warning(" The slime resists!"))
 		return TRUE
 	var/mob/living/simple_animal/adultslime/pet = new /mob/living/simple_animal/adultslime(M.loc)
 	pet.icon_state = "[M.colour] adult slime"
@@ -204,13 +204,13 @@
 	if (!istype(M, /mob/living/carbon/slime))
 		return FALSE
 	if (M.is_adult) //Can't tame adults
-		to_chat(user, SPAN_WARNING(" Only baby slimes can use the steroid!"))
+		to_chat(user, span_warning(" Only baby slimes can use the steroid!"))
 		return TRUE
 	if (M.stat)
-		to_chat(user, SPAN_WARNING(" The slime is dead!"))
+		to_chat(user, span_warning(" The slime is dead!"))
 		return TRUE
 	if (M.cores == 3)
-		to_chat(user, SPAN_WARNING(" The slime already has the maximum amount of extract!"))
+		to_chat(user, span_warning(" The slime already has the maximum amount of extract!"))
 		return TRUE
 
 	to_chat(user, "You feed the slime the steroid. It now has triple the amount of extract.")
@@ -228,10 +228,10 @@
 	if(istype(target, /obj/item/slime_extract))
 		var/obj/item/slime_extract/extract = target
 		if(extract.enhanced == 1)
-			to_chat(user, SPAN_WARNING(" This extract has already been enhanced!"))
+			to_chat(user, span_warning(" This extract has already been enhanced!"))
 			return ..()
 		if(extract.Uses == 0)
-			to_chat(user, SPAN_WARNING(" You can't enhance a used extract!"))
+			to_chat(user, span_warning(" You can't enhance a used extract!"))
 			return ..()
 		to_chat(user, "You apply the enhancer. It now has triple the amount of uses.")
 		extract.Uses = 3
@@ -250,17 +250,17 @@
 	if (!istype(M, /mob/living/carbon/slime))
 		return FALSE
 	if (M.is_adult) //Can't revive adults
-		to_chat(user, SPAN_WARNING("Only baby slimes can use \the [src]!"))
+		to_chat(user, span_warning("Only baby slimes can use \the [src]!"))
 		return TRUE
 	if (M.cores < 1)
-		to_chat(user, SPAN_WARNING("\The [M] has no cores!"))
+		to_chat(user, span_warning("\The [M] has no cores!"))
 		return TRUE
 	if (M.stat== CONSCIOUS)//need to change this to living?
-		to_chat(user, SPAN_WARNING("\The [M] is already alive!"))
+		to_chat(user, span_warning("\The [M] is already alive!"))
 		return TRUE
 	user.visible_message(
-		SPAN_NOTICE("The [user] feeds \a [src] to \the [M]. Life floods back into it!"),
-		SPAN_NOTICE("You feed \the [src] to \the [M]. Life floods back into it!")
+		span_notice("The [user] feeds \a [src] to \the [M]. Life floods back into it!"),
+		span_notice("You feed \the [src] to \the [M]. Life floods back into it!")
 		)
 	M.revive()
 	qdel(src)
@@ -301,9 +301,9 @@
 		ghost = O
 		break
 	if(!ghost)
-		to_chat(user, SPAN_WARNING("The rune fizzles uselessly."))
+		to_chat(user, span_warning("The rune fizzles uselessly."))
 		return
-	visible_message(SPAN_WARNING("A craggy humanoid figure coalesces into being!"))
+	visible_message(span_warning("A craggy humanoid figure coalesces into being!"))
 
 	var/mob/living/carbon/human/G = new(src.loc)
 	G.set_species("Golem")
@@ -317,8 +317,8 @@
 		G.set_default_language(lang)
 		I.languages[lang.name] = 1
 
-	to_chat(G, FONT_LARGE(SPAN_BOLD("You are a golem. Serve [user] and assist them at any cost.")))
-	to_chat(G, SPAN_ITALIC("You move slowly and are vulnerable to trauma, but are resistant to heat and cold."))
+	to_chat(G, FONT_LARGE(span_bold("You are a golem. Serve [user] and assist them at any cost.")))
+	to_chat(G, span_italic("You move slowly and are vulnerable to trauma, but are resistant to heat and cold."))
 	qdel(src)
 
 

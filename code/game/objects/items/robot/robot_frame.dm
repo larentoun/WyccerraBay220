@@ -34,7 +34,7 @@
 /obj/item/robot_parts/robot_suit/crowbar_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
 	if(!length(parts))
-		to_chat(user, SPAN_WARNING("[src] has no parts to remove."))
+		to_chat(user, span_warning("[src] has no parts to remove."))
 		return
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
@@ -43,7 +43,7 @@
 	part.forceMove(get_turf(src))
 	user.put_in_hands(part)
 	parts -= removing
-	to_chat(user, SPAN_WARNING("You lever [part] off [src]."))
+	to_chat(user, span_warning("You lever [part] off [src]."))
 	update_icon()
 
 /obj/item/robot_parts/robot_suit/attackby(obj/item/W as obj, mob/user as mob)
@@ -51,10 +51,10 @@
 	if (istype(W, /obj/item/robot_parts))
 		var/obj/item/robot_parts/part = W
 		if(!required_parts[part.bp_tag] || !istype(W, required_parts[part.bp_tag]))
-			to_chat(user, SPAN_WARNING("[src] is not compatible with [W]."))
+			to_chat(user, span_warning("[src] is not compatible with [W]."))
 			return
 		if(parts[part.bp_tag])
-			to_chat(user, SPAN_WARNING("[src] already has [W] installed."))
+			to_chat(user, span_warning("[src] already has [W] installed."))
 			return
 		if(part.can_install(user) && user.unEquip(W, src))
 			parts[part.bp_tag] = part
@@ -64,11 +64,11 @@
 	else if(istype(W, /obj/item/device/mmi) || istype(W, /obj/item/organ/internal/posibrain))
 
 		if(!istype(loc,/turf))
-			to_chat(user, SPAN_WARNING("You can't put [W] in without the frame being on the ground."))
+			to_chat(user, span_warning("You can't put [W] in without the frame being on the ground."))
 			return
 
 		if(!check_completion())
-			to_chat(user, SPAN_WARNING("The frame is not ready for the central processor to be installed."))
+			to_chat(user, span_warning("The frame is not ready for the central processor to be installed."))
 			return
 
 		var/mob/living/carbon/brain/B
@@ -80,15 +80,15 @@
 			B = P.brainmob
 
 		if(!B)
-			to_chat(user, SPAN_WARNING("Sticking an empty [W.name] into the frame would sort of defeat the purpose."))
+			to_chat(user, span_warning("Sticking an empty [W.name] into the frame would sort of defeat the purpose."))
 			return
 
 		if(jobban_isbanned(B, "Robot"))
-			to_chat(user, SPAN_WARNING("[W] does not seem to fit."))
+			to_chat(user, span_warning("[W] does not seem to fit."))
 			return
 
 		if(B.stat == DEAD)
-			to_chat(user, SPAN_WARNING("Sticking a dead [W.name] into the frame would sort of defeat the purpose."))
+			to_chat(user, span_warning("Sticking a dead [W.name] into the frame would sort of defeat the purpose."))
 			return
 
 		var/ghost_can_reenter = 0
@@ -101,7 +101,7 @@
 			else
 				ghost_can_reenter = 1
 		if(!ghost_can_reenter)
-			to_chat(user, SPAN_WARNING("[W] is completely unresponsive; there's no point."))
+			to_chat(user, span_warning("[W] is completely unresponsive; there's no point."))
 			return
 
 		if(!user.unEquip(W))

@@ -52,7 +52,7 @@
 		if(being_changed.gender == prefs.gender)
 			if(alert(chooser, "Оставляем голос вашего персонажа [prefs.real_name] - [prefs.tts_seed]?", "Выбор голоса", "Нет", "Да") ==  "Да")
 				if(!SStts220.tts_seeds[prefs.tts_seed])
-					to_chat(chooser, SPAN_WARNING("Отсутствует tts_seed для значения \"[prefs.tts_seed]\". Текущий голос - [tts_seed.name]"))
+					to_chat(chooser, span_warning("Отсутствует tts_seed для значения \"[prefs.tts_seed]\". Текущий голос - [tts_seed.name]"))
 					return null
 				new_tts_seed = SStts220.tts_seeds[prefs.tts_seed]
 				if(new_traits)
@@ -63,7 +63,7 @@
 	var/tts_seeds
 	var/list/tts_seeds_by_gender = SStts220.get_tts_by_gender(being_changed.gender)
 	if(!length(tts_seeds_by_gender))
-		to_chat(chooser, SPAN_WARNING("Не удалось найти пол для голоса! Текущий голос - [tts_seed.name]"))
+		to_chat(chooser, span_warning("Не удалось найти пол для голоса! Текущий голос - [tts_seed.name]"))
 		return null
 	if(check_rights(R_ADMIN, FALSE, chooser) || override || !ismob(being_changed))
 		tts_seeds = tts_seeds_by_gender
@@ -73,7 +73,7 @@
 	var/new_tts_seed_key
 	new_tts_seed_key = tgui_input_list(chooser, "Выберите голос персонажа", "Преобразуем голос", tts_seeds, tts_seed.name)
 	if(!new_tts_seed_key || !SStts220.tts_seeds[new_tts_seed_key])
-		to_chat(chooser, SPAN_WARNING("Что-то пошло не так с выбором голоса. Текущий голос - [tts_seed.name]"))
+		to_chat(chooser, span_warning("Что-то пошло не так с выбором голоса. Текущий голос - [tts_seed.name]"))
 		return null
 
 	new_tts_seed = SStts220.tts_seeds[new_tts_seed_key]

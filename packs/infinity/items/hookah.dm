@@ -97,8 +97,8 @@
 	if(length(reagents.reagent_list) > 0)
 		reagents.splash(hit_atom, reagents.total_volume)
 	visible_message(
-		SPAN_DANGER("\The [src] shatters from the impact!"),
-		SPAN_DANGER("You hear the sound of glass shattering!")
+		span_danger("\The [src] shatters from the impact!"),
+		span_danger("You hear the sound of glass shattering!")
 	)
 	playsound(src.loc, pick(GLOB.shatter_sound), 100)
 	new /obj/item/material/shard(src.loc)
@@ -115,19 +115,19 @@
 /obj/item/hookah/examine(mob/user, distance)
 	. = ..()
 	if(lit)
-		. += SPAN_NOTICE("It looks lit up")
+		. += span_notice("It looks lit up")
 	else
-		. += SPAN_NOTICE("It looks unlit")
+		. += span_notice("It looks unlit")
 	if(distance <= 1)
-		. += smoketime < 500 ? SPAN_WARNING("There is no coal inside") : SPAN_NOTICE(coal_status_examine_msg[round(smoketime/(maxsmoketime/5), 1)])
-		. += reagents.total_volume > 0 ? SPAN_NOTICE("There's tobacco inside") : SPAN_WARNING("There is no tobacco inside")
-		. += liquid_level > 0 ? SPAN_NOTICE("There's some water inside") : SPAN_WARNING("There is no water inside")
+		. += smoketime < 500 ? span_warning("There is no coal inside") : span_notice(coal_status_examine_msg[round(smoketime/(maxsmoketime/5), 1)])
+		. += reagents.total_volume > 0 ? span_notice("There's tobacco inside") : span_warning("There is no tobacco inside")
+		. += liquid_level > 0 ? span_notice("There's some water inside") : span_warning("There is no water inside")
 
 /obj/item/hookah/proc/extinguish(mob/user, no_message = FALSE)
 	if(!no_message && !user)
-		visible_message(SPAN_INFO("Hookah stops smoking."))
+		visible_message(span_info("Hookah stops smoking."))
 	else if (!no_message)
-		user.visible_message(SPAN_INFO("[user] extinguishes the hookah"))
+		user.visible_message(span_info("[user] extinguishes the hookah"))
 	lit = FALSE
 	update_icon()
 	remove_extension(src, /datum/extension/scent)
@@ -139,7 +139,7 @@
 	set name = "Extinguish"
 	set desc = "Extinguish the hookah"
 	if(!lit)
-		to_chat(usr, SPAN_WARNING("You can't put out what's not lit."))
+		to_chat(usr, span_warning("You can't put out what's not lit."))
 		return TRUE
 	extinguish(usr)
 
@@ -173,29 +173,29 @@
 	else if(istype(tool, /obj/item/tube))
 		var/obj/item/tube/T = tool
 		if(T.parent != src)
-			to_chat(user, SPAN_WARNING("This tube is not from this hookah."))
+			to_chat(user, span_warning("This tube is not from this hookah."))
 			return TRUE
 		tubes.Add(T)
 		user.unEquip(T, src)
 		GLOB.moved_event.unregister(user, T, TYPE_PROC_REF(/obj/item/tube, check_exited))
-		to_chat(user, SPAN_INFO("You put the tube back in the hookah."))
+		to_chat(user, span_info("You put the tube back in the hookah."))
 		return TRUE
 
 	else if(istype(tool, /obj/item/coal))
 		var/obj/item/coal/M = tool
 		if(smoketime + M.volume > maxsmoketime)
-			to_chat(user, SPAN_WARNING("The hookah is already full of coal."))
+			to_chat(user, span_warning("The hookah is already full of coal."))
 			return TRUE
 		smoketime += M.volume
 		qdel(M)
-		user.visible_message(SPAN_INFO("[user] adds some coal to the hookah."), SPAN_INFO("You added coal to the hookah."))
+		user.visible_message(span_info("[user] adds some coal to the hookah."), span_info("You added coal to the hookah."))
 		return TRUE
 
 	else if(istype(tool, /obj/item/reagent_containers/food/snacks/grown/dried_tobacco))
 		if(tool.reagents)
 			tool.reagents.trans_to_obj(src, tool.reagents.total_volume)
 			user.unEquip(tool, src)
-			user.visible_message(SPAN_INFO("[user] put tobacco in the hookah."), SPAN_INFO("You put tobacco in the hookah."))
+			user.visible_message(span_info("[user] put tobacco in the hookah."), span_info("You put tobacco in the hookah."))
 			qdel(tool)
 			return TRUE
 
@@ -204,7 +204,7 @@
 		for(var/obj/i in box.contents)								// Я хочу умереть.
 			qdel(box.contents[i])									// Не повторяйте моих ошибок.
 			smoketime += 500
-		src.visible_message(SPAN_INFO("[user] puts coal in the hookah"), SPAN_INFO("You put coal in the hookah"))
+		src.visible_message(span_info("[user] puts coal in the hookah"), span_info("You put coal in the hookah"))
 		return TRUE	*/
 
 	else if(istype(tool, /obj/item/reagent_containers))
@@ -213,16 +213,16 @@
 		if(!container_obj.is_open_container())
 			return TRUE
 		if(!container.has_reagent(liquid_type))
-			to_chat(user, SPAN_WARNING("This liquid is not appropriate for use in hookahs."))
+			to_chat(user, span_warning("This liquid is not appropriate for use in hookahs."))
 			return TRUE
 		var/transfer_value = min(min(container.get_reagent_amount(liquid_type), container_obj.amount_per_transfer_from_this), max_liquid_level-liquid_level)
 		if(transfer_value<=0)
-			to_chat(user, SPAN_WARNING("You can't pour any more water in the hpokah."))
+			to_chat(user, span_warning("You can't pour any more water in the hpokah."))
 			return TRUE
 		container.remove_reagent(liquid_type, transfer_value)
 		liquid_level += transfer_value
 		playsound(src.loc,'sound/effects/pour.ogg',50,-1)
-		src.visible_message(SPAN_INFO("[user] filled a hookah from a [container_obj]."))
+		src.visible_message(span_info("[user] filled a hookah from a [container_obj]."))
 		update_icon()
 		return TRUE
 
@@ -232,15 +232,15 @@
 	if(user.a_intent == I_GRAB)
 		return ..()
 	if(length(tubes) <= 0)
-		to_chat(user, SPAN_WARNING("There are no tubes left to take."))
+		to_chat(user, span_warning("There are no tubes left to take."))
 		return TRUE
 	var/obj/item/tube/T = tubes[1]
 	if(!user.put_in_active_hand(T))
-		to_chat(user, SPAN_WARNING("Your active hand must be empty!"))
+		to_chat(user, span_warning("Your active hand must be empty!"))
 		return TRUE
 	GLOB.moved_event.register(user, T, TYPE_PROC_REF(/obj/item/tube, check_exited))
 	tubes.Remove(T)
-	to_chat(user, SPAN_INFO("You take the smoking tube."))
+	to_chat(user, span_info("You take the smoking tube."))
 
 /obj/item/tube/attack_hand(mob/user)
 	. = ..()
@@ -252,18 +252,18 @@
 		return ..()
 
 	if(!parent.lit)
-		to_chat(user, SPAN_WARNING("You try to take a drag from the tube but nothing happens. Looks like the hookah isn't lit."))
+		to_chat(user, span_warning("You try to take a drag from the tube but nothing happens. Looks like the hookah isn't lit."))
 		return FALSE
 
 	var/obj/item/blocked = H.check_mouth_coverage()
 	if(blocked)
-		to_chat(H, SPAN_WARNING("\The [blocked] is in the way!"))
+		to_chat(H, span_warning("\The [blocked] is in the way!"))
 		return TRUE
 
-	to_chat(H, SPAN_INFO("You take a drag on your [name]."))
+	to_chat(H, span_info("You take a drag on your [name]."))
 
 	if(parent.liquid_level <= 0)
-		to_chat(user, SPAN_WARNING("It looks like the water has run out."))
+		to_chat(user, span_warning("It looks like the water has run out."))
 		return FALSE
 
 	playsound(H.loc, pick('packs/infinity/sound/effects/hookah.ogg', 'packs/infinity/sound/effects/hookah1.ogg'), 50, 0, -1)
@@ -275,13 +275,13 @@
 	if(lit || !smoketime)
 		return TRUE
 	if(submerged())
-		to_chat(usr, SPAN_WARNING("You cannot light \the [src] underwater."))
+		to_chat(usr, span_warning("You cannot light \the [src] underwater."))
 		return TRUE
 	lit = TRUE
 	damtype = "burn"
 	var/turf/T = get_turf(src)
 	if (flavor_text)
-		T.visible_message(SPAN_INFO(flavor_text))
+		T.visible_message(span_info(flavor_text))
 	update_icon()
 	START_PROCESSING(SSobj, src)
 	set_scent_by_reagents(src)
@@ -311,11 +311,11 @@
 	if((hookah_pos != mover_pos && get_dist(mover_pos, hookah_pos) > 1) || (!isturf(parent.loc) && (parent.loc != src.loc) && !(src in parent.tubes)))
 		if(iscarbon(loc))
 			var/mob/living/carbon/M = loc
-			visible_message(SPAN_WARNING("The tube was placed back to the hookah by [loc] as they were walking away."))
+			visible_message(span_warning("The tube was placed back to the hookah by [loc] as they were walking away."))
 			M.unEquip(src, parent)
 			GLOB.moved_event.unregister(loc, src, TYPE_PROC_REF(/obj/item/tube, check_exited))
 		else
-			visible_message(SPAN_WARNING("The tube magically flies back to the hookah. Woah."))
+			visible_message(span_warning("The tube magically flies back to the hookah. Woah."))
 			parent.contents.Add(src)
 		parent.tubes.Add(src)
 		return TRUE
@@ -330,7 +330,7 @@
 		parent.reagents.trans_to_mob(user, REM, CHEM_INGEST, 0.2)
 		add_trace_DNA(user)
 	else
-		to_chat(usr, SPAN_WARNING("The tobacco is gone and all you can feel in your mouth is plain smoke."))
+		to_chat(usr, span_warning("The tobacco is gone and all you can feel in your mouth is plain smoke."))
 		return TRUE
 	var/turf/T = get_turf(src)
 	if(T)

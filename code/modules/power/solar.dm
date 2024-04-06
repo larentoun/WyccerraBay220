@@ -63,7 +63,7 @@ var/global/solar_gen_rate = 1500
 /obj/machinery/power/solar/crowbar_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
 	playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
-	user.visible_message(SPAN_NOTICE("[user] begins to take the glass off the solar panel."))
+	user.visible_message(span_notice("[user] begins to take the glass off the solar panel."))
 	if(!tool.use_as_tool(src, user, 5 SECONDS, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	var/obj/item/solar_assembly/S = locate() in src
@@ -71,7 +71,7 @@ var/global/solar_gen_rate = 1500
 		S.dropInto(loc)
 		S.give_glass()
 	playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-	user.visible_message(SPAN_NOTICE("[user] takes the glass off the solar panel."))
+	user.visible_message(span_notice("[user] takes the glass off the solar panel."))
 	qdel(src)
 
 /obj/machinery/power/solar/on_update_icon()
@@ -224,7 +224,7 @@ var/global/solar_gen_rate = 1500
 		return
 	new /obj/item/tracker_electronics(src.loc)
 	tracker = FALSE
-	user.visible_message(SPAN_NOTICE("[user] takes out the electronics from the solar assembly."))
+	user.visible_message(span_notice("[user] takes out the electronics from the solar assembly."))
 
 /obj/item/solar_assembly/wrench_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
@@ -235,12 +235,12 @@ var/global/solar_gen_rate = 1500
 		pixel_x = 0
 		pixel_y = 0
 		pixel_z = 0
-		user.visible_message(SPAN_NOTICE("[user] wrenches the solar assembly into place."))
+		user.visible_message(span_notice("[user] wrenches the solar assembly into place."))
 		return
 	if(!tool.use_as_tool(src, user, volume = 75, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	anchored = FALSE
-	user.visible_message(SPAN_NOTICE("[user] unwrenches the solar assembly from it's place."))
+	user.visible_message(span_notice("[user] unwrenches the solar assembly from it's place."))
 
 /obj/item/solar_assembly/attackby(obj/item/W, mob/user)
 	if(anchored || isturf(loc))
@@ -249,13 +249,13 @@ var/global/solar_gen_rate = 1500
 			if(S.use(2))
 				glass_type = W.type
 				playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
-				user.visible_message(SPAN_NOTICE("[user] places the glass on the solar assembly."))
+				user.visible_message(span_notice("[user] places the glass on the solar assembly."))
 				if(tracker)
 					new /obj/machinery/power/tracker(get_turf(src), src)
 				else
 					new /obj/machinery/power/solar(get_turf(src), src)
 			else
-				to_chat(user, SPAN_WARNING("You need two sheets of glass to put them into a solar panel."))
+				to_chat(user, span_warning("You need two sheets of glass to put them into a solar panel."))
 				return
 			return TRUE
 
@@ -263,7 +263,7 @@ var/global/solar_gen_rate = 1500
 		if(istype(W, /obj/item/tracker_electronics))
 			tracker = 1
 			qdel(W)
-			user.visible_message(SPAN_NOTICE("[user] inserts the electronics into the solar assembly."))
+			user.visible_message(span_notice("[user] inserts the electronics into the solar assembly."))
 			return TRUE
 	..()
 
@@ -380,11 +380,11 @@ var/global/solar_gen_rate = 1500
 	t += "<B>[SPAN_CLASS("highlight", "Tracking:")]</B><div class='statusDisplay'>"
 	switch(track)
 		if(0)
-			t += "[SPAN_CLASS("linkOn", "Off")] <A href='?src=\ref[src];track=1'>Timed</A> <A href='?src=\ref[src];track=2'>Auto</A><BR>"
+			t += "[span_linkon("Off")] <A href='?src=\ref[src];track=1'>Timed</A> <A href='?src=\ref[src];track=2'>Auto</A><BR>"
 		if(1)
-			t += "<A href='?src=\ref[src];track=0'>Off</A> [SPAN_CLASS("linkOn", "Timed")] <A href='?src=\ref[src];track=2'>Auto</A><BR>"
+			t += "<A href='?src=\ref[src];track=0'>Off</A> [span_linkon("Timed")] <A href='?src=\ref[src];track=2'>Auto</A><BR>"
 		if(2)
-			t += "<A href='?src=\ref[src];track=0'>Off</A> <A href='?src=\ref[src];track=1'>Timed</A> [SPAN_CLASS("linkOn", "Auto")]<BR>"
+			t += "<A href='?src=\ref[src];track=0'>Off</A> <A href='?src=\ref[src];track=1'>Timed</A> [span_linkon("Auto")]<BR>"
 
 	t += "Tracking Rate: [rate_control(src,"tdir","[trackrate] deg/h ([trackrate<0 ? "CCW" : "CW"])",1,30,180)]</div><BR>"
 
@@ -392,7 +392,7 @@ var/global/solar_gen_rate = 1500
 
 	t += "<A href='?src=\ref[src];search_connected=1'>Search for devices</A><BR>"
 	t += "Solar panels : [length(connected_panels)] connected<BR>"
-	t += "Solar tracker : [connected_tracker ? SPAN_GOOD("Found") : SPAN_BAD("Not found")]</div><BR>"
+	t += "Solar tracker : [connected_tracker ? span_good("Found") : span_bad("Not found")]</div><BR>"
 
 	t += "<A href='?src=\ref[src];close=1'>Close</A>"
 

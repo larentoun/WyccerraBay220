@@ -23,7 +23,7 @@
 /obj/structure/janitorialcart/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
-		. += SPAN_NOTICE("[src] [icon2html(src, viewers(get_turf(src)))] contains [reagents.total_volume] unit\s of liquid!")
+		. += span_notice("[src] [icon2html(src, viewers(get_turf(src)))] contains [reagents.total_volume] unit\s of liquid!")
 
 
 /obj/structure/janitorialcart/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -39,8 +39,8 @@
 		update_icon()
 		updateUsrDialog()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] puts \a [tool] on \the [src]."),
-			SPAN_NOTICE("You put \the [tool] on \the [src].")
+			span_notice("\The [user] puts \a [tool] on \the [src]."),
+			span_notice("You put \the [tool] on \the [src].")
 		)
 		return TRUE
 
@@ -56,8 +56,8 @@
 		update_icon()
 		updateUsrDialog()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] puts \a [tool] on \the [src]."),
-			SPAN_NOTICE("You put \the [tool] on \the [src].")
+			span_notice("\The [user] puts \a [tool] on \the [src]."),
+			span_notice("You put \the [tool] on \the [src].")
 		)
 		return TRUE
 
@@ -75,8 +75,8 @@
 				reagents.trans_to_obj(tool, tool.reagents.maximum_volume)
 				playsound(src, 'sound/effects/slosh.ogg', 50, TRUE)
 				user.visible_message(
-					SPAN_NOTICE("\The [user] wets \a [tool] in \the [src]."),
-					SPAN_NOTICE("You wets \the [tool] in \the [src].")
+					span_notice("\The [user] wets \a [tool] in \the [src]."),
+					span_notice("You wets \the [tool] in \the [src].")
 				)
 				return TRUE
 			// Store
@@ -91,8 +91,8 @@
 				update_icon()
 				updateUsrDialog()
 				user.visible_message(
-					SPAN_NOTICE("\The [user] adds \a [tool] to \the [src]."),
-					SPAN_NOTICE("You add \the [tool] to \the [src].")
+					span_notice("\The [user] adds \a [tool] to \the [src]."),
+					span_notice("You add \the [tool] to \the [src].")
 				)
 				return TRUE
 			else
@@ -110,8 +110,8 @@
 		update_icon()
 		updateUsrDialog()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] puts \a [tool] on \the [src]."),
-			SPAN_NOTICE("You put \the [tool] on \the [src].")
+			span_notice("\The [user] puts \a [tool] on \the [src]."),
+			span_notice("You put \the [tool] on \the [src].")
 		)
 		return TRUE
 
@@ -127,8 +127,8 @@
 		update_icon()
 		updateUsrDialog()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] puts \a [tool] on \the [src]."),
-			SPAN_NOTICE("You put \the [tool] on \the [src].")
+			span_notice("\The [user] puts \a [tool] on \the [src]."),
+			span_notice("You put \the [tool] on \the [src].")
 		)
 		return TRUE
 
@@ -171,29 +171,29 @@
 			if("garbage")
 				if(mybag)
 					user.put_in_hands(mybag)
-					to_chat(user, SPAN_NOTICE("You take [mybag] from [src]."))
+					to_chat(user, span_notice("You take [mybag] from [src]."))
 					mybag = null
 			if("mop")
 				if(mymop)
 					user.put_in_hands(mymop)
-					to_chat(user, SPAN_NOTICE("You take [mymop] from [src]."))
+					to_chat(user, span_notice("You take [mymop] from [src]."))
 					mymop = null
 			if("spray")
 				if(myspray)
 					user.put_in_hands(myspray)
-					to_chat(user, SPAN_NOTICE("You take [myspray] from [src]."))
+					to_chat(user, span_notice("You take [myspray] from [src]."))
 					myspray = null
 			if("replacer")
 				if(myreplacer)
 					user.put_in_hands(myreplacer)
-					to_chat(user, SPAN_NOTICE("You take [myreplacer] from [src]."))
+					to_chat(user, span_notice("You take [myreplacer] from [src]."))
 					myreplacer = null
 			if("sign")
 				if(signs)
 					var/obj/item/caution/Sign = locate() in src
 					if(Sign)
 						user.put_in_hands(Sign)
-						to_chat(user, SPAN_NOTICE("You take \a [Sign] from [src]."))
+						to_chat(user, span_notice("You take \a [Sign] from [src]."))
 						signs--
 					else
 						warning("[src] signs ([signs]) didn't match contents")
@@ -242,9 +242,9 @@
 	if(distance > 1)
 		return
 
-	. += SPAN_NOTICE("[icon2html(src, user)] This [callme] contains [reagents.total_volume] unit\s of water!")
+	. += span_notice("[icon2html(src, user)] This [callme] contains [reagents.total_volume] unit\s of water!")
 	if(mybag)
-		. += SPAN_NOTICE("[mybag] is hanging on the [callme].")
+		. += span_notice("[mybag] is hanging on the [callme].")
 
 
 /obj/structure/bed/chair/janicart/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -261,8 +261,8 @@
 		reagents.trans_to_obj(tool, 2)
 		playsound(loc, 'sound/effects/slosh.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] wets \a [tool] in \the [callme]."),
-			SPAN_NOTICE("You wet \the [tool] in \the [callme].")
+			span_notice("\The [user] wets \a [tool] in \the [callme]."),
+			span_notice("You wet \the [tool] in \the [callme].")
 		)
 		return TRUE
 
@@ -276,8 +276,8 @@
 			return TRUE
 		mybag = TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] hooks \a [tool] onto \the [callme]."),
-			SPAN_NOTICE("You hook \the [tool] onto \the [callme].")
+			span_notice("\The [user] hooks \a [tool] onto \the [callme]."),
+			span_notice("You hook \the [tool] onto \the [callme].")
 		)
 		return TRUE
 
@@ -299,7 +299,7 @@
 		step(src, direction)
 		update_mob()
 	else
-		to_chat(user, SPAN_NOTICE("You'll need the keys in one of your hands to drive this [callme]."))
+		to_chat(user, span_notice("You'll need the keys in one of your hands to drive this [callme]."))
 
 
 /obj/structure/bed/chair/janicart/Move()
@@ -353,7 +353,7 @@
 	if(buckled_mob)
 		if(prob(85))
 			return buckled_mob.bullet_act(Proj)
-	visible_message(SPAN_WARNING("[Proj] ricochets off the [callme]!"))
+	visible_message(span_warning("[Proj] ricochets off the [callme]!"))
 
 
 /obj/item/key

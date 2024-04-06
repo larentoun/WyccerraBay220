@@ -55,11 +55,11 @@
 		cost *= 2
 	if(!checked_use(cost) && owner.isSynthetic())
 		if(!owner.lying && !owner.buckled)
-			to_chat(owner, SPAN_WARNING("You don't have enough energy to function!"))
+			to_chat(owner, span_warning("You don't have enough energy to function!"))
 		owner.Weaken(3)
 		owner.Paralyse(3)
 	if(percent() < 10 && prob(1))
-		to_chat(owner, SPAN_WARNING("Your internal battery beeps an alert code, it is low on charge!"))
+		to_chat(owner, span_warning("Your internal battery beeps an alert code, it is low on charge!"))
 
 /obj/item/organ/internal/cell/emp_act(severity)
 	..()
@@ -73,7 +73,7 @@
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	user.put_in_hands(cell)
-	to_chat(user, SPAN_NOTICE("You remove [cell] from [src]."))
+	to_chat(user, span_notice("You remove [cell] from [src]."))
 	cell = null
 
 /obj/item/organ/internal/cell/screwdriver_act(mob/living/user, obj/item/tool)
@@ -87,10 +87,10 @@
 	if(istype(W, /obj/item/cell))
 		if(open)
 			if(cell)
-				to_chat(user, SPAN_WARNING("There is a power cell already installed."))
+				to_chat(user, span_warning("There is a power cell already installed."))
 			else if(user.unEquip(W, src))
 				cell = W
-				to_chat(user, SPAN_NOTICE("You insert [cell]."))
+				to_chat(user, span_notice("You insert [cell]."))
 		return TRUE
 	. = ..()
 
@@ -99,7 +99,7 @@
 	// This is very ghetto way of rebooting an IPC. TODO better way.
 	if(owner && owner.stat == DEAD)
 		owner.set_stat(CONSCIOUS)
-		owner.visible_message(SPAN_DANGER("[owner] twitches visibly!"))
+		owner.visible_message(span_danger("[owner] twitches visibly!"))
 
 /obj/item/organ/internal/cell/listen()
 	if(get_charge())
@@ -164,7 +164,7 @@
 	if(owner && owner.stat == DEAD)
 		owner.set_stat(CONSCIOUS)
 		owner.switch_from_dead_to_living_mob_list()
-		owner.visible_message(SPAN_DANGER("[owner] twitches visibly!"))
+		owner.visible_message(span_danger("[owner] twitches visibly!"))
 
 /obj/item/organ/internal/mmi_holder/cut_away(mob/living/user)
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)

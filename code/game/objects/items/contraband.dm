@@ -62,7 +62,7 @@
 /obj/item/reagent_containers/powder/examine(mob/user)
 	. = ..()
 	if(reagents)
-		. += SPAN_NOTICE("There's about [reagents.total_volume] unit\s here.")
+		. += span_notice("There's about [reagents.total_volume] unit\s here.")
 
 /obj/item/reagent_containers/powder/Initialize()
 	..()
@@ -78,20 +78,20 @@
 /obj/item/reagent_containers/powder/attackby(obj/item/W, mob/living/user)
 	if(istype(W, /obj/item/glass_extra/straw) || istype(W, /obj/item/paper/cig) || istype(W, /obj/item/spacecash))
 		if(!user.check_has_mouth()) // We dont want dionae or adherents doing lines of cocaine. Probably.
-			to_chat(SPAN_WARNING("Without a nose, you seem unable to snort from \the [src]."))
+			to_chat(span_warning("Without a nose, you seem unable to snort from \the [src]."))
 			return TRUE
 
 		user.visible_message(
-			SPAN_WARNING("\The [user] starts to snort some of \the [src] with \a [W]!"),
-			SPAN_NOTICE("You start to snort some of \the [src] with \the [W]!")
+			span_warning("\The [user] starts to snort some of \the [src] with \a [W]!"),
+			span_notice("You start to snort some of \the [src] with \the [W]!")
 		)
 		playsound(loc, 'sound/effects/snort.ogg', 50, 1)
 		if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			return TRUE
 
 		user.visible_message(
-			SPAN_WARNING("\The [user] snorts some of \the [src] with \a [W]!"),
-			SPAN_NOTICE("You snort \the [src] with \the [W]!")
+			span_warning("\The [user] snorts some of \the [src] with \a [W]!"),
+			span_notice("You snort \the [src] with \the [W]!")
 		)
 		playsound(loc, 'sound/effects/snort.ogg', 50, 1)
 

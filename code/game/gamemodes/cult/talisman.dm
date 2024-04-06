@@ -41,9 +41,9 @@
 /obj/item/paper/talisman/examine(mob/user, distance)
 	. = ..()
 	if(iscultist(user))
-		. += SPAN_OCCULT("This is [talisman_name] talisman.")
+		. += span_cult("This is [talisman_name] talisman.")
 		if(talisman_desc)
-			. += SPAN_OCCULT("Effect: [talisman_desc].")
+			. += span_cult("Effect: [talisman_desc].")
 
 
 /obj/item/paper/talisman/attack_self(mob/living/user)
@@ -61,13 +61,13 @@
 	var/obj/item/nullrod/nullrod = locate() in target
 	if (nullrod)
 		user.visible_message(
-			SPAN_DANGER("\The [user] invokes \the [src] at \the [target]!"),
-			SPAN_DANGER("You invoke \the [talisman_name] talisman at \the [target], but it fails and falls to dust!"),
+			span_danger("\The [user] invokes \the [src] at \the [target]!"),
+			span_danger("You invoke \the [talisman_name] talisman at \the [target], but it fails and falls to dust!"),
 		)
 	else
 		user.visible_message(
-			SPAN_DANGER("\The [user] invokes \the [src] at \the [target]!"),
-			SPAN_DANGER("You invoke \the [talisman_name] talisman at \the [target]!")
+			span_danger("\The [user] invokes \the [src] at \the [target]!"),
+			span_danger("You invoke \the [talisman_name] talisman at \the [target]!")
 		)
 		admin_attack_log(user, target, "Used a talisman ([type]).", "Was victim of a talisman ([type]).", "used a talisman ([type]) on")
 		invoke(target, user)
@@ -103,15 +103,15 @@
 					isvalid = TRUE
 					break
 			if (!isvalid)
-				to_chat(user, SPAN_WARNING("\The [talisman_name] talisman cannot be used on \the [target]."))
+				to_chat(user, span_warning("\The [talisman_name] talisman cannot be used on \the [target]."))
 				return FALSE
 		else if (!istype(target, valid_target_type))
-			to_chat(user, SPAN_WARNING("\The [talisman_name] talisman cannot be used on \the [target]."))
+			to_chat(user, span_warning("\The [talisman_name] talisman cannot be used on \the [target]."))
 			return FALSE
 
 
 	if (!target.Adjacent(user))
-		to_chat(user, SPAN_WARNING("You must be next to \the [target] to use \the [talisman_name] talisman on them."))
+		to_chat(user, span_warning("You must be next to \the [target] to use \the [talisman_name] talisman on them."))
 		return FALSE
 
 	return TRUE

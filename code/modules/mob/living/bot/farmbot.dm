@@ -92,7 +92,7 @@
 	. = ..()
 	if(!emagged)
 		if(user)
-			to_chat(user, SPAN_NOTICE("You short out [src]'s plant identifier circuits."))
+			to_chat(user, span_notice("You short out [src]'s plant identifier circuits."))
 			ignore_list |= user
 		emagged = TRUE
 		return 1
@@ -158,35 +158,35 @@
 			if(FARMBOT_COLLECT)
 				action = "collect" // Needs a better one
 				update_icons()
-				visible_message(SPAN_NOTICE("[src] starts [T.dead? "removing the plant from" : "harvesting"] \the [target]."))
+				visible_message(span_notice("[src] starts [T.dead? "removing the plant from" : "harvesting"] \the [target]."))
 				busy = 1
 				if(do_after(src, 3 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
-					visible_message(SPAN_NOTICE("[src] [T.dead? "removes the plant from" : "harvests"] \the [target]."))
+					visible_message(span_notice("[src] [T.dead? "removes the plant from" : "harvests"] \the [target]."))
 					T.physical_attack_hand(src)
 			if(FARMBOT_WATER)
 				action = "water"
 				update_icons()
-				visible_message(SPAN_NOTICE("[src] starts watering \the [target]."))
+				visible_message(span_notice("[src] starts watering \the [target]."))
 				busy = 1
 				if(do_after(src, 3 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 					playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
-					visible_message(SPAN_NOTICE("[src] waters \the [target]."))
+					visible_message(span_notice("[src] waters \the [target]."))
 					tank.reagents.trans_to(T, 100 - T.waterlevel)
 			if(FARMBOT_UPROOT)
 				action = "hoe"
 				update_icons()
-				visible_message(SPAN_NOTICE("[src] starts uprooting the weeds in \the [target]."))
+				visible_message(span_notice("[src] starts uprooting the weeds in \the [target]."))
 				busy = 1
 				if(do_after(src, 3 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
-					visible_message(SPAN_NOTICE("[src] uproots the weeds in \the [target]."))
+					visible_message(span_notice("[src] uproots the weeds in \the [target]."))
 					T.weedlevel = 0
 			if(FARMBOT_NUTRIMENT)
 				action = "fertile"
 				update_icons()
-				visible_message(SPAN_NOTICE("[src] starts fertilizing \the [target]."))
+				visible_message(span_notice("[src] starts fertilizing \the [target]."))
 				busy = 1
 				if(do_after(src, 3 SECONDS, target, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
-					visible_message(SPAN_NOTICE("[src] fertilizes \the [target]."))
+					visible_message(span_notice("[src] fertilizes \the [target]."))
 					T.reagents.add_reagent(/datum/reagent/ammonia, 10)
 		busy = 0
 		action = ""
@@ -197,7 +197,7 @@
 			return
 		action = "water"
 		update_icons()
-		visible_message(SPAN_NOTICE("[src] starts refilling its tank from \the [target]."))
+		visible_message(span_notice("[src] starts refilling its tank from \the [target]."))
 		busy = 1
 		while(do_after(src, 1 SECOND, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && tank.reagents.total_volume < tank.reagents.maximum_volume)
 			tank.reagents.add_reagent(/datum/reagent/water, 100)
@@ -206,7 +206,7 @@
 		busy = 0
 		action = ""
 		update_icons()
-		visible_message(SPAN_NOTICE("[src] finishes refilling its tank."))
+		visible_message(span_notice("[src] finishes refilling its tank."))
 	else if(emagged && ishuman(target))
 		var/action = pick("weed", "water")
 		busy = 1
@@ -217,17 +217,17 @@
 				flick("farmbot_hoe", src)
 				do_attack_animation(target)
 				if(prob(50))
-					visible_message(SPAN_DANGER("[src] swings wildly at [target] with a minihoe, missing completely!"))
+					visible_message(span_danger("[src] swings wildly at [target] with a minihoe, missing completely!"))
 					return
 				var/t = pick("slashed", "sliced", "cut", "clawed")
 				target.attack_generic(src, 5, t)
 			if("water")
 				flick("farmbot_water", src)
-				visible_message(SPAN_DANGER("[src] splashes [target] with water!"))
+				visible_message(span_danger("[src] splashes [target] with water!"))
 				tank.reagents.splash(target, 100)
 
 /mob/living/bot/farmbot/explode()
-	visible_message(SPAN_DANGER("[src] blows apart!"))
+	visible_message(span_danger("[src] blows apart!"))
 	var/turf/Tsec = get_turf(src)
 
 	new /obj/item/material/minihoe(Tsec)

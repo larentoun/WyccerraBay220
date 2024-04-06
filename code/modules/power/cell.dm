@@ -87,8 +87,8 @@
 
 /obj/item/cell/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("The label states it's capacity is [maxcharge] Wh")
-	. += SPAN_NOTICE("The charge meter reads [round(src.percent(), 0.1)]%")
+	. += span_notice("The label states it's capacity is [maxcharge] Wh")
+	. += span_notice("The charge meter reads [round(src.percent(), 0.1)]%")
 
 /obj/item/cell/emp_act(severity)
 	//remove this once emp changes on dev are merged in

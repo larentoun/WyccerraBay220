@@ -16,7 +16,7 @@
 		if(!I.use_as_tool(machine, user, 2 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT))
 			return
 		TRANSFER_STATE(/singleton/machine_construction/frame/wrenched)
-		to_chat(user, SPAN_NOTICE("You wrench [machine] into place."))
+		to_chat(user, span_notice("You wrench [machine] into place."))
 		machine.anchored = TRUE
 	if(I.tool_behaviour == TOOL_WELDER)
 		if(!I.tool_start_check(user, 3))
@@ -49,19 +49,19 @@
 		if(!I.use_as_tool(machine, user, 2 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT))
 			return
 		TRANSFER_STATE(/singleton/machine_construction/frame/unwrenched)
-		to_chat(user, SPAN_NOTICE("You unfasten [machine]."))
+		to_chat(user, span_notice("You unfasten [machine]."))
 		machine.anchored = FALSE
 		return
 	if(isCoil(I))
 		var/obj/item/stack/cable_coil/C = I
 		if(C.get_amount() < 5)
-			to_chat(user, SPAN_WARNING("You need five lengths of cable to add them to [machine]."))
+			to_chat(user, span_warning("You need five lengths of cable to add them to [machine]."))
 			return TRUE
 		playsound(machine.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		to_chat(user, SPAN_NOTICE("You start to add cables to the frame."))
+		to_chat(user, span_notice("You start to add cables to the frame."))
 		if(do_after(user, 2 SECONDS, machine, DO_REPAIR_CONSTRUCT) && C.use(5))
 			TRANSFER_STATE(/singleton/machine_construction/frame/awaiting_circuit)
-			to_chat(user, SPAN_NOTICE("You add cables to the frame."))
+			to_chat(user, span_notice("You add cables to the frame."))
 		return TRUE
 
 
@@ -90,17 +90,17 @@
 			TRANSFER_STATE(/singleton/machine_construction/frame/awaiting_parts)
 			user.unEquip(I, machine)
 			playsound(machine.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-			to_chat(user, SPAN_NOTICE("You add the circuit board to [machine]."))
+			to_chat(user, span_notice("You add the circuit board to [machine]."))
 			machine.circuit = I
 			return
 		else
-			to_chat(user, SPAN_WARNING("This frame does not accept circuit boards of this type!"))
+			to_chat(user, span_warning("This frame does not accept circuit boards of this type!"))
 			return TRUE
 	if(I.tool_behaviour == TOOL_WIRECUTTER)
 		if(!I.use_as_tool(machine, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 			return
 		TRANSFER_STATE(/singleton/machine_construction/frame/wrenched)
-		to_chat(user, SPAN_NOTICE("You remove the cables."))
+		to_chat(user, span_notice("You remove the cables."))
 		new /obj/item/stack/cable_coil(machine.loc, 5)
 
 /singleton/machine_construction/frame/awaiting_circuit/mechanics_info()
@@ -126,7 +126,7 @@
 		TRANSFER_STATE(/singleton/machine_construction/frame/awaiting_circuit)
 		machine.circuit.dropInto(machine.loc)
 		machine.circuit = null
-		to_chat(user, SPAN_NOTICE("You remove the circuit board."))
+		to_chat(user, span_notice("You remove the circuit board."))
 		return TRUE
 	if(I.tool_behaviour == TOOL_SCREWDRIVER)
 		if(!I.use_as_tool(machine, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))

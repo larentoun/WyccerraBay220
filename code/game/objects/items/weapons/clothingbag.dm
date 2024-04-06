@@ -9,13 +9,13 @@
 
 /obj/item/clothingbag/attack_self(mob/user as mob)
 	if(!opened)
-		user.visible_message(SPAN_NOTICE("\The [user] tears open \the [src.name]!"), SPAN_NOTICE("You tear open \the [src.name]!"))
+		user.visible_message(span_notice("\The [user] tears open \the [src.name]!"), span_notice("You tear open \the [src.name]!"))
 		opened = 1
 		icon_state = icon_used
 		for(var/obj/item in contents)
 			item.dropInto(loc)
 	else
-		to_chat(user, SPAN_WARNING("\The [src.name] is already ripped open and is now completely useless!"))
+		to_chat(user, span_warning("\The [src.name] is already ripped open and is now completely useless!"))
 
 /obj/item/clothingbag/rubbersuit
 	name = "rubber suit bag"

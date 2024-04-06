@@ -13,7 +13,7 @@
 		var/scan_results = medical_scan_results(owner, TRUE, SKILL_UNSKILLED)
 		owner.playsound_local(null, 'sound/effects/fastbeep.ogg', 20, is_global = TRUE)
 		to_chat(owner, "<br>[scan_results]<br>")
-		to_chat(owner, SPAN_WARNING("Your [name] cheerily outputs a bogus report as it malfunctions."))
+		to_chat(owner, span_warning("Your [name] cheerily outputs a bogus report as it malfunctions."))
 
 
 /obj/item/organ/internal/augment/active/iatric_monitor/activate()

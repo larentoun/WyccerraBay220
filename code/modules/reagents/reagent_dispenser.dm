@@ -29,23 +29,23 @@
 	if(distance > 2)
 		return
 
-	. += SPAN_NOTICE("It contains:")
+	. += span_notice("It contains:")
 	if(reagents && length(reagents.reagent_list))
 		for(var/datum/reagent/R in reagents.reagent_list)
-			. += SPAN_NOTICE("[R.volume] units of [R.name]")
+			. += span_notice("[R.volume] units of [R.name]")
 	else
-		. += SPAN_NOTICE("Nothing.")
+		. += span_notice("Nothing.")
 
 /obj/structure/reagent_dispensers/verb/set_amount_per_transfer_from_this()
 	set name = "Set transfer amount"
 	set category = "Object"
 	set src in view(1)
 	if(!CanPhysicallyInteract(usr))
-		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!'"))
+		to_chat(usr, span_notice("You're in no condition to do that!'"))
 		return
 	var/N = input("Amount per transfer from this:","[src]") as null|anything in cached_number_list_decode(possible_transfer_amounts)
 	if(!CanPhysicallyInteract(usr))  // because input takes time and the situation can change
-		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!'"))
+		to_chat(usr, span_notice("You're in no condition to do that!'"))
 		return
 	if (N)
 		amount_per_transfer_from_this = N
@@ -113,7 +113,7 @@
 /obj/structure/reagent_dispensers/watertank/examine(mob/user)
 	. = ..()
 	if(modded)
-		. += SPAN_WARNING("Someone has wrenched open its tap - it's spilling everywhere!")
+		. += span_warning("Someone has wrenched open its tap - it's spilling everywhere!")
 
 /obj/structure/reagent_dispensers/watertank/wrench_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
@@ -121,8 +121,8 @@
 		return
 	modded = !modded
 	user.visible_message(
-		SPAN_NOTICE("[user] [modded ? "opens" : "closes"] [src]'s valve with [tool]."),
-		SPAN_NOTICE("You [user] [modded ? "open" : "close"] [src]'s valve with [tool].")
+		span_notice("[user] [modded ? "opens" : "closes"] [src]'s valve with [tool]."),
+		span_notice("You [user] [modded ? "open" : "close"] [src]'s valve with [tool].")
 	)
 	if (modded)
 		log_and_message_admins("opened a water tank at [get_area(src)], leaking water", user, get_turf(src))
@@ -140,8 +140,8 @@
 		transfer_fingerprints_to(new_assembly)
 		tool.transfer_fingerprints_to(new_assembly)
 		user.visible_message(
-			SPAN_NOTICE("[user] attaches [tool] to [src]."),
-			SPAN_NOTICE("You attach [tool] to [src].")
+			span_notice("[user] attaches [tool] to [src]."),
+			span_notice("You attach [tool] to [src].")
 		)
 		qdel(tool)
 		return TRUE
@@ -172,15 +172,15 @@
 /obj/structure/reagent_dispensers/fueltank/examine(mob/user)
 	. = ..()
 	if (modded)
-		. += SPAN_WARNING("The faucet is wrenched open, leaking fuel!")
+		. += span_warning("The faucet is wrenched open, leaking fuel!")
 	if(rig)
-		. += SPAN_NOTICE("There is some kind of device rigged to the tank.")
+		. += span_notice("There is some kind of device rigged to the tank.")
 
 /obj/structure/reagent_dispensers/fueltank/attack_hand()
 	if (rig)
-		usr.visible_message(SPAN_NOTICE("[usr] begins to detach [rig] from [src]."), SPAN_NOTICE("You begin to detach [rig] from [src]."))
+		usr.visible_message(span_notice("[usr] begins to detach [rig] from [src]."), span_notice("You begin to detach [rig] from [src]."))
 		if(do_after(usr, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
-			usr.visible_message(SPAN_NOTICE("[usr] detaches [rig] from [src]."), SPAN_NOTICE("You detach [rig] from [src]"))
+			usr.visible_message(span_notice("[usr] detaches [rig] from [src]."), span_notice("You detach [rig] from [src]"))
 			rig.dropInto(usr.loc)
 			rig = null
 			ClearOverlays()
@@ -190,8 +190,8 @@
 	// Flame Source - Kaboom
 	if (IsFlameSource(weapon))
 		user.visible_message(
-			SPAN_WARNING("[user] holds [weapon] up against [src], heating it up!"),
-			SPAN_WARNING("You hold [weapon] up against [src], heating it up!")
+			span_warning("[user] holds [weapon] up against [src], heating it up!"),
+			span_warning("You hold [weapon] up against [src], heating it up!")
 		)
 		if (!do_after(user, 5 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT) || !user.use_sanity_check(src, weapon))
 			return TRUE
@@ -200,8 +200,8 @@
 			return TRUE
 		log_and_message_admins("triggered a fuel tank explosion with [weapon] in [get_area(src)]", user, get_turf(src))
 		user.visible_message(
-			SPAN_DANGER("[user] holds [weapon] against [src], causing it to explode!"),
-			SPAN_DANGER("You hold [weapon] against [src], causing it to explode!")
+			span_danger("[user] holds [weapon] against [src], causing it to explode!"),
+			span_danger("You hold [weapon] against [src], causing it to explode!")
 		)
 		explode()
 		return TRUE
@@ -214,8 +214,8 @@
 		return
 	modded = !modded
 	user.visible_message(
-		SPAN_NOTICE("[user] [modded ? "opens" : "closes"] [src]'s valve with [tool]."),
-		SPAN_NOTICE("You [user] [modded ? "open" : "close"] [src]'s valve with [tool].")
+		span_notice("[user] [modded ? "opens" : "closes"] [src]'s valve with [tool]."),
+		span_notice("You [user] [modded ? "open" : "close"] [src]'s valve with [tool].")
 	)
 	if(modded)
 		log_and_message_admins("opened a fuel tank at [get_area(src)], leaking fuel.")
@@ -231,8 +231,8 @@
 			FEEDBACK_UNEQUIP_FAILURE(user, tool)
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("[user] starts attaching [tool] to [src]."),
-			SPAN_NOTICE("You start attaching [tool] to [src].")
+			span_notice("[user] starts attaching [tool] to [src]."),
+			span_notice("You start attaching [tool] to [src].")
 		)
 		if (!user.do_skilled(2 SECONDS, SKILL_DEVICES, src) || !user.use_sanity_check(src, tool, SANITY_CHECK_DEFAULT | SANITY_CHECK_TOOL_UNEQUIP))
 			return TRUE
@@ -245,8 +245,8 @@
 			log_and_message_admins("rigged a fuel tank for explosion at [get_area(src)].", user, get_turf(src))
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] attaches [tool] to [src]."),
-			SPAN_NOTICE("You attach [tool] to [src].")
+			span_notice("[user] attaches [tool] to [src]."),
+			span_notice("You attach [tool] to [src].")
 		)
 		return TRUE
 

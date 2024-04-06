@@ -128,8 +128,8 @@
 		locked = !locked
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] [locked ? "locks" : "unlocks"] [src]'s access panel lock with [tool]."),
-			SPAN_NOTICE("You [locked ? "lock" : "unlock"] [src]'s access panel lock with [tool].")
+			span_notice("[user] [locked ? "locks" : "unlocks"] [src]'s access panel lock with [tool]."),
+			span_notice("You [locked ? "lock" : "unlock"] [src]'s access panel lock with [tool].")
 		)
 		Interact(user)
 		return TRUE

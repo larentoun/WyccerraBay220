@@ -742,7 +742,7 @@ var/global/list/obj/machinery/newscaster/allCasters = list() //Global list that 
 
 /obj/machinery/newscaster/use_weapon(obj/item/weapon, mob/living/user, list/click_params)
 	if (MACHINE_IS_BROKEN(src))
-		visible_message(SPAN_WARNING("\The [user] further abuses the shattered [name]."))
+		visible_message(span_warning("\The [user] further abuses the shattered [name]."))
 		playsound(src, 'sound/effects/hit_on_shattered_glass.ogg', 100, 1)
 		return TRUE
 

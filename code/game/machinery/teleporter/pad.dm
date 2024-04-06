@@ -93,7 +93,7 @@
 		set_light(4, 0.4)
 
 		if (interference && prob(20))
-			visible_message(SPAN_WARNING("The teleporter sparks ominously!"))
+			visible_message(span_warning("The teleporter sparks ominously!"))
 			sparks(3, 1, loc)
 	else
 		set_light(0)

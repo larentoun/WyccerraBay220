@@ -21,14 +21,14 @@
 /obj/item/syringe_cartridge/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/reagent_containers/syringe) && user.unEquip(I, src))
 		syringe = I
-		to_chat(user, SPAN_NOTICE("You carefully insert [syringe] into [src]."))
+		to_chat(user, span_notice("You carefully insert [syringe] into [src]."))
 		sharp = TRUE
 		name = "syringe dart"
 		update_icon()
 
 /obj/item/syringe_cartridge/attack_self(mob/user)
 	if(syringe)
-		to_chat(user, SPAN_NOTICE("You remove [syringe] from [src]."))
+		to_chat(user, span_notice("You remove [syringe] from [src]."))
 		user.put_in_hands(syringe)
 		syringe = null
 		sharp = initial(sharp)
@@ -91,9 +91,9 @@
 
 /obj/item/gun/launcher/syringe/examine(mob/user, distance)
 	. = ..()
-	. += SPAN_NOTICE("[src] has [length(darts)] dart\s left!")
+	. += span_notice("[src] has [length(darts)] dart\s left!")
 	if(next)
-		. += SPAN_WARNING("[src] is ready to fire!")
+		. += span_warning("[src] is ready to fire!")
 
 
 /obj/item/gun/launcher/syringe/consume_next_projectile()
@@ -109,26 +109,26 @@
 
 /obj/item/gun/launcher/syringe/attack_self(mob/living/user as mob)
 	if(next)
-		user.visible_message("[user] unlatches and carefully relaxes the bolt on [src].", SPAN_WARNING("You unlatch and carefully relax the bolt on [src], unloading the spring."))
+		user.visible_message("[user] unlatches and carefully relaxes the bolt on [src].", span_warning("You unlatch and carefully relax the bolt on [src], unloading the spring."))
 		next = null
 	else if(length(darts))
 		playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
-		user.visible_message("[user] draws back the bolt on [src], clicking it into place.", SPAN_WARNING("You draw back the bolt on the [src], loading the spring!"))
+		user.visible_message("[user] draws back the bolt on [src], clicking it into place.", span_warning("You draw back the bolt on the [src], loading the spring!"))
 		next = darts[1]
 	add_fingerprint(user)
 
 /obj/item/gun/launcher/syringe/attack_hand(mob/living/user as mob)
 	if(user.get_inactive_hand() == src)
 		if(!length(darts))
-			to_chat(user, SPAN_WARNING("[src] is empty."))
+			to_chat(user, span_warning("[src] is empty."))
 			return
 		if(next)
-			to_chat(user, SPAN_WARNING("[src]'s cover is locked shut."))
+			to_chat(user, span_warning("[src]'s cover is locked shut."))
 			return
 		var/obj/item/syringe_cartridge/C = darts[1]
 		darts -= C
 		user.put_in_hands(C)
-		user.visible_message("[user] removes \a [C] from [src].", SPAN_NOTICE("You remove \a [C] from [src]."))
+		user.visible_message("[user] removes \a [C] from [src].", span_notice("You remove \a [C] from [src]."))
 	else
 		..()
 
@@ -144,11 +144,11 @@
 			return TRUE
 		darts += tool
 		user.visible_message(
-			SPAN_NOTICE("\The [user] loads \a [src] with \a [tool]."),
-			SPAN_NOTICE("You load \the [src] with \the [tool].")
+			span_notice("\The [user] loads \a [src] with \a [tool]."),
+			span_notice("You load \the [src] with \the [tool].")
 		)
 		if (max_darts > 1)
-			to_chat(user, SPAN_INFO("\The [src] now has [length(darts)]/[max_darts] dart\s loaded."))
+			to_chat(user, span_info("\The [src] now has [length(darts)]/[max_darts] dart\s loaded."))
 		return TRUE
 
 	return ..()
@@ -183,4 +183,4 @@
 /obj/item/gun/launcher/syringe/disguised/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
-		. += SPAN_NOTICE("The button is a little stiff.")
+		. += span_notice("The button is a little stiff.")

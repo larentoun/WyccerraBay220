@@ -21,7 +21,7 @@
 	if(!portable)
 		return
 	if(charging)
-		to_chat(user, SPAN_WARNING("Remove [charging] first!"))
+		to_chat(user, span_warning("Remove [charging] first!"))
 		return
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
@@ -35,16 +35,16 @@
 
 	if(allowed)
 		if(charging)
-			to_chat(user, SPAN_WARNING("\A [charging] is already charging here."))
+			to_chat(user, span_warning("\A [charging] is already charging here."))
 			return TRUE
 		// Checks to make sure he's not in space doing it, and that the area got proper power.
 		if(!powered())
-			to_chat(user, SPAN_WARNING("\The [name] blinks red as you try to insert the item!"))
+			to_chat(user, span_warning("\The [name] blinks red as you try to insert the item!"))
 			return TRUE
 		if (istype(G, /obj/item/gun/energy))
 			var/obj/item/gun/energy/E = G
 			if(E.self_recharge)
-				to_chat(user, SPAN_NOTICE("You can't find a charging port on \the [E]."))
+				to_chat(user, span_notice("You can't find a charging port on \the [E]."))
 				return TRUE
 		if(!G.get_cell())
 			to_chat(user, "This device does not have a battery installed.")
@@ -109,7 +109,7 @@
 
 	var/obj/item/cell/C = charging.get_cell()
 	if(!isnull(C))
-		. += SPAN_NOTICE("Item's charge at [round(C.percent())]%.")
+		. += span_notice("Item's charge at [round(C.percent())]%.")
 
 /obj/machinery/recharger/wallcharger
 	name = "wall recharger"

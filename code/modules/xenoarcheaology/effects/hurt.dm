@@ -7,7 +7,7 @@
 		var/weakness = GetAnomalySusceptibility(toucher)
 		if(iscarbon(toucher) && prob(weakness * 100))
 			var/mob/living/carbon/C = toucher
-			to_chat(C, SPAN_DANGER("A painful discharge of energy strikes you!"))
+			to_chat(C, span_danger("A painful discharge of energy strikes you!"))
 			do_damage(C, rand(5,25), rand(5,25), rand(5,25), rand(5,25), rand(1, 5))
 			C.apply_damage(25 * weakness, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 			C.set_nutrition(min(50 * weakness, C.nutrition))
@@ -21,7 +21,7 @@
 			var/weakness = GetAnomalySusceptibility(C)
 			if(prob(weakness * 100))
 				if(prob(10))
-					to_chat(C, SPAN_DANGER("You feel a painful force radiating from something nearby."))
+					to_chat(C, span_danger("You feel a painful force radiating from something nearby."))
 				do_damage(C)
 
 /datum/artifact_effect/hurt/DoEffectPulse()
@@ -30,7 +30,7 @@
 		for (var/mob/living/carbon/C in range(effectrange, T))
 			var/weakness = GetAnomalySusceptibility(C)
 			if(prob(weakness * 100))
-				to_chat(C, SPAN_DANGER("A wave of painful energy strikes you!"))
+				to_chat(C, span_danger("A wave of painful energy strikes you!"))
 				do_damage(C, 3, 3, 3, 3)
 
 /datum/artifact_effect/hurt/proc/do_damage(mob/living/C, brute = 1, fire = 1, tox = 1, oxy = 1, brain = 0.1)
@@ -50,5 +50,5 @@
 		for (var/mob/living/carbon/C in range(effectrange, T))
 			var/weakness = GetAnomalySusceptibility(C)
 			if(prob(weakness * 100))
-				to_chat(C, SPAN_DANGER("A wave of extremely painful energy strikes you!"))
+				to_chat(C, span_danger("A wave of extremely painful energy strikes you!"))
 				do_damage(C, 6, 6, 6, 6)

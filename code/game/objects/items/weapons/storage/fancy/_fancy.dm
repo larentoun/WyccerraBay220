@@ -37,13 +37,13 @@
 	if (distance > 2)
 		return
 	if (sealed)
-		. += SPAN_NOTICE("It is sealed and brand new.")
+		. += span_notice("It is sealed and brand new.")
 		return
 	if (!opened)
-		. += SPAN_NOTICE("It is closed.")
+		. += span_notice("It is closed.")
 		return
 	if (!length(contents))
-		. += SPAN_NOTICE("[src] is empty.")
+		. += span_notice("[src] is empty.")
 		return
 
 	var/display_message

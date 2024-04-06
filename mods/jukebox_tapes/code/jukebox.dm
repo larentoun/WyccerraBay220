@@ -20,7 +20,7 @@
 			tape.dropInto(loc)
 
 		tape = null
-		visible_message(SPAN_NOTICE("[usr] eject \a [tape] from \the [src]."))
+		visible_message(span_notice("[usr] eject \a [tape] from \the [src]."))
 		verbs -= /obj/machinery/jukebox/custom_tape/verb/eject
 		playsound(src, 'mods/jukebox_tapes/sounds/tape_eject.ogg', 40)
 		jukebox.ui_interact(usr)
@@ -60,7 +60,7 @@
 
 /obj/machinery/jukebox/custom_tape/CanUseTopic(mob/user, datum/topic_state/state)
 	if (!anchored)
-		to_chat(user, SPAN_WARNING("Secure \the [src] first."))
+		to_chat(user, span_warning("Secure \the [src] first."))
 		return STATUS_CLOSE
 	return ..()
 

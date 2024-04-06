@@ -62,13 +62,13 @@
 
 /obj/machinery/fabricator/proc/show_intake_message(mob/user, value, obj/item/thing)
 	if(value == SUBSTANCE_TAKEN_FULL)
-		to_chat(user, SPAN_NOTICE("You fill [src] to capacity with [thing]."))
+		to_chat(user, span_notice("You fill [src] to capacity with [thing]."))
 	else if(value == SUBSTANCE_TAKEN_SOME)
-		to_chat(user, SPAN_NOTICE("You fill [src] from [thing]."))
+		to_chat(user, span_notice("You fill [src] from [thing]."))
 	else if(value == SUBSTANCE_TAKEN_ALL)
-		to_chat(user, SPAN_NOTICE("You dump [thing] into [src]."))
+		to_chat(user, span_notice("You dump [thing] into [src]."))
 	else
-		to_chat(user, SPAN_WARNING("[src] cannot process [thing]."))
+		to_chat(user, span_warning("[src] cannot process [thing]."))
 
 /obj/machinery/fabricator/multitool_act(mob/living/user, obj/item/tool)
 	if(stat)
@@ -90,7 +90,7 @@
 	if ((. = ..()))
 		return
 	if(stat)
-		to_chat(user, SPAN_WARNING("[src] is not operating."))
+		to_chat(user, span_warning("[src] is not operating."))
 		return TRUE
 	// Take reagents, if any are applicable.
 	var/reagents_taken = take_reagents(O, user)
@@ -122,7 +122,7 @@
 
 /obj/machinery/fabricator/interface_interact(mob/user)
 	if((fab_status_flags & FAB_DISABLED) && !panel_open)
-		to_chat(user, SPAN_WARNING("[src] is disabled!"))
+		to_chat(user, span_warning("[src] is disabled!"))
 		return TRUE
 
 	tgui_interact(user)

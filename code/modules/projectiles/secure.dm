@@ -23,7 +23,7 @@ GLOBAL_LIST_INIT(secure_weapons, list())
 /obj/item/gun/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 0 && is_secure_gun())
-		. += SPAN_NOTICE("The registration screen shows, \"" + (registered_owner ? "[registered_owner]" : "unregistered") + "\"")
+		. += span_notice("The registration screen shows, \"" + (registered_owner ? "[registered_owner]" : "unregistered") + "\"")
 
 
 /obj/item/gun/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -38,8 +38,8 @@ GLOBAL_LIST_INIT(secure_weapons, list())
 			registered_owner = id.registered_name
 			var/idname = GET_ID_NAME(id, tool)
 			user.visible_message(
-				SPAN_NOTICE("\The [user] runs \a [tool] over \the [src]'s ID scanner."),
-				SPAN_NOTICE("You scan [idname] over \the [src]'s ID scanner, registering it to \"[registered_owner]\"."),
+				span_notice("\The [user] runs \a [tool] over \the [src]'s ID scanner."),
+				span_notice("You scan [idname] over \the [src]'s ID scanner, registering it to \"[registered_owner]\"."),
 				range = 3
 			)
 			return TRUE
@@ -56,7 +56,7 @@ GLOBAL_LIST_INIT(secure_weapons, list())
 		verbs -= /obj/item/gun/proc/reset_registration
 		req_access.Cut()
 		GLOB.secure_weapons -= src
-		to_chat(user, SPAN_NOTICE("\The [src]'s authorization chip fries, giving you full access."))
+		to_chat(user, span_notice("\The [src]'s authorization chip fries, giving you full access."))
 		return 1
 
 	return ..()
@@ -68,15 +68,15 @@ GLOBAL_LIST_INIT(secure_weapons, list())
 	set src in usr
 
 	if(issilicon(usr))
-		to_chat(usr, SPAN_WARNING("You are not permitted to modify weapon registrations."))
+		to_chat(usr, span_warning("You are not permitted to modify weapon registrations."))
 		return
 
 	usr.visible_message("[usr] presses the reset button on \the [src].", range = 3)
 	if(!allowed(usr))
-		to_chat(usr, SPAN_WARNING("\The [src] buzzes quietly, refusing your access."))
+		to_chat(usr, span_warning("\The [src] buzzes quietly, refusing your access."))
 		return
 
-	to_chat(usr, SPAN_NOTICE("\The [src] chimes quietly as its registration resets."))
+	to_chat(usr, span_notice("\The [src] chimes quietly as its registration resets."))
 	registered_owner = null
 	verbs -= /obj/item/gun/proc/reset_registration
 
@@ -92,7 +92,7 @@ GLOBAL_LIST_INIT(secure_weapons, list())
 
 	var/mob/user = get_holder_of_type(src, /mob)
 	if(user)
-		to_chat(user, SPAN_NOTICE("Your [src.name] has been [authorized ? "granted" : "denied"] [firemodes[mode]] fire authorization."))
+		to_chat(user, span_notice("Your [src.name] has been [authorized ? "granted" : "denied"] [firemodes[mode]] fire authorization."))
 
 	return TRUE
 
@@ -105,7 +105,7 @@ GLOBAL_LIST_INIT(secure_weapons, list())
 
 /obj/item/gun/special_check()
 	if(is_secure_gun() && !free_fire() && (!authorized_modes[sel_mode] || !registered_owner))
-		audible_message(SPAN_WARNING("\The [src] buzzes, refusing to fire."), hearing_distance = 3)
+		audible_message(span_warning("\The [src] buzzes, refusing to fire."), hearing_distance = 3)
 		playsound(loc, 'sound/machines/buzz-sigh.ogg', 10, 0)
 		return 0
 

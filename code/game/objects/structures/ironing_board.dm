@@ -66,8 +66,8 @@
 /obj/structure/ironing_board/attack_hand(mob/living/user)
 	if (iron)
 		user.visible_message(
-			SPAN_ITALIC("\The [user] removes \a [iron] from \a [src]."),
-			SPAN_ITALIC("You remove \the [iron] from \the [src]."),
+			span_italic("\The [user] removes \a [iron] from \a [src]."),
+			span_italic("You remove \the [iron] from \the [src]."),
 			range = 5
 		)
 		user.put_in_hands(iron)
@@ -79,8 +79,8 @@
 		return
 	if (clothing)
 		user.visible_message(
-			SPAN_ITALIC("\The [user] removes \a [clothing] from \a [src]."),
-			SPAN_ITALIC("You remove \the [clothing] from \the [src]."),
+			span_italic("\The [user] removes \a [clothing] from \a [src]."),
+			span_italic("You remove \the [clothing] from \the [src]."),
 			range = 5
 		)
 		user.put_in_hands(clothing)
@@ -90,8 +90,8 @@
 		return
 	if (!density)
 		user.visible_message(
-			SPAN_ITALIC("\The [user] begins folding \a [src]."),
-			SPAN_ITALIC("You begin folding \the [src]."),
+			span_italic("\The [user] begins folding \a [src]."),
+			span_italic("You begin folding \the [src]."),
 			range = 5
 		)
 		if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER) || density)
@@ -119,9 +119,9 @@
 	if (distance > 5 && !isghost(user))
 		return
 	if (iron)
-		. += SPAN_NOTICE("It has [iron] resting on it.")
+		. += span_notice("It has [iron] resting on it.")
 	if (clothing)
-		. += SPAN_NOTICE("[clothing] is spread out across it.")
+		. += span_notice("[clothing] is spread out across it.")
 
 /obj/structure/ironing_board/use_grab(obj/item/grab/grab, list/click_params)
 	if (deployed)
@@ -135,12 +135,12 @@
 	if (!can_buckle(grab.affecting, grab.assailant))
 		return TRUE
 	grab.assailant.visible_message(
-		SPAN_NOTICE("\The [grab.assailant] starts buckling \the [grab.affecting] to \the [src]!"),
-		SPAN_NOTICE("You start buckling \the [grab.affecting] to \the [src]!"),
+		span_notice("\The [grab.assailant] starts buckling \the [grab.affecting] to \the [src]!"),
+		span_notice("You start buckling \the [grab.affecting] to \the [src]!"),
 		exclude_mobs = list(grab.affecting)
 	)
 	grab.affecting.show_message(
-		SPAN_NOTICE("\The [grab.assailant] starts buckling you to \the [src]!")
+		span_notice("\The [grab.assailant] starts buckling you to \the [src]!")
 	)
 	if (!do_after(grab.assailant, 3 SECONDS, src, DO_PUBLIC_UNIQUE) || QDELETED(grab) || !grab.use_sanity_check(src))
 		return TRUE
@@ -171,8 +171,8 @@
 		deployed = TRUE
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] puts \a [tool] on \the [src]."),
-			SPAN_NOTICE("You put \the [tool] on \the [src].")
+			span_notice("\The [user] puts \a [tool] on \the [src]."),
+			span_notice("You put \the [tool] on \the [src].")
 		)
 		return TRUE
 
@@ -181,8 +181,8 @@
 		// Clothing
 		if (clothing)
 			user.visible_message(
-				SPAN_NOTICE("\The [user] starts ironing \a [clothing] on \the [src] with \a [tool]."),
-				SPAN_NOTICE("You start ironing \the [clothing] on \the [src] with \the [tool].")
+				span_notice("\The [user] starts ironing \a [clothing] on \the [src] with \a [tool]."),
+				span_notice("You start ironing \the [clothing] on \the [src] with \the [tool].")
 			)
 			if (!do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
 				return TRUE
@@ -192,8 +192,8 @@
 				return TRUE
 			clothing.ironed_state = WRINKLES_NONE
 			user.visible_message(
-				SPAN_NOTICE("\The [user] irons \a [clothing] on \the [src] with \a [tool]."),
-				SPAN_NOTICE("You iron \the [clothing] on \the [src] with \the [tool].")
+				span_notice("\The [user] irons \a [clothing] on \the [src] with \a [tool]."),
+				span_notice("You iron \the [clothing] on \the [src] with \the [tool].")
 			)
 			return TRUE
 
@@ -207,8 +207,8 @@
 		iron = tool
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] puts \a [tool] on \the [src]."),
-			SPAN_NOTICE("You put \a [tool] on \the [src].")
+			span_notice("\The [user] puts \a [tool] on \the [src]."),
+			span_notice("You put \a [tool] on \the [src].")
 		)
 		return TRUE
 
@@ -235,11 +235,11 @@
 
 /obj/item/ironing_board/attack_self(mob/living/user)
 	if (!isturf(user.loc))
-		to_chat(user, SPAN_WARNING("You don't have enough space to set up \the [src]."))
+		to_chat(user, span_warning("You don't have enough space to set up \the [src]."))
 		return
 	user.visible_message(
-		SPAN_ITALIC("\The [user] starts setting up \a [src]."),
-		SPAN_ITALIC("You start setting up \the [src]."),
+		span_italic("\The [user] starts setting up \a [src]."),
+		span_italic("You start setting up \the [src]."),
 		range = 5
 	)
 	if (!do_after(user, 2 SECONDS, src, do_flags = DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER))
@@ -272,8 +272,8 @@
 /obj/item/ironing_iron/attack_self(mob/living/user)
 	iron_enabled = !iron_enabled
 	user.visible_message(
-		SPAN_ITALIC("\The [user] turns \a [name] [iron_enabled ? "on" : "off"]."),
-		SPAN_ITALIC("You turn \the [name] [iron_enabled ? "on" : "off"]."),
+		span_italic("\The [user] turns \a [name] [iron_enabled ? "on" : "off"]."),
+		span_italic("You turn \the [name] [iron_enabled ? "on" : "off"]."),
 		range = 3
 	)
 
@@ -291,14 +291,14 @@
 				USE_FEEDBACK_FAILURE("\The [subject] has no [parse_zone(zone)] to iron.")
 				return TRUE
 		user.visible_message(
-			SPAN_WARNING("\The [user] starts ironing \the [subject][human ? "'s [parse_zone(zone)]" : null] with \a [src]!"),
-			SPAN_DANGER("You start ironing \the [subject][human ? "'s [parse_zone(zone)]" : null] with \a [src]!"),
+			span_warning("\The [user] starts ironing \the [subject][human ? "'s [parse_zone(zone)]" : null] with \a [src]!"),
+			span_danger("You start ironing \the [subject][human ? "'s [parse_zone(zone)]" : null] with \a [src]!"),
 			exclude_mobs = list(subject)
 		)
 		subject.show_message(
-			SPAN_DANGER("\The [user] starts ironing you[human ? "r [parse_zone(zone)]" : null] with \a [src]!"),
+			span_danger("\The [user] starts ironing you[human ? "r [parse_zone(zone)]" : null] with \a [src]!"),
 			VISIBLE_MESSAGE,
-			SPAN_DANGER("You feel a hot, searing pain[human ? " in your [parse_zone(zone)]" : null]!")
+			span_danger("You feel a hot, searing pain[human ? " in your [parse_zone(zone)]" : null]!")
 		)
 		var/sound_token = GLOB.sound_player.PlayLoopingSound(src, "\ref[src]", 'sound/effects/iron_sizzle.ogg', 80)
 		for (var/i = 1 to 5)

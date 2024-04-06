@@ -193,7 +193,7 @@
 		return 0 //Means the item is already in the storage item
 	if(storage_slots != null && length(contents) >= storage_slots)
 		if(!stop_messages)
-			to_chat(user, SPAN_NOTICE("\The [src] is full, make some space."))
+			to_chat(user, span_notice("\The [src] is full, make some space."))
 		return 0 //Storage item is full
 
 	if(W.anchored)
@@ -202,12 +202,12 @@
 	if (length(contents_allowed))
 		if (!is_type_in_list(W, contents_allowed))
 			if (!stop_messages && ! istype(W, /obj/item/hand_labeler))
-				to_chat(user, SPAN_NOTICE("\The [src] cannot hold \the [W]."))
+				to_chat(user, span_notice("\The [src] cannot hold \the [W]."))
 			return 0
 		var/max_instances = contents_allowed[W.type]
 		if (max_instances && instances_of_type_in_list(W, contents) >= max_instances)
 			if (!stop_messages && !istype(W, /obj/item/hand_labeler))
-				to_chat(user, SPAN_NOTICE("\The [src] has no more space specifically for \the [W]."))
+				to_chat(user, span_notice("\The [src] has no more space specifically for \the [W]."))
 			return 0
 
 	//Bypassing storage procedures when not using help intent for labeler/forensic tools.
@@ -224,24 +224,24 @@
 
 	if(length(contents_banned) && is_type_in_list(W, contents_banned))
 		if(!stop_messages)
-			to_chat(user, SPAN_NOTICE("\The [src] cannot hold \the [W]."))
+			to_chat(user, span_notice("\The [src] cannot hold \the [W]."))
 		return 0
 
 	if (max_w_class != null && W.w_class > max_w_class)
 		if(!stop_messages)
-			to_chat(user, SPAN_NOTICE("\The [W] is too big for this [src.name]."))
+			to_chat(user, span_notice("\The [W] is too big for this [src.name]."))
 		return 0
 
 	var/total_storage_space = W.get_storage_cost()
 	if(total_storage_space == ITEM_SIZE_NO_CONTAINER)
 		if(!stop_messages)
-			to_chat(user, SPAN_NOTICE("\The [W] cannot be placed in [src]."))
+			to_chat(user, span_notice("\The [W] cannot be placed in [src]."))
 		return 0
 
 	total_storage_space += storage_space_used() //Adds up the combined w_classes which will be in the storage item if the item is added to it.
 	if(total_storage_space > max_storage_space)
 		if(!stop_messages)
-			to_chat(user, SPAN_NOTICE("\The [src] is too full, make some space."))
+			to_chat(user, span_notice("\The [src] is too full, make some space."))
 		return 0
 
 	return 1
@@ -264,11 +264,11 @@
 		if(!prevent_warning)
 			for(var/mob/M in viewers(usr, null))
 				if (M == usr)
-					to_chat(usr, SPAN_NOTICE("You put \the [W] into [src]."))
+					to_chat(usr, span_notice("You put \the [W] into [src]."))
 				else if (M in range(1, src)) //If someone is standing close enough, they can tell what it is... TODO replace with distance check
-					M.show_message(SPAN_NOTICE("\The [usr] puts [W] into [src]."), VISIBLE_MESSAGE)
+					M.show_message(span_notice("\The [usr] puts [W] into [src]."), VISIBLE_MESSAGE)
 				else if (W && W.w_class >= ITEM_SIZE_NORMAL) //Otherwise they can only see large or normal items from a distance...
-					M.show_message(SPAN_NOTICE("\The [usr] puts [W] into [src]."), VISIBLE_MESSAGE)
+					M.show_message(span_notice("\The [usr] puts [W] into [src]."), VISIBLE_MESSAGE)
 
 		if(!NoUpdate)
 			update_ui_after_item_insertion()
@@ -390,13 +390,13 @@
 		success = 1
 		handle_item_insertion(I, 1, 1) // First 1 is no messages, second 1 is no ui updates
 	if(success && !failure)
-		to_chat(user, SPAN_NOTICE("You put everything into \the [src]."))
+		to_chat(user, span_notice("You put everything into \the [src]."))
 		update_ui_after_item_insertion()
 	else if(success)
-		to_chat(user, SPAN_NOTICE("You put some things into \the [src]."))
+		to_chat(user, span_notice("You put some things into \the [src]."))
 		update_ui_after_item_insertion()
 	else
-		to_chat(user, SPAN_NOTICE("You fail to pick anything up with \the [src]."))
+		to_chat(user, span_notice("You fail to pick anything up with \the [src]."))
 
 
 /obj/item/storage/verb/toggle_gathering_mode()
@@ -437,21 +437,21 @@
 
 	if (usr.IsHolding(src) && usr.HasFreeHand())
 		if (length(contents) == 0)
-			to_chat(usr, SPAN_WARNING("\The [src] is already empty."))
+			to_chat(usr, span_warning("\The [src] is already empty."))
 			return
 
 		var/turf/T = get_turf(src)
 		hide_from(usr)
-		usr.visible_message(SPAN_NOTICE("\The [usr] starts dumping out the contents of \the [src]."), SPAN_NOTICE("You begin dumping out the contents of \the [src]."))
+		usr.visible_message(span_notice("\The [usr] starts dumping out the contents of \the [src]."), span_notice("You begin dumping out the contents of \the [src]."))
 		if (do_after(usr, max(3 SECONDS, 1 SECONDS * length(contents)), src, DO_PUBLIC_UNIQUE))
 			for(var/obj/item/I in contents)
 				remove_from_storage(I, T, 1)
 			finish_bulk_removal()
 			playsound(loc, use_sound, 50, 0, -5)
-			usr.visible_message(SPAN_WARNING("\The [usr] dumps out the contents of \the [src]!"), SPAN_WARNING("You dump out the contents of \the [src]!"))
+			usr.visible_message(span_warning("\The [usr] dumps out the contents of \the [src]!"), span_warning("You dump out the contents of \the [src]!"))
 
 	else
-		to_chat(usr, SPAN_WARNING("You need to be holding \the [src] and have an empty hand to dump its contents!"))
+		to_chat(usr, span_warning("You need to be holding \the [src] and have an empty hand to dump its contents!"))
 
 
 /obj/item/storage/get_mechanics_info()

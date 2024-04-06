@@ -110,7 +110,7 @@ field_generator power level display
 
 /obj/machinery/field_generator/wrench_act(mob/living/user, obj/item/tool)
 	if(state == 2) //Anchoring code handled at level of obj/use_tool()
-		to_chat(user, SPAN_WARNING("[src] needs to be unwelded from the floor."))
+		to_chat(user, span_warning("[src] needs to be unwelded from the floor."))
 		return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/field_generator/welder_act(mob/living/user, obj/item/tool)
@@ -197,7 +197,7 @@ field_generator power level display
 		return 1
 	else
 		for(var/mob/M in viewers(src))
-			M.show_message(SPAN_WARNING("[src] shuts down!"))
+			M.show_message(span_warning("[src] shuts down!"))
 		turn_off()
 		investigate_log("ran out of power and [SPAN_COLOR("red", "deactivated")]","singulo")
 		src.power = 0

@@ -31,7 +31,7 @@
 		squish()
 
 /obj/item/slugegg/proc/squish()
-	src.visible_message(SPAN_WARNING("\The [src] bursts open!"))
+	src.visible_message(span_warning("\The [src] bursts open!"))
 	new /mob/living/simple_animal/hostile/voxslug(get_turf(src))
 	playsound(src.loc,'sound/effects/attackblob.ogg',100, 1)
 	qdel(src)
@@ -63,4 +63,4 @@
 
 /obj/item/gun/launcher/alien/slugsling/attack_self(mob/living/user)
 	mode = mode == "Impact" ? "Sentry" : "Impact"
-	to_chat(user,SPAN_NOTICE("You switch \the [src]'s mode to \"[mode]\""))
+	to_chat(user,span_notice("You switch \the [src]'s mode to \"[mode]\""))

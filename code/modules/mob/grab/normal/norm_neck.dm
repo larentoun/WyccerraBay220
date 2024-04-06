@@ -30,7 +30,7 @@
 	var/mob/living/carbon/human/assailant = G.assailant
 
 	if (assailant.incapacitated(INCAPACITATION_ALL))
-		affecting.visible_message(SPAN_WARNING("[assailant] lets go of \his grab!"))
+		affecting.visible_message(span_warning("[assailant] lets go of \his grab!"))
 		qdel(G)
 		return
 

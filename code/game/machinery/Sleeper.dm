@@ -41,11 +41,11 @@
 	. = ..()
 	if (distance <= 1)
 		if (beaker)
-			. += SPAN_NOTICE("It is loaded with a beaker.")
+			. += span_notice("It is loaded with a beaker.")
 		if(occupant)
 			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(examinate), user, occupant), 0.1 SECONDS)
 		if (emagged && user.skill_check(SKILL_MEDICAL, SKILL_EXPERIENCED))
-			. += SPAN_WARNING("The sleeper chemical synthesis controls look tampered with.")
+			. += span_warning("The sleeper chemical synthesis controls look tampered with.")
 
 
 /obj/machinery/sleeper/Process()
@@ -76,7 +76,7 @@
 	if(iscarbon(occupant) && stasis > 1)
 		occupant.SetStasis(stasis)
 		if (occupant.stat == UNCONSCIOUS && prob(2))
-			to_chat(occupant, SPAN_NOTICE(SPAN_BOLD("... [pick("comfy", "feels slow", "warm")] ...")))
+			to_chat(occupant, span_notice(span_bold("... [pick("comfy", "feels slow", "warm")] ...")))
 
 /obj/machinery/sleeper/on_update_icon()
 	ClearOverlays()
@@ -136,7 +136,7 @@
 
 /obj/machinery/sleeper/CanUseTopic(user)
 	if(user == occupant)
-		to_chat(usr, SPAN_WARNING("You can't reach the controls from the inside."))
+		to_chat(usr, span_warning("You can't reach the controls from the inside."))
 		return STATUS_CLOSE
 	. = ..()
 
@@ -176,19 +176,19 @@
 /obj/machinery/sleeper/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(istype(I, /obj/item/reagent_containers/glass))
 		if(beaker)
-			to_chat(user, SPAN_WARNING("There is already a beaker loaded in \the [src]."))
+			to_chat(user, span_warning("There is already a beaker loaded in \the [src]."))
 			return TRUE
 		if(!user.unEquip(I, src))
 			return TRUE
 		beaker = I
-		user.visible_message(SPAN_NOTICE("\The [user] adds \a [I] to \the [src]."), SPAN_NOTICE("You add \a [I] to \the [src]."))
+		user.visible_message(span_notice("\The [user] adds \a [I] to \the [src]."), span_notice("You add \a [I] to \the [src]."))
 		return TRUE
 
 	return ..()
 
 /obj/machinery/sleeper/user_can_move_target_inside(mob/target, mob/user)
 	if (occupant)
-		to_chat(user, SPAN_WARNING("\The [src] is already occupied!"))
+		to_chat(user, span_warning("\The [src] is already occupied!"))
 		return FALSE
 	return ..()
 
@@ -223,21 +223,21 @@
 	if(!occupant || !beaker)
 		filtering = 0
 		return
-	to_chat(occupant, SPAN_WARNING("You feel like your blood is being sucked away."))
+	to_chat(occupant, span_warning("You feel like your blood is being sucked away."))
 	filtering = !filtering
 
 /obj/machinery/sleeper/proc/toggle_pump()
 	if(!occupant || !beaker)
 		pump = 0
 		return
-	to_chat(occupant, SPAN_WARNING("You feel a tube jammed down your throat."))
+	to_chat(occupant, span_warning("You feel a tube jammed down your throat."))
 	pump = !pump
 
 /obj/machinery/sleeper/proc/go_in(mob/target, mob/user)
 	if (!target)
 		return FALSE
 	if (occupant)
-		to_chat(user, SPAN_WARNING("\The [src] is already occupied."))
+		to_chat(user, span_warning("\The [src] is already occupied."))
 		return FALSE
 	if (target == user)
 		visible_message("\The [user] starts climbing into \the [src].")
@@ -325,7 +325,7 @@
 
 /obj/machinery/sleeper/emag_act(remaining_charges, mob/user)
 	emagged = !emagged
-	to_chat(user, SPAN_DANGER("You [emagged ? "disable" : "enable"] \the [src]'s chemical synthesis safety checks."))
+	to_chat(user, span_danger("You [emagged ? "disable" : "enable"] \the [src]'s chemical synthesis safety checks."))
 
 	if (emagged)
 		available_chemicals |= antag_chemicals

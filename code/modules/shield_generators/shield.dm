@@ -119,9 +119,9 @@
 // Fails shield segments in specific range. Range of 1 affects the shielded turf only.
 /obj/shield/proc/fail_adjacent_segments(range, hitby = null)
 	if(hitby)
-		visible_message(SPAN_DANGER("\The [src] flashes a bit as \the [hitby] collides with it, eventually fading out in a rain of sparks!"))
+		visible_message(span_danger("\The [src] flashes a bit as \the [hitby] collides with it, eventually fading out in a rain of sparks!"))
 	else
-		visible_message(SPAN_DANGER("\The [src] flashes a bit as it eventually fades out in a rain of sparks!"))
+		visible_message(span_danger("\The [src] flashes a bit as it eventually fades out in a rain of sparks!"))
 	fail(range * 2)
 
 	for(var/obj/shield/S in range(range, src))
@@ -223,13 +223,13 @@
 	playsound(src, weapon.hitsound, 50, TRUE)
 	if (!gen.check_flag(MODEFLAG_HYPERKINETIC))
 		user.visible_message(
-			SPAN_WARNING("\The [user] tries to attack \the [src] with \a [weapon], but it passes through!"),
-			SPAN_WARNING("You try to attack \the [src] with \the [weapon], but it passes through!")
+			span_warning("\The [user] tries to attack \the [src] with \a [weapon], but it passes through!"),
+			span_warning("You try to attack \the [src] with \the [weapon], but it passes through!")
 		)
 		return TRUE
 	user.visible_message(
-		SPAN_DANGER("\The [user] hits \the [src] with \a [weapon]!"),
-		SPAN_DANGER("You hit \the [src] with \the [weapon]!")
+		span_danger("\The [user] hits \the [src] with \a [weapon]!"),
+		span_danger("You hit \the [src] with \the [weapon]!")
 	)
 	switch (weapon.damtype)
 		if (DAMAGE_BURN)
@@ -254,7 +254,7 @@
 /obj/shield/proc/overcharge_shock(mob/living/M)
 	M.adjustFireLoss(rand(20, 40))
 	M.Weaken(5)
-	to_chat(M, SPAN_DANGER("As you come into contact with \the [src] a surge of energy paralyses you!"))
+	to_chat(M, span_danger("As you come into contact with \the [src] a surge of energy paralyses you!"))
 	take_damage(10, SHIELD_DAMTYPE_EM)
 
 // Called when a flag is toggled. Can be used to add on-toggle behavior, such as visual changes.
@@ -320,7 +320,7 @@
 	if(!S.gen.check_flag(MODEFLAG_HYPERKINETIC))
 		return
 	S.take_damage(get_shield_damage(), SHIELD_DAMTYPE_PHYSICAL, src)
-	visible_message(SPAN_DANGER("\The [src] breaks into dust!"))
+	visible_message(span_danger("\The [src] breaks into dust!"))
 	make_debris()
 	qdel(src)
 

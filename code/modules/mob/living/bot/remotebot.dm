@@ -22,12 +22,12 @@
 /mob/living/bot/remotebot/examine(mob/user)
 	. = ..()
 	if(holding)
-		. += SPAN_NOTICE("It is holding [icon2html(holding, user)] [holding].")
+		. += span_notice("It is holding [icon2html(holding, user)] [holding].")
 
 /mob/living/bot/remotebot/explode()
 	on = 0
 	new /obj/decal/cleanable/blood/oil(get_turf(src.loc))
-	visible_message(SPAN_DANGER("[src] blows apart!"))
+	visible_message(span_danger("[src] blows apart!"))
 	if(controller)
 		controller.bot = null
 		controller = null
@@ -58,8 +58,8 @@
 		controller = bot_controller
 		GLOB.destroyed_event.register(bot_controller, src, PROC_REF(controller_deleted))
 		user.visible_message(
-			SPAN_NOTICE("\The [user] syncs \a [tool] to \the [src]."),
-			SPAN_NOTICE("You sync \the [tool] to \the [src].")
+			span_notice("\The [user] syncs \a [tool] to \the [src]."),
+			span_notice("You sync \the [tool] to \the [src].")
 		)
 		return TRUE
 

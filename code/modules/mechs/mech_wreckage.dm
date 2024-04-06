@@ -47,7 +47,7 @@
 
 /obj/structure/mech_wreckage/on_death()
 	. = ..()
-	visible_message(SPAN_WARNING("[src] breaks apart!"))
+	visible_message(span_warning("[src] breaks apart!"))
 	new /obj/item/stack/material/steel(loc, rand(1, 3))
 	qdel_self()
 
@@ -60,8 +60,8 @@
 		return
 	new /obj/item/stack/material/steel(loc, rand(5, 10))
 	user.visible_message(
-		SPAN_NOTICE("[user] finishes dismantling [src] with [tool]."),
-		SPAN_NOTICE("You finish dismantling [src] with [tool].")
+		span_notice("[user] finishes dismantling [src] with [tool]."),
+		span_notice("You finish dismantling [src] with [tool].")
 	)
 	qdel(src)
 

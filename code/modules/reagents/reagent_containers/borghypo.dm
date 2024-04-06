@@ -62,29 +62,29 @@
 		return FALSE
 
 	if (mode && !reagent_volumes[reagent_ids[mode]])
-		to_chat(user, SPAN_WARNING("\The [src] is empty."))
+		to_chat(user, span_warning("\The [src] is empty."))
 		return TRUE
 	var/obj/item/reagent_containers/container = null
 	if (!mode)
 		container = dispense.resolve()
 		if (!valid_container(user, container))
-			to_chat(user, SPAN_WARNING("Can't find the container to dispense from."))
+			to_chat(user, span_warning("Can't find the container to dispense from."))
 			return TRUE
 		if (!container.reagents?.total_volume)
-			to_chat(user, SPAN_WARNING("\The [container] is empty."))
+			to_chat(user, span_warning("\The [container] is empty."))
 			return TRUE
 
 	var/target_zone = user.zone_sel.selecting
 	var/allow = M.can_inject(user, target_zone)
 	if (allow)
 		if (allow == INJECTION_PORT)
-			user.visible_message(SPAN_WARNING("\The [user] begins hunting for an injection port on \the [M]'s suit!"))
+			user.visible_message(span_warning("\The [user] begins hunting for an injection port on \the [M]'s suit!"))
 			if (!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M, do_flags = DO_MEDICAL))
 				return TRUE
-		to_chat(user, SPAN_NOTICE("You inject [M] with the injector."))
+		to_chat(user, span_notice("You inject [M] with the injector."))
 		if (ishuman(M))
 			var/mob/living/carbon/human/H = M
-			H.custom_pain(SPAN_WARNING("You feel a tiny prick!"), 1, TRUE, H.get_organ(user.zone_sel.selecting))
+			H.custom_pain(span_warning("You feel a tiny prick!"), 1, TRUE, H.get_organ(user.zone_sel.selecting))
 
 		if (M.reagents)
 			if (mode)
@@ -95,7 +95,7 @@
 				reagent_volumes[R] -= transferred
 				if (should_admin_log)
 					admin_inject_log(user, M, src, R, transferred)
-				to_chat(user, SPAN_NOTICE("[transferred] units injected. [reagent_volumes[R]] units remaining."))
+				to_chat(user, span_notice("[transferred] units injected. [reagent_volumes[R]] units remaining."))
 				return TRUE
 			else
 				var/datum/reagents/R = container.reagents
@@ -104,7 +104,7 @@
 				var/transferred = R.trans_to_mob(M, amount_per_transfer_from_this, CHEM_BLOOD)
 				if (should_admin_log)
 					admin_inject_log(user, M, src, contained, transferred)
-				to_chat(user, SPAN_NOTICE("[transferred] units injected. [R.total_volume] units remaining in \the [container]."))
+				to_chat(user, span_notice("[transferred] units injected. [R.total_volume] units remaining in \the [container]."))
 				return TRUE
 
 /obj/item/reagent_containers/borghypo/attack_self(mob/user as mob)
@@ -117,15 +117,15 @@
 
 	if (mode)
 		var/datum/reagent/R = reagent_ids[mode]
-		. += SPAN_NOTICE("It is currently producing [initial(R.name)] and has [reagent_volumes[R]] out of [volume] units left.")
+		. += span_notice("It is currently producing [initial(R.name)] and has [reagent_volumes[R]] out of [volume] units left.")
 	else
 		var/obj/item/reagent_containers/container = dispense.resolve()
 		if (istype(container))
 			var/datum/reagents/R = container.reagents
 			if (istype(R))
-				. += SPAN_NOTICE("It is currently dispensing from \the [container] which has [R.total_volume] out of [R.maximum_volume] units left.")
+				. += span_notice("It is currently dispensing from \the [container] which has [R.total_volume] out of [R.maximum_volume] units left.")
 				return
-		. += SPAN_WARNING("It is currently empty.")
+		. += span_warning("It is currently empty.")
 
 /obj/item/reagent_containers/borghypo/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = TRUE)
 	var/data = list()
@@ -181,14 +181,14 @@
 		if (valid_container(user, bottle))
 			mode = 0
 			dispense = weakref(bottle)
-			to_chat(user, SPAN_NOTICE("Dispensing from \the [bottle]."))
+			to_chat(user, span_notice("Dispensing from \the [bottle]."))
 		return TOPIC_REFRESH
 
 	var/index = reagent_names.Find(selection)
 	if (index)
 		mode = index
 		dispense = null
-		to_chat(user, SPAN_NOTICE("Synthesizer is now producing [selection]."))
+		to_chat(user, span_notice("Synthesizer is now producing [selection]."))
 		return TOPIC_REFRESH
 
 	return TOPIC_NOACTION
@@ -256,29 +256,29 @@
 	if (!target.reagents)
 		return FALSE
 	if(!target.is_open_container())
-		to_chat(user, SPAN_WARNING("\The [target] is capped."))
+		to_chat(user, span_warning("\The [target] is capped."))
 		return TRUE
 	if(!target.reagents.get_free_space())
-		to_chat(user, SPAN_WARNING("\The [target] is full."))
+		to_chat(user, span_warning("\The [target] is full."))
 		return TRUE
 
 	if (mode)
 		var/datum/reagent/R = reagent_ids[mode]
 		if(!reagent_volumes[R])
-			to_chat(user, SPAN_WARNING("\The [src] is out of this reagent, give it some time to refill."))
+			to_chat(user, span_warning("\The [src] is out of this reagent, give it some time to refill."))
 			return TRUE
 		var/transferred = min(amount_per_transfer_from_this, reagent_volumes[R])
 		target.reagents.add_reagent(R, transferred)
 		reagent_volumes[R] -= transferred
-		to_chat(user, SPAN_NOTICE("You transfer [transferred] units of the solution to [target]."))
+		to_chat(user, span_notice("You transfer [transferred] units of the solution to [target]."))
 	else
 		var/obj/item/reagent_containers/container = dispense.resolve()
 		if (!valid_container(user, container))
-			to_chat(user, SPAN_WARNING("Can't find the container to dispense from."))
+			to_chat(user, span_warning("Can't find the container to dispense from."))
 			return TRUE
 		var/datum/reagents/R = container.reagents
 		if (!R || !R.total_volume)
-			to_chat(user, SPAN_WARNING("\The [container] is empty."))
+			to_chat(user, span_warning("\The [container] is empty."))
 		var/transferred = R.trans_to_holder(target.reagents, amount_per_transfer_from_this)
 		to_chat(user, "You transfer [transferred] units of the solution to [target].")
 	return TRUE
@@ -299,11 +299,11 @@
 	if(istype(R))
 		var/obj/item/reagent_containers/borghypo/hypo = locate() in R.module.equipment
 		if(istype(hypo))
-			. += SPAN_NOTICE("Its contents are available to [hypo].")
+			. += span_notice("Its contents are available to [hypo].")
 
 // Extra message for if you try to pick up beakers
 /obj/item/robot_rack/bottle/resolve_attackby(obj/O, mob/user, click_params)
 	if (!istype(O, object_type) && istype(O, /obj/item/reagent_containers/glass))
-		to_chat(user, SPAN_WARNING("\The [O] is the wrong shape for \the [src]."))
+		to_chat(user, span_warning("\The [O] is the wrong shape for \the [src]."))
 		return
 	. = ..()

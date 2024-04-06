@@ -251,13 +251,13 @@
 		icon_state = "sword[item_color]"
 		w_class = ITEM_SIZE_HUGE
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
-		to_chat(user, SPAN_NOTICE("[src] is now active."))
+		to_chat(user, span_notice("[src] is now active."))
 	else
 		force = 3
 		icon_state = "sword0"
 		w_class = ITEM_SIZE_SMALL
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
-		to_chat(user, SPAN_NOTICE("[src] can now be concealed."))
+		to_chat(user, span_notice("[src] can now be concealed."))
 
 	update_held_icon()
 
@@ -290,9 +290,9 @@
 			return
 		if(prob(50))
 			I.dropInto(loc)
-			visible_message(SPAN_NOTICE("Swish! \the [I] lands in \the [src]."), range = 3)
+			visible_message(span_notice("Swish! \the [I] lands in \the [src]."), range = 3)
 		else
-			visible_message(SPAN_WARNING("\The [I] bounces off of \the [src]'s rim!"), range = 3)
+			visible_message(span_warning("\The [I] bounces off of \the [src]'s rim!"), range = 3)
 		return 0
 	else
 		return ..(mover, target, height, air_group)
@@ -328,7 +328,7 @@
 			return
 		if(prob(10))
 			I.dropInto(loc)
-			visible_message(SPAN_NOTICE("Swish! \the [I] gets caught in \the [src]."), range = 3)
+			visible_message(span_notice("Swish! \the [I] gets caught in \the [src]."), range = 3)
 			return 0
 		else
 			return 1

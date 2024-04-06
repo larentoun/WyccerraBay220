@@ -43,9 +43,9 @@
 
 	if(!silent)
 		if(blocked > 0.7)
-			to_chat(victim, SPAN_NOTICE(full_block_message))
+			to_chat(victim, span_notice(full_block_message))
 		else if(blocked > 0.2)
-			to_chat(victim, SPAN_NOTICE(partial_block_message))
+			to_chat(victim, span_notice(partial_block_message))
 	return args.Copy()
 
 /datum/extension/armor/proc/on_blocking(damage, damage_type, damage_flags, armor_pen, blocked)

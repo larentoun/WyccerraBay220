@@ -84,8 +84,8 @@
 		USE_FEEDBACK_FAILURE("[src] needs a circuit board before you can complete it.")
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] starts prying [src] into its frame with [tool]."),
-		SPAN_NOTICE("You start prying [src] into its frame with [tool].")
+		span_notice("[user] starts prying [src] into its frame with [tool]."),
+		span_notice("You start prying [src] into its frame with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 4 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT) || !electronics)
 		return
@@ -100,8 +100,8 @@
 		windoor.base_state = "right"
 	transfer_fingerprints_to(windoor)
 	user.visible_message(
-		SPAN_NOTICE("[user] finishes [windoor] with [tool]."),
-		SPAN_NOTICE("You finish [windoor] with [tool].")
+		span_notice("[user] finishes [windoor] with [tool]."),
+		span_notice("You finish [windoor] with [tool].")
 	)
 	qdel(src)
 
@@ -128,8 +128,8 @@
 		USE_FEEDBACK_FAILURE("[src]'s electronics need to be removed before you can cut the wiring.")
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] starts cutting [src]'s wiring with [tool]."),
-		SPAN_NOTICE("You start cutting [src]'s wiring with [tool].")
+		span_notice("[user] starts cutting [src]'s wiring with [tool]."),
+		span_notice("You start cutting [src]'s wiring with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 4 SECONDS, volume = 50, skill_path = SKILL_ELECTRICAL, do_flags = DO_REPAIR_CONSTRUCT) || state != WINDOOR_STATE_WIRED || electronics)
 		return
@@ -138,8 +138,8 @@
 	state = WINDOOR_STATE_FRAME
 	update_icon()
 	user.visible_message(
-		SPAN_NOTICE("[user] cuts [src]'s wiring with [tool]."),
-		SPAN_NOTICE("You cut [src]'s wiring with [tool].")
+		span_notice("[user] cuts [src]'s wiring with [tool]."),
+		span_notice("You cut [src]'s wiring with [tool].")
 	)
 
 /obj/structure/windoor_assembly/welder_act(mob/living/user, obj/item/tool)
@@ -161,8 +161,8 @@
 		var/obj/item/stack/material/rods/rods = new(loc, 4)
 		transfer_fingerprints_to(rods)
 	user.visible_message(
-		SPAN_NOTICE("[user] dismantles [src] with [tool]."),
-		SPAN_NOTICE("You dismantle [src] with [tool].")
+		span_notice("[user] dismantles [src] with [tool]."),
+		span_notice("You dismantle [src] with [tool].")
 	)
 	qdel(src)
 
@@ -180,8 +180,8 @@
 			return TRUE
 		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] starts installing [tool] into [src]."),
-			SPAN_NOTICE("You start installing [tool] into [src].")
+			span_notice("[user] starts installing [tool] into [src]."),
+			span_notice("You start installing [tool] into [src].")
 		)
 		if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
@@ -198,8 +198,8 @@
 		update_icon()
 		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] installs [tool] into [src]."),
-			SPAN_NOTICE("You install [tool] into [src].")
+			span_notice("[user] installs [tool] into [src]."),
+			span_notice("You install [tool] into [src].")
 		)
 		return TRUE
 
@@ -216,8 +216,8 @@
 			USE_FEEDBACK_STACK_NOT_ENOUGH(cable, 1, "to wire [src].")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("[user] starts wiring [src] with [tool]."),
-			SPAN_NOTICE("You start wiring [src] with [tool].")
+			span_notice("[user] starts wiring [src] with [tool]."),
+			span_notice("You start wiring [src] with [tool].")
 		)
 		if (!user.do_skilled(4 SECONDS, SKILL_ELECTRICAL, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
@@ -233,8 +233,8 @@
 		state = WINDOOR_STATE_WIRED
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] wires [src] with [tool]."),
-			SPAN_NOTICE("You wires [src] with [tool].")
+			span_notice("[user] wires [src] with [tool]."),
+			span_notice("You wires [src] with [tool].")
 		)
 		return TRUE
 
@@ -251,8 +251,8 @@
 			USE_FEEDBACK_STACK_NOT_ENOUGH(rods, 4, "to reinforce [src].")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("[user] starts reinforcing [src] with some [tool.name]."),
-			SPAN_NOTICE("You start reinforcing [src] with some [tool.name].")
+			span_notice("[user] starts reinforcing [src] with some [tool.name]."),
+			span_notice("You start reinforcing [src] with some [tool.name].")
 		)
 		if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
@@ -269,8 +269,8 @@
 		SetName("secure [initial(name)]")
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] reinforces [src] with some [tool.name]."),
-			SPAN_NOTICE("You reinforce [src] with some [tool.name].")
+			span_notice("[user] reinforces [src] with some [tool.name]."),
+			span_notice("You reinforce [src] with some [tool.name].")
 		)
 		return TRUE
 

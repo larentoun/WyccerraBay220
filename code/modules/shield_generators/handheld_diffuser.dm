@@ -48,5 +48,5 @@
 
 /obj/item/shield_diffuser/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("The charge meter reads [cell ? cell.percent() : 0]%")
-	. += SPAN_NOTICE("It is [enabled ? "enabled" : "disabled"].")
+	. += span_notice("The charge meter reads [cell ? cell.percent() : 0]%")
+	. += span_notice("It is [enabled ? "enabled" : "disabled"].")

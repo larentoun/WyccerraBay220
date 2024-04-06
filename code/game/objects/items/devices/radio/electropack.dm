@@ -15,7 +15,7 @@
 
 /obj/item/device/radio/electropack/attack_hand(mob/user as mob)
 	if(src == user.back)
-		to_chat(user, SPAN_NOTICE("You need help taking this off!"))
+		to_chat(user, span_notice("You need help taking this off!"))
 		return
 	..()
 
@@ -44,8 +44,8 @@
 		transfer_fingerprints_to(shock_kit)
 		shock_kit.add_fingerprint(user)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] attaches \a [src] to \a [tool] to create \a [shock_kit]."),
-			SPAN_NOTICE("You attach \the [src] to \the [tool] to create \the [shock_kit].")
+			span_notice("\The [user] attaches \a [src] to \a [tool] to create \a [shock_kit]."),
+			span_notice("You attach \the [src] to \the [tool] to create \the [shock_kit].")
 		)
 		return TRUE
 
@@ -104,7 +104,7 @@
 				sleep(50)
 				if(M)
 					M.moved_recently = 0
-		to_chat(M, SPAN_DANGER("You feel a sharp shock!"))
+		to_chat(M, span_danger("You feel a sharp shock!"))
 		var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 		s.set_up(3, 1, M)
 		s.start()

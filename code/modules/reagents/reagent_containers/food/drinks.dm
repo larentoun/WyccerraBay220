@@ -26,7 +26,7 @@
 
 /obj/item/reagent_containers/food/drinks/proc/open(mob/user)
 	playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
-	to_chat(user, SPAN_NOTICE("You open \the [src] with an audible pop!"))
+	to_chat(user, span_notice("You open \the [src] with an audible pop!"))
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/reagent_containers/food/drinks/use_before(mob/M as mob, mob/user as mob)
@@ -45,24 +45,24 @@
 
 /obj/item/reagent_containers/food/drinks/standard_feed_mob(mob/user, mob/target)
 	if(!is_open_container())
-		to_chat(user, SPAN_NOTICE("You need to open \the [src]!"))
+		to_chat(user, span_notice("You need to open \the [src]!"))
 		return 1
 	return ..()
 
 /obj/item/reagent_containers/food/drinks/standard_dispenser_refill(mob/user, obj/structure/reagent_dispensers/target)
 	if(!is_open_container())
-		to_chat(user, SPAN_NOTICE("You need to open \the [src]!"))
+		to_chat(user, span_notice("You need to open \the [src]!"))
 		return 1
 	return ..()
 
 /obj/item/reagent_containers/food/drinks/standard_pour_into(mob/user, atom/target)
 	if(!is_open_container())
-		to_chat(user, SPAN_NOTICE("You need to open \the [src]!"))
+		to_chat(user, span_notice("You need to open \the [src]!"))
 		return 1
 	return ..()
 
 /obj/item/reagent_containers/food/drinks/self_feed_message(mob/user)
-	to_chat(user, SPAN_NOTICE("You swallow a gulp from \the [src]."))
+	to_chat(user, span_notice("You swallow a gulp from \the [src]."))
 	if(user.has_personal_goal(/datum/goal/achievement/specific_object/drink))
 		for(var/datum/reagent/R in reagents.reagent_list)
 			user.update_personal_goal(/datum/goal/achievement/specific_object/drink, R.type)
@@ -75,15 +75,15 @@
 	if(distance > 1)
 		return
 	if(!reagents || reagents.total_volume == 0)
-		. += SPAN_NOTICE("[src] is empty!")
+		. += span_notice("[src] is empty!")
 	else if (reagents.total_volume <= volume * 0.25)
-		. += SPAN_NOTICE("[src] is almost empty!")
+		. += span_notice("[src] is almost empty!")
 	else if (reagents.total_volume <= volume * 0.66)
-		. += SPAN_NOTICE("[src] is half full!")
+		. += span_notice("[src] is half full!")
 	else if (reagents.total_volume <= volume * 0.90)
-		. += SPAN_NOTICE("[src] is almost full!")
+		. += span_notice("[src] is almost full!")
 	else
-		. += SPAN_NOTICE("[src] is full!")
+		. += span_notice("[src] is full!")
 
 /obj/item/reagent_containers/food/drinks/proc/get_filling_state()
 	var/percent = round((reagents.total_volume / volume) * 100)

@@ -30,7 +30,7 @@
 	return FALSE
 
 /obj/structure/table/rack/holorack/dismantle(obj/item/wrench/W, mob/user)
-	to_chat(user, SPAN_WARNING("You cannot dismantle \the [src]."))
+	to_chat(user, span_warning("You cannot dismantle \the [src]."))
 	return
 
 /obj/structure/table/rack/dark

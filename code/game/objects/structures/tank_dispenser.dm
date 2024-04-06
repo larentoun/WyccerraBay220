@@ -62,8 +62,8 @@
 			oxygentanks++
 			update_icon()
 			user.visible_message(
-				SPAN_NOTICE("\The [user] adds \a [tool] to \the [src]'s oxygen rack."),
-				SPAN_NOTICE("You add \the [tool] to \the [src]'s oxygen rack.")
+				span_notice("\The [user] adds \a [tool] to \the [src]'s oxygen rack."),
+				span_notice("You add \the [tool] to \the [src]'s oxygen rack.")
 			)
 			return TRUE
 		// Phoron Tanks
@@ -78,8 +78,8 @@
 			phorontanks++
 			update_icon()
 			user.visible_message(
-				SPAN_NOTICE("\The [user] adds \a [tool] to \the [src]'s phoron rack."),
-				SPAN_NOTICE("You add \the [tool] to \the [src]'s phoron rack.")
+				span_notice("\The [user] adds \a [tool] to \the [src]'s phoron rack."),
+				span_notice("You add \the [tool] to \the [src]'s phoron rack.")
 			)
 			return TRUE
 		// Other tanks
@@ -103,7 +103,7 @@
 				else
 					O = new /obj/item/tank/oxygen(loc)
 				O.dropInto(loc)
-				to_chat(usr, SPAN_NOTICE("You take [O] out of [src]."))
+				to_chat(usr, span_notice("You take [O] out of [src]."))
 				oxygentanks--
 				update_icon()
 		if(href_list["phoron"])
@@ -115,7 +115,7 @@
 				else
 					P = new /obj/item/tank/phoron(loc)
 				P.dropInto(loc)
-				to_chat(usr, SPAN_NOTICE("You take [P] out of [src]."))
+				to_chat(usr, span_notice("You take [P] out of [src]."))
 				phorontanks--
 				update_icon()
 		add_fingerprint(usr)

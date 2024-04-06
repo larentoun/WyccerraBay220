@@ -68,15 +68,15 @@
 	if(distance <= 1)
 		switch(state)
 			if(AWAITING_ACTIVATION)
-				. += SPAN_NOTICE("It is labeled '[service_label]' and appears to be awaiting activation.")
+				. += span_notice("It is labeled '[service_label]' and appears to be awaiting activation.")
 			if(CURRENTLY_ACTIVE)
-				. += SPAN_NOTICE("It is labeled '[service_label]' and appears to be active.")
+				. += span_notice("It is labeled '[service_label]' and appears to be active.")
 			if(HAS_BEEN_ACTIVATED)
-				. += SPAN_NOTICE("It is labeled '[service_label]' and appears to be permanently disabled.")
+				. += span_notice("It is labeled '[service_label]' and appears to be permanently disabled.")
 
 /obj/item/device/uplink_service/attack_self(mob/user)
 	if(state != AWAITING_ACTIVATION)
-		to_chat(user, SPAN_WARNING("\The [src] won't activate again."))
+		to_chat(user, span_warning("\The [src] won't activate again."))
 		return
 	var/obj/overmap/visitable/O = map_sectors["[get_z(src)]"]
 	var/choice = alert(user, "This will only affect your current location[istype(O) ? " ([O])" : ""]. Proceed?","Confirmation", "Yes", "No")
@@ -86,7 +86,7 @@
 		return
 	state = CURRENTLY_ACTIVE
 	update_icon()
-	user.visible_message(SPAN_NOTICE("\The [user] activates \the [src]."), SPAN_NOTICE("You activate \the [src]."))
+	user.visible_message(span_notice("\The [user] activates \the [src]."), span_notice("You activate \the [src]."))
 	log_and_message_admins("has activated the service '[service_label]'", user)
 
 	if(service_duration)
@@ -101,7 +101,7 @@
 	state = HAS_BEEN_ACTIVATED
 	update_icon()
 	playsound(loc, "sparks", 50, 1)
-	visible_message(SPAN_WARNING("\The [src] shuts down with a spark."))
+	visible_message(span_warning("\The [src] shuts down with a spark."))
 
 /obj/item/device/uplink_service/on_update_icon()
 	switch(state)
@@ -177,13 +177,13 @@
 /obj/item/device/uplink_service/fake_command_report/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
-		. += SPAN_NOTICE("The message title is set to '<b>[title]</b>'. The message will be [public_announce ? "broadcast to the public" : "sent only to command consoles"].")
-		. += SPAN_NOTICE("The message contents are set to:<br />[SPAN_NOTICE(message)]")
+		. += span_notice("The message title is set to '<b>[title]</b>'. The message will be [public_announce ? "broadcast to the public" : "sent only to command consoles"].")
+		. += span_notice("The message contents are set to:<br />[span_notice(message)]")
 
 
 /obj/item/device/uplink_service/fake_command_report/attack_self(mob/user)
 	if (state != AWAITING_ACTIVATION)
-		to_chat(user, SPAN_WARNING("\The [src] won't activate again."))
+		to_chat(user, span_warning("\The [src] won't activate again."))
 		return
 
 	var/selection = input(user, "What would you like to do?", "Fake Command Report") as anything in list("Set Title", "Set Message", "Set Publicity", "Send Command Report")
@@ -193,7 +193,7 @@
 			if (!new_title || new_title == title)
 				return
 			title = new_title
-			to_chat(user, SPAN_NOTICE("You set the [service_label]'s title to '[title]'."))
+			to_chat(user, span_notice("You set the [service_label]'s title to '[title]'."))
 
 		if ("Set Message")
 			var/old_message = replacetext(message, "<br />", "\n")
@@ -201,7 +201,7 @@
 			if (!new_message || new_message == message)
 				return
 			message = replacetext(new_message, "\n", "<br />")
-			to_chat(user, SPAN_NOTICE("You set the [service_label]'s message to '[message]'."))
+			to_chat(user, span_notice("You set the [service_label]'s message to '[message]'."))
 
 		if ("Set Publicity")
 			var/new_public = alert(user, "Should the command report be public?", "Fake Command Report", "Yes", "No")
@@ -210,17 +210,17 @@
 			if (isnull(new_public) || new_public == public_announce)
 				return
 			public_announce = new_public
-			to_chat(user, SPAN_NOTICE("You set the [service_label]'s publicitiy to '[public_announce ? "public" : "private"]'."))
+			to_chat(user, span_notice("You set the [service_label]'s publicitiy to '[public_announce ? "public" : "private"]'."))
 
 		if ("Send Command Report")
 			if (!message)
-				to_chat(user, SPAN_WARNING("\The [src] has no message to send. Set a message first!"))
+				to_chat(user, span_warning("\The [src] has no message to send. Set a message first!"))
 				return
 			state = HAS_BEEN_ACTIVATED
 			update_icon()
 			user.visible_message(
-				SPAN_NOTICE("\The [user] activates \the [src]."),
-				SPAN_NOTICE("You activate the [service_label] device.")
+				span_notice("\The [user] activates \the [src]."),
+				span_notice("You activate the [service_label] device.")
 			)
 			log_and_message_admins("has activated the fake command report service: [title]", user)
 			enable(user)

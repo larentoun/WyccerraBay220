@@ -86,7 +86,7 @@
 		return
 	if(istype(new_loc) && (terminal.loc == get_step(new_loc, terminal_dir)))
 		return     // This location is fine
-	machine.visible_message(SPAN_WARNING("The terminal is ripped out of [machine]!"))
+	machine.visible_message(span_warning("The terminal is ripped out of [machine]!"))
 	qdel(terminal) // will handle everything via the destroyed event
 
 /obj/item/stock_parts/power/terminal/proc/make_terminal(obj/machinery/machine)
@@ -112,7 +112,7 @@
 	var/check_dir = terminal_dir ? GLOB.reverse_dir[terminal_dir] : machine.dir
 	for(var/obj/machinery/power/terminal/term in T)
 		if(T.dir == check_dir)
-			to_chat(user, SPAN_NOTICE("There is already a terminal here."))
+			to_chat(user, span_notice("There is already a terminal here."))
 			return TRUE
 
 /obj/item/stock_parts/power/terminal/wirecutter_act(mob/living/user, obj/item/tool)
@@ -126,10 +126,10 @@
 		return null // Wrong terminal handler.
 	if(istype(T) && !T.is_plating())
 		. = ITEM_INTERACT_SUCCESS
-		to_chat(user, SPAN_WARNING("You must remove the floor plating in front of [machine] first."))
+		to_chat(user, span_warning("You must remove the floor plating in front of [machine] first."))
 		return
 	. = ITEM_INTERACT_SUCCESS
-	user.visible_message(SPAN_WARNING("[user] dismantles the power terminal from [machine]."), \
+	user.visible_message(span_warning("[user] dismantles the power terminal from [machine]."), \
 						"You begin to cut the cables...")
 	if(!tool.use_as_tool(src, user, 5 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT))
 		return
@@ -141,7 +141,7 @@
 			if(user.stunned)
 				return
 		new /obj/item/stack/cable_coil(T, 10)
-		to_chat(user, SPAN_NOTICE("You cut the cables and dismantle the power terminal."))
+		to_chat(user, span_notice("You cut the cables and dismantle the power terminal."))
 		qdel(terminal)
 
 /obj/item/stock_parts/power/terminal/attackby(obj/item/I, mob/user)
@@ -158,13 +158,13 @@
 			return FALSE
 
 		if(istype(T) && !T.is_plating())
-			to_chat(user, SPAN_WARNING("You must remove the floor plating in front of [machine] first."))
+			to_chat(user, span_warning("You must remove the floor plating in front of [machine] first."))
 			return TRUE
 		var/obj/item/stack/cable_coil/C = I
 		if(!C.can_use(10))
-			to_chat(user, SPAN_WARNING("You need ten lengths of cable for [machine]."))
+			to_chat(user, span_warning("You need ten lengths of cable for [machine]."))
 			return TRUE
-		user.visible_message(SPAN_WARNING("[user] adds cables to the [machine]."), \
+		user.visible_message(span_warning("[user] adds cables to the [machine]."), \
 							"You start adding cables to [machine] frame...")
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		if(do_after(user, 2 SECONDS, machine, DO_REPAIR_CONSTRUCT))
@@ -178,7 +178,7 @@
 						return TRUE
 				C.use(10)
 				user.visible_message(\
-					SPAN_WARNING("[user] has added cables to the [machine]!"),\
+					span_warning("[user] has added cables to the [machine]!"),\
 					"You add cables to the [machine].")
 				make_terminal(machine)
 		return TRUE

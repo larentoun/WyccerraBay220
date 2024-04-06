@@ -122,13 +122,13 @@
 		var/obj/item/organ/internal/augment/augment = item
 		var/obj/item/organ/external/parent = augment.get_valid_parent_organ(subject)
 		if (!parent)
-			to_chat(subject, SPAN_WARNING("Failed to find a valid organ to install \the [augment] into!"))
+			to_chat(subject, span_warning("Failed to find a valid organ to install \the [augment] into!"))
 			qdel(augment)
 			return
 
 		var/surgery_step = GET_SINGLETON(/singleton/surgery_step/internal/replace_organ)
 		if (augment.surgery_configure(subject, subject, parent, null, surgery_step))
-			to_chat(subject, SPAN_WARNING("Failed to set up \the [augment] for installation in your [parent.name]!"))
+			to_chat(subject, span_warning("Failed to set up \the [augment] for installation in your [parent.name]!"))
 			qdel(augment)
 			return
 
@@ -139,13 +139,13 @@
 
 	var/atom/container = subject.equip_to_storage(item)
 	if (subject.equip_to_appropriate_slot(item))
-		to_chat(subject, SPAN_NOTICE("Placing \the [item] in your inventory!"))
+		to_chat(subject, span_notice("Placing \the [item] in your inventory!"))
 	else if (container)
-		to_chat(subject, SPAN_NOTICE("Placing \the [item] in your [container.name]!"))
+		to_chat(subject, span_notice("Placing \the [item] in your [container.name]!"))
 	else if (subject.put_in_hands(item))
-		to_chat(subject, SPAN_NOTICE("Placing \the [item] in your hands!"))
+		to_chat(subject, span_notice("Placing \the [item] in your hands!"))
 	else
-		to_chat(subject, SPAN_WARNING("Dropping \the [item] on the ground!"))
+		to_chat(subject, span_warning("Dropping \the [item] on the ground!"))
 
 /datum/gear_data
 	var/path

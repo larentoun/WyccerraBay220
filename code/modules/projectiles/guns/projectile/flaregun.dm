@@ -24,7 +24,7 @@
 /obj/item/gun/projectile/flare/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 2 && length(loaded))
-		. += SPAN_NOTICE("[loaded[1]] is chambered.")
+		. += span_notice("[loaded[1]] is chambered.")
 
 /obj/item/gun/projectile/flare/special_check()
 	if(length(loaded))
@@ -37,12 +37,12 @@
 			if(damage > 5)
 				var/mob/living/carbon/C = loc
 				if(istype(C))
-					C.visible_message(SPAN_DANGER("[src] explodes in [C]'s hands!"), SPAN_DANGER("[src] explodes in your face!"))
+					C.visible_message(span_danger("[src] explodes in [C]'s hands!"), span_danger("[src] explodes in your face!"))
 					C.drop_from_inventory(src)
 					for(var/zone in list(BP_L_HAND, BP_R_HAND))
 						C.apply_damage(rand(10,20), def_zone=zone)
 				else
-					visible_message(SPAN_DANGER("[src] explodes!"))
+					visible_message(span_danger("[src] explodes!"))
 				explosion(get_turf(src), 1, EX_ACT_LIGHT)
 				qdel(src)
 				return FALSE

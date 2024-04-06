@@ -32,9 +32,9 @@ var/global/const/SAFETY_COOLDOWN = 100
 
 /obj/machinery/recycler/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("The power light is [(stat & MACHINE_STAT_NOPOWER) ? "off" : "on"].")
-	. += SPAN_NOTICE("The safety-mode light is [safety_mode ? "on" : "off"].")
-	. += SPAN_NOTICE("The safety-sensors status light is [emagged ? "off" : "on"].")
+	. += span_notice("The power light is [(stat & MACHINE_STAT_NOPOWER) ? "off" : "on"].")
+	. += span_notice("The safety-mode light is [safety_mode ? "on" : "off"].")
+	. += span_notice("The safety-sensors status light is [emagged ? "off" : "on"].")
 
 /obj/machinery/recycler/power_change()
 	..()

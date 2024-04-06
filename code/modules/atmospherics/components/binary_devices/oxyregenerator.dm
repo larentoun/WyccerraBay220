@@ -47,7 +47,7 @@
 
 /obj/machinery/atmospherics/binary/oxyregenerator/examine(user)
 	. = ..()
-	. += SPAN_NOTICE("Its outlet port is to the [dir2text(dir)]")
+	. += span_notice("Its outlet port is to the [dir2text(dir)]")
 
 /obj/machinery/atmospherics/binary/oxyregenerator/wrench_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS

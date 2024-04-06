@@ -34,7 +34,7 @@
 /obj/item/gun/projectile/heavysniper/handle_post_fire(mob/user, atom/target, pointblank=0, reflex=0)
 	..()
 	if(user && user.skill_check(SKILL_WEAPONS, SKILL_MASTER))
-		to_chat(user, SPAN_NOTICE("You work the bolt open with a reflexive motion, ejecting [chambered]!"))
+		to_chat(user, span_notice("You work the bolt open with a reflexive motion, ejecting [chambered]!"))
 		unload_shell()
 
 /obj/item/gun/projectile/heavysniper/proc/unload_shell()
@@ -50,12 +50,12 @@
 	bolt_open = !bolt_open
 	if(bolt_open)
 		if(chambered)
-			to_chat(user, SPAN_NOTICE("You work the bolt open, ejecting [chambered]!"))
+			to_chat(user, span_notice("You work the bolt open, ejecting [chambered]!"))
 			unload_shell()
 		else
-			to_chat(user, SPAN_NOTICE("You work the bolt open."))
+			to_chat(user, span_notice("You work the bolt open."))
 	else
-		to_chat(user, SPAN_NOTICE("You work the bolt closed."))
+		to_chat(user, span_notice("You work the bolt closed."))
 		if (length(loaded))
 			chambered = loaded[1]
 		else
@@ -67,7 +67,7 @@
 
 /obj/item/gun/projectile/heavysniper/special_check(mob/user)
 	if(bolt_open)
-		to_chat(user, SPAN_WARNING("You can't fire [src] while the bolt is open!"))
+		to_chat(user, span_warning("You can't fire [src] while the bolt is open!"))
 		return 0
 	return ..()
 

@@ -55,15 +55,15 @@
 /obj/item/device/electronic_assembly/examine(mob/user)
 	. = ..()
 	if(IC_FLAG_ANCHORABLE & circuit_flags)
-		. += SPAN_NOTICE("The anchoring bolts [anchored ? "are" : "can be"] <b>wrenched</b> in place and the maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.")
+		. += span_notice("The anchoring bolts [anchored ? "are" : "can be"] <b>wrenched</b> in place and the maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.")
 	else
-		. += SPAN_NOTICE("The maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.")
+		. += span_notice("The maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.")
 
 	if((isobserver(user) && ckeys_allowed_to_scan[user.ckey]) || check_rights(R_ADMIN, 0, user))
-		. += SPAN_NOTICE("You can <a href='?src=\ref[src];ghostscan=1'>scan</a> this circuit.");
+		. += span_notice("You can <a href='?src=\ref[src];ghostscan=1'>scan</a> this circuit.");
 
 /obj/item/device/electronic_assembly/on_death()
-	visible_message(SPAN_WARNING("[src] falls to pieces!"))
+	visible_message(span_warning("[src] falls to pieces!"))
 	if(w_class == ITEM_SIZE_HUGE)
 		if(adrone)
 			new /obj/decal/cleanable/blood/gibs/robot(loc)
@@ -86,7 +86,7 @@
 	..()
 	if (get_damage_percentage() >= 75)
 		if(battery && battery.charge > 0)
-			visible_message(SPAN_WARNING("[src] sputters and sparks!"))
+			visible_message(span_warning("[src] sputters and sparks!"))
 			spark_system.start()
 		opened = TRUE
 		queue_icon_update()
@@ -135,7 +135,7 @@
 	var/power_failure = FALSE
 	if(get_damage_percentage() >= 75 && prob(1))
 		if(battery && battery.charge > 0)
-			visible_message(SPAN_WARNING("[src] sparks violently!"))
+			visible_message(span_warning("[src] sparks violently!"))
 			spark_system.start()
 		power_failure = TRUE
 	// Now spend it.
@@ -201,7 +201,7 @@
 	if(battery)
 		HTML += "[round(battery.charge, 0.1)]/[battery.maxcharge] ([round(battery.percent(), 0.1)]%) cell charge. <a href='?src=\ref[src];remove_cell=1'>\[Remove\]</a>"
 	else
-		HTML += SPAN_DANGER("No power cell detected!")
+		HTML += span_danger("No power cell detected!")
 
 	if(length(assembly_components))
 		HTML += "<br><br>"
@@ -238,7 +238,7 @@
 				var/saved = "On circuit printers with cloning enabled, you may use the code below to clone the circuit:<br><br><code>[SScircuit.save_electronic_assembly(src)]</code>"
 				show_browser(usr, saved, "window=circuit_scan;size=500x600;border=1;can_resize=1;can_close=1;can_minimize=1")
 			else
-				to_chat(usr, SPAN_DANGER("The circuit is empty!"))
+				to_chat(usr, span_danger("The circuit is empty!"))
 		return 0
 
 	if(isobserver(usr))
@@ -255,11 +255,11 @@
 
 	if(href_list["remove_cell"])
 		if(!battery)
-			to_chat(usr, SPAN_DANGER("There's no power cell to remove from [src]."))
+			to_chat(usr, span_danger("There's no power cell to remove from [src]."))
 		else
 			battery.dropInto(loc)
 			playsound(src, 'sound/items/Crowbar.ogg', 50, 1)
-			to_chat(usr, SPAN_NOTICE("You pull [battery] out of [src]'s power supplier."))
+			to_chat(usr, span_notice("You pull [battery] out of [src]'s power supplier."))
 			battery = null
 
 	if(href_list["component"])
@@ -305,7 +305,7 @@
 	if(!check_interactivity(M))
 		return
 	if(!QDELETED(src) && input)
-		to_chat(M, SPAN_NOTICE("The machine now has a label reading '[input]'."))
+		to_chat(M, span_notice("The machine now has a label reading '[input]'."))
 		name = input
 
 /obj/item/device/electronic_assembly/proc/add_allowed_scanner(ckey)
@@ -359,30 +359,30 @@
 // Returns true if the circuit made it inside.
 /obj/item/device/electronic_assembly/proc/try_add_component(obj/item/integrated_circuit/IC, mob/user)
 	if(!opened)
-		to_chat(user, SPAN_DANGER("[src]'s hatch is closed, you can't put anything inside."))
+		to_chat(user, span_danger("[src]'s hatch is closed, you can't put anything inside."))
 		return FALSE
 
 	if(IC.w_class > w_class)
-		to_chat(user, SPAN_DANGER("[IC] is way too big to fit into [src]."))
+		to_chat(user, span_danger("[IC] is way too big to fit into [src]."))
 		return FALSE
 
 	var/total_part_size = return_total_size()
 	var/total_complexity = return_total_complexity()
 
 	if((total_part_size + IC.size) > max_components)
-		to_chat(user, SPAN_DANGER("You can't seem to add the '[IC]', as there is insufficient space."))
+		to_chat(user, span_danger("You can't seem to add the '[IC]', as there is insufficient space."))
 		return FALSE
 	if((total_complexity + IC.complexity) > max_complexity)
-		to_chat(user, SPAN_DANGER("You can't seem to add the '[IC]', since this setup is too complicated for the case."))
+		to_chat(user, span_danger("You can't seem to add the '[IC]', since this setup is too complicated for the case."))
 		return FALSE
 	if((allowed_circuit_action_flags & IC.action_flags) != IC.action_flags)
-		to_chat(user, SPAN_DANGER("You can't seem to add the '[IC]', since the case doesn't support the circuit type."))
+		to_chat(user, span_danger("You can't seem to add the '[IC]', since the case doesn't support the circuit type."))
 		return FALSE
 
 	if(!user.unEquip(IC,src))
 		return FALSE
 
-	to_chat(user, SPAN_NOTICE("You slide [IC] inside [src]."))
+	to_chat(user, span_notice("You slide [IC] inside [src]."))
 	playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)
 	add_allowed_scanner(user.ckey)
 
@@ -400,17 +400,17 @@
 /obj/item/device/electronic_assembly/proc/try_remove_component(obj/item/integrated_circuit/IC, mob/user, silent)
 	if(!opened)
 		if(!silent)
-			to_chat(user, SPAN_DANGER("[src]'s hatch is closed, so you can't fiddle with the internal components."))
+			to_chat(user, span_danger("[src]'s hatch is closed, so you can't fiddle with the internal components."))
 		return FALSE
 
 	if(!IC.removable)
 		if(!silent)
-			to_chat(user, SPAN_DANGER("[src] is permanently attached to the case."))
+			to_chat(user, span_danger("[src] is permanently attached to the case."))
 		return FALSE
 
 	remove_component(IC)
 	if(!silent)
-		to_chat(user, SPAN_NOTICE("You pop [IC] out of the case, and slide it out."))
+		to_chat(user, span_notice("You pop [IC] out of the case, and slide it out."))
 		playsound(src, 'sound/items/Crowbar.ogg', 50, 1)
 		user.put_in_hands(IC)
 	add_allowed_scanner(user.ckey)
@@ -433,9 +433,9 @@
 	for(var/obj/item/integrated_circuit/input/S in assembly_components)
 		if(S.sense(target,user,proximity))
 			if(proximity)
-				visible_message(SPAN_NOTICE("[user] waves [src] around [target]."))
+				visible_message(span_notice("[user] waves [src] around [target]."))
 			else
-				visible_message(SPAN_NOTICE("[user] points [src] towards [target]."))
+				visible_message(span_notice("[user] points [src] towards [target]."))
 
 /obj/item/device/electronic_assembly/multitool_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
@@ -465,14 +465,14 @@
 		USE_FEEDBACK_FAILURE("[src] needs to be on the floor to be anchored.")
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] starts wrenching [src] [anchored ? "from" : "to"] the floor with [tool]."),
-		SPAN_NOTICE("You start wrenching [src] [anchored ? "from" : "to"] the floor with [tool].")
+		span_notice("[user] starts wrenching [src] [anchored ? "from" : "to"] the floor with [tool]."),
+		span_notice("You start wrenching [src] [anchored ? "from" : "to"] the floor with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 1 SECONDS, volume = 50, skill_path = SKILL_DEVICES, do_flags = DO_REPAIR_CONSTRUCT) || !HAS_FLAGS(circuit_flags, IC_FLAG_ANCHORABLE) || !isturf(loc))
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] wrenches [src] [anchored ? "from" : "to"] the floor with [tool]."),
-		SPAN_NOTICE("You wrenches [src] [anchored ? "from" : "to"] the floor with [tool].")
+		span_notice("[user] wrenches [src] [anchored ? "from" : "to"] the floor with [tool]."),
+		span_notice("You wrenches [src] [anchored ? "from" : "to"] the floor with [tool].")
 	)
 	anchored = !anchored
 
@@ -483,8 +483,8 @@
 		detail_color = detailer.detail_color
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] re-colors [src] with [tool]."),
-			SPAN_NOTICE("You re-color [src] with [tool].")
+			span_notice("[user] re-colors [src] with [tool]."),
+			span_notice("You re-color [src] with [tool].")
 		)
 		return TRUE
 
@@ -519,8 +519,8 @@
 		battery = tool
 		playsound(src, 'sound/items/Deconstruct.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] installs [tool] into [src]."),
-			SPAN_NOTICE("You install [tool] into [src].")
+			span_notice("[user] installs [tool] into [src]."),
+			span_notice("You install [tool] into [src].")
 		)
 		return TRUE
 
@@ -534,8 +534,8 @@
 			USE_FEEDBACK_STACK_NOT_ENOUGH(cable, 5, "to repair [src].")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("[user] starts repairing some of [src]'s damage with [cable.get_vague_name(TRUE)]."),
-			SPAN_NOTICE("You start repairing some of [src]'s damage with [cable.get_exact_name(5)].")
+			span_notice("[user] starts repairing some of [src]'s damage with [cable.get_vague_name(TRUE)]."),
+			span_notice("You start repairing some of [src]'s damage with [cable.get_exact_name(5)].")
 		)
 		if (!user.do_skilled(1 SECOND, SKILL_DEVICES, src) || !user.use_sanity_check(src, tool))
 			return TRUE
@@ -547,8 +547,8 @@
 			return TRUE
 		restore_health(5)
 		user.visible_message(
-			SPAN_NOTICE("[user] repairs some of [src]'s damage with [cable.get_vague_name(TRUE)]."),
-			SPAN_NOTICE("You repair some of [src]'s damage with [cable.get_exact_name(5)].")
+			span_notice("[user] repairs some of [src]'s damage with [cable.get_vague_name(TRUE)]."),
+			span_notice("You repair some of [src]'s damage with [cable.get_exact_name(5)].")
 		)
 		return TRUE
 
@@ -811,14 +811,14 @@
 		return
 	var/turf/T = get_turf(user)
 	if(T.density)
-		to_chat(user, SPAN_DANGER("You cannot place [src] on this spot!"))
+		to_chat(user, span_danger("You cannot place [src] on this spot!"))
 		return
 	if(gotwallitem(T, ndir))
-		to_chat(user, SPAN_DANGER("There's already an item on this wall!"))
+		to_chat(user, span_danger("There's already an item on this wall!"))
 		return
 	playsound(loc, 'sound/machines/click.ogg', 75, 1)
 	user.visible_message("[user.name] attaches [src] to the wall.",
-		SPAN_NOTICE("You attach [src] to the wall."),
+		span_notice("You attach [src] to the wall."),
 		SPAN_CLASS("italics", "You hear clicking."))
 	if(user.unEquip(src,T))
 		var/rotation = 0

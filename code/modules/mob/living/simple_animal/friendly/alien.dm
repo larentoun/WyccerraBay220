@@ -36,11 +36,11 @@
 		var/obj/item/meat = new meat_type(loc)
 		playsound(user, 'sound/weapons/bladeslice.ogg', 15, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] harvests some [meat.name] from \the [src] with \a [tool]."),
-			SPAN_NOTICE("You harvest some [meat.name] from \the [src] with \the [tool]."),
+			span_notice("\The [user] harvests some [meat.name] from \the [src] with \a [tool]."),
+			span_notice("You harvest some [meat.name] from \the [src] with \the [tool]."),
 			exclude_mobs = list(src)
 		)
-		to_chat(src, SPAN_NOTICE("\The [user] harvests some [meat.name] from you with \a [tool]."))
+		to_chat(src, span_notice("\The [user] harvests some [meat.name] from you with \a [tool]."))
 		return TRUE
 
 	return ..()

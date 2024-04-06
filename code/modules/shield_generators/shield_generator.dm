@@ -205,9 +205,9 @@
 
 /obj/machinery/power/shield_generator/cannot_transition_to(state_path)
 	if(running)
-		return SPAN_NOTICE("Turn off \the [src] first!")
+		return span_notice("Turn off \the [src] first!")
 	if(offline_for)
-		return SPAN_NOTICE("Wait until \the [src] cools down from emergency shutdown first!")
+		return span_notice("Wait until \the [src] cools down from emergency shutdown first!")
 	return ..()
 
 /obj/machinery/power/shield_generator/multitool_act(mob/living/user, obj/item/tool)

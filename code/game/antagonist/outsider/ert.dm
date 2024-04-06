@@ -35,8 +35,8 @@ GLOBAL_DATUM_INIT(ert, /datum/antagonist/ert, new)
 
 /datum/antagonist/ert/Initialize()
 	..()
-	leader_welcome_text = SPAN_BOLD("You are the leader of the Emergency Response Team. ") + "As the leader, you answer only to [GLOB.using_map.company_name] officials. You have authorization to override the Commanding Officer where it is necessary to achieve your goals. However, it is recommended that you work with them to achieve your goals if possible."
-	welcome_text =        SPAN_BOLD("You are a member of the Emergency Response Team.") + "As a member of the Emergency Response Team, you answer only to your leader and [GLOB.using_map.company_name] officials."
+	leader_welcome_text = span_bold("You are the leader of the Emergency Response Team. ") + "As the leader, you answer only to [GLOB.using_map.company_name] officials. You have authorization to override the Commanding Officer where it is necessary to achieve your goals. However, it is recommended that you work with them to achieve your goals if possible."
+	welcome_text =        span_bold("You are a member of the Emergency Response Team.") + "As a member of the Emergency Response Team, you answer only to your leader and [GLOB.using_map.company_name] officials."
 
 /datum/antagonist/ert/greet(datum/mind/player)
 	if(!..())
@@ -45,6 +45,6 @@ GLOBAL_DATUM_INIT(ert, /datum/antagonist/ert, new)
 	to_chat(player.current, "You should first gear up and discuss a plan with your team. More members may be joining, so don't move out before you're all ready. You might receive further instruction from a superior in person or through holocomms soon.")
 
 	if(reason)
-		to_chat(player.current, SPAN_BOLD(FONT_LARGE("You have been summoned to \the [GLOB.using_map.station_name] for the following reason: " + SPAN_NOTICE(reason))))
+		to_chat(player.current, span_bold(FONT_LARGE("You have been summoned to \the [GLOB.using_map.station_name] for the following reason: " + span_notice(reason))))
 
 //Equip proc has been moved to the map specific folders.

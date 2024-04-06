@@ -36,9 +36,9 @@
 /obj/item/gun/magnetic/railgun/show_ammo(mob/user)
 	var/obj/item/rcd_ammo/ammo = loaded
 	if (ammo)
-		to_chat(user, SPAN_NOTICE("There are [ammo.remaining] shot\s remaining in \the [loaded]."))
+		to_chat(user, span_notice("There are [ammo.remaining] shot\s remaining in \the [loaded]."))
 	else
-		to_chat(user, SPAN_NOTICE("There is nothing loaded."))
+		to_chat(user, span_notice("There is nothing loaded."))
 
 /obj/item/gun/magnetic/railgun/check_ammo()
 	var/obj/item/rcd_ammo/ammo = loaded
@@ -55,7 +55,7 @@
 /obj/item/gun/magnetic/railgun/proc/out_of_ammo()
 	qdel(loaded)
 	loaded = null
-	visible_message(SPAN_WARNING("\The [src] beeps and ejects its empty cartridge."))
+	visible_message(span_warning("\The [src] beeps and ejects its empty cartridge."))
 
 /obj/item/gun/magnetic/railgun/mmi
 	desc = "The Mars Military Industries MI-72 Comet. A man-portable mass driver for squad support, anti-armour and destruction of fortifications and emplacements."
@@ -83,7 +83,7 @@
 /obj/item/gun/magnetic/railgun/tcc/show_ammo(mob/user)
 	var/obj/item/stack/material/rods/ammo = loaded
 	if(istype(ammo))
-		to_chat(user, SPAN_NOTICE("It has [ammo.amount] shots loaded."))
+		to_chat(user, span_notice("It has [ammo.amount] shots loaded."))
 
 /obj/item/gun/magnetic/railgun/tcc/check_ammo()
 	var/obj/item/stack/material/rods/ammo = loaded
@@ -94,7 +94,7 @@
 	loaded = null
 	spawn(3)
 		playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
-	visible_message(SPAN_WARNING("\The [src] beeps, before clanging as the ammunition bank resets."))
+	visible_message(span_warning("\The [src] beeps, before clanging as the ammunition bank resets."))
 
 /obj/item/gun/magnetic/railgun/tcc/use_ammo()
 	var/obj/item/stack/material/rods/ammo = loaded
@@ -126,7 +126,7 @@
 /obj/item/gun/magnetic/railgun/automatic/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
-		. += SPAN_NOTICE("Someone has scratched <i>Ultima Ratio Regum</i> onto the side of the barrel.")
+		. += span_notice("Someone has scratched <i>Ultima Ratio Regum</i> onto the side of the barrel.")
 
 /obj/item/gun/magnetic/railgun/automatic/mmi
 	name = "\improper RHR accelerator"
@@ -158,7 +158,7 @@
 		)
 
 /obj/item/gun/magnetic/railgun/flechette/out_of_ammo()
-	visible_message(SPAN_WARNING("\The [src] beeps to indicate the magazine is empty."))
+	visible_message(span_warning("\The [src] beeps to indicate the magazine is empty."))
 
 
 /obj/item/gun/magnetic/railgun/flechette/skrell

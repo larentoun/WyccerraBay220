@@ -58,7 +58,7 @@
 		var/depth = 1
 		for(var/T = GetBelow(src); isopenspace(T); T = GetBelow(T))
 			depth += 1
-		. += SPAN_NOTICE("It is about [depth] level\s deep.")
+		. += span_notice("It is about [depth] level\s deep.")
 
 /turf/simulated/open/is_open()
 	return TRUE
@@ -72,7 +72,7 @@
 		if (!R.can_use(1))
 			USE_FEEDBACK_STACK_NOT_ENOUGH(R, 1, "to lay down support lattice.")
 			return TRUE
-		to_chat(user, SPAN_NOTICE("You lay down the support lattice."))
+		to_chat(user, span_notice("You lay down the support lattice."))
 		playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 		new /obj/structure/lattice(locate(src.x, src.y, src.z), R.material.name)
 		return TRUE
@@ -80,7 +80,7 @@
 	if (istype(C, /obj/item/stack/tile))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(!L)
-			to_chat(user, SPAN_WARNING("The plating is going to need some support."))
+			to_chat(user, span_warning("The plating is going to need some support."))
 			return TRUE
 
 		var/obj/item/stack/tile/floor/S = C

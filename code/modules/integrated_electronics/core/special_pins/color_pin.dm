@@ -5,7 +5,7 @@
 /datum/integrated_io/color/ask_for_pin_data(mob/user)
 	var/new_data = input("Please select a color.","[src] color writing") as color|null
 	if(holder.check_interactivity(user) )
-		to_chat(user, SPAN_NOTICE("You input a [SPAN_COLOR(new_data, "new color")] into the pin."))
+		to_chat(user, span_notice("You input a [SPAN_COLOR(new_data, "new color")] into the pin."))
 		write_data_to_pin(new_data)
 
 /datum/integrated_io/color/write_data_to_pin(new_data)

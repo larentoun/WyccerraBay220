@@ -70,7 +70,7 @@
 
 /obj/machinery/power/port_gen/CanUseTopic(mob/user)
 	if(!anchored)
-		to_chat(user, SPAN_WARNING("The generator needs to be secured first."))
+		to_chat(user, span_warning("The generator needs to be secured first."))
 		return STATUS_CLOSE
 	return ..()
 
@@ -79,9 +79,9 @@
 	if(distance > 1)
 		return
 	if(active)
-		. += SPAN_NOTICE("The generator is on.")
+		. += span_notice("The generator is on.")
 	else
-		. += SPAN_NOTICE("The generator is off.")
+		. += span_notice("The generator is off.")
 /obj/machinery/power/port_gen/emp_act(severity)
 	SHOULD_CALL_PARENT(FALSE)
 	if(!active)
@@ -168,12 +168,12 @@
 
 /obj/machinery/power/port_gen/pacman/examine(mob/user)
 	. = ..(user)
-	. += SPAN_NOTICE("[src] appears to be producing [power_gen*power_output] W.")
-	. += SPAN_NOTICE("There [sheets == 1 ? "is" : "are"] [sheets] sheet\s left in the hopper.")
+	. += span_notice("[src] appears to be producing [power_gen*power_output] W.")
+	. += span_notice("There [sheets == 1 ? "is" : "are"] [sheets] sheet\s left in the hopper.")
 	if(IsBroken())
-		. += SPAN_WARNING("[src] seems to have broken down.")
+		. += span_warning("[src] seems to have broken down.")
 	if(overheating)
-		. += SPAN_DANGER("[src] is overheating!")
+		. += span_danger("[src] is overheating!")
 
 /obj/machinery/power/port_gen/pacman/proc/process_exhaust()
 	var/datum/gas_mixture/environment = loc?.return_air()
@@ -292,7 +292,7 @@
 
 /obj/machinery/power/port_gen/pacman/cannot_transition_to(state_path, mob/user)
 	if(active)
-		return SPAN_WARNING("You cannot do this while [src] is running!")
+		return span_warning("You cannot do this while [src] is running!")
 	return ..()
 
 /obj/machinery/power/port_gen/pacman/wrench_act(mob/living/user, obj/item/tool)
@@ -305,9 +305,9 @@
 		var/obj/item/stack/addstack = O
 		var/amount = min((max_sheets - sheets), addstack.amount)
 		if(amount < 1)
-			to_chat(user, SPAN_NOTICE("The [src.name] is full!"))
+			to_chat(user, span_notice("The [src.name] is full!"))
 			return TRUE
-		to_chat(user, SPAN_NOTICE("You add [amount] sheet\s to the [src.name]."))
+		to_chat(user, span_notice("You add [amount] sheet\s to the [src.name]."))
 		sheets += amount
 		addstack.use(amount)
 		updateUsrDialog()
@@ -387,7 +387,7 @@
 	dat += text("Power current: [(isnull(powernet) ? "Unconnected" : "[avail()]")]<br>")
 
 	var/tempstr = "Temperature: [temperature]&deg;C<br>"
-	dat += (overheating)? SPAN_DANGER("[tempstr]") : tempstr
+	dat += (overheating)? span_danger("[tempstr]") : tempstr
 	dat += "<br><A href='?src=\ref[src];action=close'>Close</A>"
 	show_browser(user, "[dat]", "window=port_gen")
 	onclose(user, "port_gen")
@@ -486,7 +486,7 @@
 
 /obj/machinery/power/port_gen/pacman/super/potato/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("Auxilary tank shows [reagents.total_volume]u of liquid in it.")
+	. += span_notice("Auxilary tank shows [reagents.total_volume]u of liquid in it.")
 
 /obj/machinery/power/port_gen/pacman/super/potato/UseFuel()
 	if(reagents.has_reagent(coolant_reagent))
@@ -494,7 +494,7 @@
 		temperature_gain = 60
 		reagents.remove_any(coolant_use)
 		if(prob(2))
-			audible_message(SPAN_NOTICE("[src] churns happily"))
+			audible_message(span_notice("[src] churns happily"))
 	else
 		rad_power = initial(rad_power)
 		temperature_gain = initial(temperature_gain)
@@ -511,22 +511,22 @@
 		return ..()
 	var/datum/reagents/item_reagents = item.reagents
 	if (!HAS_FLAGS(item.atom_flags, ATOM_FLAG_OPEN_CONTAINER))
-		to_chat(user, SPAN_WARNING("[item] is closed."))
+		to_chat(user, span_warning("[item] is closed."))
 	else if (!item_reagents.has_reagent(coolant_reagent))
-		to_chat(user, SPAN_WARNING("[src] needs [initial(coolant_reagent.name)] to run."))
+		to_chat(user, span_warning("[src] needs [initial(coolant_reagent.name)] to run."))
 	else if (length(item_reagents.reagent_list) > 1)
-		to_chat(user, SPAN_WARNING("The contents of [item] is impure."))
+		to_chat(user, span_warning("The contents of [item] is impure."))
 	else
 		var/obj/item/reagent_containers/container = item
 		var/transferred = item_reagents.trans_to_holder(reagents, container.amount_per_transfer_from_this)
 		if (transferred)
 			user.visible_message(
-				SPAN_ITALIC("[user] pours something from [item] into [src]."),
-				SPAN_ITALIC("You pour [transferred]u from [item] into [src]."),
-				SPAN_ITALIC("You hear a liquid gurgling.")
+				span_italic("[user] pours something from [item] into [src]."),
+				span_italic("You pour [transferred]u from [item] into [src]."),
+				span_italic("You hear a liquid gurgling.")
 			)
 		else
-			to_chat(user, SPAN_WARNING("The [src] is full."))
+			to_chat(user, span_warning("The [src] is full."))
 	return TRUE
 
 /obj/machinery/power/port_gen/pacman/super/potato/reactor

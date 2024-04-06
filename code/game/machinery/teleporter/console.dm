@@ -60,7 +60,7 @@
 
 
 /obj/machinery/computer/teleporter/proc/lost_projector()
-	audible_message(SPAN_WARNING("\The [src] buzzes, \"Projector missing.\""))
+	audible_message(span_warning("\The [src] buzzes, \"Projector missing.\""))
 	clear_projector()
 
 
@@ -81,7 +81,7 @@
 
 
 /obj/machinery/computer/teleporter/proc/lost_pad()
-	audible_message(SPAN_WARNING("\The [src] buzzes, \"Pad missing.\""))
+	audible_message(span_warning("\The [src] buzzes, \"Pad missing.\""))
 	clear_pad()
 
 
@@ -107,7 +107,7 @@
 
 
 /obj/machinery/computer/teleporter/proc/lost_target()
-	audible_message(SPAN_WARNING("\The [src] buzzes, \"Target lost.\""))
+	audible_message(span_warning("\The [src] buzzes, \"Target lost.\""))
 	clear_target()
 
 
@@ -130,9 +130,9 @@
 				var/interlude_prob = max(100, (distance / GLOB.maximum_safe_teleport_distance) * 100)
 				playsound(loc, 'sound/machines/twobeep.ogg', 75, 1)
 				if (interlude_prob > 80)
-					visible_message(SPAN_WARNING("WARNING! Maximum range reached! Interference exceeds safe limits!"))
+					visible_message(span_warning("WARNING! Maximum range reached! Interference exceeds safe limits!"))
 				else
-					visible_message(SPAN_WARNING("Warning: Safe range limit exceeded. Interference probability: [interlude_prob]%."))
+					visible_message(span_warning("Warning: Safe range limit exceeded. Interference probability: [interlude_prob]%."))
 
 				pad.interlude_chance = interlude_prob
 
@@ -150,9 +150,9 @@
 	set_timer(!active)
 	if (notify && effective)
 		if (active)
-			visible_message(SPAN_NOTICE("The teleporter sparks and hums to life."))
+			visible_message(span_notice("The teleporter sparks and hums to life."))
 		else
-			visible_message(SPAN_WARNING("The teleporter sputters and fails."))
+			visible_message(span_warning("The teleporter sputters and fails."))
 	if (projector)
 		projector.queue_icon_update()
 	if (pad)
@@ -225,6 +225,6 @@
 			if (isnull(data_target) || !CanDefaultInteract(user))
 				return TRUE
 			if (set_target(targets[data_target]))
-				audible_message(SPAN_NOTICE("\The [src] hums, \"Target updated.\""))
+				audible_message(span_notice("\The [src] hums, \"Target updated.\""))
 			else
-				audible_message(SPAN_WARNING("\The [src] buzzes, \"Failed to establish teleporter lock.\""))
+				audible_message(span_warning("\The [src] buzzes, \"Failed to establish teleporter lock.\""))

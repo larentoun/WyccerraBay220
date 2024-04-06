@@ -72,7 +72,7 @@
 		var/turf/T = get_turf(src)
 		var/area/A = get_area(src)
 		log_game("EMP with size ([heavy_range], [lighter_range]) in area [A] ([T.x], [T.y], [T.z])")
-		visible_message(SPAN_NOTICE("\the [src] suddenly activates."), SPAN_NOTICE("Few lightnings jump between [src]'s rotating hands. You feel everything metal being pulled towards \the [src]."))
+		visible_message(span_notice("\the [src] suddenly activates."), span_notice("Few lightnings jump between [src]'s rotating hands. You feel everything metal being pulled towards \the [src]."))
 		for(var/mob/living/carbon/M in hear(10, get_turf(src)))
 			eye_safety = M.eyecheck()
 			if(eye_safety < FLASH_PROTECTION_MODERATE)
@@ -81,7 +81,7 @@
 
 /obj/structure/magshield/maggen/attack_hand(mob/user)
 	..()
-	to_chat(user, SPAN_NOTICE(" You don't see how you could turn off \the [src]. You can try to stick something in rotating hands."))
+	to_chat(user, span_notice(" You don't see how you could turn off \the [src]. You can try to stick something in rotating hands."))
 
 
 /obj/structure/magshield/maggen/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -89,17 +89,17 @@
 	if (istype(tool, /obj/item/stack/material/rods))
 		var/obj/item/stack/material/rods/rods = tool
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts to stick [rods.get_vague_name(FALSE)] into \the [src]'s rotating hands."),
-			SPAN_NOTICE("You start to stick [rods.get_exact_name(1)] into \the [src]'s rotating hands.")
+			span_notice("\The [user] starts to stick [rods.get_vague_name(FALSE)] into \the [src]'s rotating hands."),
+			span_notice("You start to stick [rods.get_exact_name(1)] into \the [src]'s rotating hands.")
 		)
 		if (!do_after(user, 10 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
 			return TRUE
 		user.visible_message(
-			SPAN_WARNING("\The [user] sticks [rods.get_vague_name(FALSE)] into \the [src]'s rotating hands."),
-			SPAN_WARNING("You stick [rods.get_exact_name(1)] into \the [src]'s rotating hands.")
+			span_warning("\The [user] sticks [rods.get_vague_name(FALSE)] into \the [src]'s rotating hands."),
+			span_warning("You stick [rods.get_exact_name(1)] into \the [src]'s rotating hands.")
 		)
 		rods.use(1)
-		visible_message(SPAN_DANGER("\The [src] stops rotating and releases a cloud of sparks. Better get to a safe distance!"))
+		visible_message(span_danger("\The [src] stops rotating and releases a cloud of sparks. Better get to a safe distance!"))
 		var/datum/effect/spark_spread/sparks = new(src)
 		sparks.set_up(10, EMPTY_BITFIELD, src)
 		sparks.start()
@@ -110,7 +110,7 @@
 
 
 /obj/structure/magshield/maggen/proc/explode()
-	visible_message(SPAN_DANGER("\The [src] explodes!"))
+	visible_message(span_danger("\The [src] explodes!"))
 	explosion(src, 17, EX_ACT_DEVASTATING)
 	empulse(src, heavy_range * 2, lighter_range * 2, 1)
 	qdel_self()

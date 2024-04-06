@@ -64,6 +64,6 @@
 
 /obj/machinery/shield_diffuser/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("It is [enabled ? "enabled" : "disabled"].")
+	. += span_notice("It is [enabled ? "enabled" : "disabled"].")
 	if(alarm)
-		. += SPAN_NOTICE("A red LED labeled \"Proximity Alarm\" is blinking on the control panel.")
+		. += span_notice("A red LED labeled \"Proximity Alarm\" is blinking on the control panel.")

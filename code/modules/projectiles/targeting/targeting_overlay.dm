@@ -115,17 +115,17 @@
 	var/cancel_aim = 1
 
 	if(!(aiming_with in owner) || (istype(owner, /mob/living/carbon/human) && !owner.IsHolding(aiming_with)))
-		to_chat(owner, SPAN_WARNING("You must keep hold of your weapon!"))
+		to_chat(owner, span_warning("You must keep hold of your weapon!"))
 	else if(owner.eye_blind)
-		to_chat(owner, SPAN_WARNING("You are blind and cannot see your target!"))
+		to_chat(owner, span_warning("You are blind and cannot see your target!"))
 	else if(!aiming_at || !istype(aiming_at.loc, /turf))
-		to_chat(owner, SPAN_WARNING("You have lost sight of your target!"))
+		to_chat(owner, span_warning("You have lost sight of your target!"))
 	else if(owner.incapacitated() || owner.lying || owner.restrained())
-		to_chat(owner, SPAN_WARNING("You must be conscious and standing to keep track of your target!"))
+		to_chat(owner, span_warning("You must be conscious and standing to keep track of your target!"))
 	else if(aiming_at.is_invisible_to(owner))
-		to_chat(owner, SPAN_WARNING("Your target has become invisible!"))
+		to_chat(owner, span_warning("Your target has become invisible!"))
 	else if(!(aiming_at in view(owner)))
-		to_chat(owner, SPAN_WARNING("Your target is too far away to track!"))
+		to_chat(owner, span_warning("Your target is too far away to track!"))
 	else
 		cancel_aim = 0
 
@@ -145,16 +145,16 @@
 		return
 
 	if (owner.incapacitated())
-		to_chat(owner, SPAN_WARNING("You cannot aim a gun in your current state."))
+		to_chat(owner, span_warning("You cannot aim a gun in your current state."))
 		return
 	if (owner.lying)
-		to_chat(owner, SPAN_WARNING("You cannot aim a gun while prone."))
+		to_chat(owner, span_warning("You cannot aim a gun while prone."))
 		return
 	if (owner.restrained())
-		to_chat(owner, SPAN_WARNING("You cannot aim a gun while handcuffed."))
+		to_chat(owner, span_warning("You cannot aim a gun while handcuffed."))
 		return
 
-	var/gunpointedtarget = SPAN_DANGER("You now have \a [thing] pointed at you. No sudden moves!")
+	var/gunpointedtarget = span_danger("You now have \a [thing] pointed at you. No sudden moves!")
 	var/gunpointedself = ""
 	var/mob/living/carbon/human/user = owner
 
@@ -162,11 +162,11 @@
 		if (user.zone_sel.selecting == BP_MOUTH)
 			admin_attacker_log(user, "is getting ready to suicide with \a [thing]")
 			if (user.check_has_mouth() && !(user.check_mouth_coverage()))
-				gunpointedself = SPAN_DANGER("\The [owner] puts the barrel of \the [thing] in their mouth, ready to pull the trigger...")
+				gunpointedself = span_danger("\The [owner] puts the barrel of \the [thing] in their mouth, ready to pull the trigger...")
 			else
-				gunpointedself = SPAN_DANGER("\The [owner] aims \the [thing] at themselves, ready to pull the trigger...")
+				gunpointedself = span_danger("\The [owner] aims \the [thing] at themselves, ready to pull the trigger...")
 		else
-			gunpointedself = SPAN_DANGER("\The [owner] aims \the [thing] at themselves!")
+			gunpointedself = span_danger("\The [owner] aims \the [thing] at themselves!")
 
 	if (aiming_at)
 		if (!no_target_change)
@@ -174,12 +174,12 @@
 				return
 			cancel_aiming(1)
 		if (owner != target)
-			owner.visible_message(SPAN_DANGER("\The [owner] turns \the [thing] on \the [target]!"))
+			owner.visible_message(span_danger("\The [owner] turns \the [thing] on \the [target]!"))
 			to_chat(target, "[gunpointedtarget]")
 		else
 			owner.visible_message("[gunpointedself]")
 	else if (owner != target)
-		owner.visible_message(SPAN_DANGER("\The [owner] aims \the [thing] at \the [target]!"))
+		owner.visible_message(span_danger("\The [owner] aims \the [thing] at \the [target]!"))
 		to_chat(target, "[gunpointedtarget]")
 	else
 		owner.visible_message("[gunpointedself]")
@@ -228,11 +228,11 @@
 	if(owner.client)
 		if(active)
 			if(!no_message)
-				to_chat(owner, SPAN_NOTICE("You will now aim rather than fire."))
+				to_chat(owner, span_notice("You will now aim rather than fire."))
 			owner.client.add_gun_icons()
 		else
 			if(!no_message)
-				to_chat(owner, SPAN_NOTICE("You will no longer aim rather than fire."))
+				to_chat(owner, span_notice("You will no longer aim rather than fire."))
 			owner.client.remove_gun_icons()
 		owner.gun_setting_icon.icon_state = "gun[active]"
 
@@ -240,7 +240,7 @@
 	if(!aiming_with || !aiming_at)
 		return
 	if(!no_message)
-		owner.visible_message(SPAN_NOTICE("\The [owner] lowers \the [aiming_with]."))
+		owner.visible_message(span_notice("\The [owner] lowers \the [aiming_with]."))
 		if(istype(aiming_with, /obj/item/gun))
 			sound_to(aiming_at, sound('sound/weapons/TargetOff.ogg'))
 			sound_to(owner, sound('sound/weapons/TargetOff.ogg'))

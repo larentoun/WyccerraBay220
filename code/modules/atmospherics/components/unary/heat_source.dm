@@ -154,4 +154,4 @@
 /obj/machinery/atmospherics/unary/heater/examine(mob/user)
 	. = ..()
 	if(panel_open)
-		. += SPAN_NOTICE("The maintenance hatch is open.")
+		. += span_notice("The maintenance hatch is open.")

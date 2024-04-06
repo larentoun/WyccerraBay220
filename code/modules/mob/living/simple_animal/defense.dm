@@ -15,7 +15,7 @@
 		damage += Proj.agony / 6
 		if(health < Proj.agony * 3)
 			Paralyse(Proj.agony / 20)
-			visible_message(SPAN_WARNING("[src] is stunned momentarily!"))
+			visible_message(span_warning("[src] is stunned momentarily!"))
 
 	bullet_impact_visuals(Proj)
 	adjustBruteLoss(damage)
@@ -31,11 +31,11 @@
 	switch (M.a_intent)
 		if (I_HELP)
 			if (health > 0)
-				M.visible_message(SPAN_NOTICE("\The [M] [response_help] \the [src]."))
+				M.visible_message(span_notice("\The [M] [response_help] \the [src]."))
 				M.update_personal_goal(/datum/goal/achievement/specific_object/pet, type)
 
 		if (I_DISARM)
-			M.visible_message(SPAN_NOTICE("\The [M] [response_disarm] \the [src]."))
+			M.visible_message(span_notice("\The [M] [response_disarm] \the [src]."))
 			M.do_attack_animation(src)
 
 		if (I_HURT)
@@ -50,7 +50,7 @@
 					adjustBleedTicks(dealt_damage)
 
 			adjustBruteLoss(dealt_damage)
-			M.visible_message(SPAN_WARNING("\The [M] [harm_verb] \the [src]!"))
+			M.visible_message(span_warning("\The [M] [harm_verb] \the [src]!"))
 			M.do_attack_animation(src)
 
 			if (ai_holder)
@@ -73,8 +73,8 @@
 			return TRUE
 		var/time_to_butcher = mob_size
 		user.visible_message(
-			SPAN_WARNING("\The [user] begins butchering \the [src]'s corpse with \a [tool]."),
-			SPAN_WARNING("You begin \the [src]'s corpse with \the [tool].")
+			span_warning("\The [user] begins butchering \the [src]'s corpse with \a [tool]."),
+			span_warning("You begin \the [src]'s corpse with \the [tool].")
 		)
 		if (!user.do_skilled(time_to_butcher, SKILL_COOKING, src) || !user.use_sanity_check(src, tool))
 			USE_FEEDBACK_FAILURE("Some of \the [src]'s meat is ruined.")
@@ -83,14 +83,14 @@
 		if (prob(user.skill_fail_chance(SKILL_COOKING, 60, SKILL_TRAINED)))
 			subtract_meat(user)
 			user.visible_message(
-				SPAN_WARNING("\The [user] botches harvesting \the [src], and ruins some of the meat in the process."),
-				SPAN_WARNING("You botch harvesting \the [src], and ruins some of the meat in the process.")
+				span_warning("\The [user] botches harvesting \the [src], and ruins some of the meat in the process."),
+				span_warning("You botch harvesting \the [src], and ruins some of the meat in the process.")
 			)
 			return TRUE
 		harvest(user, user.get_skill_value(SKILL_COOKING))
 		user.visible_message(
-			SPAN_WARNING("\The [user] harvests some meat from \the [src] with \a [tool]."),
-			SPAN_WARNING("You harvest some meat from \the [src] with \the [tool].")
+			span_warning("\The [user] harvests some meat from \the [src] with \a [tool]."),
+			span_warning("You harvest some meat from \the [src] with \the [tool].")
 		)
 		return TRUE
 
@@ -111,18 +111,18 @@
 			return TRUE
 		adjustBruteLoss(-medical.animal_heal)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] applies [medical.get_vague_name(FALSE)] to \the [src]'s injuries."),
-			SPAN_NOTICE("You apply [medical.get_exact_name(1)] to \the [src]'s injuries."),
+			span_notice("\The [user] applies [medical.get_vague_name(FALSE)] to \the [src]'s injuries."),
+			span_notice("You apply [medical.get_exact_name(1)] to \the [src]'s injuries."),
 			exclude_mobs = list(src)
 		)
-		to_chat(src, SPAN_NOTICE("\The [user] applies [medical.get_vague_name(FALSE)] to your injuries."),)
+		to_chat(src, span_notice("\The [user] applies [medical.get_vague_name(FALSE)] to your injuries."),)
 		return TRUE
 
 	return ..()
 
 /mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, effective_force, hit_zone)
 	if(O.force <= resistance)
-		to_chat(user, SPAN_DANGER("This weapon is ineffective; it does no damage."))
+		to_chat(user, span_danger("This weapon is ineffective; it does no damage."))
 		return FALSE
 
 	var/damage = O.force
@@ -147,4 +147,4 @@
 			hand_hurtie = BP_R_HAND
 		attacker.apply_damage(rand(return_damage_min, return_damage_max), damage_type, hand_hurtie, used_weapon = description)
 		if(rand(25))
-			to_chat(attacker, SPAN_WARNING("Your attack has no obvious effect on \the [src]'s [description]!"))
+			to_chat(attacker, span_warning("Your attack has no obvious effect on \the [src]'s [description]!"))

@@ -30,12 +30,12 @@
 "}
 
 /datum/build_mode/ai/Help()
-	to_chat(user, SPAN_NOTICE(help_text))
+	to_chat(user, span_notice(help_text))
 
 /datum/build_mode/ai/Configurate()
 	. = ..()
 	ai_type = select_subpath(ai_type || /datum/ai_holder, /datum/ai_holder)
-	to_chat(user, SPAN_NOTICE("AI Type selected: [ai_type]" ))
+	to_chat(user, span_notice("AI Type selected: [ai_type]" ))
 
 /datum/build_mode/ai/Unselected()
 	. = ..()
@@ -79,15 +79,15 @@
 				if (!isnull(stance)) // Null means there's no AI datum or it has one but is player controlled w/o autopilot on.
 					if (stance == STANCE_SLEEP)
 						AI.go_wake()
-						to_chat(user, SPAN_NOTICE("\The [L]'s AI has been enabled."))
+						to_chat(user, span_notice("\The [L]'s AI has been enabled."))
 					else
 						AI.go_sleep()
-						to_chat(user, SPAN_NOTICE("\The [L]'s AI has been disabled."))
+						to_chat(user, span_notice("\The [L]'s AI has been disabled."))
 
 					toggle_ai_status(L)
 					return
 				else
-					to_chat(user, SPAN_WARNING("\The [L] is not AI controlled."))
+					to_chat(user, span_warning("\The [L] is not AI controlled."))
 				return
 
 			// Toggle hostility
@@ -95,9 +95,9 @@
 				if (!isnull(L.get_AI_stance()))
 					AI.hostile = !AI.hostile
 					AI.lose_target()
-					to_chat(user, SPAN_NOTICE("\The [L] is now [AI.hostile ? "hostile" : "passive"]."))
+					to_chat(user, span_notice("\The [L] is now [AI.hostile ? "hostile" : "passive"]."))
 				else
-					to_chat(user, SPAN_WARNING("\The [L] is not AI controlled."))
+					to_chat(user, span_warning("\The [L] is not AI controlled."))
 				return
 
 
@@ -105,10 +105,10 @@
 			if (!isnull(L.get_AI_stance()))
 				deselect_all()
 				select_AI_mob(L)
-				to_chat(user, SPAN_NOTICE("Selected \the [L]."))
+				to_chat(user, span_notice("Selected \the [L]."))
 				return
 			else
-				to_chat(user, SPAN_WARNING("\The [L] is not AI controlled."))
+				to_chat(user, span_warning("\The [L] is not AI controlled."))
 				return
 		else //Not living
 			deselect_all()
@@ -122,29 +122,29 @@
 			// Change/Set AI Holder
 			if (LAZYACCESS(modifiers, ALT_CLICK) && LAZYACCESS(modifiers, SHIFT_CLICK))
 				if (!ai_type)
-					to_chat(user, SPAN_WARNING("No AI type selected."))
+					to_chat(user, span_warning("No AI type selected."))
 					return
 				if (!isnull(L.ai_holder))
 					GLOB.stat_set_event.unregister(L, L.ai_holder, TYPE_PROC_REF(/datum/ai_holder, holder_stat_change))
 					qdel(L.ai_holder)
 				L.ai_holder = new ai_type (L)
-				to_chat(user, SPAN_NOTICE("\The [L]'s AI type has been changed to [ai_type]"))
+				to_chat(user, span_notice("\The [L]'s AI type has been changed to [ai_type]"))
 				return
 
 			// Copy faction
 			if (LAZYACCESS(modifiers, SHIFT_CLICK))
 				copied_faction = L.faction
-				to_chat(user, SPAN_NOTICE("Copied faction '[copied_faction]'."))
+				to_chat(user, span_notice("Copied faction '[copied_faction]'."))
 				return
 
 			// Paste faction
 			if (LAZYACCESS(modifiers, CTRL_CLICK))
 				if (!copied_faction)
-					to_chat(user, SPAN_WARNING("LMB+Shift a mob to copy their faction before pasting."))
+					to_chat(user, span_warning("LMB+Shift a mob to copy their faction before pasting."))
 					return
 				else
 					L.faction = copied_faction
-					to_chat(user, SPAN_NOTICE("Pasted faction '[copied_faction]'."))
+					to_chat(user, span_notice("Pasted faction '[copied_faction]'."))
 					return
 
 
@@ -155,7 +155,7 @@
 					var/datum/ai_holder/AI = unit.ai_holder
 					AI.give_target(A)
 					i++
-				to_chat(user, SPAN_NOTICE("Commanded [i] mob\s to attack \the [A]."))
+				to_chat(user, span_notice("Commanded [i] mob\s to attack \the [A]."))
 				var/image/orderimage = image(buildmode_hud,A,"ai_targetorder")
 				// orderimage.plane = PLANE_BUILDMODE
 				flick_overlay(orderimage, list(user.client), 8, TRUE)
@@ -176,7 +176,7 @@
 				else
 					AI.give_destination(T, 0, LAZYACCESS(modifiers, SHIFT_CLICK)) // If shift is held, the mobs will not stop moving to attack a visible enemy.
 					told++
-			to_chat(user, SPAN_NOTICE("Commanded [told] mob\s to move to \the [T], and manually placed [forced] of them."))
+			to_chat(user, span_notice("Commanded [told] mob\s to move to \the [T], and manually placed [forced] of them."))
 			var/image/orderimage = image(buildmode_hud,T,"ai_turforder")
 			flick_overlay(orderimage, list(user.client), 8, TRUE)
 			return
@@ -205,7 +205,7 @@
 					message += "."
 			if(j)
 				message += "[j] mob\s to follow \the [L]."
-			to_chat(user, SPAN_NOTICE(message))
+			to_chat(user, span_notice(message))
 			var/image/orderimage = image(buildmode_hud,L,"ai_targetorder")
 			flick_overlay(orderimage, list(user.client), 8, TRUE)
 			return

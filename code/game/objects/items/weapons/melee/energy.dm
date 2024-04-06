@@ -40,9 +40,9 @@
 	if (damaged)
 		if (world.time < disabled)
 			if (user)
-				user.show_message(SPAN_WARNING("\The [src] sputters. It's not going to work right now!"))
+				user.show_message(span_warning("\The [src] sputters. It's not going to work right now!"))
 			return
-		user.visible_message(SPAN_NOTICE("\The [src] resonates perfectly, once again."))
+		user.visible_message(span_notice("\The [src] resonates perfectly, once again."))
 		damaged = FALSE
 
 	active = TRUE
@@ -55,7 +55,7 @@
 
 	if (user)
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
-		to_chat(user, SPAN_NOTICE("\The [src] is now energised."))
+		to_chat(user, span_notice("\The [src] is now energised."))
 	set_light(2, 0.8, lighting_color)
 
 	if (istype(user,/mob/living/carbon/human))
@@ -79,7 +79,7 @@
 
 	if (user)
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
-		to_chat(user, SPAN_NOTICE("\The [src] deactivates!"))
+		to_chat(user, span_notice("\The [src] deactivates!"))
 	set_light(0)
 
 	if (istype(user,/mob/living/carbon/human))
@@ -93,8 +93,8 @@
 /obj/item/melee/energy/attack_self(mob/living/user as mob)
 	if (active)
 		if ((MUTATION_CLUMSY in user.mutations) && prob(50))
-			user.visible_message(SPAN_DANGER("\The [user] accidentally cuts \himself with \the [src]."),\
-			SPAN_DANGER("You accidentally cut yourself with \the [src]."))
+			user.visible_message(span_danger("\The [user] accidentally cuts \himself with \the [src]."),\
+			span_danger("You accidentally cut yourself with \the [src]."))
 			user.take_organ_damage(5,5)
 		deactivate(user)
 	else
@@ -114,7 +114,7 @@
 	if (severity == EMP_ACT_HEAVY)
 		disabletime = 1.5 MINUTES
 
-	visible_message(SPAN_DANGER("\The [src] violently shudders!"))
+	visible_message(span_danger("\The [src] violently shudders!"))
 	new /obj/overlay/self_deleting/emppulse(get_turf(src))
 
 	disabled = world.time + disabletime
@@ -167,7 +167,7 @@
 
 /obj/item/melee/energy/axe/deactivate(mob/living/user)
 	. = ..()
-	to_chat(user, SPAN_NOTICE("\The [src] is de-energised. It's just a regular axe now."))
+	to_chat(user, span_notice("\The [src] is de-energised. It's just a regular axe now."))
 
 
 /*

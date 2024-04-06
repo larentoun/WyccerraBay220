@@ -146,7 +146,7 @@ meteor_act
 
 	var/obj/item/projectile/P = damage_source
 	if(istype(P) && !P.disrupts_psionics() && psi && P.starting && prob(psi.get_armour(get_armor_key(P.damage_type, P.damage_flags())) * 0.5) && psi.spend_power(round(damage/10)))
-		visible_message(SPAN_DANGER("\The [src] deflects [attack_text]!"))
+		visible_message(span_danger("\The [src] deflects [attack_text]!"))
 		P.redirect(P.starting.x + rand(-2,2), P.starting.y + rand(-2,2), get_turf(src), src)
 		return PROJECTILE_FORCE_MISS
 
@@ -171,7 +171,7 @@ meteor_act
 
 	var/obj/item/organ/external/affecting = get_organ(hit_zone)
 	if (!affecting || affecting.is_stump())
-		to_chat(user, SPAN_DANGER("They are missing that limb!"))
+		to_chat(user, span_danger("They are missing that limb!"))
 		return
 
 	return hit_zone
@@ -193,7 +193,7 @@ meteor_act
 	var/hit_zone = get_zone_with_miss_chance(target_zone, src, accuracy_penalty)
 
 	if (!hit_zone)
-		visible_message(SPAN_DANGER("\The [user] misses [src] with \the [I]!"))
+		visible_message(span_danger("\The [user] misses [src] with \the [I]!"))
 		return
 
 	if (check_shields(I.force, I, user, hit_zone, "the [I.name]"))
@@ -201,7 +201,7 @@ meteor_act
 
 	var/obj/item/organ/external/affecting = get_organ(hit_zone)
 	if (!affecting || affecting.is_stump())
-		to_chat(user, SPAN_DANGER("They are missing that limb!"))
+		to_chat(user, span_danger("They are missing that limb!"))
 		return
 
 	return hit_zone
@@ -236,7 +236,7 @@ meteor_act
 			if (!headcheck(hit_zone))
 				if (prob(unimpeded_force + 5))
 					apply_effect(3, EFFECT_WEAKEN, 100 * blocked)
-					visible_message(SPAN_DANGER("[src] has been knocked down!"))
+					visible_message(span_danger("[src] has been knocked down!"))
 		//Apply blood
 		attack_bloody(I, user, effective_force, hit_zone)
 	return TRUE
@@ -310,12 +310,12 @@ meteor_act
 /mob/living/carbon/human/emag_act(remaining_charges, mob/user, emag_source)
 	var/obj/item/organ/external/affecting = get_organ(user.zone_sel.selecting)
 	if(!affecting || !BP_IS_ROBOTIC(affecting))
-		to_chat(user, SPAN_WARNING("That limb isn't robotic."))
+		to_chat(user, span_warning("That limb isn't robotic."))
 		return -1
 	if(affecting.status & ORGAN_SABOTAGED)
-		to_chat(user, SPAN_WARNING("[src]'s [affecting.name] is already sabotaged!"))
+		to_chat(user, span_warning("[src]'s [affecting.name] is already sabotaged!"))
 		return -1
-	to_chat(user, SPAN_NOTICE("You sneakily slide [emag_source] into the dataport on [src]'s [affecting.name] and short out the safeties."))
+	to_chat(user, span_notice("You sneakily slide [emag_source] into the dataport on [src]'s [affecting.name] and short out the safeties."))
 	affecting.status |= ORGAN_SABOTAGED
 	return 1
 
@@ -329,7 +329,7 @@ meteor_act
 			if(!incapacitated())
 				if(isturf(O.loc))
 					put_in_active_hand(O)
-					visible_message(SPAN_WARNING("[src] catches [O]!"))
+					visible_message(span_warning("[src] catches [O]!"))
 					throw_mode_off()
 					return
 
@@ -354,18 +354,18 @@ meteor_act
 				return
 
 		if(!zone)
-			visible_message(SPAN_NOTICE("\The [O] misses [src] narrowly!"))
+			visible_message(span_notice("\The [O] misses [src] narrowly!"))
 			return
 
 		var/obj/item/organ/external/affecting = get_organ(zone)
 		if (!affecting)
-			visible_message(SPAN_NOTICE("\The [O] misses [src] narrowly!"))
+			visible_message(span_notice("\The [O] misses [src] narrowly!"))
 			return
 
 		var/hit_area = affecting.name
 		var/datum/wound/created_wound
 
-		src.visible_message(SPAN_WARNING("\The [src] has been hit in the [hit_area] by \the [O]."))
+		src.visible_message(span_warning("\The [src] has been hit in the [hit_area] by \the [O]."))
 		created_wound = apply_damage(throw_damage, dtype, zone, O.damage_flags(), O, O.armor_penetration)
 
 		if(TT.thrower)

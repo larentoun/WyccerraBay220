@@ -234,12 +234,12 @@
 		return ..()
 
 	if (clipped)
-		to_chat(user, SPAN_NOTICE("\The [src] have already been modified!"))
+		to_chat(user, span_notice("\The [src] have already been modified!"))
 		update_icon()
 		return TRUE
 
 	playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
-	user.visible_message(SPAN_WARNING("\The [user] modifies \the [src] with \the [W]."),SPAN_WARNING("You modify \the [src] with \the [W]."))
+	user.visible_message(span_warning("\The [user] modifies \the [src] with \the [W]."),span_warning("You modify \the [src] with \the [W]."))
 	cut_clogs()
 	return TRUE
 

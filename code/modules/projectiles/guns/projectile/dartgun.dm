@@ -98,11 +98,11 @@
 /obj/item/gun/projectile/dartgun/examine(mob/user)
 	. = ..()
 	if (length(beakers))
-		. += SPAN_NOTICE("[src] contains:")
+		. += span_notice("[src] contains:")
 		for(var/obj/item/reagent_containers/glass/beaker/B in beakers)
 			if(B.reagents && length(B.reagents.reagent_list))
 				for(var/datum/reagent/R in B.reagents.reagent_list)
-					. += SPAN_NOTICE("[R.volume] units of [R.name]")
+					. += span_notice("[R.volume] units of [R.name]")
 
 
 /obj/item/gun/projectile/dartgun/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -116,21 +116,21 @@
 
 /obj/item/gun/projectile/dartgun/proc/add_beaker(obj/item/reagent_containers/glass/B, mob/user)
 	if(!istype(B, container_type))
-		to_chat(user, SPAN_WARNING("[B] doesn't seem to fit into [src]."))
+		to_chat(user, span_warning("[B] doesn't seem to fit into [src]."))
 		return
 	if(length(beakers) >= max_beakers)
-		to_chat(user, SPAN_WARNING("[src] already has [max_beakers] beakers in it - another one isn't going to fit!"))
+		to_chat(user, span_warning("[src] already has [max_beakers] beakers in it - another one isn't going to fit!"))
 		return
 	if(!user.unEquip(B, src))
 		return
 	beakers |= B
-	user.visible_message("\The [user] inserts \a [B] into [src].", SPAN_NOTICE("You slot [B] into [src]."))
+	user.visible_message("\The [user] inserts \a [B] into [src].", span_notice("You slot [B] into [src]."))
 
 /obj/item/gun/projectile/dartgun/proc/remove_beaker(obj/item/reagent_containers/glass/B, mob/user)
 	mixing -= B
 	beakers -= B
 	user.put_in_hands(B)
-	user.visible_message("\The [user] removes \a [B] from [src].", SPAN_NOTICE("You remove [B] from [src]."))
+	user.visible_message("\The [user] removes \a [B] from [src].", span_notice("You remove [B] from [src]."))
 
 //fills the given dart with reagents
 /obj/item/gun/projectile/dartgun/proc/fill_dart(obj/item/projectile/bullet/chemdart/dart)

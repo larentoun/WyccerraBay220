@@ -153,16 +153,16 @@
 			if(host.reagents.has_reagent(/datum/reagent/sugar))
 				if(!docile)
 					if(controlling)
-						to_chat(host, SPAN_NOTICE("You feel the soporific flow of sugar in your host's blood, lulling you into docility."))
+						to_chat(host, span_notice("You feel the soporific flow of sugar in your host's blood, lulling you into docility."))
 					else
-						to_chat(src, SPAN_NOTICE("You feel the soporific flow of sugar in your host's blood, lulling you into docility."))
+						to_chat(src, span_notice("You feel the soporific flow of sugar in your host's blood, lulling you into docility."))
 					docile = 1
 			else
 				if(docile)
 					if(controlling)
-						to_chat(host, SPAN_NOTICE("You shake off your lethargy as the sugar leaves your host's blood."))
+						to_chat(host, span_notice("You shake off your lethargy as the sugar leaves your host's blood."))
 					else
-						to_chat(src, SPAN_NOTICE("You shake off your lethargy as the sugar leaves your host's blood."))
+						to_chat(src, span_notice("You shake off your lethargy as the sugar leaves your host's blood."))
 					docile = 0
 
 			if(chemicals < 250 && host.nutrition >= (neutered ? 200 : 50))
@@ -176,7 +176,7 @@
 					return
 
 				if(docile)
-					to_chat(host, SPAN_NOTICE("You are feeling far too docile to continue controlling your host..."))
+					to_chat(host, span_notice("You are feeling far too docile to continue controlling your host..."))
 					host.release_control()
 					return
 

@@ -168,7 +168,7 @@
 	return FALSE
 
 /atom/movable/openspace/mimic/attack_hand(mob/user)
-	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))
+	to_chat(user, span_notice("You cannot reach \the [src] from here."))
 
 /atom/movable/openspace/mimic/examine(...)
 	SHOULD_CALL_PARENT(FALSE)
@@ -229,10 +229,10 @@
 	return tool.resolve_attackby(loc, user, click_params)
 
 /atom/movable/openspace/turf_mimic/attack_hand(mob/user as mob)
-	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))
+	to_chat(user, span_notice("You cannot reach \the [src] from here."))
 
 /atom/movable/openspace/turf_mimic/attack_generic(mob/user as mob)
-	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))
+	to_chat(user, span_notice("You cannot reach \the [src] from here."))
 
 /atom/movable/openspace/turf_mimic/examine(...)
 	SHOULD_CALL_PARENT(FALSE)

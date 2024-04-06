@@ -35,7 +35,7 @@
 			match_to_light.icon_state = "match_lit"
 			START_PROCESSING(SSobj, match_to_light)
 			playsound(loc, 'sound/items/match.ogg', 60, 1, -4)
-			user.visible_message(SPAN_NOTICE("[user] strikes the match on \the [src]."))
+			user.visible_message(span_notice("[user] strikes the match on \the [src]."))
 			match_to_light.update_icon()
 			return TRUE
 

@@ -47,10 +47,10 @@
 /obj/item/inducer/proc/CannotUse(mob/user)
 	var/obj/item/cell/my_cell = get_cell()
 	if(!istype(my_cell))
-		to_chat(user, SPAN_WARNING("\The [src] doesn't have a power cell installed!"))
+		to_chat(user, span_warning("\The [src] doesn't have a power cell installed!"))
 		return TRUE
 	if(my_cell.percent() <= 0)
-		to_chat(user, SPAN_WARNING("\The [src]'s battery is dead!"))
+		to_chat(user, span_warning("\The [src]'s battery is dead!"))
 		return TRUE
 	return FALSE
 
@@ -65,18 +65,18 @@
 /obj/item/inducer/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/cell))
 		if (istype(W, /obj/item/cell/device))
-			to_chat(user, SPAN_WARNING("\The [src] only takes full-size power cells."))
+			to_chat(user, span_warning("\The [src] only takes full-size power cells."))
 			return
 		if(opened)
 			if(!cell)
 				if(!user.unEquip(W, src))
 					return
-				to_chat(user, SPAN_NOTICE("You insert \the [W] into \the [src]."))
+				to_chat(user, span_notice("You insert \the [W] into \the [src]."))
 				cell = W
 				update_icon()
 				return
 			else
-				to_chat(user, SPAN_NOTICE("\The [src] already has \a [cell] installed!"))
+				to_chat(user, span_notice("\The [src] already has \a [cell] installed!"))
 				return
 	if(CannotUse(user) || recharge(W, user))
 		return
@@ -100,12 +100,12 @@
 		sparks.set_up(1, 1, user.loc)
 		sparks.start()
 		if(C.charge >= C.maxcharge)
-			to_chat(user, SPAN_WARNING("\The [A] is already fully charged!"))
+			to_chat(user, span_warning("\The [A] is already fully charged!"))
 			recharging = FALSE
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts recharging \the [A] with \the [src]."),
-			SPAN_NOTICE("You start recharging \the [A] with \the [src].")
+			span_notice("\The [user] starts recharging \the [A] with \the [src]."),
+			span_notice("You start recharging \the [A] with \the [src].")
 		)
 		if (istype(A, /obj/item/gun/energy))
 			length = 3 SECONDS
@@ -121,8 +121,8 @@
 			sparks.start()
 			induce(C)
 			user.visible_message(
-				SPAN_NOTICE("\The [user] recharges \the [A] with \the [src]."),
-				SPAN_NOTICE("You recharge \the [A] with \the [src].")
+				span_notice("\The [user] recharges \the [A] with \the [src]."),
+				span_notice("You recharge \the [A] with \the [src].")
 			)
 			if(O)
 				O.update_icon()
@@ -131,7 +131,7 @@
 		recharging = FALSE
 		return TRUE
 	else
-		to_chat(user, SPAN_WARNING("No cell detected!"))
+		to_chat(user, span_warning("No cell detected!"))
 	recharging = FALSE
 
 // used only on the borg one, but here in case we invent inducer guns idk
@@ -143,7 +143,7 @@
 
 /obj/item/inducer/attack_self(mob/user)
 	if(opened && cell)
-		user.visible_message("\The [user] removes \the [cell] from \the [src]!",SPAN_NOTICE("You remove \the [cell]."))
+		user.visible_message("\The [user] removes \the [cell] from \the [src]!",span_notice("You remove \the [cell]."))
 		cell.update_icon()
 		user.put_in_hands(cell)
 		cell = null
@@ -154,11 +154,11 @@
 	. = ..()
 	var/obj/item/cell/MyC = get_cell()
 	if(MyC)
-		. += SPAN_NOTICE("Its display shows: [MyC.percent()]%.")
+		. += span_notice("Its display shows: [MyC.percent()]%.")
 	else
-		. += SPAN_NOTICE("Its display is dark.")
+		. += span_notice("Its display is dark.")
 	if(opened)
-		. += SPAN_NOTICE("Its battery compartment is open.")
+		. += span_notice("Its battery compartment is open.")
 
 /obj/item/inducer/on_update_icon()
 	ClearOverlays()
@@ -198,7 +198,7 @@
 		failsafe = 0.2
 	update_icon()
 	if(user)
-		to_chat(user, SPAN_NOTICE("You switch your battery output failsafe [safety() ? "on" : "off"	]."))
+		to_chat(user, span_notice("You switch your battery output failsafe [safety() ? "on" : "off"	]."))
 
 /obj/item/inducer/borg/get_cell()
 	return loc ? loc.get_cell() : null

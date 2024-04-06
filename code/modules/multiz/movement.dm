@@ -45,18 +45,18 @@
 	var/turf/destination = (direction == UP) ? GetAbove(pulling) : GetBelow(pulling)
 
 	if(!start.CanZPass(pulling, direction))
-		to_chat(src, SPAN_WARNING("\The [start] blocked your pulled object!"))
+		to_chat(src, span_warning("\The [start] blocked your pulled object!"))
 		stop_pulling()
 		return 0
 
 	if(!destination.CanZPass(pulling, direction))
-		to_chat(src, SPAN_WARNING("The [pulling] you were pulling bumps up against \the [destination]."))
+		to_chat(src, span_warning("The [pulling] you were pulling bumps up against \the [destination]."))
 		stop_pulling()
 		return 0
 
 	for(var/atom/A in destination)
 		if(!A.CanMoveOnto(pulling, start, 1.5, direction))
-			to_chat(src, SPAN_WARNING("\The [A] blocks the [pulling] you were pulling."))
+			to_chat(src, span_warning("\The [A] blocks the [pulling] you were pulling."))
 			stop_pulling()
 			return 0
 
@@ -223,7 +223,7 @@
 	if(locate(/obj/structure/stairs) in landing)
 		return 1
 	else if(landing.get_fluid_depth() >= FLUID_DEEP)
-		visible_message(SPAN_NOTICE("\The [src] falls into the water!"), SPAN_NOTICE("What a splash!"))
+		visible_message(span_notice("\The [src] falls into the water!"), span_notice("What a splash!"))
 		playsound(src,  'sound/effects/watersplash.ogg', 30, TRUE)
 		return 1
 	else
@@ -239,8 +239,8 @@
 			for (var/obj/item/rig_module/actuators/A in rig.installed_modules)
 				if (A.active)
 					visible_message(
-						SPAN_NOTICE("\The [src]'s suit whirrs loudly as \the [rig] absorbs the fall!"),
-						SPAN_NOTICE("You hear an electric <i>*whirr*</i> right after the slam!")
+						span_notice("\The [src]'s suit whirrs loudly as \the [rig] absorbs the fall!"),
+						span_notice("You hear an electric <i>*whirr*</i> right after the slam!")
 					)
 		if (fall_damage())
 			for (var/mob/living/M in landing.contents)
@@ -293,7 +293,7 @@
 		if(length(victims))
 			var/obj/item/organ/external/victim = pick(victims)
 			victim.dislocate()
-			to_chat(src, SPAN_WARNING("You feel a sickening pop as your [victim.joint] is wrenched out of the socket."))
+			to_chat(src, span_warning("You feel a sickening pop as your [victim.joint] is wrenched out of the socket."))
 	updatehealth()
 
 
@@ -310,16 +310,16 @@
 			for (var/obj/item/rig_module/actuators/R in rig.installed_modules)
 				if (R.active && rig.check_power_cost(src, 50 KILOWATTS, A, 0))
 					visible_message(
-						SPAN_NOTICE("\The [src] prepares to leap upwards onto \the [A]!"),
-						SPAN_NOTICE("You crouch, preparing to leap upwards onto \the [A]!")
+						span_notice("\The [src] prepares to leap upwards onto \the [A]!"),
+						span_notice("You crouch, preparing to leap upwards onto \the [A]!")
 					)
 					if (do_after(src, 2 SECONDS, A, DO_PUBLIC_UNIQUE))
 						if(src.incapacitated() || src.restrained())
-							to_chat(src, SPAN_WARNING("You are in no condition to activate your suit."))
+							to_chat(src, span_warning("You are in no condition to activate your suit."))
 							return TRUE
 						visible_message(
-							SPAN_NOTICE("\The [src]'s suit whirrs aggressively as they leap up to \the [A]!"),
-							SPAN_NOTICE("You leap to \the [A]!")
+							span_notice("\The [src]'s suit whirrs aggressively as they leap up to \the [A]!"),
+							span_notice("You leap to \the [A]!")
 						)
 						src.Move(T)
 						return TRUE
@@ -327,12 +327,12 @@
 		if(loc.has_gravity() && !can_overcome_gravity())
 			return FALSE
 
-		visible_message(SPAN_NOTICE("[src] starts climbing onto \the [A]!"), SPAN_NOTICE("You start climbing onto \the [A]!"))
+		visible_message(span_notice("[src] starts climbing onto \the [A]!"), span_notice("You start climbing onto \the [A]!"))
 		if(do_after(src, 5 SECONDS, A, DO_PUBLIC_UNIQUE))
-			visible_message(SPAN_NOTICE("[src] climbs onto \the [A]!"), SPAN_NOTICE("You climb onto \the [A]!"))
+			visible_message(span_notice("[src] climbs onto \the [A]!"), span_notice("You climb onto \the [A]!"))
 			src.Move(T)
 		else
-			visible_message(SPAN_WARNING("[src] gives up on trying to climb onto \the [A]!"), SPAN_WARNING("You give up on trying to climb onto \the [A]!"))
+			visible_message(span_warning("[src] gives up on trying to climb onto \the [A]!"), span_warning("You give up on trying to climb onto \the [A]!"))
 		return TRUE
 
 /atom/movable/proc/can_float()

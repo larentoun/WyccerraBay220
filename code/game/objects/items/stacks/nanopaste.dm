@@ -19,10 +19,10 @@
 			R.adjustFireLoss(-15)
 			R.updatehealth()
 			use(1)
-			user.visible_message(SPAN_NOTICE("\The [user] applied some [src] on [R]'s damaged areas."),\
-				SPAN_NOTICE("You apply some [src] at [R]'s damaged areas."))
+			user.visible_message(span_notice("\The [user] applied some [src] on [R]'s damaged areas."),\
+				span_notice("You apply some [src] at [R]'s damaged areas."))
 		else
-			to_chat(user, SPAN_NOTICE("All [R]'s systems are nominal."))
+			to_chat(user, span_notice("All [R]'s systems are nominal."))
 		return TRUE
 
 	if (istype(M,/mob/living/carbon/human))		//Repairing robolimbs
@@ -30,21 +30,21 @@
 		var/obj/item/organ/external/S = H.get_organ(user.zone_sel.selecting)
 
 		if(!S)
-			to_chat(user, SPAN_WARNING("\The [M] is missing that body part."))
+			to_chat(user, span_warning("\The [M] is missing that body part."))
 			return TRUE
 
 		if(BP_IS_BRITTLE(S))
-			to_chat(user, SPAN_WARNING("\The [M]'s [S.name] is hard and brittle - \the [src] cannot repair it."))
+			to_chat(user, span_warning("\The [M]'s [S.name] is hard and brittle - \the [src] cannot repair it."))
 			return TRUE
 
 		if(S && BP_IS_ROBOTIC(S) && S.hatch_state == HATCH_OPENED)
 			if (!S.get_damage())
-				to_chat(user, SPAN_NOTICE("Nothing to fix here."))
+				to_chat(user, span_notice("Nothing to fix here."))
 			else if (can_use(1))
 				user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 				S.heal_damage(15, 15, robo_repair = 1)
 				H.updatehealth()
 				use(1)
-				user.visible_message(SPAN_NOTICE("\The [user] applies some nanite paste on [user != M ? "[M]'s [S.name]" : "[S]"] with [src]."),\
-				SPAN_NOTICE("You apply some nanite paste on [user == M ? "your" : "[M]'s"] [S.name]."))
+				user.visible_message(span_notice("\The [user] applies some nanite paste on [user != M ? "[M]'s [S.name]" : "[S]"] with [src]."),\
+				span_notice("You apply some nanite paste on [user == M ? "your" : "[M]'s"] [S.name]."))
 			return TRUE

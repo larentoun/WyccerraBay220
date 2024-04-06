@@ -38,12 +38,12 @@
 	P.can_buckle = TRUE
 
 	if (!P.can_buckle(M))
-		P.visible_message(SPAN_WARNING("\The [P] appear from the floor, attempting to wrap around \the [M], but slip free and disappear!"))
+		P.visible_message(span_warning("\The [P] appear from the floor, attempting to wrap around \the [M], but slip free and disappear!"))
 		qdel(src)
 		return TRUE
 	P.buckle_mob(M)
 	M.set_dir(pick(GLOB.cardinal))
-	M.visible_message(SPAN_DANGER("[P] appear from the floor, spinning around \the [M] tightly!"))
+	M.visible_message(span_danger("[P] appear from the floor, spinning around \the [M] tightly!"))
 	return ..()
 
 /spell/hand/charges/entangle/empower_spell()

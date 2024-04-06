@@ -27,7 +27,7 @@
 		owner.bodytemperature += burn
 		burn = 0
 		if(prob(25))
-			owner.visible_message(SPAN_WARNING("\The [owner]'s crystalline [name] shines with absorbed energy!"))
+			owner.visible_message(span_warning("\The [owner]'s crystalline [name] shines with absorbed energy!"))
 
 	if(used_weapon)
 		add_autopsy_data("[used_weapon]", brute + burn)
@@ -101,7 +101,7 @@
 				W.salved = 0
 				disturbed += W.damage
 		if(owner && disturbed)
-			to_chat(owner,SPAN_WARNING("Ow! Your burns were disturbed."))
+			to_chat(owner,span_warning("Ow! Your burns were disturbed."))
 			add_pain(0.5*disturbed)
 
 	//If there are still hurties to dispense
@@ -216,7 +216,7 @@
 	if(genetic_degradation <= 30)
 		if(status & ORGAN_MUTATED)
 			unmutate()
-			to_chat(src, SPAN_NOTICE("Your [name] is shaped normally again."))
+			to_chat(src, span_notice("Your [name] is shaped normally again."))
 	return -(genetic_degradation - last_gene_dam)
 
 /obj/item/organ/external/proc/add_genetic_damage(amount)
@@ -229,7 +229,7 @@
 	if(genetic_degradation > 30)
 		if(!(status & ORGAN_MUTATED) && prob(genetic_degradation))
 			mutate()
-			to_chat(owner, SPAN_NOTICE("Something is not right with your [name]..."))
+			to_chat(owner, span_notice("Something is not right with your [name]..."))
 	return (genetic_degradation - last_gene_dam)
 
 /obj/item/organ/external/proc/mutate()

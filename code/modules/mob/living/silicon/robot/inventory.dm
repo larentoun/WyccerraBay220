@@ -77,7 +77,7 @@
 
 /mob/living/silicon/robot/hotkey_drop()
 	if (!module)
-		to_chat(src, SPAN_WARNING("You haven't selected a module yet."))
+		to_chat(src, span_warning("You haven't selected a module yet."))
 		return
 	uneq_active()
 	hud_used.update_robot_modules_display()
@@ -268,10 +268,10 @@
 	if(!(locate(O) in module.equipment))
 		return
 	if (IsHolding(O))
-		to_chat(src, SPAN_NOTICE("Already activated"))
+		to_chat(src, span_notice("Already activated"))
 		return
 	if (!HasFreeHand())
-		to_chat(src, SPAN_NOTICE("You need to disable a module first!"))
+		to_chat(src, span_notice("You need to disable a module first!"))
 		return
 	if(!module_state_1)
 		module_state_1 = O

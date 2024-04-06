@@ -26,7 +26,7 @@
 /obj/item/clothing/accessory/wristwatch/proc/CheckTime(mob/user)
 	var/extra_days = round(station_time_in_ticks / (1 DAY)) DAYS
 	var/timeofday = world.timeofday + extra_days
-	return SPAN_NOTICE("You check \the [src]. The time is [stationtime2text()] on the [time2text(timeofday, "DD")]\th of [time2text(timeofday, "Month")], [GLOB.using_map.game_year].")
+	return span_notice("You check \the [src]. The time is [stationtime2text()] on the [time2text(timeofday, "DD")]\th of [time2text(timeofday, "Month")], [GLOB.using_map.game_year].")
 
 
 /obj/item/clothing/accessory/wristwatch/OnTopic(mob/user, list/href_list)

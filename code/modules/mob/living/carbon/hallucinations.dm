@@ -159,10 +159,10 @@
 			if(holder.hallucination_power > 50)
 				phrases += list("What did you come here for[add]?","Don't touch me[add].","You're not getting out of here[add].", "You are a failure, [pick(names)].","Just leave already, [pick(names)]")
 			message = pick(phrases)
-			to_chat(holder,"[SPAN_CLASS("game say", "[SPAN_CLASS("name", display_name)] [holder.say_quote(message)], [SPAN_CLASS("message", "[SPAN_CLASS("body", "\"[message]\"")]")]")]")
+			to_chat(holder,"[SPAN_CLASS("game say", "[span_name(display_name)] [holder.say_quote(message)], [SPAN_CLASS("message", "[SPAN_CLASS("body", "\"[message]\"")]")]")]")
 		else
 			to_chat(holder,"<B>[display_name]</B> points at [holder.name]")
-			to_chat(holder,"[SPAN_CLASS("game say", "[SPAN_CLASS("name", display_name)] says something softly.")]")
+			to_chat(holder,"[SPAN_CLASS("game say", "[span_name(display_name)] says something softly.")]")
 		var/image/speech_bubble = image('icons/mob/talk.dmi',talker,"h[holder.say_test(message)]")
 		spawn(30) qdel(speech_bubble)
 		image_to(holder,speech_bubble)
@@ -172,7 +172,7 @@
 
 //Spiderling skitters
 /datum/hallucination/skitter/start()
-	to_chat(holder,SPAN_NOTICE("The spiderling skitters[pick(" away"," around","")]."))
+	to_chat(holder,span_notice("The spiderling skitters[pick(" away"," around","")]."))
 
 //Spiders in your body
 /datum/hallucination/spiderbabies
@@ -182,7 +182,7 @@
 	if(istype(holder,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = holder
 		var/obj/O = pick(H.organs)
-		to_chat(H,SPAN_WARNING("You feel something [pick("moving","squirming","skittering")] inside of your [O.name]!"))
+		to_chat(H,span_warning("You feel something [pick("moving","squirming","skittering")] inside of your [O.name]!"))
 
 //Seeing stuff
 /datum/hallucination/mirage
@@ -261,4 +261,4 @@
 	min_power = 30
 
 /datum/hallucination/fakeattack/hypo/start()
-	holder.custom_pain(SPAN_WARNING("You feel a tiny prick!"), 1, TRUE)
+	holder.custom_pain(span_warning("You feel a tiny prick!"), 1, TRUE)

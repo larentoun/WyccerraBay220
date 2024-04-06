@@ -27,16 +27,16 @@
 	..()
 
 /singleton/surgery_step/fix_face/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message(SPAN_NOTICE("[user] repairs \the [target]'s face with \the [tool]."),	\
-	SPAN_NOTICE("You repair \the [target]'s face with \the [tool]."))
+	user.visible_message(span_notice("[user] repairs \the [target]'s face with \the [tool]."),	\
+	span_notice("You repair \the [target]'s face with \the [tool]."))
 	var/obj/item/organ/external/head/h = target.get_organ(target_zone)
 	if(h)
 		h.status &= ~ORGAN_DISFIGURED
 
 /singleton/surgery_step/fix_face/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_WARNING("[user]'s hand slips, tearing skin on [target]'s face with \the [tool]!"), \
-	SPAN_WARNING("Your hand slips, tearing skin on [target]'s face with \the [tool]!"))
+	user.visible_message(span_warning("[user]'s hand slips, tearing skin on [target]'s face with \the [tool]!"), \
+	span_warning("Your hand slips, tearing skin on [target]'s face with \the [tool]!"))
 	affected.take_external_damage(10, 0, (DAMAGE_FLAG_SHARP|DAMAGE_FLAG_EDGE), used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
@@ -67,8 +67,8 @@
 
 /singleton/surgery_step/plastic_surgery/prepare_face/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message(
-		SPAN_NOTICE("\The [user] starts peeling back the skin around \the [target]'s face with \the [tool]."),
-		SPAN_NOTICE("You start peeling back the skin around \the [target]'s face with \the [tool].")
+		span_notice("\The [user] starts peeling back the skin around \the [target]'s face with \the [tool]."),
+		span_notice("You start peeling back the skin around \the [target]'s face with \the [tool].")
 	)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(affected.stage == 0)
@@ -78,15 +78,15 @@
 
 /singleton/surgery_step/plastic_surgery/prepare_face/end_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message(
-		SPAN_NOTICE("\The [user] finishes peeling back the skin around \the [target]'s face with \the [tool]."),
-		SPAN_NOTICE("You finish peeling back the skin around \the [target]'s face with \the [tool].")
+		span_notice("\The [user] finishes peeling back the skin around \the [target]'s face with \the [tool]."),
+		span_notice("You finish peeling back the skin around \the [target]'s face with \the [tool].")
 	)
 
 /singleton/surgery_step/plastic_surgery/prepare_face/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message(
-		SPAN_WARNING("\The [user]'s hand slips, tearing skin on \the [target]'s face with \the [tool]!"),
-		SPAN_WARNING("Your hand slips, tearing skin on \the [target]'s face with \the [tool]!")
+		span_warning("\The [user]'s hand slips, tearing skin on \the [target]'s face with \the [tool]!"),
+		span_warning("Your hand slips, tearing skin on \the [target]'s face with \the [tool]!")
 	)
 	affected.take_external_damage(10, 0, (DAMAGE_FLAG_SHARP|DAMAGE_FLAG_EDGE), used_weapon = tool)
 
@@ -106,23 +106,23 @@
 
 /singleton/surgery_step/plastic_surgery/reform_face/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message(
-		SPAN_NOTICE("\The [user] starts molding \the [target]'s face with \the [tool]."),
-		SPAN_NOTICE("You start molding \the [target]'s face with \the [tool].")
+		span_notice("\The [user] starts molding \the [target]'s face with \the [tool]."),
+		span_notice("You start molding \the [target]'s face with \the [tool].")
 	)
 	playsound(target.loc, 'sound/items/hemostat.ogg', 50, TRUE)
 	..()
 
 /singleton/surgery_step/plastic_surgery/reform_face/end_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	user.visible_message(
-		SPAN_NOTICE("\The [user] finishes molding \the [target]'s face with \the [tool]."),
-		SPAN_NOTICE("You finish molding \the [target]'s face with \the [tool].")
+		span_notice("\The [user] finishes molding \the [target]'s face with \the [tool]."),
+		span_notice("You finish molding \the [target]'s face with \the [tool].")
 	)
 	if(!target.fake_name)
 		var/new_name = sanitizeSafe(input(user, "Select a new name for \the [target].") as text|null, MAX_NAME_LEN)
 		if(new_name && user.Adjacent(target))
 			user.visible_message(
-				SPAN_NOTICE("\The [user] molds \the [target]'s face into the spitting image of [new_name]!"),
-				SPAN_NOTICE("You mold \the [target]'s face into the spitting image of [new_name]!")
+				span_notice("\The [user] molds \the [target]'s face into the spitting image of [new_name]!"),
+				span_notice("You mold \the [target]'s face into the spitting image of [new_name]!")
 			)
 			target.fake_name=new_name
 			target.name=new_name
@@ -130,8 +130,8 @@
 	else
 		target.fake_name=null
 		user.visible_message(
-			SPAN_NOTICE("\The [user] returns \the [target]'s face back to normal!"),
-			SPAN_NOTICE("You return \the [target]'s face back to normal!")
+			span_notice("\The [user] returns \the [target]'s face back to normal!"),
+			span_notice("You return \the [target]'s face back to normal!")
 		)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	affected.stage=0
@@ -139,8 +139,8 @@
 /singleton/surgery_step/plastic_surgery/reform_face/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message(
-		SPAN_WARNING("\The [user]'s hand slips, tearing skin on \the [target]'s face with \the [tool]!"),
-		SPAN_WARNING("Your hand slips, tearing skin on \the [target]'s face with \the [tool]!")
+		span_warning("\The [user]'s hand slips, tearing skin on \the [target]'s face with \the [tool]!"),
+		span_warning("Your hand slips, tearing skin on \the [target]'s face with \the [tool]!")
 	)
 	var/obj/item/organ/external/head/h = target.get_organ(target_zone)
 	affected.take_external_damage(10, 0, (DAMAGE_FLAG_SHARP|DAMAGE_FLAG_EDGE), used_weapon = tool)

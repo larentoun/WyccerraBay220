@@ -324,12 +324,12 @@
 /obj/item/reagent_containers/glass/bottle/dye/polychromic/attack_self(mob/living/user)
 	var/datum/reagent/heldDye = reagents.get_reagent(starting_reagent)
 	if (!heldDye)
-		to_chat(user, SPAN_WARNING("\The [src] isn't holding any dye!"))
+		to_chat(user, span_warning("\The [src] isn't holding any dye!"))
 		return
 	var/new_color = input(user, "Choose the dye's new color.", "[name]") as color|null
 	if (!new_color || !Adjacent(user))
 		return
-	to_chat(user, SPAN_NOTICE("The dye in \the [src] swirls and takes on a new color."))
+	to_chat(user, span_notice("The dye in \the [src] swirls and takes on a new color."))
 	heldDye.color = new_color
 	update_icon()
 

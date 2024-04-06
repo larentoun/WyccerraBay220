@@ -30,7 +30,7 @@ SUBSYSTEM_DEF(inactivity)
 			continue
 		if (client.inactivity > kick_time && !client.holder)
 			log_access("AFK: [key_name(client)]")
-			to_chat_immediate(SPAN_WARNING("You were inactive for [config.kick_inactive] minutes and have been disconnected."))
+			to_chat_immediate(span_warning("You were inactive for [config.kick_inactive] minutes and have been disconnected."))
 			qdel(client)
 		if (MC_TICK_CHECK)
 			queue.Cut(1, cut_until)

@@ -42,7 +42,7 @@
 /obj/item/clothing/accessory/badge/examine(user)
 	. = ..()
 	if(stored_name)
-		. += SPAN_NOTICE("It reads: [stored_name], [badge_string].")
+		. += span_notice("It reads: [stored_name], [badge_string].")
 
 
 /obj/item/clothing/accessory/badge/attack_self(mob/user)
@@ -53,17 +53,17 @@
 		return
 	if (isliving(user))
 		if(stored_name)
-			user.visible_message(SPAN_NOTICE("[user] displays their [src.name].\nIt reads: [stored_name], [badge_string]."),SPAN_NOTICE("You display your [src.name].\nIt reads: [stored_name], [badge_string]."))
+			user.visible_message(span_notice("[user] displays their [src.name].\nIt reads: [stored_name], [badge_string]."),span_notice("You display your [src.name].\nIt reads: [stored_name], [badge_string]."))
 		else
-			user.visible_message(SPAN_NOTICE("[user] displays their [src.name].\nIt reads: [badge_string]."),SPAN_NOTICE("You display your [src.name]. It reads: [badge_string]."))
+			user.visible_message(span_notice("[user] displays their [src.name].\nIt reads: [badge_string]."),span_notice("You display your [src.name]. It reads: [badge_string]."))
 
 
 /obj/item/clothing/accessory/badge/use_before(mob/living/carbon/human/M, mob/living/user)
 	. = FALSE
 	if (isliving(user) && istype(M))
-		user.visible_message(SPAN_DANGER("[user] invades [M]'s personal space, thrusting \the [src] into their face insistently."),SPAN_DANGER("You invade [M]'s personal space, thrusting \the [src] into their face insistently."))
+		user.visible_message(span_danger("[user] invades [M]'s personal space, thrusting \the [src] into their face insistently."),span_danger("You invade [M]'s personal space, thrusting \the [src] into their face insistently."))
 		if (stored_name)
-			to_chat(M, SPAN_WARNING("It reads: [stored_name], [badge_string]."))
+			to_chat(M, span_warning("It reads: [stored_name], [badge_string]."))
 		return TRUE
 
 
@@ -112,7 +112,7 @@
 /obj/item/clothing/accessory/badge/holo/examine(user)
 	. = ..()
 	if(badge_number)
-		. += SPAN_NOTICE("The badge number is [badge_number].")
+		. += span_notice("The badge number is [badge_number].")
 
 
 /obj/item/clothing/accessory/badge/holo/attack_self(mob/user)
@@ -124,10 +124,10 @@
 
 /obj/item/clothing/accessory/badge/holo/emag_act(remaining_charges, mob/user)
 	if (emagged)
-		to_chat(user, SPAN_DANGER("\The [src] is already cracked."))
+		to_chat(user, span_danger("\The [src] is already cracked."))
 		return NO_EMAG_ACT
 	emagged = TRUE
-	to_chat(user, SPAN_DANGER("You crack the security checks on \the [src]."))
+	to_chat(user, span_danger("You crack the security checks on \the [src]."))
 	return 1
 
 
@@ -242,13 +242,13 @@
 		if (!B)
 			return
 	if (usr.get_active_hand() != B)
-		to_chat(usr, SPAN_WARNING("You must be holding \the [src] to modify it."))
+		to_chat(usr, span_warning("You must be holding \the [src] to modify it."))
 		return
 	var/value = input(usr, "Input your SDTF.", "SDTF Holobadge") as null | text
 	if (isnull(value))
 		return
 	if (usr.stat || usr.get_active_hand() != B)
-		to_chat(usr, SPAN_WARNING("You keep holding \the [src] to modify it."))
+		to_chat(usr, span_warning("You keep holding \the [src] to modify it."))
 		return
 	badge_string = sanitize(value, MAX_NAME_LEN)
 	set_name(usr.real_name)

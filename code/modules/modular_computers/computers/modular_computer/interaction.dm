@@ -21,11 +21,11 @@
 	set src in view(1)
 
 	if(usr.incapacitated() || !istype(usr, /mob/living))
-		to_chat(usr, SPAN_WARNING("You can't do that."))
+		to_chat(usr, span_warning("You can't do that."))
 		return
 
 	if(!Adjacent(usr))
-		to_chat(usr, SPAN_WARNING("You can't reach it."))
+		to_chat(usr, span_warning("You can't reach it."))
 		return
 
 	if(enabled)
@@ -48,7 +48,7 @@
 		return
 
 	if(!Adjacent(usr))
-		to_chat(usr, SPAN_WARNING("You can't reach it."))
+		to_chat(usr, span_warning("You can't reach it."))
 		return
 
 	proc_eject_usb(usr)
@@ -64,15 +64,15 @@
 /obj/item/modular_computer/proc/remove_pen(mob/user)
 
 	if(user.incapacitated() || !istype(user, /mob/living))
-		to_chat(user, SPAN_WARNING("You can't do that."))
+		to_chat(user, span_warning("You can't do that."))
 		return
 
 	if(!Adjacent(user))
-		to_chat(user, SPAN_WARNING("You can't reach it."))
+		to_chat(user, span_warning("You can't reach it."))
 		return
 
 	if(istype(stored_pen))
-		to_chat(user, SPAN_NOTICE("You remove [stored_pen] from [src]."))
+		to_chat(user, span_notice("You remove [stored_pen] from [src]."))
 		user.put_in_hands(stored_pen) // Silicons will drop it anyway.
 		stored_pen = null
 		update_verbs()
@@ -106,7 +106,7 @@
 // On-click handling. Turns on the computer if it's off and opens the GUI.
 /obj/item/modular_computer/attack_self(mob/user)
 	if(MUTATION_CLUMSY in user.mutations)
-		to_chat(user, SPAN_WARNING("You can't quite work out how to use [src]."))
+		to_chat(user, span_warning("You can't quite work out how to use [src]."))
 		return
 	if(enabled && screen_on)
 		ui_interact(user)
@@ -174,13 +174,13 @@
 
 	if(istype(W, /obj/item/pen) && stores_pen)
 		if(istype(stored_pen))
-			to_chat(user, SPAN_NOTICE("There is already a pen in [src]."))
+			to_chat(user, span_notice("There is already a pen in [src]."))
 			return
 		if(!user.unEquip(W, src))
 			return
 		stored_pen = W
 		update_verbs()
-		to_chat(user, SPAN_NOTICE("You insert [W] into [src]."))
+		to_chat(user, span_notice("You insert [W] into [src]."))
 		return
 	if(istype(W, /obj/item/paper))
 		var/obj/item/paper/paper = W
@@ -210,10 +210,10 @@
 	. = ..()
 
 	if(enabled)
-		. += SPAN_NOTICE("The time [stationtime2text()] is displayed in the corner of the screen.")
+		. += span_notice("The time [stationtime2text()] is displayed in the corner of the screen.")
 
 	if(card_slot && card_slot.stored_card)
-		. += SPAN_NOTICE("[card_slot.stored_card] is inserted into it.")
+		. += span_notice("[card_slot.stored_card] is inserted into it.")
 
 /obj/item/modular_computer/MouseDrop(atom/over_object)
 	var/mob/M = usr

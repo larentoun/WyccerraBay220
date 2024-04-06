@@ -129,7 +129,7 @@
 	else if (A.atom_flags & ATOM_FLAG_CAN_BE_PAINTED)
 		new_color = A.get_color()
 	if (!change_color(new_color, user))
-		to_chat(user, SPAN_WARNING("\The [A] does not have a color that you could pick from."))
+		to_chat(user, span_warning("\The [A] does not have a color that you could pick from."))
 	return TRUE // There was an attempt to pick a color.
 
 /obj/item/device/paint_sprayer/proc/apply_paint(atom/A, mob/user, params)
@@ -141,10 +141,10 @@
 	else if (istype(A, /obj/machinery/door/airlock))
 		. = paint_airlock(A, user)
 	else if (istype(A, /mob/living/exosuit))
-		to_chat(user, SPAN_WARNING("You can't paint an active exosuit. Dismantle it first."))
+		to_chat(user, span_warning("You can't paint an active exosuit. Dismantle it first."))
 		. = FALSE
 	else
-		to_chat(user, SPAN_WARNING("\The [src] can only be used on floors, windows, walls, exosuits or certain airlocks."))
+		to_chat(user, span_warning("\The [src] can only be used on floors, windows, walls, exosuits or certain airlocks."))
 		. = FALSE
 	if (.)
 		playsound(get_turf(src), 'sound/effects/spray3.ogg', 30, 1, -6)
@@ -189,11 +189,11 @@
 
 /obj/item/device/paint_sprayer/proc/paint_floor(turf/simulated/floor/F, mob/user, params)
 	if(!F.flooring)
-		to_chat(user, SPAN_WARNING("You need flooring to paint on."))
+		to_chat(user, span_warning("You need flooring to paint on."))
 		return FALSE
 
 	if(!F.flooring.can_paint || F.broken || F.burnt)
-		to_chat(user, SPAN_WARNING("\The [src] cannot paint \the [F.name]."))
+		to_chat(user, span_warning("\The [src] cannot paint \the [F.name]."))
 		return FALSE
 
 	var/list/decal_data = decals[decal]
@@ -207,11 +207,11 @@
 			config_error = 1
 
 	if(config_error)
-		to_chat(user, SPAN_WARNING("\The [src] flashes an error light. You might need to reconfigure it."))
+		to_chat(user, span_warning("\The [src] flashes an error light. You might need to reconfigure it."))
 		return FALSE
 
 	if((F.decals && length(F.decals) > 5) && !ispath(painting_decal, /obj/floor_decal/reset))
-		to_chat(user, SPAN_WARNING("\The [F] has been painted too much; you need to clear it off."))
+		to_chat(user, span_warning("\The [F] has been painted too much; you need to clear it off."))
 		return FALSE
 
 	var/painting_dir = 0
@@ -257,7 +257,7 @@
 
 /obj/item/device/paint_sprayer/proc/paint_airlock(obj/machinery/door/airlock/D, mob/user)
 	if (!D.paintable)
-		to_chat(user, SPAN_WARNING("You can't paint this airlock type."))
+		to_chat(user, span_warning("You can't paint this airlock type."))
 		return FALSE
 
 	switch (select_airlock_region(D, user, "What do you wish to paint?"))
@@ -293,7 +293,7 @@
 		paint_color = new_color
 		if (user)
 			add_fingerprint(user)
-			to_chat(user, SPAN_NOTICE("You set \the [src] to paint with <span style='color:[paint_color]'>a new color</span>."))
+			to_chat(user, span_notice("You set \the [src] to paint with <span style='color:[paint_color]'>a new color</span>."))
 		update_icon()
 		playsound(src, 'sound/weapons/flipblade.ogg', 30, 1)
 		return TRUE
@@ -301,7 +301,7 @@
 
 /obj/item/device/paint_sprayer/examine(mob/user)
 	. = ..(user)
-	. += SPAN_NOTICE("It is configured to produce the '[decal]' decal using <span style='color:[paint_color]'>[paint_color]</span> paint.")
+	. += span_notice("It is configured to produce the '[decal]' decal using <span style='color:[paint_color]'>[paint_color]</span> paint.")
 
 /obj/item/device/paint_sprayer/AltClick()
 	if (!isturf(loc))
@@ -354,7 +354,7 @@
 		return
 	if(new_decal && !isnull(decals[new_decal]))
 		decal = new_decal
-		to_chat(usr, SPAN_NOTICE("You set \the [src] decal to '[decal]'."))
+		to_chat(usr, span_notice("You set \the [src] decal to '[decal]'."))
 
 /datum/click_handler/default/paint_sprayer
 	var/obj/item/device/paint_sprayer/paint_sprayer

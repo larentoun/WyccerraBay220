@@ -32,7 +32,7 @@
 	if(!CanInteract(user, DefaultTopicState()))
 		return FALSE
 	ignite()
-	visible_message(SPAN_NOTICE("\The [user] toggles \the [src]."))
+	visible_message(span_notice("\The [user] toggles \the [src]."))
 	return TRUE
 
 /obj/machinery/igniter/Process()

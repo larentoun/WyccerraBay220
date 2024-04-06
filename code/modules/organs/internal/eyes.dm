@@ -58,7 +58,7 @@
 			update_colour()
 			// Finally, update the eye icon on the mob.
 			owner.regenerate_icons()
-			owner.visible_message(SPAN_NOTICE("\The [owner] changes their eye color."),SPAN_NOTICE("You change your eye color."),)
+			owner.visible_message(span_notice("\The [owner] changes their eye color."),span_notice("You change your eye color."),)
 
 /obj/item/organ/internal/eyes/replaced(mob/living/carbon/human/target)
 
@@ -77,7 +77,7 @@
 	var/oldbroken = is_broken()
 	. = ..()
 	if(is_broken() && !oldbroken && owner && !owner.stat)
-		to_chat(owner, SPAN_DANGER("You go blind!"))
+		to_chat(owner, span_danger("You go blind!"))
 
 /obj/item/organ/internal/eyes/Process() //Eye damage replaces the old eye_stat var.
 	..()

@@ -487,7 +487,7 @@ var/global/list/additional_antag_types = list()
 						msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] ([SPAN_COLOR("red", "<b>Ghosted</b>")])\n"
 						continue //Ghosted while alive
 
-	msg = SPAN_NOTICE(msg)
+	msg = span_notice(msg)
 
 	for(var/mob/M in SSmobs.mob_list)
 		if(M.client && M.client.holder)
@@ -501,7 +501,7 @@ var/global/list/additional_antag_types = list()
 		return
 
 	var/obj_count = 1
-	to_chat(player.current, SPAN_NOTICE("Your current objectives:"))
+	to_chat(player.current, span_notice("Your current objectives:"))
 	for(var/datum/objective/objective in player.objectives)
 		to_chat(player.current, "<B>Objective #[obj_count]</B>: [objective.explanation_text]")
 		obj_count++

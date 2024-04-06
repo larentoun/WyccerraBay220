@@ -49,9 +49,9 @@
 	else if (is_deaf() || get_sound_volume_multiplier() < 0.2)
 		if (!(language?.flags & INNATE))
 			if (speaker == src)
-				to_chat(src, SPAN_WARNING("You cannot hear yourself speak!"))
+				to_chat(src, span_warning("You cannot hear yourself speak!"))
 			else if (!is_blind())
-				to_chat(src, {"[SPAN_CLASS("name", display_name)][alt_name] says something you cannot hear."})
+				to_chat(src, {"[span_name(display_name)][alt_name] says something you cannot hear."})
 			return
 		speech_sound = null
 
@@ -117,7 +117,7 @@
 				display_verb = "[verb] ([language.shorthand])"
 		display_message = language.format_message(display_message, display_verb)
 
-	on_hear_say({"[SPAN_CLASS("game say", "[display_controls][SPAN_CLASS("name", display_name)][alt_name] [display_message]")]"})
+	on_hear_say({"[SPAN_CLASS("game say", "[display_controls][span_name(display_name)][alt_name] [display_message]")]"})
 
 	if (istype(language, /datum/language/noise))
 		create_chat_message(speaker, runechat_message, italics, list("emote"))
@@ -266,7 +266,7 @@
 	if(sdisabilities & DEAFENED || ear_deaf)
 		var/mob/living/carbon/human/H = src
 		if(istype(H) && H.has_headset_in_ears() && prob(20))
-			to_chat(src, SPAN_WARNING("You feel your headset vibrate but can hear nothing from it!"))
+			to_chat(src, span_warning("You feel your headset vibrate but can hear nothing from it!"))
 	else
 		on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted)
 

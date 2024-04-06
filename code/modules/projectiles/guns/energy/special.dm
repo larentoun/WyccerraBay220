@@ -78,7 +78,7 @@
 	if (!istype(target, /obj/machinery/portable_atmospherics/hydroponics))
 		return FALSE
 
-	user.visible_message(SPAN_DANGER("\The [user] fires \the [src] into \the [target]!"))
+	user.visible_message(span_danger("\The [user] fires \the [src] into \the [target]!"))
 	Fire(target,user)
 	return TRUE
 
@@ -94,7 +94,7 @@
 
 	gene = SSplants.plant_gene_datums[genemask]
 
-	to_chat(usr, SPAN_INFO("You set the [src]'s targeted genetic area to [genemask]."))
+	to_chat(usr, span_info("You set the [src]'s targeted genetic area to [genemask]."))
 
 	return
 
@@ -256,10 +256,10 @@
 	if (!charges)
 		return NO_EMAG_ACT
 	if (emagged)
-		to_chat(user, SPAN_NOTICE("\The [src]'s safety limiter has already been disabled!"))
+		to_chat(user, span_notice("\The [src]'s safety limiter has already been disabled!"))
 		return NO_EMAG_ACT
 	else
-		to_chat(user, SPAN_NOTICE("\The [src]'s safety limiter sparks and dies!"))
+		to_chat(user, span_notice("\The [src]'s safety limiter sparks and dies!"))
 		projectile_type = /obj/item/projectile/beam/smalllaser
 		charge_cost = 30
 	return ..()
@@ -268,7 +268,7 @@
 /obj/item/gun/energy/laser/xenofauna/examine(mob/user, distance)
 	. = ..()
 	if (emagged && distance < 3)
-		. += SPAN_DANGER("The safety limiter doesn't look functional.")
+		. += span_danger("The safety limiter doesn't look functional.")
 
 
 /obj/item/gun/energy/laser/xenofauna/broken

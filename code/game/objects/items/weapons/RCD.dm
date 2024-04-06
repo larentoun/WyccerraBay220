@@ -43,8 +43,8 @@
 /obj/item/rcd/examine(mob/user)
 	. = ..()
 	if(src.type == /obj/item/rcd && loc == user)
-		. += SPAN_NOTICE("The current mode is '[work_mode]'")
-		. += SPAN_NOTICE("It currently holds [stored_matter]/[max_stored_matter] matter-units.")
+		. += span_notice("The current mode is '[work_mode]'")
+		. += span_notice("It currently holds [stored_matter]/[max_stored_matter] matter-units.")
 
 /obj/item/rcd/New()
 	..()
@@ -64,16 +64,16 @@
 		return
 	crafting = !crafting
 	if(!crafting)
-		to_chat(user, SPAN_NOTICE("You reassemble the RCD"))
+		to_chat(user, span_notice("You reassemble the RCD"))
 	else
-		to_chat(user, SPAN_NOTICE("The RCD can now be modified."))
+		to_chat(user, span_notice("The RCD can now be modified."))
 	add_fingerprint(user)
 
 /obj/item/rcd/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/rcd_ammo))
 		var/obj/item/rcd_ammo/cartridge = W
 		if(stored_matter >= max_stored_matter)
-			to_chat(user, SPAN_NOTICE("The RCD is at maximum capacity."))
+			to_chat(user, span_notice("The RCD is at maximum capacity."))
 			return
 		var/matter_exchange = min(cartridge.remaining,max_stored_matter - stored_matter)
 		stored_matter += matter_exchange
@@ -82,7 +82,7 @@
 			qdel(W)
 		cartridge.matter = list(MATERIAL_STEEL = 500 * cartridge.remaining,MATERIAL_GLASS = 250 * cartridge.remaining)
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
-		to_chat(user, SPAN_NOTICE("The RCD now holds [stored_matter]/[max_stored_matter] matter-units."))
+		to_chat(user, span_notice("The RCD now holds [stored_matter]/[max_stored_matter] matter-units."))
 		update_icon()
 		return
 	..()
@@ -119,7 +119,7 @@
 
 	work_id++
 
-	to_chat(user, SPAN_NOTICE("Changed mode to '[work_mode]'"))
+	to_chat(user, span_notice("Changed mode to '[work_mode]'"))
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
 	if(prob(20)) src.spark_system.start()
 
@@ -147,7 +147,7 @@
 	AddOverlays("rcd-[ratio]")
 
 /obj/item/rcd/proc/lowAmmo(mob/user)	//Kludge to make it animate when out of ammo, but I guess you can make it blow up when it's out of ammo or something
-	to_chat(user, SPAN_WARNING("The \'Low Ammo\' light on the device blinks yellow."))
+	to_chat(user, span_warning("The \'Low Ammo\' light on the device blinks yellow."))
 	flick("[icon_state]-empty", src)
 
 /obj/item/rcd_ammo
@@ -164,7 +164,7 @@
 /obj/item/rcd_ammo/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
-		. += SPAN_NOTICE("It has [remaining] unit\s of matter left.")
+		. += span_notice("It has [remaining] unit\s of matter left.")
 
 /obj/item/rcd_ammo/large
 	name = "high-capacity matter cartridge"
@@ -263,10 +263,10 @@
 	var/message
 	if(work_type)
 		var/atom/work = work_type
-		message = SPAN_NOTICE("You begin constructing \a [initial(work.name)].")
+		message = span_notice("You begin constructing \a [initial(work.name)].")
 	else
-		message = SPAN_NOTICE("You begin construction.")
-	user.visible_message(SPAN_NOTICE("\The [user] uses \a [rcd] to construct something."), message)
+		message = span_notice("You begin construction.")
+	user.visible_message(span_notice("\The [user] uses \a [rcd] to construct something."), message)
 
 /*
 	Airlock construction
@@ -356,7 +356,7 @@
 	name = "Deconstruction"
 
 /singleton/hierarchy/rcd_mode/deconstruction/work_message(atom/target, mob/user, rcd)
-	user.visible_message(SPAN_WARNING("\The [user] is using \a [rcd] to deconstruct \the [target]!"), SPAN_WARNING("You are deconstructing \the [target]!"))
+	user.visible_message(span_warning("\The [user] is using \a [rcd] to deconstruct \the [target]!"), span_warning("You are deconstructing \the [target]!"))
 
 /singleton/hierarchy/rcd_mode/deconstruction/airlock
 	cost = 30

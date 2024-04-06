@@ -8,10 +8,10 @@
 	. = ..()
 
 /datum/build_mode/throw_at/Help()
-	to_chat(user, SPAN_NOTICE("***********************************************************"))
-	to_chat(user, SPAN_NOTICE("Left Click on Movable Atom = Select object to be thrown"))
-	to_chat(user, SPAN_NOTICE("Right Click on Atom        = Throw at the target"))
-	to_chat(user, SPAN_NOTICE("***********************************************************"))
+	to_chat(user, span_notice("***********************************************************"))
+	to_chat(user, span_notice("Left Click on Movable Atom = Select object to be thrown"))
+	to_chat(user, span_notice("Right Click on Atom        = Throw at the target"))
+	to_chat(user, span_notice("***********************************************************"))
 
 /datum/build_mode/throw_at/OnClick(atom/A, params)
 	var/list/modifiers = params2list(params)
@@ -21,12 +21,12 @@
 	else if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		if(to_throw)
 			if(!isturf(to_throw.loc))
-				to_chat(user, SPAN_WARNING("\The [to_throw] is currently not on a turf and cannot be thrown."))
+				to_chat(user, span_warning("\The [to_throw] is currently not on a turf and cannot be thrown."))
 			else
 				to_throw.throw_at(A, 10, 1)
 				Log("Threw '[log_info_line(to_throw)]' at '[log_info_line(A)]'")
 		else
-			to_chat(user, SPAN_WARNING("You have nothing selected to throw."))
+			to_chat(user, span_warning("You have nothing selected to throw."))
 
 /datum/build_mode/throw_at/proc/SetThrowable(new_throwable)
 	if(to_throw == new_throwable)
@@ -35,7 +35,7 @@
 
 	to_throw = new_throwable
 	GLOB.destroyed_event.register(to_throw, src, TYPE_PROC_REF(/datum/build_mode/throw_at, ClearThrowable))
-	to_chat(user, SPAN_NOTICE("Will now be throwing \the [to_throw]."))
+	to_chat(user, span_notice("Will now be throwing \the [to_throw]."))
 
 /datum/build_mode/throw_at/proc/ClearThrowable(feedback)
 	if(!to_throw)

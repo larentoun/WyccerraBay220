@@ -36,8 +36,8 @@
 	for(var/obj/item/book/book in contents)
 		book.dropInto(loc)
 	user.visible_message(
-		SPAN_NOTICE("[user] dismantles [src] with [tool]."),
-		SPAN_NOTICE("You dismantle [src] with [tool].")
+		span_notice("[user] dismantles [src] with [tool]."),
+		span_notice("You dismantle [src] with [tool].")
 	)
 	qdel(src)
 
@@ -58,8 +58,8 @@
 			return TRUE
 		SetName("[initial(name)] ([input])")
 		user.visible_message(
-			SPAN_NOTICE("[user] re-labels [src] with [tool]."),
-			SPAN_NOTICE("You re-label [src] with [tool].")
+			span_notice("[user] re-labels [src] with [tool]."),
+			span_notice("You re-label [src] with [tool].")
 		)
 		return TRUE
 
@@ -167,12 +167,12 @@
 /obj/item/book/attack_self(mob/user as mob)
 	if(carved)
 		if(store)
-			to_chat(user, SPAN_NOTICE("[store] falls out of [title]!"))
+			to_chat(user, span_notice("[store] falls out of [title]!"))
 			store.dropInto(loc)
 			store = null
 			return
 		else
-			to_chat(user, SPAN_NOTICE("The pages of [title] have been cut out!"))
+			to_chat(user, span_notice("The pages of [title] have been cut out!"))
 			return
 	if(src.dat)
 		show_browser(user, dat, "window=book;size=1000x550")
@@ -188,13 +188,13 @@
 				if(!user.unEquip(W, src))
 					return
 				store = W
-				to_chat(user, SPAN_NOTICE("You put [W] in [title]."))
+				to_chat(user, span_notice("You put [W] in [title]."))
 				return
 			else
-				to_chat(user, SPAN_NOTICE("[W] won't fit in [title]."))
+				to_chat(user, span_notice("[W] won't fit in [title]."))
 				return
 		else
-			to_chat(user, SPAN_NOTICE("There's already something in [title]!"))
+			to_chat(user, span_notice("There's already something in [title]!"))
 			return
 	if(istype(W, /obj/item/pen))
 		if(unique)
@@ -228,9 +228,9 @@
 				return
 	else if(istype(W, /obj/item/material/knife) || W.tool_behaviour == TOOL_WIRECUTTER)
 		if(carved)	return
-		to_chat(user, SPAN_NOTICE("You begin to carve out [title]."))
+		to_chat(user, span_notice("You begin to carve out [title]."))
 		if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
-			to_chat(user, SPAN_NOTICE("You carve out the pages from [title]! You didn't want to read it anyway."))
+			to_chat(user, span_notice("You carve out the pages from [title]! You didn't want to read it anyway."))
 			carved = 1
 			return
 	else
@@ -239,8 +239,8 @@
 /obj/item/book/use_before(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	. = FALSE
 	if (istype(M) && user.a_intent == I_HELP && user.zone_sel.selecting == BP_EYES)
-		user.visible_message(SPAN_NOTICE("You open up the book and show it to [M]. "), \
-			SPAN_NOTICE(" [user] opens up a book and shows it to [M]. "))
+		user.visible_message(span_notice("You open up the book and show it to [M]. "), \
+			span_notice(" [user] opens up a book and shows it to [M]. "))
 		show_browser(M, "<i>Author: [author].</i><br><br>" + "[dat]", "window=book;size=1000x550")
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN) //to prevent spam
 		return TRUE

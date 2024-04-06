@@ -31,12 +31,12 @@
 
 /obj/machinery/pipelayer/interface_interact(mob/user)
 	if(!metal&&!on)
-		to_chat(user, SPAN_WARNING("[src] doesn't work without metal."))
+		to_chat(user, span_warning("[src] doesn't work without metal."))
 		return TRUE
 	on=!on
 	user.visible_message(
-		SPAN_NOTICE("[user] has [!on?"de":""]activated [src]."),
-		SPAN_NOTICE("You [!on?"de":""]activate [src].")
+		span_notice("[user] has [!on?"de":""]activated [src]."),
+		span_notice("You [!on?"de":""]activate [src].")
 	)
 	return TRUE
 
@@ -46,8 +46,8 @@
 		return
 	a_dis=!a_dis
 	user.visible_message(
-		SPAN_NOTICE("[user] has [!a_dis?"de":""]activated auto-dismantling."),
-		SPAN_NOTICE("You [!a_dis?"de":""]activate auto-dismantling.")
+		span_notice("[user] has [!a_dis?"de":""]activated auto-dismantling."),
+		span_notice("You [!a_dis?"de":""]activate auto-dismantling.")
 	)
 
 /obj/machinery/pipelayer/screwdriver_act(mob/living/user, obj/item/tool)
@@ -65,7 +65,7 @@
 		use_metal(m)
 		var/obj/item/stack/material/steel/MM = new (get_turf(src))
 		MM.amount = m
-		user.visible_message(SPAN_NOTICE("[user] removes [m] sheet\s of metal from the [src]."), SPAN_NOTICE("You remove [m] sheet\s of metal from [src]"))
+		user.visible_message(span_notice("[user] removes [m] sheet\s of metal from the [src]."), span_notice("You remove [m] sheet\s of metal from [src]"))
 
 /obj/machinery/pipelayer/wrench_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
@@ -75,24 +75,24 @@
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	P_type = Pipes[P_type_t]
-	user.visible_message(SPAN_NOTICE("[user] has set [src] to manufacture [P_type_t]."), SPAN_NOTICE("You set [src] to manufacture [P_type_t]."))
+	user.visible_message(span_notice("[user] has set [src] to manufacture [P_type_t]."), span_notice("You set [src] to manufacture [P_type_t]."))
 
 /obj/machinery/pipelayer/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/stack/material) && W.get_material_name() == MATERIAL_STEEL)
 		var/result = load_metal(W)
 		if(isnull(result))
-			to_chat(user, SPAN_WARNING("Unable to load [W] - no metal found."))
+			to_chat(user, span_warning("Unable to load [W] - no metal found."))
 		else if(!result)
-			to_chat(user, SPAN_NOTICE("[src] is full."))
+			to_chat(user, span_notice("[src] is full."))
 		else
-			user.visible_message(SPAN_NOTICE("[user] has loaded metal into [src]."), SPAN_NOTICE("You load metal into [src]"))
+			user.visible_message(span_notice("[user] has loaded metal into [src]."), span_notice("You load metal into [src]"))
 		return TRUE
 
 	return ..()
 
 /obj/machinery/pipelayer/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("[src] has [metal] sheet\s, is set to produce [P_type_t], and auto-dismantling is [!a_dis?"de":""]activated.")
+	. += span_notice("[src] has [metal] sheet\s, is set to produce [P_type_t], and auto-dismantling is [!a_dis?"de":""]activated.")
 
 /obj/machinery/pipelayer/proc/reset()
 	on=0

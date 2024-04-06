@@ -29,15 +29,15 @@
 		var/obj/fluid/F = locate() in T
 		if(F && F.fluid_amount > 0)
 			if(F.fluid_amount > FLUID_SHALLOW)
-				to_chat(user, SPAN_WARNING("There is too much water here to be mopped up."))
+				to_chat(user, span_warning("There is too much water here to be mopped up."))
 			else
-				user.visible_message(SPAN_NOTICE("\The [user] begins to mop up \the [T]."))
+				user.visible_message(span_notice("\The [user] begins to mop up \the [T]."))
 				if(do_after(user, mopspeed, T, do_flags = DO_DEFAULT | DO_PUBLIC_PROGRESS) && F && !QDELETED(F))
 					if(F.fluid_amount > FLUID_SHALLOW)
-						to_chat(user, SPAN_WARNING("There is too much water here to be mopped up."))
+						to_chat(user, span_warning("There is too much water here to be mopped up."))
 					else
 						qdel(F)
-						to_chat(user, SPAN_NOTICE("You have finished mopping!"))
+						to_chat(user, span_notice("You have finished mopping!"))
 			return TRUE
 		moppable = TRUE
 
@@ -46,18 +46,18 @@
 
 	if(moppable)
 		if(reagents.total_volume < 1)
-			to_chat(user, SPAN_NOTICE("Your mop is dry!"))
+			to_chat(user, span_notice("Your mop is dry!"))
 			return TRUE
 		var/turf/T = get_turf(A)
 		if(!T)
 			return TRUE
 
-		user.visible_message(SPAN_WARNING("\The [user] begins to clean \the [T]."))
+		user.visible_message(span_warning("\The [user] begins to clean \the [T]."))
 
 		if(do_after(user, mopspeed, T, do_flags = DO_DEFAULT | DO_PUBLIC_PROGRESS))
 			if(T)
 				T.clean(src, user)
-			to_chat(user, SPAN_NOTICE("You have finished mopping!"))
+			to_chat(user, span_notice("You have finished mopping!"))
 		return TRUE
 
 
@@ -83,7 +83,7 @@
 		START_PROCESSING(SSobj, src)
 	else
 		STOP_PROCESSING(SSobj,src)
-	to_chat(user, SPAN_NOTICE("You set the condenser switch to the '[refill_enabled ? "ON" : "OFF"]' position."))
+	to_chat(user, span_notice("You set the condenser switch to the '[refill_enabled ? "ON" : "OFF"]' position."))
 	playsound(user, 'sound/machines/click.ogg', 30, 1)
 
 /obj/item/mop/advanced/Process()
@@ -92,7 +92,7 @@
 
 /obj/item/mop/advanced/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("The condenser switch is set to <b>[refill_enabled ? "ON" : "OFF"]</b>.")
+	. += span_notice("The condenser switch is set to <b>[refill_enabled ? "ON" : "OFF"]</b>.")
 
 /obj/item/mop/advanced/Destroy()
 	if(refill_enabled)

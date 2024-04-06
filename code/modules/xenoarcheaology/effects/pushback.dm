@@ -18,8 +18,8 @@
 		M.apply_damage(damage * weakness, DAMAGE_BRUTE, damage_flags = DAMAGE_FLAG_DISPERSED)
 		M.throw_at(get_target_turf(M), throw_range, speed)
 
-		to_chat(M, SPAN_DANGER("A violent force slams into you as you touch \the [holder]!"))
-		holder.visible_message(SPAN_WARNING("\The [holder] shines bright as it releases a wave of energy!"))
+		to_chat(M, span_danger("A violent force slams into you as you touch \the [holder]!"))
+		holder.visible_message(span_warning("\The [holder] shines bright as it releases a wave of energy!"))
 		playsound(get_turf(holder), "sound/magic/repulse.ogg", 100)
 
 /datum/artifact_effect/pushback/DoEffectPulse()
@@ -29,9 +29,9 @@
 			var/weakness = GetAnomalySusceptibility(M)
 			M.apply_damage(damage * weakness, DAMAGE_BRUTE, damage_flags = DAMAGE_FLAG_DISPERSED)
 			M.throw_at(get_target_turf(M), throw_range, speed)
-			to_chat(M, SPAN_DANGER("A violent force explodes outward from \the [holder] and sends you flying!"))
+			to_chat(M, span_danger("A violent force explodes outward from \the [holder] and sends you flying!"))
 
-		holder.visible_message(SPAN_WARNING("\The [holder] shines bright as it releases a wave of energy!"))
+		holder.visible_message(span_warning("\The [holder] shines bright as it releases a wave of energy!"))
 		playsound(get_turf(holder), "sound/magic/repulse.ogg", 100)
 
 //returns a turf at a distance of 'throw_range' away from the artifact
@@ -72,6 +72,6 @@
 			var/weakness = GetAnomalySusceptibility(M)
 			M.apply_damage(damage * weakness, DAMAGE_BRUTE, damage_flags = DAMAGE_FLAG_DISPERSED)
 			M.throw_at(get_target_turf(M), throw_range, speed)
-			to_chat(M, SPAN_DANGER("A violent force explodes outward from \the [holder] and sends you flying!"))
+			to_chat(M, span_danger("A violent force explodes outward from \the [holder] and sends you flying!"))
 
 		playsound(get_turf(holder), "sound/magic/repulse.ogg", 100)

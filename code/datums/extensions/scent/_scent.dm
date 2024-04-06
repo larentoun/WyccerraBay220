@@ -19,9 +19,9 @@ Scent intensity
 	if(!can_smell(user))
 		return
 	if(!user.isSynthetic())
-		to_chat(user, SPAN_SUBTLE("The subtle [descriptor] of [scent] tickles your nose..."))
+		to_chat(user, span_subtle("The subtle [descriptor] of [scent] tickles your nose..."))
 	else
-		to_chat(user, SPAN_NOTICE("Your sensors detect trace amounts of [scent] in the air."))
+		to_chat(user, span_notice("Your sensors detect trace amounts of [scent] in the air."))
 
 
 /singleton/scent_intensity/normal
@@ -32,9 +32,9 @@ Scent intensity
 	if(!can_smell(user))
 		return
 	if(!user.isSynthetic())
-		to_chat(user, SPAN_NOTICE("The [descriptor] of [scent] fills the air."))
+		to_chat(user, span_notice("The [descriptor] of [scent] fills the air."))
 	else
-		to_chat(user, SPAN_NOTICE("Your sensors pick up the presence of [scent] in the air."))
+		to_chat(user, span_notice("Your sensors pick up the presence of [scent] in the air."))
 
 /singleton/scent_intensity/strong
 	cooldown = 3 MINUTES
@@ -44,9 +44,9 @@ Scent intensity
 	if(!can_smell(user))
 		return
 	if(!user.isSynthetic())
-		to_chat(user, SPAN_WARNING("The unmistakable [descriptor] of [scent] bombards your nostrils."))
+		to_chat(user, span_warning("The unmistakable [descriptor] of [scent] bombards your nostrils."))
 	else
-		to_chat(user, SPAN_WARNING("Your sensors pick up an intense concentration of [scent]."))
+		to_chat(user, span_warning("Your sensors pick up an intense concentration of [scent]."))
 
 /singleton/scent_intensity/overpowering
 	cooldown = 1 MINUTES
@@ -56,9 +56,9 @@ Scent intensity
 	if(!can_smell(user))
 		return
 	if(!user.isSynthetic())
-		to_chat(user, SPAN_WARNING("The overwhelming [descriptor] of [scent] assaults your senses. You stifle a gag."))
+		to_chat(user, span_warning("The overwhelming [descriptor] of [scent] assaults your senses. You stifle a gag."))
 	else
-		to_chat(user, SPAN_WARNING("ALERT! Your sensors pick up an overwhelming concentration of [scent]."))
+		to_chat(user, span_warning("ALERT! Your sensors pick up an overwhelming concentration of [scent]."))
 /*****
  Scent extensions
  Usage:

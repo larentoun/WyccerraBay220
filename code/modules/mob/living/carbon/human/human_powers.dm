@@ -7,14 +7,14 @@
 	set category = "IC"
 
 	if(incapacitated())
-		to_chat(src, SPAN_WARNING("You can't mess with your hair right now!"))
+		to_chat(src, span_warning("You can't mess with your hair right now!"))
 		return
 
 	if(head_hair_style)
 		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[head_hair_style]
 		var/selected_string
 		if(!(hair_style.flags & HAIR_TIEABLE))
-			to_chat(src, SPAN_WARNING("Your hair isn't long enough to tie."))
+			to_chat(src, span_warning("Your hair isn't long enough to tie."))
 			return
 		else
 			var/list/datum/sprite_accessory/hair/valid_hairstyles = list()
@@ -24,14 +24,14 @@
 					valid_hairstyles.Add(hair_string)
 			selected_string = input("Select a new hairstyle", "Your hairstyle", hair_style) as null|anything in valid_hairstyles
 		if(incapacitated())
-			to_chat(src, SPAN_WARNING("You can't mess with your hair right now!"))
+			to_chat(src, span_warning("You can't mess with your hair right now!"))
 			return
 		else if(selected_string && head_hair_style != selected_string)
 			head_hair_style = selected_string
 			regenerate_icons()
-			visible_message(SPAN_NOTICE("[src] pauses a moment to style their hair."))
+			visible_message(span_notice("[src] pauses a moment to style their hair."))
 		else
-			to_chat(src, SPAN_NOTICE("You're already using that style."))
+			to_chat(src, span_notice("You're already using that style."))
 
 /****************
  misc alien verbs
@@ -59,18 +59,18 @@
 	var/mob/M = targets[target]
 
 	if(isghost(M) || M.stat == DEAD)
-		to_chat(src, SPAN_WARNING("Not even a [src.species.name] can speak to the dead."))
+		to_chat(src, span_warning("Not even a [src.species.name] can speak to the dead."))
 		return
 
 	log_say("[key_name(src)] communed to [key_name(M)]: [text]")
 
-	to_chat(M, SPAN_NOTICE("Like lead slabs crashing into the ocean, alien thoughts drop into your mind: <i>[text]</i>"))
+	to_chat(M, span_notice("Like lead slabs crashing into the ocean, alien thoughts drop into your mind: <i>[text]</i>"))
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		if(H.species.name == src.species.name)
 			return
 		if(prob(75))
-			to_chat(H, SPAN_WARNING("Your nose begins to bleed..."))
+			to_chat(H, span_warning("Your nose begins to bleed..."))
 			H.drip(1)
 
 /mob/living/carbon/human/proc/psychic_whisper(mob/M as mob in oview())
@@ -94,10 +94,10 @@
 	set category = "Abilities"
 	var/obj/aura/regenerating/human/aura = locate() in auras
 	if(!aura)
-		to_chat(src, SPAN_WARNING("You don't possess an innate healing ability."))
+		to_chat(src, span_warning("You don't possess an innate healing ability."))
 		return
 	if(!aura.can_toggle())
-		to_chat(src, SPAN_WARNING("You can't toggle the healing at this time!"))
+		to_chat(src, span_warning("You can't toggle the healing at this time!"))
 		return
 	aura.toggle()
 	if (aura.innate_heal)

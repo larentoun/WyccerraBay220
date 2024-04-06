@@ -59,7 +59,7 @@
 		return
 
 	if(!is_powered())
-		to_chat(usr, SPAN_WARNING("\The [src] is unpowered."))
+		to_chat(usr, span_warning("\The [src] is unpowered."))
 		return
 
 	state |= WASHER_STATE_RUNNING
@@ -109,7 +109,7 @@
 	if(!CanPhysicallyInteract(usr))
 		return
 	if(state & WASHER_STATE_CLOSED)
-		to_chat(usr, SPAN_WARNING("\The [src] is closed."))
+		to_chat(usr, span_warning("\The [src] is closed."))
 		return
 	if(!do_after(usr, 2 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return
@@ -152,11 +152,11 @@
 		return TRUE
 
 	if (state & WASHER_STATE_RUNNING)
-		to_chat(user, SPAN_WARNING("\The [src] is currently running."))
+		to_chat(user, span_warning("\The [src] is currently running."))
 		return TRUE
 
 	if (!(W.item_flags & ITEM_FLAG_WASHER_ALLOWED))
-		to_chat(user, SPAN_WARNING("\The [W] can't be washed in \the [src]!"))
+		to_chat(user, span_warning("\The [W] can't be washed in \the [src]!"))
 		return TRUE
 
 	if (length(contents) < 5)
@@ -166,15 +166,15 @@
 			state |= WASHER_STATE_FULL
 			update_icon()
 		else
-			to_chat(user, SPAN_NOTICE("You can't put the item in right now."))
+			to_chat(user, span_notice("You can't put the item in right now."))
 	else
-		to_chat(user, SPAN_NOTICE("\The [src] is full."))
+		to_chat(user, span_notice("\The [src] is full."))
 	return TRUE
 
 
 /obj/machinery/washing_machine/physical_attack_hand(mob/user)
 	if(state & WASHER_STATE_RUNNING)
-		to_chat(user, SPAN_WARNING("\The [src] is busy."))
+		to_chat(user, span_warning("\The [src] is busy."))
 		return TRUE
 	if(state & WASHER_STATE_CLOSED)
 		state &= ~WASHER_STATE_CLOSED

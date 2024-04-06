@@ -29,20 +29,20 @@
 		power_cell = robot.get_cell()
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	user.visible_message(SPAN_WARNING("There is a loud crack and the smell of ozone as \the [user] touches \the [src]."))
+	user.visible_message(span_warning("There is a loud crack and the smell of ozone as \the [user] touches \the [src]."))
 	playsound(loc, 'sound/effects/snap.ogg', 50, 1)
 	if(power_cell)
 		power_cell.charge = power_cell.maxcharge
-		to_chat(user, SPAN_NOTICE("<b>Your [power_cell] has been charged to capacity.</b>"))
+		to_chat(user, span_notice("<b>Your [power_cell] has been charged to capacity.</b>"))
 	if(istype(H) && H.species.name == SPECIES_ADHERENT)
 		return
 	if(isrobot(user))
 		user.apply_damage(150, DAMAGE_BURN, def_zone = BP_CHEST)
-		visible_message(SPAN_DANGER("Electricity arcs off [user] as it touches \the [src]!"))
-		to_chat(user, SPAN_DANGER("<b>You detect damage to your components!</b>"))
+		visible_message(span_danger("Electricity arcs off [user] as it touches \the [src]!"))
+		to_chat(user, span_danger("<b>You detect damage to your components!</b>"))
 	else
 		user.electrocute_act(100, src, def_zone = BP_CHEST)
-		visible_message(SPAN_DANGER("\The [user] has been shocked by \the [src]!"))
+		visible_message(span_danger("\The [user] has been shocked by \the [src]!"))
 	user.throw_at(get_step(user,get_dir(src,user)), 5, 10)
 
 

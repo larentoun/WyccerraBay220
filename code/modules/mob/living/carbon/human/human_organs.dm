@@ -157,7 +157,7 @@
 		for(var/limb_tag in list(BP_L_HAND, BP_L_ARM))
 			var/obj/item/organ/external/E = get_organ(limb_tag)
 			if(!E)
-				visible_message(SPAN_DANGER("Lacking a functioning left hand, \the [src] drops \the [l_hand]."))
+				visible_message(span_danger("Lacking a functioning left hand, \the [src] drops \the [l_hand]."))
 				drop_from_inventory(l_hand)
 				break
 
@@ -165,7 +165,7 @@
 		for(var/limb_tag in list(BP_R_HAND, BP_R_ARM))
 			var/obj/item/organ/external/E = get_organ(limb_tag)
 			if(!E)
-				visible_message(SPAN_DANGER("Lacking a functioning right hand, \the [src] drops \the [r_hand]."))
+				visible_message(span_danger("Lacking a functioning right hand, \the [src] drops \the [r_hand]."))
 				drop_from_inventory(r_hand)
 				break
 
@@ -185,14 +185,14 @@
 		switch(affected.body_part)
 			if(FOOT_LEFT, FOOT_RIGHT)
 				if(!BP_IS_ROBOTIC(affected))
-					to_chat(src, SPAN_WARNING("You lose your footing as your [affected.name] spasms!"))
+					to_chat(src, span_warning("You lose your footing as your [affected.name] spasms!"))
 				else
-					to_chat(src, SPAN_WARNING("You lose your footing as your [affected.name] [pick("twitches", "shudders")]!"))
+					to_chat(src, span_warning("You lose your footing as your [affected.name] [pick("twitches", "shudders")]!"))
 			if(LEG_LEFT, LEG_RIGHT)
 				if(!BP_IS_ROBOTIC(affected))
-					to_chat(src, SPAN_WARNING("Your [affected.name] buckles from the shock!"))
+					to_chat(src, span_warning("Your [affected.name] buckles from the shock!"))
 				else
-					to_chat(src, SPAN_WARNING("You lose your balance as [affected.name] [pick("malfunctions", "freezes","shudders")]!"))
+					to_chat(src, span_warning("You lose your balance as [affected.name] [pick("malfunctions", "freezes","shudders")]!"))
 			else
 				return
 	Weaken(4)

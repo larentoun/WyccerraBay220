@@ -93,7 +93,7 @@
 	if(allow_move == 1)
 		var/obj/item/tank/jetpack/thrust = get_jetpack()
 		if(thrust && thrust.on && skill_fail_prob(SKILL_EVA, 10, SKILL_TRAINED))
-			to_chat(src, SPAN_WARNING("You fumble with [thrust] controls!"))
+			to_chat(src, span_warning("You fumble with [thrust] controls!"))
 			if(prob(50))
 				thrust.toggle()
 			if(prob(50))

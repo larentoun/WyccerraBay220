@@ -11,9 +11,9 @@
 /obj/item/device/drone_designator/examine(mob/user, distance)
 	. = ..()
 	if (network)
-		. += SPAN_NOTICE("It is connected to the '[network]' network.")
+		. += span_notice("It is connected to the '[network]' network.")
 	else
-		. += SPAN_NOTICE("The device hasn't been linked to a transport network.")
+		. += span_notice("The device hasn't been linked to a transport network.")
 
 /obj/item/device/drone_designator/proc/recursive_validate_contents(atom/A, depth = 1)
 	if(depth >= 4)
@@ -33,13 +33,13 @@
 	if (!istype(target))
 		return FALSE
 	if (target.anchored)
-		to_chat(user, SPAN_WARNING("\The [target] is anchored to the ground!"))
+		to_chat(user, span_warning("\The [target] is anchored to the ground!"))
 		return FALSE
 	if (target.buckled_mob)
-		to_chat(user, SPAN_WARNING("There is a living being buckled to \the [target]."))
+		to_chat(user, span_warning("There is a living being buckled to \the [target]."))
 		return FALSE
 	if (!recursive_validate_contents(target))
-		to_chat(user, SPAN_WARNING("There is an unsecured lifeform inside \the [target]."))
+		to_chat(user, span_warning("There is an unsecured lifeform inside \the [target]."))
 		return FALSE
 	return TRUE
 
@@ -50,25 +50,25 @@
 		for(var/obj/machinery/drone_pad/pad in drone_pads)
 			if(pad.attempt_to_transport(target, user, src))
 				return
-		to_chat(user, SPAN_WARNING("It would seem there are no available drones to process this request!"))
+		to_chat(user, span_warning("It would seem there are no available drones to process this request!"))
 	else
-		to_chat(user, SPAN_WARNING("The network is not responding..."))
+		to_chat(user, span_warning("The network is not responding..."))
 
 /obj/item/device/drone_designator/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	. = ..()
 	if (!network)
-		to_chat(user, SPAN_WARNING("\The [src] has not been connected to any network!"))
+		to_chat(user, span_warning("\The [src] has not been connected to any network!"))
 		return
 	var/turf/T = target.loc
 	if (!istype(T))
 		return
 	var/area/A = T.loc
 	if (!(istype(A) && A.area_flags & AREA_FLAG_EXTERNAL))
-		to_chat(user, SPAN_WARNING("You should probably try to use this outside."))
+		to_chat(user, span_warning("You should probably try to use this outside."))
 		return
 	if (validate_target(target, user))
 		var/datum/beam/B = user.Beam(BeamTarget = T, icon_state = "n_beam", maxdistance = get_dist(user, T), beam_type = /obj/ebeam)
-		user.visible_message(SPAN_NOTICE("\The [user] points \the [src] at \the [target]."))
+		user.visible_message(span_notice("\The [user] points \the [src] at \the [target]."))
 		playsound(src,'sound/effects/scanbeep.ogg',30,0)
 		if(do_after(user, 2 SECONDS, target, (DO_PUBLIC_UNIQUE & ~DO_USER_SAME_HAND) | DO_MOVE_CHECKS_TURFS))
 			QDEL_NULL(B)
@@ -137,12 +137,12 @@
 	var/datum/extension/local_network_member/transport = get_extension(src, /datum/extension/local_network_member)
 	var/network = transport.id_tag
 	if (network)
-		. += SPAN_NOTICE("It is connected to the '[network]' network.")
+		. += span_notice("It is connected to the '[network]' network.")
 	else
-		. += SPAN_NOTICE("The device hasn't been linked to a transport network.")
+		. += span_notice("The device hasn't been linked to a transport network.")
 
 	if (current_flight)
-		. += SPAN_NOTICE("There is a drone en route to this pad. The drone is [ time_to_readable(current_flight.time_of_arrival - world.time) ] away.")
+		. += span_notice("There is a drone en route to this pad. The drone is [ time_to_readable(current_flight.time_of_arrival - world.time) ] away.")
 
 /obj/machinery/drone_pad/proc/pickup_animation(obj/target)
 	var/image/object = new
@@ -228,8 +228,8 @@
 			flight_time += get_dist(other, self) * tile_travel_time
 		current_flight.time_of_arrival = world.time +  flight_time
 
-		designator.audible_message(SPAN_NOTICE("<b>\The [designator]</b> pings, Request acknowledged. Drone en route. Delivery expected in T - [ (flight_time) / (1 SECOND)] seconds."))
-		audible_message(SPAN_NOTICE("<b>\The [src]</b> pings, Incoming payload. Delivery expected in T - [(flight_time) / (1 SECOND)] seconds."))
+		designator.audible_message(span_notice("<b>\The [designator]</b> pings, Request acknowledged. Drone en route. Delivery expected in T - [ (flight_time) / (1 SECOND)] seconds."))
+		audible_message(span_notice("<b>\The [src]</b> pings, Incoming payload. Delivery expected in T - [(flight_time) / (1 SECOND)] seconds."))
 
 
 		active_timer = addtimer(CALLBACK(src, PROC_REF(finish_moving)), flight_time, TIMER_UNIQUE | TIMER_OVERRIDE | TIMER_STOPPABLE)
@@ -256,13 +256,13 @@
 	var/obj/item/device/drone_designator/designator = tool
 	if (istype(designator))
 		if (!transport.id_tag)
-			to_chat(user, SPAN_WARNING("\The [src] has not yet been set up."))
+			to_chat(user, span_warning("\The [src] has not yet been set up."))
 			playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 1, -3)
 		else if (designator.network == transport.id_tag)
-			to_chat(user, SPAN_WARNING("\The [tool] is already synchronized with this network."))
+			to_chat(user, span_warning("\The [tool] is already synchronized with this network."))
 			playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 1, -3)
 		else
-			to_chat(user, SPAN_NOTICE("\The [tool] was synchronized with the [transport.id_tag] network."))
+			to_chat(user, span_notice("\The [tool] was synchronized with the [transport.id_tag] network."))
 			designator.network = transport.id_tag
 			playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1, -3)
 		update_icon()

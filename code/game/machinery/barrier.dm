@@ -18,7 +18,7 @@
 	if (locked)
 		var/message = "The lights show it is locked onto [get_turf(src)]."
 		if (emagged && distance < 3)
-			message += SPAN_WARNING(" The locking clamps have other ideas.")
+			message += span_warning(" The locking clamps have other ideas.")
 		. += message
 
 /obj/machinery/barrier/welder_act(mob/living/user, obj/item/tool)

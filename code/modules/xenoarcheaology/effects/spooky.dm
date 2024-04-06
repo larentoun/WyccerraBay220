@@ -12,7 +12,7 @@
 			if (prob(weakness * 100))
 				if (!addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, ChangeToSkeleton)), rand(30 SECONDS, 2 MINUTES), TIMER_UNIQUE | TIMER_NO_HASH_WAIT))
 					return
-				to_chat(H, SPAN_WARNING("You suddenly feel a deep chill in your bones..."))
+				to_chat(H, span_warning("You suddenly feel a deep chill in your bones..."))
 				var/datum/gas_mixture/env = H.loc.return_air()
 				if (env)
 					env.temperature -= 15
@@ -27,7 +27,7 @@
 			if (prob(weakness * 100))
 				if (!addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, ChangeToSkeleton)), rand(30 SECONDS, 2 MINUTES), TIMER_UNIQUE | TIMER_NO_HASH_WAIT))
 					return
-				to_chat(H, SPAN_WARNING("You suddenly feel a deep chill in your bones..."))
+				to_chat(H, span_warning("You suddenly feel a deep chill in your bones..."))
 				var/datum/gas_mixture/env = H.loc.return_air()
 				if (env)
 					env.temperature -= 15
@@ -42,7 +42,7 @@
 			if (prob(weakness * 100))
 				if (!addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, ChangeToSkeleton)), rand(30 SECONDS, 2 MINUTES), TIMER_UNIQUE | TIMER_NO_HASH_WAIT))
 					return
-				to_chat(H, SPAN_WARNING("You suddenly feel a deep chill in your bones..."))
+				to_chat(H, span_warning("You suddenly feel a deep chill in your bones..."))
 				var/datum/gas_mixture/env = H.loc.return_air()
 				if (env)
 					env.temperature -= 15
@@ -55,5 +55,5 @@
 		new /mob/living/simple_animal/hostile/skeleton(T)
 		for (var/mob/living/carbon/human/H in range(src.effectrange, T))
 			if (prob(50))
-				H.custom_pain(SPAN_DANGER("You feel a deep ache in your bones!"), 30)
+				H.custom_pain(span_danger("You feel a deep ache in your bones!"), 30)
 				H.Weaken(10)

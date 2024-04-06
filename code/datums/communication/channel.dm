@@ -39,25 +39,25 @@
 		return FALSE
 
 	if(config_setting && !config.vars[config_setting] && !check_rights(R_INVESTIGATE,0,communicator))
-		to_chat(communicator, SPAN_DANGER("[name] is globally muted."))
+		to_chat(communicator, span_danger("[name] is globally muted."))
 		return FALSE
 
 	var/client/C = communicator.get_client()
 
 	if(jobban_isbanned(C.mob, name))
-		to_chat(communicator, SPAN_DANGER("You cannot use [name] (banned)."))
+		to_chat(communicator, span_danger("You cannot use [name] (banned)."))
 		return FALSE
 
 	if(can_ignore(C))
-		to_chat(communicator, SPAN_WARNING("Couldn't send message - you have [name] muted."))
+		to_chat(communicator, span_warning("Couldn't send message - you have [name] muted."))
 		return FALSE
 
 	if(C && mute_setting && (C.prefs.muted & mute_setting))
-		to_chat(communicator, SPAN_DANGER("You cannot use [name] (muted)."))
+		to_chat(communicator, span_danger("You cannot use [name] (muted)."))
 		return FALSE
 
 	if(C && (flags & COMMUNICATION_NO_GUESTS) && IsGuestKey(C.key))
-		to_chat(communicator, SPAN_DANGER("Guests may not use the [name] channel."))
+		to_chat(communicator, span_danger("Guests may not use the [name] channel."))
 		return FALSE
 
 	if (config.forbidden_message_regex && !check_rights(R_INVESTIGATE, 0, communicator) && findtext(message, config.forbidden_message_regex))

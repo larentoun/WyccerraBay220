@@ -46,20 +46,20 @@
 		USE_FEEDBACK_FAILURE("\The [weapon] isn't sharp enough to cut \the [src].")
 		return TRUE
 	user.visible_message(
-		SPAN_NOTICE("\The [user] starts cutting through \the [src] with \a [weapon]."),
-		SPAN_NOTICE("You start cutting through \the [src] with \the [weapon].")
+		span_notice("\The [user] starts cutting through \the [src] with \a [weapon]."),
+		span_notice("You start cutting through \the [src] with \the [weapon].")
 	)
 	while (!health_dead())
 		if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, weapon))
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] makes some progress cutting through \the [src]..."),
-			SPAN_NOTICE("You make some progress cutting through \the [src]...")
+			span_notice("\The [user] makes some progress cutting through \the [src]..."),
+			span_notice("You make some progress cutting through \the [src]...")
 		)
 		if (damage_health(20 * (1 + (weapon.force - 10) / 10), weapon.damtype, weapon.damage_flags()))
 			user.visible_message(
-				SPAN_NOTICE("\The [user] cuts through \the [src] with \a [weapon]."),
-				SPAN_NOTICE("You cut through \the [src] with \the [weapon].")
+				span_notice("\The [user] cuts through \the [src] with \a [weapon]."),
+				span_notice("You cut through \the [src] with \the [weapon].")
 			)
 			break
 	return TRUE
@@ -75,7 +75,7 @@
 	. = PROJECTILE_CONTINUE //few cloth ribbons won't stop bullet or energy ray
 	if (P.damage_type != DAMAGE_BURN)//beams, lasers, fire. Bullets won't make a lot of damage to the few hanging belts.
 		return
-	visible_message(SPAN_WARNING("\The [P] hits \the [src] and tears it!"))
+	visible_message(span_warning("\The [P] hits \the [src] and tears it!"))
 	damage_health(P.damage, P.damage_type)
 
 /obj/structure/net/update_connections()//maybe this should also be called when any of the walls nearby is removed but no idea how I can make it happen
@@ -150,11 +150,11 @@
 /obj/item/stack/net/attack_self(mob/user)//press while holding to lay one. If there's net already, place wall
 	var/turf/T = get_turf(user)
 	if (locate(/obj/structure/net/net_wall) in T)
-		to_chat(user, SPAN_WARNING("Net wall is already placed here!"))
+		to_chat(user, span_warning("Net wall is already placed here!"))
 		return
 	if (locate(/obj/structure/net) in T)//if there's already layed "floor" net
 		if (!attach_wall_check())
-			to_chat(user, SPAN_WARNING("You try to place net wall but it falls on the floor. Try to attach it to something vertical and stable."))
+			to_chat(user, span_warning("You try to place net wall but it falls on the floor. Try to attach it to something vertical and stable."))
 			return
 		new /obj/structure/net/net_wall(T)
 		//update_adjacent_nets(1)//since net-wall was added we also update adjacent wall-nets

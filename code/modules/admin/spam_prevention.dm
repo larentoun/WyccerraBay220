@@ -21,7 +21,7 @@ GLOBAL_LIST_EMPTY(ckey_punished_for_spam) // this round; to avoid redundant reco
 	// Punitive action
 	. = FALSE
 	log_and_message_admins("Kicking due to possible spam abuse", C)
-	to_chat(C, SPAN_DANGER("Possible spam abuse detected; you are being kicked from the server."))
+	to_chat(C, span_danger("Possible spam abuse detected; you are being kicked from the server."))
 	if(GLOB.ckey_punished_for_spam[ckey])
 		qdel(C)
 		return

@@ -403,22 +403,22 @@
 			if(istype(usr,/mob/living/carbon))
 				var/mob/living/carbon/M = usr
 				if(prob(50))
-					to_chat(usr, SPAN_WARNING("You hear battle shouts. The tramping of boots on cold metal. Screams of agony. The rush of venting air. Are you going insane?"))
+					to_chat(usr, span_warning("You hear battle shouts. The tramping of boots on cold metal. Screams of agony. The rush of venting air. Are you going insane?"))
 					M.hallucination(50, 50)
 				else
-					to_chat(usr, SPAN_DANGER("Something strikes you from behind! It hurts like hell and feel like a blunt weapon, but nothing is there..."))
+					to_chat(usr, span_danger("Something strikes you from behind! It hurts like hell and feel like a blunt weapon, but nothing is there..."))
 					M.take_organ_damage(10, 0)
 			else
-				to_chat(usr, SPAN_WARNING("The sounds of battle fill your ears..."))
+				to_chat(usr, span_warning("The sounds of battle fill your ears..."))
 		if(ORION_TRAIL_ILLNESS)
 			if(istype(usr,/mob/living/carbon/human))
 				var/mob/living/carbon/human/M = usr
-				to_chat(M, SPAN_WARNING("An overpowering wave of nausea consumes over you. You hunch over, your stomach's contents preparing for a spectacular exit."))
+				to_chat(M, span_warning("An overpowering wave of nausea consumes over you. You hunch over, your stomach's contents preparing for a spectacular exit."))
 				M.vomit()
 			else
-				to_chat(usr, SPAN_WARNING("You feel ill."))
+				to_chat(usr, span_warning("You feel ill."))
 		if(ORION_TRAIL_CARP)
-			to_chat(usr, SPAN_DANGER(" Something bit you!"))
+			to_chat(usr, span_danger(" Something bit you!"))
 			var/mob/living/M = usr
 			M.adjustBruteLoss(10)
 		if(ORION_TRAIL_FLUX)
@@ -428,7 +428,7 @@
 				src.visible_message("A sudden gust of powerful wind slams \the [M] into the floor!", "You hear a large fwooshing sound, followed by a bang.")
 				M.take_organ_damage(10, 0)
 			else
-				to_chat(usr, SPAN_WARNING("A violent gale blows past you, and you barely manage to stay standing!"))
+				to_chat(usr, span_warning("A violent gale blows past you, and you barely manage to stay standing!"))
 		if(ORION_TRAIL_MALFUNCTION)
 			if(supplies["3"])
 				return
@@ -439,11 +439,11 @@
 			if(prob(90) && !supplies["2"])
 				var/turf/simulated/floor/F = src.loc
 				F.ChangeTurf(/turf/space)
-				src.visible_message(SPAN_DANGER("Something slams into the floor around \the [src], exposing it to space!"), "You hear something crack and break.")
+				src.visible_message(span_danger("Something slams into the floor around \the [src], exposing it to space!"), "You hear something crack and break.")
 			else
 				src.visible_message("Something slams into the floor around \the [src] - luckily, it didn't get through!", "You hear something crack.")
 		if(ORION_TRAIL_GAMEOVER)
-			to_chat(usr, SPAN_DANGER(FONT_LARGE("You're never going to make it to Orion...")))
+			to_chat(usr, span_danger(FONT_LARGE("You're never going to make it to Orion...")))
 			var/mob/living/M = usr
 			M.visible_message("\The [M] starts rapidly deteriorating.")
 			close_browser(M, "window=arcade")
@@ -484,25 +484,25 @@
 	if(!(in_range(user, src)))
 		return
 	if(!active)
-		. += SPAN_NOTICE("There's a little switch on the bottom. It's flipped down.")
+		. += span_notice("There's a little switch on the bottom. It's flipped down.")
 	else
-		. += SPAN_NOTICE("There's a little switch on the bottom. It's flipped up.")
+		. += span_notice("There's a little switch on the bottom. It's flipped up.")
 
 /obj/item/orion_ship/attack_self(mob/user)
 	if(active)
 		return
 	log_and_message_admins("primed an explosive Orion ship for detonation.", user)
-	to_chat(user, SPAN_WARNING("You flip the switch on the underside of [src]."))
+	to_chat(user, span_warning("You flip the switch on the underside of [src]."))
 	active = 1
-	src.visible_message(SPAN_NOTICE("[src] softly beeps and whirs to life!"))
+	src.visible_message(span_notice("[src] softly beeps and whirs to life!"))
 	src.audible_message("<b>\The [src]</b> says, 'This is ship ID #[rand(1,1000)] to Orion Port Authority. We're coming in for landing, over.'")
 	sleep(20)
-	src.visible_message(SPAN_WARNING("[src] begins to vibrate..."))
+	src.visible_message(span_warning("[src] begins to vibrate..."))
 	src.audible_message("<b>\The [src]</b> says, 'Uh, Port? Having some issues with our reactor, could you check it out? Over.'")
 	sleep(30)
 	src.audible_message("<b>\The [src]</b> says, 'Oh, God! Code Eight! CODE EIGHT! IT'S GONNA BL-'")
 	sleep(3.6)
-	src.visible_message(SPAN_DANGER("[src] explodes!"))
+	src.visible_message(span_danger("[src] explodes!"))
 	explosion(src.loc, 7)
 	qdel(src)
 

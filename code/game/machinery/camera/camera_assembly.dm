@@ -29,7 +29,7 @@
 	if(U)
 		if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 			return
-		to_chat(user, SPAN_NOTICE("You unattach an upgrade from the assembly."))
+		to_chat(user, span_notice("You unattach an upgrade from the assembly."))
 		U.dropInto(loc)
 		upgrades -= U
 
@@ -126,10 +126,10 @@
 			if(isCoil(W))
 				var/obj/item/stack/cable_coil/C = W
 				if(C.use(2))
-					to_chat(user, SPAN_NOTICE("You add wires to the assembly."))
+					to_chat(user, span_notice("You add wires to the assembly."))
 					state = ASSEMBLY_WIRED
 				else
-					to_chat(user, SPAN_WARNING("You need 2 coils of wire to wire the assembly."))
+					to_chat(user, span_warning("You need 2 coils of wire to wire the assembly."))
 				return
 
 	// Upgrades!

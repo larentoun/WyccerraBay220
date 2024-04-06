@@ -72,7 +72,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 /spell/New()
 	..()
 
-	//still_recharging_msg = SPAN_NOTICE("[name] is still recharging.")
+	//still_recharging_msg = span_notice("[name] is still recharging.")
 	charge_counter = charge_max
 
 /spell/proc/process()
@@ -105,12 +105,12 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 	if(!cast_check(skipcharge, user))
 		return
 	if (cast_delay > 1)
-		to_chat(user, SPAN_NOTICE("You start casting [name]..."))
+		to_chat(user, span_notice("You start casting [name]..."))
 	if(cast_delay && !spell_do_after(user, cast_delay))
 		return
 	var/list/targets = choose_targets(user)
 	if(!check_valid_targets(targets))
-		to_chat(user, SPAN_WARNING("[name] fizzles. There are no valid targets nearby."))
+		to_chat(user, span_warning("[name] fizzles. There are no valid targets nearby."))
 		return
 	var/time = 0
 	admin_attacker_log(user, "attempted to cast the spell [name]")
@@ -218,17 +218,17 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 
 	if(!(src in user.mind.learned_spells) && holder == user && !(isanimal(user)))
 		error("[user] utilized the spell '[src]' without having it.")
-		to_chat(user, SPAN_WARNING("You shouldn't have this spell! Something's wrong."))
+		to_chat(user, span_warning("You shouldn't have this spell! Something's wrong."))
 		return 0
 
 	var/spell_leech = user.disrupts_psionics()
 	if(spell_leech)
-		to_chat(user, SPAN_WARNING("You try to marshal your energy, but find it leeched away by \the [spell_leech]!"))
+		to_chat(user, span_warning("You try to marshal your energy, but find it leeched away by \the [spell_leech]!"))
 		return 0
 
 	var/turf/user_turf = get_turf(user)
 	if(!user_turf)
-		to_chat(user, SPAN_WARNING("You cannot cast spells in null space!"))
+		to_chat(user, span_warning("You cannot cast spells in null space!"))
 
 	if((spell_flags & Z2NOCAST) && (user_turf.z in GLOB.using_map.admin_levels)) //Certain spells are not allowed on the centcomm zlevel
 		return 0
@@ -245,14 +245,14 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 		if(istype(user, /mob/living/simple_animal))
 			var/mob/living/simple_animal/SA = user
 			if(SA.purge)
-				to_chat(SA, SPAN_WARNING("The null sceptre's power interferes with your own!"))
+				to_chat(SA, span_warning("The null sceptre's power interferes with your own!"))
 				return 0
 
 		if(!(spell_flags & GHOSTCAST))
 			if(!(spell_flags & NO_SOMATIC))
 				var/mob/living/L = user
 				if(L.incapacitated(INCAPACITATION_STUNNED|INCAPACITATION_RESTRAINED|INCAPACITATION_BUCKLED_FULLY|INCAPACITATION_FORCELYING|INCAPACITATION_KNOCKOUT))
-					to_chat(user, SPAN_WARNING("You can't cast spells while incapacitated!"))
+					to_chat(user, span_warning("You can't cast spells while incapacitated!"))
 					return 0
 
 			if(ishuman(user) && !(invocation_type in list(SpI_EMOTE, SpI_NONE)))
@@ -276,7 +276,7 @@ var/global/list/spells = typesof(/spell) //needed for the badmin verb for now
 					return 0
 			if(Sp_CHARGES)
 				if(!charge_counter)
-					to_chat(user, SPAN_NOTICE("[name] has no charges left."))
+					to_chat(user, span_notice("[name] has no charges left."))
 					return 0
 	return 1
 

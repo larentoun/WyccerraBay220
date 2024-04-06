@@ -64,19 +64,19 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 
 /obj/machinery/stasis_cage/proc/try_release(mob/user)
 	if(!contained)
-		to_chat(user, SPAN_WARNING("There's no animals inside [src]"))
+		to_chat(user, span_warning("There's no animals inside [src]"))
 		return
 	if (broken)
-		to_chat(user, SPAN_WARNING("[src]'s lid is broken!"))
+		to_chat(user, span_warning("[src]'s lid is broken!"))
 		return
 	if (!allowed(user))
-		to_chat(user, SPAN_WARNING("[src] refuses access."))
+		to_chat(user, span_warning("[src] refuses access."))
 		return
 	if (!is_powered())
-		to_chat(user, SPAN_WARNING("[src] is unpowered."))
+		to_chat(user, span_warning("[src] is unpowered."))
 		return
 	if (health_dead())
-		to_chat(usr, SPAN_NOTICE("[src] is completely destroyed."))
+		to_chat(usr, span_notice("[src] is completely destroyed."))
 		return
 
 	user.visible_message("[user] begins undoing the locks and latches on [src].")
@@ -101,10 +101,10 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	if(contained || broken)
 		return
 	if (!is_powered())
-		to_chat(usr, SPAN_WARNING("[src] is unpowered."))
+		to_chat(usr, span_warning("[src] is unpowered."))
 		return
 	if (health_dead())
-		to_chat(usr, SPAN_WARNING("[src] is completely destroyed."))
+		to_chat(usr, span_warning("[src] is completely destroyed."))
 		return
 	user.visible_message(
 		"[user] has stuffed [thing] into [src].",
@@ -134,13 +134,13 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	. = ..()
 	if(contained)
 		if (HAS_FLAGS(stat, MACHINE_STAT_NOSCREEN))
-			. += SPAN_NOTICE("[src] seems to be occupied.")
+			. += span_notice("[src] seems to be occupied.")
 		else
-			. += SPAN_NOTICE("[contained] is kept inside.")
+			. += span_notice("[contained] is kept inside.")
 	if(broken)
-		. += SPAN_WARNING("[src]'s lid is broken. It probably can not be used.")
+		. += span_warning("[src]'s lid is broken. It probably can not be used.")
 	if(cell)
-		. += SPAN_NOTICE("[src]'s power gauge shows [cell.percent()]% remaining.")
+		. += span_notice("[src]'s power gauge shows [cell.percent()]% remaining.")
 
 /obj/machinery/stasis_cage/crowbar_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
@@ -153,8 +153,8 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 		USE_FEEDBACK_FAILURE("[src] is still powered shut.")
 		return
 	user.visible_message(
-		SPAN_DANGER("[user] begins to pry open [src] with the crowbar!"),
-		SPAN_DANGER("You being to pry open [src] with the crowbar.")
+		span_danger("[user] begins to pry open [src] with the crowbar!"),
+		span_danger("You being to pry open [src] with the crowbar.")
 	)
 	playsound(loc, 'sound/machines/airlock_creaking.ogg', 40)
 	if(!tool.use_as_tool(src, user, 7 SECONDS, volume = 50, skill_path = list(SKILL_CONSTRUCTION, SKILL_DEVICES), do_flags = DO_PUBLIC_UNIQUE) || panel_open || !contained || is_powered())
@@ -164,16 +164,16 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 		return
 	if(!user.skill_check(SKILL_CONSTRUCTION, SKILL_TRAINED))
 		user.visible_message(
-			SPAN_DANGER("[user] jams open [src]'s lid, damaging it in the process!"),
-			SPAN_DANGER("You successfully manage to jam open [src]'s lid, damaging it in the process.")
+			span_danger("[user] jams open [src]'s lid, damaging it in the process!"),
+			span_danger("You successfully manage to jam open [src]'s lid, damaging it in the process.")
 		)
 		release()
 		broken = TRUE
 		update_icon()
 		return
 	user.visible_message(
-		SPAN_DANGER("[user] jams open [src]'s lid!"),
-		SPAN_DANGER("You successfully manage to jam open [src]'s lid.")
+		span_danger("[user] jams open [src]'s lid!"),
+		span_danger("You successfully manage to jam open [src]'s lid.")
 	)
 	release()
 
@@ -185,17 +185,17 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 		USE_FEEDBACK_FAILURE("You need to repair the rest of [src] first!")
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] begins to clamp [src]'s lid back into position."),
-		SPAN_NOTICE("You begin to clamp [src]'s lid back into position.")
+		span_notice("[user] begins to clamp [src]'s lid back into position."),
+		span_notice("You begin to clamp [src]'s lid back into position.")
 	)
 	if(!user.skill_check(SKILL_CONSTRUCTION, SKILL_BASIC))
-		to_chat(user, SPAN_WARNING("You fail to repair [src]."))
+		to_chat(user, span_warning("You fail to repair [src]."))
 		return
 	if(!tool.use_as_tool(src, user, 5 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_PUBLIC_UNIQUE))
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] successfully repairs [src]'s lid!"),
-		SPAN_NOTICE("You successfully repair [src]'s lid!")
+		span_notice("[user] successfully repairs [src]'s lid!"),
+		span_notice("You successfully repair [src]'s lid!")
 	)
 	broken = FALSE
 	update_icon()
@@ -212,8 +212,8 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 				USE_FEEDBACK_STACK_NOT_ENOUGH(I, 10, "to repair [src].")
 				return TRUE
 			user.visible_message(
-				SPAN_NOTICE("[user] begins to repair [src]'s electronics with [tool]."),
-				SPAN_NOTICE("You being to repair [src]'s electronics with [tool].")
+				span_notice("[user] begins to repair [src]'s electronics with [tool]."),
+				span_notice("You being to repair [src]'s electronics with [tool].")
 			)
 			if(!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
 				return TRUE
@@ -221,8 +221,8 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 				USE_FEEDBACK_FAILURE("You fail to successfully repair [src]'s electronics.")
 				return TRUE
 			user.visible_message(
-				SPAN_NOTICE("[user] repairs [src]'s containment with [tool]."),
-				SPAN_NOTICE("You repair [src]'s containment with [tool].")
+				span_notice("[user] repairs [src]'s containment with [tool]."),
+				span_notice("You repair [src]'s containment with [tool].")
 			)
 			I.use(10)
 			revive_health()
@@ -265,13 +265,13 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 		return
 	if(contained)
 		if(prob(30))
-			visible_message(SPAN_DANGER("[src]'s lights flicker, unlocking the container!"))
+			visible_message(span_danger("[src]'s lights flicker, unlocking the container!"))
 			release()
 			broken = TRUE
 			update_icon()
 			new /obj/sparks(get_turf(src))
 			return
-	visible_message(SPAN_DANGER("[src] sparks violently, damaging the lid!"))
+	visible_message(span_danger("[src] sparks violently, damaging the lid!"))
 	broken = TRUE
 	new /obj/sparks(get_turf(src))
 
@@ -309,7 +309,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 /obj/machinery/stasis_cage/on_death()
 	. = ..()
 	visible_message(
-		SPAN_DANGER("[src] lets out a painful whine, as its structure deforms!")
+		span_danger("[src] lets out a painful whine, as its structure deforms!")
 	)
 
 
@@ -317,7 +317,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 	if(!CanMouseDrop(target, user))
 		return
 	if (!isanimal(target) && safety)
-		to_chat(user, SPAN_WARNING("[src] smartly refuses [target]."))
+		to_chat(user, span_warning("[src] smartly refuses [target]."))
 		return
 	if (!allowed(user))
 		to_chat(user, "[src] blinks, refusing access.")
@@ -384,8 +384,8 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 			if (!mended)
 				playsound(stasis_cage.loc, 'sound/machines/BoltsDown.ogg', 60)
 				holder.visible_message(
-					SPAN_WARNING("The cage's lid bolts down destructively, denting itself!"),
-					SPAN_NOTICE("You notice the cage lid override flag blink hastily.")
+					span_warning("The cage's lid bolts down destructively, denting itself!"),
+					span_notice("You notice the cage lid override flag blink hastily.")
 				)
 				stasis_cage.broken = TRUE
 
@@ -397,7 +397,7 @@ var/global/const/STASISCAGE_WIRE_LOCK      = 4
 			if (stasis_cage.contained)
 				if (prob(20) && usr.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
 					holder.visible_message(
-						SPAN_WARNING("The cage hastily flicks open its lid!"),
-						SPAN_NOTICE("You notice the biometric sensor flag blink fervently.")
+						span_warning("The cage hastily flicks open its lid!"),
+						span_notice("You notice the biometric sensor flag blink fervently.")
 					)
 					stasis_cage.release()

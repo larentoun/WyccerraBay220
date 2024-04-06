@@ -38,7 +38,7 @@
 	if (tool_index > length(tool_list))
 		tool_index = 1
 	active_tool = tool_list[tool_index]
-	to_chat(user, SPAN_NOTICE("You attach the [active_tool] to [src]."))
+	to_chat(user, span_notice("You attach the [active_tool] to [src]."))
 	playsound(src, 'sound/items/Ratchet.ogg', 10, 1)
 	update_icon()
 	if (active_tool == PRY_HEAD || PULSE_HEAD) //this is mostly to stop people accidentally engraving reinforced walls

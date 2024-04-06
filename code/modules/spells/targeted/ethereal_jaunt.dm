@@ -115,14 +115,14 @@
 	if (!canmove || reappearing) return
 	var/turf/newLoc = get_step(src, direction)
 	if (!newLoc)
-		to_chat(user, SPAN_WARNING("You cannot go that way."))
+		to_chat(user, span_warning("You cannot go that way."))
 	else if (!(newLoc.turf_flags & TURF_FLAG_NOJAUNT))
 		forceMove(newLoc)
 		var/turf/T = get_turf(loc)
 		if(!T.contains_dense_objects())
 			last_valid_turf = T
 	else
-		to_chat(user, SPAN_WARNING("Some strange aura is blocking the way!"))
+		to_chat(user, span_warning("Some strange aura is blocking the way!"))
 	canmove = 0
 	addtimer(CALLBACK(src, PROC_REF(allow_move)), 2)
 

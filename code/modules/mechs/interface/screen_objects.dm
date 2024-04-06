@@ -19,7 +19,7 @@
 		if(owner.radio)
 			owner.radio.attack_self(usr)
 		else
-			to_chat(usr, SPAN_WARNING("There is no radio installed."))
+			to_chat(usr, span_warning("There is no radio installed."))
 
 /obj/screen/exosuit/Initialize()
 	. = ..()
@@ -134,18 +134,18 @@
 		return
 
 	if(!owner?.hatch_closed)
-		to_chat(usr, SPAN_WARNING("Error: Hardpoint interface disabled while [owner.body.hatch_descriptor] is open."))
+		to_chat(usr, span_warning("Error: Hardpoint interface disabled while [owner.body.hatch_descriptor] is open."))
 		return
 
 	var/list/modifiers = params2list(params)
 	if(LAZYACCESS(modifiers, CTRL_CLICK))
 		if(owner.hardpoints_locked)
-			to_chat(usr, SPAN_WARNING("Hardpoint ejection system is locked."))
+			to_chat(usr, span_warning("Hardpoint ejection system is locked."))
 			return
 		if(owner.remove_system(hardpoint_tag))
-			to_chat(usr, SPAN_NOTICE("You disengage and discard the system mounted to your [hardpoint_tag] hardpoint."))
+			to_chat(usr, span_notice("You disengage and discard the system mounted to your [hardpoint_tag] hardpoint."))
 		else
-			to_chat(usr, SPAN_DANGER("You fail to remove the system mounted to your [hardpoint_tag] hardpoint."))
+			to_chat(usr, span_danger("You fail to remove the system mounted to your [hardpoint_tag] hardpoint."))
 		return
 
 	if(owner.selected_hardpoint == hardpoint_tag)
@@ -228,7 +228,7 @@
 
 /obj/screen/exosuit/toggle/air/toggled()
 	owner.use_air = ..()
-	to_chat(usr, SPAN_NOTICE("Auxiliary atmospheric system [owner.use_air ? "enabled" : "disabled"]."))
+	to_chat(usr, span_notice("Auxiliary atmospheric system [owner.use_air ? "enabled" : "disabled"]."))
 	playsound(src.loc, 'sound/effects/turret/open.wav', 50, 1, -6)
 
 /obj/screen/exosuit/toggle/maint
@@ -241,7 +241,7 @@
 
 /obj/screen/exosuit/toggle/maint/toggled()
 	owner.maintenance_protocols = ..()
-	to_chat(usr, SPAN_NOTICE("Maintenance protocols [owner.maintenance_protocols ? "enabled" : "disabled"]."))
+	to_chat(usr, span_notice("Maintenance protocols [owner.maintenance_protocols ? "enabled" : "disabled"]."))
 	playsound(src.loc, 'sound/machines/suitstorage_lockdoor.ogg', 50, 1, -6)
 
 /obj/screen/exosuit/toggle/hardpoint
@@ -252,7 +252,7 @@
 
 /obj/screen/exosuit/toggle/hardpoint/toggled()
 	owner.hardpoints_locked = ..()
-	to_chat(usr, SPAN_NOTICE("Hardpoint system access is now [owner.hardpoints_locked ? "disabled" : "enabled"]."))
+	to_chat(usr, span_notice("Hardpoint system access is now [owner.hardpoints_locked ? "disabled" : "enabled"]."))
 	playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1, -6)
 
 /obj/screen/exosuit/toggle/hatch
@@ -263,10 +263,10 @@
 
 /obj/screen/exosuit/toggle/hatch/toggled()
 	if(!owner.hatch_locked && !owner.hatch_closed)
-		to_chat(usr, SPAN_WARNING("You cannot lock the hatch while it is open."))
+		to_chat(usr, span_warning("You cannot lock the hatch while it is open."))
 		return
 	owner.hatch_locked = ..()
-	to_chat(usr, SPAN_NOTICE("The [owner.body.hatch_descriptor] is [owner.hatch_locked ? "now" : "no longer" ] locked."))
+	to_chat(usr, span_notice("The [owner.body.hatch_descriptor] is [owner.hatch_locked ? "now" : "no longer" ] locked."))
 	playsound(src.loc, 'sound/machines/suitstorage_lockdoor.ogg', 50, 1, -6)
 
 /obj/screen/exosuit/toggle/hatch_open
@@ -279,10 +279,10 @@
 	if (!owner)
 		return
 	if(owner.hatch_locked && owner.hatch_closed)
-		to_chat(usr, SPAN_WARNING("You cannot open the hatch while it is locked."))
+		to_chat(usr, span_warning("You cannot open the hatch while it is locked."))
 		return
 	owner.hatch_closed = ..()
-	to_chat(usr, SPAN_NOTICE("The [owner.body.hatch_descriptor] is now [owner.hatch_closed ? "closed" : "open" ]."))
+	to_chat(usr, span_notice("The [owner.body.hatch_descriptor] is now [owner.hatch_closed ? "closed" : "open" ]."))
 	owner.update_icon()
 	playsound(src.loc, 'sound/machines/suitstorage_cycledoor.ogg', 50, 1, -6)
 
@@ -305,7 +305,7 @@
 	if(..())
 		if(owner && owner.body && owner.get_cell() && owner.body.diagnostics?.is_functional())
 			usr.setClickCooldown(0.2 SECONDS)
-			to_chat(usr, SPAN_NOTICE("The diagnostics panel blinks several times as it updates:"))
+			to_chat(usr, span_notice("The diagnostics panel blinks several times as it updates:"))
 			playsound(owner.loc,'sound/effects/scanbeep.ogg',30,0)
 			for(var/obj/item/mech_component/MC in list(owner.arms, owner.legs, owner.body, owner.head))
 				if(MC)
@@ -322,16 +322,16 @@
 
 /obj/screen/exosuit/toggle/camera/toggled()
 	if(!owner.head)
-		to_chat(usr, SPAN_WARNING("I/O Error: Camera systems not found."))
+		to_chat(usr, span_warning("I/O Error: Camera systems not found."))
 		return
 	if(!owner.head.vision_flags)
-		to_chat(usr,  SPAN_WARNING("Alternative sensor configurations not found. Contact manufacturer for more details."))
+		to_chat(usr,  span_warning("Alternative sensor configurations not found. Contact manufacturer for more details."))
 		return
 	if(!owner.get_cell())
-		to_chat(usr,  SPAN_WARNING("The augmented vision systems are offline."))
+		to_chat(usr,  span_warning("The augmented vision systems are offline."))
 		return
 	owner.head.active_sensors = ..()
-	to_chat(usr, SPAN_NOTICE("[owner.head.name] advanced sensor mode is [owner.head.active_sensors ? "now" : "no longer" ] active."))
+	to_chat(usr, span_notice("[owner.head.name] advanced sensor mode is [owner.head.active_sensors ? "now" : "no longer" ] active."))
 
 /obj/screen/exosuit/toggle/camera/on_update_icon()
 	toggled = owner.head.active_sensors
@@ -361,25 +361,25 @@
 		var/list/modifiers = params2list(params)
 		if(LAZYACCESS(modifiers, SHIFT_CLICK))
 			if(owner && owner.material)
-				usr.show_message(SPAN_NOTICE("Your suit's safe operating limit ceiling is [(celsius ? "[owner.material.melting_point - T0C] °C" : "[owner.material.melting_point] K" )]."), VISIBLE_MESSAGE)
+				usr.show_message(span_notice("Your suit's safe operating limit ceiling is [(celsius ? "[owner.material.melting_point - T0C] °C" : "[owner.material.melting_point] K" )]."), VISIBLE_MESSAGE)
 			return
 		if(LAZYACCESS(modifiers, CTRL_CLICK))
 			celsius = !celsius
-			usr.show_message(SPAN_NOTICE("You switch the chassis probe display to use [celsius ? "celsius" : "kelvin"]."), VISIBLE_MESSAGE)
+			usr.show_message(span_notice("You switch the chassis probe display to use [celsius ? "celsius" : "kelvin"]."), VISIBLE_MESSAGE)
 			return
 		if(owner && owner.body && owner.body.diagnostics?.is_functional() && owner.loc)
-			usr.show_message(SPAN_NOTICE("The life support panel blinks several times as it updates:"), VISIBLE_MESSAGE)
+			usr.show_message(span_notice("The life support panel blinks several times as it updates:"), VISIBLE_MESSAGE)
 
-			usr.show_message(SPAN_NOTICE("Chassis heat probe reports temperature of [(celsius ? "[owner.bodytemperature - T0C] °C" : "[owner.bodytemperature] K" )]."), VISIBLE_MESSAGE)
+			usr.show_message(span_notice("Chassis heat probe reports temperature of [(celsius ? "[owner.bodytemperature - T0C] °C" : "[owner.bodytemperature] K" )]."), VISIBLE_MESSAGE)
 			if(owner.material.melting_point < owner.bodytemperature)
-				usr.show_message(SPAN_WARNING("Warning: Current chassis temperature exceeds operating parameters."), VISIBLE_MESSAGE)
+				usr.show_message(span_warning("Warning: Current chassis temperature exceeds operating parameters."), VISIBLE_MESSAGE)
 			var/air_contents = owner.loc.return_air()
 			if(!air_contents)
-				usr.show_message(SPAN_WARNING("The external air probe isn't reporting any data!"), VISIBLE_MESSAGE)
+				usr.show_message(span_warning("The external air probe isn't reporting any data!"), VISIBLE_MESSAGE)
 			else
-				usr.show_message(SPAN_NOTICE("External probes report: [jointext(atmosanalyzer_scan(owner.loc, air_contents), "<br>")]"), VISIBLE_MESSAGE)
+				usr.show_message(span_notice("External probes report: [jointext(atmosanalyzer_scan(owner.loc, air_contents), "<br>")]"), VISIBLE_MESSAGE)
 		else
-			usr.show_message(SPAN_WARNING("The life support panel isn't responding."), VISIBLE_MESSAGE)
+			usr.show_message(span_warning("The life support panel isn't responding."), VISIBLE_MESSAGE)
 
 /obj/screen/exosuit/heat/proc/Update()
 	//Relative value of heat

@@ -26,9 +26,9 @@
 		for (var/obj/item/item as anything in GetAllHeld())
 			if(prob(current_size*5) && item.w_class >= ((11-current_size)/2) && unEquip(item))
 				step_towards(item, S)
-				to_chat(src, SPAN_WARNING("\The [S] pulls \the [item] from your grip!"))
+				to_chat(src, span_warning("\The [S] pulls \the [item] from your grip!"))
 		if(!lying && (!shoes || !(shoes.item_flags & ITEM_FLAG_NOSLIP)) && (!species || !(species.check_no_slip(src))) && prob(current_size*5))
-			to_chat(src, SPAN_DANGER("A strong gravitational force slams you to the ground!"))
+			to_chat(src, span_danger("A strong gravitational force slams you to the ground!"))
 			Weaken(current_size)
 	..()
 

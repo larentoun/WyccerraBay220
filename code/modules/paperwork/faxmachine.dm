@@ -52,9 +52,9 @@ GLOBAL_LIST_EMPTY(admin_departments)
 
 /obj/machinery/photocopier/faxmachine/multitool_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
-	to_chat(user, SPAN_NOTICE("[src]'s department tag is set to [department]."))
+	to_chat(user, span_notice("[src]'s department tag is set to [department]."))
 	if(!emagged)
-		to_chat(user, SPAN_WARNING("[src]'s department configuration is vendor locked."))
+		to_chat(user, span_warning("[src]'s department configuration is vendor locked."))
 		return
 	var/list/option_list = GLOB.alldepartments.Copy() + GLOB.admin_departments.Copy() + "(Custom)" + "(Cancel)"
 	var/new_department = input(user, "Which department do you want to tag this fax machine as? Choose '(Custom)' to enter a custom department or '(Cancel) to cancel.", "Fax Machine Department Tag") as null|anything in option_list
@@ -65,32 +65,32 @@ GLOBAL_LIST_EMPTY(admin_departments)
 		if (!new_department || new_department == department || !CanUseTopic(user) || !Adjacent(user))
 			return
 	if(new_department == "Unknown" || new_department == "(Custom)" || new_department == "(Cancel)")
-		to_chat(user, SPAN_WARNING("Invalid department tag selected."))
+		to_chat(user, span_warning("Invalid department tag selected."))
 		return
 	department = new_department
-	to_chat(user, SPAN_NOTICE("You reconfigure [src]'s department tag to [department]."))
+	to_chat(user, span_notice("You reconfigure [src]'s department tag to [department]."))
 
 /obj/machinery/photocopier/faxmachine/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(istype(O, /obj/item/paper))
 		var/obj/item/paper/P = O
 		if(!P.readable)
-			to_chat(user, SPAN_NOTICE("[src] beeps. Error, invalid document detected."))
+			to_chat(user, span_notice("[src] beeps. Error, invalid document detected."))
 			return TRUE
 
 	if(isid(O))
 		if(!user.unEquip(O, src))
 			return TRUE
 		scan = O
-		to_chat(user, SPAN_NOTICE("You insert [O] into [src]."))
+		to_chat(user, span_notice("You insert [O] into [src]."))
 		return TRUE
 
 	if (istype(O, /obj/item/modular_computer/pda))
 		if (LAZYISIN(linked_pdas, O))
 			unlink_pda(O)
-			to_chat(user, SPAN_NOTICE("You remove [O] from [src]'s notifications list."))
+			to_chat(user, span_notice("You remove [O] from [src]'s notifications list."))
 			return TRUE
 		link_pda(O)
-		to_chat(user, SPAN_NOTICE("You add [O] to [src]'s notifications list. It will now be pinged whenever a fax is received."))
+		to_chat(user, span_notice("You add [O] to [src]'s notifications list. It will now be pinged whenever a fax is received."))
 		return TRUE
 
 	return ..()
@@ -115,9 +115,9 @@ GLOBAL_LIST_EMPTY(admin_departments)
 
 /obj/machinery/photocopier/faxmachine/emag_act(remaining_charges, mob/user, emag_source)
 	if (emagged)
-		to_chat(user, SPAN_WARNING("[src]'s systems have already been hacked."))
+		to_chat(user, span_warning("[src]'s systems have already been hacked."))
 		return
-	to_chat(user, SPAN_NOTICE("You unlock [src]'s department tagger. You can now modify it's department tag to disguise faxes as being from another department or even off-ship using a multitool."))
+	to_chat(user, span_notice("You unlock [src]'s department tagger. You can now modify it's department tag to disguise faxes as being from another department or even off-ship using a multitool."))
 	emagged = TRUE
 	return TRUE
 
@@ -240,7 +240,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 
 	flick("faxreceive", src)
 	playsound(loc, "sound/machines/dotprinter.ogg", 50, 1)
-	visible_message(SPAN_NOTICE("[src] pings, \"New fax received from [origin_department].\""))
+	visible_message(span_notice("[src] pings, \"New fax received from [origin_department].\""))
 
 	// Notify any linked PDAs
 	if (LAZYLEN(linked_pdas))
@@ -300,7 +300,7 @@ GLOBAL_LIST_EMPTY(admin_departments)
 	var/msg = "<b>[SPAN_COLOR("#006100", "[faxname]: ")][get_options_bar(sender, 2,1,1)]"
 	msg += "(<A HREF='?_src_=holder;take_ic=\ref[sender]'>TAKE</a>) (<a href='?_src_=holder;FaxReply=\ref[sender];originfax=\ref[src];replyorigin=[reply_type]'>REPLY</a>)</b>: "
 	msg += "Receiving '[sent.name]' via secure connection ... <a href='?_src_=holder;AdminFaxView=\ref[sent]'>view message</a>"
-	msg = SPAN_NOTICE(msg)
+	msg = span_notice(msg)
 
 	for(var/client/C as anything in GLOB.admins)
 		if(check_rights((R_ADMIN|R_MOD),0,C))

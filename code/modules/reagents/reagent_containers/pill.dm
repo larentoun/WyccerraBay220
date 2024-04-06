@@ -27,7 +27,7 @@
 		if (!M.can_eat(src))
 			return TRUE
 
-		M.visible_message(SPAN_NOTICE("[M] swallows a pill."), SPAN_NOTICE("You swallow \the [src]."), null, 2)
+		M.visible_message(span_notice("[M] swallows a pill."), span_notice("You swallow \the [src]."), null, 2)
 		if (reagents.total_volume)
 			reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 		qdel(src)
@@ -37,7 +37,7 @@
 		if (!M.can_force_feed(user, src))
 			return TRUE
 
-		user.visible_message(SPAN_WARNING("[user] attempts to force [M] to swallow \the [src]."))
+		user.visible_message(span_warning("[user] attempts to force [M] to swallow \the [src]."))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if (!do_after(user, 3 SECONDS, M, DO_MEDICAL))
 			return TRUE
@@ -45,7 +45,7 @@
 		if (user.get_active_hand() != src)
 			return TRUE
 
-		user.visible_message(SPAN_WARNING("[user] forces [M] to swallow \the [src]."))
+		user.visible_message(span_warning("[user] forces [M] to swallow \the [src]."))
 		var/contained = reagentlist()
 		if (reagents.should_admin_log())
 			admin_attack_log(user, M, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
@@ -57,16 +57,16 @@
 /obj/item/reagent_containers/pill/use_after(atom/target, mob/living/user, click_parameters)
 	if (target.is_open_container() && target.reagents)
 		if (!target.reagents.total_volume)
-			to_chat(user, SPAN_NOTICE("\The [target] is empty. Can't dissolve \the [src]."))
+			to_chat(user, span_notice("\The [target] is empty. Can't dissolve \the [src]."))
 			return TRUE
 
-		to_chat(user, SPAN_NOTICE("You dissolve \the [src] in \the [target]."))
+		to_chat(user, span_notice("You dissolve \the [src] in \the [target]."))
 
 		if (reagents.should_admin_log())
 			admin_attacker_log(user, "spiked \a [target] with a pill. Reagents: [reagentlist()]")
 		reagents.trans_to(target, reagents.total_volume)
 		for(var/mob/O in viewers(2, user))
-			O.show_message(SPAN_WARNING("\The [user] puts something in \the [target]."), 1)
+			O.show_message(span_warning("\The [user] puts something in \the [target]."), 1)
 		qdel(src)
 		return TRUE
 	else return FALSE
@@ -401,9 +401,9 @@
 /obj/item/reagent_containers/pill/attackby(obj/item/W, mob/user)
 	if(is_sharp(W) || istype(W, /obj/item/card/id))
 		user.visible_message(
-			SPAN_WARNING("\The [user] starts to gently cut up \the [src] with \a [W]!"),
-			SPAN_NOTICE("You start to gently cut up \the [src] with \the [W]."),
-			SPAN_WARNING("You hear quiet grinding.")
+			span_warning("\The [user] starts to gently cut up \the [src] with \a [W]!"),
+			span_notice("You start to gently cut up \the [src] with \the [W]."),
+			span_warning("You hear quiet grinding.")
 		)
 		playsound(loc, 'sound/effects/chop.ogg', 50, 1)
 		if (!do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
@@ -411,8 +411,8 @@
 
 		var/obj/item/reagent_containers/powder/J = new /obj/item/reagent_containers/powder(loc)
 		user.visible_message(
-			SPAN_WARNING("\The [user] gently cuts up \the [src] with \a [W]!"),
-			SPAN_NOTICE("You gently cut up \the [src] with \the [W].")
+			span_warning("\The [user] gently cuts up \the [src] with \a [W]!"),
+			span_notice("You gently cut up \the [src] with \the [W].")
 		)
 		playsound(loc, 'sound/effects/chop.ogg', 50, 1)
 

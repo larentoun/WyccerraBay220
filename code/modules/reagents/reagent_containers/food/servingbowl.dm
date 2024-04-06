@@ -15,7 +15,7 @@
 		return ..()
 	var/allowed = isturf(loc) | SHIFTL(src == user.l_hand, 1) | SHIFTL(src == user.r_hand, 2)
 	if (!allowed)
-		to_chat(user, SPAN_WARNING("Put down or hold the bowl first."))
+		to_chat(user, span_warning("Put down or hold the bowl first."))
 		return
 	var/obj/item/reagent_containers/food/snacks/custombowl/bowl = new (get_turf(src), item)
 	bowl.pixel_x = pixel_x
@@ -65,7 +65,7 @@
 	var/response = sanitizeSafe(input(usr, "Enter a new name for \the [src]."), 32)
 	if (!response)
 		return
-	to_chat(usr, SPAN_ITALIC("You rename \the [src] to \"[response]\"."))
+	to_chat(usr, span_italic("You rename \the [src] to \"[response]\"."))
 	SetName("\improper [response]")
 	verbs -= /obj/item/reagent_containers/food/snacks/custombowl/verb/rename_bowl
 	renamed = TRUE
@@ -77,13 +77,13 @@
 	if (is_path_in_list(item.type, list(/obj/item/reagent_containers/food/snacks/custombowl, /obj/item/reagent_containers/food/snacks/csandwich)))
 		return ..()
 	if (ingredients_left < 1)
-		to_chat(user, SPAN_WARNING("There's no room for any more ingredients in \the [src]."))
+		to_chat(user, span_warning("There's no room for any more ingredients in \the [src]."))
 		return
 	if (!user.unEquip(item, src))
 		return
 	user.visible_message(
-		SPAN_ITALIC("\The [user] adds \a [item] to \the [src]."),
-		SPAN_NOTICE("You add \the [item] to \the [src]."),
+		span_italic("\The [user] adds \a [item] to \the [src]."),
+		span_notice("You add \the [item] to \the [src]."),
 		range = 3
 	)
 	UpdateIngredients(item, user)
@@ -109,4 +109,4 @@
 /obj/item/reagent_containers/food/snacks/custombowl/examine(mob/user, distance)
 	. = ..(user)
 	if(distance < 2)
-		. += SPAN_NOTICE("This one contains [fullname].")
+		. += span_notice("This one contains [fullname].")

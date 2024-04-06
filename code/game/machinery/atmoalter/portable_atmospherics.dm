@@ -109,25 +109,25 @@
 		if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 			return
 		disconnect()
-		to_chat(user, SPAN_NOTICE("You disconnect [src] from the port."))
+		to_chat(user, span_notice("You disconnect [src] from the port."))
 		update_icon()
 		return
 	var/obj/machinery/atmospherics/portables_connector/possible_port = locate(/obj/machinery/atmospherics/portables_connector) in loc
 	if(!possible_port)
-		to_chat(user, SPAN_NOTICE("Nothing happens."))
+		to_chat(user, span_notice("Nothing happens."))
 		return
 	if(!connect(possible_port))
-		to_chat(user, SPAN_NOTICE("[src] failed to connect to the port."))
+		to_chat(user, span_notice("[src] failed to connect to the port."))
 		return
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
-	to_chat(user, SPAN_NOTICE("You connect [src] to the port."))
+	to_chat(user, span_notice("You connect [src] to the port."))
 	update_icon()
 
 /obj/machinery/portable_atmospherics/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if ((istype(W, /obj/item/tank) && !destroyed))
 		if (holding)
-			to_chat(user, SPAN_WARNING("[src] already contains a tank!"))
+			to_chat(user, span_warning("[src] already contains a tank!"))
 			return
 		if(!user.unEquip(W, src))
 			return TRUE

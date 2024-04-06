@@ -200,16 +200,16 @@
 	playsound(src, damage_hitsound, 25, TRUE, -1)
 	if (!can_damage_health(damage, attack.get_damage_type()))
 		user.visible_message(
-			SPAN_WARNING("\The [user] [attack_verb] \the [src], but doesn't even leave a dent!"),
-			SPAN_WARNING("You [attack_verb] \the [src], but cause no visible damage and hurt yourself!")
+			span_warning("\The [user] [attack_verb] \the [src], but doesn't even leave a dent!"),
+			span_warning("You [attack_verb] \the [src], but cause no visible damage and hurt yourself!")
 		)
 		if (!(MUTATION_FERAL in user.mutations))
 			user.apply_damage(3, DAMAGE_BRUTE, user.hand ? BP_L_HAND : BP_R_HAND)
 		return TRUE
 
 	assailant.visible_message(
-			SPAN_WARNING("\The [assailant] [attack_verb] \the [src]!"),
-			SPAN_WARNING("You [attack_verb] \the [src]!")
+			span_warning("\The [assailant] [attack_verb] \the [src]!"),
+			span_warning("You [attack_verb] \the [src]!")
 			)
 	damage_health(damage, attack.get_damage_type(), attack.damage_flags())
 	return TRUE

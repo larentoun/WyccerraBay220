@@ -103,11 +103,11 @@
 	if(!panel_open)
 		return
 	. = ITEM_INTERACT_SUCCESS
-	to_chat(user, SPAN_NOTICE("You start [valve_open ? "closing" : "opening"] the pressure relief valve of [src]."))
+	to_chat(user, span_notice("You start [valve_open ? "closing" : "opening"] the pressure relief valve of [src]."))
 	if(!tool.use_as_tool(src, user, 5 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT) || !panel_open)
 		return
 	valve_open = !valve_open
-	to_chat(user, SPAN_NOTICE("You [valve_open ? "open" : "close"] the pressure relief valve of [src]."))
+	to_chat(user, span_notice("You [valve_open ? "open" : "close"] the pressure relief valve of [src]."))
 	if(valve_open)
 		blocked = 0
 		action = "retract"
@@ -130,7 +130,7 @@
 		if(prot == 0)
 			M.apply_damage(45, INJURY_TYPE_BRUISE, user.get_active_hand())
 			M.apply_damage(EFFECT_PAIN)
-			M.visible_message(SPAN_DANGER("[user]'s hand catches in the [src]!"), SPAN_DANGER("Your hand gets caught in the [src]!"))
+			M.visible_message(span_danger("[user]'s hand catches in the [src]!"), span_danger("Your hand gets caught in the [src]!"))
 			if(M.can_feel_pain())
 				M.emote("scream")
 		return TRUE

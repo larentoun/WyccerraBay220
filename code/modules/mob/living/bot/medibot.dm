@@ -70,7 +70,7 @@
 		return
 
 	icon_state = "medibots"
-	visible_message(SPAN_WARNING("[src] is trying to inject [H]!"))
+	visible_message(span_warning("[src] is trying to inject [H]!"))
 	if(declare_treatment)
 		var/area/location = get_area(src)
 		broadcast_medical_hud_message("[src] is treating <b>[H]</b> in <b>[location]</b>", src)
@@ -81,7 +81,7 @@
 			reagent_glass.reagents.trans_to_mob(H, injection_amount, CHEM_BLOOD)
 		else
 			H.reagents.add_reagent(t, injection_amount)
-		visible_message(SPAN_WARNING("[src] injects [H] with the syringe!"))
+		visible_message(span_warning("[src] injects [H] with the syringe!"))
 	busy = 0
 	update_icons()
 
@@ -127,8 +127,8 @@
 			return TRUE
 		reagent_glass = tool
 		user.visible_message(
-			SPAN_NOTICE("\The [user] installs \a [tool] into \the [src]."),
-			SPAN_NOTICE("You install \the [tool] into \the [src].")
+			span_notice("\The [user] installs \a [tool] into \the [src]."),
+			span_notice("You install \the [tool] into \the [src].")
 		)
 		return TRUE
 
@@ -195,7 +195,7 @@
 						reagent_glass.dropInto(src.loc)
 						reagent_glass = null
 					else
-						to_chat(user, SPAN_NOTICE("You cannot eject the beaker because the panel is locked."))
+						to_chat(user, span_notice("You cannot eject the beaker because the panel is locked."))
 			if("togglevoice")
 				if(!locked || issilicon(user))
 					vocal = !vocal
@@ -213,9 +213,9 @@
 	. = ..()
 	if(!emagged)
 		if(user)
-			to_chat(user, SPAN_WARNING("You short out [src]'s reagent synthesis circuits."))
+			to_chat(user, span_warning("You short out [src]'s reagent synthesis circuits."))
 			ignore_list |= user
-		visible_message(SPAN_WARNING("[src] buzzes oddly!"))
+		visible_message(span_warning("[src] buzzes oddly!"))
 		flick("medibot_spark", src)
 		target = null
 		busy = 0
@@ -226,7 +226,7 @@
 
 /mob/living/bot/medbot/explode()
 	on = 0
-	visible_message(SPAN_DANGER("[src] blows apart!"))
+	visible_message(span_danger("[src] blows apart!"))
 	var/turf/Tsec = get_turf(src)
 
 	new /obj/item/storage/firstaid/empty(Tsec)

@@ -26,7 +26,7 @@
 		if(user.check_has_mouth())
 			START_PROCESSING(SSobj, src)
 		else
-			to_chat(user, SPAN_NOTICE("You don't have a mouth, and can't make much use of \the [src]."))
+			to_chat(user, span_notice("You don't have a mouth, and can't make much use of \the [src]."))
 	else
 		sprite_sheets = list()
 
@@ -77,7 +77,7 @@
 	if (ismob(loc))
 		chewer = loc
 		if (!no_message)
-			to_chat(chewer, SPAN_NOTICE("You spit out \the [name]."))
+			to_chat(chewer, span_notice("You spit out \the [name]."))
 
 	if (type_butt)
 		var/obj/item/butt = new type_butt()

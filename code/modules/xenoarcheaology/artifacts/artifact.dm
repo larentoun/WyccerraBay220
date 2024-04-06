@@ -145,15 +145,15 @@
 	var/health = get_current_health()
 	var/max_health = get_max_health()
 	if (health <= 0)
-		to_chat(user, SPAN_NOTICE("It is inert, dead and quiet."))
+		to_chat(user, span_notice("It is inert, dead and quiet."))
 	else if (health < (max_health * 0.25))
-		to_chat(user, SPAN_DANGER("It looks like its almost shattered!"))
+		to_chat(user, span_danger("It looks like its almost shattered!"))
 	else if (health < (max_health * 0.5))
-		to_chat(user, SPAN_WARNING("It is badly damaged, and is getting close to breaking apart."))
+		to_chat(user, span_warning("It is badly damaged, and is getting close to breaking apart."))
 	else if (health < (max_health * 0.75))
-		to_chat(user, SPAN_NOTICE("It is moderately damaged, cracks visible on its surface."))
+		to_chat(user, span_notice("It is moderately damaged, cracks visible on its surface."))
 	else if (health < max_health)
-		to_chat(user, SPAN_NOTICE("It has minor damage."))
+		to_chat(user, span_notice("It has minor damage."))
 
 /**
  * Sets up the artifacts destructibility by doing the following:
@@ -214,7 +214,7 @@
 
 /obj/machinery/artifact/on_death()
 	..()
-	visible_message(SPAN_DANGER("\The [src] breaks apart and explodes in a wave of energy!"), SPAN_DANGER("You hear something break apart and feel a wave of energy hit you!"))
+	visible_message(span_danger("\The [src] breaks apart and explodes in a wave of energy!"), span_danger("You hear something break apart and feel a wave of energy hit you!"))
 	playsound(get_turf(src), 'sound/effects/Glassbr3.ogg', 75, TRUE)
 	icon_state = "ano[icon_num]2"
 

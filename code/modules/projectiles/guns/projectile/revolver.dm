@@ -29,8 +29,8 @@
 	set category = "Object"
 
 	chamber_offset = 0
-	visible_message(SPAN_WARNING("[usr] spins the cylinder of [src]!"), \
-	SPAN_NOTICE("You hear something metallic spin and click."))
+	visible_message(span_warning("[usr] spins the cylinder of [src]!"), \
+	span_notice("You hear something metallic spin and click."))
 	playsound(src.loc, 'sound/weapons/revolver_spin.ogg', 100, 1)
 	loaded = shuffle(loaded)
 	if(rand(1,max_shells) > length(loaded))
@@ -108,8 +108,8 @@
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] snips \a [src]'s toy markings with \a [tool]."),
-		SPAN_NOTICE("You snip [src]'s toy markings with [tool]."),
+		span_notice("[user] snips \a [src]'s toy markings with \a [tool]."),
+		span_notice("You snip [src]'s toy markings with [tool]."),
 		range = 3
 	)
 	set_snipped()

@@ -34,11 +34,11 @@
 /obj/item/music_tape/examine(mob/user)
 	. = ..(user)
 	if(track?.title)
-		. += SPAN_NOTICE("It's labeled as \"[track.title]\".")
+		. += span_notice("It's labeled as \"[track.title]\".")
 
 /obj/item/music_tape/attack_self(mob/user)
 	if(!ruined)
-		to_chat(user, SPAN_NOTICE("You pull out all the tape!"))
+		to_chat(user, span_notice("You pull out all the tape!"))
 		ruin()
 
 /obj/item/music_tape/screwdriver_act(mob/living/user, obj/item/tool)
@@ -54,9 +54,9 @@
 
 /obj/item/music_tape/use_tool(obj/item/tool, mob/living/user, list/click_params)
 	if(ruined && istype(tool, /obj/item/pen))
-		to_chat(user, SPAN_NOTICE("You start winding [src] back in..."))
+		to_chat(user, span_notice("You start winding [src] back in..."))
 		if(do_after(user, 12 SECONDS, target = src) && user.use_sanity_check(src, tool))
-			to_chat(user, SPAN_NOTICE("You wound [src] back in."))
+			to_chat(user, span_notice("You wound [src] back in."))
 			fix()
 		return TRUE
 
@@ -69,12 +69,12 @@
 			new_name = sanitizeSafe(new_name)
 
 			if(new_name)
-				to_chat(user, SPAN_NOTICE("You label [src] '[new_name]'."))
+				to_chat(user, span_notice("You label [src] '[new_name]'."))
 				if(track)
 					track.title = "tape - \"[new_name]\""
 				SetName("tape - \"[new_name]\"")
 			else
-				to_chat(user, SPAN_NOTICE("You scratch off the label."))
+				to_chat(user, span_notice("You scratch off the label."))
 				if(track)
 					track.title = "unknown"
 				SetName("tape")

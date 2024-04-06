@@ -39,7 +39,7 @@
 	. += "<br><b>Записи</b>:"
 	// [/SIERRA-EDIT]
 	if (jobban_isbanned(user, "Records"))
-		. += "[SPAN_WARNING("You are banned from using character records.")]"
+		. += "[span_warning("You are banned from using character records.")]"
 	// [SIERRA-EDIT] - EXPANDED_CULTURE_DESCRIPTOR - Перевод
 	// else  // SIERRA-EDIT - ORIGINAL
 		// .+= TBTN("set_public_record", TextPreview(pref.public_record, 40), "Public") // SIERRA-EDIT - ORIGINAL
@@ -128,8 +128,8 @@
 			var/chars = length(clean)
 			if (chars < 4 || chars > 16)
 				// [SIERRA-EDIT] - EXPANDED_CULTURE_DESCRIPTOR - Перевод
-				// to_chat(user, SPAN_WARNING("Invalid Email Password '[clean]': must be 4..16 safe glyphs.")) // SIERRA-EDIT - ORIGINAL
-				to_chat(user, SPAN_WARNING("Неподходящий пароль '[clean]': пароль должен содержать 4..16 символов."))
+				// to_chat(user, span_warning("Invalid Email Password '[clean]': must be 4..16 safe glyphs.")) // SIERRA-EDIT - ORIGINAL
+				to_chat(user, span_warning("Неподходящий пароль '[clean]': пароль должен содержать 4..16 символов."))
 				// [/SIERRA-EDIT]
 				return TOPIC_NOACTION
 			value = clean
@@ -148,8 +148,8 @@
 			var/chars = length(clean)
 			if (chars < 4 || chars > 24)
 				// [SIERRA-EDIT] - EXPANDED_CULTURE_DESCRIPTOR - Перевод
-				// to_chat(user, SPAN_WARNING("Invalid Email Username '[clean]': must be 4..24 glyphs from /a-z0-9./")) // SIERRA-EDIT - ORIGINAL
-				to_chat(user, SPAN_WARNING("Неподходящий логин '[clean]': логин должен содержать 4..24 символов /a-z0-9./"))
+				// to_chat(user, span_warning("Invalid Email Username '[clean]': must be 4..24 glyphs from /a-z0-9./")) // SIERRA-EDIT - ORIGINAL
+				to_chat(user, span_warning("Неподходящий логин '[clean]': логин должен содержать 4..24 символов /a-z0-9./"))
 				// [/SIERRA-EDIT]
 				return TOPIC_NOACTION
 			value = clean

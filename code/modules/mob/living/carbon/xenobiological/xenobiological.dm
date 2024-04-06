@@ -228,11 +228,11 @@
 	if(Victim)
 		if(Victim == M)
 			if(prob(60))
-				visible_message(SPAN_WARNING("\The [M] attempts to wrestle \the [src] off!"))
+				visible_message(span_warning("\The [M] attempts to wrestle \the [src] off!"))
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 
 			else
-				visible_message(SPAN_WARNING("\The [M] manages to wrestle \the [src] off!"))
+				visible_message(span_warning("\The [M] manages to wrestle \the [src] off!"))
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 
 				set_confused(2)
@@ -243,11 +243,11 @@
 
 		else
 			if(prob(30))
-				visible_message(SPAN_WARNING("\The [M] attempts to wrestle \the [src] off \the [Victim]!"))
+				visible_message(span_warning("\The [M] attempts to wrestle \the [src] off \the [Victim]!"))
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 
 			else
-				visible_message(SPAN_WARNING("\The [M] manages to wrestle \the [src] off \the [Victim]!"))
+				visible_message(span_warning("\The [M] manages to wrestle \the [src] off \the [Victim]!"))
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 
 				set_confused(2)
@@ -263,7 +263,7 @@
 
 		if (I_DISARM)
 			var/success = prob(40)
-			visible_message(SPAN_WARNING("\The [M] pushes \the [src]![success ? " \The [src] looks momentarily disoriented!" : ""]"))
+			visible_message(span_warning("\The [M] pushes \the [src]![success ? " \The [src] looks momentarily disoriented!" : ""]"))
 			if(success)
 				set_confused(2)
 				UpdateFace()
@@ -278,14 +278,14 @@
 			attacked += 10
 			if (prob(90))
 				playsound(loc, "punch", 25, 1, -1)
-				visible_message(SPAN_DANGER("[M] has punched [src]!"), \
-						SPAN_DANGER("[M] has punched [src]!"))
+				visible_message(span_danger("[M] has punched [src]!"), \
+						span_danger("[M] has punched [src]!"))
 
 				adjustBruteLoss(damage)
 				updatehealth()
 			else
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-				visible_message(SPAN_DANGER("[M] has attempted to punch [src]!"))
+				visible_message(span_danger("[M] has attempted to punch [src]!"))
 	return
 
 
@@ -295,8 +295,8 @@
 		user.setClickCooldown(user.get_attack_speed(weapon))
 		user.do_attack_animation(src)
 		user.visible_message(
-			SPAN_DANGER("\The [user] swings \a [weapon] at \the [src], but it just passes through!"),
-			SPAN_DANGER("You swing \the [weapon] at \the [src], but it just passes through!")
+			span_danger("\The [user] swings \a [weapon] at \the [src], but it just passes through!"),
+			span_danger("You swing \the [weapon] at \the [src], but it just passes through!")
 		)
 		return TRUE
 

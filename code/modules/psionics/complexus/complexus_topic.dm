@@ -7,7 +7,7 @@
 		if(href_list && href_list["remove_psionics"])
 			if(!QDELETED(src) && !QDELETED(owner?.psi) && owner.psi == src)
 				log_and_message_admins("removed all psionics from [key_name(owner)].")
-				to_chat(owner, SPAN_NOTICE("<b>Your psionic powers vanish abruptly, leaving you cold and empty.</b>"))
+				to_chat(owner, span_notice("<b>Your psionic powers vanish abruptly, leaving you cold and empty.</b>"))
 				QDEL_NULL(owner.psi)
 			. = TRUE
 		if(href_list && href_list["trigger_psi_latencies"])

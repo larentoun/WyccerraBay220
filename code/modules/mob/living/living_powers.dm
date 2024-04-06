@@ -11,7 +11,7 @@
 
 	hiding = !hiding
 	if(hiding)
-		to_chat(src, SPAN_NOTICE("You are now hiding."))
+		to_chat(src, span_notice("You are now hiding."))
 	else
-		to_chat(src, SPAN_NOTICE("You have stopped hiding."))
+		to_chat(src, span_notice("You have stopped hiding."))
 	reset_layer()

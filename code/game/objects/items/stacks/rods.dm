@@ -54,8 +54,8 @@
 	var/obj/item/stack/material/new_item = material.place_sheet(usr.loc)
 	new_item.add_to_stacks(usr)
 	user.visible_message(
-		SPAN_NOTICE("[user] welds [src] into [material.sheet_singular_name]."),
-		SPAN_NOTICE("You weld [src] into [material.sheet_singular_name].")
+		span_notice("[user] welds [src] into [material.sheet_singular_name]."),
+		span_notice("You weld [src] into [material.sheet_singular_name].")
 		)
 	var/obj/item/stack/material/rods/R = src
 	src = null

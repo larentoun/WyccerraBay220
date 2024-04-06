@@ -44,7 +44,7 @@
 	for(var/turf/simulated/floor/bluegrid/turf_to_update in get_area_turfs(get_area(usr)))
 		turf_to_update.color = f_color
 
-	to_chat(usr, SPAN_NOTICE("Proccessing strata color was change to [f_color]"))
+	to_chat(usr, span_notice("Proccessing strata color was change to [f_color]"))
 
 /mob/living/silicon/ai/proc/show_crew_manifest()
 	set category = "Silicon Commands"

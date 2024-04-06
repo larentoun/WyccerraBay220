@@ -67,9 +67,9 @@
 	. = ..()
 	if (health < maxHealth)
 		if (health >= maxHealth / 2)
-			. += SPAN_WARNING("It looks slightly dented.")
+			. += span_warning("It looks slightly dented.")
 		else
-			. += SPAN_WARNING(SPAN_BOLD("It looks severely dented!"))
+			. += span_warning(span_bold("It looks severely dented!"))
 
 /obj/item/ectoplasm
 	name = "ectoplasm"
@@ -122,8 +122,8 @@
 		var/reflectchance = 80 - round(P.damage/3)
 		if(prob(reflectchance))
 			adjustBruteLoss(P.damage * 0.5)
-			visible_message(SPAN_DANGER("The [P.name] gets reflected by [src]'s shell!"), \
-							SPAN_CLASS("userdanger", "The [P.name] gets reflected by [src]'s shell!"))
+			visible_message(span_danger("The [P.name] gets reflected by [src]'s shell!"), \
+							span_userdanger("The [P.name] gets reflected by [src]'s shell!"))
 
 			// Find a turf near or on the original location to bounce to
 			if(P.starting)
@@ -209,9 +209,9 @@
 	if (istype(M, /mob/living/simple_animal/construct))
 		if (M.health < M.maxHealth)
 			M.adjustBruteLoss(-5)
-			user.visible_message(SPAN_NOTICE("\The [user] mends some of \the [M]'s wounds."))
+			user.visible_message(span_notice("\The [user] mends some of \the [M]'s wounds."))
 		else
-			to_chat(user, SPAN_NOTICE("\The [M] is undamaged."))
+			to_chat(user, span_notice("\The [M] is undamaged."))
 		return TRUE
 
 /////////////////////////////Behemoth/////////////////////////

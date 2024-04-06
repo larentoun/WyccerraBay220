@@ -71,7 +71,7 @@
 	if (href_list["edit_language"])
 		var/obj/item/stock_parts/computer/nano_printer/nano_printer = program.computer.get_component(/obj/item/stock_parts/computer/nano_printer)
 		if (!nano_printer)
-			to_chat(usr, SPAN_WARNING("No printer found, unable to update language."))
+			to_chat(usr, span_warning("No printer found, unable to update language."))
 			return TOPIC_REFRESH
 		var/list/selectable_languages = list()
 		for (var/datum/language/L in usr.languages)

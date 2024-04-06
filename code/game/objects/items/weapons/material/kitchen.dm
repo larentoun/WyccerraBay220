@@ -36,31 +36,31 @@
 				return TRUE
 			switch(M.get_fullness())
 				if (0 to 50)
-					to_chat(M, SPAN_DANGER("You ravenously stick \the [src] into your mouth and gobble the food!"))
+					to_chat(M, span_danger("You ravenously stick \the [src] into your mouth and gobble the food!"))
 				if (50 to 150)
-					to_chat(M, SPAN_NOTICE("You hungrily chew the food on \the [src]."))
+					to_chat(M, span_notice("You hungrily chew the food on \the [src]."))
 				if (150 to 350)
-					to_chat(M, SPAN_NOTICE("You chew the food on \the [src]."))
+					to_chat(M, span_notice("You chew the food on \the [src]."))
 				if (350 to 550)
-					to_chat(M, SPAN_NOTICE("You unwillingly chew the food on \the [src]."))
+					to_chat(M, span_notice("You unwillingly chew the food on \the [src]."))
 				if (550 to INFINITY)
-					to_chat(M, SPAN_WARNING("You cannot take one more bite from \the [src]!"))
+					to_chat(M, span_warning("You cannot take one more bite from \the [src]!"))
 					return TRUE
 
 		else
-			user.visible_message(SPAN_WARNING("\The [user] begins to feed \the [M]!"))
+			user.visible_message(span_warning("\The [user] begins to feed \the [M]!"))
 			if (!M.can_force_feed(user, loaded) || !do_after(user, 5 SECONDS, M, DO_PUBLIC_UNIQUE))
 				return TRUE
 
 			if (user.get_active_hand() != src)
 				return TRUE
-			M.visible_message(SPAN_NOTICE("\The [user] feeds some [loaded] to \the [M] with \the [src]."))
+			M.visible_message(span_notice("\The [user] feeds some [loaded] to \the [M] with \the [src]."))
 		reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 		playsound(M.loc,'sound/items/eatfood.ogg', rand(10,40), 1)
 		ClearOverlays()
 		return TRUE
 	else
-		to_chat(user, SPAN_WARNING("You don't have anything on \the [src]."))
+		to_chat(user, span_warning("You don't have anything on \the [src]."))
 		return TRUE
 
 
@@ -136,9 +136,9 @@
 	. = FALSE
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50) && user.unEquip(src))
 		user.visible_message(
-			SPAN_WARNING("\The [user] manages to hit \himself on the head with \the [src]!"),
-			SPAN_WARNING("\The [src] slips out of your hand and hits your head!"),
-			SPAN_WARNING("Bonk!")
+			span_warning("\The [user] manages to hit \himself on the head with \the [src]!"),
+			span_warning("\The [src] slips out of your hand and hits your head!"),
+			span_warning("Bonk!")
 		)
 		user.take_organ_damage(10, 0)
 		user.Paralyse(2)

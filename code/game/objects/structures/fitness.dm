@@ -16,7 +16,7 @@
 		return
 	var/synth = user.isSynthetic()
 	if(!synth && user.nutrition < 20)
-		to_chat(user, SPAN_WARNING("You need more energy to use the punching bag. Go eat something."))
+		to_chat(user, span_warning("You need more energy to use the punching bag. Go eat something."))
 	else
 		if(user.a_intent == I_HURT)
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -27,7 +27,7 @@
 			if(!synth)
 				user.adjust_nutrition(-(5 * DEFAULT_HUNGER_FACTOR))
 				user.adjust_hydration(-(5 * DEFAULT_THIRST_FACTOR))
-			to_chat(user, SPAN_WARNING("You [pick(hit_message)] [src]."))
+			to_chat(user, span_warning("You [pick(hit_message)] [src]."))
 
 /obj/structure/fitness/weightlifter
 	name = "weightlifting machine"
@@ -46,8 +46,8 @@
 	// Wrench - Set weight level
 	weight = (weight % max_weight) + 1
 	user.visible_message(
-		SPAN_NOTICE("[user] adjusts [src]'s weight level with [tool]."),
-		SPAN_NOTICE("You set [src]'s weight level to [weight] with [tool].")
+		span_notice("[user] adjusts [src]'s weight level with [tool]."),
+		span_notice("You set [src]'s weight level to [weight] with [tool].")
 	)
 
 /obj/structure/fitness/weightlifter/attack_hand(mob/living/carbon/human/user)
@@ -55,13 +55,13 @@
 		return
 	var/synth = user.isSynthetic()
 	if(user.loc != src.loc)
-		to_chat(user, SPAN_WARNING("You must be on the weight machine to use it."))
+		to_chat(user, span_warning("You must be on the weight machine to use it."))
 		return
 	if(!synth && user.nutrition < 50)
-		to_chat(user, SPAN_WARNING("You need more energy to lift weights. Go eat something."))
+		to_chat(user, span_warning("You need more energy to lift weights. Go eat something."))
 		return
 	if(being_used)
-		to_chat(user, SPAN_WARNING("The weight machine is already in use by somebody else."))
+		to_chat(user, span_warning("The weight machine is already in use by somebody else."))
 		return
 	else
 		being_used = 1
@@ -81,13 +81,13 @@
 						message = "; this does not look safe"
 				else
 					message = fail_message[min(1 + round(weight - skill), length(fail_message))]
-				user.visible_message(SPAN_NOTICE("[user] fails to lift the weights[message]."), SPAN_NOTICE("You fail to lift the weights[message]."))
+				user.visible_message(span_notice("[user] fails to lift the weights[message]."), span_notice("You fail to lift the weights[message]."))
 			else
 				if(!synth)
 					var/adj_weight = weight * 5
 					user.adjust_nutrition(-(adj_weight * DEFAULT_HUNGER_FACTOR))
 					user.adjust_hydration(-(adj_weight * DEFAULT_THIRST_FACTOR))
 				message = success_message[min(1 + round(skill - weight), length(fail_message))]
-				user.visible_message(SPAN_NOTICE("[user] lift\s the weights [message]."), SPAN_NOTICE("You lift the weights [message]."))
+				user.visible_message(span_notice("[user] lift\s the weights [message]."), span_notice("You lift the weights [message]."))
 				user.update_personal_goal(/datum/goal/weights, 1)
 		being_used = FALSE

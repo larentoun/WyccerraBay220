@@ -48,7 +48,7 @@
 	vanish()
 
 /mob/living/simple_animal/hostile/retaliate/beast/antlion/proc/vanish()
-	visible_message(SPAN_NOTICE("\The [src] burrows into \the [get_turf(src)]!"))
+	visible_message(span_notice("\The [src] burrows into \the [get_turf(src)]!"))
 	set_invisibility(INVISIBILITY_OBSERVER)
 	set_density(FALSE)
 	prep_burrow(TRUE)
@@ -84,7 +84,7 @@
 	var/turf/T = get_turf(src)
 	if (!T)
 		return
-	visible_message(SPAN_WARNING("\The [src] erupts from \the [T]!"))
+	visible_message(span_warning("\The [src] erupts from \the [T]!"))
 	set_invisibility(initial(invisibility))
 	set_density(TRUE)
 	prep_burrow(FALSE)
@@ -92,7 +92,7 @@
 	for (var/mob/living/carbon/human/H in get_turf(src))
 		var/obj/item/weapon = get_natural_weapon()
 		weapon.resolve_attackby(H, src)
-		visible_message(SPAN_DANGER("\The [src] tears into \the [H] from below!"))
+		visible_message(span_danger("\The [src] tears into \the [H] from below!"))
 		H.Weaken(1)
 
 /mob/living/simple_animal/hostile/retaliate/beast/antlion/proc/process_healing()

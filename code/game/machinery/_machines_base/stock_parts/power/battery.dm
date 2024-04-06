@@ -60,8 +60,8 @@
 	cell.add_fingerprint(user)
 	cell.update_icon()
 
-	user.visible_message(SPAN_WARNING("\The [user] removes the power cell from [src]!"),\
-							SPAN_NOTICE("You remove the power cell."))
+	user.visible_message(span_warning("\The [user] removes the power cell from [src]!"),\
+							span_notice("You remove the power cell."))
 	. = remove_cell()
 	var/obj/machinery/machine = loc
 	if(machine)
@@ -145,7 +145,7 @@
 			to_chat(user, "There is a power cell already installed.")
 			return TRUE
 		if(istype(machine) && (GET_FLAGS(machine.stat, MACHINE_STAT_MAINT)))
-			to_chat(user, SPAN_WARNING("There is no connector for your power cell."))
+			to_chat(user, span_warning("There is no connector for your power cell."))
 			return TRUE
 		if(I.w_class != ITEM_SIZE_NORMAL)
 			to_chat(user, "\The [I] is too [I.w_class < ITEM_SIZE_NORMAL? "small" : "large"] to fit here.")
@@ -155,8 +155,8 @@
 			return
 		add_cell(machine, I)
 		user.visible_message(\
-			SPAN_WARNING("\The [user] has inserted the power cell to \the [src]!"),\
-			SPAN_NOTICE("You insert the power cell."))
+			span_warning("\The [user] has inserted the power cell to \the [src]!"),\
+			span_notice("You insert the power cell."))
 		return TRUE
 
 	// Interactions without machine

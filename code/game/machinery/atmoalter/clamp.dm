@@ -45,7 +45,7 @@
 		open()
 	else
 		close()
-	to_chat(user, SPAN_NOTICE("You turn [open ? "off" : "on"] \the [src]"))
+	to_chat(user, span_notice("You turn [open ? "off" : "on"] \the [src]"))
 	return TRUE
 
 /obj/machinery/clamp/Destroy()
@@ -123,9 +123,9 @@
 		return
 
 	if(open && over_object == usr && Adjacent(usr))
-		to_chat(usr, SPAN_NOTICE("You begin to remove \the [src]..."))
+		to_chat(usr, span_notice("You begin to remove \the [src]..."))
 		if (do_after(usr, 3 SECONDS, over_object, DO_REPAIR_CONSTRUCT))
-			to_chat(usr, SPAN_NOTICE("You have removed \the [src]."))
+			to_chat(usr, span_notice("You have removed \the [src]."))
 			var/obj/item/clamp/C = new/obj/item/clamp(src.loc)
 			C.forceMove(usr.loc)
 			if(ishuman(usr))
@@ -133,7 +133,7 @@
 			qdel(src)
 			return
 	else
-		to_chat(usr, SPAN_WARNING("You can't remove \the [src] while it's active!"))
+		to_chat(usr, span_warning("You can't remove \the [src] while it's active!"))
 
 /obj/machinery/clamp/proc/detach()
 	if (target && target.clamp == src)
@@ -152,19 +152,19 @@
 	if (istype(A, /obj/machinery/atmospherics/pipe/simple))
 		var/obj/machinery/atmospherics/pipe/simple/P = A
 		if (P.clamp)
-			to_chat(user, SPAN_WARNING("There is already \a [P.clamp] attached to \the [P]."))
+			to_chat(user, span_warning("There is already \a [P.clamp] attached to \the [P]."))
 			return TRUE
 
-		to_chat(user, SPAN_NOTICE("You begin to attach \the [src] to \the [A]..."))
+		to_chat(user, span_notice("You begin to attach \the [src] to \the [A]..."))
 		if (do_after(user, 3 SECONDS, A, DO_REPAIR_CONSTRUCT))
 			if (QDELETED(P))
 				return TRUE
 			if (P.clamp)
-				to_chat(user, SPAN_WARNING("There is already \a [P.clamp] attached to \the [P]."))
+				to_chat(user, span_warning("There is already \a [P.clamp] attached to \the [P]."))
 				return TRUE
 			if(!user.unEquip(src))
 				return TRUE
-			to_chat(user, SPAN_NOTICE("You have attached \the [src] to \the [A]."))
+			to_chat(user, span_notice("You have attached \the [src] to \the [A]."))
 			new/obj/machinery/clamp(A.loc, A)
 			qdel(src)
 		return TRUE

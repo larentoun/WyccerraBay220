@@ -17,15 +17,15 @@
 			break
 
 	if(!C)
-		to_chat(usr, SPAN_WARNING("There is no active key like that in the game or the person is not currently a ghost."))
+		to_chat(usr, span_warning("There is no active key like that in the game or the person is not currently a ghost."))
 		return
 
 	if(isnewplayer(C.mob))
-		to_chat(usr, SPAN_WARNING("You can't use this on a new player."))
+		to_chat(usr, span_warning("You can't use this on a new player."))
 		return
 
 	if(!C.prefs)
-		to_chat(usr, SPAN_WARNING("No preferences or client found."))
+		to_chat(usr, span_warning("No preferences or client found."))
 		return
 
 	var/mob/oldmob = C.mob

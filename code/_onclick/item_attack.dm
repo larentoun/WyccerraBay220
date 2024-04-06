@@ -285,14 +285,14 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		if (!can_damage_health(weapon.force, weapon.damtype, damage_flags))
 			playsound(src, use_weapon_hitsound ? weapon.hitsound : damage_hitsound, 50, TRUE)
 			user.visible_message(
-				SPAN_WARNING("\The [user] hits \the [src] with \a [weapon], but it bounces off!"),
-				SPAN_WARNING("You hit \the [src] with \the [weapon], but it bounces off!")
+				span_warning("\The [user] hits \the [src] with \a [weapon], but it bounces off!"),
+				span_warning("You hit \the [src] with \the [weapon], but it bounces off!")
 			)
 			return TRUE
 		playsound(src, use_weapon_hitsound ? weapon.hitsound : damage_hitsound, 75, TRUE)
 		user.visible_message(
-			SPAN_DANGER("\The [user] hits \the [src] with \a [weapon]!"),
-			SPAN_DANGER("You hit \the [src] with \the [weapon]!")
+			span_danger("\The [user] hits \the [src] with \a [weapon]!"),
+			span_danger("You hit \the [src] with \the [weapon]!")
 		)
 		damage_health(weapon.force, weapon.damtype, damage_flags, skip_can_damage_check = TRUE)
 		return TRUE
@@ -321,14 +321,14 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		if (!can_damage_health(weapon.force, weapon.damtype, damage_flags))
 			playsound(src, weapon.hitsound, 50, TRUE)
 			user.visible_message(
-				SPAN_WARNING("\The [user] hit \the [src] [weapon_mention], but it bounced off!"),
-				SPAN_WARNING("You hit \the [src] [weapon_mention], but it bounced off!"),
+				span_warning("\The [user] hit \the [src] [weapon_mention], but it bounced off!"),
+				span_warning("You hit \the [src] [weapon_mention], but it bounced off!"),
 				exclude_mobs = list(src)
 			)
 			show_message(
-				SPAN_WARNING("\The [user] hit you [weapon_mention], but it bounced off!"),
+				span_warning("\The [user] hit you [weapon_mention], but it bounced off!"),
 				VISIBLE_MESSAGE,
-				SPAN_WARNING("You felt something bounce off you harmlessly.")
+				span_warning("You felt something bounce off you harmlessly.")
 			)
 			return TRUE
 
@@ -338,14 +338,14 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 		playsound(src, weapon.hitsound, 75, TRUE)
 		user.visible_message(
-			SPAN_DANGER("\The [user] [attack_verb] \the [src] [weapon_mention]"),
-			SPAN_DANGER("You [attack_verb] \the [src] [weapon_mention]!"),
+			span_danger("\The [user] [attack_verb] \the [src] [weapon_mention]"),
+			span_danger("You [attack_verb] \the [src] [weapon_mention]!"),
 			exclude_mobs = list(src)
 		)
 		show_message(
-			SPAN_DANGER("\The [user] [attack_verb] you [weapon_mention]!"),
+			span_danger("\The [user] [attack_verb] you [weapon_mention]!"),
 			VISIBLE_MESSAGE,
-			SPAN_DANGER("You feel something hit you!")
+			span_danger("You feel something hit you!")
 		)
 
 		if (!weapon.no_attack_log)

@@ -16,7 +16,7 @@ When a meteor is spawned, its type is randomly chosen from the list. The list mu
 "}
 
 /datum/build_mode/meteor/Help()
-	to_chat(user, SPAN_NOTICE(help_text))
+	to_chat(user, span_notice(help_text))
 
 /datum/build_mode/meteor/Configurate()
 	var/choice = alert("Add or remove a meteor type from the list?", "Add/Remove", "Add", "Remove", "Cancel")
@@ -38,19 +38,19 @@ When a meteor is spawned, its type is randomly chosen from the list. The list mu
 	var/list/modifiers = params2list(params)
 	if (LAZYACCESS(modifiers, LEFT_CLICK))
 		if (!length(meteors))
-			to_chat(user, SPAN_NOTICE("You must specify at least one meteor type to spawn first!"))
+			to_chat(user, span_notice("You must specify at least one meteor type to spawn first!"))
 			return
 		var/turf/T = get_turf(A)
 
 		if (!T)
-			to_chat(user, SPAN_NOTICE("Could not get turf at this location!"))
+			to_chat(user, span_notice("Could not get turf at this location!"))
 			return
 
 		if (!spawn_point)
 			spawn_point = T
 
 
-			to_chat(user, SPAN_NOTICE("Spawn point set. Click again to set direction."))
+			to_chat(user, span_notice("Spawn point set. Click again to set direction."))
 			return
 
 		var/dir = get_dir(spawn_point, get_turf(A))
@@ -63,7 +63,7 @@ When a meteor is spawned, its type is randomly chosen from the list. The list mu
 	else if (LAZYACCESS(modifiers, RIGHT_CLICK))
 		entrance = null
 		exit = null
-		to_chat(user, SPAN_NOTICE("Selection cancelled."))
+		to_chat(user, span_notice("Selection cancelled."))
 
 
 /datum/build_mode/meteor/proc/spawn_meteor(direction)

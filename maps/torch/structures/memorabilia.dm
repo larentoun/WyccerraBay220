@@ -21,7 +21,7 @@
 /obj/structure/decorative/ed209/examine(mob/user)
 	. = ..()
 	if(anchored)
-		. += SPAN_NOTICE("Magnetic chains hold it in place. Somebody isn't taking any risks with this one.")
+		. += span_notice("Magnetic chains hold it in place. Somebody isn't taking any risks with this one.")
 
 /obj/structure/decorative/ed209/on_update_icon()
 	. = ..()

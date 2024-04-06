@@ -80,12 +80,12 @@
 /obj/item/stack/animalhide/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if (is_sharp(W))
 		visible_message(
-			SPAN_NOTICE("\The [user] starts cutting hair off \the [src]"),
-			SPAN_NOTICE("You start cutting the hair off \the [src]"),
-			SPAN_NOTICE("You hear the sound of a knife rubbing against flesh.")
+			span_notice("\The [user] starts cutting hair off \the [src]"),
+			span_notice("You start cutting the hair off \the [src]"),
+			span_notice("You hear the sound of a knife rubbing against flesh.")
 			)
 		if (do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
-			to_chat(user, SPAN_NOTICE("You cut the hair from \the [get_exact_name(1)]"))
+			to_chat(user, span_notice("You cut the hair from \the [get_exact_name(1)]"))
 			for (var/obj/item/stack/hairlesshide/HS in user.loc)
 				if(HS.amount < 50)
 					HS.amount++

@@ -80,7 +80,7 @@
 	var/sparked = FALSE
 	if (prob(1))
 		sparked = TRUE
-		visible_message(SPAN_WARNING("\The [src] shudders and shakes."))
+		visible_message(span_warning("\The [src] shudders and shakes."))
 		var/datum/effect/spark_spread/sparks = new
 		sparks.set_up(3, 1, src)
 		sparks.start()
@@ -93,9 +93,9 @@
 	if (malfunctioning && prob(disabled ? 0 : 1))
 		hostile_drone = !hostile_drone
 		if (hostile_drone)
-			visible_message(SPAN_WARNING("\The [src] suddenly lights up with activity, searching for targets."))
+			visible_message(span_warning("\The [src] suddenly lights up with activity, searching for targets."))
 		else
-			visible_message(SPAN_WARNING("\The [src] dulls its running lights, becoming passive."))
+			visible_message(span_warning("\The [src] dulls its running lights, becoming passive."))
 	if (health / maxHealth > 0.9)
 		icon_state = "[initial(icon_state)]"
 		explode_chance = 0
@@ -112,11 +112,11 @@
 		icon_state = "[initial(icon_state)]_dead"
 		exploding = FALSE
 		if (!disabled)
-			visible_message(SPAN_WARNING("\The [src] suddenly goes still and quiet."))
+			visible_message(span_warning("\The [src] suddenly goes still and quiet."))
 			disabled = rand(150, 600)
 			walk(src, 0)
 	if (exploding && prob(20))
-		visible_message(SPAN_WARNING("\The [src] begins to spark and shake violently!"))
+		visible_message(span_warning("\The [src] begins to spark and shake violently!"))
 		if (!sparked)
 			var/datum/effect/spark_spread/sparks = new
 			sparks.set_up(3, 1, src)

@@ -23,7 +23,7 @@
 		return FALSE
 	. = ..()
 	if(.)
-		user.visible_message(SPAN_DANGER("\The [user] releases a gout of crackling static and arcing lightning over \the [target]!"))
+		user.visible_message(span_danger("\The [user] releases a gout of crackling static and arcing lightning over \the [target]!"))
 		empulse(target, 0, 1)
 		return TRUE
 
@@ -42,7 +42,7 @@
 		return FALSE
 	. = ..()
 	if(.)
-		user.visible_message(SPAN_DANGER("\The [user] sends a jolt of electricity arcing into \the [target]!"))
+		user.visible_message(span_danger("\The [user] sends a jolt of electricity arcing into \the [target]!"))
 		if(istype(target))
 			target.electrocute_act(rand(15,45), user, 1, user.zone_sel.selecting)
 			return TRUE
@@ -63,7 +63,7 @@
 /singleton/psionic_power/energistics/zorch/invoke(mob/living/user, mob/living/target)
 	. = ..()
 	if(.)
-		user.visible_message(SPAN_DANGER("\The [user]'s eyes flare with light!"))
+		user.visible_message(span_danger("\The [user]'s eyes flare with light!"))
 
 		var/user_rank = user.psi.get_rank(faculty)
 		var/obj/item/projectile/pew

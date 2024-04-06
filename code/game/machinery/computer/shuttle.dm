@@ -15,7 +15,7 @@
 
 	var/datum/evacuation_controller/shuttle/evac_control = evacuation_controller
 	if(!istype(evac_control))
-		to_chat(user, SPAN_DANGER("This console should not in use on this map. Please report this to a developer."))
+		to_chat(user, span_danger("This console should not in use on this map. Please report this to a developer."))
 		return TRUE
 
 	if (isid(W) || istype(W, /obj/item/modular_computer))
@@ -44,11 +44,11 @@
 				if (auth_need - length(authorized) > 0)
 					message_admins("[key_name_admin(user)] has authorized early shuttle launch")
 					log_game("[user.ckey] has authorized early shuttle launch")
-					to_world(SPAN_NOTICE("<b>Alert: [auth_need - length(authorized)] authorizations needed until shuttle is launched early</b>"))
+					to_world(span_notice("<b>Alert: [auth_need - length(authorized)] authorizations needed until shuttle is launched early</b>"))
 				else
 					message_admins("[key_name_admin(user)] has launched the shuttle")
 					log_game("[user.ckey] has launched the shuttle early")
-					to_world(SPAN_NOTICE("<b>Alert: Shuttle launch time shortened to 10 seconds!</b>"))
+					to_world(span_notice("<b>Alert: Shuttle launch time shortened to 10 seconds!</b>"))
 					evacuation_controller.set_launch_time(world.time+100)
 					//src.authorized = null
 					qdel(authorized)
@@ -56,10 +56,10 @@
 
 			if("Repeal")
 				authorized -= W:registered_name
-				to_world(SPAN_NOTICE("<b>Alert: [auth_need - length(authorized)] authorizations needed until shuttle is launched early</b>"))
+				to_world(span_notice("<b>Alert: [auth_need - length(authorized)] authorizations needed until shuttle is launched early</b>"))
 
 			if("Abort")
-				to_world(SPAN_NOTICE("<b>All authorizations to shortening time for shuttle launch have been revoked!</b>"))
+				to_world(span_notice("<b>All authorizations to shortening time for shuttle launch have been revoked!</b>"))
 				authorized.Cut()
 				authorized = list(  )
 		return TRUE
@@ -70,7 +70,7 @@
 		if(!emagged && !evacuation_controller.is_prepared() && user.get_active_hand() == W)
 			switch(choice)
 				if("Launch")
-					to_world(SPAN_NOTICE("<b>Alert: Shuttle launch time shortened to 10 seconds!</b>"))
+					to_world(span_notice("<b>Alert: Shuttle launch time shortened to 10 seconds!</b>"))
 					evacuation_controller.set_launch_time(world.time+100)
 					emagged = TRUE
 				if("Cancel")

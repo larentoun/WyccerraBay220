@@ -702,7 +702,7 @@ var/global/floorIsLava = 0
 		if(!category.can_view(usr))
 			continue
 		if(active_category == category)
-			dat += SPAN_CLASS("linkOn", category.name)
+			dat += span_linkon(category.name)
 		else
 			dat += "<A href='?src=\ref[src];admin_secrets_panel=\ref[category]'>[category.name]</A> "
 	dat += "<HR>"
@@ -736,7 +736,7 @@ var/global/floorIsLava = 0
 	if(confirm == "Cancel")
 		return
 	if(confirm == "Yes")
-		to_world("[SPAN_DANGER("Restarting world!")] [SPAN_NOTICE("Initiated by [usr.key]!")]")
+		to_world("[span_danger("Restarting world!")] [span_notice("Initiated by [usr.key]!")]")
 		log_admin("[key_name(usr)] initiated a reboot.")
 
 		sleep(50)
@@ -753,7 +753,7 @@ var/global/floorIsLava = 0
 	message = sanitize(message, 500, extra = 0)
 	if(message)
 		message = replacetext(message, "\n", "<br>") // required since we're putting it in a <p> tag
-		to_world("[SPAN_NOTICE("<b>[usr.key] Announces:</b><p style='text-indent: 50px'>[message]</p>")]")
+		to_world("[span_notice("<b>[usr.key] Announces:</b><p style='text-indent: 50px'>[message]</p>")]")
 		log_admin("Announce: [key_name(usr)] : [message]")
 
 
@@ -871,13 +871,13 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	set desc="Start the round RIGHT NOW"
 	set name="Start Now"
 	if(GAME_STATE < RUNLEVEL_LOBBY)
-		to_chat(usr, FONT_LARGE(SPAN_DANGER("Unable to start the game as it is not yet set up.")))
+		to_chat(usr, FONT_LARGE(span_danger("Unable to start the game as it is not yet set up.")))
 		SSticker.start_ASAP = !SSticker.start_ASAP
 		if(SSticker.start_ASAP)
-			to_chat(usr, FONT_LARGE(SPAN_WARNING("The game will begin as soon as possible.")))
+			to_chat(usr, FONT_LARGE(span_warning("The game will begin as soon as possible.")))
 			log_and_message_admins("will begin the game as soon as possible.")
 		else
-			to_chat(usr, FONT_LARGE(SPAN_WARNING("The game will begin as normal.")))
+			to_chat(usr, FONT_LARGE(span_warning("The game will begin as normal.")))
 			log_and_message_admins("will begin the game as normal.")
 		return 0
 	SSticker.start_ASAP = TRUE
@@ -902,7 +902,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		SSticker.forced_end = TRUE
 		log_and_message_admins("has ended the round.")
 	else
-		to_chat(usr, FONT_LARGE(SPAN_WARNING("You cannot end the round before it's begun!")))
+		to_chat(usr, FONT_LARGE(span_warning("You cannot end the round before it's begun!")))
 
 /datum/admins/proc/toggleenter()
 	set category = "Server"
@@ -974,7 +974,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	if(!usr.client.holder)	return
 	if( alert("Reboot server?",,"Yes","No") == "No")
 		return
-	to_world("[SPAN_DANGER("Rebooting world!")] [SPAN_NOTICE("Initiated by [usr.key]!")]")
+	to_world("[span_danger("Rebooting world!")] [span_notice("Initiated by [usr.key]!")]")
 	log_admin("[key_name(usr)] initiated an immediate reboot.")
 
 	world.Reboot()
@@ -1490,14 +1490,14 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 			H.paralysis = 8000
 			H.admin_paralyzed = TRUE
 			msg = "has paralyzed [key_name(H)]."
-			H.visible_message(SPAN_DEBUG("OOC: \The [H] has been paralyzed by a staff member. Please hold all interactions with them until staff have finished with them."))
-			to_chat(H, SPAN_DEBUG("OOC: You have been paralyzed by a staff member. Please refer to your currently open admin help ticket or, if you don't have one, admin help for assistance."))
+			H.visible_message(span_debug("OOC: \The [H] has been paralyzed by a staff member. Please hold all interactions with them until staff have finished with them."))
+			to_chat(H, span_debug("OOC: You have been paralyzed by a staff member. Please refer to your currently open admin help ticket or, if you don't have one, admin help for assistance."))
 		else
 			H.paralysis = 0
 			H.admin_paralyzed = FALSE
 			msg = "has unparalyzed [key_name(H)]."
-			H.visible_message(SPAN_DEBUG("OOC: \The [H] has been released from paralysis by staff. You may resume interactions with them."))
-			to_chat(H, SPAN_DEBUG("OOC: You have been released from paralysis by staff and can return to your game."))
+			H.visible_message(span_debug("OOC: \The [H] has been released from paralysis by staff. You may resume interactions with them."))
+			to_chat(H, span_debug("OOC: You have been released from paralysis by staff and can return to your game."))
 		log_and_message_staff(msg)
 
 
@@ -1523,7 +1523,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		if (!replyorigin)
 			return
 	if (replyorigin == "Unknown" || replyorigin == "(Custom)" || replyorigin == "(Cancel)")
-		to_chat(owner, SPAN_WARNING("Invalid origin selected."))
+		to_chat(owner, span_warning("Invalid origin selected."))
 		return
 
 	// Destination
@@ -1597,7 +1597,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	var/success = send_fax_loop(P, P.department, P.origin)
 
 	if (success)
-		to_chat(src.owner, SPAN_NOTICE("Message reply to transmitted successfully."))
+		to_chat(src.owner, span_notice("Message reply to transmitted successfully."))
 		if(P.sender) // sent as a reply
 			log_admin("[key_name(src.owner)] replied to a fax message from [key_name(P.sender)]")
 			for(var/client/C as anything in GLOB.admins)
@@ -1609,7 +1609,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 				if((R_INVESTIGATE) & C.holder.rights)
 					to_chat(C, SPAN_CLASS("log_message", "[SPAN_CLASS("prefix", "FAX LOG:")][key_name_admin(src.owner)] has sent a fax message to [P.department] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)"))
 	else
-		to_chat(src.owner, SPAN_WARNING("Message reply failed."))
+		to_chat(src.owner, span_warning("Message reply failed."))
 
 	spawn(100)
 		qdel(P)
@@ -1622,7 +1622,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	set name = "Set Round Length"
 	set desc = "Set the maximum length of a round in minutes."
 	if (GAME_STATE > RUNLEVEL_GAME)
-		to_chat(usr, SPAN_WARNING("The game is already ending!"))
+		to_chat(usr, span_warning("The game is already ending!"))
 		return
 	var/current = round(round_duration_in_ticks / 600, 0.1)
 	var/response = input(usr, "Time in minutes when the round will end, or 0 to disable.\nCurrent time: [current]m") as null | num
@@ -1635,7 +1635,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		log_and_message_admins("set max round length to [response] minutes.")
 		config.maximum_round_length = response
 	else
-		to_chat(usr, SPAN_WARNING("You cannot set a max round length in the past."))
+		to_chat(usr, span_warning("You cannot set a max round length in the past."))
 
 
 /datum/admins/proc/ToggleContinueVote()
@@ -1643,13 +1643,13 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	set name = "Toggle Continue Vote"
 	set desc = "Toggle the continue vote on/off. Toggling off will cause round-end to occur when the next continue vote time would be."
 	if (GAME_STATE > RUNLEVEL_GAME)
-		to_chat(usr, SPAN_WARNING("The game is already ending!"))
+		to_chat(usr, span_warning("The game is already ending!"))
 		return
 	SSroundend.vote_check = !SSroundend.vote_check
 	if (SSroundend.vote_check)
 		var/interval = config.vote_autotransfer_interval
 		if (!interval)
-			to_chat(usr, SPAN_WARNING("Continue votes not configured."))
+			to_chat(usr, span_warning("Continue votes not configured."))
 			SSroundend.vote_check = 0
 			return
 		SSroundend.vote_check = (round_duration_in_ticks / 600) + interval
@@ -1662,7 +1662,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	set name = "Toggle Gamemode Requirement Checks"
 
 	if (GAME_STATE > RUNLEVEL_LOBBY)
-		to_chat(usr, SPAN_WARNING("You cannot change the gamemode requirement checks after the game has started!"))
+		to_chat(usr, span_warning("You cannot change the gamemode requirement checks after the game has started!"))
 		return
 
 	SSticker.skip_requirement_checks = !SSticker.skip_requirement_checks

@@ -48,7 +48,7 @@
 /obj/structure/rubble/attack_hand(mob/user)
 	if(!is_rummaging)
 		if(!lootleft)
-			to_chat(user, SPAN_WARNING("There's nothing left in this one but unusable garbage..."))
+			to_chat(user, span_warning("There's nothing left in this one but unusable garbage..."))
 			return
 		visible_message("[user] starts rummaging through \the [src].")
 		is_rummaging = 1
@@ -57,10 +57,10 @@
 			booty = new booty(loc)
 			lootleft--
 			update_icon()
-			to_chat(user, SPAN_NOTICE("You find \a [booty] and pull it carefully out of \the [src]."))
+			to_chat(user, span_notice("You find \a [booty] and pull it carefully out of \the [src]."))
 		is_rummaging = 0
 	else
-		to_chat(user, SPAN_WARNING("Someone is already rummaging here!"))
+		to_chat(user, span_warning("Someone is already rummaging here!"))
 
 
 /obj/structure/rubble/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -68,8 +68,8 @@
 	if (istype(tool, /obj/item/pickaxe))
 		var/obj/item/pickaxe/pickaxe = tool
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts clearing away \the [src] with \a [tool]."),
-			SPAN_NOTICE("You start clearing away \the [src] with \the [tool].")
+			span_notice("\The [user] starts clearing away \the [src] with \a [tool]."),
+			span_notice("You start clearing away \the [src] with \the [tool].")
 		)
 		if (!user.do_skilled(pickaxe.digspeed, SKILL_HAULING, src) || !user.use_sanity_check(src, tool))
 			return TRUE
@@ -77,8 +77,8 @@
 			var/booty = pickweight(loot)
 			new booty(loc)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] clears away \the [src] with \a [tool]."),
-			SPAN_NOTICE("You clear away \the [src] with \the [tool].")
+			span_notice("\The [user] clears away \the [src] with \a [tool]."),
+			span_notice("You clear away \the [src] with \the [tool].")
 		)
 		qdel_self()
 		return TRUE
@@ -87,7 +87,7 @@
 
 
 /obj/structure/rubble/on_death()
-	visible_message(SPAN_WARNING("\The [src] breaks apart!"))
+	visible_message(span_warning("\The [src] breaks apart!"))
 	qdel(src)
 
 /obj/structure/rubble/house

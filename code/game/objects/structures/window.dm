@@ -102,41 +102,41 @@
 
 /obj/structure/window/examine(mob/user)
 	. = ..(user)
-	. += SPAN_NOTICE("It is fitted with [material.display_name] pane.")
+	. += span_notice("It is fitted with [material.display_name] pane.")
 	if(reinf_material)
-		. += SPAN_NOTICE("It is reinforced with [reinf_material.display_name] lattice.")
+		. += span_notice("It is reinforced with [reinf_material.display_name] lattice.")
 
 	if (reinf_material)
 		switch (construction_state)
 			if (CONSTRUCT_STATE_UNANCHORED)
-				. += SPAN_WARNING("The window is not in the frame.")
+				. += span_warning("The window is not in the frame.")
 			if (CONSTRUCT_STATE_ANCHORED)
-				. += SPAN_WARNING("The window is pried into the frame but not yet fastened.")
+				. += span_warning("The window is pried into the frame but not yet fastened.")
 			if (CONSTRUCT_STATE_COMPLETE)
-				. += SPAN_NOTICE("The window is fastened to the frame.")
+				. += span_notice("The window is fastened to the frame.")
 
 	if (anchored)
-		. += SPAN_NOTICE("It is fastened to [get_turf(src)].")
+		. += span_notice("It is fastened to [get_turf(src)].")
 	else
-		. += SPAN_NOTICE("It is not fastened to anything.")
+		. += span_notice("It is not fastened to anything.")
 	if (paint_color)
-		. += SPAN_NOTICE("[material] pane is stained with paint.")
+		. += span_notice("[material] pane is stained with paint.")
 	if (polarized)
-		. += SPAN_NOTICE("It appears to be wired.")
+		. += span_notice("It appears to be wired.")
 
 /obj/structure/window/examine_damage_state(mob/user)
 	var/damage_percentage = get_damage_percentage()
 	switch (damage_percentage)
 		if (0)
-			to_chat(user, SPAN_NOTICE("It looks fully intact."))
+			to_chat(user, span_notice("It looks fully intact."))
 		if (1 to 24)
-			to_chat(user, SPAN_WARNING("[material] pane has a few cracks."))
+			to_chat(user, span_warning("[material] pane has a few cracks."))
 		if (25 to 49)
-			to_chat(user, SPAN_WARNING("[material] pane looks slightly damaged."))
+			to_chat(user, span_warning("[material] pane looks slightly damaged."))
 		if (50 to 74)
-			to_chat(user, SPAN_WARNING("[material] pane looks moderately damaged."))
+			to_chat(user, span_warning("[material] pane looks moderately damaged."))
 		else
-			to_chat(user, SPAN_WARNING("[material] pane looks severely damaged."))
+			to_chat(user, span_warning("[material] pane looks severely damaged."))
 
 /obj/structure/window/get_color()
 	if (paint_color)
@@ -162,13 +162,13 @@
 		var/initial_damage_percentage = round((prior_health / get_max_health()) * 100)
 		var/damage_percentage = get_damage_percentage()
 		if (damage_percentage >= 75 && initial_damage_percentage < 75)
-			visible_message(SPAN_DANGER("[src] looks like it's about to shatter!"))
+			visible_message(span_danger("[src] looks like it's about to shatter!"))
 			playsound(loc, "glasscrack", 100, 1)
 		else if (damage_percentage >= 50 && initial_damage_percentage < 50)
-			visible_message(SPAN_WARNING("[src] looks seriously damaged!"))
+			visible_message(span_warning("[src] looks seriously damaged!"))
 			playsound(loc, "glasscrack", 100, 1)
 		else if (damage_percentage >= 25 && initial_damage_percentage < 25)
-			visible_message(SPAN_WARNING("Cracks begin to appear in [src]!"))
+			visible_message(span_warning("Cracks begin to appear in [src]!"))
 			playsound(loc, "glasscrack", 100, 1)
 
 /obj/structure/window/proc/get_glass_cost()
@@ -183,7 +183,7 @@
 /obj/structure/window/proc/shatter(display_message = 1)
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
-		visible_message(SPAN_WARNING("[src] shatters!"))
+		visible_message(span_warning("[src] shatters!"))
 
 	var/debris_count = round(get_glass_cost() / rand(1, 4))
 	for(var/i = 1 to debris_count)
@@ -227,7 +227,7 @@
 	return TRUE
 
 /obj/structure/window/do_simple_ranged_interaction(mob/user)
-	visible_message(SPAN_NOTICE("Something knocks on [src]."))
+	visible_message(span_notice("Something knocks on [src]."))
 	playsound(loc, 'sound/effects/Glasshit.ogg', 50, 1)
 	return TRUE
 
@@ -261,8 +261,8 @@
 	else
 		construction_state = CONSTRUCT_STATE_ANCHORED
 	user.visible_message(
-		SPAN_NOTICE("[user] pries [src] [construction_state ? "into" : "out of"] its frame with [tool]."),
-		SPAN_NOTICE("You pry [src] [construction_state ? "into" : "out of"] its frame with [tool].")
+		span_notice("[user] pries [src] [construction_state ? "into" : "out of"] its frame with [tool]."),
+		span_notice("You pry [src] [construction_state ? "into" : "out of"] its frame with [tool].")
 	)
 
 /obj/structure/window/multitool_act(mob/living/user, obj/item/tool)
@@ -275,8 +275,8 @@
 		toggle()
 		playsound(src, 'sound/effects/pop.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] toggles [src]'s tinting with [tool]."),
-			SPAN_NOTICE("You toggle [src]'s tinting with [tool].")
+			span_notice("[user] toggles [src]'s tinting with [tool]."),
+			span_notice("You toggle [src]'s tinting with [tool].")
 		)
 		return
 	// Set ID
@@ -286,8 +286,8 @@
 		return
 	id = input
 	user.visible_message(
-		SPAN_NOTICE("[user] configures [src] with [tool]."),
-		SPAN_NOTICE("You set [src]'s polarization ID to '[id]' with [tool].")
+		span_notice("[user] configures [src] with [tool]."),
+		span_notice("You set [src]'s polarization ID to '[id]' with [tool].")
 	)
 
 /obj/structure/window/screwdriver_act(mob/living/user, obj/item/tool)
@@ -302,8 +302,8 @@
 					return
 				set_anchored(!anchored)
 				user.visible_message(
-					SPAN_NOTICE("[user] [!anchored ? "un" : null]fastens [src] [!anchored ? "from" : "to"] the floor with [tool]."),
-					SPAN_NOTICE("You [!anchored ? "un" : null]fasten [src] [!anchored ? "from" : "to"] the floor with [tool].")
+					span_notice("[user] [!anchored ? "un" : null]fastens [src] [!anchored ? "from" : "to"] the floor with [tool]."),
+					span_notice("You [!anchored ? "un" : null]fasten [src] [!anchored ? "from" : "to"] the floor with [tool].")
 				)
 				return
 			if(CONSTRUCT_STATE_ANCHORED)
@@ -316,8 +316,8 @@
 				construction_state = CONSTRUCT_STATE_ANCHORED
 		update_nearby_icons()
 		user.visible_message(
-			SPAN_NOTICE("[user] [construction_state == CONSTRUCT_STATE_ANCHORED ? "un" : null]fastens [src] [construction_state == CONSTRUCT_STATE_ANCHORED ? "from" : "to"] its frame with [tool]."),
-			SPAN_NOTICE("You [construction_state == CONSTRUCT_STATE_ANCHORED ? "un" : null]fasten [src] [construction_state == CONSTRUCT_STATE_ANCHORED ? "from" : "to"] its frame with [tool].")
+			span_notice("[user] [construction_state == CONSTRUCT_STATE_ANCHORED ? "un" : null]fastens [src] [construction_state == CONSTRUCT_STATE_ANCHORED ? "from" : "to"] its frame with [tool]."),
+			span_notice("You [construction_state == CONSTRUCT_STATE_ANCHORED ? "un" : null]fasten [src] [construction_state == CONSTRUCT_STATE_ANCHORED ? "from" : "to"] its frame with [tool].")
 		)
 		return
 	// Regular Windows
@@ -331,8 +331,8 @@
 		construction_state = CONSTRUCT_STATE_ANCHORED
 	set_anchored(!anchored)
 	user.visible_message(
-		SPAN_NOTICE("[user] [!anchored ? "un" : null]fastens [src] [!anchored ? "from" : "to"] the floor with [tool]."),
-		SPAN_NOTICE("You [!anchored ? "un" : null]fasten [src] [!anchored ? "from" : "to"] the floor with [tool].")
+		span_notice("[user] [!anchored ? "un" : null]fastens [src] [!anchored ? "from" : "to"] the floor with [tool]."),
+		span_notice("You [!anchored ? "un" : null]fasten [src] [!anchored ? "from" : "to"] the floor with [tool].")
 	)
 
 /obj/structure/window/wrench_act(mob/living/user, obj/item/tool)
@@ -346,8 +346,8 @@
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] dismantles [src] with [tool]."),
-		SPAN_NOTICE("You dismantle [src] with [tool].")
+		span_notice("[user] dismantles [src] with [tool]."),
+		span_notice("You dismantle [src] with [tool].")
 	)
 	dismantle()
 
@@ -364,8 +364,8 @@
 	polarized = FALSE
 	id = null
 	user.visible_message(
-		SPAN_NOTICE("[user] cuts [src]'s wiring with [tool]."),
-		SPAN_NOTICE("You cut [src]'s wiring with [tool].")
+		span_notice("[user] cuts [src]'s wiring with [tool]."),
+		span_notice("You cut [src]'s wiring with [tool].")
 	)
 
 /obj/structure/window/welder_act(mob/living/user, obj/item/tool)
@@ -395,8 +395,8 @@
 		playsound(src, 'sound/effects/sparks1.ogg', 50, TRUE)
 		polarized = TRUE
 		user.visible_message(
-			SPAN_NOTICE("[user] wires and polarizes [src] with [tool]."),
-			SPAN_NOTICE("You wire and polarize [src] with [tool].")
+			span_notice("[user] wires and polarizes [src] with [tool]."),
+			span_notice("You wire and polarize [src] with [tool].")
 		)
 		return TRUE
 
@@ -417,11 +417,11 @@
 			return TRUE
 		repair_pending += get_repaired_per_unit()
 		user.visible_message(
-			SPAN_NOTICE("[user] replaces some of [src]'s damaged [material] with [tool]."),
-			SPAN_NOTICE("You replace some of [src]'s damaged [material] with [tool].")
+			span_notice("[user] replaces some of [src]'s damaged [material] with [tool]."),
+			span_notice("You replace some of [src]'s damaged [material] with [tool].")
 		)
 		if(repair_pending < get_damage_value())
-			user.show_message(SPAN_WARNING("It looks like it could use more sheets"), VISIBLE_MESSAGE)
+			user.show_message(span_warning("It looks like it could use more sheets"), VISIBLE_MESSAGE)
 		return TRUE
 
 	return ..()
@@ -444,8 +444,8 @@
 		var/def_zone = ran_zone(BP_HEAD, 20)
 		if (grab.damage_stage() < 2)
 			grab.assailant.visible_message(
-				SPAN_DANGER("[grab.assailant] bashes [grab.affecting] against [src]!"),
-				SPAN_DANGER("You bash [grab.affecting] against [src]!")
+				span_danger("[grab.assailant] bashes [grab.affecting] against [src]!"),
+				span_danger("You bash [grab.affecting] against [src]!")
 			)
 			if (prob(50))
 				grab.affecting.Weaken(1)
@@ -453,8 +453,8 @@
 			hit(25, grab.assailant, grab.affecting)
 		else
 			grab.assailant.visible_message(
-				SPAN_DANGER("[grab.assailant] crushes [grab.affecting] against [src]!"),
-				SPAN_DANGER("You crush [grab.affecting] against [src]!")
+				span_danger("[grab.assailant] crushes [grab.affecting] against [src]!"),
+				span_danger("You crush [grab.affecting] against [src]!")
 			)
 			grab.affecting.Weaken(5)
 			grab.affecting.apply_damage(20, DAMAGE_BRUTE, def_zone, used_weapon = src)
@@ -468,9 +468,9 @@
 	if (can_damage_health(damage, damage_type))
 		var/weapon_text = weapon ? " with [weapon]" : null
 		user.visible_message(
-			SPAN_DANGER("[user] attacks [src][weapon_text]!"),
-			SPAN_WARNING("You attack [src][weapon_text]!"),
-			SPAN_WARNING("You hear the sound of something hitting a window.")
+			span_danger("[user] attacks [src][weapon_text]!"),
+			span_warning("You attack [src][weapon_text]!"),
+			span_warning("You hear the sound of something hitting a window.")
 		)
 		playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
 		damage_health(damage, damage_type, skip_can_damage_check = TRUE)
@@ -479,9 +479,9 @@
 		var/weapon_text = weapon ? " with [weapon]" : null
 		playsound(loc, 'sound/effects/Glasshit.ogg', 50, 1)
 		user.visible_message(
-			SPAN_WARNING("[user] attacks [src][weapon_text], but it bounces off!"),
-			SPAN_WARNING("You attack [src][weapon_text], but it bounces off! You need something stronger."),
-			SPAN_WARNING("You hear the sound of something hitting a window.")
+			span_warning("[user] attacks [src][weapon_text], but it bounces off!"),
+			span_warning("You attack [src][weapon_text], but it bounces off! You need something stronger."),
+			span_warning("You hear the sound of something hitting a window.")
 		)
 
 /obj/structure/window/proc/deanchor(atom/impact_origin)
@@ -491,18 +491,18 @@
 
 /obj/structure/window/rotate(mob/user)
 	if(!CanPhysicallyInteract(user))
-		to_chat(user, SPAN_NOTICE("You can't interact with [src] right now!"))
+		to_chat(user, span_notice("You can't interact with [src] right now!"))
 		return
 
 	if (anchored)
-		to_chat(user, SPAN_NOTICE("[src] is secured to the floor!"))
+		to_chat(user, span_notice("[src] is secured to the floor!"))
 		return
 
 	var/newdir=turn(dir, 90)
 	if(!is_fulltile())
 		for(var/obj/structure/window/W in loc)
 			if(W.dir == newdir)
-				to_chat(user, SPAN_NOTICE("There's already a window facing that direction here!"))
+				to_chat(user, span_notice("There's already a window facing that direction here!"))
 				return
 
 	update_nearby_tiles(need_rebuild=1) //Compel updates before
@@ -717,14 +717,14 @@
 	if(user.incapacitated() && !user.Adjacent(src))
 		return
 	if(user.get_active_hand() != tool)
-		to_chat(SPAN_WARNING("[tool] needs to be in your active hand."))
+		to_chat(span_warning("[tool] needs to be in your active hand."))
 		return
 	if(!in_range(src, user) && src.loc != user)
 		return
 	t = sanitizeSafe(t, MAX_NAME_LEN)
 	if(t)
 		src.id = t
-		to_chat(user, SPAN_NOTICE("The new ID of the button is [id]"))
+		to_chat(user, span_notice("The new ID of the button is [id]"))
 
 /obj/machinery/button/windowtint/screwdriver_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
@@ -784,35 +784,35 @@
 			else
 				dir_to_set = get_dir(loc, user)
 				if(dir_to_set & (dir_to_set - 1)) //Only works for cardinal direcitons, diagonals aren't supposed to work like this.
-					to_chat(user, SPAN_WARNING("You can't reach from this angle."))
+					to_chat(user, span_warning("You can't reach from this angle."))
 					return
 
 	var/required_amount = (dir_to_set & (dir_to_set - 1)) ? 4 : 1
 	if (!ST.can_use(required_amount))
-		to_chat(user, SPAN_NOTICE("You do not have enough sheets."))
+		to_chat(user, span_notice("You do not have enough sheets."))
 		return
 	for(var/obj/structure/window/WINDOW in loc)
 		if(WINDOW.dir == dir_to_set)
-			to_chat(user, SPAN_NOTICE("There is already a window facing this way there."))
+			to_chat(user, span_notice("There is already a window facing this way there."))
 			return
 		if(WINDOW.is_fulltile() && (dir_to_set & (dir_to_set - 1))) //two fulltile windows
-			to_chat(user, SPAN_NOTICE("There is already a window there."))
+			to_chat(user, span_notice("There is already a window there."))
 			return
-	to_chat(user, SPAN_NOTICE("You start placing the window."))
+	to_chat(user, span_notice("You start placing the window."))
 	if(do_after(user, 2 SECONDS, loc, DO_REPAIR_CONSTRUCT))
 		for(var/obj/structure/window/WINDOW in loc)
 			if(WINDOW.dir == dir_to_set)//checking this for a 2nd time to check if a window was made while we were waiting.
-				to_chat(user, SPAN_NOTICE("There is already a window facing this way there."))
+				to_chat(user, span_notice("There is already a window facing this way there."))
 				return
 			if(WINDOW.is_fulltile() && (dir_to_set & (dir_to_set - 1)))
-				to_chat(user, SPAN_NOTICE("There is already a window there."))
+				to_chat(user, span_notice("There is already a window there."))
 				return
 
 		if (ST.use(required_amount))
 			var/obj/structure/window/WD = new(loc, dir_to_set, FALSE, ST.material.name, ST.reinf_material && ST.reinf_material.name)
-			to_chat(user, SPAN_NOTICE("You place [WD]."))
+			to_chat(user, span_notice("You place [WD]."))
 			WD.construction_state = 0
 			WD.set_anchored(FALSE)
 		else
-			to_chat(user, SPAN_NOTICE("You do not have enough sheets."))
+			to_chat(user, span_notice("You do not have enough sheets."))
 			return

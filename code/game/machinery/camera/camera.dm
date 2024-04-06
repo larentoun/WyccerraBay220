@@ -42,9 +42,9 @@
 /obj/machinery/camera/examine(mob/user)
 	. = ..()
 	if(MACHINE_IS_BROKEN(src))
-		. += SPAN_WARNING("It is completely demolished.")
+		. += span_warning("It is completely demolished.")
 	else if(inoperable(MACHINE_STAT_EMPED))
-		. += SPAN_WARNING("It's unpowered.")
+		. += span_warning("It's unpowered.")
 
 /obj/machinery/camera/malf_upgrade(mob/living/silicon/ai/user)
 	..()
@@ -162,7 +162,7 @@
 	if(user.species.can_shred(user))
 		set_status(0)
 		user.do_attack_animation(src)
-		visible_message(SPAN_WARNING("[user] slashes at [src]!"))
+		visible_message(span_warning("[user] slashes at [src]!"))
 		playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
 		add_hiddenprint(user)
 		kill_health()
@@ -254,17 +254,17 @@
 	set_status(!src.status)
 	if (!(src.status))
 		if(user)
-			visible_message(SPAN_NOTICE(" [user] has deactivated [src]!"))
+			visible_message(span_notice(" [user] has deactivated [src]!"))
 		else
-			visible_message(SPAN_NOTICE(" [src] clicks and shuts down. "))
+			visible_message(span_notice(" [src] clicks and shuts down. "))
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		icon_state = "[initial(icon_state)]1"
 		add_hiddenprint(user)
 	else
 		if(user)
-			visible_message(SPAN_NOTICE(" [user] has reactivated [src]!"))
+			visible_message(span_notice(" [user] has reactivated [src]!"))
 		else
-			visible_message(SPAN_NOTICE(" [src] clicks and reactivates itself. "))
+			visible_message(span_notice(" [src] clicks and reactivates itself. "))
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		icon_state = initial(icon_state)
 		add_hiddenprint(user)

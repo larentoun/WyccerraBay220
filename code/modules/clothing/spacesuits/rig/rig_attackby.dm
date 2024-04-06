@@ -1,12 +1,12 @@
 /obj/item/rig/crowbar_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
 	if(!open && locked)
-		to_chat(user, SPAN_NOTICE("The access panel is locked shut."))
+		to_chat(user, span_notice("The access panel is locked shut."))
 		return
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	open = !open
-	to_chat(user, SPAN_NOTICE("You [open ? "open" : "close"] the access panel."))
+	to_chat(user, span_notice("You [open ? "open" : "close"] the access panel."))
 
 /obj/item/rig/multitool_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
@@ -73,9 +73,9 @@
 				return
 			chest.storage.DoQuickEmpty()
 			user.visible_message(
-				SPAN_ITALIC("[user] ejects the contents of [src]'s storage."),
-				SPAN_ITALIC("You eject the contents of [src]'s storage."),
-				SPAN_ITALIC("You hear things clatter to the floor."),
+				span_italic("[user] ejects the contents of [src]'s storage."),
+				span_italic("You eject the contents of [src]'s storage."),
+				span_italic("You hear things clatter to the floor."),
 				range = 5
 			)
 		if("system module")
@@ -127,16 +127,16 @@
 	if(W.GetIdCard())
 		if(subverted)
 			locked = 0
-			to_chat(user, SPAN_DANGER("It looks like the locking system has been shorted out."))
+			to_chat(user, span_danger("It looks like the locking system has been shorted out."))
 			return
 
 		if(!length(req_access))
 			locked = 0
-			to_chat(user, SPAN_DANGER("[src] doesn't seem to have a locking mechanism."))
+			to_chat(user, span_danger("[src] doesn't seem to have a locking mechanism."))
 			return
 
 		if(security_check_enabled && !src.allowed(user))
-			to_chat(user, SPAN_DANGER("Access denied."))
+			to_chat(user, span_danger("Access denied."))
 			return
 
 		locked = !locked
@@ -150,7 +150,7 @@
 				to_chat(user, "[src] already has a tank installed.")
 				return
 			if (istype(W, /obj/item/tank/scrubber))
-				to_chat(user, SPAN_WARNING("[W] is far too large to attach to [src]."))
+				to_chat(user, span_warning("[W] is far too large to attach to [src]."))
 				return
 
 			if(!user.unEquip(W)) return
@@ -221,5 +221,5 @@
 		req_access.Cut()
 		locked = 0
 		subverted = 1
-		to_chat(user, SPAN_DANGER("You short out the access protocol for the suit."))
+		to_chat(user, span_danger("You short out the access protocol for the suit."))
 		return 1

@@ -28,19 +28,19 @@
 /obj/item/card/union/examine(mob/user)
 	. = ..()
 	if(signed_by)
-		. += SPAN_NOTICE("It has been signed by [signed_by].")
+		. += span_notice("It has been signed by [signed_by].")
 	else
-		. += SPAN_NOTICE("It has a blank space for a signature.")
+		. += span_notice("It has a blank space for a signature.")
 
 /obj/item/card/union/attackby(obj/item/thing, mob/user)
 	if(istype(thing, /obj/item/pen))
 		if(signed_by)
-			to_chat(user, SPAN_WARNING("\The [src] has already been signed."))
+			to_chat(user, span_warning("\The [src] has already been signed."))
 		else
 			var/signature = sanitizeSafe(input("What do you want to sign the card as?", "Union Card") as text, MAX_NAME_LEN)
 			if(signature && !signed_by && !user.incapacitated() && Adjacent(user))
 				signed_by = signature
-				user.visible_message(SPAN_NOTICE("\The [user] signs \the [src] with a flourish."))
+				user.visible_message(span_notice("\The [user] signs \the [src] with a flourish."))
 		return
 	..()
 
@@ -88,11 +88,11 @@
 
 /obj/item/card/operant_card/attack_self(mob/living/user)
 	user.visible_message(
-		SPAN_ITALIC("\The [user] examines \a [src]."),
-		SPAN_ITALIC("You examine \the [src]."),
+		span_italic("\The [user] examines \a [src]."),
+		span_italic("You examine \the [src]."),
 		3
 	)
-	to_chat(user, info || SPAN_WARNING("\The [src] is completely blank!"))
+	to_chat(user, info || span_warning("\The [src] is completely blank!"))
 
 /obj/item/card/data
 	name = "data card"
@@ -143,7 +143,7 @@
 /obj/item/card/emag_broken/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 0 && (user.skill_check(SKILL_DEVICES, SKILL_TRAINED) || player_is_antag(user.mind)))
-		. += SPAN_WARNING("You can tell the components are completely fried; whatever use it may have had before is gone.")
+		. += span_warning("You can tell the components are completely fried; whatever use it may have had before is gone.")
 
 /obj/item/card/emag_broken/get_antag_info()
 	. = ..()
@@ -170,7 +170,7 @@ var/global/const/NO_EMAG_ACT = -50
 		log_and_message_admins("emagged \an [A].")
 
 	if(uses<1)
-		user.visible_message(SPAN_WARNING("\The [src] fizzles and sparks - it seems it's been used once too often, and is now spent."))
+		user.visible_message(span_warning("\The [src] fizzles and sparks - it seems it's been used once too often, and is now spent."))
 		var/obj/item/card/emag_broken/junk = new(user.loc)
 		junk.add_fingerprint(user)
 		qdel(src)
@@ -261,7 +261,7 @@ var/global/const/NO_EMAG_ACT = -50
 
 /obj/item/card/id/examine(mob/user, distance)
 	. = ..()
-	. += SPAN_NOTICE("It says '[get_display_name()]'.")
+	. += span_notice("It says '[get_display_name()]'.")
 	if(distance <= 1)
 		show(user)
 
@@ -415,7 +415,7 @@ var/global/const/NO_EMAG_ACT = -50
 				id.military_rank = null
 			return
 
-	to_chat(client, SPAN_WARNING("Input, must be an existing branch - [var_value] is invalid"))
+	to_chat(client, span_warning("Input, must be an existing branch - [var_value] is invalid"))
 
 /singleton/vv_set_handler/id_card_military_rank
 	handled_type = /obj/item/card/id
@@ -427,7 +427,7 @@ var/global/const/NO_EMAG_ACT = -50
 		return
 
 	if(!id.military_branch)
-		to_chat(client, SPAN_WARNING("military_branch not set - No valid ranks available"))
+		to_chat(client, span_warning("military_branch not set - No valid ranks available"))
 		return
 
 	if(ispath(var_value, /datum/mil_rank))
@@ -444,7 +444,7 @@ var/global/const/NO_EMAG_ACT = -50
 			id.military_rank = new_rank
 			return
 
-	to_chat(client, SPAN_WARNING("Input must be an existing rank belonging to military_branch - [var_value] is invalid"))
+	to_chat(client, span_warning("Input must be an existing rank belonging to military_branch - [var_value] is invalid"))
 
 /obj/item/card/id/silver
 	name = "identification card"
@@ -535,9 +535,9 @@ var/global/const/NO_EMAG_ACT = -50
 	if(distance <= 1 && isliving(user))
 		var/mob/living/M = user
 		if(M.psi)
-			. += SPAN_WARNING("There is a psionic compulsion surrounding \the [src], forcing anyone who reads it to perceive it as a legitimate document of authority. The actual text just reads 'I can do what I want.'")
+			. += span_warning("There is a psionic compulsion surrounding \the [src], forcing anyone who reads it to perceive it as a legitimate document of authority. The actual text just reads 'I can do what I want.'")
 		else
-			. += SPAN_NOTICE("This is the real deal, stamped by [GLOB.using_map.boss_name]. It gives the holder the full authority to pursue their goals. You believe it implicitly.")
+			. += span_notice("This is the real deal, stamped by [GLOB.using_map.boss_name]. It gives the holder the full authority to pursue their goals. You believe it implicitly.")
 
 /obj/item/card/id/foundation/attack_self(mob/living/user)
 	. = ..()
@@ -546,9 +546,9 @@ var/global/const/NO_EMAG_ACT = -50
 			if(user.psi && isliving(M))
 				var/mob/living/L = M
 				if(!L.psi)
-					to_chat(L, SPAN_NOTICE("This is the real deal, stamped by [GLOB.using_map.boss_name]. It gives the holder the full authority to pursue their goals. You believe \the [user] implicitly."))
+					to_chat(L, span_notice("This is the real deal, stamped by [GLOB.using_map.boss_name]. It gives the holder the full authority to pursue their goals. You believe \the [user] implicitly."))
 					continue
-			to_chat(M, SPAN_WARNING("There is a psionic compulsion surrounding \the [src] in a flicker of indescribable light."))
+			to_chat(M, span_warning("There is a psionic compulsion surrounding \the [src] in a flicker of indescribable light."))
 
 /obj/item/card/id/foundation/on_update_icon()
 	return

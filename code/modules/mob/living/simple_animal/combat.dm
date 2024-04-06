@@ -36,7 +36,7 @@
 
 	if(missed) // Most likely we have a slow attack and they dodged it or we somehow got moved.
 		playsound(src, 'sound/weapons/punchmiss.ogg', 75, 1)
-		visible_message(SPAN_WARNING("\The [src] misses their attack."))
+		visible_message(span_warning("\The [src] misses their attack."))
 		return FALSE
 
 	var/obj/item/natural_weapon/weapon = get_natural_weapon()
@@ -72,7 +72,7 @@
 			try_reload()
 			return FALSE
 
-	visible_message(SPAN_DANGER("<b>\The [src]</b> fires at \the [A]!"))
+	visible_message(span_danger("<b>\The [src]</b> fires at \the [A]!"))
 	shoot(A)
 	if(casingtype)
 		var/obj/item/ammo_casing/b = new casingtype(loc)

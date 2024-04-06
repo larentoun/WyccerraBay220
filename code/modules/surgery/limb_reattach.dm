@@ -39,17 +39,17 @@
 		return
 
 	if(!P || P.is_stump())
-		to_chat(user, SPAN_WARNING("The [E.amputation_point] is missing!"))
+		to_chat(user, span_warning("The [E.amputation_point] is missing!"))
 	else if(T && T.is_stump())
-		to_chat(user, SPAN_WARNING("You cannot attach \a [E] when there is a stump!"))
+		to_chat(user, span_warning("You cannot attach \a [E] when there is a stump!"))
 	else if(T)
-		to_chat(user, SPAN_WARNING("There is already \a [E]!"))
+		to_chat(user, span_warning("There is already \a [E]!"))
 	else if(BP_IS_ROBOTIC(P) && !BP_IS_ROBOTIC(E))
-		to_chat(user, SPAN_WARNING("You cannot attach a flesh part to a robotic body."))
+		to_chat(user, span_warning("You cannot attach a flesh part to a robotic body."))
 	else if(BP_IS_CRYSTAL(P) && !BP_IS_CRYSTAL(E))
-		to_chat(user, SPAN_WARNING("You cannot attach a flesh part to a crystalline body."))
+		to_chat(user, span_warning("You cannot attach a flesh part to a crystalline body."))
 	else if(!BP_IS_CRYSTAL(P) && BP_IS_CRYSTAL(E))
-		to_chat(user, SPAN_WARNING("You cannot attach a crystalline part to a flesh body."))
+		to_chat(user, span_warning("You cannot attach a crystalline part to a flesh body."))
 	else
 		. = TRUE
 
@@ -77,8 +77,8 @@
 	if(!user.unEquip(tool))
 		return
 	var/obj/item/organ/external/E = tool
-	user.visible_message(SPAN_NOTICE("[user] has attached [target]'s [E.name] to the [E.amputation_point]."),	\
-	SPAN_NOTICE("You have attached [target]'s [E.name] to the [E.amputation_point]."))
+	user.visible_message(span_notice("[user] has attached [target]'s [E.name] to the [E.amputation_point]."),	\
+	span_notice("You have attached [target]'s [E.name] to the [E.amputation_point]."))
 	E.replaced(target)
 	target.update_body()
 	target.updatehealth()
@@ -86,8 +86,8 @@
 
 /singleton/surgery_step/limb/attach/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = tool
-	user.visible_message(SPAN_WARNING(" [user]'s hand slips, damaging [target]'s [E.amputation_point]!"), \
-	SPAN_WARNING(" Your hand slips, damaging [target]'s [E.amputation_point]!"))
+	user.visible_message(span_warning(" [user]'s hand slips, damaging [target]'s [E.amputation_point]!"), \
+	span_warning(" Your hand slips, damaging [target]'s [E.amputation_point]!"))
 	target.apply_damage(10, DAMAGE_BRUTE, null, damage_flags=DAMAGE_FLAG_SHARP)
 
 //////////////////////////////////////////////////////////////////
@@ -126,8 +126,8 @@
 
 /singleton/surgery_step/limb/connect/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = target.get_organ(target_zone)
-	user.visible_message(SPAN_NOTICE("[user] has connected tendons and muscles in [target]'s [E.amputation_point] with [tool]."),	\
-	SPAN_NOTICE("You have connected tendons and muscles in [target]'s [E.amputation_point] with [tool]."))
+	user.visible_message(span_notice("[user] has connected tendons and muscles in [target]'s [E.amputation_point] with [tool]."),	\
+	span_notice("You have connected tendons and muscles in [target]'s [E.amputation_point] with [tool]."))
 	E.status &= ~ORGAN_CUT_AWAY
 	if(E.children)
 		for(var/obj/item/organ/external/C in E.children)
@@ -138,8 +138,8 @@
 
 /singleton/surgery_step/limb/connect/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/E = target.get_organ(target_zone)
-	user.visible_message(SPAN_WARNING(" [user]'s hand slips, damaging [target]'s [E.amputation_point]!"), \
-	SPAN_WARNING(" Your hand slips, damaging [target]'s [E.amputation_point]!"))
+	user.visible_message(span_warning(" [user]'s hand slips, damaging [target]'s [E.amputation_point]!"), \
+	span_warning(" Your hand slips, damaging [target]'s [E.amputation_point]!"))
 	target.apply_damage(10, DAMAGE_BRUTE, null, damage_flags=DAMAGE_FLAG_SHARP)
 
 //////////////////////////////////////////////////////////////////
@@ -173,8 +173,8 @@
 
 /singleton/surgery_step/limb/mechanize/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/robot_parts/L = tool
-	user.visible_message(SPAN_NOTICE("[user] has attached \the [tool] to [target]."),	\
-	SPAN_NOTICE("You have attached \the [tool] to [target]."))
+	user.visible_message(span_notice("[user] has attached \the [tool] to [target]."),	\
+	span_notice("You have attached \the [tool] to [target]."))
 
 	if(L.part)
 		for(var/part_name in L.part)
@@ -196,6 +196,6 @@
 	qdel(tool)
 
 /singleton/surgery_step/limb/mechanize/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message(SPAN_WARNING(" [user]'s hand slips, damaging [target]'s flesh!"), \
-		SPAN_WARNING(" Your hand slips, damaging [target]'s flesh!"))
+		user.visible_message(span_warning(" [user]'s hand slips, damaging [target]'s flesh!"), \
+		span_warning(" Your hand slips, damaging [target]'s flesh!"))
 		target.apply_damage(10, DAMAGE_BRUTE, null, damage_flags=DAMAGE_FLAG_SHARP)

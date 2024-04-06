@@ -90,17 +90,17 @@
 		return
 
 	if(!arms)
-		to_chat(user, SPAN_WARNING("[src] has no manipulators!"))
+		to_chat(user, span_warning("[src] has no manipulators!"))
 		setClickCooldown(3)
 		return
 
 	if(!arms.motivator || !arms.motivator.is_functional())
-		to_chat(user, SPAN_WARNING("Your motivators are damaged! You can't use your manipulators!"))
+		to_chat(user, span_warning("Your motivators are damaged! You can't use your manipulators!"))
 		setClickCooldown(15)
 		return
 
 	if(!get_cell()?.checked_use(arms.power_use * CELLRATE))
-		to_chat(user, power == MECH_POWER_ON ? SPAN_WARNING("Error: Power levels insufficient.") :  SPAN_WARNING("[src] is powered off."))
+		to_chat(user, power == MECH_POWER_ON ? span_warning("Error: Power levels insufficient.") :  span_warning("[src] is powered off."))
 		return
 
 	// User is not necessarily the exosuit, or the same person, so update intent.
@@ -115,10 +115,10 @@
 	var/fail_prob = (user != src && istype(AM) && AM.loc != src) ? (user.skill_check(SKILL_MECH, HAS_PERK) ? 0: 15 ) : 0
 	var/failed = FALSE
 	if(prob(fail_prob))
-		to_chat(user, SPAN_DANGER("Your incompetence leads you to target the wrong thing with the exosuit!"))
+		to_chat(user, span_danger("Your incompetence leads you to target the wrong thing with the exosuit!"))
 		failed = TRUE
 	else if(emp_damage > EMP_ATTACK_DISRUPT && prob(emp_damage*2))
-		to_chat(user, SPAN_DANGER("The wiring sparks as you attempt to control the exosuit!"))
+		to_chat(user, span_danger("The wiring sparks as you attempt to control the exosuit!"))
 		failed = TRUE
 
 	if(!failed)
@@ -147,7 +147,7 @@
 			// Slip up and attack yourself maybe.
 			failed = FALSE
 			if(prob(fail_prob))
-				to_chat(user, SPAN_DANGER("You artlessly shove the exosuit controls the wrong way!"))
+				to_chat(user, span_danger("You artlessly shove the exosuit controls the wrong way!"))
 				failed = TRUE
 			else if(emp_damage>EMP_MOVE_DISRUPT && prob(10))
 				failed = TRUE
@@ -190,7 +190,7 @@
 	else if(adj && user.a_intent == I_HURT) //Prevents accidental slams.
 		setClickCooldown(arms ? arms.action_delay : 7) // You've already commited to applying fist, don't turn and back out now!
 		playsound(src.loc, legs.mech_step_sound, 60, 1)
-		src.visible_message(SPAN_DANGER("[src] steps back, preparing for a slam!"), blind_message = SPAN_DANGER("You hear the loud hissing of hydraulics!"))
+		src.visible_message(span_danger("[src] steps back, preparing for a slam!"), blind_message = span_danger("You hear the loud hissing of hydraulics!"))
 		if (do_after(src, 1.2 SECONDS, get_turf(src), DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && user)
 			A.attack_generic(src, arms.melee_damage, "slammed against", DAMAGE_BRUTE) //"Punch" would be bad since vehicles without arms could be a thing
 			var/turf/T = get_step(get_turf(src), src.dir)
@@ -229,32 +229,32 @@
 		return FALSE
 	if (user.buckled)
 		if (!silent)
-			to_chat(user, SPAN_WARNING("You are currently buckled to [user.buckled]."))
+			to_chat(user, span_warning("You are currently buckled to [user.buckled]."))
 		return FALSE
 	if(!(user.mob_size >= body.min_pilot_size && user.mob_size <= body.max_pilot_size))
 		if(!silent)
-			to_chat(user, SPAN_WARNING("You cannot pilot an exosuit of this size."))
+			to_chat(user, span_warning("You cannot pilot an exosuit of this size."))
 		return FALSE
 	if(!user.Adjacent(src))
 		return FALSE
 	if(hatch_locked)
 		if(!silent)
-			to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is locked."))
+			to_chat(user, span_warning("The [body.hatch_descriptor] is locked."))
 		return FALSE
 	if(hatch_closed)
 		if(!silent)
-			to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is closed."))
+			to_chat(user, span_warning("The [body.hatch_descriptor] is closed."))
 		return FALSE
 	if(LAZYLEN(pilots) >= LAZYLEN(body.pilot_positions))
 		if(!silent)
-			to_chat(user, SPAN_WARNING("[src] is occupied to capacity."))
+			to_chat(user, span_warning("[src] is occupied to capacity."))
 		return FALSE
 	return TRUE
 
 /mob/living/exosuit/proc/enter(mob/user, silent = FALSE, check_incap = TRUE, instant = FALSE)
 	if(!check_enter(user, silent, check_incap))
 		return FALSE
-	to_chat(user, SPAN_NOTICE("You start climbing into [src]..."))
+	to_chat(user, span_notice("You start climbing into [src]..."))
 	if(!body)
 		return FALSE
 	if(!instant && !do_after(user, body.climb_time, src, DO_PUBLIC_UNIQUE))
@@ -262,7 +262,7 @@
 	if(!check_enter(user, silent, check_incap))
 		return FALSE
 	if(!silent)
-		to_chat(user, SPAN_NOTICE("You climb into [src]."))
+		to_chat(user, span_notice("You climb into [src]."))
 		playsound(src, 'sound/machines/airlock_heavy.ogg', 60, 1)
 	add_pilot(user)
 	return TRUE
@@ -302,7 +302,7 @@
 	if(sync_access)
 		for(var/mob/pilot in pilots)
 			access_card.access |= pilot.GetAccess()
-			to_chat(pilot, SPAN_NOTICE("Security access permissions synchronized."))
+			to_chat(pilot, span_notice("Security access permissions synchronized."))
 
 /mob/living/exosuit/proc/eject(mob/user, silent)
 	if(!user || !(user in src.contents))
@@ -310,14 +310,14 @@
 	if(hatch_closed)
 		if(hatch_locked)
 			if(!silent)
-				to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is locked."))
+				to_chat(user, span_warning("The [body.hatch_descriptor] is locked."))
 			return
 		hud_open.toggled()
 		if(!silent)
-			to_chat(user, SPAN_NOTICE("You open the hatch and climb out of [src]."))
+			to_chat(user, span_notice("You open the hatch and climb out of [src]."))
 	else
 		if(!silent)
-			to_chat(user, SPAN_NOTICE("You climb out of [src]."))
+			to_chat(user, span_notice("You climb out of [src]."))
 
 	remove_pilot(user)
 	return 1
@@ -332,8 +332,8 @@
 		USE_FEEDBACK_FAILURE("[src]'s cockpit isn't locked. You don't need to force it.")
 		return
 	user.visible_message(
-		SPAN_WARNING("[user] starts forcing [src]'s emergency [body.hatch_descriptor] release using [tool]."),
-		SPAN_WARNING("You start forcing [src]'s emergency [body.hatch_descriptor] release using [tool].")
+		span_warning("[user] starts forcing [src]'s emergency [body.hatch_descriptor] release using [tool]."),
+		span_warning("You start forcing [src]'s emergency [body.hatch_descriptor] release using [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 5 SECONDS, volume = 50, skill_path = list(SKILL_DEVICES, SKILL_EVA), do_flags = DO_REPAIR_CONSTRUCT) || !body)
 		return
@@ -345,8 +345,8 @@
 	hud_open.update_icon()
 	update_icon()
 	user.visible_message(
-		SPAN_WARNING("[user] forces [src]'s emergency [body.hatch_descriptor] release using [tool]."),
-		SPAN_WARNING("You force [src]'s emergency [body.hatch_descriptor] release using [tool].")
+		span_warning("[user] forces [src]'s emergency [body.hatch_descriptor] release using [tool]."),
+		span_warning("You force [src]'s emergency [body.hatch_descriptor] release using [tool].")
 	)
 
 /mob/living/exosuit/multitool_act(mob/living/user, obj/item/tool)
@@ -389,14 +389,14 @@
 		USE_FEEDBACK_FAILURE("[src]'s maintenance protocols must be enabled to access the securing bolts.")
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] starts removing [src]'s securing bolts with [tool]."),
-		SPAN_NOTICE("You start removing [src]'s securing bolts with [tool].")
+		span_notice("[user] starts removing [src]'s securing bolts with [tool]."),
+		span_notice("You start removing [src]'s securing bolts with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 6 SECONDS, volume = 50, skill_path = SKILL_DEVICES, do_flags = DO_REPAIR_CONSTRUCT) || !maintenance_protocols)
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] removes [src]'s securing bolts with [tool], dismantling it."),
-		SPAN_NOTICE("You remove [src]'s securing bolts with [tool], dismantling it.")
+		span_notice("[user] removes [src]'s securing bolts with [tool], dismantling it."),
+		span_notice("You remove [src]'s securing bolts with [tool], dismantling it.")
 	)
 	dismantle()
 
@@ -448,8 +448,8 @@
 		update_icon()
 		paint.use(1, user)
 		user.visible_message(
-			SPAN_NOTICE("[user] opens [tool] and spends some quality time customising [src]."),
-			SPAN_NOTICE("You open [tool] and spend some quality time customising [src].")
+			span_notice("[user] opens [tool] and spends some quality time customising [src]."),
+			span_notice("You open [tool] and spend some quality time customising [src].")
 		)
 		return TRUE
 
@@ -492,8 +492,8 @@
 		body.cell = tool
 		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] installs [tool] into [src]."),
-			SPAN_NOTICE("You install [tool] into [src].")
+			span_notice("[user] installs [tool] into [src]."),
+			span_notice("You install [tool] into [src].")
 		)
 		return TRUE
 
@@ -504,12 +504,12 @@
 	// Drag the pilot out if possible.
 	if(user.a_intent == I_HURT)
 		if(!LAZYLEN(pilots))
-			to_chat(user, SPAN_WARNING("There is nobody inside [src]."))
+			to_chat(user, span_warning("There is nobody inside [src]."))
 		else if(!hatch_closed)
 			var/mob/pilot = pick(pilots)
-			user.visible_message(SPAN_DANGER("[user] is trying to pull [pilot] out of [src]!"))
+			user.visible_message(span_danger("[user] is trying to pull [pilot] out of [src]!"))
 			if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE) && user.Adjacent(src) && (pilot in pilots) && !hatch_closed)
-				user.visible_message(SPAN_DANGER("[user] drags [pilot] out of [src]!"))
+				user.visible_message(span_danger("[user] drags [pilot] out of [src]!"))
 				eject(pilot, silent=1)
 		else if(hatch_closed)
 			if(MUTATION_FERAL in user.mutations)
@@ -537,7 +537,7 @@
 	if(!new_name || new_name == name || (user != src && !(user in pilots)))
 		return
 	SetName(new_name)
-	to_chat(user, SPAN_NOTICE("You have redesignated this exosuit as [name]."))
+	to_chat(user, span_notice("You have redesignated this exosuit as [name]."))
 
 /mob/living/exosuit/get_inventory_slot(obj/item/I)
 	for(var/h in hardpoints)

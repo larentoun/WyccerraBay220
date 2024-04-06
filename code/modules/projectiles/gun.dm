@@ -161,8 +161,8 @@
 			if(process_projectile(P, user, user, pick(BP_L_FOOT, BP_R_FOOT)))
 				handle_post_fire(user, user)
 				user.visible_message(
-					SPAN_DANGER("\The [user] shoots \himself in the foot with \the [src]!"),
-					SPAN_DANGER("You shoot yourself in the foot with \the [src]!")
+					span_danger("\The [user] shoots \himself in the foot with \the [src]!"),
+					span_danger("You shoot yourself in the foot with \the [src]!")
 					)
 				M.unequip_item()
 		else
@@ -239,7 +239,7 @@
 
 	if(world.time < next_fire_time)
 		if (world.time % 3) //to prevent spam
-			to_chat(user, SPAN_WARNING("[src] is not ready to fire again!"))
+			to_chat(user, span_warning("[src] is not ready to fire again!"))
 		return
 
 	last_safety_check = world.time
@@ -295,13 +295,13 @@
 //called if there was no projectile to shoot
 /obj/item/gun/proc/handle_click_empty(mob/user)
 	if (user)
-		user.visible_message("*click click*", SPAN_DANGER("*click*"))
+		user.visible_message("*click click*", span_danger("*click*"))
 	else
 		src.visible_message("*click click*")
 	playsound(src.loc, 'sound/weapons/empty.ogg', 100, 1)
 
 /obj/item/gun/proc/handle_click_safety(mob/user)
-	user.visible_message(SPAN_WARNING("[user] squeezes the trigger of \the [src] but it doesn't move!"), SPAN_WARNING("You squeeze the trigger but it doesn't move!"), range = 3)
+	user.visible_message(span_warning("[user] squeezes the trigger of \the [src] but it doesn't move!"), span_warning("You squeeze the trigger but it doesn't move!"), range = 3)
 
 //called after successfully firing
 /obj/item/gun/proc/handle_post_fire(mob/user, atom/target, pointblank = 0, reflex = 0, obj/projectile)
@@ -309,14 +309,14 @@
 		flick(fire_anim, src)
 
 	if (user)
-		var/user_message = SPAN_WARNING("You fire \the [src][pointblank ? " point blank":""] at \the [target][reflex ? " by reflex" : ""]!")
+		var/user_message = span_warning("You fire \the [src][pointblank ? " point blank":""] at \the [target][reflex ? " by reflex" : ""]!")
 		if (silenced)
 			to_chat(user, user_message)
 		else
 			user.visible_message(
-				SPAN_DANGER("\The [user] fires \the [src][pointblank ? " point blank":""] at \the [target][reflex ? " by reflex" : ""]!"),
+				span_danger("\The [user] fires \the [src][pointblank ? " point blank":""] at \the [target][reflex ? " by reflex" : ""]!"),
 				user_message,
-				SPAN_DANGER("You hear a [fire_sound_text]!")
+				span_danger("You hear a [fire_sound_text]!")
 			)
 
 		if (pointblank)
@@ -331,20 +331,20 @@
 				switch(one_hand_penalty)
 					if(4 to 6)
 						if(prob(50)) //don't need to tell them every single time
-							to_chat(user, SPAN_WARNING("Your aim wavers slightly."))
+							to_chat(user, span_warning("Your aim wavers slightly."))
 					if(6 to 8)
-						to_chat(user, SPAN_WARNING("You have trouble keeping \the [src] on target with just one hand."))
+						to_chat(user, span_warning("You have trouble keeping \the [src] on target with just one hand."))
 					if(8 to INFINITY)
-						to_chat(user, SPAN_WARNING("You struggle to keep \the [src] on target with just one hand!"))
+						to_chat(user, span_warning("You struggle to keep \the [src] on target with just one hand!"))
 			else if(!user.can_wield_item(src))
 				switch(one_hand_penalty)
 					if(4 to 6)
 						if(prob(50)) //don't need to tell them every single time
-							to_chat(user, SPAN_WARNING("Your aim wavers slightly."))
+							to_chat(user, span_warning("Your aim wavers slightly."))
 					if(6 to 8)
-						to_chat(user, SPAN_WARNING("You have trouble holding \the [src] steady."))
+						to_chat(user, span_warning("You have trouble holding \the [src] steady."))
 					if(8 to INFINITY)
-						to_chat(user, SPAN_WARNING("You struggle to hold \the [src] steady!"))
+						to_chat(user, span_warning("You struggle to hold \the [src] steady!"))
 
 		if(screen_shake)
 			spawn()
@@ -529,7 +529,7 @@
 		return
 	if (world.time < next_fire_time)
 		if (world.time % 3)
-			to_chat(M, SPAN_WARNING("\The [src] is not ready to fire again!"))
+			to_chat(M, span_warning("\The [src] is not ready to fire again!"))
 		return
 	M.setClickCooldown((burst - 1) * burst_delay)
 	next_fire_time = world.time + max(burst_delay + 1, fire_delay)
@@ -539,8 +539,8 @@
 
 	last_safety_check = world.time
 	admin_attacker_log(M, "is trying to commit suicide with \a [src]")
-	user.visible_message(SPAN_WARNING("\The [M] pulls the trigger."))
-	to_chat(M, SPAN_NOTICE("You feel \the [src] go off..."))
+	user.visible_message(span_warning("\The [M] pulls the trigger."))
+	to_chat(M, span_notice("You feel \the [src] go off..."))
 
 	var/obj/item/organ/brain = M.internal_organs_by_name[BP_BRAIN] || M.internal_organs_by_name[BP_POSIBRAIN]
 	var/bodypart = brain.parent_organ
@@ -567,7 +567,7 @@
 				else
 					dmgmultiplier = 0.5
 				if (blocked)
-					to_chat(M, SPAN_WARNING("A clear shot to your [bodypart] is blocked by the [blocked], significantly reducing damage to \the [brain.name]!"))
+					to_chat(M, span_warning("A clear shot to your [bodypart] is blocked by the [blocked], significantly reducing damage to \the [brain.name]!"))
 					dmgmultiplier = dmgmultiplier/5
 				if (istype(brain, /obj/item/organ/internal/brain))
 					var/obj/item/organ/internal/brain/notposi = brain
@@ -623,9 +623,9 @@
 	if(user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
 		if(length(firemodes) > 1)
 			var/datum/firemode/current_mode = firemodes[sel_mode]
-			. += SPAN_NOTICE("The fire selector is set to [current_mode.name].")
+			. += span_notice("The fire selector is set to [current_mode.name].")
 	if(has_safety)
-		. += SPAN_NOTICE("The safety is [safety() ? "on" : "off"].")
+		. += span_notice("The safety is [safety() ? "on" : "off"].")
 	last_safety_check = world.time
 
 /obj/item/gun/proc/switch_firemodes()
@@ -655,7 +655,7 @@
 	if(prob(20) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
 		new_mode = switch_firemodes(user)
 	if(new_mode)
-		to_chat(user, SPAN_NOTICE("\The [src] is now set to [new_mode.name]."))
+		to_chat(user, span_notice("\The [src] is now set to [new_mode.name]."))
 
 /obj/item/gun/proc/toggle_safety(mob/user)
 	if (user?.is_physically_disabled())
@@ -664,7 +664,7 @@
 	safety_state = !safety_state
 	update_icon()
 	if(user)
-		user.visible_message(SPAN_WARNING("[user] switches the safety of \the [src] [safety_state ? "on" : "off"]."), SPAN_NOTICE("You switch the safety of \the [src] [safety_state ? "on" : "off"]."), range = 3)
+		user.visible_message(span_warning("[user] switches the safety of \the [src] [safety_state ? "on" : "off"]."), span_notice("You switch the safety of \the [src] [safety_state ? "on" : "off"]."), range = 3)
 		last_safety_check = world.time
 		playsound(src, 'sound/weapons/flipblade.ogg', 15, 1)
 	SEND_SIGNAL(src, COMSIG_GUN_TOGGLE_SAFETY, safety_state)
@@ -699,7 +699,7 @@
 		turfs += T
 	if(length(turfs))
 		var/turf/shoot_to = pick(turfs)
-		target.visible_message(SPAN_DANGER("\The [src] goes off during the struggle!"))
+		target.visible_message(span_danger("\The [src] goes off during the struggle!"))
 		afterattack(shoot_to,target)
 		return 1
 
@@ -708,7 +708,7 @@
 		return FALSE
 
 	if(!safety() && user.skill_fail_prob(skill_path, fail_chance, no_more_fail, factor) && special_check(user))
-		user.visible_message(SPAN_WARNING(message))
+		user.visible_message(span_warning(message))
 		var/list/targets = list(user)
 
 		var/turf/center = get_turf(src)

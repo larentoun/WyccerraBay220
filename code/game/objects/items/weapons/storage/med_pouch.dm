@@ -46,7 +46,7 @@ Single Use Emergency Pouches
 
 /obj/item/storage/med_pouch/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("<A href='?src=\ref[src];show_info=1'>Please read instructions before use.</A>")
+	. += span_notice("<A href='?src=\ref[src];show_info=1'>Please read instructions before use.</A>")
 
 /obj/item/storage/med_pouch/CanUseTopic()
 	return STATUS_INTERACTIVE
@@ -61,7 +61,7 @@ Single Use Emergency Pouches
 
 /obj/item/storage/med_pouch/open(mob/user)
 	if(!opened)
-		user.visible_message(SPAN_NOTICE("\The [user] tears open [src], breaking the vacuum seal!"), SPAN_NOTICE("You tear open [src], breaking the vacuum seal!"))
+		user.visible_message(span_notice("\The [user] tears open [src], breaking the vacuum seal!"), span_notice("You tear open [src], breaking the vacuum seal!"))
 	. = ..()
 
 /obj/item/storage/med_pouch/trauma

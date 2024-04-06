@@ -14,17 +14,17 @@
 /obj/item/clothing/suit/armor/equip_delay_before(mob/user, slot, equip_flags)
 	user.setClickCooldown(1 SECOND)
 	user.visible_message(
-		SPAN_ITALIC("\The [user] begins to don \the [src]."),
-		SPAN_ITALIC("You begin to don \the [src]."),
-		SPAN_ITALIC("You can hear metal clicking and fabric rustling."),
+		span_italic("\The [user] begins to don \the [src]."),
+		span_italic("You begin to don \the [src]."),
+		span_italic("You can hear metal clicking and fabric rustling."),
 		range = 5
 	)
 
 
 /obj/item/clothing/suit/armor/equip_delay_after(mob/user, slot, equip_flags)
 	user.visible_message(
-		SPAN_ITALIC("\The [user] finishes putting on \the [src]."),
-		SPAN_NOTICE("You finish putting on \the [src]."),
+		span_italic("\The [user] finishes putting on \the [src]."),
+		span_notice("You finish putting on \the [src]."),
 		range = 5
 	)
 
@@ -106,7 +106,7 @@
 	if(!prob(50))
 		return FALSE
 
-	user.visible_message(SPAN_DANGER("The reactive teleport system flings [user] clear of the attack!"))
+	user.visible_message(span_danger("The reactive teleport system flings [user] clear of the attack!"))
 	var/list/turfs = list()
 
 	var/turf/user_turf = get_turf(user)
@@ -144,11 +144,11 @@
 /obj/item/clothing/suit/armor/reactive/attack_self(mob/user as mob)
 	src.active = !( src.active )
 	if (src.active)
-		to_chat(user, SPAN_NOTICE("The reactive armor is now active."))
+		to_chat(user, span_notice("The reactive armor is now active."))
 		src.icon_state = "reactive"
 		src.item_state = "reactive"
 	else
-		to_chat(user, SPAN_NOTICE("The reactive armor is now inactive."))
+		to_chat(user, span_notice("The reactive armor is now inactive."))
 		src.icon_state = "reactiveoff"
 		src.item_state = "reactiveoff"
 		src.add_fingerprint(user)
@@ -461,7 +461,7 @@
 		if(!(def_zone in list(BP_CHEST, BP_GROIN))) //not changing this so arm and leg shots reflect, gives some incentive to not aim center-mass
 			reflectchance /= 2
 		if(P.starting && prob(reflectchance))
-			visible_message(SPAN_DANGER("\The [user]'s [src.name] reflects [attack_text]!"))
+			visible_message(span_danger("\The [user]'s [src.name] reflects [attack_text]!"))
 
 			// Find a turf near or on the original location to bounce to
 			var/new_x = P.starting.x + pick(0, 0, 0, 0, 0, -1, 1, -2, 2)

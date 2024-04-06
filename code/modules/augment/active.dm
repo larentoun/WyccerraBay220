@@ -21,7 +21,7 @@
 
 /obj/item/organ/internal/augment/active/proc/can_activate()
 	if (!owner || owner.incapacitated() || !is_usable())
-		to_chat(owner, SPAN_WARNING("You can't do that now!"))
+		to_chat(owner, span_warning("You can't do that now!"))
 		return FALSE
 	return TRUE
 

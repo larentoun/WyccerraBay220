@@ -231,7 +231,7 @@
 		\n<BR>
 		\n"}
 	else
-		dat += SPAN_DANGER("No compatible attached compressor found.")
+		dat += span_danger("No compatible attached compressor found.")
 
 	show_browser(user, dat, "window=computer;size=400x500")
 	onclose(user, "computer")

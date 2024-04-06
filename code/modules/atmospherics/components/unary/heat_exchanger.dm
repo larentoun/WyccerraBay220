@@ -72,19 +72,19 @@
 	. = ITEM_INTERACT_SUCCESS
 	var/turf/T = loc
 	if(level == ATOM_LEVEL_UNDER_TILE && isturf(T) && !T.is_plating())
-		to_chat(user, SPAN_WARNING("You must remove the plating first."))
+		to_chat(user, span_warning("You must remove the plating first."))
 		return
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()
 	if((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-		to_chat(user, SPAN_WARNING("You cannot unwrench [src], it is too exerted due to internal pressure."))
+		to_chat(user, span_warning("You cannot unwrench [src], it is too exerted due to internal pressure."))
 		return
-	to_chat(user, SPAN_NOTICE("You begin to unfasten [src]..."))
+	to_chat(user, span_notice("You begin to unfasten [src]..."))
 	if(!tool.use_as_tool(src, user, 4 SECONDS, volume = 50, skill_path = SKILL_ATMOS, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	user.visible_message( \
-		SPAN_NOTICE("[user] unfastens [src]."), \
-		SPAN_NOTICE("You have unfastened [src]."), \
+		span_notice("[user] unfastens [src]."), \
+		span_notice("You have unfastened [src]."), \
 		"You hear a ratchet.")
 	new /obj/item/pipe(loc, src)
 	qdel(src)

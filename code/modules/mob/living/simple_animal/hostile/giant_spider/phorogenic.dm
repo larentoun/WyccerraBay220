@@ -39,7 +39,7 @@
 	return ..()
 
 /mob/living/simple_animal/hostile/giant_spider/phorogenic/death()
-	visible_message(SPAN_DANGER("\The [src]'s body begins to rupture!"))
+	visible_message(span_danger("\The [src]'s body begins to rupture!"))
 	var/delay = rand(explosion_delay_lower, explosion_delay_upper)
 	addtimer(CALLBACK(src, PROC_REF(flash), delay), 0)
 
@@ -59,7 +59,7 @@
 /mob/living/simple_animal/hostile/giant_spider/phorogenic/proc/detonate()
 	// The actual boom.
 	if (src && !exploded)
-		visible_message(SPAN_DANGER("\The [src]'s body detonates!"))
+		visible_message(span_danger("\The [src]'s body detonates!"))
 		exploded = TRUE
 		explosion(loc, explosion_radius, explosion_max_power)
 		qdel(src)

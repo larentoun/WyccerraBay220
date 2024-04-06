@@ -30,7 +30,7 @@
 	if (H.hand)
 		temp = H.organs_by_name[BP_L_HAND]
 	if (H.a_intent != I_HURT && (!temp || !temp.is_usable())) //Usability for harm is handled at the level of the attack datum's proc on get_attack_hand.
-		to_chat(H, SPAN_WARNING("You can't use your hand."))
+		to_chat(H, span_warning("You can't use your hand."))
 		return
 
 	..()
@@ -42,7 +42,7 @@
 		var/hit_zone = resolve_hand_attack(damage, H, H.zone_sel.selecting)
 		if (!hit_zone || !damage)
 			playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-			visible_message(SPAN_DANGER("\The [H] has attempted to punch \the [src]!"))
+			visible_message(span_danger("\The [H] has attempted to punch \the [src]!"))
 			return
 
 		var/obj/item/organ/external/affecting = get_organ(hit_zone)
@@ -52,11 +52,11 @@
 		update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
 		H.update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
 
-		visible_message(SPAN_DANGER("[H] has punched \the [src] in the [affecting.name]!"))
+		visible_message(span_danger("[H] has punched \the [src] in the [affecting.name]!"))
 
 		apply_damage(damage, DAMAGE_PAIN, affecting)
 		if (damage >= 9)
-			visible_message(SPAN_DANGER("[H] has weakened \the [src]!"))
+			visible_message(span_danger("[H] has weakened \the [src]!"))
 			var/armor_block = 100 * get_blocked_ratio(affecting, DAMAGE_BRUTE, damage = damage)
 			apply_effect(4, EFFECT_WEAKEN, armor_block)
 		return
@@ -78,14 +78,14 @@
 				var/cpr_delay = 15 * M.skill_delay_mult(SKILL_ANATOMY, 0.2)
 				cpr_time = 0
 
-				H.visible_message(SPAN_NOTICE("\The [H] is trying to perform CPR on \the [src]."))
+				H.visible_message(span_notice("\The [H] is trying to perform CPR on \the [src]."))
 
 				if (!do_after(H, cpr_delay, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 					cpr_time = 1
 					return
 				cpr_time = 1
 
-				H.visible_message(SPAN_NOTICE("\The [H] performs CPR on \the [src]!"))
+				H.visible_message(span_notice("\The [H] performs CPR on \the [src]!"))
 
 				if (is_asystole())
 					if (prob(5 + 5 * (SKILL_EXPERIENCED - pumping_skill)))
@@ -101,19 +101,19 @@
 						resuscitate()
 
 				if (!H.check_has_mouth())
-					to_chat(H, SPAN_WARNING("You don't have a mouth, you cannot do mouth-to-mouth resuscitation!"))
+					to_chat(H, span_warning("You don't have a mouth, you cannot do mouth-to-mouth resuscitation!"))
 					return
 				if (!check_has_mouth())
-					to_chat(H, SPAN_WARNING("They don't have a mouth, you cannot do mouth-to-mouth resuscitation!"))
+					to_chat(H, span_warning("They don't have a mouth, you cannot do mouth-to-mouth resuscitation!"))
 					return
 				if ((H.head && (H.head.body_parts_covered & FACE)) || (H.wear_mask && (H.wear_mask.body_parts_covered & FACE)))
-					to_chat(H, SPAN_WARNING("You need to remove your mouth covering for mouth-to-mouth resuscitation!"))
+					to_chat(H, span_warning("You need to remove your mouth covering for mouth-to-mouth resuscitation!"))
 					return
 				if ((head && (head.body_parts_covered & FACE)) || (wear_mask && (wear_mask.body_parts_covered & FACE)))
-					to_chat(H, SPAN_WARNING("You need to remove \the [src]'s mouth covering for mouth-to-mouth resuscitation!"))
+					to_chat(H, span_warning("You need to remove \the [src]'s mouth covering for mouth-to-mouth resuscitation!"))
 					return
 				if (!H.internal_organs_by_name[H.species.breathing_organ])
-					to_chat(H, SPAN_DANGER("You need lungs for mouth-to-mouth resuscitation!"))
+					to_chat(H, span_danger("You need lungs for mouth-to-mouth resuscitation!"))
 					return
 				if (!need_breathe())
 					return
@@ -124,7 +124,7 @@
 					if (!fail)
 						if (!L.is_bruised())
 							losebreath = 0
-						to_chat(src, SPAN_NOTICE("You feel a breath of fresh air enter your lungs. It feels good."))
+						to_chat(src, span_notice("You feel a breath of fresh air enter your lungs. It feels good."))
 
 			else if (!(M == src && apply_pressure(M, M.zone_sel.selecting)))
 				help_shake_act(M)
@@ -142,11 +142,11 @@
 			if (!attack)
 				return
 			if(H.incapacitated())
-				to_chat(H, SPAN_NOTICE("You can't attack while incapacitated."))
+				to_chat(H, span_notice("You can't attack while incapacitated."))
 				return
 
 			if (world.time < H.last_attack + attack.delay)
-				to_chat(H, SPAN_NOTICE("You can't attack again so soon."))
+				to_chat(H, span_notice("You can't attack again so soon."))
 				return
 			else
 				H.last_attack = world.time
@@ -154,7 +154,7 @@
 			H.do_attack_animation(src)
 			var/hit_zone = resolve_hand_attack(rand_damage, H, H.zone_sel.selecting)
 			if (!hit_zone)
-				H.visible_message(SPAN_DANGER("[H] attempted to strike [src], but missed!"))
+				H.visible_message(span_danger("[H] attempted to strike [src], but missed!"))
 				playsound(loc, attack.miss_sound, 25, 1, -1)
 				return
 
@@ -164,7 +164,7 @@
 
 			if (hit_zone != H.zone_sel.selecting) //If resolve_hand_attack returned a different zone, that means you're not as accurate.
 				if (prob(15) && hit_zone != BP_CHEST && lying)
-					H.visible_message(SPAN_DANGER("\The [H] attempted to strike \the [src], but \he rolled out of the way!"))
+					H.visible_message(span_danger("\The [H] attempted to strike \the [src], but \he rolled out of the way!"))
 					set_dir(pick(GLOB.cardinal))
 					playsound(loc, attack.miss_sound, 25, 1, -1)
 					return
@@ -211,7 +211,7 @@
 	if(H.hand)
 		temp = H.organs_by_name[BP_L_HAND]
 	if(H.a_intent != I_HURT && (!temp || !temp.is_usable())) //Usability for harm is handled at the level of the attack datum's proc on get_attack_hand.
-		to_chat(H, SPAN_WARNING("You can't use your hand."))
+		to_chat(H, span_warning("You can't use your hand."))
 		return
 	remove_cloaking_source(species)
 	if(H.species)
@@ -226,7 +226,7 @@
 	if(!damage || !istype(user))
 		return
 	admin_attack_log(user, src, "Attacked their victim", "Was attacked", "has [attack_message]")
-	src.visible_message(SPAN_DANGER("[user] has [attack_message] [src]!"))
+	src.visible_message(span_danger("[user] has [attack_message] [src]!"))
 	user.do_attack_animation(src)
 
 	var/dam_zone = pick(organs_by_name)
@@ -238,13 +238,13 @@
 /mob/living/carbon/human/proc/break_all_grabs(mob/living/carbon/user)
 	var/success = 0
 	if(pulling)
-		visible_message(SPAN_DANGER("[user] has broken [src]'s grip on [pulling]!"))
+		visible_message(span_danger("[user] has broken [src]'s grip on [pulling]!"))
 		success = 1
 		stop_pulling()
 
 	for (var/obj/item/grab/grab as anything in GetAllHeld(/obj/item/grab))
 		if(grab.affecting)
-			visible_message(SPAN_DANGER("\The [user] has broken \the [src]'s grip on \the [grab.affecting]!"))
+			visible_message(span_danger("\The [user] has broken \the [src]'s grip on \the [grab.affecting]!"))
 			success = TRUE
 		spawn(1)
 			grab.current_grab.let_go(grab)
@@ -264,7 +264,7 @@
 		return 0
 
 	if(organ.applied_pressure)
-		var/message = SPAN_WARNING("[ismob(organ.applied_pressure)? "Someone" : "\A [organ.applied_pressure]"] is already applying pressure to [user == src? "your [organ.name]" : "[src]'s [organ.name]"].")
+		var/message = span_warning("[ismob(organ.applied_pressure)? "Someone" : "\A [organ.applied_pressure]"] is already applying pressure to [user == src? "your [organ.name]" : "[src]'s [organ.name]"].")
 		to_chat(user, message)
 		return 0
 
@@ -302,4 +302,4 @@
 		return
 
 	default_attack = selection ? choices[selection] : null
-	to_chat(src, SPAN_NOTICE("Your default unarmed attack is now <b>[default_attack ? default_attack.attack_name : "cleared"]</b>."))
+	to_chat(src, span_notice("Your default unarmed attack is now <b>[default_attack ? default_attack.attack_name : "cleared"]</b>."))

@@ -16,25 +16,25 @@
 /obj/item/shellfish/attackby(obj/item/item, mob/living/user)
 	if (!item.sharp)
 		return ..()
-	to_chat(user, SPAN_NOTICE("You start to pry open \the [src]."))
+	to_chat(user, span_notice("You start to pry open \the [src]."))
 	if (!user.do_skilled((item.toolspeed * 2) SECONDS, SKILL_COOKING, user))
 		return TRUE
 	if (!prob(user.skill_fail_chance(SKILL_COOKING, 80, SKILL_TRAINED)))
-		to_chat(user, SPAN_NOTICE("You carefully clean and open \the [src]."))
+		to_chat(user, span_notice("You carefully clean and open \the [src]."))
 		new snack_path (get_turf(src))
 		qdel(src)
 		return TRUE
 	if (isrobot(user))
-		to_chat(user, SPAN_WARNING("You slip, failing to open \the [src]."))
+		to_chat(user, span_warning("You slip, failing to open \the [src]."))
 		return TRUE
 	if (ishuman(user))
 		var/mob/living/carbon/human/human = user
 		if (human.gloves?.item_flags & ITEM_FLAG_THICKMATERIAL)
-			to_chat(human, SPAN_WARNING("You slip while trying to open \the [src] but your [human.gloves.name] protect you."))
+			to_chat(human, span_warning("You slip while trying to open \the [src] but your [human.gloves.name] protect you."))
 			return TRUE
 	user.visible_message(
-		SPAN_WARNING("\The [user] slips and is cut while trying to open \a [src]."),
-		SPAN_WARNING("You slip and are cut while trying to open \the [src].")
+		span_warning("\The [user] slips and is cut while trying to open \a [src]."),
+		span_warning("You slip and are cut while trying to open \the [src].")
 	)
 	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, TRUE)
 	user.apply_damage(2, DAMAGE_BRUTE, pick(BP_R_HAND, BP_L_HAND), damage_flags = DAMAGE_FLAG_SHARP)

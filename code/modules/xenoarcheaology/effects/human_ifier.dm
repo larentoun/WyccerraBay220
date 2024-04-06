@@ -42,8 +42,8 @@
 		var/obj/item/organ/external/chest = H.organs_by_name[BP_CHEST]
 		if (BP_IS_ROBOTIC(chest))
 			H.visible_message(
-				SPAN_DANGER("\The [H] freezes up and collapses!"),
-				SPAN_DANGER("A strange force lashes out at you, and everything goes black, your mind reeling in a horrible pain!")
+				span_danger("\The [H] freezes up and collapses!"),
+				span_danger("A strange force lashes out at you, and everything goes black, your mind reeling in a horrible pain!")
 			)
 			H.Paralyse(20)
 			H.make_jittery(100)
@@ -87,15 +87,15 @@
 		H.mind.transfer_to(new_human)
 
 
-	H.visible_message(SPAN_DANGER("[SPAN_BOLD("\The [H]")] seizes up, their body twitching one last time before going completely still..."))
-	new_human.visible_message(SPAN_DANGER("[SPAN_BOLD("\The [new_human]")] bursts forth from \the [holder], gasping for air!"))
-	to_chat(new_human, FONT_LARGE(SPAN_DANGER("The pain suddenly stops, and you feel warm, alive, and with the feeling of a beating heart in your chest...")))
+	H.visible_message(span_danger("[span_bold("\The [H]")] seizes up, their body twitching one last time before going completely still..."))
+	new_human.visible_message(span_danger("[span_bold("\The [new_human]")] bursts forth from \the [holder], gasping for air!"))
+	to_chat(new_human, FONT_LARGE(span_danger("The pain suddenly stops, and you feel warm, alive, and with the feeling of a beating heart in your chest...")))
 	var/list/victims = list()
 	var/list/objs = list()
 	get_mobs_and_objs_in_view_fast(holder.loc, 5, victims, objs)
 	for (var/mob/living/living in victims)
 		if (living.client)
-			to_chat(living, SPAN_DANGER(FONT_LARGE("\The [holder] emits a blinding flash of light!")))
+			to_chat(living, span_danger(FONT_LARGE("\The [holder] emits a blinding flash of light!")))
 		living.flash_eyes(FLASH_PROTECTION_MAJOR)
 		living.Stun(1)
 		living.mod_confused(5)
@@ -106,8 +106,8 @@
 	set waitfor = FALSE
 
 	H.visible_message(
-		SPAN_DANGER("\The [holder] grabs hold of [SPAN_BOLD("\The [H]")]'s [limb.name] with some invisible force and tears it off!"),
-		SPAN_DANGER("You feel an invisible energy reach out and tear your [limb.name] from your body!"),
+		span_danger("\The [holder] grabs hold of [span_bold("\The [H]")]'s [limb.name] with some invisible force and tears it off!"),
+		span_danger("You feel an invisible energy reach out and tear your [limb.name] from your body!"),
 		)
 
 	var/list/children_to_create = list()
@@ -118,7 +118,7 @@
 	limb.droplimb(TRUE, TRUE)
 	playsound(H, 'sound/effects/razorweb_break.ogg', 70)
 	sleep(6 SECONDS)
-	holder.visible_message(SPAN_WARNING("\The [holder] hums with a strange energy as it continues to manipulate [SPAN_BOLD("\The [H]")]'s body..."))
+	holder.visible_message(span_warning("\The [holder] hums with a strange energy as it continues to manipulate [span_bold("\The [H]")]'s body..."))
 	sleep(6 SECONDS)
 	playsound(H, 'sound/effects/squelch2.ogg', 70)
 	var/list/organ_data = H.species.has_limbs[limb.organ_tag]
@@ -131,8 +131,8 @@
 			new child_limb_path(H)
 
 	H.visible_message(
-		SPAN_DANGER("[SPAN_BOLD("\The [H]")] suddenly sprouts a new [O.name]!"),
-		SPAN_DANGER("You feel a strange energy reach out and attach a new [O.name] to your body, this one feeling much more natural than the last...")
+		span_danger("[span_bold("\The [H]")] suddenly sprouts a new [O.name]!"),
+		span_danger("You feel a strange energy reach out and attach a new [O.name] to your body, this one feeling much more natural than the last...")
 		)
 
 	H.update_body()

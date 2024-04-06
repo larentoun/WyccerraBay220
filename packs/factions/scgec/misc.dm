@@ -28,7 +28,7 @@
 
 /obj/structure/sign/ecplaque/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("The founding principles of EC are written there: <A href='?src=\ref[src];show_info=1'>Expeditionary Directives</A>")
+	. += span_notice("The founding principles of EC are written there: <A href='?src=\ref[src];show_info=1'>Expeditionary Directives</A>")
 
 
 /obj/structure/sign/ecplaque/CanUseTopic()
@@ -48,14 +48,14 @@
 		grab.assailant.setClickCooldown(grab.assailant.get_attack_speed(grab))
 		grab.affecting.apply_damage(5, DAMAGE_BRUTE, BP_HEAD, used_weapon = src)
 		grab.assailant.visible_message(
-			SPAN_WARNING("\The [grab.assailant] smashes \the [grab.affecting] into \the [src] face-first!"),
-			SPAN_DANGER("You smash \the [grab.affecting] into \the [src] face-first!"),
+			span_warning("\The [grab.assailant] smashes \the [grab.affecting] into \the [src] face-first!"),
+			span_danger("You smash \the [grab.affecting] into \the [src] face-first!"),
 			exclude_mobs = list(grab.affecting)
 		)
 		grab.affecting.show_message(
-			SPAN_DANGER("\The [grab.assailant] smashes you into \the [src] face-first!"),
+			span_danger("\The [grab.assailant] smashes you into \the [src] face-first!"),
 			VISIBLE_MESSAGE,
-			SPAN_DANGER("You feel your face being smashed into something!")
+			span_danger("You feel your face being smashed into something!")
 		)
 		playsound(src, 'sound/weapons/tablehit1.ogg', 50, TRUE)
 		grab.force_drop()

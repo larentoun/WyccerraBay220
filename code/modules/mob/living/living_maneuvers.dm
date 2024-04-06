@@ -31,7 +31,7 @@
 	set category = "IC"
 
 	if(!length(available_maneuvers))
-		to_chat(src, SPAN_WARNING("You are unable to perform any maneuvers."))
+		to_chat(src, span_warning("You are unable to perform any maneuvers."))
 		return
 
 	var/list/maneuvers = list()
@@ -41,10 +41,10 @@
 	var/next_maneuver = input(src, "Select a maneuver.") as null|anything in maneuvers
 	if(next_maneuver)
 		prepared_maneuver = next_maneuver
-		to_chat(src, SPAN_NOTICE("You prepare to [prepared_maneuver.name]."))
+		to_chat(src, span_notice("You prepare to [prepared_maneuver.name]."))
 	else
 		prepared_maneuver = null
-		to_chat(src, SPAN_NOTICE("You are no longer preparing to perform a maneuver."))
+		to_chat(src, span_notice("You are no longer preparing to perform a maneuver."))
 
 /mob/living/proc/perform_maneuver(maneuver, atom/target)
 	var/singleton/maneuver/performing_maneuver = ispath(maneuver) ? GET_SINGLETON(maneuver) : maneuver

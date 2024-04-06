@@ -15,16 +15,16 @@
 		USE_FEEDBACK_FAILURE("[src] has no wires to cut.")
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] starts cutting [src]'s wires with [tool]."),
-		SPAN_NOTICE("You start cutting [src]'s wires with [tool].")
+		span_notice("[user] starts cutting [src]'s wires with [tool]."),
+		span_notice("You start cutting [src]'s wires with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 4 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT) || !wired)
 		return
 	new /obj/item/stack/cable_coil(loc, 1)
 	wired = FALSE
 	user.visible_message(
-		SPAN_NOTICE("[user] cuts [src]'s wires with [tool]."),
-		SPAN_NOTICE("You cut [src]'s wires with [tool].")
+		span_notice("[user] cuts [src]'s wires with [tool]."),
+		span_notice("You cut [src]'s wires with [tool].")
 	)
 
 /obj/structure/firedoor_assembly/welder_act(mob/living/user, obj/item/tool)
@@ -40,8 +40,8 @@
 	var/obj/item/stack/material/steel/stack = new (loc, 4)
 	transfer_fingerprints_to(stack)
 	user.visible_message(
-		SPAN_NOTICE("[user] dismantles [src] with [tool]."),
-		SPAN_NOTICE("You dismantle [src] with [tool].")
+		span_notice("[user] dismantles [src] with [tool]."),
+		span_notice("You dismantle [src] with [tool].")
 	)
 	qdel(src)
 
@@ -60,8 +60,8 @@
 		new_door.close()
 		transfer_fingerprints_to(new_door)
 		user.visible_message(
-			SPAN_NOTICE("[user] installs [tool] into [src]."),
-			SPAN_NOTICE("You install [tool] into [src].")
+			span_notice("[user] installs [tool] into [src]."),
+			span_notice("You install [tool] into [src].")
 		)
 		qdel(tool)
 		qdel_self()
@@ -80,8 +80,8 @@
 			USE_FEEDBACK_STACK_NOT_ENOUGH(cable, 1, "to wire [src].")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("[user] starts wiring [src] with [cable.get_vague_name(FALSE)]."),
-			SPAN_NOTICE("You start wiring [src] with [cable.get_exact_name(1)].")
+			span_notice("[user] starts wiring [src] with [cable.get_vague_name(FALSE)]."),
+			span_notice("You start wiring [src] with [cable.get_exact_name(1)].")
 		)
 		if (!user.do_skilled(4 SECONDS, SKILL_ELECTRICAL, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
@@ -96,8 +96,8 @@
 			return TRUE
 		wired = TRUE
 		user.visible_message(
-			SPAN_NOTICE("[user] wires [src] with [cable.get_vague_name(FALSE)]."),
-			SPAN_NOTICE("You wire [src] with [cable.get_exact_name(1)].")
+			span_notice("[user] wires [src] with [cable.get_vague_name(FALSE)]."),
+			span_notice("You wire [src] with [cable.get_exact_name(1)].")
 		)
 		return TRUE
 

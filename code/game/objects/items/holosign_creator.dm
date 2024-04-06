@@ -29,7 +29,7 @@
 
 	if (!is_blocked_turf(T, TRUE)) //can't put holograms on a tile that has dense stuff
 		if (holocreator_busy)
-			to_chat(user, SPAN_NOTICE("[src] is busy creating a hologram."))
+			to_chat(user, span_notice("[src] is busy creating a hologram."))
 			return TRUE
 		if (length(signs) < max_signs)
 			playsound(src.loc, 'sound/machines/click.ogg', 20, 1)
@@ -44,13 +44,13 @@
 				if(is_blocked_turf(T, TRUE)) //don't try to sneak dense stuff on our tile during the wait.
 					return TRUE
 			H = new holosign_type(get_turf(target), src)
-			to_chat(user, SPAN_NOTICE("You create \a [H] with [src]."))
+			to_chat(user, span_notice("You create \a [H] with [src]."))
 		else
-			to_chat(user, SPAN_NOTICE("[src] is projecting at max capacity!"))
+			to_chat(user, span_notice("[src] is projecting at max capacity!"))
 		return TRUE
 
 /obj/item/holosign_creator/attack_self(mob/user)
 	if(length(signs))
 		for(var/H in signs)
 			qdel(H)
-		to_chat(user, SPAN_NOTICE("You clear all active holograms."))
+		to_chat(user, span_notice("You clear all active holograms."))

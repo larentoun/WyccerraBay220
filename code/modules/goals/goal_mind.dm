@@ -4,9 +4,9 @@
 /datum/mind/proc/show_roundend_summary(department_goals)
 	if(current)
 		if(department_goals && current.get_preference_value(/datum/client_preference/show_department_goals) == GLOB.PREF_SHOW)
-			to_chat(current, SPAN_NOTICE(department_goals))
+			to_chat(current, span_notice(department_goals))
 		if(LAZYLEN(goals))
-			to_chat(current, SPAN_NOTICE("<br><br><b>You had the following personal goals this round:</b><br>[jointext(summarize_goals(TRUE), "<br>")]"))
+			to_chat(current, span_notice("<br><br><b>You had the following personal goals this round:</b><br>[jointext(summarize_goals(TRUE), "<br>")]"))
 
 /datum/mind/proc/summarize_goals(show_success = FALSE, allow_modification = FALSE, mob/caller)
 	. = list()
@@ -46,13 +46,13 @@
 		add_amount = min(max(0, max_goals - LAZYLEN(goals)), add_amount)
 		if(add_amount <= 0)
 			if(!is_spawning)
-				to_chat(src.current, SPAN_WARNING("Your job doesn't allow for any more distractions."))
+				to_chat(src.current, span_warning("Your job doesn't allow for any more distractions."))
 			return FALSE
 
 		var/pref_val = current.get_preference_value(/datum/client_preference/give_personal_goals)
 		if (pref_val == GLOB.PREF_NEVER || (pref_val == GLOB.PREF_NON_ANTAG && player_is_antag(src)))
 			if(!is_spawning)
-				to_chat(src.current, SPAN_WARNING("Your preferences do not allow you to add random goals."))
+				to_chat(src.current, span_warning("Your preferences do not allow you to add random goals."))
 			return FALSE
 
 	if(LAZYLEN(goals))
@@ -60,7 +60,7 @@
 			LAZYREMOVE(available_goals, mind_goal.type)
 		if(!LAZYLEN(available_goals))
 			if(!is_spawning)
-				to_chat(src.current, SPAN_WARNING("There are no more goals available."))
+				to_chat(src.current, span_warning("There are no more goals available."))
 			return FALSE
 
 	for(var/i = 1 to min(LAZYLEN(available_goals), add_amount))
@@ -72,7 +72,7 @@
 	var/min_goals = job ? job.min_goals : 1
 
 	if(!override_min_goals && LAZYLEN(goals) == min_goals)
-		to_chat(src.current, SPAN_WARNING("Your job needs you to have at least [min_goals] distraction\s."))
+		to_chat(src.current, span_warning("Your job needs you to have at least [min_goals] distraction\s."))
 		return FALSE
 	else
 		qdel(goal)

@@ -53,31 +53,31 @@
 	// Shield check
 	if (!prob(80))
 		user.visible_message(
-			SPAN_WARNING("\The [user] swings \a [weapon] at \the [src], but they block it with their shield!"),
-			SPAN_WARNING("You swing \the [weapon] at \the [src], but they block it with their shield!"),
+			span_warning("\The [user] swings \a [weapon] at \the [src], but they block it with their shield!"),
+			span_warning("You swing \the [weapon] at \the [src], but they block it with their shield!"),
 			exclude_mobs = list(src)
 		)
-		to_chat(src, SPAN_WARNING("\The [user] swings \a [weapon] at you, but you block it with your shield!"))
+		to_chat(src, span_warning("\The [user] swings \a [weapon] at you, but you block it with your shield!"))
 		return TRUE
 
 	// Block pain damage
 	if (weapon.damtype == DAMAGE_PAIN)
 		user.visible_message(
-			SPAN_WARNING("\The [user] swings \a [weapon] at \the [src], but it has no effect!"),
-			SPAN_WARNING("You swing \the [weapon] at \the [src], but it has no effect!"),
+			span_warning("\The [user] swings \a [weapon] at \the [src], but it has no effect!"),
+			span_warning("You swing \the [weapon] at \the [src], but it has no effect!"),
 			exclude_mobs = list(src)
 		)
-		to_chat(src, SPAN_WARNING("\The [user] swings \a [weapon] at you, but it has no effect!"))
+		to_chat(src, span_warning("\The [user] swings \a [weapon] at you, but it has no effect!"))
 		return TRUE
 
 	// Apply damage
 	health -= weapon.force
 	user.visible_message(
-		SPAN_WARNING("\The [user] swings \a [weapon] at \the [src]!"),
-		SPAN_DANGER("You swing \the [weapon] at \the [src]!"),
+		span_warning("\The [user] swings \a [weapon] at \the [src]!"),
+		span_danger("You swing \the [weapon] at \the [src]!"),
 		exclude_mobs = list(src)
 	)
-	to_chat(src, SPAN_DANGER("\The [user] swings \a [weapon] at you!"))
+	to_chat(src, span_danger("\The [user] swings \a [weapon] at you!"))
 	return TRUE
 
 
@@ -88,7 +88,7 @@
 	if(prob(65))
 		src.health -= Proj.damage
 	else
-		visible_message(SPAN_DANGER("\The [src] blocks \the [Proj] with its shield!"))
+		visible_message(span_danger("\The [src] blocks \the [Proj] with its shield!"))
 	return 0
 
 

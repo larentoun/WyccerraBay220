@@ -28,7 +28,7 @@ var/global/list/empty_playable_ai_cores = list()
 
 /obj/structure/AIcore/emag_act(remaining_charges, mob/user, emag_source)
 	if(!authorized)
-		to_chat(user, SPAN_WARNING("You swipe [emag_source] at [src] and jury rig it into the systems of [GLOB.using_map.full_name]!"))
+		to_chat(user, span_warning("You swipe [emag_source] at [src] and jury rig it into the systems of [GLOB.using_map.full_name]!"))
 		authorized = 1
 		return 1
 	. = ..()
@@ -73,8 +73,8 @@ var/global/list/empty_playable_ai_cores = list()
 			var/obj/item/aiModule/lawboard = tool
 			lawboard.laws.sync(src)
 		user.visible_message(
-			SPAN_NOTICE("[user] scans [tool] with [src]."),
-			SPAN_NOTICE("You scan [tool] with [src], updating its lawset.")
+			span_notice("[user] scans [tool] with [src]."),
+			span_notice("You scan [tool] with [src], updating its lawset.")
 		)
 		return TRUE
 
@@ -95,8 +95,8 @@ var/global/list/empty_playable_ai_cores = list()
 			USE_FEEDBACK_STACK_NOT_ENOUGH(cable, 5, "to wire [src]'s [circuit.name]")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("[user] starts wiring [src] with [tool]."),
-			SPAN_NOTICE("You start wiring [src] with [tool].")
+			span_notice("[user] starts wiring [src] with [tool]."),
+			span_notice("You start wiring [src] with [tool].")
 		)
 		playsound(loc, 'sound/items/Deconstruct.ogg', 50, TRUE)
 		if (!user.do_skilled(2 SECONDS, SKILL_ELECTRICAL, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
@@ -117,8 +117,8 @@ var/global/list/empty_playable_ai_cores = list()
 		state = STATE_WIRED
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] wires [src] with [tool]."),
-			SPAN_NOTICE("You wire [src] with [tool].")
+			span_notice("[user] wires [src] with [tool]."),
+			span_notice("You wire [src] with [tool].")
 		)
 		return TRUE
 
@@ -135,13 +135,13 @@ var/global/list/empty_playable_ai_cores = list()
 			FEEDBACK_UNEQUIP_FAILURE(user, tool)
 			return TRUE
 		playsound(src, 'sound/items/Deconstruct.ogg', 50, TRUE)
-		to_chat(user, SPAN_NOTICE("You place the circuit board inside the frame."))
+		to_chat(user, span_notice("You place the circuit board inside the frame."))
 		circuit = tool
 		state = STATE_CIRCUIT
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] installs [tool] into [src]."),
-			SPAN_NOTICE("You install [tool] into [src].")
+			span_notice("[user] installs [tool] into [src]."),
+			span_notice("You install [tool] into [src].")
 		)
 		return TRUE
 
@@ -161,8 +161,8 @@ var/global/list/empty_playable_ai_cores = list()
 			state = STATE_FRAME
 			update_icon()
 			user.visible_message(
-				SPAN_NOTICE("[user] removes [src]'s [circuit.name] with [tool]."),
-				SPAN_NOTICE("[user] removes [src]'s [circuit.name] with [tool].")
+				span_notice("[user] removes [src]'s [circuit.name] with [tool]."),
+				span_notice("[user] removes [src]'s [circuit.name] with [tool].")
 			)
 			circuit.dropInto(loc)
 			circuit = null
@@ -172,11 +172,11 @@ var/global/list/empty_playable_ai_cores = list()
 			update_icon()
 			brain.dropInto(loc)
 			user.visible_message(
-				SPAN_NOTICE("[user] removes [src]'s [brain.name] with [tool]."),
-				SPAN_NOTICE("You remove [src]'s [brain.name] with [tool]."),
+				span_notice("[user] removes [src]'s [brain.name] with [tool]."),
+				span_notice("You remove [src]'s [brain.name] with [tool]."),
 				exclude_mobs = list(brain.brainmob)
 			)
-			to_chat(brain.brainmob, SPAN_NOTICE("[user] removes you from [src] with [tool]."))
+			to_chat(brain.brainmob, span_notice("[user] removes you from [src] with [tool]."))
 			brain = null
 		// Remove panel
 		else if (state == STATE_PANEL)
@@ -185,8 +185,8 @@ var/global/list/empty_playable_ai_cores = list()
 			playsound(src, 'sound/items/Crowbar.ogg', 50, TRUE)
 			new /obj/item/stack/material/glass/reinforced(loc, 2)
 			user.visible_message(
-				SPAN_NOTICE("[user] removes [src]'s glass panel with [tool]."),
-				SPAN_NOTICE("You remove [src]'s glass panel with [tool].")
+				span_notice("[user] removes [src]'s glass panel with [tool]."),
+				span_notice("You remove [src]'s glass panel with [tool].")
 			)
 		return TRUE
 
@@ -202,8 +202,8 @@ var/global/list/empty_playable_ai_cores = list()
 			return TRUE
 		authorized = TRUE
 		user.visible_message(
-			SPAN_NOTICE("[user] scans [tool] over [src]'s ID scanner."),
-			SPAN_NOTICE("You scan [id_name] over [src]'s ID scanner and authorize it to connect into the area's systems.")
+			span_notice("[user] scans [tool] over [src]'s ID scanner."),
+			span_notice("You scan [id_name] over [src]'s ID scanner and authorize it to connect into the area's systems.")
 		)
 		return TRUE
 
@@ -244,12 +244,12 @@ var/global/list/empty_playable_ai_cores = list()
 		state = STATE_BRAIN
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] installs [tool] into [src]."),
-			SPAN_NOTICE("You install [tool] into [src]."),
+			span_notice("[user] installs [tool] into [src]."),
+			span_notice("You install [tool] into [src]."),
 			exclude_mobs = list(brain.brainmob)
 		)
 		if (brain)
-			to_chat(brain.brainmob, SPAN_NOTICE("[user] installs you into [src]."))
+			to_chat(brain.brainmob, span_notice("[user] installs you into [src]."))
 		return TRUE
 
 	// Material Stack
@@ -271,8 +271,8 @@ var/global/list/empty_playable_ai_cores = list()
 			USE_FEEDBACK_STACK_NOT_ENOUGH(material_stack, 2, "to install a panel into [src]")
 		playsound(src, 'sound/items/Deconstruct.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] starts installing a panel into [src] with [tool]."),
-			SPAN_NOTICE("You start installing a panel into [src] with [tool].")
+			span_notice("[user] starts installing a panel into [src] with [tool]."),
+			span_notice("You start installing a panel into [src] with [tool].")
 		)
 		if (!user.do_skilled(2 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
@@ -289,8 +289,8 @@ var/global/list/empty_playable_ai_cores = list()
 		state = STATE_PANEL
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] installs a panel into [src] with [tool]."),
-			SPAN_NOTICE("You install a panel into [src] with [tool].")
+			span_notice("[user] installs a panel into [src] with [tool]."),
+			span_notice("You install a panel into [src] with [tool].")
 		)
 		return TRUE
 
@@ -313,12 +313,12 @@ var/global/list/empty_playable_ai_cores = list()
 			if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 				return TRUE
 			user.visible_message(
-				SPAN_NOTICE("[user] finishes [src] with [tool]."),
-				SPAN_NOTICE("You finish [src] with [tool]."),
+				span_notice("[user] finishes [src] with [tool]."),
+				span_notice("You finish [src] with [tool]."),
 				exclude_mobs = list(brain?.brainmob)
 			)
 			if (brain)
-				to_chat(brain.brainmob, SPAN_NOTICE("[user] finishes your [name] with [tool]."))
+				to_chat(brain.brainmob, span_notice("[user] finishes your [name] with [tool]."))
 				var/mob/living/silicon/ai/ai = new /mob/living/silicon/ai(loc, laws, brain)
 				if (ai)
 					ai.on_mob_init()
@@ -344,8 +344,8 @@ var/global/list/empty_playable_ai_cores = list()
 			update_icon()
 			playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
 			user.visible_message(
-				SPAN_NOTICE("[user] [state == STATE_CIRCUIT ? "un" : null]fastens [src]'s circuits with [tool]."),
-				SPAN_NOTICE("You [state == STATE_CIRCUIT ? "un" : null]fasten [src]'s circuits with [tool].")
+				span_notice("[user] [state == STATE_CIRCUIT ? "un" : null]fastens [src]'s circuits with [tool]."),
+				span_notice("You [state == STATE_CIRCUIT ? "un" : null]fasten [src]'s circuits with [tool].")
 			)
 		return TRUE
 
@@ -363,8 +363,8 @@ var/global/list/empty_playable_ai_cores = list()
 				return TRUE
 			new /obj/item/stack/material/plasteel(loc, 4)
 			user.visible_message(
-				SPAN_NOTICE("[user] dismantles [src] with [tool]."),
-				SPAN_NOTICE("You dismantle [src] with [tool].")
+				span_notice("[user] dismantles [src] with [tool]."),
+				span_notice("You dismantle [src] with [tool].")
 			)
 			qdel(src)
 			return TRUE
@@ -383,8 +383,8 @@ var/global/list/empty_playable_ai_cores = list()
 		state = STATE_CIRCUIT_SECURE
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] removes [src]'s wiring with [tool]."),
-			SPAN_NOTICE("You remove [src]'s wiring with [tool].")
+			span_notice("[user] removes [src]'s wiring with [tool]."),
+			span_notice("You remove [src]'s wiring with [tool].")
 		)
 		return TRUE
 
@@ -429,7 +429,7 @@ var/global/list/empty_playable_ai_cores = list()
 	transfer.dropInto(src)
 	transfer.create_eyeobj()
 	transfer.cancel_camera()
-	to_chat(user, "[SPAN_NOTICE("Transfer successful:")] [transfer.name] ([rand(1000,9999)].exe) downloaded to host terminal. Local copy wiped.")
+	to_chat(user, "[span_notice("Transfer successful:")] [transfer.name] ([rand(1000,9999)].exe) downloaded to host terminal. Local copy wiped.")
 	to_chat(transfer, "You have been uploaded to a stationary terminal. Remote device connection restored.")
 
 	if(card)

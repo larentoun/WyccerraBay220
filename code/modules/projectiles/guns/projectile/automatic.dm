@@ -248,9 +248,9 @@
 	if(!launcher)
 		return
 	if(launcher.chambered)
-		. += SPAN_NOTICE("[launcher] has [launcher.chambered] loaded.")
+		. += span_notice("[launcher] has [launcher.chambered] loaded.")
 	else
-		. += SPAN_NOTICE("[launcher] is empty.")
+		. += span_notice("[launcher] is empty.")
 
 /obj/item/gun/projectile/automatic/bullpup_rifle/light
 	name = "light bullpup assault rifle"
@@ -306,13 +306,13 @@
 
 /obj/item/gun/projectile/automatic/l6_saw/special_check(mob/user)
 	if(cover_open)
-		to_chat(user, SPAN_WARNING("[src]'s cover is open! Close it before firing!"))
+		to_chat(user, span_warning("[src]'s cover is open! Close it before firing!"))
 		return 0
 	return ..()
 
 /obj/item/gun/projectile/automatic/l6_saw/proc/toggle_cover(mob/user)
 	cover_open = !cover_open
-	to_chat(user, SPAN_NOTICE("You [cover_open ? "open" : "close"] [src]'s cover."))
+	to_chat(user, span_notice("You [cover_open ? "open" : "close"] [src]'s cover."))
 	update_icon()
 	user.update_inv_l_hand()
 	user.update_inv_r_hand()
@@ -354,13 +354,13 @@
 
 /obj/item/gun/projectile/automatic/l6_saw/load_ammo(obj/item/A, mob/user)
 	if(!cover_open)
-		to_chat(user, SPAN_WARNING("You need to open the cover to load that into [src]."))
+		to_chat(user, span_warning("You need to open the cover to load that into [src]."))
 		return
 	..()
 
 /obj/item/gun/projectile/automatic/l6_saw/unload_ammo(mob/user, allow_dump=1)
 	if(!cover_open)
-		to_chat(user, SPAN_WARNING("You need to open the cover to unload [src]."))
+		to_chat(user, span_warning("You need to open the cover to unload [src]."))
 		return
 	..()
 
@@ -443,20 +443,20 @@
 	var/obj/item/rig/rig = get_rig()
 	if (istype(rig))
 		if (!rig.offline && rig.suit_is_deployed())
-			user.visible_message(SPAN_NOTICE("\The [user] begins the slow process of re-arming \The [src]."), range = 4)
+			user.visible_message(span_notice("\The [user] begins the slow process of re-arming \The [src]."), range = 4)
 			do_after(user, 10 SECONDS, src, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER)
 			..()
 		else
-			to_chat(user, SPAN_DANGER("You can't reload your minigun without deploying your hardsuit!"))
+			to_chat(user, span_danger("You can't reload your minigun without deploying your hardsuit!"))
 			return
 
 /obj/item/gun/projectile/automatic/minigun/mounted/unload_ammo(mob/user, allow_dump=0)
 	var/obj/item/rig/rig = get_rig()
 	if (istype(rig))
 		if (!rig.offline && rig.suit_is_deployed())
-			user.visible_message(SPAN_NOTICE("\The [user] begins ejecting the magazine from \The [src]."), range = 4)
+			user.visible_message(span_notice("\The [user] begins ejecting the magazine from \The [src]."), range = 4)
 			do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER)
 			..()
 		else
-			to_chat(user, SPAN_DANGER("You can't unload your minigun without deploying your hardsuit!"))
+			to_chat(user, span_danger("You can't unload your minigun without deploying your hardsuit!"))
 			return

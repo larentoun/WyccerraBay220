@@ -65,7 +65,7 @@
 
 /obj/machinery/turretid/proc/isLocked(mob/user)
 	if(ailock && issilicon(user))
-		to_chat(user, SPAN_NOTICE("There seems to be a firewall preventing you from accessing this device."))
+		to_chat(user, span_notice("There seems to be a firewall preventing you from accessing this device."))
 		return 1
 
 	if(malf_upgraded && master_ai)
@@ -74,7 +74,7 @@
 		return 1
 
 	if(locked && !issilicon(user))
-		to_chat(user, SPAN_NOTICE("Access denied."))
+		to_chat(user, span_notice("Access denied."))
 		return 1
 
 	return 0
@@ -92,17 +92,17 @@
 	if(istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
 		if(allowed(usr))
 			if(emagged)
-				to_chat(user, SPAN_NOTICE("The turret control is unresponsive."))
+				to_chat(user, span_notice("The turret control is unresponsive."))
 			else
 				locked = !locked
-				to_chat(user, SPAN_NOTICE("You [ locked ? "lock" : "unlock"] the panel."))
+				to_chat(user, span_notice("You [ locked ? "lock" : "unlock"] the panel."))
 		return TRUE
 
 	return ..()
 
 /obj/machinery/turretid/emag_act(remaining_charges, mob/user)
 	if(!emagged)
-		to_chat(user, SPAN_DANGER("You short out the turret controls' access analysis module."))
+		to_chat(user, span_danger("You short out the turret controls' access analysis module."))
 		emagged = TRUE
 		req_access.Cut()
 		locked = 0

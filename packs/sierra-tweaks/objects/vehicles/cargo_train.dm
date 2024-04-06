@@ -72,7 +72,7 @@
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	passenger_allowed = !passenger_allowed
-	user.visible_message(SPAN_NOTICE("[user] [passenger_allowed ? "cuts" : "mends"] a cable in [src]."), SPAN_NOTICE("You [passenger_allowed ? "cut" : "mend"] the load limiter cable."))
+	user.visible_message(span_notice("[user] [passenger_allowed ? "cuts" : "mends"] a cable in [src]."), span_notice("You [passenger_allowed ? "cut" : "mend"] the load limiter cable."))
 
 /obj/vehicle/train/cargo/engine/use_tool(obj/item/tool, mob/user, list/click_params)
 	if(istype(tool, /obj/item/key/cargo_train))
@@ -168,8 +168,8 @@
 	if(is_train_head() && istype(load, /mob/living/carbon/human))
 		var/mob/living/carbon/human/D = load
 		D.visible_message(
-			SPAN_DANGER("\The [src] ran over [H]!"),
-			SPAN_DANGER("You ran over [H]!")
+			span_danger("\The [src] ran over [H]!"),
+			span_danger("You ran over [H]!")
 		)
 		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [H.name] ([H.ckey]), driven by [D.name] ([D.ckey])</font>")
 		msg_admin_attack("[D.name] ([D.ckey]) ran over [H.name] ([H.ckey]). (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
@@ -199,8 +199,8 @@
 		return
 	if(!ishuman(user))
 		return
-	. += SPAN_NOTICE("The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition.")
-	. += SPAN_NOTICE("The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%")
+	. += span_notice("The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition.")
+	. += span_notice("The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%")
 
 /obj/vehicle/train/cargo/engine/verb/start_engine()
 	set name = "Start engine"

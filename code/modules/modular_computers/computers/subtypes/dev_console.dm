@@ -79,12 +79,12 @@
 /obj/machinery/computer/modular/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(istype(I, /obj/item/stock_parts/computer/hard_drive/portable))
 		if(portable_drive)
-			to_chat(user, SPAN_WARNING("There's already \a [portable_drive] plugged in."))
+			to_chat(user, span_warning("There's already \a [portable_drive] plugged in."))
 			return TRUE
 		else if(user.unEquip(I, src))
 			portable_drive = I
 			verbs += /obj/machinery/computer/modular/proc/eject_usb
-			visible_message(SPAN_NOTICE("[user] plugs \the [I] into \the [src]."))
+			visible_message(span_notice("[user] plugs \the [I] into \the [src]."))
 			return TRUE
 	return ..()
 
@@ -94,12 +94,12 @@
 	set src in view(1)
 
 	if(!CanPhysicallyInteract(usr))
-		to_chat(usr, SPAN_WARNING("You can't reach it."))
+		to_chat(usr, span_warning("You can't reach it."))
 		return
 
 	if(ismob(usr))
 		var/mob/user = usr
-		visible_message(SPAN_NOTICE("[user] ejects \the [portable_drive] from \the [src]."))
+		visible_message(span_notice("[user] ejects \the [portable_drive] from \the [src]."))
 		user.put_in_hands(portable_drive)
 	else
 		portable_drive.dropInto(loc)

@@ -100,8 +100,8 @@
 	secured = !secured
 	update_icon()
 	user.visible_message(
-		SPAN_NOTICE("[user] adjusts [src] with [tool]."),
-		SPAN_NOTICE("You adjust [src] with [tool]. It [secured ? "is now ready to use" : "can now be taken apart"].")
+		span_notice("[user] adjusts [src] with [tool]."),
+		span_notice("You adjust [src] with [tool]. It [secured ? "is now ready to use" : "can now be taken apart"].")
 	)
 
 
@@ -109,7 +109,7 @@
 	add_fingerprint(user)
 	if(secured)
 		if(!a_left || !a_right)
-			to_chat(user, SPAN_WARNING("Assembly part missing!"))
+			to_chat(user, span_warning("Assembly part missing!"))
 			return
 		if(istype(a_left,a_right.type))//If they are the same type it causes issues due to window code
 			switch(alert("Which side would you like to use?",,"Left","Right"))
@@ -170,7 +170,7 @@
 	. = ..()
 	if (distance > 1)
 		return
-	. += SPAN_NOTICE("[src] is [secured ? "ready": "not secured"]!")
+	. += span_notice("[src] is [secured ? "ready": "not secured"]!")
 
 
 /obj/item/device/assembly_holder/timer_igniter
@@ -213,17 +213,17 @@
 		if(!istype(tmr,/obj/item/device/assembly/timer))
 			tmr = holder.a_right
 		if(!istype(tmr,/obj/item/device/assembly/timer))
-			to_chat(usr, SPAN_NOTICE("This detonator has no timer."))
+			to_chat(usr, span_notice("This detonator has no timer."))
 			return
 		if(tmr.timing)
-			to_chat(usr, SPAN_NOTICE("Clock is ticking already."))
+			to_chat(usr, span_notice("Clock is ticking already."))
 		else
 			var/ntime = input("Enter desired time in seconds", "Time", "5") as num
 			if (ntime>0 && ntime<1000)
 				tmr.time = ntime
 				SetName(initial(name) + "([tmr.time] secs)")
-				to_chat(usr, SPAN_NOTICE("Timer set to [tmr.time] seconds."))
+				to_chat(usr, span_notice("Timer set to [tmr.time] seconds."))
 			else
-				to_chat(usr, SPAN_NOTICE("Timer can't be [ntime<=0?"negative":"more than 1000 seconds"]."))
+				to_chat(usr, span_notice("Timer can't be [ntime<=0?"negative":"more than 1000 seconds"]."))
 	else
-		to_chat(usr, SPAN_NOTICE("You cannot do this while [usr.stat?"unconscious/dead":"restrained"]."))
+		to_chat(usr, span_notice("You cannot do this while [usr.stat?"unconscious/dead":"restrained"]."))

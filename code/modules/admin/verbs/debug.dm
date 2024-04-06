@@ -10,11 +10,11 @@
 
 	var/datum/gas_mixture/env = T.return_air()
 
-	var/t = "[SPAN_NOTICE("Coordinates: [T.x],[T.y],[T.z]")]\n"
-	t += "[SPAN_WARNING("Temperature: [env.temperature]")]\n"
-	t += "[SPAN_WARNING("Pressure: [env.return_pressure()]kPa")]\n"
+	var/t = "[span_notice("Coordinates: [T.x],[T.y],[T.z]")]\n"
+	t += "[span_warning("Temperature: [env.temperature]")]\n"
+	t += "[span_warning("Pressure: [env.return_pressure()]kPa")]\n"
 	for(var/g in env.gas)
-		t += "[SPAN_NOTICE("[g]: [env.gas[g]] / [env.gas[g] * R_IDEAL_GAS_EQUATION * env.temperature / env.volume]kPa")]\n"
+		t += "[span_notice("[g]: [env.gas[g]] / [env.gas[g] * R_IDEAL_GAS_EQUATION * env.temperature / env.volume]kPa")]\n"
 
 	usr.show_message(t, 1)
 

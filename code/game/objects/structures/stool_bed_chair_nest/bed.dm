@@ -88,8 +88,8 @@
 		return
 	dismantle()
 	user.visible_message(
-		SPAN_NOTICE("[user] dismantles [src] with [tool]."),
-		SPAN_NOTICE("You dismantle [src] with [tool].")
+		span_notice("[user] dismantles [src] with [tool]."),
+		span_notice("You dismantle [src] with [tool].")
 	)
 	qdel(src)
 
@@ -120,8 +120,8 @@
 			return TRUE
 		stack.use(1)
 		user.visible_message(
-			SPAN_NOTICE("[user] pads [src] with [tool]."),
-			SPAN_NOTICE("You pad [src] with [tool].")
+			span_notice("[user] pads [src] with [tool]."),
+			span_notice("You pad [src] with [tool].")
 		)
 		add_padding(padding_type)
 		return TRUE
@@ -132,8 +132,8 @@
 			USE_FEEDBACK_FAILURE("[src] has no padding to remove.")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("[user] removes [src]'s padding with [tool]."),
-			SPAN_NOTICE("You remove [src]'s padding with [tool].")
+			span_notice("[user] removes [src]'s padding with [tool]."),
+			span_notice("You remove [src]'s padding with [tool].")
 		)
 		playsound(src, 'sound/items/Wirecutter.ogg', 50, TRUE)
 		remove_padding()
@@ -145,28 +145,28 @@
 /obj/structure/bed/use_grab(obj/item/grab/grab, list/click_params)
 	// Force-buckle
 	grab.assailant.visible_message(
-		SPAN_WARNING("[grab.assailant] starts to buckle [grab.affecting] to [src]."),
-		SPAN_DANGER("You start to buckle [grab.affecting] to [src]!"),
-		SPAN_ITALIC("You hear the sound of struggling."),
+		span_warning("[grab.assailant] starts to buckle [grab.affecting] to [src]."),
+		span_danger("You start to buckle [grab.affecting] to [src]!"),
+		span_italic("You hear the sound of struggling."),
 		exclude_mobs = list(grab.affecting)
 	)
 	grab.affecting.show_message(
-		SPAN_DANGER("[grab.assailant] starts to buckle you to [src]!"),
+		span_danger("[grab.assailant] starts to buckle you to [src]!"),
 		VISIBLE_MESSAGE,
-		SPAN_DANGER("You feel someone trying to force you into a bed or chair!")
+		span_danger("You feel someone trying to force you into a bed or chair!")
 	)
 	if (!do_after(grab.assailant, 2 SECONDS, src, DO_PUBLIC_UNIQUE) || !grab.use_sanity_check(src))
 		return TRUE
 	grab.assailant.visible_message(
-		SPAN_WARNING("[grab.assailant] buckles [grab.affecting] to [src]."),
-		SPAN_DANGER("You buckle [grab.affecting] to [src]!"),
-		SPAN_ITALIC("You hear the sound of buckling."),
+		span_warning("[grab.assailant] buckles [grab.affecting] to [src]."),
+		span_danger("You buckle [grab.affecting] to [src]!"),
+		span_italic("You hear the sound of buckling."),
 		exclude_mobs = list(grab.affecting)
 	)
 	grab.affecting.show_message(
-		SPAN_DANGER("[grab.assailant] buckles you to [src]!"),
+		span_danger("[grab.assailant] buckles you to [src]!"),
 		VISIBLE_MESSAGE,
-		SPAN_DANGER("You feel someone buckle you into a bed or chair!")
+		span_danger("You feel someone buckle you into a bed or chair!")
 	)
 	qdel(grab)
 	return TRUE

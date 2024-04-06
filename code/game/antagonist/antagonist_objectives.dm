@@ -42,7 +42,7 @@
 	if(!mind)
 		return
 	if(!is_special_character(mind))
-		to_chat(src, SPAN_WARNING("While you may perhaps have goals, this verb's meant to only be visible \
+		to_chat(src, span_warning("While you may perhaps have goals, this verb's meant to only be visible \
 		to antagonists.  Please make a bug report!"))
 		return
 
@@ -54,9 +54,9 @@
 		if(!goal)
 			goal = new /datum/goal/ambition(mind)
 		goal.description = new_goal
-		to_chat(src, SPAN_NOTICE("You've set your goal to be <b>'[goal.description]'</b>. You can check your goals with the <b>Show Goals</b> verb."))
+		to_chat(src, span_notice("You've set your goal to be <b>'[goal.description]'</b>. You can check your goals with the <b>Show Goals</b> verb."))
 	else
-		to_chat(src, SPAN_NOTICE("You leave your ambitions behind."))
+		to_chat(src, span_notice("You leave your ambitions behind."))
 		if(goal)
 			qdel(goal)
 	log_and_message_admins("has set their ambitions to now be: [new_goal].")

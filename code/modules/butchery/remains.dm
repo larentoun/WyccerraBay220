@@ -7,18 +7,18 @@
 /obj/item/bone/use_tool(obj/item/tool, mob/living/user, list/click_params)
 	if (carve_product && is_sharp(tool))
 		if (!isturf(loc))
-			to_chat(user, SPAN_WARNING("You must put \the [src] down before carving it."))
+			to_chat(user, span_warning("You must put \the [src] down before carving it."))
 			return
 		user.visible_message(
-			SPAN_ITALIC("\The [user] begins carving \a [src] with \a [tool]."),
-			SPAN_ITALIC("You begin carving \the [src] into \a [initial(carve_product.name)] with \the [tool]."),
+			span_italic("\The [user] begins carving \a [src] with \a [tool]."),
+			span_italic("You begin carving \the [src] into \a [initial(carve_product.name)] with \the [tool]."),
 			range = 5
 		)
 		if (!do_after(user, 10 SECONDS, src))
 			return
 		user.visible_message(
-			SPAN_ITALIC("\The [user] finishes carving \a [src] into \a [initial(carve_product.name)]."),
-			SPAN_ITALIC("You finish carving \the [src]."),
+			span_italic("\The [user] finishes carving \a [src] into \a [initial(carve_product.name)]."),
+			span_italic("You finish carving \the [src]."),
 			range = 5
 		)
 		new carve_product (loc)
@@ -65,8 +65,8 @@
 		if (!user.unEquip(tool, src))
 			return
 		user.visible_message(
-			SPAN_ITALIC("\The [user] fits \a [tool] into \a [src]."),
-			SPAN_ITALIC("You fit \the [tool] into \the [src]."),
+			span_italic("\The [user] fits \a [tool] into \a [src]."),
+			span_italic("You fit \the [tool] into \the [src]."),
 			range = 5
 		)
 		eyeglow_source = tool
@@ -83,7 +83,7 @@
 
 /obj/item/clothing/head/skull/ui_action_click(mob/living/user)
 	if (!eyeglow_source)
-		to_chat(user, SPAN_WARNING("\The [src] has no pen light."))
+		to_chat(user, span_warning("\The [src] has no pen light."))
 		return
 	on = !on
 	if (eyeglow_source.activation_sound)

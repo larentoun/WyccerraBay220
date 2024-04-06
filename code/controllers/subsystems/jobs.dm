@@ -64,7 +64,7 @@ SUBSYSTEM_DEF(jobs)
 	if(!length(GLOB.skills))
 		GET_SINGLETON(/singleton/hierarchy/skill)
 	if(!length(GLOB.skills))
-		log_error(SPAN_WARNING("Error setting up job skill requirements, no skill datums found!"))
+		log_error(span_warning("Error setting up job skill requirements, no skill datums found!"))
 
 	// Update title and path tracking, submap list, etc.
 	// Populate/set up map job lists.
@@ -141,13 +141,13 @@ SUBSYSTEM_DEF(jobs)
 		log_debug("Job assignment error for [joining] - job does not exist or is of the incorrect type.")
 		return FALSE
 	if(!job.is_position_available())
-		to_chat(joining, SPAN_WARNING("Unfortunately, that job is no longer available."))
+		to_chat(joining, span_warning("Unfortunately, that job is no longer available."))
 		return FALSE
 	if(!config.enter_allowed)
-		to_chat(joining, SPAN_WARNING("There is an administrative lock on entering the game!"))
+		to_chat(joining, span_warning("There is an administrative lock on entering the game!"))
 		return FALSE
 	if(SSticker.mode && SSticker.mode.explosion_in_progress)
-		to_chat(joining, SPAN_WARNING("The [station_name()] is currently exploding. Joining would go poorly."))
+		to_chat(joining, span_warning("The [station_name()] is currently exploding. Joining would go poorly."))
 		return FALSE
 	return TRUE
 
@@ -157,10 +157,10 @@ SUBSYSTEM_DEF(jobs)
 	if(job.is_restricted(joining.client.prefs, joining))
 		return FALSE
 	if(!job.player_old_enough(joining.client))
-		to_chat(joining, SPAN_WARNING("Your player age (days since first seen on the server) is too low for this job."))
+		to_chat(joining, span_warning("Your player age (days since first seen on the server) is too low for this job."))
 		return FALSE
 	if(GAME_STATE != RUNLEVEL_GAME)
-		to_chat(joining, SPAN_WARNING("The round is either not ready, or has already finished..."))
+		to_chat(joining, span_warning("The round is either not ready, or has already finished..."))
 		return FALSE
 	return TRUE
 
@@ -397,7 +397,7 @@ SUBSYSTEM_DEF(jobs)
 			continue
 
 		if(!gear_item.is_permitted_to_equip(human_to_equip, job))
-			to_chat(human_to_equip, SPAN_WARNING("Your current species, job, branch, skills or whitelist status does not permit you to spawn with [gear_name]!"))
+			to_chat(human_to_equip, span_warning("Your current species, job, branch, skills or whitelist status does not permit you to spawn with [gear_name]!"))
 			continue
 
 		var/failed_to_equip = !gear_item.slot || gear_item.slot == slot_tie || loadout_taken_slots["[gear_item.slot]"] || !gear_item.spawn_on_mob(human_to_equip, gear_to_equip[gear_item.display_name])

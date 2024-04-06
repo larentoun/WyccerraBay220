@@ -172,10 +172,10 @@
 		data["nopower"] = !data["faillink"] && (!front.powered() || !middle.powered() || !back.powered())
 		data["skill"] = user.get_skill_value(core_skill) > skill_offset
 
-		var/charge = SPAN_BOLD("UNKNOWN ERROR")
+		var/charge = span_bold("UNKNOWN ERROR")
 		switch(get_charge_type())
 			if(OVERMAP_WEAKNESS_NONE)
-				charge = "[SPAN_BOLD("ERROR")]: No valid charge detected."
+				charge = "[span_bold("ERROR")]: No valid charge detected."
 			else
 				var/obj/structure/ship_munition/disperser_charge/B = get_charge()
 				charge = B.chargedesc

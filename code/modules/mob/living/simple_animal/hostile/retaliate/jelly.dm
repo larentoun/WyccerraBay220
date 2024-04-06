@@ -61,7 +61,7 @@
 		..()
 
 /mob/living/simple_animal/hostile/retaliate/jelly/mega/proc/jelly_split()
-	visible_message(SPAN_MFAUNA("\The [src] rumbles briefly before splitting into two!"))
+	visible_message(span_mfauna("\The [src] rumbles briefly before splitting into two!"))
 	var/kidnum = 2
 	for(var/i = 0 to kidnum)
 		var/mob/living/simple_animal/child = new split_type(get_turf(src))

@@ -179,52 +179,6 @@
 
 #define JOINTEXT(X) jointext(X, null)
 
-#define SPAN_CLASS(class, X) "<span class='[class]'>[X]</span>"
-
-#define SPAN_STYLE(style, X) "<span style=\"[style]\">[X]</span>"
-
-#define SPAN_ITALIC(X) SPAN_CLASS("italic", "[X]")
-
-#define SPAN_BOLD(X) SPAN_CLASS("bold", "[X]")
-
-#define SPAN_NOTICE(X) SPAN_CLASS("notice", "[X]")
-
-#define SPAN_WARNING(X) SPAN_CLASS("warning", "[X]")
-
-#define SPAN_GOOD(X) SPAN_CLASS("good", "[X]")
-
-#define SPAN_BAD(X) SPAN_CLASS("bad", "[X]")
-
-#define SPAN_DANGER(X) SPAN_CLASS("danger", "[X]")
-
-#define SPAN_OCCULT(X) SPAN_CLASS("cult", "[X]")
-
-#define SPAN_MFAUNA(X) SPAN_CLASS("mfauna", "[X]")
-
-#define SPAN_SUBTLE(X) SPAN_CLASS("subtle", "[X]")
-
-#define SPAN_INFO(X) SPAN_CLASS("info", "[X]")
-
-#define STYLE_SMALLFONTS(X, S, C1) SPAN_STYLE("font-family: 'Small Fonts'; color: [C1]; font-size: [S]px", "[X]")
-
-#define STYLE_SMALLFONTS_OUTLINE(X, S, C1, C2) SPAN_STYLE("font-family: 'Small Fonts'; color: [C1]; -dm-text-outline: 1 [C2]; font-size: [S]px", "[X]")
-
-#define SPAN_DEBUG(X) SPAN_CLASS("debug", "[X]")
-
-#define SPAN_COLOR(color, text) SPAN_STYLE("color: [color]", "[text]")
-
-#define SPAN_SIZE(size, text) SPAN_STYLE("font-size: [size]", "[text]")
-
-#define FONT_SMALL(X) SPAN_SIZE("10px", "[X]")
-
-#define FONT_NORMAL(X) SPAN_SIZE("13px", "[X]")
-
-#define FONT_LARGE(X) SPAN_SIZE("16px", "[X]")
-
-#define FONT_HUGE(X) SPAN_SIZE("18px", "[X]")
-
-#define FONT_GIANT(X) SPAN_SIZE("24px", "[X]")
-
 #define crash_with(X) crash_at(X, __FILE__, __LINE__)
 
 #define TO_HEX_DIGIT(n) ascii2text((n&15) + ((n&15)<10 ? 48 : 87))

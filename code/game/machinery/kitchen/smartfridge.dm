@@ -129,14 +129,14 @@
 
 /obj/machinery/smartfridge/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(!is_powered())
-		to_chat(user, SPAN_NOTICE("[src] is unpowered and useless."))
+		to_chat(user, span_notice("[src] is unpowered and useless."))
 		return TRUE
 
 	if(accept_check(O))
 		if(!user.unEquip(O))
 			return TRUE
 		stock_item(O)
-		user.visible_message(SPAN_NOTICE("[user] has added [O] to [src]."), SPAN_NOTICE("You add [O] to [src]."))
+		user.visible_message(span_notice("[user] has added [O] to [src]."), span_notice("You add [O] to [src]."))
 		update_icon()
 		return TRUE
 
@@ -150,9 +150,9 @@
 		P.finish_bulk_removal()
 
 		if(plants_loaded)
-			user.visible_message(SPAN_NOTICE("[user] loads [src] with the contents of [P]."), SPAN_NOTICE("You load [src] with the contents of [P]."))
+			user.visible_message(span_notice("[user] loads [src] with the contents of [P]."), span_notice("You load [src] with the contents of [P]."))
 			if(length(P.contents) > 0)
-				to_chat(user, SPAN_NOTICE("Some items were refused."))
+				to_chat(user, span_notice("Some items were refused."))
 		return TRUE
 	return ..()
 
@@ -210,7 +210,7 @@
 	switch(action)
 		if("vend")
 			if(is_secure && !allowed(usr) && !emagged && locked != -1 && scan_id)
-				to_chat(usr, SPAN_WARNING("Отказано в доступе."))
+				to_chat(usr, span_warning("Отказано в доступе."))
 				return FALSE
 
 			var/index = text2num(params["vend"])
@@ -262,7 +262,7 @@
 
 	spawn(0)
 		throw_item.throw_at(target, 16, 3)
-	src.visible_message(SPAN_WARNING("[src] launches [throw_item.name] at [target.name]!"))
+	src.visible_message(span_warning("[src] launches [throw_item.name] at [target.name]!"))
 	update_icon()
 	return TRUE
 

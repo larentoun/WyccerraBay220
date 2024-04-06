@@ -10,7 +10,7 @@
 			var/mob/living/silicon/robot/R = user
 			for (var/obj/item/cell/D in R.contents)
 				D.charge += rand() * 100 + 50
-				to_chat(R, SPAN_WARNING("SYSTEM ALERT: Large energy boost detected!"))
+				to_chat(R, span_warning("SYSTEM ALERT: Large energy boost detected!"))
 			return 1
 
 /datum/artifact_effect/cellcharge/DoEffectAura()
@@ -25,7 +25,7 @@
 			for (var/obj/item/cell/D in M.contents)
 				D.charge += 25
 				if(world.time - last_message > 200)
-					to_chat(M, SPAN_WARNING("SYSTEM ALERT: Energy boost detected!"))
+					to_chat(M, span_warning("SYSTEM ALERT: Energy boost detected!"))
 					last_message = world.time
 		return 1
 
@@ -41,6 +41,6 @@
 			for (var/obj/item/cell/D in M.contents)
 				D.charge += rand() * 100
 				if(world.time - last_message > 200)
-					to_chat(M, SPAN_WARNING("SYSTEM ALERT: Energy boost detected!"))
+					to_chat(M, span_warning("SYSTEM ALERT: Energy boost detected!"))
 					last_message = world.time
 		return 1

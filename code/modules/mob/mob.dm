@@ -394,9 +394,9 @@
 	if (flavor_text && flavor_text != "")
 		var/msg = replacetext(flavor_text, "\n", " ")
 		if(length(msg) <= 40)
-			return SPAN_NOTICE("[msg]")
+			return span_notice("[msg]")
 		else
-			return SPAN_NOTICE("[copytext_preserve_html(msg, 1, 37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a>")
+			return span_notice("[copytext_preserve_html(msg, 1, 37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a>")
 
 /client/verb/changes()
 	set name = "Changelog"
@@ -488,9 +488,9 @@
 	if(pulling)
 		if(ishuman(pulling))
 			var/mob/living/carbon/human/H = pulling
-			visible_message(SPAN_WARNING("\The [src] lets go of \the [H]."), SPAN_NOTICE("You let go of \the [H]."), exclude_mobs = list(H))
+			visible_message(span_warning("\The [src] lets go of \the [H]."), span_notice("You let go of \the [H]."), exclude_mobs = list(H))
 			if(!H.stat)
-				to_chat(H, SPAN_WARNING("\The [src] lets go of you."))
+				to_chat(H, span_warning("\The [src] lets go of you."))
 		pulling.pulledby = null
 		pulling = null
 		if(pullin)
@@ -502,11 +502,11 @@
 		return
 
 	if (!Adjacent(AM))
-		to_chat(src, SPAN_WARNING("You must remain next to \the [AM]."))
+		to_chat(src, span_warning("You must remain next to \the [AM]."))
 		return
 
 	if (AM.anchored)
-		to_chat(src, SPAN_WARNING("It won't budge!"))
+		to_chat(src, span_warning("It won't budge!"))
 		return
 
 	var/mob/M = AM
@@ -515,23 +515,23 @@
 		var/obj/item/grab/G = locate() in M
 		if(istype(G))
 			if(G.current_grab.shield_assailant) // Check that the pull target isn't holding someone hostage to prevent just yanking them away from their victim.
-				visible_message(SPAN_WARNING("\The [G.assailant] uses \the [G.affecting] to block \the [src] from getting a firm grip!"), SPAN_WARNING("Your grip is blocked by \the [G.assailant] using \the [G.affecting] as a shield!"))
+				visible_message(span_warning("\The [G.assailant] uses \the [G.affecting] to block \the [src] from getting a firm grip!"), span_warning("Your grip is blocked by \the [G.assailant] using \the [G.affecting] as a shield!"))
 				return
 			if(prob(25))
-				visible_message(SPAN_WARNING("\The [src] fails to pull \the [G.assailant] away from \the [G.affecting]!"), SPAN_WARNING("You fail to pull \the [G.assailant] away from \the [G.affecting]!"))
+				visible_message(span_warning("\The [src] fails to pull \the [G.assailant] away from \the [G.affecting]!"), span_warning("You fail to pull \the [G.assailant] away from \the [G.affecting]!"))
 				return
 			G.current_grab.let_go(G) // Makes sure dragging the assailant away from their victim makes them release the grab instead of holding it at long range forever.
 
 		if(!can_pull_mobs || !can_pull_size)
-			to_chat(src, SPAN_WARNING("It won't budge!"))
+			to_chat(src, span_warning("It won't budge!"))
 			return
 
 		if((mob_size < M.mob_size) && (can_pull_mobs != MOB_PULL_LARGER))
-			to_chat(src, SPAN_WARNING("It won't budge!"))
+			to_chat(src, span_warning("It won't budge!"))
 			return
 
 		if((mob_size == M.mob_size) && (can_pull_mobs == MOB_PULL_SMALLER))
-			to_chat(src, SPAN_WARNING("It won't budge!"))
+			to_chat(src, span_warning("It won't budge!"))
 			return
 
 		// If your size is larger than theirs and you have some
@@ -546,7 +546,7 @@
 	else if(isobj(AM))
 		var/obj/I = AM
 		if(!can_pull_size || can_pull_size < I.w_class)
-			to_chat(src, SPAN_WARNING("It won't budge!"))
+			to_chat(src, span_warning("It won't budge!"))
 			return
 
 	if(pulling)
@@ -573,9 +573,9 @@
 			else //If they have no arms
 				grabtype = "torso"
 
-			visible_message(SPAN_WARNING("\The [src] leans down and grips \the [H]'s [grabtype]."), SPAN_NOTICE("You lean down and grip \the [H]'s [grabtype]."), exclude_mobs = list(H))
+			visible_message(span_warning("\The [src] leans down and grips \the [H]'s [grabtype]."), span_notice("You lean down and grip \the [H]'s [grabtype]."), exclude_mobs = list(H))
 			if(!H.stat)
-				to_chat(H, SPAN_WARNING("\The [src] leans down and grips your [grabtype]."))
+				to_chat(H, span_warning("\The [src] leans down and grips your [grabtype]."))
 
 		else //Otherwise we're probably just holding their arm to lead them somewhere
 			var/grabtype
@@ -584,13 +584,13 @@
 			else //If they have no arms
 				grabtype = "shoulder"
 
-			visible_message(SPAN_WARNING("\The [src] grips \the [H]'s [grabtype]."), SPAN_NOTICE("You grip \the [H]'s [grabtype]."), exclude_mobs = list(H))
+			visible_message(span_warning("\The [src] grips \the [H]'s [grabtype]."), span_notice("You grip \the [H]'s [grabtype]."), exclude_mobs = list(H))
 			if(!H.stat)
-				to_chat(H, SPAN_WARNING("\The [src] grips your [grabtype]."))
+				to_chat(H, span_warning("\The [src] grips your [grabtype]."))
 		playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 15) //Quieter than hugging/grabbing but we still want some audio feedback
 
 		if(H.pull_damage())
-			to_chat(src, SPAN_DANGER("Pulling \the [H] in their current condition would probably be a bad idea."))
+			to_chat(src, span_danger("Pulling \the [H] in their current condition would probably be a bad idea."))
 
 		var/obj/item/clothing/C = H.get_covering_equipped_item_by_zone(BP_CHEST)
 		if(istype(C))
@@ -919,7 +919,7 @@
 		var/obj/item/holder/voxslug/holder = implant
 		var/mob/living/simple_animal/hostile/voxslug/V = holder.contents[1]
 
-		V.visible_message(SPAN_WARNING("\The [src] is momentarily stunned as it is ripped from its victim!"))
+		V.visible_message(span_warning("\The [src] is momentarily stunned as it is ripped from its victim!"))
 		if (V.ai_holder)
 			var/datum/ai_holder/AI = V.ai_holder
 			AI.set_busy_delay(8 SECONDS)
@@ -985,18 +985,18 @@
 		return
 	var/obj/item/selection = input("What do you want to yank out?", "Embedded objects") in valid_objects
 	if(self)
-		to_chat(src, SPAN_WARNING("You attempt to get a good grip on [selection] in your body."))
+		to_chat(src, span_warning("You attempt to get a good grip on [selection] in your body."))
 	else
-		to_chat(U, SPAN_WARNING("You attempt to get a good grip on [selection] in [S]'s body."))
+		to_chat(U, span_warning("You attempt to get a good grip on [selection] in [S]'s body."))
 	if(!do_after(U, 3 SECONDS, S, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS, INCAPACITATION_DEFAULT & ~INCAPACITATION_FORCELYING)) //let people pinned to stuff yank it out, otherwise they're stuck... forever!!!
 		return
 	if(!selection || !S || !U)
 		return
 
 	if(self)
-		visible_message(SPAN_WARNING("<b>[src] rips [selection] out of their body.</b>"),SPAN_WARNING("<b>You rip [selection] out of your body.</b>"))
+		visible_message(span_warning("<b>[src] rips [selection] out of their body.</b>"),span_warning("<b>You rip [selection] out of your body.</b>"))
 	else
-		visible_message(SPAN_WARNING("<b>[usr] rips [selection] out of [src]'s body.</b>"),SPAN_WARNING("<b>[usr] rips [selection] out of your body.</b>"))
+		visible_message(span_warning("<b>[usr] rips [selection] out of [src]'s body.</b>"),span_warning("<b>[usr] rips [selection] out of your body.</b>"))
 	remove_implant(selection)
 	selection.forceMove(get_turf(src))
 	if (U.HasFreeHand())
@@ -1182,7 +1182,7 @@
 		if(!lying)
 			Weaken(1)
 			if(lying && prob(10))
-				to_chat(src, SPAN_DANGER("You are pushed down by the flood!"))
+				to_chat(src, span_danger("You are pushed down by the flood!"))
 		return TRUE
 	return FALSE
 
@@ -1215,20 +1215,20 @@
 	var/mob/S = src
 	var/mob/U = usr
 	if(U == S)
-		to_chat(U, SPAN_WARNING("You can't introduce yourself to yourself!"))
+		to_chat(U, span_warning("You can't introduce yourself to yourself!"))
 		return
 	if(get_dist(U, S) > 3)
-		to_chat(U, SPAN_WARNING("You're too far away to properly introduce yourself!"))
+		to_chat(U, span_warning("You're too far away to properly introduce yourself!"))
 		return
 	if((S.stat != CONSCIOUS) || !(S.mind))
-		to_chat(U, SPAN_WARNING("You can't introduce yourself while they're in this state!"))
+		to_chat(U, span_warning("You can't introduce yourself while they're in this state!"))
 		return
 	if((S in U.mind.known_mobs) || (U in S.mind.known_mobs))
-		to_chat(U, SPAN_WARNING("You already know [S.name]!"))
+		to_chat(U, span_warning("You already know [S.name]!"))
 		return
 
-	to_chat(U, SPAN_WARNING("You introduce yourself to [S]!"))
-	to_chat(S, SPAN_WARNING("[U] introduces [U.p_they()]self!"))
+	to_chat(U, span_warning("You introduce yourself to [S]!"))
+	to_chat(S, span_warning("[U] introduces [U.p_they()]self!"))
 	U.mind.add_known_mob(S)
 	S.mind.add_known_mob(U)
 

@@ -57,7 +57,7 @@
 		return 1
 
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/go_berserk()
-	audible_message(SPAN_DANGER("\The [src] chitters wildly!"))
+	audible_message(span_danger("\The [src] chitters wildly!"))
 	var/obj/item/W = get_natural_weapon()
 	if(W)
 		W.force = initial(W.force) + 5
@@ -67,7 +67,7 @@
 
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/calm_down()
 	berserking = FALSE
-	visible_message(SPAN_NOTICE("\The [src] calms down and surveys the area."))
+	visible_message(span_notice("\The [src] calms down and surveys the area."))
 	var/obj/item/W = get_natural_weapon()
 	if(W)
 		W.force = initial(W.force)

@@ -29,9 +29,9 @@
 /obj/vehicle/train/examine(mob/user)
 	. = ..()
 	if (lead)
-		. += SPAN_NOTICE("It is hitched to [lead].")
+		. += span_notice("It is hitched to [lead].")
 	if (tow)
-		. += SPAN_NOTICE("It is towinge [tow].")
+		. += span_notice("It is towinge [tow].")
 
 /obj/vehicle/train/Move()
 	var/old_loc = get_turf(src)
@@ -57,7 +57,7 @@
 	if(emagged)
 		if(istype(A, /mob/living))
 			var/mob/living/M = A
-			visible_message(SPAN_WARNING("[src] knocks over [M]!"))
+			visible_message(span_warning("[src] knocks over [M]!"))
 			var/def_zone = ran_zone()
 			M.apply_effects(5, 5)				//knock people down if you hit them
 			M.apply_damage(22 / move_delay, DAMAGE_BRUTE, def_zone)	// and do damage according to how fast the train is going
@@ -97,7 +97,7 @@
 
 	unload(user, direction)
 
-	to_chat(user, SPAN_NOTICE("You climb down from [src]."))
+	to_chat(user, span_notice("You climb down from [src]."))
 
 	return 1
 
@@ -172,7 +172,7 @@
 	set_dir(lead.dir)
 
 	if(user)
-		to_chat(user, SPAN_NOTICE("You hitch \the [src] to \the [T]."))
+		to_chat(user, span_notice("You hitch \the [src] to \the [T]."))
 
 	update_stats()
 
@@ -186,7 +186,7 @@
 	lead.tow = null
 	lead.update_stats()
 
-	to_chat(user, SPAN_NOTICE("You unhitch \the [src] from \the [lead]."))
+	to_chat(user, span_notice("You unhitch \the [src] from \the [lead]."))
 	lead = null
 
 	update_stats()

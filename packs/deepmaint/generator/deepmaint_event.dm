@@ -24,7 +24,7 @@
 	for (var/obj/structure/ladder/L in spawned_ladders)
 		L.target_down = null
 		L.target_up = null
-		L.visible_message(SPAN_WARNING("\The [src] suddenly vanishes into nothingness!"))
+		L.visible_message(span_warning("\The [src] suddenly vanishes into nothingness!"))
 		qdel(L)
 	LAZYCLEARLIST(spawned_ladders)
 	LAZYCLEARLIST(free_ladders)

@@ -181,25 +181,25 @@
 /mob/living/exosuit/examine(mob/user)
 	. = ..()
 	if(LAZYLEN(pilots) && (!hatch_closed || body.pilot_coverage < 100 || body.transparent_cabin))
-		. += SPAN_NOTICE("It is being piloted by [english_list(pilots, nothing_text = "nobody")].")
+		. += span_notice("It is being piloted by [english_list(pilots, nothing_text = "nobody")].")
 	if(body && LAZYLEN(body.pilot_positions))
-		. += SPAN_NOTICE("It can seat [length(body.pilot_positions)] pilot\s total.")
+		. += span_notice("It can seat [length(body.pilot_positions)] pilot\s total.")
 	if(length(hardpoints))
-		. += SPAN_NOTICE("It has the following hardpoints:")
+		. += span_notice("It has the following hardpoints:")
 		for(var/hardpoint in hardpoints)
 			var/obj/item/I = hardpoints[hardpoint]
-			. += SPAN_NOTICE("- [hardpoint]: [istype(I) ? "[I]" : "nothing"].")
+			. += span_notice("- [hardpoint]: [istype(I) ? "[I]" : "nothing"].")
 	else
-		. += SPAN_NOTICE("It has no visible hardpoints.")
+		. += span_notice("It has no visible hardpoints.")
 
 	for(var/obj/item/mech_component/thing in list(arms, legs, head, body))
 		if(!thing)
 			continue
 
 		var/damage_string = thing.get_damage_string()
-		. += SPAN_NOTICE("Its [thing.name] [thing.gender == PLURAL ? "are" : "is"] [damage_string].")
+		. += span_notice("Its [thing.name] [thing.gender == PLURAL ? "are" : "is"] [damage_string].")
 
-	. += SPAN_NOTICE("It menaces with reinforcements of [material].")
+	. += span_notice("It menaces with reinforcements of [material].")
 
 /mob/living/exosuit/return_air()
 	return (body && body.pilot_coverage >= 100 && hatch_closed && body.cockpit) ? body.cockpit : loc.return_air()
@@ -214,7 +214,7 @@
 
 /mob/living/exosuit/proc/toggle_power(mob/user)
 	if(power == MECH_POWER_TRANSITION)
-		to_chat(user, SPAN_NOTICE("Power transition in progress. Please wait."))
+		to_chat(user, span_notice("Power transition in progress. Please wait."))
 	else if(power == MECH_POWER_ON) //Turning it off is instant
 		playsound(src, 'sound/mecha/mech-shutdown.ogg', 100, 0)
 		power = MECH_POWER_OFF
@@ -226,8 +226,8 @@
 			playsound(src, 'sound/mecha/nominal.ogg', 50, 0)
 			power = MECH_POWER_ON
 		else
-			to_chat(user, SPAN_WARNING("You abort the powerup sequence."))
+			to_chat(user, span_warning("You abort the powerup sequence."))
 			power = MECH_POWER_OFF
 		hud_power_control?.queue_icon_update()
 	else
-		to_chat(user, SPAN_WARNING("Error: No power cell was detected."))
+		to_chat(user, span_warning("Error: No power cell was detected."))

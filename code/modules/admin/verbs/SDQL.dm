@@ -10,11 +10,11 @@
 
 	if(length(query_list) < 2)
 		if(length(query_list) > 0)
-			to_chat(usr, SPAN_WARNING("SDQL: Too few discrete tokens in query \"[query_text]\". Please check your syntax and try again."))
+			to_chat(usr, span_warning("SDQL: Too few discrete tokens in query \"[query_text]\". Please check your syntax and try again."))
 		return
 
 	if(!(lowertext(query_list[1]) in list("select", "delete", "update")))
-		to_chat(usr, SPAN_WARNING("SDQL: Unknown query type: \"[query_list[1]]\" in query \"[query_text]\". Please check your syntax and try again."))
+		to_chat(usr, span_warning("SDQL: Unknown query type: \"[query_list[1]]\" in query \"[query_text]\". Please check your syntax and try again."))
 		return
 
 	var/list/types = list()
@@ -53,7 +53,7 @@
 					set_vars[query_list[i]] = query_list[i + 2]
 
 				else
-					to_chat(usr, SPAN_WARNING("SDQL: Invalid set parameter in query \"[query_text]\". Please check your syntax and try again."))
+					to_chat(usr, span_warning("SDQL: Invalid set parameter in query \"[query_text]\". Please check your syntax and try again."))
 					return
 
 				i += 3
@@ -62,7 +62,7 @@
 					break
 
 		if(length(set_vars) < 1)
-			to_chat(usr, SPAN_WARNING("SDQL: Invalid or missing set in query \"[query_text]\". Please check your syntax and try again."))
+			to_chat(usr, span_warning("SDQL: Invalid or missing set in query \"[query_text]\". Please check your syntax and try again."))
 			return
 
 	var/list/where = list()
@@ -206,7 +206,7 @@
 			var/v = where[i++]
 			var/compare_op = where[i++]
 			if(!(compare_op in list("==", "=", "<>", "<", ">", "<=", ">=", "!=")))
-				to_chat(usr, SPAN_WARNING("SDQL: Unknown comparison operator [compare_op] in where clause following [v] in query \"[query_text]\". Please check your syntax and try again."))
+				to_chat(usr, span_warning("SDQL: Unknown comparison operator [compare_op] in where clause following [v] in query \"[query_text]\". Please check your syntax and try again."))
 				return
 
 			var/j
@@ -253,7 +253,7 @@
 
 
 
-	to_chat(usr, SPAN_NOTICE("SQDL Query: [query_text]"))
+	to_chat(usr, span_notice("SQDL Query: [query_text]"))
 	message_admins("[usr] executed SDQL query: \"[query_text]\".")
 /*
 	for(var/t in types)
@@ -334,7 +334,7 @@
 
 
 	else
-		to_chat(usr, SPAN_WARNING("SDQL: Sorry, equations not yet supported :("))
+		to_chat(usr, span_warning("SDQL: Sorry, equations not yet supported :("))
 		return null
 
 
@@ -409,7 +409,7 @@
 
 		else if(char == "'")
 			if(word != "")
-				to_chat(usr, SPAN_WARNING("SDQL: You have an error in your SDQL syntax, unexpected ' in query: \"[SPAN_COLOR("gray", query_text)]\" following \"[SPAN_COLOR("gray", word)]\". Please check your syntax, and try again."))
+				to_chat(usr, span_warning("SDQL: You have an error in your SDQL syntax, unexpected ' in query: \"[SPAN_COLOR("gray", query_text)]\" following \"[SPAN_COLOR("gray", word)]\". Please check your syntax, and try again."))
 				return null
 
 			word = "'"
@@ -429,7 +429,7 @@
 					word += char
 
 			if(i > len)
-				to_chat(usr, SPAN_WARNING("SDQL: You have an error in your SDQL syntax, unmatched ' in query: \"[SPAN_COLOR("gray", query_text)]\". Please check your syntax, and try again."))
+				to_chat(usr, span_warning("SDQL: You have an error in your SDQL syntax, unmatched ' in query: \"[SPAN_COLOR("gray", query_text)]\". Please check your syntax, and try again."))
 				return null
 
 			query_list += "[word]'"
@@ -437,7 +437,7 @@
 
 		else if(char == "\"")
 			if(word != "")
-				to_chat(usr, SPAN_WARNING("SDQL: You have an error in your SDQL syntax, unexpected \" in query: \"[SPAN_COLOR("gray", query_text)]\" following \"[SPAN_COLOR("gray", word)]\". Please check your syntax, and try again."))
+				to_chat(usr, span_warning("SDQL: You have an error in your SDQL syntax, unexpected \" in query: \"[SPAN_COLOR("gray", query_text)]\" following \"[SPAN_COLOR("gray", word)]\". Please check your syntax, and try again."))
 				return null
 
 			word = "\""
@@ -457,7 +457,7 @@
 					word += char
 
 			if(i > len)
-				to_chat(usr, SPAN_WARNING("SDQL: You have an error in your SDQL syntax, unmatched \" in query: \"[SPAN_COLOR("gray", "[query_text]")]\". Please check your syntax, and try again."))
+				to_chat(usr, span_warning("SDQL: You have an error in your SDQL syntax, unmatched \" in query: \"[SPAN_COLOR("gray", "[query_text]")]\". Please check your syntax, and try again."))
 				return null
 
 			query_list += "[word]\""

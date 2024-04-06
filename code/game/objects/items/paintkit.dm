@@ -9,7 +9,7 @@
 
 /obj/item/device/kit/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("It has [uses] use\s left.")
+	. += span_notice("It has [uses] use\s left.")
 
 /obj/item/device/kit/inherit_custom_item_data(datum/custom_item/citem)
 	new_name = citem.item_name
@@ -87,7 +87,7 @@
 
 /obj/item/device/kit/paint/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("This kit will add a '[new_name]' decal to a exosuit'.")
+	. += span_notice("This kit will add a '[new_name]' decal to a exosuit'.")
 
 // exosuit kits.
 /obj/item/device/kit/paint/use(amt, mob/user)

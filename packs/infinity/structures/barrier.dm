@@ -22,13 +22,13 @@
 /obj/structure/barrier/examine(mob/user)
 	. = ..()
 	if(health>=200)
-		. += SPAN_NOTICE("It looks undamaged.")
+		. += span_notice("It looks undamaged.")
 	if(health>=140 && health<200)
-		. += SPAN_WARNING("It has small dents.")
+		. += span_warning("It has small dents.")
 	if(health>=80 && health<140)
-		. += SPAN_WARNING("It has medium dents.")
+		. += span_warning("It has medium dents.")
 	if(health<80)
-		. += SPAN_DANGER("It will break apart soon!")
+		. += span_danger("It will break apart soon!")
 
 /obj/structure/barrier/Destroy()
 	if(health <= 0)
@@ -94,25 +94,25 @@
 		take_damage(20)
 		return
 	if(deployed)
-		to_chat(user, SPAN_NOTICE("[src] is already deployed. You can't move it."))
+		to_chat(user, span_notice("[src] is already deployed. You can't move it."))
 	else
 		if(do_after(user, 5, src))
 			playsound(src, 'sound/effects/extout.ogg', 100, 1)
 			density = !density
-			to_chat(user, SPAN_NOTICE("You're getting [density ? "up" : "down"] [src]."))
+			to_chat(user, span_notice("You're getting [density ? "up" : "down"] [src]."))
 			update_layers()
 			update_icon()
 
 /obj/structure/barrier/crowbar_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
 	if(deployed || density)
-		to_chat(user, SPAN_NOTICE("You should unsecure [src] firstly. Use a screwdriver."))
+		to_chat(user, span_notice("You should unsecure [src] firstly. Use a screwdriver."))
 		return
-	visible_message(SPAN_DANGER("[user] begins disassembling [src]..."))
+	visible_message(span_danger("[user] begins disassembling [src]..."))
 	if(!tool.use_as_tool(src, user, 6 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	var/obj/item/barrier/B = new /obj/item/barrier(get_turf(user))
-	visible_message(SPAN_NOTICE("[user] dismantled [src]."))
+	visible_message(span_notice("[user] dismantled [src]."))
 	playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)
 	B.health = health
 	B.add_fingerprint(user)
@@ -184,7 +184,7 @@
 		chance += 10
 
 	if(prob(chance))
-		visible_message(SPAN_WARNING("[P] hits [src]!"))
+		visible_message(span_warning("[P] hits [src]!"))
 		bullet_act(P)
 		return 0
 

@@ -7,7 +7,7 @@
 	set category = "IC"
 
 	if (!gun_setting_icon)
-		to_chat(src, SPAN_WARNING("Your mobtype cannot use aiming overlays. If you feel this is in error, contact a dev."))
+		to_chat(src, span_warning("Your mobtype cannot use aiming overlays. If you feel this is in error, contact a dev."))
 		return
 
 	if(isliving(src)) //Needs to be a mob verb to prevent error messages when using hotkeys
@@ -16,7 +16,7 @@
 			M.aiming = new(src)
 		M.aiming.toggle_active()
 	else
-		to_chat(src, SPAN_WARNING("This verb may only be used by living mobs, sorry."))
+		to_chat(src, span_warning("This verb may only be used by living mobs, sorry."))
 	return
 
 /mob/living/proc/stop_aiming(obj/item/thing, no_message = 0)

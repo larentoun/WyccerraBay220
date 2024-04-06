@@ -17,23 +17,23 @@
 
 /obj/machinery/microscope/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(sample)
-		to_chat(user, SPAN_WARNING("There is already a slide in the microscope."))
+		to_chat(user, span_warning("There is already a slide in the microscope."))
 		return ..()
 
 	if (istype(W, /obj/item/evidencebag))
 		var/obj/item/evidencebag/B = W
 		if (B.stored_item)
-			to_chat(user, SPAN_NOTICE("You insert \the [B.stored_item] from \the [B] into the microscope."))
+			to_chat(user, span_notice("You insert \the [B.stored_item] from \the [B] into the microscope."))
 			B.stored_item.forceMove(src)
 			sample = B.stored_item
 			B.empty()
 		else
-			to_chat(user, SPAN_WARNING("\The [B] is empty!"))
+			to_chat(user, span_warning("\The [B] is empty!"))
 		return TRUE
 
 	if(!user.unEquip(W, src))
 		return TRUE
-	to_chat(user, SPAN_NOTICE("You insert \the [W] into the microscope."))
+	to_chat(user, span_notice("You insert \the [W] into the microscope."))
 	sample = W
 	update_icon()
 	return TRUE
@@ -41,20 +41,20 @@
 /obj/machinery/microscope/physical_attack_hand(mob/user)
 	. = TRUE
 	if(!sample)
-		to_chat(user, SPAN_WARNING("The microscope has no sample to examine."))
+		to_chat(user, span_warning("The microscope has no sample to examine."))
 		return
 
-	to_chat(user, SPAN_NOTICE("The microscope whirrs as you examine \the [sample]."))
+	to_chat(user, span_notice("The microscope whirrs as you examine \the [sample]."))
 
 	if(!user.do_skilled(2.5 SECONDS, SKILL_FORENSICS, src) || !sample)
-		to_chat(user, SPAN_NOTICE("You stop examining \the [sample]."))
+		to_chat(user, span_notice("You stop examining \the [sample]."))
 		return
 
 	if(!user.skill_check(SKILL_FORENSICS, SKILL_TRAINED))
-		to_chat(user, SPAN_WARNING("You can't figure out what it means..."))
+		to_chat(user, span_warning("You can't figure out what it means..."))
 		return
 
-	to_chat(user, SPAN_NOTICE("Printing findings now..."))
+	to_chat(user, span_notice("Printing findings now..."))
 	var/obj/item/paper/report = new(get_turf(src))
 	report.stamped = list(/obj/item/stamp)
 	report.SetOverlays("paper_stamp-circle")
@@ -88,14 +88,14 @@
 		if(LAZYLEN(evidence["gunshot_residue"]))
 			report.info += "Residue from the following bullets detected:"
 			for(var/residue in evidence["gunshot_residue"])
-				report.info += "[SPAN_NOTICE("[residue]")]<br><br>"
+				report.info += "[span_notice("[residue]")]<br><br>"
 		else
 			report.info += "No gunpowder residue found."
 	if("fibers" in evidence)
 		if(LAZYLEN(evidence["fibers"]))
 			report.info += "Molecular analysis on provided sample has determined the presence of unique fiber strings.<br><br>"
 			for(var/fiber in evidence["fibers"])
-				report.info += "[SPAN_NOTICE("Most likely match for fibers: [fiber]")]<br><br>"
+				report.info += "[span_notice("Most likely match for fibers: [fiber]")]<br><br>"
 		else
 			report.info += "No fibers found."
 	if("prints" in evidence)
@@ -103,7 +103,7 @@
 		if(LAZYLEN(evidence["prints"]))
 			report.info += "Surface analysis has determined unique fingerprint strings:<br><br>"
 			for(var/prints in evidence["prints"])
-				report.info += SPAN_NOTICE("Fingerprint string: ")
+				report.info += span_notice("Fingerprint string: ")
 				if(!is_complete_print(evidence["prints"][prints]))
 					report.info += "INCOMPLETE PRINT"
 				else
@@ -122,9 +122,9 @@
 	if(!istype(remover) || remover.incapacitated() || !Adjacent(remover))
 		return
 	if(!sample)
-		to_chat(remover, SPAN_WARNING("\The [src] does not have a sample in it."))
+		to_chat(remover, span_warning("\The [src] does not have a sample in it."))
 		return
-	to_chat(remover, SPAN_NOTICE("You remove \the [sample] from \the [src]."))
+	to_chat(remover, span_notice("You remove \the [sample] from \the [src]."))
 	remover.put_in_hands(sample)
 	sample = null
 	update_icon()

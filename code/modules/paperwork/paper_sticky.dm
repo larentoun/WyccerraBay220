@@ -26,17 +26,17 @@
 	if(istype(thing, /obj/item/pen))
 
 		if(jobban_isbanned(user, "Graffiti"))
-			to_chat(user, SPAN_WARNING("You are banned from leaving persistent information across rounds."))
+			to_chat(user, span_warning("You are banned from leaving persistent information across rounds."))
 			return
 
 		var/writing_space = MAX_MESSAGE_LEN - length(written_text)
 		if(writing_space <= 0)
-			to_chat(user, SPAN_WARNING("There is no room left on \the [src]."))
+			to_chat(user, span_warning("There is no room left on \the [src]."))
 			return
 		var/text = sanitizeSafe(input("What would you like to write?") as text, writing_space)
 		if(!text || thing.loc != user || (!Adjacent(user) && loc != user) || user.incapacitated())
 			return
-		user.visible_message(SPAN_NOTICE("\The [user] jots a note down on \the [src]."))
+		user.visible_message(span_notice("\The [user] jots a note down on \the [src]."))
 		written_by = user.ckey
 		if(written_text)
 			written_text = "[written_text] [text]"
@@ -48,8 +48,8 @@
 
 /obj/item/sticky_pad/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("It has [papers] sticky note\s left.")
-	. += SPAN_NOTICE("You can click it on grab intent to pick it up.")
+	. += span_notice("It has [papers] sticky note\s left.")
+	. += span_notice("You can click it on grab intent to pick it up.")
 
 /obj/item/sticky_pad/attack_hand(mob/user)
 	if(user.a_intent == I_GRAB)
@@ -61,7 +61,7 @@
 		paper.color = color
 		written_text = null
 		user.put_in_hands(paper)
-		to_chat(user, SPAN_NOTICE("You pull \the [paper] off \the [src]."))
+		to_chat(user, span_notice("You pull \the [paper] off \the [src]."))
 		papers--
 		if(papers <= 0)
 			qdel(src)
@@ -117,7 +117,7 @@
 	if(target_turf != source_turf)
 		dir_offset = get_dir(source_turf, target_turf)
 		if(!(dir_offset in GLOB.cardinal))
-			to_chat(user, SPAN_WARNING("You cannot reach that from here."))
+			to_chat(user, span_warning("You cannot reach that from here."))
 			return TRUE
 
 	if(user.unEquip(src, source_turf))

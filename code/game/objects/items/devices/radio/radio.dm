@@ -83,7 +83,7 @@
 		if(!has_cell.checked_use(power_usage * CELLRATE)) // Use power and display if we run out.
 			on = FALSE
 			STOP_PROCESSING(SSobj, src)
-			visible_message(SPAN_WARNING("[icon2html(src, viewers(src))] [src] lets out a quiet click as it powers down."), SPAN_WARNING("You hear [src] let out a quiet click."))
+			visible_message(span_warning("[icon2html(src, viewers(src))] [src] lets out a quiet click as it powers down."), span_warning("You hear [src] let out a quiet click."))
 			return FALSE
 
 /obj/item/device/radio/Destroy()
@@ -279,7 +279,7 @@
 		if(cell && b_stat)
 			var/mob/user = usr
 			user.put_in_hands(cell)
-			to_chat(user, SPAN_NOTICE("You remove [cell] from [src]."))
+			to_chat(user, span_notice("You remove [cell] from [src]."))
 			cell = null
 		return TRUE
 
@@ -347,7 +347,7 @@
 			var/dx = self_x - jammer_turf.x
 			var/dy = self_y - jammer_turf.y
 			if (dx*dx + dy*dy <= jammer.square_radius && (jammer_turf.z in headset_z_group))
-				to_chat(M,SPAN_WARNING("Instead of the familiar radio crackle, \the [src] emits a faint buzzing sound."))
+				to_chat(M,span_warning("Instead of the familiar radio crackle, \the [src] emits a faint buzzing sound."))
 				playsound(loc, 'sound/effects/zzzt.ogg', 20, 0, -1)
 				return FALSE
 
@@ -355,15 +355,15 @@
 		var/mob/living/carbon/C = M
 		if (istype(C))
 			if ((C.chem_effects[CE_SEDATE] || C.incapacitated(INCAPACITATION_UNRESISTING)))
-				to_chat(M, SPAN_WARNING("You're unable to reach [src]."))
+				to_chat(M, span_warning("You're unable to reach [src]."))
 				return 0
 
 			if (C.chem_effects[CE_VOICELOSS])
-				to_chat(M, SPAN_WARNING("Your voice is too quiet for [src] to pickup!"))
+				to_chat(M, span_warning("Your voice is too quiet for [src] to pickup!"))
 				return FALSE
 
 			if (C.radio_interrupt_cooldown > world.time)
-				to_chat(M, SPAN_WARNING("You're disrupted as you reach for [src]."))
+				to_chat(M, span_warning("You're disrupted as you reach for [src]."))
 				return 0
 
 		if(istype(M)) M.trigger_aiming(TARGET_CAN_RADIO)
@@ -624,11 +624,11 @@
 	. = ..()
 	if (distance <= 1 || loc == user)
 		if (b_stat)
-			. += SPAN_NOTICE("[src] can be attached and modified!")
+			. += span_notice("[src] can be attached and modified!")
 		else
-			. += SPAN_NOTICE("[src] can not be modified or attached!")
+			. += span_notice("[src] can not be modified or attached!")
 		if (power_usage && cell)
-			. += SPAN_NOTICE("[src] charge meter reads [round(cell.percent(), 0.1)]%.")
+			. += span_notice("[src] charge meter reads [round(cell.percent(), 0.1)]%.")
 
 /obj/item/device/radio/screwdriver_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
@@ -636,8 +636,8 @@
 		return
 	b_stat = !b_stat
 	user.visible_message(
-		SPAN_NOTICE("[user] adjusts [src] with [tool]."),
-		SPAN_NOTICE("You adjust [src] with [tool]. It can [b_stat ? "now" : "no longer"] be attached or modified.")
+		span_notice("[user] adjusts [src] with [tool]."),
+		span_notice("You adjust [src] with [tool]. It can [b_stat ? "now" : "no longer"] be attached or modified.")
 	)
 
 /obj/item/device/radio/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -654,8 +654,8 @@
 			return TRUE
 		cell = tool
 		user.visible_message(
-			SPAN_NOTICE("[user] installs [tool] into [src]."),
-			SPAN_NOTICE("You install [tool] into [src].")
+			span_notice("[user] installs [tool] into [src]."),
+			span_notice("You install [tool] into [src].")
 		)
 		return TRUE
 
@@ -739,8 +739,8 @@
 	user.put_in_hands(keyslot)
 	recalculateChannels()
 	user.visible_message(
-		SPAN_NOTICE("[user] pops [keyslot] out of [src] with [tool]."),
-		SPAN_NOTICE("You pop [keyslot] out of [src] with [tool]."),
+		span_notice("[user] pops [keyslot] out of [src] with [tool]."),
+		span_notice("You pop [keyslot] out of [src] with [tool]."),
 		range = 2
 	)
 	keyslot = null
@@ -757,8 +757,8 @@
 		keyslot = tool
 		recalculateChannels()
 		user.visible_message(
-			SPAN_NOTICE("[user] slots [tool] into [src]."),
-			SPAN_NOTICE("You slot [tool] into [src]."),
+			span_notice("[user] slots [tool] into [src]."),
+			span_notice("You slot [tool] into [src]."),
 			range = 2
 		)
 		return TRUE
@@ -800,9 +800,9 @@
 		if(enable_subspace_transmission != subspace_transmission)
 			subspace_transmission = !subspace_transmission
 			if(subspace_transmission)
-				to_chat(usr, SPAN_NOTICE("Subspace Transmission is enabled"))
+				to_chat(usr, span_notice("Subspace Transmission is enabled"))
 			else
-				to_chat(usr, SPAN_NOTICE("Subspace Transmission is disabled"))
+				to_chat(usr, span_notice("Subspace Transmission is disabled"))
 
 			if(subspace_transmission == 0)//Simple as fuck, clears the channel list to prevent talking/listening over them if subspace transmission is disabled
 				channels = list()
@@ -815,10 +815,10 @@
 			shut_up = !shut_up
 			if(shut_up)
 				canhear_range = 0
-				to_chat(usr, SPAN_NOTICE("Loadspeaker disabled."))
+				to_chat(usr, span_notice("Loadspeaker disabled."))
 			else
 				canhear_range = 3
-				to_chat(usr, SPAN_NOTICE("Loadspeaker enabled."))
+				to_chat(usr, span_notice("Loadspeaker enabled."))
 		. = 1
 
 	if(.)
@@ -975,7 +975,7 @@
 		user.set_machine(src)
 		interact(user)
 	else
-		to_chat(user, SPAN_WARNING("The radio is too damaged to function."))
+		to_chat(user, span_warning("The radio is too damaged to function."))
 
 /obj/item/device/radio/exosuit/CanUseTopic()
 	. = ..()

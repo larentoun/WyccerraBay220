@@ -21,7 +21,7 @@
 /obj/item/gun/launcher/rocket/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 2)
-		. += SPAN_NOTICE("[length(rockets)] / [max_rockets] rockets.")
+		. += span_notice("[length(rockets)] / [max_rockets] rockets.")
 
 /obj/item/gun/launcher/rocket/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Rocket - Load ammo
@@ -34,11 +34,11 @@
 			return TRUE
 		rockets += tool
 		user.visible_message(
-			SPAN_NOTICE("\The [user] loads \a [src] with \a [tool]."),
-			SPAN_NOTICE("You load \the [src] with \the [tool].")
+			span_notice("\The [user] loads \a [src] with \a [tool]."),
+			span_notice("You load \the [src] with \the [tool].")
 		)
 		if (max_rockets > 1)
-			to_chat(user, SPAN_INFO("\The [src] now has [length(rockets)]/[max_rockets] rocket\s loaded."))
+			to_chat(user, span_info("\The [src] now has [length(rockets)]/[max_rockets] rocket\s loaded."))
 		return TRUE
 
 	return ..()

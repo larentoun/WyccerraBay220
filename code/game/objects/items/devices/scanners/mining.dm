@@ -18,7 +18,7 @@
 
 /obj/item/device/scanner/mining/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("A tiny indicator on the [src] shows it holds [survey_data] good explorer points.")
+	. += span_notice("A tiny indicator on the [src] shows it holds [survey_data] good explorer points.")
 
 /obj/item/device/scanner/mining/is_valid_scan_target(turf/simulated/T)
 	return istype(T)
@@ -30,19 +30,19 @@
 		scan_data = scan_results[1]
 	else
 		scan_data += "<hr>[scan_results[1]]"
-	to_chat(user, "[icon2html(src, user)] [SPAN_NOTICE("\The [src] displays a readout.")]")
+	to_chat(user, "[icon2html(src, user)] [span_notice("\The [src] displays a readout.")]")
 	to_chat(user, scan_results[1])
 
 	if(scan_results[2])
 		survey_data += scan_results[2]
 		playsound(loc, 'sound/machines/ping.ogg', 40, 1)
-		to_chat(user,SPAN_NOTICE("New survey data stored - [scan_results[2]] GEP."))
+		to_chat(user,span_notice("New survey data stored - [scan_results[2]] GEP."))
 
 /obj/item/device/scanner/mining/proc/put_disk_in_hand(mob/M)
 	if(!survey_data)
-		to_chat(M,SPAN_WARNING("There is no survey data stored on the [src]."))
+		to_chat(M,span_warning("There is no survey data stored on the [src]."))
 		return 0
-	visible_message(SPAN_NOTICE("The [src] spits out a disk containing [survey_data] GEP."))
+	visible_message(span_notice("The [src] spits out a disk containing [survey_data] GEP."))
 	var/obj/item/disk/survey/D = new(get_turf(src))
 	D.data = survey_data
 	survey_data = 0
@@ -69,7 +69,7 @@
 
 /obj/item/disk/survey/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("A tiny indicator on the [src] shows it holds [data] good explorer points.")
+	. += span_notice("A tiny indicator on the [src] shows it holds [data] good explorer points.")
 
 /obj/item/disk/survey/Value()
 	if(data < 10000)

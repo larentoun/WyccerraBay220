@@ -8,7 +8,7 @@
 
 	if(istype(H) && Adjacent(H) && (usr == H) && (H.a_intent == "grab") && hat && H.HasFreeHand())
 		H.put_in_hands(hat)
-		H.visible_message(SPAN_DANGER("\The [H] removes \the [src]'s [hat]."))
+		H.visible_message(span_danger("\The [H] removes \the [src]'s [hat]."))
 		hat = null
 		update_icons()
 		return
@@ -27,8 +27,8 @@
 			return TRUE
 		wear_hat(tool)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] puts \a [tool] on \the [src]."),
-			SPAN_NOTICE("You put \the [tool] on \the [src].")
+			span_notice("\The [user] puts \a [tool] on \the [src]."),
+			span_notice("You put \the [tool] on \the [src].")
 		)
 		return TRUE
 
@@ -53,7 +53,7 @@
 		// don't want to touch that pile.
 
 		if(istype(target, /obj/machinery/seed_storage))
-			visible_message(SPAN_DANGER("\The [src] headbutts \the [target]!"))
+			visible_message(span_danger("\The [src] headbutts \the [target]!"))
 			var/obj/machinery/seed_storage/G = target
 			if(LAZYLEN(G.piles))
 				var/datum/seed_pile/pile = pick(G.piles)
@@ -65,7 +65,7 @@
 						G.piles -= pile
 						qdel(pile)
 					S.forceMove(get_turf(G))
-					G.visible_message(SPAN_NOTICE("\target [S] falls out!"))
+					G.visible_message(span_notice("\target [S] falls out!"))
 			return
 		// End superhacky stuff.
 
@@ -76,7 +76,7 @@
 
 	if(istype(target, /mob))
 		if(src != target && !gestalt_with(target))
-			visible_message(SPAN_NOTICE("\The [src] butts its head into \the [target]."))
+			visible_message(span_notice("\The [src] butts its head into \the [target]."))
 		return
 
 	. = ..()
@@ -84,7 +84,7 @@
 /mob/living/carbon/alien/diona/ranged_attack(atom/target, modifiers)
 	if((a_intent == I_HURT || a_intent == I_GRAB) && holding_item)
 		setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		visible_message(SPAN_DANGER("\The [src] spits \a [holding_item] at \the [target]!"))
+		visible_message(span_danger("\The [src] spits \a [holding_item] at \the [target]!"))
 		var/atom/movable/temp = holding_item
 		unEquip(holding_item)
 		if(temp)
@@ -107,38 +107,38 @@
 	if(tray.dead)
 		if(tray.remove_dead(src, silent = TRUE))
 			reagents.add_reagent(/datum/reagent/nutriment/glucose, rand(10,20))
-			visible_message(SPAN_NOTICE("<b>\The [src]</b> chews up the dead plant, clearing \the [tray] out."), SPAN_NOTICE("You devour the dead plant, clearing \the [tray]."))
+			visible_message(span_notice("<b>\The [src]</b> chews up the dead plant, clearing \the [tray] out."), span_notice("You devour the dead plant, clearing \the [tray]."))
 		return
 
 	if(tray.harvest)
 		if(tray.harvest(src))
-			visible_message(SPAN_NOTICE("<b>\The [src]</b> harvests from \the [tray]."), SPAN_NOTICE("You harvest the contents of \the [tray]."))
+			visible_message(span_notice("<b>\The [src]</b> harvests from \the [tray]."), span_notice("You harvest the contents of \the [tray]."))
 		return
 
 	if(tray.weedlevel || tray.pestlevel)
 		reagents.add_reagent(/datum/reagent/nutriment/glucose, (tray.weedlevel + tray.pestlevel))
 		tray.weedlevel = 0
 		tray.pestlevel = 0
-		visible_message(SPAN_NOTICE("<b>\The [src]</b> begins rooting through \the [tray], ripping out pests and weeds, and eating them noisily."),SPAN_NOTICE("You begin rooting through \the [tray], ripping out pests and weeds, and eating them noisily."))
+		visible_message(span_notice("<b>\The [src]</b> begins rooting through \the [tray], ripping out pests and weeds, and eating them noisily."),span_notice("You begin rooting through \the [tray], ripping out pests and weeds, and eating them noisily."))
 		return
 
 	if(tray.nutrilevel < 10)
 		var/nutrition_cost = (10-tray.nutrilevel) * 5
 		if(nutrition >= nutrition_cost)
-			visible_message(SPAN_NOTICE("<b>\The [src]</b> secretes a trickle of green liquid, refilling [tray]."),SPAN_NOTICE("You secrete some nutrients into \the [tray]."))
+			visible_message(span_notice("<b>\The [src]</b> secretes a trickle of green liquid, refilling [tray]."),span_notice("You secrete some nutrients into \the [tray]."))
 			tray.nutrilevel = 10
 			adjust_nutrition(-((10-tray.nutrilevel) * 5))
 		else
-			to_chat(src, SPAN_NOTICE("You haven't eaten enough to refill \the [tray]'s nutrients."))
+			to_chat(src, span_notice("You haven't eaten enough to refill \the [tray]'s nutrients."))
 		return
 
 	if(tray.waterlevel < 100)
 		var/nutrition_cost = floor((100-tray.nutrilevel)/10) * 5
 		if(nutrition >= nutrition_cost)
-			visible_message(SPAN_NOTICE("<b>\The [src]</b> secretes a trickle of clear liquid, refilling [tray]."),SPAN_NOTICE("You secrete some water into \the [tray]."))
+			visible_message(span_notice("<b>\The [src]</b> secretes a trickle of clear liquid, refilling [tray]."),span_notice("You secrete some water into \the [tray]."))
 			tray.waterlevel = 100
 		else
-			to_chat(src, SPAN_NOTICE("You haven't eaten enough to refill \the [tray]'s water."))
+			to_chat(src, span_notice("You haven't eaten enough to refill \the [tray]'s water."))
 		return
 
-	visible_message(SPAN_NOTICE("<b>\The [src]</b> rolls around in \the [tray] for a bit."),SPAN_NOTICE("You roll around in \the [tray] for a bit."))
+	visible_message(span_notice("<b>\The [src]</b> rolls around in \the [tray] for a bit."),span_notice("You roll around in \the [tray] for a bit."))

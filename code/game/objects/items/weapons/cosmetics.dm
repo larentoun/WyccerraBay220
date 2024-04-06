@@ -30,7 +30,7 @@
 	name = "[colour] lipstick"
 
 /obj/item/lipstick/attack_self(mob/user as mob)
-	to_chat(user, SPAN_NOTICE("You twist \the [src] [open ? "closed" : "open"]."))
+	to_chat(user, span_notice("You twist \the [src] [open ? "closed" : "open"]."))
 	open = !open
 	if(open)
 		icon_state = "[initial(icon_state)]_[colour]"
@@ -39,7 +39,7 @@
 
 /obj/item/lipstick/use_after(atom/A, mob/living/user, click_parameters)
 	if (!open)
-		to_chat(user, SPAN_NOTICE("You need to uncap \the [src] first!"))
+		to_chat(user, span_notice("You need to uncap \the [src] first!"))
 		return TRUE
 
 	if (ishuman(A))
@@ -55,21 +55,21 @@
 
 		if (head.has_lips && user.zone_sel.selecting == BP_MOUTH)
 			if (H.makeup_style)	//if they already have lipstick on
-				to_chat(user, SPAN_NOTICE("You need to wipe off the old lipstick first!"))
+				to_chat(user, span_notice("You need to wipe off the old lipstick first!"))
 				return TRUE
 
 			if (H == user)
-				user.visible_message(SPAN_NOTICE("\The [user] does their lips with \the [src]."), \
-									 SPAN_NOTICE("You take a moment to apply \the [src]. Perfect!"))
+				user.visible_message(span_notice("\The [user] does their lips with \the [src]."), \
+									 span_notice("You take a moment to apply \the [src]. Perfect!"))
 				H.makeup_style = colour
 				H.update_body()
 				return TRUE
 			else
-				user.visible_message(SPAN_WARNING("\The [user] begins to do \the [H]'s lips with \the [src]."), \
-									 SPAN_NOTICE("You begin to apply \the [src] on \the [H]'s lips."))
+				user.visible_message(span_warning("\The [user] begins to do \the [H]'s lips with \the [src]."), \
+									 span_notice("You begin to apply \the [src] on \the [H]'s lips."))
 				if (do_after(user, 4 SECONDS, H, DO_EQUIP))
-					user.visible_message(SPAN_NOTICE("\The [user] does \the [H]'s lips with \the [src]."), \
-										 SPAN_NOTICE("You apply \the [src] on \the [H]'s lips."))
+					user.visible_message(span_notice("\The [user] does \the [H]'s lips with \the [src]."), \
+										 span_notice("You apply \the [src] on \the [H]'s lips."))
 					H.makeup_style = colour
 					H.update_body()
 				return TRUE
@@ -98,7 +98,7 @@
 
 /obj/item/haircomb/attack_self(mob/living/carbon/human/user)
 	if(!user.incapacitated())
-		user.visible_message(SPAN_NOTICE("\The [user] uses \the [src] to comb their hair with incredible style and sophistication. What a [user.gender == FEMALE ? "lady" : "guy"]."))
+		user.visible_message(span_notice("\The [user] uses \the [src] to comb their hair with incredible style and sophistication. What a [user.gender == FEMALE ? "lady" : "guy"]."))
 
 /obj/item/haircomb/brush
 	name = "hairbrush"
@@ -112,6 +112,6 @@
 	if(!user.incapacitated())
 		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[user.head_hair_style]
 		if(hair_style.flags & VERY_SHORT)
-			user.visible_message(SPAN_NOTICE("\The [user] just sort of runs \the [src] over their scalp."))
+			user.visible_message(span_notice("\The [user] just sort of runs \the [src] over their scalp."))
 		else
-			user.visible_message(SPAN_NOTICE("\The [user] meticulously brushes their hair with \the [src]."))
+			user.visible_message(span_notice("\The [user] meticulously brushes their hair with \the [src]."))

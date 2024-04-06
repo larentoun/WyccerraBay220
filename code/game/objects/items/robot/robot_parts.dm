@@ -78,7 +78,7 @@
 /obj/item/robot_parts/head/can_install(mob/user)
 	var/success = TRUE
 	if(!flash1 || !flash2)
-		to_chat(user, SPAN_WARNING("You need to attach a flash to it first!"))
+		to_chat(user, span_warning("You need to attach a flash to it first!"))
 		success = FALSE
 	return success && ..()
 
@@ -95,10 +95,10 @@
 /obj/item/robot_parts/chest/can_install(mob/user)
 	var/success = TRUE
 	if(!wires)
-		to_chat(user, SPAN_WARNING("You need to attach wires to it first!"))
+		to_chat(user, span_warning("You need to attach wires to it first!"))
 		success = FALSE
 	if(!cell)
-		to_chat(user, SPAN_WARNING("You need to attach a cell to it first!"))
+		to_chat(user, span_warning("You need to attach a cell to it first!"))
 		success = FALSE
 	return success && ..()
 
@@ -106,22 +106,22 @@
 	..()
 	if(istype(W, /obj/item/cell))
 		if(src.cell)
-			to_chat(user, SPAN_WARNING("You have already inserted a cell!"))
+			to_chat(user, span_warning("You have already inserted a cell!"))
 			return
 		else
 			if(!user.unEquip(W, src))
 				return
 			src.cell = W
-			to_chat(user, SPAN_NOTICE("You insert the cell!"))
+			to_chat(user, span_notice("You insert the cell!"))
 	if(isCoil(W))
 		if(src.wires)
-			to_chat(user, SPAN_WARNING("You have already inserted wire!"))
+			to_chat(user, span_warning("You have already inserted wire!"))
 			return
 		else
 			var/obj/item/stack/cable_coil/coil = W
 			if(coil.use(1))
 				src.wires = 1.0
-				to_chat(user, SPAN_NOTICE("You insert the wire!"))
+				to_chat(user, span_notice("You insert the wire!"))
 	if(istype(W, /obj/item/robot_parts/head))
 		var/obj/item/robot_parts/head/head_part = W
 		// Attempt to create full-body prosthesis.
@@ -188,7 +188,7 @@
 		if(istype(user,/mob/living/silicon/robot))
 			var/current_module = user.get_active_hand()
 			if(current_module == W)
-				to_chat(user, SPAN_WARNING("How do you propose to do that?"))
+				to_chat(user, span_warning("How do you propose to do that?"))
 				return
 			else
 				add_flashes(W,user)
@@ -197,24 +197,24 @@
 
 /obj/item/robot_parts/head/proc/add_flashes(obj/item/W as obj, mob/user as mob) //Made into a seperate proc to avoid copypasta
 	if(src.flash1 && src.flash2)
-		to_chat(user, SPAN_NOTICE("You have already inserted the eyes!"))
+		to_chat(user, span_notice("You have already inserted the eyes!"))
 		return
 	else if(src.flash1)
 		if(!user.unEquip(W, src))
 			return
 		src.flash2 = W
-		to_chat(user, SPAN_NOTICE("You insert the flash into the eye socket!"))
+		to_chat(user, span_notice("You insert the flash into the eye socket!"))
 	else
 		if(!user.unEquip(W, src))
 			return
 		src.flash1 = W
-		to_chat(user, SPAN_NOTICE("You insert the flash into the eye socket!"))
+		to_chat(user, span_notice("You insert the flash into the eye socket!"))
 
 
 /obj/item/robot_parts/emag_act(remaining_charges, mob/user)
 	if(sabotaged)
-		to_chat(user, SPAN_WARNING("[src] is already sabotaged!"))
+		to_chat(user, span_warning("[src] is already sabotaged!"))
 	else
-		to_chat(user, SPAN_WARNING("You short out the safeties."))
+		to_chat(user, span_warning("You short out the safeties."))
 		sabotaged = 1
 		return 1

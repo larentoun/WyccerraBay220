@@ -28,7 +28,7 @@
 /obj/item/tank/jetpack/examine(mob/living/user)
 	. = ..()
 	if(air_contents.total_moles < 5)
-		. += SPAN_DANGER("The meter on [src] indicates you are almost out of gas!")
+		. += span_danger("The meter on [src] indicates you are almost out of gas!")
 		playsound(src.loc, 'sound/effects/caution.ogg', 50, 1, -6)
 
 /obj/item/tank/jetpack/verb/toggle_rockets()

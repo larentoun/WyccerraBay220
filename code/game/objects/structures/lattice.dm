@@ -51,15 +51,15 @@
 
 /obj/structure/lattice/proc/deconstruct(mob/user, obj/item/tool)
 	user.visible_message(
-		SPAN_NOTICE("[user] slices [src] apart with [tool]."),
-		SPAN_NOTICE("You [src] apart with [tool].")
+		span_notice("[user] slices [src] apart with [tool]."),
+		span_notice("You [src] apart with [tool].")
 	)
 	var/obj/item/stack/material/rods/rods = new(loc, 1, material.name)
 	transfer_fingerprints_to(rods)
 	var/turf/source = get_turf(src)
 	if(locate(/obj/structure/cable, source))
 		for(var/obj/structure/cable/C in source)
-			C.visible_message(SPAN_WARNING("\The [C] snaps!"))
+			C.visible_message(span_warning("\The [C] snaps!"))
 			new/obj/item/stack/cable_coil(source, (C.d1 ? 2 : 1), C.color)
 			qdel(C)
 	qdel_self()
@@ -85,8 +85,8 @@
 		var/obj/structure/catwalk/catwalk = new(loc)
 		transfer_fingerprints_to(catwalk)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] constructs \a [catwalk] over \the [src] with \a [tool]."),
-			SPAN_NOTICE("You construct \a [catwalk] over \the [src] with \the [tool].")
+			span_notice("\The [user] constructs \a [catwalk] over \the [src] with \a [tool]."),
+			span_notice("You construct \a [catwalk] over \the [src] with \the [tool].")
 		)
 		qdel(src)
 		return TRUE

@@ -93,11 +93,11 @@
 		if (A.can_use(5))
 			TRANSFER_STATE(/singleton/machine_construction/tcomms/panel_open/unwrenched)
 			A.use(5)
-			to_chat(user, SPAN_NOTICE("You insert the cables."))
+			to_chat(user, span_notice("You insert the cables."))
 			machine.set_broken(FALSE, TRUE) // the machine's not borked anymore!
 			return
 		else
-			to_chat(user, SPAN_WARNING("You need five coils of wire for this."))
+			to_chat(user, span_warning("You need five coils of wire for this."))
 			return TRUE
 	if(I.tool_behaviour == TOOL_CROWBAR)
 		if(!I.use_as_tool(machine, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))

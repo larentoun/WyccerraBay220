@@ -26,7 +26,7 @@
 	valid_gases = gas_data.gases.Copy()
 
 /datum/build_mode/atmosphere/Help()
-	to_chat(user, SPAN_NOTICE(help_text))
+	to_chat(user, span_notice(help_text))
 
 /datum/build_mode/atmosphere/ui_interact(mob/user, ui_key = "atmosphere_editor", datum/nanoui/ui = null, force_open = 1, master_ui = null, datum/topic_state/state = GLOB.default_state)
 	. = ..()

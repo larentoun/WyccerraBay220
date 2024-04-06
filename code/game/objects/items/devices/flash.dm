@@ -19,7 +19,7 @@
 
 /obj/item/device/flash/proc/clown_check(mob/user)
 	if(user && (MUTATION_CLUMSY in user.mutations) && prob(50))
-		to_chat(user, SPAN_WARNING("\The [src] slips out of your hand."))
+		to_chat(user, span_warning("\The [src] slips out of your hand."))
 		user.unequip_item()
 		return 0
 	return 1
@@ -42,7 +42,7 @@
 	if (!clown_check(user))
 		return TRUE
 	if (broken)
-		to_chat(user, SPAN_WARNING("\The [src] is broken."))
+		to_chat(user, span_warning("\The [src] is broken."))
 		return TRUE
 
 	flash_recharge()
@@ -54,12 +54,12 @@
 			last_used = world.time
 			if (prob(times_used))	//if you use it 5 times in a minute it has a 10% chance to break!
 				broken = 1
-				to_chat(user, SPAN_WARNING("The bulb has burnt out!"))
+				to_chat(user, span_warning("The bulb has burnt out!"))
 				icon_state = "[initial(icon_state)]_burnt"
 				return TRUE
 			times_used++
 		else	//can only use it 5 times a minute
-			to_chat(user, SPAN_WARNING("*click* *click*"))
+			to_chat(user, span_warning("*click* *click*"))
 			return TRUE
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -85,9 +85,9 @@
 		if (!issilicon(M))
 			user.visible_message(SPAN_CLASS("disarm", "[user] blinds [M] with \the [src]!"))
 		else
-			user.visible_message(SPAN_NOTICE("[user] overloads [M]'s sensors with \the [src]!"))
+			user.visible_message(span_notice("[user] overloads [M]'s sensors with \the [src]!"))
 	else
-		user.visible_message(SPAN_NOTICE("[user] fails to blind [M] with \the [src]!"))
+		user.visible_message(span_notice("[user] fails to blind [M] with \the [src]!"))
 	return TRUE
 
 
@@ -153,7 +153,7 @@
 	if(!user || !clown_check(user)) 	return 0
 
 	if(broken)
-		user.show_message(SPAN_WARNING("The [src.name] is broken"), 2)
+		user.show_message(span_warning("The [src.name] is broken"), 2)
 		return 0
 
 	flash_recharge()
@@ -164,12 +164,12 @@
 		if(0 to 5)
 			if(prob(2*times_used))	//if you use it 5 times in a minute it has a 10% chance to break!
 				broken = 1
-				to_chat(user, SPAN_WARNING("The bulb has burnt out!"))
+				to_chat(user, span_warning("The bulb has burnt out!"))
 				icon_state = "[initial(icon_state)]_burnt"
 				return 0
 			times_used++
 		else	//can only use it  5 times a minute
-			user.show_message(SPAN_WARNING("*click* *click*"), 2)
+			user.show_message(span_warning("*click* *click*"), 2)
 			return 0
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	playsound(src.loc, 'sound/weapons/flash.ogg', 100, 1)

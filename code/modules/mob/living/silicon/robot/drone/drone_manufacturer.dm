@@ -61,7 +61,7 @@
 /obj/machinery/drone_fabricator/examine(mob/user)
 	. = ..()
 	if(produce_drones && drone_progress >= 100 && isghost(user) && config.allow_drone_spawn && count_drones() < config.max_maint_drones)
-		. += SPAN_NOTICE("<B>A drone is prepared. Select 'Join As Drone' from the Ghost tab to spawn as a maintenance drone.</B>")
+		. += span_notice("<B>A drone is prepared. Select 'Join As Drone' from the Ghost tab to spawn as a maintenance drone.</B>")
 
 /obj/machinery/drone_fabricator/proc/create_drone(client/player)
 
@@ -96,20 +96,20 @@
 /proc/try_drone_spawn(mob/user, obj/machinery/drone_fabricator/fabricator)
 
 	if(GAME_STATE < RUNLEVEL_GAME)
-		to_chat(user, SPAN_DANGER("The game hasn't started yet!"))
+		to_chat(user, span_danger("The game hasn't started yet!"))
 		return
 
 	if(!(config.allow_drone_spawn))
-		to_chat(user, SPAN_DANGER("That verb is not currently permitted."))
+		to_chat(user, span_danger("That verb is not currently permitted."))
 		return
 
 	if(jobban_isbanned(user,"Robot"))
-		to_chat(user, SPAN_DANGER("You are banned from playing synthetics and cannot spawn as a drone."))
+		to_chat(user, span_danger("You are banned from playing synthetics and cannot spawn as a drone."))
 		return
 
 	if(config.use_age_restriction_for_jobs && isnum(user.client.player_age))
 		if(user.client.player_age <= 3)
-			to_chat(user, SPAN_DANGER(" Your account is not old enough to play as a maintenance drone."))
+			to_chat(user, span_danger(" Your account is not old enough to play as a maintenance drone."))
 			return
 
 	if(!user.MayRespawn(1, DRONE_SPAWN_DELAY))
@@ -124,7 +124,7 @@
 			all_fabricators[DF.fabricator_tag] = DF
 
 		if(!length(all_fabricators))
-			to_chat(user, SPAN_DANGER("There are no available drone spawn points, sorry."))
+			to_chat(user, span_danger("There are no available drone spawn points, sorry."))
 			return
 
 		var/choice = input(user,"Which fabricator do you wish to use?") as null|anything in all_fabricators

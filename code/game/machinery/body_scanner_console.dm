@@ -62,7 +62,7 @@
 
 /obj/machinery/body_scanconsole/attack_hand(mob/user)
 	if(!connected || connected.inoperable())
-		to_chat(user, SPAN_WARNING("This console is not connected to a functioning body scanner."))
+		to_chat(user, span_warning("This console is not connected to a functioning body scanner."))
 		return TRUE
 	return ..()
 
@@ -103,10 +103,10 @@
 /obj/machinery/body_scanconsole/OnTopic(mob/user, href_list)
 	if(href_list["scan"])
 		if (!connected.occupant)
-			to_chat(user, SPAN_WARNING("[icon2html(src, user)]The body scanner is empty."))
+			to_chat(user, span_warning("[icon2html(src, user)]The body scanner is empty."))
 			return TOPIC_REFRESH
 		if (!istype(connected.occupant))
-			to_chat(user, SPAN_WARNING("[icon2html(src, user)]The body scanner cannot scan that lifeform."))
+			to_chat(user, span_warning("[icon2html(src, user)]The body scanner cannot scan that lifeform."))
 			return TOPIC_REFRESH
 		data["printEnabled"] = TRUE
 		data["eraseEnabled"] = TRUE
@@ -118,16 +118,16 @@
 
 		stored_scan_subject = connected.occupant
 		user.visible_message(
-			SPAN_NOTICE("\The [user] performs a scan of \the [connected.occupant] using \the [initial(connected.name)]."),
-			SPAN_NOTICE("You run a full-body diagnostic of \the [connected.occupant] using \the [initial(connected.name)]."),
-			SPAN_ITALIC("You hear a series of beeps, followed by a deep humming sound.")
+			span_notice("\The [user] performs a scan of \the [connected.occupant] using \the [initial(connected.name)]."),
+			span_notice("You run a full-body diagnostic of \the [connected.occupant] using \the [initial(connected.name)]."),
+			span_italic("You hear a series of beeps, followed by a deep humming sound.")
 		)
 		playsound(connected.loc, 'sound/machines/medbayscanner.ogg', 50)
 		return TOPIC_REFRESH
 
 	if (href_list["print"])
 		if (!data["scan"])
-			to_chat(user, SPAN_WARNING("[icon2html(src, user)]Error: No scan stored."))
+			to_chat(user, span_warning("[icon2html(src, user)]Error: No scan stored."))
 			return TOPIC_REFRESH
 		var/list/scan = data["scan"]
 		new /obj/item/paper/bodyscan(loc, "Printout error.", "Body scan report - [stored_scan_subject]", scan.Copy())
@@ -135,14 +135,14 @@
 
 	if(href_list["push"])
 		if(!length(connected_displays) && !FindDisplays())
-			to_chat(user, SPAN_WARNING("[icon2html(src, user)]Error: No configured displays detected."))
+			to_chat(user, span_warning("[icon2html(src, user)]Error: No configured displays detected."))
 			return TOPIC_REFRESH
 		for(var/obj/machinery/body_scan_display/D in connected_displays)
 			D.add_new_scan(data["scan"])
 		user.visible_message(
-			SPAN_NOTICE("\The [user] keys a command into \the [src]."),
-			SPAN_NOTICE("The console beeps, confirming it has successfully sent the scan to the connected displays."),
-			SPAN_ITALIC("You hear someone typing on a terminal, then a beep.")
+			span_notice("\The [user] keys a command into \the [src]."),
+			span_notice("The console beeps, confirming it has successfully sent the scan to the connected displays."),
+			span_italic("You hear someone typing on a terminal, then a beep.")
 		)
 		return TOPIC_REFRESH
 

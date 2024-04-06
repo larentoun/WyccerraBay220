@@ -21,17 +21,17 @@
 				var/turf/playerTurf = get_turf(Player)
 				if(evacuation_controller.round_over() && evacuation_controller.emergency_evacuation)
 					if(isStationLevel(playerTurf.z))
-						to_chat(Player, SPAN_INFO("<b>You managed to survive, but were marooned on [station_name()] as [Player.real_name]...</b>"))
+						to_chat(Player, span_info("<b>You managed to survive, but were marooned on [station_name()] as [Player.real_name]...</b>"))
 					else if (isEscapeLevel(playerTurf.z))
 						to_chat(Player, SPAN_COLOR("green", "<b>You managed to survive the events on [station_name()] as [Player.real_name].</b>"))
 					else
-						to_chat(Player, SPAN_INFO("<b>You managed to survive, but were marooned in the sector as [Player.real_name]...</b>"))
+						to_chat(Player, span_info("<b>You managed to survive, but were marooned in the sector as [Player.real_name]...</b>"))
 				else if(issilicon(Player))
 					to_chat(Player, SPAN_COLOR("green", "<b>You remain operational after the events on [station_name()] as [Player.real_name].</b>"))
 				else if (isNotStationLevel(playerTurf.z))
-					to_chat(Player, SPAN_INFO("<b>You managed to survive, but were marooned in the sector as [Player.real_name]...</b>"))
+					to_chat(Player, span_info("<b>You managed to survive, but were marooned in the sector as [Player.real_name]...</b>"))
 				else
-					to_chat(Player, SPAN_INFO("<b>You got through just another workday on [station_name()] as [Player.real_name].</b>"))
+					to_chat(Player, span_info("<b>You got through just another workday on [station_name()] as [Player.real_name].</b>"))
 			else
 				if(isghost(Player))
 					var/mob/observer/ghost/O = Player
@@ -75,7 +75,7 @@
 		return
 
 	if (isliving(target))
-		to_chat(target, FONT_LARGE(SPAN_WARNING("Your vision goes blurry and nausea strikes your stomach. Where are you...?")))
+		to_chat(target, FONT_LARGE(span_warning("Your vision goes blurry and nausea strikes your stomach. Where are you...?")))
 	do_teleport(target, T, precision, type)
 	if (destination)
 		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(do_teleport), target, destination), duration)

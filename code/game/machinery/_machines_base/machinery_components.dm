@@ -179,7 +179,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		part_replacer.remove_from_storage(new_part, src)
 		part_replacer.handle_item_insertion(old_part, TRUE)
 	install_component(new_part)
-	to_chat(user, SPAN_NOTICE("[old_part.name] replaced with [new_part.name]."))
+	to_chat(user, span_notice("[old_part.name] replaced with [new_part.name]."))
 
 /// Handles destroying the provided component. `component` should be an item within the machine.
 /obj/machinery/proc/component_destroyed(obj/item/component)
@@ -225,11 +225,11 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	if(!(component.part_flags & PART_FLAG_HAND_REMOVE))
 		return 0
 	if(!components_are_accessible(component.type))
-		to_chat(user, SPAN_WARNING("The insertion point for [component] is inaccessible!"))
+		to_chat(user, span_warning("The insertion point for [component] is inaccessible!"))
 		return 0
 	for(var/path in maximum_component_parts)
 		if(istype(component, path) && (number_of_components(path) == maximum_component_parts[path]))
-			to_chat(user, SPAN_WARNING("There are too many parts of this type installed in [src] already!"))
+			to_chat(user, span_warning("There are too many parts of this type installed in [src] already!"))
 			return 0
 	return 1
 
@@ -248,7 +248,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 /obj/machinery/can_anchor(obj/item/tool, mob/user, silent)
 	if (use_power == POWER_USE_ACTIVE)
 		if (!silent)
-			to_chat(user, SPAN_WARNING("Turn [src] off first!"))
+			to_chat(user, span_warning("Turn [src] off first!"))
 		return FALSE
 	return ..()
 
@@ -328,8 +328,8 @@ Standard helpers for users interacting with machinery parts.
 		user.unEquip(part, src)
 		install_component(part)
 	user.visible_message(
-		SPAN_NOTICE("[user] installs [part] in [src]!"),
-		SPAN_NOTICE("You install [part] in [src]!")
+		span_notice("[user] installs [part] in [src]!"),
+		span_notice("You install [part] in [src]!")
 	)
 	return TRUE
 
@@ -358,8 +358,8 @@ Standard helpers for users interacting with machinery parts.
 	if(part)
 		user.put_in_hands(part) // Already dropped at loc, so that's the fallback.
 		user.visible_message(
-			SPAN_NOTICE("[user] removes [part] from [src]."),
-			SPAN_NOTICE("You remove [part] from [src].")
+			span_notice("[user] removes [part] from [src]."),
+			span_notice("You remove [part] from [src].")
 		)
 
 /// Returns a list of required components that are missing from the machine, or `null` if no components are missing or the machine lacks a `construct_state`.

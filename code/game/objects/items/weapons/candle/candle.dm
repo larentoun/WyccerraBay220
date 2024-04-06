@@ -49,7 +49,7 @@
 /obj/item/flame/candle/proc/light(mob/user)
 	if(!lit)
 		lit = 1
-		visible_message(SPAN_NOTICE("\The [user] lights the [name]."))
+		visible_message(span_notice("\The [user] lights the [name]."))
 		set_light(candle_range, candle_power)
 		START_PROCESSING(SSobj, src)
 

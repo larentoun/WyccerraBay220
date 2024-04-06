@@ -25,7 +25,7 @@
 				for(var/k in visible)
 					if(LAZYACCESS(last_reported_damage, k) != visible[k])
 						LAZYSET(last_reported_damage, k, visible[k])
-						to_chat(M, SPAN_WARNING("The [k] armor on your [holder] has [visible[k]] damage now!"))
+						to_chat(M, span_warning("The [k] armor on your [holder] has [visible[k]] damage now!"))
 
 /datum/extension/armor/ablative/proc/get_damage()
 	for(var/key in armor_values)

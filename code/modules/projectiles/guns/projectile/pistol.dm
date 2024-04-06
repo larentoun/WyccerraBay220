@@ -131,7 +131,7 @@
 				..()
 				return
 			if (silencer)
-				to_chat(user, SPAN_NOTICE("You unscrew \the [silencer] from \the [src]."))
+				to_chat(user, span_notice("You unscrew \the [silencer] from \the [src]."))
 				user.put_in_hands(silencer)
 				silencer = null
 			silenced = FALSE
@@ -158,8 +158,8 @@
 		w_class = ITEM_SIZE_NORMAL
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] screws \a [tool] onto \a [src]."),
-			SPAN_NOTICE("You screw \a [tool] onto \a [src]."),
+			span_notice("\The [user] screws \a [tool] onto \a [src]."),
+			span_notice("You screw \a [tool] onto \a [src]."),
 			range = 2
 		)
 		return TRUE

@@ -82,8 +82,8 @@
 	hatch_open = !hatch_open
 	update_icon()
 	user.visible_message(
-		SPAN_NOTICE("[user] pries [src]'s maintenance hatch open with [tool]."),
-		SPAN_NOTICE("You pry [src]'s maintenance hatch open with [tool].")
+		span_notice("[user] pries [src]'s maintenance hatch open with [tool]."),
+		span_notice("You pry [src]'s maintenance hatch open with [tool].")
 	)
 
 /obj/structure/catwalk/welder_act(mob/living/user, obj/item/tool)
@@ -103,8 +103,8 @@
 			USE_FEEDBACK_STACK_NOT_ENOUGH(stack, 1, "to plate [src].")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("[user] starts plating [src] with [tool]."),
-			SPAN_NOTICE("You start plating [src] with [tool].")
+			span_notice("[user] starts plating [src] with [tool]."),
+			span_notice("You start plating [src] with [tool].")
 		)
 		if (!user.do_skilled(1 SECOND, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
@@ -122,8 +122,8 @@
 		update_icon()
 		SetName("plated catwalk")
 		user.visible_message(
-			SPAN_NOTICE("[user] plates [src] with [tool]."),
-			SPAN_NOTICE("You plate [src] with [tool].")
+			span_notice("[user] plates [src] with [tool]."),
+			span_notice("You plate [src] with [tool].")
 		)
 		return TRUE
 

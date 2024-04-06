@@ -6,14 +6,14 @@
 		Weaken(3)
 		spin(32,2)
 		visible_message(
-			SPAN_DANGER("[src] rolls on the floor, trying to put themselves out!"),
-			SPAN_NOTICE("You stop, drop, and roll!")
+			span_danger("[src] rolls on the floor, trying to put themselves out!"),
+			span_notice("You stop, drop, and roll!")
 			)
 		sleep(30)
 		if(fire_stacks <= 0)
 			visible_message(
-				SPAN_DANGER("[src] has successfully extinguished themselves!"),
-				SPAN_NOTICE("You extinguish yourself.")
+				span_danger("[src] has successfully extinguished themselves!"),
+				span_notice("You extinguish yourself.")
 				)
 			ExtinguishMob()
 		return TRUE
@@ -48,8 +48,8 @@
 		breakout_time = max(5, breakout_time * psi_mod)
 
 	visible_message(
-		SPAN_DANGER("\The [src] attempts to remove \the [HC]!"),
-		SPAN_WARNING("You attempt to remove \the [HC] (This will take around [breakout_time/(1 SECOND)] second\s and you need to stand still)."), range = 2
+		span_danger("\The [src] attempts to remove \the [HC]!"),
+		span_warning("You attempt to remove \the [HC] (This will take around [breakout_time/(1 SECOND)] second\s and you need to stand still)."), range = 2
 		)
 
 	var/stages = 4
@@ -58,18 +58,18 @@
 		if(do_after(src, breakout_time*(1/stages), do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
 			if(!handcuffed || buckled)
 				return
-			to_chat(src, SPAN_WARNING("You try to slip free of \the [handcuffed] ([i*100/stages]% done)."))
+			to_chat(src, span_warning("You try to slip free of \the [handcuffed] ([i*100/stages]% done)."))
 		else
 			if(!handcuffed || buckled)
 				return
-			to_chat(src, SPAN_WARNING("You stop trying to slip free of \the [handcuffed]."))
+			to_chat(src, span_warning("You stop trying to slip free of \the [handcuffed]."))
 			return
 		if(!handcuffed || buckled)
 			return
 	if (handcuffed.damage_health(handcuffed.get_max_health() / 2))
 		visible_message(
-			SPAN_DANGER("\The [src] manages to remove \the [handcuffed], breaking them!"),
-			SPAN_NOTICE("You successfully remove \the [handcuffed], breaking them!"), range = 2
+			span_danger("\The [src] manages to remove \the [handcuffed], breaking them!"),
+			span_notice("You successfully remove \the [handcuffed], breaking them!"), range = 2
 			)
 		QDEL_NULL(handcuffed)
 		if(buckled && buckled.buckle_require_restraints)
@@ -77,8 +77,8 @@
 		update_inv_handcuffed()
 		return
 	visible_message(
-		SPAN_WARNING("\The [src] manages to remove \the [handcuffed]!"),
-		SPAN_NOTICE("You successfully remove \the [handcuffed]!"), range = 2
+		span_warning("\The [src] manages to remove \the [handcuffed]!"),
+		span_notice("You successfully remove \the [handcuffed]!"), range = 2
 		)
 	drop_from_inventory(handcuffed)
 	return
@@ -91,8 +91,8 @@
 
 /mob/living/carbon/proc/break_handcuffs()
 	visible_message(
-		SPAN_DANGER("[src] is trying to break \the [handcuffed]!"),
-		SPAN_WARNING("You attempt to break your [handcuffed.name]. (This will take around 5 seconds and you need to stand still)")
+		span_danger("[src] is trying to break \the [handcuffed]!"),
+		span_warning("You attempt to break your [handcuffed.name]. (This will take around 5 seconds and you need to stand still)")
 		)
 
 	if (!do_after(src, 5 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
@@ -101,8 +101,8 @@
 		return
 
 	visible_message(
-		SPAN_DANGER("[src] manages to break \the [handcuffed]!"),
-		SPAN_WARNING("You successfully break your [handcuffed.name].")
+		span_danger("[src] manages to break \the [handcuffed]!"),
+		span_warning("You successfully break your [handcuffed.name].")
 		)
 
 	qdel(handcuffed)
@@ -131,8 +131,8 @@
 			unbuckle_time = max(0, unbuckle_time - ((25 SECONDS) * psi.get_rank(PSI_PSYCHOKINESIS)))
 
 		visible_message(
-			SPAN_DANGER("[src] attempts to unbuckle themself!"),
-			SPAN_WARNING("You attempt to unbuckle yourself. (This will take around [unbuckle_time / (1 SECOND)] second\s and you need to stand still)"), range = 2
+			span_danger("[src] attempts to unbuckle themself!"),
+			span_warning("You attempt to unbuckle yourself. (This will take around [unbuckle_time / (1 SECOND)] second\s and you need to stand still)"), range = 2
 			)
 
 	if(unbuckle_time && buckled)
@@ -141,12 +141,12 @@
 			if(!unbuckle_time || do_after(usr, unbuckle_time*(1/stages), do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT, incapacitation_flags = INCAPACITATION_DISABLED))
 				if(!buckled)
 					return
-				to_chat(src, SPAN_WARNING("You try to unbuckle yourself ([i*100/stages]% done)."))
+				to_chat(src, span_warning("You try to unbuckle yourself ([i*100/stages]% done)."))
 			else
 				if(!buckled)
 					return
-				to_chat(src, SPAN_WARNING("You stop trying to unbuckle yourself."))
+				to_chat(src, span_warning("You stop trying to unbuckle yourself."))
 				return
-		to_chat(src, SPAN_NOTICE("You successfully unbuckle yourself."))
+		to_chat(src, span_notice("You successfully unbuckle yourself."))
 		buckled.user_unbuckle_mob(src)
 		return

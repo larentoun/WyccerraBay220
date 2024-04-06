@@ -53,10 +53,10 @@
 
 
 /datum/preferences/proc/announce_conflict(list/notadded)
-	to_chat(client, SPAN_DANGER("KEYBINDING CONFLICT.\n\
+	to_chat(client, span_danger("KEYBINDING CONFLICT.\n\
 	There are new keybindings that have defaults bound to keys you already set, They will default to Unbound. You can bind them in Setup Character or Game Preferences\n\
 	<a href='?src=\ref[src];preference=tab;tab=3'>Or you can click here to go straight to the keybindings page.</a>"))
 	for(var/item in notadded)
 		var/datum/keybinding/conflicted = item
-		to_chat(client, SPAN_DANGER("[conflicted.category]: [conflicted.full_name] needs updating."))
+		to_chat(client, span_danger("[conflicted.category]: [conflicted.full_name] needs updating."))
 		LAZYADD(key_bindings["None"], conflicted.name) // set it to unbound to prevent this from opening up again in the future

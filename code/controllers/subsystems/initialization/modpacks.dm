@@ -67,4 +67,4 @@ SUBSYSTEM_DEF(modpacks)
 		popup.set_content(.)
 		popup.open()
 	else
-		to_chat(src, SPAN_WARNING("Этот сервер не использует какие-либо модификации."))
+		to_chat(src, span_warning("Этот сервер не использует какие-либо модификации."))

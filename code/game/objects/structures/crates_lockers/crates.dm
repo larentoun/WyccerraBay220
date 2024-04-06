@@ -15,7 +15,7 @@
 	. = ..()
 	if(.)
 		if(rigged)
-			visible_message(SPAN_DANGER("There are wires attached to the lid of [src]..."))
+			visible_message(span_danger("There are wires attached to the lid of [src]..."))
 			for(var/obj/item/device/assembly_holder/H in src)
 				H.process_activation(usr)
 			for(var/obj/item/device/assembly/A in src)
@@ -29,7 +29,7 @@
 			devices += H
 		for(var/obj/item/device/assembly/A in src)
 			devices += A
-		. += SPAN_NOTICE("There are some wires attached to the lid, connected to [english_list(devices)].")
+		. += span_notice("There are some wires attached to the lid, connected to [english_list(devices)].")
 
 /obj/structure/closet/crate/wirecutter_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
@@ -41,8 +41,8 @@
 	rigged = FALSE
 	new /obj/item/stack/cable_coil(loc, 1)
 	user.visible_message(
-		SPAN_NOTICE("[user] cuts [src]'s wiring with [tool]."),
-		SPAN_NOTICE("You cuts [src]'s wiring with [tool].")
+		span_notice("[user] cuts [src]'s wiring with [tool]."),
+		span_notice("You cuts [src]'s wiring with [tool].")
 	)
 
 /obj/structure/closet/crate/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -59,8 +59,8 @@
 			FEEDBACK_UNEQUIP_FAILURE(user, tool)
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("[user] attaches [tool] to [src]."),
-			SPAN_NOTICE("You attach [tool] to [src].")
+			span_notice("[user] attaches [tool] to [src]."),
+			span_notice("You attach [tool] to [src].")
 		)
 		return TRUE
 
@@ -75,8 +75,8 @@
 			return TRUE
 		rigged = TRUE
 		user.visible_message(
-			SPAN_NOTICE("[user] adds some wiring to [src] with [cable.get_vague_name(FALSE)]."),
-			SPAN_NOTICE("You rig [src] with [cable.get_exact_name(1)].")
+			span_notice("[user] adds some wiring to [src] with [cable.get_vague_name(FALSE)]."),
+			span_notice("You rig [src] with [cable.get_exact_name(1)].")
 		)
 		return TRUE
 

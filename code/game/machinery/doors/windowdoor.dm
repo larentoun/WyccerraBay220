@@ -155,21 +155,21 @@
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
 			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
-			visible_message(SPAN_DANGER("[user] smashes against the [src.name]."), 1)
+			visible_message(span_danger("[user] smashes against the [src.name]."), 1)
 			damage_health(25, DAMAGE_BRUTE)
 			return TRUE
 
 /obj/machinery/door/window/emag_act(remaining_charges, mob/user)
 	if (emagged)
-		to_chat(user, SPAN_WARNING("\The [src] has already been locked open."))
+		to_chat(user, span_warning("\The [src] has already been locked open."))
 		return FALSE
 	if (!operable())
-		to_chat(user, SPAN_WARNING("\The [src] is not functioning and doesn't respond to your attempt to short the circuitry."))
+		to_chat(user, span_warning("\The [src] is not functioning and doesn't respond to your attempt to short the circuitry."))
 		return FALSE
 
 	operating = DOOR_OPERATING_BROKEN
 	emagged = TRUE
-	to_chat(user, SPAN_NOTICE("You short out \the [src]'s internal circuitry, locking it open!"))
+	to_chat(user, span_notice("You short out \the [src]'s internal circuitry, locking it open!"))
 	if (density)
 		flick("[base_state]spark", src)
 		addtimer(CALLBACK(src, PROC_REF(open)), 6, TIMER_UNIQUE | TIMER_OVERRIDE)
@@ -196,7 +196,7 @@
 			spark_system.start()
 			playsound(src.loc, "sparks", 50, 1)
 			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
-			visible_message(SPAN_WARNING("The glass door was sliced open by [user]!"))
+			visible_message(span_warning("The glass door was sliced open by [user]!"))
 		return TRUE
 
 	//If it's emagged, crowbar can pry electronics out.
@@ -204,7 +204,7 @@
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		user.visible_message("\The [user] starts removing the electronics from the windoor.", "You start to remove electronics from the windoor.")
 		if (do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT))
-			to_chat(user, SPAN_NOTICE("You removed the windoor electronics!"))
+			to_chat(user, span_notice("You removed the windoor electronics!"))
 
 			var/obj/structure/windoor_assembly/wa = new/obj/structure/windoor_assembly(src.loc)
 			if (istype(src, /obj/machinery/door/window/brigdoor))
@@ -227,7 +227,7 @@
 			open()
 		else
 			if (emagged)
-				to_chat(user, SPAN_WARNING("\The [src] seems to be stuck and refuses to close!"))
+				to_chat(user, span_warning("\The [src] seems to be stuck and refuses to close!"))
 				return TRUE
 			close()
 		return TRUE

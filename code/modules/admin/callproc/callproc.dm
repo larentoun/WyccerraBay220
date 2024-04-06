@@ -236,7 +236,7 @@
 		var/P = text2path("/proc/[procname]")
 		returnval = call(P)(arglist(arguments))
 
-	to_chat(usr, SPAN_INFO("[procname]() returned: [json_encode(returnval)]"))
+	to_chat(usr, span_info("[procname]() returned: [json_encode(returnval)]"))
 
 #undef CANCEL
 #undef WAITING

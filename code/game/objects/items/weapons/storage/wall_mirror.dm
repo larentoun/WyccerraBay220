@@ -33,7 +33,7 @@
 
 /obj/item/storage/mirror/attack_hand(mob/living/carbon/human/user)
 	if (shattered)
-		to_chat(user, SPAN_WARNING("\The [src] is ruined - you can't get your strut on."))
+		to_chat(user, span_warning("\The [src] is ruined - you can't get your strut on."))
 		return
 	open_mirror_ui(src, user, ui_cache)
 
@@ -57,7 +57,7 @@
 		return
 	flick("mirror_open", src)
 	if (prob(I.force) && user.a_intent == I_HURT)
-		user.visible_message(SPAN_WARNING("\The [user] smashes \the [src] with \the [I]!"))
+		user.visible_message(span_warning("\The [user] smashes \the [src] with \the [I]!"))
 		shatter()
 
 

@@ -59,11 +59,11 @@
 		return
 	switch(stage)
 		if(LIGHT_STAGE_EMPTY)
-			. += SPAN_NOTICE("It's an empty frame.")
+			. += span_notice("It's an empty frame.")
 		if(LIGHT_STAGE_WIRED)
-			. += SPAN_NOTICE("It's wired.")
+			. += span_notice("It's wired.")
 		if(LIGHT_STAGE_COMPLETE)
-			. += SPAN_NOTICE("The casing is closed.")
+			. += span_notice("The casing is closed.")
 
 /obj/machinery/light_construct/screwdriver_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
@@ -75,9 +75,9 @@
 	stage = LIGHT_STAGE_COMPLETE
 	update_icon()
 	user.visible_message(
-		SPAN_NOTICE("[user] closes [src]'s casing."),
-		SPAN_NOTICE("You close [src]'s casing."),
-		SPAN_ITALIC("You hear screws being tightened.")
+		span_notice("[user] closes [src]'s casing."),
+		span_notice("You close [src]'s casing."),
+		span_italic("You hear screws being tightened.")
 	)
 	var/obj/machinery/light/newlight = new fixture_type(loc, src)
 	newlight.set_dir(dir)
@@ -88,27 +88,27 @@
 	switch(stage)
 		if(LIGHT_STAGE_EMPTY)
 			. = ITEM_INTERACT_SUCCESS
-			to_chat(user, SPAN_NOTICE("You begin deconstructing [src]."))
+			to_chat(user, span_notice("You begin deconstructing [src]."))
 			if(!tool.use_as_tool(src, user, 3 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT))
 				return
 			new /obj/item/stack/material/steel( get_turf(loc), sheets_refunded )
 			user.visible_message(
-				SPAN_NOTICE("[user] deconstructs [src]."),
-				SPAN_NOTICE("You deconstruct [src]!"),
-				SPAN_ITALIC("You hear ratcheting and metal scraping.")
+				span_notice("[user] deconstructs [src]."),
+				span_notice("You deconstruct [src]!"),
+				span_italic("You hear ratcheting and metal scraping.")
 			)
 			qdel(src)
 		if(LIGHT_STAGE_WIRED)
 			. = ITEM_INTERACT_SUCCESS
-			to_chat(user, SPAN_WARNING("You have to remove the wires first."))
+			to_chat(user, span_warning("You have to remove the wires first."))
 		if(LIGHT_STAGE_COMPLETE)
 			. = ITEM_INTERACT_SUCCESS
-			to_chat(user, SPAN_WARNING("You have to unscrew the case first."))
+			to_chat(user, span_warning("You have to unscrew the case first."))
 
 /obj/machinery/light_construct/wirecutter_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
 	if(stage != LIGHT_STAGE_WIRED)
-		to_chat(user, SPAN_WARNING("There are no exposed wires to cut!"))
+		to_chat(user, span_warning("There are no exposed wires to cut!"))
 		return
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
@@ -116,23 +116,23 @@
 	update_icon()
 	new /obj/item/stack/cable_coil(get_turf(loc), 1, "red")
 	user.visible_message(
-		SPAN_NOTICE("[user] cuts the wires from [src]."),
-		SPAN_NOTICE("You cut [src]'s wires and remove them from the frame'."),
-		SPAN_ITALIC("You hear snipping and cables being cut.")
+		span_notice("[user] cuts the wires from [src]."),
+		span_notice("You cut [src]'s wires and remove them from the frame'."),
+		span_italic("You hear snipping and cables being cut.")
 	)
 
 /obj/machinery/light_construct/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/stack/cable_coil))
 		if (stage != LIGHT_STAGE_EMPTY)
-			to_chat(user, SPAN_WARNING("There is no exposed, empty area to wire!"))
+			to_chat(user, span_warning("There is no exposed, empty area to wire!"))
 			return TRUE
 		var/obj/item/stack/cable_coil/coil = W
 		if (coil.use(1))
 			stage = LIGHT_STAGE_WIRED
 			update_icon()
 			user.visible_message(
-				SPAN_NOTICE("[user] adds wires to [src]."),
-				SPAN_NOTICE("You add wires to [src].")
+				span_notice("[user] adds wires to [src]."),
+				span_notice("You add wires to [src].")
 			)
 			playsound(loc, 'sound/items/Deconstruct.ogg', 50, TRUE)
 		return TRUE
@@ -340,13 +340,13 @@
 		return
 	var/status = get_status()
 	if(status == LIGHT_EMPTY || status == LIGHT_BROKEN)
-		to_chat(user, SPAN_WARNING("You can't do anything with [src]."))
+		to_chat(user, span_warning("You can't do anything with [src]."))
 		return
 	if(!(status == LIGHT_OK || status == LIGHT_BURNED))
 		return
 	user.visible_message(
-		SPAN_WARNING("[user] smashes [src]!"),
-		SPAN_WARNING("You smash [src]!")
+		span_warning("[user] smashes [src]!"),
+		span_warning("You smash [src]!")
 	)
 	attack_animation(user)
 	broken()
@@ -390,13 +390,13 @@
 	var/fitting = get_fitting_name()
 	switch(get_status())
 		if(LIGHT_OK)
-			. += SPAN_NOTICE("It is turned [on? "on" : "off"].")
+			. += span_notice("It is turned [on? "on" : "off"].")
 		if(LIGHT_EMPTY)
-			. += SPAN_NOTICE("The [fitting] has been removed.")
+			. += span_notice("The [fitting] has been removed.")
 		if(LIGHT_BURNED)
-			. += SPAN_NOTICE("The [fitting] is burnt out.")
+			. += span_notice("The [fitting] is burnt out.")
 		if(LIGHT_BROKEN)
-			. += SPAN_NOTICE("The [fitting] has been smashed.")
+			. += span_notice("The [fitting] has been smashed.")
 
 /// Fetches the name of `light_type`.
 /obj/machinery/light/proc/get_fitting_name()
@@ -426,9 +426,9 @@
 		user.do_attack_animation(src)
 		if(prob(1 + weapon.force * 5))
 			user.visible_message(
-				SPAN_WARNING("[user] smashes [src]!"),
-				SPAN_WARNING("You smash [src]!"),
-				SPAN_WARNING("You hear a small glass object shatter.")
+				span_warning("[user] smashes [src]!"),
+				span_warning("You smash [src]!"),
+				span_warning("You hear a small glass object shatter.")
 			)
 			if(on && (weapon.obj_flags & OBJ_FLAG_CONDUCTIBLE))
 				if (prob(12))
@@ -436,9 +436,9 @@
 			broken()
 		else
 			user.visible_message(
-				SPAN_WARNING("[user] hits [src]!"),
-				SPAN_WARNING("You hit [src]!"),
-				SPAN_WARNING("You hear glass cracking.")
+				span_warning("[user] hits [src]!"),
+				span_warning("You hit [src]!"),
+				span_warning("You hear glass cracking.")
 			)
 			playsound(loc, "glasscrack", 40, TRUE)
 		return TRUE
@@ -453,9 +453,9 @@
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] opens [src]'s casing."),
-		SPAN_NOTICE("You open up [src]'s casing."),
-		SPAN_ITALIC("You hear screws being loosened.")
+		span_notice("[user] opens [src]'s casing."),
+		span_notice("You open up [src]'s casing."),
+		span_italic("You hear screws being loosened.")
 	)
 	var/obj/machinery/light_construct/C = new construct_type(loc, dir, src)
 	C.stage = LIGHT_STAGE_WIRED
@@ -466,25 +466,25 @@
 /obj/machinery/light/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if (istype(W, /obj/item/light))
 		if(lightbulb)
-			to_chat(user, SPAN_WARNING("There is a [get_fitting_name()] already inserted."))
+			to_chat(user, span_warning("There is a [get_fitting_name()] already inserted."))
 			return TRUE
 		if(!istype(W, light_type))
-			to_chat(user, SPAN_WARNING("This type of light requires a [get_fitting_name()]."))
+			to_chat(user, span_warning("This type of light requires a [get_fitting_name()]."))
 			return TRUE
 		if(!user.unEquip(W, src))
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("[user] inserts \a [W] into [src]."),
-			SPAN_NOTICE("You insert [W] into [src]."),
-			SPAN_ITALIC("You hear something being screwed in.")
+			span_notice("[user] inserts \a [W] into [src]."),
+			span_notice("You insert [W] into [src]."),
+			span_italic("You hear something being screwed in.")
 		)
 		insert_bulb(W)
 		return TRUE
 
 	if (!lightbulb)
 		user.visible_message(
-			SPAN_WARNING("[user] shoves \a [W] into [src]!"),
-			SPAN_DANGER("You stick [W] into [src]!")
+			span_warning("[user] shoves \a [W] into [src]!"),
+			span_danger("You stick [W] into [src]!")
 		)
 		if(powered() && (W.obj_flags & OBJ_FLAG_CONDUCTIBLE))
 			var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
@@ -521,23 +521,23 @@
 // ai attack - make lights flicker, because why not
 
 /obj/machinery/light/attack_ai(mob/user)
-	to_chat(user, SPAN_NOTICE("You cause [src] to flick on and off."))
+	to_chat(user, span_notice("You cause [src] to flick on and off."))
 	flicker(1)
 
 // attack with hand - remove tube/bulb
 // if hands aren't protected and the light is on, burn the player
 /obj/machinery/light/physical_attack_hand(mob/living/user)
 	if(!lightbulb)
-		to_chat(user, SPAN_WARNING("There is no [get_fitting_name()] in this light."))
+		to_chat(user, span_warning("There is no [get_fitting_name()] in this light."))
 		return TRUE
 
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
 			H.visible_message(
-				SPAN_WARNING("[user] shreds [src]!"),
-				SPAN_WARNING("You shred [src]!"),
-				SPAN_WARNING("You hear glass shattering!"))
+				span_warning("[user] shreds [src]!"),
+				span_warning("You shred [src]!"),
+				span_warning("You hear glass shattering!"))
 			broken()
 			return TRUE
 
@@ -556,22 +556,22 @@
 			prot = TRUE
 
 		if(prot || (MUTATION_COLD_RESISTANCE in user.mutations))
-			to_chat(user, SPAN_NOTICE("You remove the [get_fitting_name()]."))
+			to_chat(user, span_notice("You remove the [get_fitting_name()]."))
 		else if(istype(user) && user.psi && !user.psi.suppressed && user.psi.get_rank(PSI_PSYCHOKINESIS) >= PSI_RANK_OPERANT)
-			to_chat(user, SPAN_NOTICE("You telekinetically remove the [get_fitting_name()]."))
+			to_chat(user, span_notice("You telekinetically remove the [get_fitting_name()]."))
 		else if(user.a_intent != I_HELP)
 			var/obj/item/organ/external/hand = H.organs_by_name[user.hand ? BP_L_HAND : BP_R_HAND]
 			if(hand && hand.is_usable() && !hand.can_feel_pain())
 				user.apply_damage(3, DAMAGE_BURN, user.hand ? BP_L_HAND : BP_R_HAND, used_weapon = src)
 				user.visible_message(
-					SPAN_WARNING("[user]'s [hand] burns and sizzles as \he touches the hot [get_fitting_name()]."),
-					SPAN_WARNING("Your [hand.name] burns and sizzles as you remove the hot [get_fitting_name()].")
+					span_warning("[user]'s [hand] burns and sizzles as \he touches the hot [get_fitting_name()]."),
+					span_warning("Your [hand.name] burns and sizzles as you remove the hot [get_fitting_name()].")
 				)
 		else
-			to_chat(user, SPAN_WARNING("You try to remove the [get_fitting_name()], but it's too hot and you don't want to burn your hand."))
+			to_chat(user, span_warning("You try to remove the [get_fitting_name()], but it's too hot and you don't want to burn your hand."))
 			return TRUE
 	else
-		to_chat(user, SPAN_NOTICE("You remove the [get_fitting_name()]."))
+		to_chat(user, span_notice("You remove the [get_fitting_name()]."))
 
 	// create a light tube/bulb item and put it in the user's hand
 	user.put_in_active_hand(remove_bulb())	//puts it in our active hand
@@ -687,7 +687,7 @@
 /obj/item/light/examine(mob/user)
 	. = ..()
 	if(reagents?.total_volume && Adjacent(user))
-		. += SPAN_WARNING("There's some sort of fluid inside [src].")
+		. += span_warning("There's some sort of fluid inside [src].")
 
 /obj/item/light/get_color()
 	return b_colour
@@ -837,12 +837,12 @@
 			if (!reagents)
 				create_reagents(5)
 				S.reagents.trans_to_obj(src, 5)
-				to_chat(user, SPAN_WARNING("You inject the solution into [src]."))
+				to_chat(user, span_warning("You inject the solution into [src]."))
 				if (reagents.get_reagent_amount(/datum/reagent/toxin/phoron) >= LIGHT_PHORON_EXPLODE_THRESHOLD)
 					log_and_message_admins("injected a light with phoron, rigging it to explode.", user)
 				return
 			else
-				to_chat(user, SPAN_WARNING("[src] is already filled with fluid!"))
+				to_chat(user, span_warning("[src] is already filled with fluid!"))
 	. = ..()
 
 // shatter light, unless it was an attempt to put it in a light socket
@@ -870,8 +870,8 @@
 /obj/item/light/proc/shatter()
 	if(status == LIGHT_OK || status == LIGHT_BURNED)
 		visible_message(
-			SPAN_WARNING("[src] shatters!"),
-			SPAN_WARNING("You hear a small glass object shatter.")
+			span_warning("[src] shatters!"),
+			span_warning("You hear a small glass object shatter.")
 		)
 		set_status(LIGHT_BROKEN)
 		playsound(loc, "glasscrack", 75, TRUE)
@@ -882,15 +882,15 @@
 	if(reagents)
 		if (reagents.get_reagent_amount(/datum/reagent/toxin/phoron) >= LIGHT_PHORON_EXPLODE_THRESHOLD)
 			visible_message(
-				SPAN_DANGER("[src] flares brilliantly!"),
-				SPAN_DANGER("You hear a loud crack!")
+				span_danger("[src] flares brilliantly!"),
+				span_danger("You hear a loud crack!")
 			)
 			log_and_message_admins("Rigged light explosion, last touched by [fingerprintslast]")
 			var/turf/T = get_turf(loc)
 			set_status(LIGHT_BROKEN)
 			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(explosion), T, 3, EX_ACT_LIGHT), 0.5 SECONDS)
 		else
-			visible_message(SPAN_WARNING("[src] short-circuits as something burns out its filament!"))
+			visible_message(span_warning("[src] short-circuits as something burns out its filament!"))
 			set_status(LIGHT_BURNED)
 			if (sound_on)
 				playsound(src, sound_on, 100)

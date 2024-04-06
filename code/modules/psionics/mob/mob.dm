@@ -14,7 +14,7 @@
 
 /mob/living/proc/set_psi_rank(faculty, rank, take_larger, defer_update, temporary)
 	if(!src.zone_sel)
-		to_chat(src, SPAN_NOTICE("You feel something strange brush against your mind... but your brain is not able to grasp it."))
+		to_chat(src, span_notice("You feel something strange brush against your mind... but your brain is not able to grasp it."))
 		return
 	if(!psi)
 		psi = new(src)
@@ -26,7 +26,7 @@
 	var/blocked = 100 * get_blocked_ratio(null, DAMAGE_PSIONIC)
 	if(prob(blocked))
 		if(attacker)
-			to_chat(attacker, SPAN_WARNING("Your mental attack is deflected by \the [src]'s defenses!"))
-			to_chat(src, SPAN_DANGER("\The [attacker] strikes out with a mental attack, but you deflect it!"))
+			to_chat(attacker, span_warning("Your mental attack is deflected by \the [src]'s defenses!"))
+			to_chat(src, span_danger("\The [attacker] strikes out with a mental attack, but you deflect it!"))
 		return TRUE
 	return FALSE

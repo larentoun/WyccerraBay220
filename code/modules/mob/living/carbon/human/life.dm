@@ -97,7 +97,7 @@
 	else
 		stamina = clamp(stamina + amt, 0, 100)
 		if(stamina <= 0)
-			to_chat(src, SPAN_WARNING("You are exhausted!"))
+			to_chat(src, span_warning("You are exhausted!"))
 			if(MOVING_QUICKLY(src))
 				set_moving_slowly()
 	if(last_stamina != stamina && hud_used)
@@ -252,13 +252,13 @@
 			if(!isSynthetic())
 				if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT))
 					radiation -= 5 * RADIATION_SPEED_COEFFICIENT
-					to_chat(src, SPAN_WARNING("You feel weak."))
+					to_chat(src, span_warning("You feel weak."))
 					Weaken(3)
 					if(!lying)
 						emote("collapse")
 				if(prob(5) && prob(100 * RADIATION_SPEED_COEFFICIENT) && species.get_bodytype(src) == SPECIES_HUMAN) //apes go bald
 					if((head_hair_style != "Bald" || facial_hair_style != "Shaved" ))
-						to_chat(src, SPAN_WARNING("Your hair falls out."))
+						to_chat(src, span_warning("Your hair falls out."))
 						head_hair_style = "Bald"
 						facial_hair_style = "Shaved"
 						update_hair()
@@ -270,7 +270,7 @@
 				if(prob(5))
 					take_overall_damage(0, 5 * RADIATION_SPEED_COEFFICIENT, used_weapon = "Radiation Burns")
 				if(prob(1))
-					to_chat(src, SPAN_WARNING("You feel strange!"))
+					to_chat(src, span_warning("You feel strange!"))
 					adjustCloneLoss(5 * RADIATION_SPEED_COEFFICIENT)
 					emote("gasp")
 		if(radiation > 150)
@@ -599,7 +599,7 @@
 			if(stat || status_flags & FAKEDEATH)
 				return
 			else
-				to_chat(src, SPAN_WARNING("[species.halloss_message_self]"))
+				to_chat(src, span_warning("[species.halloss_message_self]"))
 				src.visible_message("<B>[src]</B> [species.halloss_message]")
 			Paralyse(10)
 
@@ -647,7 +647,7 @@
 				var/zzzchance = min(5, 5*drowsyness/30)
 				if((prob(zzzchance) || drowsyness >= 60))
 					if(stat == CONSCIOUS)
-						to_chat(src, SPAN_NOTICE("You are about to fall asleep..."))
+						to_chat(src, span_notice("You are about to fall asleep..."))
 					Sleeping(5)
 
 		// If you're dirty, your gloves will become dirty, too.
@@ -670,7 +670,7 @@
 		if(stasis_value > 1 && drowsyness < stasis_value * 4)
 			drowsyness += min(stasis_value, 3)
 			if(!stat && prob(1))
-				to_chat(src, SPAN_NOTICE("You feel slow and sluggish..."))
+				to_chat(src, span_notice("You feel slow and sluggish..."))
 
 	return 1
 
@@ -888,7 +888,7 @@
 	if(client && world.time >= client.next_ambience_time + 5 MINUTES)
 		A.play_ambience(src)
 	if(stat == UNCONSCIOUS && world.time - l_move_time < 5 && prob(10))
-		to_chat(src,SPAN_NOTICE("You feel like you're [pick("moving","flying","floating","falling","hovering")]."))
+		to_chat(src,span_notice("You feel like you're [pick("moving","flying","floating","falling","hovering")]."))
 
 /mob/living/carbon/human/proc/handle_changeling()
 	if(mind && mind.changeling)

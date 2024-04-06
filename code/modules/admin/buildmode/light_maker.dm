@@ -7,11 +7,11 @@
 	var/light_color = COLOR_WHITE
 
 /datum/build_mode/light_maker/Help()
-	to_chat(usr, SPAN_NOTICE("***********************************************************"))
-	to_chat(usr, SPAN_NOTICE("Left Click                       = Make it glow"))
-	to_chat(usr, SPAN_NOTICE("Right Click                      = Reset glow"))
-	to_chat(usr, SPAN_NOTICE("Right Click on Build Mode Button = Change glow properties"))
-	to_chat(usr, SPAN_NOTICE("***********************************************************"))
+	to_chat(usr, span_notice("***********************************************************"))
+	to_chat(usr, span_notice("Left Click                       = Make it glow"))
+	to_chat(usr, span_notice("Right Click                      = Reset glow"))
+	to_chat(usr, span_notice("Right Click on Build Mode Button = Change glow properties"))
+	to_chat(usr, span_notice("***********************************************************"))
 
 /datum/build_mode/light_maker/Configurate()
 	var/choice = alert("Change the new light range, power, or color?", "Light Maker", "Range", "Power", "Color", "Cancel")

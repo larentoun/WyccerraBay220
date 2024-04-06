@@ -40,31 +40,31 @@
 	// Measuring Tape
 	if (istype(tool, /obj/item/device/measuring_tape))
 		user.visible_message(
-			SPAN_NOTICE("\The [user] extends \a [tool] towards \the [src]."),
-			SPAN_NOTICE("You extend \the [tool] towards \the [src].")
+			span_notice("\The [user] extends \a [tool] towards \the [src]."),
+			span_notice("You extend \the [tool] towards \the [src].")
 		)
 		if (!user.do_skilled(1.5 SECONDS, SKILL_SCIENCE, src) || !user.use_sanity_check(src, tool))
 			return TRUE
-		to_chat(user, SPAN_INFO("\The [src] has been excavated to a depth of [excavation_level]cm."))
+		to_chat(user, span_info("\The [src] has been excavated to a depth of [excavation_level]cm."))
 		return TRUE
 
 	// Pickaxe - Excavate
 	if (istype(tool, /obj/item/pickaxe))
 		var/obj/item/pickaxe/pickaxe = tool
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts [pickaxe.drill_verb] \the [src] with \a [pickaxe]."),
-			SPAN_NOTICE("You start [pickaxe.drill_verb] \the [src] with \the [pickaxe].")
+			span_notice("\The [user] starts [pickaxe.drill_verb] \the [src] with \a [pickaxe]."),
+			span_notice("You start [pickaxe.drill_verb] \the [src] with \the [pickaxe].")
 		)
 		if (!do_after(user, pickaxe.digspeed, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] finished [pickaxe.drill_verb] \the [src] with \a [pickaxe]."),
-			SPAN_NOTICE("You finish [pickaxe.drill_verb] \the [src] with \the [pickaxe].")
+			span_notice("\The [user] finished [pickaxe.drill_verb] \the [src] with \a [pickaxe]."),
+			span_notice("You finish [pickaxe.drill_verb] \the [src] with \the [pickaxe].")
 		)
 		excavation_level += pickaxe.excavation_amount
 		if (excavation_level > 200)
 			visible_message(
-				SPAN_WARNING("\The [src] suddenly crumbles away. Any secrets it was holding are long gone.")
+				span_warning("\The [src] suddenly crumbles away. Any secrets it was holding are long gone.")
 			)
 			qdel_self()
 			return TRUE
@@ -77,11 +77,11 @@
 					if (machine.my_effect)
 						machine.my_effect.artifact_id = artifact_find.artifact_id
 				visible_message(
-					SPAN_WARNING("\The [src] suddenly crumbles away, revealing \a [artifact].")
+					span_warning("\The [src] suddenly crumbles away, revealing \a [artifact].")
 				)
 			else
 				visible_message(
-					SPAN_WARNING("\The [src] suddenly crumbles away, but there was nothing of interest inside.")
+					span_warning("\The [src] suddenly crumbles away, but there was nothing of interest inside.")
 				)
 			qdel_self()
 		return TRUE

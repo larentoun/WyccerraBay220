@@ -129,7 +129,7 @@
 
 	if (target?.do_unique_target_user)
 		if (do_feedback)
-			to_chat(user, SPAN_WARNING("[target.do_unique_target_user] is already interacting with [target]!"))
+			to_chat(user, span_warning("[target.do_unique_target_user] is already interacting with [target]!"))
 		return DO_TARGET_UNIQUE_ACT
 
 	if ((do_flags & DO_TARGET_UNIQUE_ACT) && target)

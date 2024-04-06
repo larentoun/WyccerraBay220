@@ -60,7 +60,7 @@
 	add_fingerprint(user)
 	use(amount_used)
 	user.visible_message("\The [user] wraps \the [target] with [get_vague_name(TRUE)]].",
-		SPAN_NOTICE("You wrap \the [target] with [get_exact_name(amount_used)]"),
+		span_notice("You wrap \the [target] with [get_exact_name(amount_used)]"),
 		"You hear someone taping paper around an object.")
 	playsound(user.loc, 'sound/effects/wrap.ogg', 65, 1)
 
@@ -74,34 +74,34 @@
 	if (!isobj(object))
 		return FALSE
 	if (istype(object, /obj/item/smallDelivery) || istype(object,/obj/structure/bigDelivery) || istype(object, /obj/item/evidencebag))
-		to_chat(user, SPAN_WARNING("\The [object] is already wrapped."))
+		to_chat(user, span_warning("\The [object] is already wrapped."))
 		return TRUE
 	if (object.anchored)
-		to_chat(user, SPAN_WARNING("\The [object] is bolted down and can't be wrapped."))
+		to_chat(user, span_warning("\The [object] is bolted down and can't be wrapped."))
 		return TRUE
 	if (user in object)
-		to_chat(user, SPAN_WARNING("You cannot wrap \the [object] while inside it."))
+		to_chat(user, span_warning("You cannot wrap \the [object] while inside it."))
 		return TRUE
 	var/amount = get_amount()
 	if (amount < 1)
-		to_chat(user, SPAN_WARNING("\The [src] is out of [plural_name]."))
+		to_chat(user, span_warning("\The [src] is out of [plural_name]."))
 		return TRUE
 
 	if (istype(object, /obj/item))
 		var/obj/item/target = object
 		var/a_used = target.get_storage_cost()
 		if (target.w_class == ITEM_SIZE_NO_CONTAINER || target.w_class == ITEM_SIZE_GARGANTUAN)
-			to_chat(user, SPAN_WARNING("\The [target] is too big to wrap!"))
+			to_chat(user, span_warning("\The [target] is too big to wrap!"))
 			return TRUE
 		if (user.isEquipped(target))
-			to_chat(user, SPAN_WARNING("You must put down \the [target] in order to wrap it."))
+			to_chat(user, span_warning("You must put down \the [target] in order to wrap it."))
 			return TRUE
 		if (amount < a_used)
 			USE_FEEDBACK_STACK_NOT_ENOUGH(src, a_used, "to wrap \the [target]!")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts wrapping \the [target] with \the [src]."),
-			SPAN_NOTICE("You start wrapping \the [target] with \the [src].")
+			span_notice("\The [user] starts wrapping \the [target] with \the [src]."),
+			span_notice("You start wrapping \the [target] with \the [src].")
 		)
 		if (!do_after(user, target.w_class SECONDS, target, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(target, src))
 			return TRUE
@@ -119,8 +119,8 @@
 			USE_FEEDBACK_STACK_NOT_ENOUGH(src, item_size, "to wrap \the [target]!")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts wrapping \the [target] with \the [src]."),
-			SPAN_NOTICE("You start wrapping \the [target] with \the [src].")
+			span_notice("\The [user] starts wrapping \the [target] with \the [src]."),
+			span_notice("You start wrapping \the [target] with \the [src].")
 		)
 		if (!do_after(user, item_size SECONDS, target, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(target, src))
 			return TRUE
@@ -137,11 +137,11 @@
 		USE_FEEDBACK_STACK_NOT_ENOUGH(src, a_used, "to wrap \the [target]!")
 		return TRUE
 	if (!H.has_danger_grab(user))
-		to_chat(user, SPAN_WARNING("You need to have a firm grip on \the [target] in order to wrap them."))
+		to_chat(user, span_warning("You need to have a firm grip on \the [target] in order to wrap them."))
 		return TRUE
 	H.visible_message(
-		SPAN_NOTICE("\The [H] starts wrapping \the [target] with \the [src]."),
-		SPAN_NOTICE("You start wrapping \the [target] with \the [src].")
+		span_notice("\The [H] starts wrapping \the [target] with \the [src]."),
+		span_notice("You start wrapping \the [target] with \the [src].")
 	)
 	if (!do_after(user, ITEM_SIZE_LARGE SECONDS, target, DO_PUBLIC_UNIQUE) || !H.has_danger_grab(user) || !user.use_sanity_check(H, src))
 		return TRUE
@@ -151,13 +151,13 @@
 
 	if (user == target)
 		user.visible_message(
-			SPAN_DANGER("\The [user] wraps themselves with [get_vague_name(TRUE)]."),
-			SPAN_DANGER("You wrap yourself with [get_exact_name(a_used)].")
+			span_danger("\The [user] wraps themselves with [get_vague_name(TRUE)]."),
+			span_danger("You wrap yourself with [get_exact_name(a_used)].")
 		)
 	else
 		user.visible_message(
-			SPAN_DANGER("\The [user] wraps \the [target] with [get_vague_name(TRUE)]."),
-			SPAN_DANGER("You wrap \the [target] with [get_exact_name(a_used)].")
+			span_danger("\The [user] wraps \the [target] with [get_vague_name(TRUE)]."),
+			span_danger("You wrap \the [target] with [get_exact_name(a_used)].")
 		)
 
 	playsound(user.loc, 'sound/effects/wrap.ogg', 65, 1)

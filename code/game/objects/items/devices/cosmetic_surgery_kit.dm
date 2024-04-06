@@ -20,21 +20,21 @@
 
 /obj/item/device/cosmetic_surgery_kit/attack_self(mob/living/carbon/human/user)
 	if (used)
-		to_chat(user, SPAN_WARNING("The [src] remains lifeless, as it's armatures dangle uselessly, now."))
+		to_chat(user, span_warning("The [src] remains lifeless, as it's armatures dangle uselessly, now."))
 		return
 	if (!istype(user))
 		return
 	user.visible_message(
-		SPAN_WARNING("\The [user] places \the [src] up to [user.p_their()] face."),
-		SPAN_WARNING("You place \the [src] up to your face.")
+		span_warning("\The [user] places \the [src] up to [user.p_their()] face."),
+		span_warning("You place \the [src] up to your face.")
 	)
 	if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src))
 		return
-	user.visible_message(SPAN_DANGER("\The [src] purrs maliciously and unfurls its armatures with frightening speed!"))
+	user.visible_message(span_danger("\The [src] purrs maliciously and unfurls its armatures with frightening speed!"))
 	playsound(user, 'sound/items/electronic_assembly_emptying.ogg', 50, TRUE)
 	user.visible_message(
-		SPAN_DANGER("\The [src]'s armatures begin chipping away at \the [user]'s face!"),
-		SPAN_DANGER("\The [src]'s armatures begin chipping away at your face!")
+		span_danger("\The [src]'s armatures begin chipping away at \the [user]'s face!"),
+		span_danger("\The [src]'s armatures begin chipping away at your face!")
 	)
 	user.custom_pain("Your face feels like it's being shredded apart!", 160)
 	playsound(user, 'sound/effects/squelch1.ogg', 25, TRUE)

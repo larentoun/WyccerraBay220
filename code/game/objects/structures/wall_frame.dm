@@ -49,7 +49,7 @@
 /obj/structure/wall_frame/examine(mob/user)
 	. = ..()
 	if(paint_color)
-		. += SPAN_NOTICE("It has a smooth coat of paint applied.")
+		. += span_notice("It has a smooth coat of paint applied.")
 
 
 /obj/structure/wall_frame/can_use_item(obj/item/tool, mob/user, click_params)
@@ -72,14 +72,14 @@
 /obj/structure/wall_frame/wrench_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
 	user.visible_message(
-		SPAN_NOTICE("[user] starts dismantling [src] with [tool]."),
-		SPAN_NOTICE("You start dismantling [src] with [tool].")
+		span_notice("[user] starts dismantling [src] with [tool]."),
+		span_notice("You start dismantling [src] with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 4 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] dismantles [src] with [tool]."),
-		SPAN_NOTICE("You dismantle [src] with [tool].")
+		span_notice("[user] dismantles [src] with [tool]."),
+		span_notice("You dismantle [src] with [tool].")
 	)
 	dismantle()
 
@@ -88,14 +88,14 @@
 	if(!tool.tool_start_check(user, 1))
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] starts slicing [src] apart with [tool]."),
-		SPAN_NOTICE("You start slicing [src] apart with [tool].")
+		span_notice("[user] starts slicing [src] apart with [tool]."),
+		span_notice("You start slicing [src] apart with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 2 SECONDS, 1, 50, SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] slices [src] apart with [tool]."),
-		SPAN_NOTICE("You slice [src] apart with [tool].")
+		span_notice("[user] slices [src] apart with [tool]."),
+		span_notice("You slice [src] apart with [tool].")
 	)
 	dismantle()
 

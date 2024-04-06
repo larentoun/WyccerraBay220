@@ -80,8 +80,8 @@
 			grab.affecting.Weaken(5)
 		grab.affecting.apply_damage(8, DAMAGE_BRUTE, BP_HEAD)
 		visible_message(
-			SPAN_DANGER("\The [grab.assailant] slams \the [grab.affecting]'s face against \the [src]!"),
-			SPAN_DANGER("You slam \the [grab.affecting]'s face against \the [src]!")
+			span_danger("\The [grab.assailant] slams \the [grab.affecting]'s face against \the [src]!"),
+			span_danger("You slam \the [grab.affecting]'s face against \the [src]!")
 		)
 		if (material)
 			playsound(src, material.tableslam_noise, 50, 1)
@@ -109,8 +109,8 @@
 		grab.affecting.forceMove(loc)
 		grab.affecting.Weaken(rand(2,5))
 		visible_message(
-			SPAN_WARNING("\The [grab.assailant] puts \the [grab.affecting] on \the [src]."),
-			SPAN_WARNING("You put \the [grab.affecting] on \the [src].")
+			span_warning("\The [grab.assailant] puts \the [grab.affecting] on \the [src]."),
+			span_warning("You put \the [grab.affecting] on \the [src].")
 		)
 		qdel(grab)
 		return TRUE

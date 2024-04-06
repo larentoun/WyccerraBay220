@@ -24,12 +24,12 @@
 		if(!inserted_battery)
 			if(!user.unEquip(I, src))
 				return TRUE
-			to_chat(user, SPAN_NOTICE("You insert [I] into [src]."))
+			to_chat(user, span_notice("You insert [I] into [src]."))
 			src.inserted_battery = I
 			updateDialog()
 			return TRUE
 		else
-			to_chat(user, SPAN_WARNING("There is already a battery in [src]."))
+			to_chat(user, span_warning("There is already a battery in [src]."))
 			return TRUE
 	return..()
 

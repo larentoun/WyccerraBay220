@@ -154,7 +154,7 @@ var/global/list/image/splatter_cache=list()
 			return
 		var/taken = rand(1,amount)
 		amount -= taken
-		to_chat(user, SPAN_NOTICE("You get some of \the [src] on your hands."))
+		to_chat(user, span_notice("You get some of \the [src] on your hands."))
 		if (!user.blood_DNA)
 			user.blood_DNA = list()
 		user.blood_DNA |= blood_DNA.Copy()
@@ -211,7 +211,7 @@ var/global/list/image/splatter_cache=list()
 
 /obj/decal/cleanable/blood/writing/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("It reads: [SPAN_COLOR(basecolor, "\"[message]\"")]")
+	. += span_notice("It reads: [SPAN_COLOR(basecolor, "\"[message]\"")]")
 
 /obj/decal/cleanable/blood/gibs
 	name = "gibs"

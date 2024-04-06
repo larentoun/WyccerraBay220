@@ -50,13 +50,13 @@
 					var/obj/item/device/multitool/multimeter/O = L.get_active_hand()
 					if(O.mode == METER_MESURING)
 						if (L.skill_check(SKILL_ELECTRICAL, SKILL_TRAINED))
-							to_chat(usr, SPAN_NOTICE("Вы подаёте напряжение на провод..."))
+							to_chat(usr, span_notice("Вы подаёте напряжение на провод..."))
 							if(!do_after(L, 50, holder))
 								return
 							PulseColour(colour)
-							to_chat(usr,SPAN_NOTICE("Провод пропульсован."))
+							to_chat(usr,span_notice("Провод пропульсован."))
 						else
-							to_chat(L, SPAN_NOTICE ("Вы не знаете с каким напряжением работает этот провод."))
+							to_chat(L, span_notice ("Вы не знаете с каким напряжением работает этот провод."))
 					else
 						if (L.skill_check(SKILL_ELECTRICAL, SKILL_TRAINED))
 							if(!do_after(L, 10, holder))
@@ -72,14 +72,14 @@
 							else
 								to_chat(L, "the [colour] wire not connected")
 						else
-							to_chat(L, SPAN_NOTICE ("Вы не умеете подключать мультиметр."))
+							to_chat(L, span_notice ("Вы не умеете подключать мультиметр."))
 
 			if(href_list["examine"])
 				if(isMultimeter(I) || isMultimeter(offhand_item))
 					var/obj/item/device/multitool/multimeter/O = L.get_active_hand()
 					if (L.skill_check(SKILL_ELECTRICAL, SKILL_TRAINED))
 						if(O.mode == METER_CHECKING)
-							to_chat(L, SPAN_NOTICE ("Перебираем провода..."))
+							to_chat(L, span_notice ("Перебираем провода..."))
 							var/name_by_type = name_by_type()
 							to_chat(L, "[name_by_type] wires:")
 							for(var/colour in src.wires)
@@ -97,9 +97,9 @@
 									else
 										to_chat(L, "the [colour] wire not connected")
 						else
-							to_chat(L, SPAN_NOTICE ("Переключите мультиметр в режим прозвонки."))
+							to_chat(L, span_notice ("Переключите мультиметр в режим прозвонки."))
 					else
-						to_chat(L, SPAN_NOTICE ("Вы не знаете как с этим работать."))
+						to_chat(L, span_notice ("Вы не знаете как с этим работать."))
 
 /datum/design/item/tool/multimeter
 	name = "multimeter"
@@ -146,12 +146,12 @@
 		if(isMultimeter(tool))
 			var/obj/item/device/multitool/multimeter/O = tool
 			if(O.mode != METER_CHECKING)
-				to_chat(user, SPAN_NOTICE ("Переключите мультиметр."))
+				to_chat(user, span_notice ("Переключите мультиметр."))
 			else
 				if (user.skill_check(SKILL_ELECTRICAL, SKILL_TRAINED))
 					src.interact(usr)
 				else
-					to_chat(user, SPAN_NOTICE ("Вы не умеете работать с этим замком."))
+					to_chat(user, span_notice ("Вы не умеете работать с этим замком."))
 
 /obj/structure/closet/interact(mob/user)
 	add_fingerprint(user)
@@ -189,18 +189,18 @@
 		validate = 0
 
 		if(W.mode != METER_CHECKING)
-			to_chat(user, SPAN_NOTICE("Мультиметр не реагирует на подключение."))
+			to_chat(user, span_notice("Мультиметр не реагирует на подключение."))
 			return
 
-		to_chat(usr, SPAN_NOTICE ("Вы начинаете проверять замок..."))
+		to_chat(usr, span_notice ("Вы начинаете проверять замок..."))
 		for(var/i = 1 to codelen)
 			if(do_after(user, 10, src))
 				if(code2[i] == code1[i])
 					validate++
-					to_chat(usr, SPAN_NOTICE ("Ключ подходит."))
+					to_chat(usr, span_notice ("Ключ подходит."))
 					playsound(W.loc, 'mods/utility_items/sounds/mbeep.ogg', 30, 1, frequency = rand(50000, 55000))
 				else
-					to_chat(usr, SPAN_NOTICE ("Ключ не подходит."))
+					to_chat(usr, span_notice ("Ключ не подходит."))
 		W.in_use = FALSE
 
 		if(validate < codelen)
@@ -208,7 +208,7 @@
 
 		locked = !locked
 		update_icon()
-		visible_message(SPAN_WARNING ("[user] has [locked ? "locked" : "hacked"] [src]!"))
+		visible_message(span_warning ("[user] has [locked ? "locked" : "hacked"] [src]!"))
 		return
 
 	if(href_list["inc"])

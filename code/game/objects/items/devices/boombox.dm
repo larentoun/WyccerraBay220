@@ -36,7 +36,7 @@
 /obj/item/boombox/emp_act(severity)
 	if (GET_FLAGS(boombox_flags, BOOMBOX_BROKEN))
 		return
-	audible_message(SPAN_WARNING("[src]'s speakers pop with a sharp crack!"))
+	audible_message(span_warning("[src]'s speakers pop with a sharp crack!"))
 	playsound(src, 'sound/effects/snap.ogg', 100, 1)
 	SET_FLAGS(boombox_flags, BOOMBOX_BROKEN)
 	jukebox.Stop()
@@ -53,7 +53,7 @@
 			message += "[message?" ":""]It's broken."
 	if (!message)
 		return
-	. += SPAN_ITALIC(message)
+	. += span_italic(message)
 
 /obj/item/boombox/screwdriver_act_secondary(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
@@ -101,18 +101,18 @@
 	set waitfor = FALSE
 	if (istype(item, /obj/item/stack/nanopaste))
 		if (!GET_FLAGS(boombox_flags, BOOMBOX_PANEL))
-			to_chat(user, SPAN_WARNING("The panel on [src] is not open."))
+			to_chat(user, span_warning("The panel on [src] is not open."))
 			return TRUE
 		if (!GET_FLAGS(boombox_flags, BOOMBOX_BROKEN))
-			to_chat(user, SPAN_WARNING("[src] is not broken."))
+			to_chat(user, span_warning("[src] is not broken."))
 			return TRUE
 		var/obj/item/stack/paste = item
 		if (!paste.use(1))
-			to_chat(user, SPAN_WARNING("[paste] is empty."))
+			to_chat(user, span_warning("[paste] is empty."))
 			return TRUE
 		user.visible_message(
-			SPAN_ITALIC("[user] uses [item] to repair [src]."),
-			SPAN_NOTICE("You repair [src] with [item]."),
+			span_italic("[user] uses [item] to repair [src]."),
+			span_notice("You repair [src] with [item]."),
 			range = 3
 		)
 		CLEAR_FLAGS(boombox_flags, BOOMBOX_BROKEN)

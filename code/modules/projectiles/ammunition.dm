@@ -70,17 +70,17 @@
 	var/tmp_label = ""
 	var/label_text = sanitizeSafe(input(user, "Inscribe some text into [initial(BB.name)]","Inscription",tmp_label), MAX_NAME_LEN)
 	if(length(label_text) > 20)
-		to_chat(user, SPAN_WARNING("The inscription can be at most 20 characters long."))
+		to_chat(user, span_warning("The inscription can be at most 20 characters long."))
 		return
 	if(!label_text)
 		if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 			return
-		to_chat(user, SPAN_NOTICE("You scratch the inscription off of [initial(BB)]."))
+		to_chat(user, span_notice("You scratch the inscription off of [initial(BB)]."))
 		BB.SetName(initial(BB.name))
 	else
 		if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 			return
-		to_chat(user, SPAN_NOTICE("You inscribe \"[label_text]\" into [initial(BB.name)]."))
+		to_chat(user, span_notice("You inscribe \"[label_text]\" into [initial(BB.name)]."))
 		BB.SetName("[initial(BB.name)] (\"[label_text]\")")
 
 /obj/item/ammo_casing/on_update_icon()
@@ -91,9 +91,9 @@
 /obj/item/ammo_casing/examine(mob/user)
 	. = ..()
 	if(caliber)
-		. += SPAN_NOTICE("Its caliber is [caliber].")
+		. += span_notice("Its caliber is [caliber].")
 	if (!BB)
-		. += SPAN_NOTICE("This one is spent.")
+		. += span_notice("This one is spent.")
 
 
 //An item that holds casings and can be used to put them inside guns
@@ -152,10 +152,10 @@
 	if(istype(W, /obj/item/ammo_casing))
 		var/obj/item/ammo_casing/C = W
 		if(C.caliber != caliber)
-			to_chat(user, SPAN_WARNING("[C] does not fit into [src]."))
+			to_chat(user, span_warning("[C] does not fit into [src]."))
 			return
 		if(length(stored_ammo) >= max_ammo)
-			to_chat(user, SPAN_WARNING("[src] is full!"))
+			to_chat(user, span_warning("[src] is full!"))
 			return
 		if(!user.unEquip(C, src))
 			return
@@ -166,9 +166,9 @@
 
 /obj/item/ammo_magazine/attack_self(mob/user)
 	if(!length(stored_ammo))
-		to_chat(user, SPAN_NOTICE("[src] is already empty!"))
+		to_chat(user, span_notice("[src] is already empty!"))
 		return
-	to_chat(user, SPAN_NOTICE("You empty [src]."))
+	to_chat(user, span_notice("You empty [src]."))
 	for(var/obj/item/ammo_casing/C in stored_ammo)
 		C.forceMove(user.loc)
 		C.set_dir(pick(GLOB.alldirs))
@@ -179,12 +179,12 @@
 /obj/item/ammo_magazine/attack_hand(mob/user)
 	if(user.get_inactive_hand() == src)
 		if(!length(stored_ammo))
-			to_chat(user, SPAN_NOTICE("[src] is already empty!"))
+			to_chat(user, span_notice("[src] is already empty!"))
 		else
 			var/obj/item/ammo_casing/C = stored_ammo[length(stored_ammo)]
 			stored_ammo-=C
 			user.put_in_hands(C)
-			user.visible_message("[user] removes \a [C] from [src].", SPAN_NOTICE("You remove \a [C] from [src]."))
+			user.visible_message("[user] removes \a [C] from [src].", span_notice("You remove \a [C] from [src]."))
 			update_icon()
 	else
 		..()
@@ -223,7 +223,7 @@
 
 /obj/item/ammo_magazine/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("There [(length(stored_ammo) == 1)? "is" : "are"] [length(stored_ammo)] round\s left!")
+	. += span_notice("There [(length(stored_ammo) == 1)? "is" : "are"] [length(stored_ammo)] round\s left!")
 
 
 //magazine icon state caching

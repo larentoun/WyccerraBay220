@@ -79,12 +79,12 @@
 			brute = max(brute - absorb_brute, 0)
 			burn = max(brute - absorb_burn, 0)
 			if (!brute && !burn)
-				to_chat(src, SPAN_WARNING("Your shield absorbs all of the damage!"))
+				to_chat(src, span_warning("Your shield absorbs all of the damage!"))
 				return
 			else
-				to_chat(src, SPAN_WARNING("Your shield absorbs some of the damage!"))
+				to_chat(src, span_warning("Your shield absorbs some of the damage!"))
 		else
-			to_chat(src, SPAN_DANGER("Your charge is too low to power your shield!"))
+			to_chat(src, span_danger("Your charge is too low to power your shield!"))
 
 	var/datum/robot_component/component
 	if (~flags & ORGAN_DAMAGE_SILICON_EMP)
@@ -126,11 +126,11 @@
 		cell.charge -= cost
 		if(cell.charge <= 0)
 			cell.charge = 0
-			to_chat(src, SPAN_WARNING("Your shield has overloaded!"))
+			to_chat(src, span_warning("Your shield has overloaded!"))
 		else
 			brute -= absorb_brute
 			burn -= absorb_burn
-			to_chat(src, SPAN_WARNING("Your shield absorbs some of the impact!"))
+			to_chat(src, span_warning("Your shield absorbs some of the impact!"))
 
 	var/datum/robot_component/armour/A = get_armour()
 	if(A)

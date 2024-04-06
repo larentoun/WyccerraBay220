@@ -106,21 +106,21 @@
 			pixel_x = -32
 			pixel_y = 0
 	user.visible_message(
-		SPAN_NOTICE("[user] adjusts [src]'s positioning with [tool]."),
-		SPAN_NOTICE("You set [src]'s positioning to [choice] with [tool].")
+		span_notice("[user] adjusts [src]'s positioning with [tool]."),
+		span_notice("You set [src]'s positioning to [choice] with [tool].")
 	)
 
 /obj/structure/noticeboard/wrench_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
 	user.visible_message(
-		SPAN_NOTICE("[user] starts dismantling [src] with [tool]."),
-		SPAN_NOTICE("You start dismantling [src] with [tool].")
+		span_notice("[user] starts dismantling [src] with [tool]."),
+		span_notice("You start dismantling [src] with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 5 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] dismantles [src] with [tool]."),
-		SPAN_NOTICE("You dismantle [src] with [tool].")
+		span_notice("[user] dismantles [src] with [tool]."),
+		span_notice("You dismantle [src] with [tool].")
 	)
 	dismantle()
 
@@ -139,8 +139,8 @@
 		add_paper(tool)
 		SSpersistence.track_value(tool, /datum/persistent/paper)
 		user.visible_message(
-			SPAN_NOTICE("[user] pins [tool] to [src]."),
-			SPAN_NOTICE("You pin [tool] to [src].")
+			span_notice("[user] pins [tool] to [src]."),
+			span_notice("You pin [tool] to [src].")
 		)
 		return TRUE
 
@@ -195,7 +195,7 @@
 			add_fingerprint(user)
 			pen.resolve_attackby(P, user)
 		else
-			to_chat(user, SPAN_WARNING("You need a pen to write on [P]."))
+			to_chat(user, span_warning("You need a pen to write on [P]."))
 		. = TOPIC_REFRESH
 
 	if(. == TOPIC_REFRESH)

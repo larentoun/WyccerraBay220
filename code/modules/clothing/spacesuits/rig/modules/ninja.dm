@@ -86,7 +86,7 @@
 	var/mob/living/carbon/human/H = holder.wearer
 
 	if(!istype(H.loc, /turf))
-		to_chat(H, SPAN_WARNING("You cannot teleport out of your current location."))
+		to_chat(H, span_warning("You cannot teleport out of your current location."))
 		return 0
 
 	var/turf/T
@@ -96,23 +96,23 @@
 		T = get_teleport_loc(get_turf(H), H, 6, 1, 1, 1)
 
 	if(!T)
-		to_chat(H, SPAN_WARNING("No valid teleport target found."))
+		to_chat(H, span_warning("No valid teleport target found."))
 		return 0
 
 	if(T.density)
-		to_chat(H, SPAN_WARNING("You cannot teleport into solid walls."))
+		to_chat(H, span_warning("You cannot teleport into solid walls."))
 		return 0
 
 	if(T.z in GLOB.using_map.admin_levels)
-		to_chat(H, SPAN_WARNING("You cannot use your teleporter on this Z-level."))
+		to_chat(H, span_warning("You cannot use your teleporter on this Z-level."))
 		return 0
 
 	if(T.contains_dense_objects())
-		to_chat(H, SPAN_WARNING("You cannot teleport to a location with solid objects."))
+		to_chat(H, span_warning("You cannot teleport to a location with solid objects."))
 		return 0
 
 	if(T.z != H.z || get_dist(T, get_turf(H)) > world.view)
-		to_chat(H, SPAN_WARNING("You cannot teleport to such a distant object."))
+		to_chat(H, span_warning("You cannot teleport to such a distant object."))
 		return 0
 
 	if(!..()) return 0
@@ -205,19 +205,19 @@
 			return
 
 		if(usr == holder.wearer)
-			holder.wearer.visible_message(SPAN_WARNING(" \The [src.holder.wearer] flicks a small switch on the back of \the [src.holder]."),1)
+			holder.wearer.visible_message(span_warning(" \The [src.holder.wearer] flicks a small switch on the back of \the [src.holder]."),1)
 			sleep(blink_delay)
 
 	self_destructing = 1
 	src.blink_mode = 1
 	src.blink()
-	holder.visible_message(SPAN_NOTICE("\The [src.holder] begins beeping."),SPAN_NOTICE(" You hear beeping."))
+	holder.visible_message(span_notice("\The [src.holder] begins beeping."),span_notice(" You hear beeping."))
 	sleep(blink_time)
 	src.blink_mode = 2
-	holder.visible_message(SPAN_WARNING("\The [src.holder] beeps rapidly!"),SPAN_WARNING(" You hear rapid beeping!"))
+	holder.visible_message(span_warning("\The [src.holder] beeps rapidly!"),span_warning(" You hear rapid beeping!"))
 	sleep(blink_rapid_time)
 	src.blink_mode = 3
-	holder.visible_message(SPAN_DANGER("\The [src.holder] emits a shrill tone!"),SPAN_DANGER(" You hear a shrill tone!"))
+	holder.visible_message(span_danger("\The [src.holder] emits a shrill tone!"),span_danger(" You hear a shrill tone!"))
 	sleep(blink_solid_time)
 	src.blink_mode = 0
 	src.holder.set_light(2, 0, "#000000")

@@ -12,15 +12,15 @@
 
 /obj/machinery/power/debug_items/proc/show_info(mob/user)
 	if(!powernet)
-		. += SPAN_NOTICE("This device is not connected to a powernet")
+		. += span_notice("This device is not connected to a powernet")
 		return
 
-	. += SPAN_NOTICE("Connected to powernet: [powernet]")
-	. += SPAN_NOTICE("Available power: [num2text(powernet.avail, 20)] W")
-	. += SPAN_NOTICE("Load: [num2text(powernet.viewload, 20)] W")
-	. += SPAN_NOTICE("Has alert: [powernet.problem ? "YES" : "NO"]")
-	. += SPAN_NOTICE("Cables: [length(powernet.cables)]")
-	. += SPAN_NOTICE("Nodes: [length(powernet.nodes)]")
+	. += span_notice("Connected to powernet: [powernet]")
+	. += span_notice("Available power: [num2text(powernet.avail, 20)] W")
+	. += span_notice("Load: [num2text(powernet.viewload, 20)] W")
+	. += span_notice("Has alert: [powernet.problem ? "YES" : "NO"]")
+	. += span_notice("Cables: [length(powernet.cables)]")
+	. += span_notice("Nodes: [length(powernet.nodes)]")
 
 
 // An infinite power generator. Adds energy to connected cable.

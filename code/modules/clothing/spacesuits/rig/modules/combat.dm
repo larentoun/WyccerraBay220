@@ -58,7 +58,7 @@
 		return 0
 
 	if(!holder.cell.check_charge(use_power_cost * CELLRATE))
-		to_chat(holder.wearer,SPAN_WARNING("Not enough stored power."))
+		to_chat(holder.wearer,span_warning("Not enough stored power."))
 		return 0
 
 	if(!target)
@@ -78,7 +78,7 @@
 	if(active || !check())
 		return
 
-	to_chat(holder.wearer, SPAN_NOTICE("Your hardsuit gauntlets heat up and lock into place, ready to be used."))
+	to_chat(holder.wearer, span_notice("Your hardsuit gauntlets heat up and lock into place, ready to be used."))
 	playsound(src.loc, 'sound/items/goggles_charge.ogg', 20, 1)
 	active = 1
 
@@ -119,10 +119,10 @@
 		return 0
 
 	if(accepted_item.charges >= 5)
-		to_chat(user, SPAN_DANGER("Another grenade of that type will not fit into the module."))
+		to_chat(user, span_danger("Another grenade of that type will not fit into the module."))
 		return 0
 
-	to_chat(user, SPAN_INFO("<b>You slot \the [input_device] into the suit module.</b>"))
+	to_chat(user, span_info("<b>You slot \the [input_device] into the suit module.</b>"))
 	qdel(input_device)
 	accepted_item.charges++
 	return 1
@@ -138,7 +138,7 @@
 	var/mob/living/carbon/human/H = holder.wearer
 
 	if(!charge_selected)
-		to_chat(H, SPAN_DANGER("You have not selected a grenade type."))
+		to_chat(H, span_danger("You have not selected a grenade type."))
 		return 0
 
 	var/datum/rig_charge/charge = charges[charge_selected]
@@ -147,12 +147,12 @@
 		return 0
 
 	if(charge.charges <= 0)
-		to_chat(H, SPAN_DANGER("Insufficient grenades!"))
+		to_chat(H, span_danger("Insufficient grenades!"))
 		return 0
 
 	charge.charges--
 	var/obj/item/grenade/new_grenade = new charge.product_type(get_turf(H))
-	H.visible_message(SPAN_DANGER("[H] launches \a [new_grenade]!"))
+	H.visible_message(span_danger("[H] launches \a [new_grenade]!"))
 	log_and_message_admins("fired a grenade ([new_grenade.name]) from a rigsuit grenade launcher.")
 	new_grenade.activate(H)
 	new_grenade.throw_at(target,fire_force,fire_distance)
@@ -384,7 +384,7 @@
 	var/mob/living/M = holder.wearer
 
 	if (!M.HasFreeHand())
-		to_chat(M, SPAN_DANGER("Your hands are full."))
+		to_chat(M, span_danger("Your hands are full."))
 		deactivate()
 		return
 
@@ -449,15 +449,15 @@
 	if(target)
 		var/obj/item/firing = new fabrication_type()
 		firing.dropInto(loc)
-		H.visible_message(SPAN_DANGER("[H] launches \a [firing]!"))
+		H.visible_message(span_danger("[H] launches \a [firing]!"))
 		firing.throw_at(target,fire_force,fire_distance)
 	else
 		if (!H.HasFreeHand())
-			to_chat(H, SPAN_DANGER("Your hands are full."))
+			to_chat(H, span_danger("Your hands are full."))
 		else
 			var/obj/item/new_weapon = new fabrication_type()
 			new_weapon.forceMove(H)
-			to_chat(H, SPAN_INFO("<b>You quickly fabricate \a [new_weapon].</b>"))
+			to_chat(H, span_info("<b>You quickly fabricate \a [new_weapon].</b>"))
 			H.put_in_hands(new_weapon)
 
 	return 1
@@ -504,13 +504,13 @@
 	var/mob/living/carbon/human/H = holder.wearer
 
 	if (!isturf(H.loc))
-		to_chat(H, SPAN_WARNING("You cannot leap out of your current location!"))
+		to_chat(H, span_warning("You cannot leap out of your current location!"))
 		return FALSE
 
 	var/turf/T = get_turf(target)
 
 	if (!T || T.density)
-		to_chat(H, SPAN_WARNING("You cannot leap at solid walls!"))
+		to_chat(H, span_warning("You cannot leap at solid walls!"))
 		return FALSE
 
 	var/dist = max(get_dist(T, get_turf(H)), 0) /// The target the user has selected
@@ -522,17 +522,17 @@
 				continue
 
 			if (aA.density)
-				to_chat(H, SPAN_WARNING("You cannot leap at a location with solid objects on it!"))
+				to_chat(H, span_warning("You cannot leap at a location with solid objects on it!"))
 				return FALSE
 
 	if (T.z != H.z || dist > leapDistance)
-		to_chat(H, SPAN_WARNING("You cannot leap at such a distant object!"))
+		to_chat(H, span_warning("You cannot leap at such a distant object!"))
 		return FALSE
 
 	if (dist)
-		H.visible_message(SPAN_WARNING("\The [H]'s suit whirrs aggressively, launching them towards \the [target]!"),
-			SPAN_WARNING("Your suit whirrs aggressively, launching you towards \the [target]!"),
-			SPAN_WARNING("You hear an electric <i>whirr</i> followed by a weighty thump!"))
+		H.visible_message(span_warning("\The [H]'s suit whirrs aggressively, launching them towards \the [target]!"),
+			span_warning("Your suit whirrs aggressively, launching you towards \the [target]!"),
+			span_warning("You hear an electric <i>whirr</i> followed by a weighty thump!"))
 		H.face_atom(T)
 		H.throw_at(T, leapDistance, 0.5, H, FALSE)
 		return TRUE
@@ -571,7 +571,7 @@
 	var/mob/living/M = holder.wearer
 
 	if (!M.HasFreeHand())
-		to_chat(M, SPAN_DANGER("Your hands are full."))
+		to_chat(M, span_danger("Your hands are full."))
 		deactivate()
 		return
 
@@ -627,7 +627,7 @@
 	var/mob/living/M = holder.wearer
 
 	if (!M.HasFreeHand())
-		to_chat(M, SPAN_DANGER("Your hands are full."))
+		to_chat(M, span_danger("Your hands are full."))
 		deactivate()
 		return
 

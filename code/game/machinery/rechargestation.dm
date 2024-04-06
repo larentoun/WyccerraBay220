@@ -91,9 +91,9 @@
 	. = ..()
 	var/obj/item/cell/cell = get_cell()
 	if(cell)
-		. += SPAN_NOTICE("The charge meter reads: [cell.percent()]%")
+		. += span_notice("The charge meter reads: [cell.percent()]%")
 	else
-		. += SPAN_WARNING("The indicator shows that the cell is missing.")
+		. += span_warning("The indicator shows that the cell is missing.")
 
 /obj/machinery/recharge_station/relaymove(mob/user as mob)
 	if(user.stat)
@@ -114,7 +114,7 @@
 
 /obj/machinery/recharge_station/cannot_transition_to(state_path)
 	if(occupant)
-		return SPAN_NOTICE("You cannot do this while \the [src] is occupied!.")
+		return span_notice("You cannot do this while \the [src] is occupied!.")
 	return ..()
 
 /obj/machinery/recharge_station/RefreshParts()

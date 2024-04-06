@@ -85,14 +85,14 @@
 		return ..()
 
 	if(occupant_state == CARCASS_FRESH)
-		visible_message(SPAN_NOTICE("\The [user] removes \the [occupant] from \the [src]."))
+		visible_message(span_notice("\The [user] removes \the [occupant] from \the [src]."))
 		occupant.forceMove(get_turf(src))
 		occupant = null
 		occupant_state = CARCASS_EMPTY
 		busy = FALSE
 		update_icon()
 	else
-		to_chat(user, SPAN_WARNING("\The [occupant] is so badly mangled that removing them from \the [src] would be pointless."))
+		to_chat(user, span_warning("\The [occupant] is so badly mangled that removing them from \the [src] would be pointless."))
 		return
 
 /obj/structure/kitchenspike/MouseDrop_T(mob/target, mob/user)
@@ -103,31 +103,31 @@
 		return
 
 	if(!target.stat)
-		to_chat(user, SPAN_WARNING("\The [target] won't stop moving around!"))
+		to_chat(user, span_warning("\The [target] won't stop moving around!"))
 		return
 
 	if(occupant)
-		to_chat(user, SPAN_WARNING("\The [src] already has a carcass on it."))
+		to_chat(user, span_warning("\The [src] already has a carcass on it."))
 		return
 
 	if(suitable_for_butchery(target))
 
-		user.visible_message(SPAN_WARNING("\The [user] begins wrestling \the [target] onto \the [src]."))
+		user.visible_message(span_warning("\The [user] begins wrestling \the [target] onto \the [src]."))
 		if(!do_after(user, 3 SECONDS, target, DO_PUBLIC_UNIQUE) || occupant || !target || QDELETED(target) || target.stat == CONSCIOUS || !target.Adjacent(user))
 			return
 
 		if(secures_occupant)
-			user.visible_message(SPAN_DANGER("\The [user] impales \the [target] on \the [src]!"))
+			user.visible_message(span_danger("\The [user] impales \the [target] on \the [src]!"))
 			target.adjustBruteLoss(rand(30, 45))
 		else
-			user.visible_message(SPAN_DANGER("\The [user] hangs \the [target] from \the [src]!"))
+			user.visible_message(span_danger("\The [user] hangs \the [target] from \the [src]!"))
 
 		target.forceMove(src)
 		occupant = target
 		occupant_state = CARCASS_FRESH
 		update_icon()
 	else
-		to_chat(user, SPAN_WARNING("You cannot butcher \the [target]."))
+		to_chat(user, span_warning("You cannot butcher \the [target]."))
 
 /obj/structure/kitchenspike/proc/suitable_for_butchery(mob/living/victim)
 	return istype(victim) && ((victim.meat_type && victim.meat_amount) || (victim.skin_material && victim.skin_amount) || (victim.bone_material && victim.bone_amount))
@@ -144,10 +144,10 @@
 /obj/structure/kitchenspike/mob_breakout(mob/living/escapee)
 	. = ..()
 	if(secures_occupant)
-		escapee.visible_message(SPAN_WARNING("\The [escapee] begins writhing free of \the [src]!"))
+		escapee.visible_message(span_warning("\The [escapee] begins writhing free of \the [src]!"))
 		if(!do_after(escapee, 5 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 			return FALSE
-	escapee.visible_message(SPAN_DANGER("\The [escapee] escapes from \the [src]!"))
+	escapee.visible_message(span_danger("\The [escapee] escapes from \the [src]!"))
 	escapee.dropInto(loc)
 	if(escapee == occupant)
 		occupant = null
@@ -178,12 +178,12 @@
 	var/last_state = occupant_state
 	var/mob/living/last_occupant = occupant
 
-	user.visible_message(SPAN_NOTICE("\The [user] begins [butchery_string] \the [occupant]."))
+	user.visible_message(span_notice("\The [user] begins [butchery_string] \the [occupant]."))
 	occupant.adjustBruteLoss(rand(50,60))
 	update_icon()
 
 	if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE) && !QDELETED(user) && !QDELETED(last_occupant) && occupant == last_occupant && occupant_state == last_state)
-		user.visible_message(SPAN_NOTICE("\The [user] finishes [butchery_string] \the [occupant]."))
+		user.visible_message(span_notice("\The [user] finishes [butchery_string] \the [occupant]."))
 		switch(next_state)
 			if(CARCASS_SKINNED)
 				occupant.harvest_skin()

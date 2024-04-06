@@ -181,7 +181,7 @@ var/global/list/channel_to_radio_key = new
 /mob/living/say(message, datum/language/speaking = null, verb="says", alt_name="", whispering)
 	if(client)
 		if(client.prefs.muted & MUTE_IC)
-			to_chat(src, SPAN_WARNING("You cannot speak in IC (Muted)."))
+			to_chat(src, span_warning("You cannot speak in IC (Muted)."))
 			return
 
 	if(stat)
@@ -220,7 +220,7 @@ var/global/list/channel_to_radio_key = new
 		return 1
 
 	if((is_muzzled()) && !(speaking && (speaking.flags & SIGNLANG)))
-		to_chat(src, SPAN_DANGER("You're muzzled and cannot speak!"))
+		to_chat(src, span_danger("You're muzzled and cannot speak!"))
 		return
 
 	if (speaking)
@@ -268,7 +268,7 @@ var/global/list/channel_to_radio_key = new
 		if(speaking)
 			message_range = speaking.get_talkinto_msg_range(message)
 		if(!speaking || !(speaking.flags & NO_TALK_MSG))
-			src.visible_message(SPAN_NOTICE("\The [src] talks into \the [used_radios[1]]."), blind_message = SPAN_NOTICE("You hear someone talk into their headset."), range = 5, exclude_mobs = list(src))
+			src.visible_message(span_notice("\The [src] talks into \the [used_radios[1]]."), blind_message = span_notice("You hear someone talk into their headset."), range = 5, exclude_mobs = list(src))
 			if (speech_sound)
 				sound_vol *= 0.5
 

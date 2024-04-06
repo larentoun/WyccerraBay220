@@ -58,8 +58,8 @@
 			return TRUE
 		fallen += "[dog_tags.owner_rank] [dog_tags.owner_name] | [dog_tags.owner_branch]"
 		user.visible_message(
-			SPAN_NOTICE("\The [user] adds \a [tool] to \the [src]."),
-			SPAN_NOTICE("You add \the [dog_tags.owner_name]'s [tool.name] to \the [src].")
+			span_notice("\The [user] adds \a [tool] to \the [src]."),
+			span_notice("You add \the [dog_tags.owner_name]'s [tool.name] to \the [src].")
 		)
 		qdel(dog_tags)
 		return TRUE
@@ -70,7 +70,7 @@
 /obj/structure/sign/memorial/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 2 && length(fallen))
-		. += SPAN_NOTICE("<b>The fallen:</b> [jointext(fallen, "<br>")]")
+		. += span_notice("<b>The fallen:</b> [jointext(fallen, "<br>")]")
 
 // Disallow trader to sell unique memorial
 /datum/trader/trading_beacon/manufacturing/New()

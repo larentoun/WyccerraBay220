@@ -323,7 +323,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	if (!.)
 		return FALSE
 	if (istype(target, /mob/living/carbon/human) && target.is_zombie())
-		to_chat(usr, SPAN_WARNING("They don't look very appetizing!"))
+		to_chat(usr, span_warning("They don't look very appetizing!"))
 		return FALSE
 	return TRUE
 
@@ -370,12 +370,12 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		if (M.getBrainLoss() > 140)
 			H.zombify()
 		if (prob(2))
-			to_chat(M, SPAN_WARNING(SPAN_SIZE(rand(1,2), pick(GLOB.zombie_messages["stage1"]))))
+			to_chat(M, span_warning(SPAN_SIZE(rand(1,2), pick(GLOB.zombie_messages["stage1"]))))
 
 	if (true_dose >= 60)
 		M.bodytemperature += 7.5
 		if (prob(3))
-			to_chat(M, SPAN_WARNING(FONT_NORMAL(pick(GLOB.zombie_messages["stage1"]))))
+			to_chat(M, span_warning(FONT_NORMAL(pick(GLOB.zombie_messages["stage1"]))))
 
 	if (true_dose >= 90)
 		M.adjustBruteLoss(rand(1, 2))
@@ -387,7 +387,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 			M.seizure()
 			M.adjustBrainLoss(rand(12, 24))
 		if (prob(5))
-			to_chat(M, SPAN_DANGER(SPAN_SIZE(rand(2,3), pick(GLOB.zombie_messages["stage2"]))))
+			to_chat(M, span_danger(SPAN_SIZE(rand(2,3), pick(GLOB.zombie_messages["stage2"]))))
 		M.bodytemperature += 9
 
 	if (true_dose >= 120)
@@ -396,7 +396,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		var/obj/item/organ/internal = pick(M.internal_organs)
 		internal.take_general_damage(rand(1, 3))
 		if (prob(8))
-			to_chat(M, SPAN_DANGER(SPAN_SIZE(rand(3,4), pick(GLOB.zombie_messages["stage3"]))))
+			to_chat(M, span_danger(SPAN_SIZE(rand(3,4), pick(GLOB.zombie_messages["stage3"]))))
 
 	if (true_dose >= 140)
 		if (prob(3))
@@ -485,7 +485,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	facial_hair_style = facial_hair_old
 	regenerate_icons()
 
-	visible_message(SPAN_DANGER("\The [src]'s skin decays before your very eyes!"), SPAN_DANGER("Your entire body is ripe with pain as it is consumed down to flesh and bones. You ... hunger. Not only for flesh, but to spread this gift. Use Abilities -> Consume to infect and feed upon your prey."))
+	visible_message(span_danger("\The [src]'s skin decays before your very eyes!"), span_danger("Your entire body is ripe with pain as it is consumed down to flesh and bones. You ... hunger. Not only for flesh, but to spread this gift. Use Abilities -> Consume to infect and feed upon your prey."))
 	log_admin("[key_name(src)] has transformed into a zombie!")
 
 	playsound(get_turf(src), 'sound/hallucinations/wail.ogg', 25, 1)
@@ -505,7 +505,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	set category = "Abilities"
 
 	if (last_special > world.time)
-		to_chat(src, SPAN_WARNING("You aren't ready to do that! Wait [round(last_special - world.time) / 10] seconds."))
+		to_chat(src, span_warning("You aren't ready to do that! Wait [round(last_special - world.time) / 10] seconds."))
 		return
 
 	var/mob/living/carbon/human/target
@@ -513,15 +513,15 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	for (var/mob/living/carbon/human/L in get_turf(src))
 		if (L != src && (L.lying || L.stat == DEAD))
 			if (L.is_zombie())
-				to_chat(src, SPAN_WARNING("\The [L] isn't fresh anymore!"))
+				to_chat(src, span_warning("\The [L] isn't fresh anymore!"))
 				continue
 			if (!(L.species.name in GLOB.zombie_species) || L.is_species(SPECIES_DIONA) || L.isSynthetic())
-				to_chat(src, SPAN_WARNING("You'd break your teeth on \the [L]!"))
+				to_chat(src, span_warning("You'd break your teeth on \the [L]!"))
 				continue
 			victims += L
 
 	if (!length(victims))
-		to_chat(src, SPAN_WARNING("No valid targets nearby!"))
+		to_chat(src, span_warning("No valid targets nearby!"))
 		return
 	if (client)
 		if (length(victims) == 1) //No need to choose
@@ -533,15 +533,15 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 			target = victims[1]
 
 	if (!target)
-		to_chat(src, SPAN_WARNING("You aren't on top of a victim!"))
+		to_chat(src, span_warning("You aren't on top of a victim!"))
 		return
 	if (get_turf(src) != get_turf(target) || !(target.lying || target.stat == DEAD))
-		to_chat(src, SPAN_WARNING("You're no longer on top of \the [target]!"))
+		to_chat(src, span_warning("You're no longer on top of \the [target]!"))
 		return
 
 	last_special = world.time + 5 SECONDS
 
-	visible_message(SPAN_DANGER("\The [src] hunkers down over \the [target], tearing into their flesh."))
+	visible_message(span_danger("\The [src] hunkers down over \the [target], tearing into their flesh."))
 	playsound(loc, 'sound/effects/bonebreak3.ogg', 20, 1)
 
 	target.adjustHalLoss(25)
@@ -554,7 +554,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 
 		target.reagents.add_reagent(/datum/reagent/zombie, 35) //Just in case they haven't been infected already
 		if (target.getBruteLoss() > target.maxHealth * 1.5)
-			to_chat(src,SPAN_WARNING("You've scraped \the [target] down to the bones already!."))
+			to_chat(src,span_warning("You've scraped \the [target] down to the bones already!."))
 			if (target.stat != DEAD)
 				target.zombify()
 			else if (!(MUTATION_SKELETON in target.mutations))
@@ -566,12 +566,12 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 							target.remove_from_mob(clothing)
 					target.ChangeToSkeleton()
 					target.adjustBruteLoss(500)
-				to_chat(src, SPAN_DANGER("You shred and rip apart \the [target]'s remains!."))
+				to_chat(src, span_danger("You shred and rip apart \the [target]'s remains!."))
 				playsound(loc, 'sound/effects/splat.ogg', 40, 1)
 			return
 
-		to_chat(target,SPAN_DANGER("\The [src] scrapes your flesh from your bones!"))
-		to_chat(src,SPAN_DANGER("You feed hungrily off \the [target]'s flesh."))
+		to_chat(target,span_danger("\The [src] scrapes your flesh from your bones!"))
+		to_chat(src,span_danger("You feed hungrily off \the [target]'s flesh."))
 
 		if (target.is_zombie()) //Just in case they turn whilst being eaten
 			return
@@ -592,16 +592,16 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		if (target.getBruteLoss() > target.maxHealth*0.75)
 			if (prob(50))
 				gibs(get_turf(src), target.dna)
-				visible_message(SPAN_DANGER("\The [src] tears out \the [target]'s insides!"))
+				visible_message(span_danger("\The [src] tears out \the [target]'s insides!"))
 	else
-		visible_message(SPAN_WARNING("\The [src] leaves their meal for later."))
+		visible_message(span_warning("\The [src] leaves their meal for later."))
 
 /mob/observer/ghost/verb/join_as_zombie()
 	set name = "Join as Zombie"
 	set category = "Ghost"
 
 	if(!config.ghosts_can_possess_zombies)
-		to_chat(src, SPAN_WARNING("Possessing zombies is currently disabled."))
+		to_chat(src, span_warning("Possessing zombies is currently disabled."))
 		return
 
 	if(!MayRespawn(1, ANIMAL_SPAWN_DELAY))
@@ -614,7 +614,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 				return
 			candidate.do_possession(src)
 
-	to_chat(src, SPAN_WARNING("There are no zombies available at the moment."))
+	to_chat(src, span_warning("There are no zombies available at the moment."))
 
 
 //// Zombie Atoms

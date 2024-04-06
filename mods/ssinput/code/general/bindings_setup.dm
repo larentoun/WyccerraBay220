@@ -56,7 +56,7 @@
 
 	if(skip_alert || ans)
 		set_macros()
-		to_chat(src, SPAN_NOTICE("Keybindings were fixed.")) // not yet but set_macros works fast enough
+		to_chat(src, span_notice("Keybindings were fixed.")) // not yet but set_macros works fast enough
 
 
 /**

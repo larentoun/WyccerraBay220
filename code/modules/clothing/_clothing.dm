@@ -102,7 +102,7 @@
 
 			if(!wearable && !(slot in list(slot_l_store, slot_r_store, slot_s_store)))
 				if(!disable_warning)
-					to_chat(H, SPAN_DANGER("Your species cannot wear [src]."))
+					to_chat(H, span_danger("Your species cannot wear [src]."))
 				return 0
 	return 1
 
@@ -181,7 +181,7 @@
 	. = ..()
 	var/datum/extension/armor/ablative/armor_datum = get_extension(src, /datum/extension/armor/ablative)
 	if(istype(armor_datum) && LAZYLEN(armor_datum.get_visible_damage()))
-		. +=SPAN_WARNING("It has some <a href='?src=\ref[src];list_armor_damage=1'>damage</a>.")
+		. +=span_warning("It has some <a href='?src=\ref[src];list_armor_damage=1'>damage</a>.")
 
 /obj/item/clothing/CanUseTopic(user)
 	if(user in view(get_turf(src)))
@@ -338,11 +338,11 @@ BLIND     // can't see anything
 /obj/item/clothing/gloves/attackby(obj/item/W, mob/user)
 	if(W.tool_behaviour == TOOL_WIRECUTTER || istype(W, /obj/item/scalpel))
 		if(clipped)
-			to_chat(user, SPAN_NOTICE("\The [src] have already been modified!"))
+			to_chat(user, span_notice("\The [src] have already been modified!"))
 			update_icon()
 			return TRUE
 		playsound(loc, 'sound/items/Wirecutter.ogg', 100, TRUE)
-		user.visible_message(SPAN_WARNING("\The [user] modifies \the [src] with \the [W]."),SPAN_WARNING("You modify \the [src] with \the [W]."))
+		user.visible_message(span_warning("\The [user] modifies \the [src] with \the [W]."),span_warning("You modify \the [src] with \the [W]."))
 		cut_fingertops() // apply change, so relevant xenos can wear these
 		return TRUE
 	return ..()
@@ -498,9 +498,9 @@ BLIND     // can't see anything
 	if(!success)
 		return 0
 	else if(success == 2)
-		to_chat(user, SPAN_WARNING("You are already wearing a hat."))
+		to_chat(user, span_warning("You are already wearing a hat."))
 	else if(success == 1)
-		to_chat(user, SPAN_NOTICE("You crawl under \the [src]."))
+		to_chat(user, span_notice("You crawl under \the [src]."))
 	return 1
 
 
@@ -576,7 +576,7 @@ BLIND     // can't see anything
 
 	if(!user.incapacitated())
 		if(!pull_mask)
-			to_chat(usr, SPAN_NOTICE("You cannot pull down your [src.name]."))
+			to_chat(usr, span_notice("You cannot pull down your [src.name]."))
 			return
 		else
 			src.hanging = !src.hanging
@@ -639,12 +639,12 @@ BLIND     // can't see anything
 /obj/item/clothing/shoes/examine(mob/user)
 	. = ..()
 	if (attached_cuffs)
-		. += SPAN_WARNING("They are connected by [attached_cuffs].")
+		. += span_warning("They are connected by [attached_cuffs].")
 	if (hidden_item)
 		if (loc == user)
-			. += SPAN_NOTICE(SPAN_ITALIC("\An [hidden_item] is inside."))
+			. += span_notice(span_italic("\An [hidden_item] is inside."))
 		else if (get_dist(src, user) == 1)
-			. += SPAN_NOTICE(SPAN_ITALIC("Something is hidden inside."))
+			. += span_notice(span_italic("Something is hidden inside."))
 
 /obj/item/clothing/shoes/attack_hand(mob/living/user)
 	if (remove_hidden(user))
@@ -667,15 +667,15 @@ BLIND     // can't see anything
 
 /obj/item/clothing/shoes/proc/add_cuffs(obj/item/handcuffs/cuffs, mob/user)
 	if (!can_add_cuffs)
-		to_chat(user, SPAN_WARNING("\The [cuffs] can't be attached to \the [src]."))
+		to_chat(user, span_warning("\The [cuffs] can't be attached to \the [src]."))
 		return
 	if (attached_cuffs)
-		to_chat(user, SPAN_WARNING("\The [src] already has [attached_cuffs] attached."))
+		to_chat(user, span_warning("\The [src] already has [attached_cuffs] attached."))
 		return
 	if (do_after(user, 5 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 		if(!user.unEquip(cuffs, src))
 			return
-		user.visible_message(SPAN_ITALIC("\The [user] attaches \the [cuffs] to \the [src]."), range = 2)
+		user.visible_message(span_italic("\The [user] attaches \the [cuffs] to \the [src]."), range = 2)
 		verbs |= /obj/item/clothing/shoes/proc/remove_cuffs
 		slowdown_per_slot[slot_shoes] += cuffs.elastic ? 5 : 10
 		attached_cuffs = cuffs
@@ -695,9 +695,9 @@ BLIND     // can't see anything
 		return
 	if (do_after(user, 5 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 		if (!user.put_in_hands(attached_cuffs))
-			to_chat(usr, SPAN_WARNING("You need an empty, unbroken hand to remove the [attached_cuffs] from the [src]."))
+			to_chat(usr, span_warning("You need an empty, unbroken hand to remove the [attached_cuffs] from the [src]."))
 			return
-		user.visible_message(SPAN_ITALIC("\The [user] removes \the [attached_cuffs] from \the [src]."), range = 2)
+		user.visible_message(span_italic("\The [user] removes \the [attached_cuffs] from \the [src]."), range = 2)
 		attached_cuffs.add_fingerprint(user)
 		slowdown_per_slot[slot_shoes] -= attached_cuffs.elastic ? 5 : 10
 		verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
@@ -705,21 +705,21 @@ BLIND     // can't see anything
 
 /obj/item/clothing/shoes/proc/add_hidden(obj/item/I, mob/user)
 	if (!can_add_hidden_item)
-		to_chat(user, SPAN_WARNING("\The [src] can't hold anything."))
+		to_chat(user, span_warning("\The [src] can't hold anything."))
 		return
 	if (hidden_item)
-		to_chat(user, SPAN_WARNING("\The [src] already holds \an [hidden_item]."))
+		to_chat(user, span_warning("\The [src] already holds \an [hidden_item]."))
 		return
 	if (!(I.item_flags & ITEM_FLAG_CAN_HIDE_IN_SHOES) || (I.slot_flags & SLOT_DENYPOCKET))
-		to_chat(user, SPAN_WARNING("\The [src] can't hold the [I]."))
+		to_chat(user, span_warning("\The [src] can't hold the [I]."))
 		return
 	if (I.w_class > hidden_item_max_w_class)
-		to_chat(user, SPAN_WARNING("\The [I] is too large to fit in the [src]."))
+		to_chat(user, span_warning("\The [I] is too large to fit in the [src]."))
 		return
 	if (do_after(user, 1 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 		if(!user.unEquip(I, src))
 			return
-		user.visible_message(SPAN_ITALIC("\The [user] shoves \the [I] into \the [src]."), range = 1)
+		user.visible_message(span_italic("\The [user] shoves \the [I] into \the [src]."), range = 1)
 		verbs |= /obj/item/clothing/shoes/proc/remove_hidden
 		hidden_item = I
 
@@ -740,9 +740,9 @@ BLIND     // can't see anything
 		return FALSE
 	if (do_after(user, 2 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 		if (!user.put_in_hands(hidden_item))
-			to_chat(usr, SPAN_WARNING("You need an empty, unbroken hand to pull the [hidden_item] from the [src]."))
+			to_chat(usr, span_warning("You need an empty, unbroken hand to pull the [hidden_item] from the [src]."))
 			return TRUE
-		user.visible_message(SPAN_ITALIC("\The [user] pulls \the [hidden_item] from \the [src]."), range = 1)
+		user.visible_message(span_italic("\The [user] pulls \the [hidden_item] from \the [src]."), range = 1)
 		playsound(get_turf(src), 'sound/effects/holster/tactiholsterout.ogg', 25)
 		verbs -= /obj/item/clothing/shoes/proc/remove_hidden
 		hidden_item = null
@@ -750,7 +750,7 @@ BLIND     // can't see anything
 
 /obj/item/clothing/shoes/proc/handle_movement(turf/walking, running)
 	if (running && attached_cuffs?.damage_health(1))
-		visible_message(SPAN_WARNING("\The [attached_cuffs] attached to \the [src] snap and fall away!"), range = 1)
+		visible_message(span_warning("\The [attached_cuffs] attached to \the [src] snap and fall away!"), range = 1)
 		verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
 		slowdown_per_slot[slot_shoes] -= attached_cuffs.elastic ? 5 : 10
 		QDEL_NULL(attached_cuffs)
@@ -972,13 +972,13 @@ BLIND     // can't see anything
 	. = ..()
 	switch(src.sensor_mode)
 		if(SUIT_SENSOR_OFF)
-			. += SPAN_NOTICE("Its sensors appear to be disabled.")
+			. += span_notice("Its sensors appear to be disabled.")
 		if(SUIT_SENSOR_BINARY)
-			. += SPAN_NOTICE("Its binary life sensors appear to be enabled.")
+			. += span_notice("Its binary life sensors appear to be enabled.")
 		if(SUIT_SENSOR_VITAL)
-			. += SPAN_NOTICE("Its vital tracker appears to be enabled.")
+			. += span_notice("Its vital tracker appears to be enabled.")
 		if(SUIT_SENSOR_TRACKING)
-			. += SPAN_NOTICE("Its vital tracker and tracking beacon appear to be enabled.")
+			. += span_notice("Its vital tracker and tracking beacon appear to be enabled.")
 
 /obj/item/clothing/under/proc/set_sensors(mob/user as mob)
 	var/mob/M = user
@@ -1012,7 +1012,7 @@ BLIND     // can't see anything
 
 	else if (ismob(src.loc))
 		if(sensor_mode == SUIT_SENSOR_OFF)
-			user.visible_message(SPAN_WARNING("[user] disables [src.loc]'s remote sensing equipment."), "You disable [src.loc]'s remote sensing equipment.")
+			user.visible_message(span_warning("[user] disables [src.loc]'s remote sensing equipment."), "You disable [src.loc]'s remote sensing equipment.")
 		else
 			user.visible_message("[user] adjusts the tracking sensor on [src.loc]'s [src.name].", "You adjust [src.loc]'s sensors.")
 	else
@@ -1046,7 +1046,7 @@ BLIND     // can't see anything
 		return
 
 	if(rolled_down == UNDER_ROLLDOWN_STATUS_CANT_BE_ROLLED)
-		to_chat(usr, SPAN_NOTICE("You cannot roll down [src]!"))
+		to_chat(usr, span_notice("You cannot roll down [src]!"))
 
 	if((rolled_sleeves == SLEEVES_ROLLDOWN_STATUS_ROLLED) && !(rolled_down))
 		rolled_sleeves = SLEEVES_ROLLDOWN_STATUS_UNROLLED
@@ -1074,22 +1074,22 @@ BLIND     // can't see anything
 		return
 
 	if(rolled_sleeves == SLEEVES_ROLLDOWN_STATUS_CANT_BE_ROLLED)
-		to_chat(usr, SPAN_NOTICE("You cannot roll up your [src]'s sleeves!"))
+		to_chat(usr, span_notice("You cannot roll up your [src]'s sleeves!"))
 		return
 
 	if(rolled_down == UNDER_ROLLDOWN_STATUS_ROLLED)
-		to_chat(usr, SPAN_NOTICE("You must roll up your [src] first!"))
+		to_chat(usr, span_notice("You must roll up your [src] first!"))
 		return
 
 	rolled_sleeves = !rolled_sleeves
 	if(rolled_sleeves)
 		body_parts_covered &= ~(ARMS|HANDS)
 		item_state_slots[slot_w_uniform_str] = worn_state + get_gender_suffix("_r_s")
-		to_chat(usr, SPAN_NOTICE("You roll up your [src]'s sleeves."))
+		to_chat(usr, span_notice("You roll up your [src]'s sleeves."))
 	else
 		body_parts_covered = initial(body_parts_covered)
 		item_state_slots[slot_w_uniform_str] = worn_state + get_gender_suffix()
-		to_chat(usr, SPAN_NOTICE("You roll down your [src]'s sleeves."))
+		to_chat(usr, span_notice("You roll down your [src]'s sleeves."))
 	update_clothing_icon()
 
 /obj/item/clothing/under/rank/New()

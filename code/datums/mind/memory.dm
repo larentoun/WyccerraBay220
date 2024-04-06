@@ -16,7 +16,7 @@
 
 	LAZYREMOVE(memories, memory)
 	memory.creation_source.Log("removed a memory")
-	to_chat(remover, SPAN_NOTICE("You have removed a memory."))
+	to_chat(remover, span_notice("You have removed a memory."))
 	ShowMemory(remover)
 
 /datum/mind/proc/ClearMemories(list/tags)
@@ -184,7 +184,7 @@
 	if(mind)
 		mind.ShowMemory(src)
 	else
-		to_chat(src, SPAN_WARNING("There is no mind to retrieve stored memories from."))
+		to_chat(src, span_warning("There is no mind to retrieve stored memories from."))
 
 /mob/verb/AddMemory(msg as message)
 	set name = "Add Note"
@@ -194,6 +194,6 @@
 	if(msg)
 		var/error = StoreMemory(msg)
 		if(error)
-			to_chat(src, SPAN_WARNING(error))
+			to_chat(src, span_warning(error))
 		else
-			to_chat(src, SPAN_NOTICE("Note added - View it with the 'Notes' verb"))
+			to_chat(src, span_notice("Note added - View it with the 'Notes' verb"))

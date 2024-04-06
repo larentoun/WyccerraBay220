@@ -38,7 +38,7 @@
 
 /obj/machinery/computer/on_death()
 	..()
-	visible_message(SPAN_WARNING("\The [src] breaks!"))
+	visible_message(span_warning("\The [src] breaks!"))
 
 /obj/machinery/computer/on_update_icon()
 	update_glow()
@@ -116,10 +116,10 @@
 
 /obj/machinery/computer/dismantle(mob/user)
 	if(MACHINE_IS_BROKEN(src))
-		to_chat(user, SPAN_NOTICE("The broken glass falls out."))
+		to_chat(user, span_notice("The broken glass falls out."))
 		for(var/obj/item/stock_parts/console_screen/screen in component_parts)
 			qdel(screen)
 			new /obj/item/material/shard(loc)
 	else
-		to_chat(user, SPAN_NOTICE("You disconnect the monitor."))
+		to_chat(user, span_notice("You disconnect the monitor."))
 	return ..()

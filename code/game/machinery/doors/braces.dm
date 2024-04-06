@@ -81,8 +81,8 @@
 			update_access()
 			if (check_access(item))
 				user.visible_message(
-					SPAN_ITALIC("[user] swipes [item] through [src]."),
-					SPAN_ITALIC("You swipe [item] through [src]."),
+					span_italic("[user] swipes [item] through [src]."),
+					span_italic("You swipe [item] through [src]."),
 				)
 				if (do_after(user, 1 SECOND, airlock, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 					to_chat(user, "[src] clicks and detaches from [airlock]!")
@@ -101,13 +101,13 @@
 		if (!airlock)
 			return TRUE
 		user.visible_message(
-			SPAN_ITALIC("[user] begins removing [src] with [item]."),
-			SPAN_ITALIC("You begin removing [src] with [item].")
+			span_italic("[user] begins removing [src] with [item]."),
+			span_italic("You begin removing [src] with [item].")
 		)
 		if (do_after(user, 20 SECONDS, airlock, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 			user.visible_message(
-				SPAN_ITALIC("[user] removes [src] with [item]."),
-				SPAN_ITALIC("You remove [src] with [item].")
+				span_italic("[user] removes [src] with [item]."),
+				span_italic("You remove [src] with [item].")
 			)
 			user.put_in_hands(src)
 			airlock.brace = null
@@ -118,7 +118,7 @@
 
 /obj/item/airlock_brace/on_death()
 	if (airlock)
-		visible_message(SPAN_DANGER("[src] breaks, falling from [airlock]!"))
+		visible_message(span_danger("[src] breaks, falling from [airlock]!"))
 		airlock.brace = null
 		airlock.update_icon()
 	qdel(src)

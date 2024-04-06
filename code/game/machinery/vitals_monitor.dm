@@ -48,13 +48,13 @@
 	. = ..()
 	if (victim)
 		if (!is_powered())
-			. += SPAN_NOTICE("It's unpowered.")
+			. += span_notice("It's unpowered.")
 			return
-		. += SPAN_NOTICE("Vitals of [victim]:")
-		. += SPAN_NOTICE("Pulse: [victim.get_pulse(GETPULSE_TOOL)]")
-		. += SPAN_NOTICE("Blood pressure: [victim.get_blood_pressure()]")
-		. += SPAN_NOTICE("Blood oxygenation: [victim.get_blood_oxygenation()]%")
-		. += SPAN_NOTICE("Body temperature: [victim.bodytemperature-T0C]&deg;C ([victim.bodytemperature*1.8-459.67]&deg;F)")
+		. += span_notice("Vitals of [victim]:")
+		. += span_notice("Pulse: [victim.get_pulse(GETPULSE_TOOL)]")
+		. += span_notice("Blood pressure: [victim.get_blood_pressure()]")
+		. += span_notice("Blood oxygenation: [victim.get_blood_oxygenation()]%")
+		. += span_notice("Body temperature: [victim.bodytemperature-T0C]&deg;C ([victim.bodytemperature*1.8-459.67]&deg;F)")
 
 		var/brain_activity = "none"
 		var/obj/item/organ/internal/brain/brain = victim.internal_organs_by_name[BP_BRAIN]
@@ -79,9 +79,9 @@
 			else
 				brain_activity = "some"
 		if (!danger)
-			. += SPAN_NOTICE("Brain activity: [brain_activity]")
+			. += span_notice("Brain activity: [brain_activity]")
 		else
-			. += SPAN_WARNING("Brain activity: [brain_activity]")
+			. += span_warning("Brain activity: [brain_activity]")
 
 		var/breathing = "none"
 		var/obj/item/organ/internal/lungs/lungs = victim.internal_organs_by_name[BP_LUNGS]
@@ -91,7 +91,7 @@
 			else if (lungs.breath_fail_ratio < 1)
 				breathing = "shallow"
 
-		. += SPAN_NOTICE("Breathing: [breathing]")
+		. += span_notice("Breathing: [breathing]")
 
 		if (detailed && user.skill_check(SKILL_MEDICAL, SKILL_TRAINED))
 			for (var/name in victim.organs_by_name)
@@ -108,10 +108,10 @@
 					dat += SPAN_CLASS("scan_warning", "Arterial bleeding.")
 				if (dat)
 					dat = capitalize(dat)
-					. += SPAN_WARNING("[dat]")
+					. += span_warning("[dat]")
 
 	if (connected_optable)
-		. += SPAN_NOTICE("Connected to [connected_optable].")
+		. += span_notice("Connected to [connected_optable].")
 
 /obj/machinery/vitals_monitor/Process()
 	if (QDELETED(victim))
@@ -128,10 +128,10 @@
 	var/old_victim = victim
 	victim = new_victim
 	if (victim)
-		visible_message(SPAN_NOTICE("\The [src] is now showing data for \the [victim]."))
+		visible_message(span_notice("\The [src] is now showing data for \the [victim]."))
 	else
 		if (old_victim != new_victim) // Protects against qdel edge case. In all other cases we want a message printed.
-			visible_message(SPAN_NOTICE("\The [src] is no longer showing data from [isnull(old_victim)? "any patient" : "\the [old_victim]"]."))
+			visible_message(span_notice("\The [src] is no longer showing data from [isnull(old_victim)? "any patient" : "\the [old_victim]"]."))
 	update_use_power(isnull(victim)? POWER_USE_IDLE : POWER_USE_ACTIVE)
 	update_icon()
 
@@ -143,11 +143,11 @@
 	connected_optable = new_optable
 	if (connected_optable)
 		connected_optable.connected_monitor = src
-		visible_message(SPAN_NOTICE("\The [src] is now relaying information from \the [connected_optable]"))
+		visible_message(span_notice("\The [src] is now relaying information from \the [connected_optable]"))
 		//In case there's already a patient on the table
 		update_victim(connected_optable.victim)
 	else
-		visible_message(SPAN_NOTICE("\The [src] is no longer relaying data from a connected operating table."))
+		visible_message(span_notice("\The [src] is no longer relaying data from a connected operating table."))
 
 /obj/machinery/vitals_monitor/MouseDrop(over_object, src_location, over_location)
 	if (!CanMouseDrop(over_object))
@@ -265,11 +265,11 @@
 		return
 	if (last_alert_time + alert_cooldown < world.time)
 		if (alerts[PULSE_ALERT] && alerts[PULSE_ALERT] != last_alert[PULSE_ALERT])
-			audible_message(SPAN_WARNING("<b>\The [src]</b> beeps, \"[alerts[PULSE_ALERT]]\""))
+			audible_message(span_warning("<b>\The [src]</b> beeps, \"[alerts[PULSE_ALERT]]\""))
 		if (alerts[BRAIN_ALERT] && alerts[BRAIN_ALERT] != last_alert[BRAIN_ALERT])
-			audible_message(SPAN_WARNING("<b>\The [src]</b> alarms, \"[alerts[BRAIN_ALERT]]\""))
+			audible_message(span_warning("<b>\The [src]</b> alarms, \"[alerts[BRAIN_ALERT]]\""))
 		if (alerts[LUNGS_ALERT] && alerts[LUNGS_ALERT] != last_alert[LUNGS_ALERT])
-			audible_message(SPAN_WARNING("<b>\The [src]</b> warns, \"[alerts[LUNGS_ALERT]]\""))
+			audible_message(span_warning("<b>\The [src]</b> warns, \"[alerts[LUNGS_ALERT]]\""))
 		last_alert = alerts.Copy()
 		last_alert_time = world.time
 
@@ -286,7 +286,7 @@
 
 	if (CanPhysicallyInteract(user))
 		beep = !beep
-		to_chat(user, SPAN_NOTICE("You turn the sound on \the [src] [beep ? "on" : "off"]."))
+		to_chat(user, span_notice("You turn the sound on \the [src] [beep ? "on" : "off"]."))
 
 /obj/machinery/vitals_monitor/verb/toggle_alerts()
 	set name = "Toggle Alert Annunciator"
@@ -299,7 +299,7 @@
 
 	if (CanPhysicallyInteract(user))
 		read_alerts = !read_alerts
-		to_chat(user, SPAN_NOTICE("You turn the alert reader on \the [src] [read_alerts ? "on" : "off"]."))
+		to_chat(user, span_notice("You turn the alert reader on \the [src] [read_alerts ? "on" : "off"]."))
 
 /obj/item/stock_parts/circuitboard/vitals_monitor
 	name = "circuit board (vitals monitor)"

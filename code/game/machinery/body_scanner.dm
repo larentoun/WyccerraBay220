@@ -25,8 +25,8 @@
 	..()
 	go_out()
 	user.visible_message(
-		SPAN_NOTICE("\The [user] climbs out of \the [initial(name)]."),
-		SPAN_NOTICE("You climb out of \the [initial(name)].")
+		span_notice("\The [user] climbs out of \the [initial(name)]."),
+		span_notice("You climb out of \the [initial(name)].")
 	)
 
 /obj/machinery/bodyscanner/verb/eject()
@@ -37,9 +37,9 @@
 	if (usr.incapacitated())
 		return
 	usr.visible_message(
-		SPAN_NOTICE("\The [usr] opens \the [src]."),
-		SPAN_NOTICE("You eject \the [initial(name)]'s occupant."),
-		SPAN_ITALIC("You hear a pressurized hiss, then a sound like glass creaking.")
+		span_notice("\The [usr] opens \the [src]."),
+		span_notice("You eject \the [initial(name)]'s occupant."),
+		span_italic("You hear a pressurized hiss, then a sound like glass creaking.")
 	)
 	go_out()
 	add_fingerprint(usr)
@@ -58,9 +58,9 @@
 	if(!user_can_move_target_inside(usr,usr))
 		return
 	usr.visible_message(
-		SPAN_NOTICE("\The [usr] climbs into \the [src]."),
-		SPAN_NOTICE("You climb into \the [src]."),
-		SPAN_ITALIC("You hear footsteps on metal, cloth rustling, and then a pressurized hiss.")
+		span_notice("\The [usr] climbs into \the [src]."),
+		span_notice("You climb into \the [src]."),
+		span_italic("You hear footsteps on metal, cloth rustling, and then a pressurized hiss.")
 	)
 	move_target_inside(usr,usr)
 	usr.pulling = null
@@ -116,7 +116,7 @@
 
 /obj/machinery/bodyscanner/user_can_move_target_inside(mob/target, mob/user)
 	if (occupant)
-		to_chat(user, SPAN_WARNING("\The [src] is already occupied!"))
+		to_chat(user, span_warning("\The [src] is already occupied!"))
 		return FALSE
 	return ..()
 
@@ -127,15 +127,15 @@
 		return
 	if (user == target)
 		user.visible_message(
-			SPAN_NOTICE("\The [usr] climbs into \the [src]."),
-			SPAN_NOTICE("You climb into \the [src]."),
-			SPAN_ITALIC("You hear metal clanking, then a pressurized hiss.")
+			span_notice("\The [usr] climbs into \the [src]."),
+			span_notice("You climb into \the [src]."),
+			span_italic("You hear metal clanking, then a pressurized hiss.")
 		)
 		move_target_inside(target, user)
 	else
 		user.visible_message(
-			SPAN_NOTICE("\The [user] begins placing \the [target] into \the [src]."),
-			SPAN_NOTICE("You start placing \the [target] into \the [src].")
+			span_notice("\The [user] begins placing \the [target] into \the [src]."),
+			span_notice("You start placing \the [target] into \the [src].")
 		)
 		add_fingerprint(user)
 		if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))

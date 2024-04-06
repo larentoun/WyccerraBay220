@@ -49,13 +49,13 @@ GLOBAL_LIST_EMPTY(radio_jammers)
 /obj/item/device/radio_jammer/proc/toggle(mob/user)
 	if(is_active)
 		STOP_PROCESSING(SSobj, src)
-		to_chat(user,SPAN_WARNING("You flick a switch on [src], deactivating it."))
+		to_chat(user,span_warning("You flick a switch on [src], deactivating it."))
 		is_active = FALSE
 		GLOB.radio_jammers -= src
 		update_icon()
 	else
 		START_PROCESSING(SSobj, src)
-		to_chat(user,SPAN_WARNING("You flick a switch on [src], activating it."))
+		to_chat(user,span_warning("You flick a switch on [src], activating it."))
 		is_active = TRUE
 		GLOB.radio_jammers += src
 		update_icon()
@@ -153,8 +153,8 @@ GLOBAL_LIST_EMPTY(radio_jammers)
 		GLOB.radio_jammers -= src
 	user.put_in_hands(bcell)
 	user.visible_message(
-		SPAN_NOTICE("[user] removes [bcell] from [src] with [tool]."),
-		SPAN_NOTICE("You remove [bcell] from [src] with [tool].")
+		span_notice("[user] removes [bcell] from [src] with [tool]."),
+		span_notice("You remove [bcell] from [src] with [tool].")
 	)
 	bcell = null
 	update_icon()
@@ -169,8 +169,8 @@ GLOBAL_LIST_EMPTY(radio_jammers)
 			return TRUE
 		bcell = tool
 		user.visible_message(
-			SPAN_NOTICE("[user] installs [tool] into [src]."),
-			SPAN_NOTICE("you install [tool] into [src].")
+			span_notice("[user] installs [tool] into [src]."),
+			span_notice("you install [tool] into [src].")
 		)
 		update_icon()
 		return TRUE

@@ -19,7 +19,7 @@ Right Click + Ctrl  - Delete all portals
 		if (LAZYACCESS(modifiers, LEFT_CLICK))
 			if (istype(A, /obj/portal) && (A in portals))
 				qdel(A)
-				to_chat(user, SPAN_NOTICE("Portal deleted."))
+				to_chat(user, span_notice("Portal deleted."))
 		else if (LAZYACCESS(modifiers, RIGHT_CLICK))
 			var/choice = alert("Delete all active portals?", "Delete All", "Yes", "No")
 
@@ -30,11 +30,11 @@ Right Click + Ctrl  - Delete all portals
 	else if (LAZYACCESS(modifiers, LEFT_CLICK))
 		if (!entrance)
 			entrance = get_turf(A)
-			to_chat(user, SPAN_NOTICE("Entrance turf selected: [entrance]"))
+			to_chat(user, span_notice("Entrance turf selected: [entrance]"))
 
 		else if (!exit)
 			exit = get_turf(A)
-			to_chat(user, SPAN_NOTICE("Exit turf selected: [exit]"))
+			to_chat(user, span_notice("Exit turf selected: [exit]"))
 			var/choice = alert("Portal turfs selected. Create the portal now?", "Create Portal?", "Yes", "No")
 			if (choice == "No")
 				entrance = null
@@ -60,4 +60,4 @@ Right Click + Ctrl  - Delete all portals
 	else if (LAZYACCESS(modifiers, RIGHT_CLICK))
 		entrance = null
 		exit = null
-		to_chat(user, SPAN_NOTICE("Selection cancelled."))
+		to_chat(user, span_notice("Selection cancelled."))

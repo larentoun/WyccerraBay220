@@ -89,4 +89,4 @@
 	var/state = "disabled"
 	if(item_flags & ITEM_FLAG_NOSLIP)
 		state = "enabled"
-	. += SPAN_NOTICE("Its mag-pulse traction system appears to be [state].")
+	. += span_notice("Its mag-pulse traction system appears to be [state].")

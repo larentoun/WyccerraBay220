@@ -49,11 +49,11 @@
 /obj/item/device/soulstone/examine(mob/user)
 	. = ..()
 	if(full == SOULSTONE_EMPTY)
-		. += SPAN_NOTICE("The shard still flickers with a fraction of the full artifact's power, but it needs to be filled with the essence of someone's life before it can be used.")
+		. += span_notice("The shard still flickers with a fraction of the full artifact's power, but it needs to be filled with the essence of someone's life before it can be used.")
 	if(full == SOULSTONE_ESSENCE)
-		. += SPAN_NOTICE("The shard has gone transparent, a seeming window into a dimension of unspeakable horror.")
+		. += span_notice("The shard has gone transparent, a seeming window into a dimension of unspeakable horror.")
 	if(full == SOULSTONE_CRACKED)
-		. += SPAN_NOTICE("This one is cracked and useless.")
+		. += span_notice("This one is cracked and useless.")
 
 /obj/item/device/soulstone/on_update_icon()
 	if(full == SOULSTONE_EMPTY)
@@ -71,8 +71,8 @@
 
 	if (full == SOULSTONE_CRACKED)
 		user.visible_message(
-			SPAN_WARNING("\The [user] shatters \a [src] with \a [weapon]!"),
-			SPAN_DANGER("You shatter \the [src] with \the [weapon]!")
+			span_warning("\The [user] shatters \a [src] with \a [weapon]!"),
+			span_danger("You shatter \the [src] with \the [weapon]!")
 		)
 		shatter()
 		return TRUE
@@ -83,8 +83,8 @@
 	if (shade?.client)
 		scream = "You hear a terrible scream!"
 	user.visible_message(
-		SPAN_WARNING("\The [user] hits \a [src] with \a [weapon], and it cracks. [scream]"),
-		SPAN_WARNING("You hit \the [src] with \the [weapon], and it cracks. [scream]")
+		span_warning("\The [user] hits \a [src] with \a [weapon], and it cracks. [scream]"),
+		span_warning("You hit \the [src] with \the [weapon], and it cracks. [scream]")
 	)
 	return TRUE
 
@@ -97,8 +97,8 @@
 			return TRUE
 		owner_flag = SOULSTONE_OWNER_PURE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] waves \a [tool] over \a [src]."),
-			SPAN_NOTICE("You cleanse \the [src] of taint with \the [tool], purging its shackles to its creator...")
+			span_notice("\The [user] waves \a [tool] over \a [src]."),
+			span_notice("You cleanse \the [src] of taint with \the [tool], purging its shackles to its creator...")
 		)
 		return TRUE
 
@@ -111,14 +111,14 @@
 		return FALSE
 
 	if (M == shade)
-		to_chat(user, SPAN_NOTICE("You recapture \the [M]."))
+		to_chat(user, span_notice("You recapture \the [M]."))
 		M.forceMove(src)
 		return TRUE
 	if (full == SOULSTONE_ESSENCE)
-		to_chat(user, SPAN_NOTICE("\The [src] is already full."))
+		to_chat(user, span_notice("\The [src] is already full."))
 		return TRUE
 	if (M.stat != DEAD && !M.is_asystole())
-		to_chat(user, SPAN_NOTICE("Kill or maim the victim first."))
+		to_chat(user, span_notice("Kill or maim the victim first."))
 		return TRUE
 	for (var/obj/item/W in M)
 		M.drop_from_inventory(W)
@@ -128,22 +128,22 @@
 
 /obj/item/device/soulstone/attack_self(mob/user)
 	if(full != SOULSTONE_ESSENCE) // No essence - no shade
-		to_chat(user, SPAN_NOTICE("This [src] has no life essence."))
+		to_chat(user, span_notice("This [src] has no life essence."))
 		return
 
 	if(!shade.key) // No key = hasn't been used
-		to_chat(user, SPAN_NOTICE("You cut your finger and let the blood drip on \the [src]."))
+		to_chat(user, span_notice("You cut your finger and let the blood drip on \the [src]."))
 		user.remove_blood_simple(1)
 		var/datum/ghosttrap/cult/shade/S = get_ghost_trap("soul stone")
 		S.request_player(shade, "The soul stone shade summon ritual has been performed. ")
 	else if(!shade.client) // Has a key but no client - shade logged out
-		to_chat(user, SPAN_NOTICE("\The [shade] in \the [src] is dormant."))
+		to_chat(user, span_notice("\The [shade] in \the [src] is dormant."))
 		return
 	else if(shade.loc == src)
 		var/choice = alert("Would you like to invoke the spirit within?",,"Yes","No")
 		if(choice == "Yes")
 			shade.dropInto(loc)
-			to_chat(user, SPAN_NOTICE("You summon \the [shade]."))
+			to_chat(user, span_notice("You summon \the [shade]."))
 		if(choice == "No")
 			return
 
@@ -200,8 +200,8 @@
 				construct_type = /mob/living/simple_animal/construct/armoured
 		var/mob/living/simple_animal/construct/construct = new construct_type(loc)
 		user.visible_message(
-			SPAN_WARNING("\The [user] presses \a [tool] against \the [src]. It twists and warps into the shape of \a [initial(construct.name)]!"),
-			SPAN_WARNING("You press \the [tool] against \the [src], summoning forth a loyal [initial(construct.name)]!")
+			span_warning("\The [user] presses \a [tool] against \the [src]. It twists and warps into the shape of \a [initial(construct.name)]!"),
+			span_warning("You press \the [tool] against \the [src], summoning forth a loyal [initial(construct.name)]!")
 		)
 		construct.key = soulstone.shade.key
 		transfer_languages(user, construct, RESTRICTED | HIVEMIND)

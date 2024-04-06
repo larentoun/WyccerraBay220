@@ -27,7 +27,7 @@
 			continue
 		if(A.area_flags & AREA_FLAG_ION_SHIELDED)
 			continue
-		to_chat(S, SPAN_WARNING("Your integrated sensors detect an ionospheric anomaly. Your systems will be impacted as you begin a partial restart."))
+		to_chat(S, span_warning("Your integrated sensors detect an ionospheric anomaly. Your systems will be impacted as you begin a partial restart."))
 		var/ionbug = rand(5, 15)
 		S.mod_confused(ionbug)
 		S.eye_blurry += ionbug-1

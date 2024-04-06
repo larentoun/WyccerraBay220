@@ -154,12 +154,12 @@
 
 /obj/machinery/robotics_fabricator/cannot_transition_to(state_path)
 	if(busy)
-		return SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation.")
+		return span_notice("\The [src] is busy. Please wait for completion of previous operation.")
 	return ..()
 
 /obj/machinery/robotics_fabricator/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if(busy)
-		to_chat(user, SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation."))
+		to_chat(user, span_notice("\The [src] is busy. Please wait for completion of previous operation."))
 		return TRUE
 	if(!istype(I, /obj/item/stack/material))
 		return ..()
@@ -174,7 +174,7 @@
 		return
 
 	if(!(material in materials))
-		to_chat(user, SPAN_WARNING("\The [src] does not accept [stack_plural]!"))
+		to_chat(user, span_warning("\The [src] does not accept [stack_plural]!"))
 		return TRUE
 
 	if(materials[material] + amnt <= res_max_amount)
@@ -197,11 +197,11 @@
 
 /obj/machinery/robotics_fabricator/emag_act(remaining_charges, mob/user)
 	if (emagged)
-		to_chat(user, SPAN_WARNING("No records in user DB."))
+		to_chat(user, span_warning("No records in user DB."))
 		return
 	emagged = TRUE
 	req_access.Cut()
-	to_chat(user, SPAN_NOTICE("User DB truncated; defaulting to open access."))
+	to_chat(user, span_notice("User DB truncated; defaulting to open access."))
 	return 1
 
 /obj/machinery/robotics_fabricator/proc/update_busy()

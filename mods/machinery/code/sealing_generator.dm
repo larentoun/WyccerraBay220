@@ -88,7 +88,7 @@
 /obj/machinery/sealgen/attack_hand(mob/user)
 
 	if(locked && !allowed(user))
-		to_chat(user, SPAN_WARNING("It's locked! You can't [current_field ? "shut it down" : "turn it on"]."))
+		to_chat(user, span_warning("It's locked! You can't [current_field ? "shut it down" : "turn it on"]."))
 		return
 
 	if(!current_field)
@@ -103,7 +103,7 @@
 		return
 	. = ITEM_INTERACT_SUCCESS
 	field_color = input(usr, "Choose field colour.", "Field color", initial(field_color)) as color|null
-	to_chat(usr, SPAN_NOTICE("You change [src] field <font color='[field_color]'>color.</font>"))
+	to_chat(usr, span_notice("You change [src] field <font color='[field_color]'>color.</font>"))
 	colorize()
 
 /obj/machinery/sealgen/screwdriver_act(mob/living/user, obj/item/tool)
@@ -117,7 +117,7 @@
 /obj/machinery/sealgen/wrench_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
 	if(!anchored && (!isturf(src.loc) || is_space_turf(src.loc)))
-		to_chat(user, SPAN_WARNING("[src] can't be anchored here."))
+		to_chat(user, span_warning("[src] can't be anchored here."))
 		return
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
@@ -159,7 +159,7 @@
 /obj/effect/seal_field/attack_hand(mob/user)
 	..()
 	if(density)
-		user.visible_message(SPAN_DANGER("[user] begins waving around [src]."),SPAN_WARNING("You begin to wave around [src], trying to dispel it."))
+		user.visible_message(span_danger("[user] begins waving around [src]."),span_warning("You begin to wave around [src], trying to dispel it."))
 		if(do_after(user, dispel_delay, src))
 			generator.off()
 
@@ -234,12 +234,12 @@
 
 /obj/item/sealgen_case/attack_self(mob/user)
 	. = ..()
-	to_chat(user,SPAN_NOTICE("You start deploying [src]."))
-	user.visible_message(SPAN_NOTICE("[user] starts deploying [src]."))
+	to_chat(user,span_notice("You start deploying [src]."))
+	user.visible_message(span_notice("[user] starts deploying [src]."))
 	if(do_after(user, deploy_time, src))
 		qdel(src)
 		var/obj/machinery/sealgen/G  = new(get_turf(user))
-		user.visible_message(SPAN_NOTICE("[user] deploys [G]."),SPAN_INFO("You deploy [G]."))
+		user.visible_message(span_notice("[user] deploys [G]."),span_info("You deploy [G]."))
 		G.dir = user.dir
 
 /obj/machinery/sealgen/MouseDrop(over_object, src_location, over_location)
@@ -247,16 +247,16 @@
 	var/mob/user = usr
 	if(istype(user) && Adjacent(user))
 		if(locked)
-			to_chat(user,SPAN_WARNING("You can't fold [src], it's locked!"))
+			to_chat(user,span_warning("You can't fold [src], it's locked!"))
 			return
 		if(anchored)
-			to_chat(user,SPAN_WARNING("You can't fold [src], it's anchor bolts doesn't fit."))
+			to_chat(user,span_warning("You can't fold [src], it's anchor bolts doesn't fit."))
 			return
 		if(over_object == user)
-			to_chat(user,SPAN_NOTICE("You start folding [src]."))
-			user.visible_message(SPAN_NOTICE("[user] starts folding [src]."))
+			to_chat(user,span_notice("You start folding [src]."))
+			user.visible_message(span_notice("[user] starts folding [src]."))
 			if(do_after(user, fold_time, src))
-				user.visible_message(SPAN_NOTICE("[user] folds [src]."),SPAN_INFO("You fold [src]."))
+				user.visible_message(span_notice("[user] folds [src]."),span_info("You fold [src]."))
 				fold(user)
 
 /obj/machinery/sealgen/proc/fold(mob/user)

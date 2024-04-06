@@ -47,7 +47,7 @@
 
 	// Do the actual leap.
 	status_flags |= LEAPING // Lets us pass over everything.
-	visible_message(SPAN_DANGER("\The [src] leaps at \the [A]!"))
+	visible_message(span_danger("\The [src] leaps at \the [A]!"))
 	throw_at(get_step(get_turf(A), get_turf(src)), special_attack_max_range+1, 1, src)
 	playsound(src, leap_sound, 75, 1)
 
@@ -76,7 +76,7 @@
 
 	if(victim)
 		victim.Weaken(2)
-		victim.visible_message(SPAN_DANGER("\The [src] knocks down \the [victim]!"))
+		victim.visible_message(span_danger("\The [src] knocks down \the [victim]!"))
 		to_chat(victim, SPAN_CLASS("critical", "\The [src] jumps on you!"))
 		. = TRUE
 

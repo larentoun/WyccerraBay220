@@ -80,7 +80,7 @@ var/global/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 	if(T)
 		forceMove(T)
 		throwing = null
-		to_chat(src, SPAN_NOTICE("You cannot move further in this direction."))
+		to_chat(src, span_notice("You cannot move further in this direction."))
 
 /mob/observer/can_be_floored()
 	return FALSE

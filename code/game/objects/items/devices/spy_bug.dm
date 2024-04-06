@@ -34,8 +34,8 @@
 /obj/item/device/spy_bug/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 0)
-		. += SPAN_NOTICE("It's a tiny camera, microphone, and transmission device in a happy union.")
-		. += SPAN_NOTICE("Needs to be both configured and brought in contact with monitor device to be fully functional.")
+		. += span_notice("It's a tiny camera, microphone, and transmission device in a happy union.")
+		. += span_notice("Needs to be both configured and brought in contact with monitor device to be fully functional.")
 
 /obj/item/device/spy_bug/attack_self(mob/user)
 	radio.attack_self(user)
@@ -82,7 +82,7 @@
 /obj/item/device/spy_monitor/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
-		. += SPAN_NOTICE("The time '12:00' is blinking in the corner of the screen and \the [src] looks very cheaply made.")
+		. += span_notice("The time '12:00' is blinking in the corner of the screen and \the [src] looks very cheaply made.")
 
 /obj/item/device/spy_monitor/attack_self(mob/user)
 	if(operating)
@@ -103,10 +103,10 @@
 
 /obj/item/device/spy_monitor/proc/pair(obj/item/device/spy_bug/SB, mob/living/user)
 	if(SB.camera in cameras)
-		to_chat(user, SPAN_NOTICE("\The [SB] has been unpaired from \the [src]."))
+		to_chat(user, span_notice("\The [SB] has been unpaired from \the [src]."))
 		cameras -= SB.camera
 	else
-		to_chat(user, SPAN_NOTICE("\The [SB] has been paired with \the [src]."))
+		to_chat(user, span_notice("\The [SB] has been paired with \the [src]."))
 		cameras += SB.camera
 
 /obj/item/device/spy_monitor/proc/view_cameras(mob/user)
@@ -129,7 +129,7 @@
 			if(!T || !is_on_same_plane_or_station(T.z, user.z) || !selected_camera.can_use())
 				user.unset_machine()
 				user.reset_view(null)
-				to_chat(user, SPAN_NOTICE("[selected_camera] unavailable."))
+				to_chat(user, span_notice("[selected_camera] unavailable."))
 				sleep(90)
 			else
 				user.set_machine(selected_camera)
@@ -143,8 +143,8 @@
 		return
 
 	if(!length(cameras))
-		to_chat(user, SPAN_WARNING("No paired cameras detected!"))
-		to_chat(user, SPAN_WARNING("Bring a bug in contact with this device to pair the camera."))
+		to_chat(user, span_warning("No paired cameras detected!"))
+		to_chat(user, span_warning("Bring a bug in contact with this device to pair the camera."))
 		return
 
 	return 1

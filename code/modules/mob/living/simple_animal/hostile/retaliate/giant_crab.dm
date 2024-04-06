@@ -69,7 +69,7 @@
 			release_grab()
 		ai_holder.attackers = list() //TODO: does this still work?
 		ai_holder.lose_target()
-		visible_message(SPAN_NOTICE("\The [src] lowers its pincer."))
+		visible_message(span_notice("\The [src] lowers its pincer."))
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/can_special_attack(mob/living/carbon/human/H)
 	. = ..()
@@ -84,12 +84,12 @@
 		if(victim.stat >= UNCONSCIOUS || !Adjacent(victim) || !victim.incapacitated())
 			release_grab()
 			return
-		visible_message(SPAN_DANGER("\The [src] [pick(grab_desc)] \the [victim] in its pincer!"))
+		visible_message(span_danger("\The [src] [pick(grab_desc)] \the [victim] in its pincer!"))
 		victim.apply_damage(grab_damage, DAMAGE_BRUTE, BP_CHEST, DAMAGE_FLAG_EDGE, used_weapon = "crab's pincer")
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/proc/release_grab()
 	if(victim)
-		visible_message(SPAN_NOTICE("\The [src] releases its grip on \the [victim]!"))
+		visible_message(span_notice("\The [src] releases its grip on \the [victim]!"))
 		GLOB.destroyed_event.unregister(victim)
 		victim = null
 	set_AI_busy(FALSE)
@@ -107,7 +107,7 @@
 				H.Weaken(1)
 				H.Stun(1)
 				C.grab_damage++
-				C.visible_message(SPAN_MFAUNA("\The [src] tightens its grip on \the [C.victim]!"))
+				C.visible_message(span_mfauna("\The [src] tightens its grip on \the [C.victim]!"))
 				return
 
 		if(!C.victim && C.can_special_attack(H))
@@ -115,7 +115,7 @@
 			C.victim = H
 			H.Weaken(C.grab_duration)
 			H.Stun(C.grab_duration)
-			C.visible_message(SPAN_MFAUNA("\The [C] catches \the [C.victim] in its powerful pincer!"))
+			C.visible_message(span_mfauna("\The [C] catches \the [C.victim] in its powerful pincer!"))
 			set_busy(TRUE)
 			return
 

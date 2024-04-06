@@ -72,7 +72,7 @@
 		viables.Remove(type)
 		construction[button_desc] = type
 
-	fail_message = SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] a [pick("loud","soft","sinister","eery","triumphant","depressing","cheerful","angry")] \
+	fail_message = span_notice("[icon2html(src, viewers(get_turf(src)))] a [pick("loud","soft","sinister","eery","triumphant","depressing","cheerful","angry")] \
 		[pick("horn","beep","bing","bleep","blat","honk","hrumph","ding")] sounds and a \
 		[pick("yellow","purple","green","blue","red","orange","white")] \
 		[pick("light","dial","meter","window","protrusion","knob","antenna","swirly thing")] \
@@ -84,7 +84,7 @@
 	if(length(spawning_types) && is_powered())
 		spawn_progress_time += world.time - last_process_time
 		if(spawn_progress_time > max_spawn_time)
-			src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [src] pings!"))
+			src.visible_message(span_notice("[icon2html(src, viewers(get_turf(src)))] [src] pings!"))
 
 			var/obj/source_material = pop(stored_materials)
 			var/spawn_type = pop(spawning_types)
@@ -107,7 +107,7 @@
 				icon_state = "borgcharger0(old)"
 
 		else if(prob(5))
-			src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [src] [pick("clicks","whizzes","whirrs","whooshes","clanks","clongs","clonks","bangs")]."))
+			src.visible_message(span_notice("[icon2html(src, viewers(get_turf(src)))] [src] [pick("clicks","whizzes","whirrs","whooshes","clanks","clongs","clonks","bangs")]."))
 
 	last_process_time = world.time
 
@@ -130,7 +130,7 @@
 	if(!user.unEquip(W, src))
 		return TRUE
 	stored_materials.Add(W)
-	visible_message(SPAN_NOTICE("\The [user] inserts \the [W] into \the [src]."))
+	visible_message(span_notice("\The [user] inserts \the [W] into \the [src]."))
 	return TRUE
 
 /obj/machinery/replicator/OnTopic(user, href_list)
@@ -139,9 +139,9 @@
 		if(index > 0 && index <= length(construction))
 			if(length(stored_materials) > length(spawning_types))
 				if(length(spawning_types))
-					src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] a [pick("light","dial","display","meter","pad")] on [src]'s front [pick("blinks","flashes")] [pick("red","yellow","blue","orange","purple","green","white")]."))
+					src.visible_message(span_notice("[icon2html(src, viewers(get_turf(src)))] a [pick("light","dial","display","meter","pad")] on [src]'s front [pick("blinks","flashes")] [pick("red","yellow","blue","orange","purple","green","white")]."))
 				else
-					src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [src]'s front compartment slides shut."))
+					src.visible_message(span_notice("[icon2html(src, viewers(get_turf(src)))] [src]'s front compartment slides shut."))
 
 				spawning_types.Add(construction[construction[index]])
 				spawn_progress_time = 0

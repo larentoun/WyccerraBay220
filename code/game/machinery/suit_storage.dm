@@ -3,11 +3,11 @@
 	if(istype(I, /obj/item/##path)){\
 		if(!isopen) return;\
 		if(##slot){\
-			to_chat(user, SPAN_NOTICE("The unit already contains \a [slot]."));\
+			to_chat(user, span_notice("The unit already contains \a [slot]."));\
 			return\
 		};\
 		if(!user.unEquip(I, src)) return;\
-		to_chat(user, SPAN_NOTICE("You load the [I.name] into the storage compartment."));\
+		to_chat(user, span_notice("You load the [I.name] into the storage compartment."));\
 		##slot = I;\
 		update_icon();\
 		SStgui.update_uis(src);\
@@ -103,15 +103,15 @@
 /obj/machinery/suit_storage_unit/crowbar_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
 	if(islocked)
-		to_chat(user, SPAN_WARNING("You can't pry the unit open, it's locked!"))
+		to_chat(user, span_warning("You can't pry the unit open, it's locked!"))
 		return
 	if(!inoperable() || isopen)
 		return
-	to_chat(user, SPAN_NOTICE("You begin prying the unit open."))
+	to_chat(user, span_notice("You begin prying the unit open."))
 	if(!tool.use_as_tool(src, user, 5 SECONDS, volume = 50, skill_path = list(SKILL_CONSTRUCTION, SKILL_DEVICES), do_flags = DO_REPAIR_CONSTRUCT) || !inoperable() || isopen || islocked)
 		return
 	isopen = TRUE
-	to_chat(user, SPAN_NOTICE("You pry the unit open."))
+	to_chat(user, span_notice("You pry the unit open."))
 	SStgui.update_uis(src)
 	update_icon()
 
@@ -138,7 +138,7 @@
 	return TRUE
 
 /obj/machinery/suit_storage_unit/proc/move_target_inside(mob/target, mob/user)
-	visible_message(SPAN_WARNING("\The [user] starts putting \the [target] into \the [src]."))
+	visible_message(span_warning("\The [user] starts putting \the [target] into \the [src]."))
 	add_fingerprint(user)
 	if(do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 		if(!user_can_move_target_inside(target, user))
@@ -157,10 +157,10 @@
 
 /obj/machinery/suit_storage_unit/user_can_move_target_inside(mob/target, mob/user)
 	if(!isopen)
-		to_chat(user, SPAN_NOTICE("The unit's doors are shut."))
+		to_chat(user, span_notice("The unit's doors are shut."))
 		return FALSE
 	if(occupant || suit || tank || (helmet && boots && mask))
-		to_chat(user, SPAN_NOTICE("The unit's storage area is too cluttered."))
+		to_chat(user, span_notice("The unit's storage area is too cluttered."))
 		return FALSE
 	return ..()
 
@@ -174,7 +174,7 @@
 	if(!ismob(target) || !CanMouseDrop(target, user))
 		return
 	if(user != target)
-		to_chat(user, SPAN_WARNING("You need to grab \the [target] to be able to do that!"))
+		to_chat(user, span_warning("You need to grab \the [target] to be able to do that!"))
 		return
 	else if (user_can_move_target_inside(target, user))
 		move_target_inside(target, user)
@@ -294,7 +294,7 @@
 		FEEDBACK_ACCESS_DENIED(user, src)
 		return
 	if(occupant && safetieson)
-		to_chat(user, SPAN_WARNING("The Unit's safety protocols disallow locking when a biological form is detected inside its compartments."))
+		to_chat(user, span_warning("The Unit's safety protocols disallow locking when a biological form is detected inside its compartments."))
 		return
 	if(isopen)
 		return
@@ -303,14 +303,14 @@
 
 /obj/machinery/suit_storage_unit/proc/start_UV(mob/user)
 	if(occupant && safetieson)
-		to_chat(user, SPAN_WARNING("Biological entity detected in the confines of the Unit's storage. Cannot initiate cycle."))
+		to_chat(user, span_warning("Biological entity detected in the confines of the Unit's storage. Cannot initiate cycle."))
 		return
 	if(!helmet  && !mask && !suit && !boots && !tank && !occupant )
-		to_chat(user, SPAN_NOTICE("Unit storage bays empty. Nothing to disinfect -- Aborting."))
+		to_chat(user, span_notice("Unit storage bays empty. Nothing to disinfect -- Aborting."))
 		return
 	if(occupant && !islocked)
 		islocked = TRUE
-	to_chat(user, SPAN_NOTICE("You start the Unit's cauterisation cycle."))
+	to_chat(user, span_notice("You start the Unit's cauterisation cycle."))
 	isUV = TRUE
 	update_use_power(POWER_USE_ACTIVE)
 	update_icon()
@@ -351,7 +351,7 @@
 			tank = null
 		if(mask)
 			mask = null
-		visible_message(SPAN_WARNING("With a loud whining noise, the Suit Storage Unit's door grinds open. Puffs of ashen smoke come out of its chamber."))
+		visible_message(span_warning("With a loud whining noise, the Suit Storage Unit's door grinds open. Puffs of ashen smoke come out of its chamber."))
 		set_broken(TRUE)
 		isopen = TRUE
 		islocked = FALSE
@@ -372,7 +372,7 @@
 	SStgui.update_uis(src)
 
 /obj/machinery/suit_storage_unit/proc/eject_occupant(mob/user)
-	visible_message(SPAN_NOTICE("The suit storage unit spits out [occupant]."))
+	visible_message(span_notice("The suit storage unit spits out [occupant]."))
 	occupant.reset_view()
 	occupant.dropInto(loc)
 	occupant = null
@@ -398,15 +398,15 @@
 	if(usr.incapacitated())
 		return
 	if(!isopen)
-		to_chat(usr, SPAN_NOTICE("The unit's doors are shut."))
+		to_chat(usr, span_notice("The unit's doors are shut."))
 		return
 	if(inoperable())
-		to_chat(usr, SPAN_NOTICE("The unit is not operational."))
+		to_chat(usr, span_notice("The unit is not operational."))
 		return
 	if((occupant) || (helmet) || (suit))
-		to_chat(usr, SPAN_WARNING("It's too cluttered inside for you to fit in!"))
+		to_chat(usr, span_warning("It's too cluttered inside for you to fit in!"))
 		return
-	visible_message(SPAN_NOTICE("\The [usr] starts squeezing into the suit storage unit!"))
+	visible_message(span_notice("\The [usr] starts squeezing into the suit storage unit!"))
 	if(do_after(usr, 1 SECOND, src, DO_PUBLIC_UNIQUE))
 		usr.reset_view(src)
 		usr.stop_pulling()

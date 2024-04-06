@@ -66,14 +66,14 @@
 		camera.set_status(!camera.status)
 		if(camera.status)
 			camera.c_tag = FindNameFromID(usr)
-			to_chat(usr, SPAN_NOTICE("User scanned as [camera.c_tag]. Camera activated."))
+			to_chat(usr, span_notice("User scanned as [camera.c_tag]. Camera activated."))
 		else
-			to_chat(usr, SPAN_NOTICE("Camera deactivated."))
+			to_chat(usr, span_notice("Camera deactivated."))
 
 /obj/item/clothing/head/helmet/space/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1 && camera)
-		. += SPAN_NOTICE("This helmet has a built-in camera. Its [!ispath(camera) && camera.status ? "" : "in"]active.")
+		. += span_notice("This helmet has a built-in camera. Its [!ispath(camera) && camera.status ? "" : "in"]active.")
 
 /obj/item/clothing/head/helmet/space/proc/update_tint()
 	if(tinted)
@@ -147,17 +147,17 @@
 /obj/item/clothing/suit/space/equip_delay_before(mob/user, slot, equip_flags)
 	user.setClickCooldown(1 SECOND)
 	user.visible_message(
-		SPAN_ITALIC("\The [user] begins to struggle into \the [src]."),
-		SPAN_ITALIC("You begin to struggle into \the [src]."),
-		SPAN_ITALIC("You can hear metal clicking and fabric rustling."),
+		span_italic("\The [user] begins to struggle into \the [src]."),
+		span_italic("You begin to struggle into \the [src]."),
+		span_italic("You can hear metal clicking and fabric rustling."),
 		range = 5
 	)
 
 
 /obj/item/clothing/suit/space/equip_delay_after(mob/user, slot, equip_flags)
 	user.visible_message(
-		SPAN_ITALIC("\The [user] finishes putting on \the [src]."),
-		SPAN_NOTICE("You finish putting on \the [src]."),
+		span_italic("\The [user] finishes putting on \the [src]."),
+		span_notice("You finish putting on \the [src]."),
 		range = 5
 	)
 

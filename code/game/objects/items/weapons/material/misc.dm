@@ -26,12 +26,12 @@
 /obj/item/material/harpoon/bomb/has_embedded()
 	if(spent)
 		return
-	audible_message(SPAN_WARNING("\The [src] emits a long, harsh tone!"))
+	audible_message(span_warning("\The [src] emits a long, harsh tone!"))
 	playsound(loc, 'sound/weapons/bombwhine.ogg', 100, 0, -3)
 	addtimer(CALLBACK(src, PROC_REF(harpoon_detonate)), 4 SECONDS) //for suspense
 
 /obj/item/material/harpoon/bomb/proc/harpoon_detonate()
-	audible_message(SPAN_DANGER("\The [src] detonates!")) //an actual sound will be handled by explosion()
+	audible_message(span_danger("\The [src] detonates!")) //an actual sound will be handled by explosion()
 	var/turf/T = get_turf(src)
 	explosion(T, 2, EX_ACT_LIGHT, 1, UP|DOWN, 1)
 	fragmentate(T, 4, 2)

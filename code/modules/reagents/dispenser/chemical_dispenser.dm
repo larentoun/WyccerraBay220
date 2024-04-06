@@ -51,17 +51,17 @@
 
 	if (istype(W, /obj/item/reagent_containers/glass) || istype(W, /obj/item/reagent_containers/food) || istype(W, /obj/item/reagent_containers/ivbag))
 		if(container)
-			to_chat(user, SPAN_WARNING("There is already \a [container] on [src]!"))
+			to_chat(user, span_warning("There is already \a [container] on [src]!"))
 			return TRUE
 
 		var/obj/item/reagent_containers/RC = W
 
 		if(!accept_drinking && istype(RC, /obj/item/reagent_containers/food))
-			to_chat(user, SPAN_WARNING("This machine only accepts beakers and IV bags!"))
+			to_chat(user, span_warning("This machine only accepts beakers and IV bags!"))
 			return TRUE
 
 		if(!RC.is_open_container())
-			to_chat(user, SPAN_WARNING("You don't see how [src] could dispense reagents into [RC]."))
+			to_chat(user, span_warning("You don't see how [src] could dispense reagents into [RC]."))
 			return TRUE
 
 		if(!user.unEquip(RC, src))
@@ -69,7 +69,7 @@
 
 		container =  RC
 		update_icon()
-		to_chat(user, SPAN_NOTICE("You set [RC] on [src]."))
+		to_chat(user, span_notice("You set [RC] on [src]."))
 		SStgui.update_uis(src)
 		return TRUE
 
@@ -162,27 +162,27 @@
 /obj/machinery/chemical_dispenser/proc/add_cartridge(obj/item/reagent_containers/chem_disp_cartridge/new_cartridge, mob/user)
 	if(!istype(new_cartridge))
 		if(user)
-			to_chat(user, SPAN_WARNING("[new_cartridge] will not fit in [src]!"))
+			to_chat(user, span_warning("[new_cartridge] will not fit in [src]!"))
 		return
 
 	if(length(cartridges) >= DISPENSER_MAX_CARTRIDGES)
 		if(user)
-			to_chat(user, SPAN_WARNING("[src] does not have any slots open for [new_cartridge] to fit into!"))
+			to_chat(user, span_warning("[src] does not have any slots open for [new_cartridge] to fit into!"))
 		return
 
 	if(!new_cartridge.label)
 		if(user)
-			to_chat(user, SPAN_WARNING("[new_cartridge] does not have a label!"))
+			to_chat(user, span_warning("[new_cartridge] does not have a label!"))
 		return
 
 	if(cartridges[new_cartridge.label])
 		if(user)
-			to_chat(user, SPAN_WARNING("[src] already contains a cartridge with that label!"))
+			to_chat(user, span_warning("[src] already contains a cartridge with that label!"))
 		return
 
 	if(user)
 		if(user.unEquip(new_cartridge))
-			to_chat(user, SPAN_NOTICE("You add [new_cartridge] to [src]."))
+			to_chat(user, span_notice("You add [new_cartridge] to [src]."))
 		else
 			return
 

@@ -20,11 +20,11 @@
 /obj/machinery/external_cooling_device/examine(mob/user)
 	. = ..()
 
-	. += SPAN_NOTICE("The external cooling device is [active ? "on" : "off"] and the hatch is [!closed ? "open" : "closed"].")
+	. += span_notice("The external cooling device is [active ? "on" : "off"] and the hatch is [!closed ? "open" : "closed"].")
 	if(!closed)
-		. += SPAN_NOTICE("The power cell is [cell ? "installed" : "missing"].")
+		. += span_notice("The power cell is [cell ? "installed" : "missing"].")
 	else
-		. += SPAN_NOTICE("The charge meter reads [cell ? round(cell.percent(),1) : 0]%")
+		. += span_notice("The charge meter reads [cell ? round(cell.percent(),1) : 0]%")
 
 
 /obj/machinery/external_cooling_device/Topic(href, href_list, state = GLOB.physical_state)
@@ -42,8 +42,8 @@
 		if("cellremove")
 			if(!closed && cell && !usr.get_active_hand())
 				usr.visible_message(
-				SPAN_NOTICE("The [usr] removes \the [cell] from \the [src]."),
-				SPAN_NOTICE("You remove \the [cell] from \the [src].")
+				span_notice("The [usr] removes \the [cell] from \the [src]."),
+				span_notice("You remove \the [cell] from \the [src].")
 				)
 				cell.update_icon()
 				usr.put_in_hands(cell)
@@ -59,8 +59,8 @@
 					cell = C
 					C.add_fingerprint(usr)
 					usr.visible_message(
-						SPAN_NOTICE("\The [usr] inserts \the [C] into \the [src]."),
-						SPAN_NOTICE("You insert \the [C] into \the [src].")
+						span_notice("\The [usr] inserts \the [C] into \the [src]."),
+						span_notice("You insert \the [C] into \the [src].")
 					)
 
 		if("Power_On")
@@ -139,7 +139,7 @@
 	if(istype(W, /obj/item/screwdriver))
 		closed = !closed
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		to_chat(user, SPAN_NOTICE("You [closed ? "tighten" : "unscrew"] ECD panel"))
+		to_chat(user, span_notice("You [closed ? "tighten" : "unscrew"] ECD panel"))
 		on_update_icon()
 	if(!closed)
 		if (istype(W, /obj/item/cell))
@@ -187,19 +187,19 @@
 		return
 
 	if(!CanPhysicallyInteractWith(usr, src))
-		to_chat(usr, SPAN_WARNING("You're in no condition to do that!"))
+		to_chat(usr, span_warning("You're in no condition to do that!"))
 		return
 
 	if(!usr.skill_check(SKILL_DEVICES, SKILL_BASIC))
 		rip_out()
 	else
-		visible_message(SPAN_NOTICE("\The [attached] is taken off \the [src]."))
+		visible_message(span_notice("\The [attached] is taken off \the [src]."))
 		attached = null
 	update_icon()
 
 
 /obj/machinery/external_cooling_device/proc/rip_out()
-	visible_message(SPAN_WARNING("\The tube is ripped out of \the [src.attached]!"))
+	visible_message(span_warning("\The tube is ripped out of \the [src.attached]!"))
 	attached.apply_damage(1, DAMAGE_BRUTE, pick(BP_GROIN, BP_CHEST), damage_flags=DAMAGE_FLAG_SHARP)
 	attached = null
 	update_icon()
@@ -210,20 +210,20 @@
 		update_icon()
 
 /obj/machinery/external_cooling_device/proc/do_ECD_hookup(mob/living/carbon/human/target, mob/user, obj/ECD)
-	to_chat(user, SPAN_NOTICE("You start to hook up \the [target] to \the [ECD]."))
+	to_chat(user, span_notice("You start to hook up \the [target] to \the [ECD]."))
 	if(!user.do_skilled(2 SECONDS, SKILL_DEVICES, target))
 		return FALSE
 
 	if(prob(user.skill_fail_chance(SKILL_DEVICES, 40, SKILL_MIN)))
 		user.visible_message(
-			SPAN_WARNING("\The [user] fails while trying to hook \the [target] up to \the [ECD], stabbing them instead!"),
-			SPAN_WARNING("You fail while trying to hook \the [target] up to \the [ECD], stabbing yourself instead!")
+			span_warning("\The [user] fails while trying to hook \the [target] up to \the [ECD], stabbing them instead!"),
+			span_warning("You fail while trying to hook \the [target] up to \the [ECD], stabbing yourself instead!")
 		)
 		target.apply_damage(5, DAMAGE_BRUTE, pick(BP_GROIN, BP_CHEST), damage_flags=DAMAGE_FLAG_SHARP)
 		return FALSE
 
 	user.visible_message(
-		SPAN_NOTICE("\The [user] hooks \the [target] up to \the [ECD]."),
-		SPAN_NOTICE("You hook \the [target] up to \the [ECD]")
+		span_notice("\The [user] hooks \the [target] up to \the [ECD]."),
+		span_notice("You hook \the [target] up to \the [ECD]")
 	)
 	return TRUE

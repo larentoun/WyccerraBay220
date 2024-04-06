@@ -6,7 +6,7 @@
 
 /obj/item/clothing/gloves/boxing/attackby(obj/item/W, mob/user)
 	if(W.tool_behaviour == TOOL_WIRECUTTER || istype(W, /obj/item/scalpel))
-		to_chat(user, SPAN_NOTICE("That won't work."))//Nope
+		to_chat(user, span_notice("That won't work."))//Nope
 	else
 		..()
 

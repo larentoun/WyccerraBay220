@@ -94,7 +94,7 @@
 	if (AM in contents)
 		return
 
-	visible_message(SPAN_NOTICE("\The [src] begins to secrete a sticky substance around \the [AM].") )
+	visible_message(span_notice("\The [src] begins to secrete a sticky substance around \the [AM].") )
 
 	// Get our AI to stay still.
 	set_AI_busy(TRUE)
@@ -115,7 +115,7 @@
 		if(istype(L, /mob/living/simple_animal/hostile/giant_spider)) // Cannibalism is bad.
 			continue
 		fed++
-		visible_message(SPAN_WARNING("\The [src] sticks a proboscis into \the [L], and sucks a viscous substance out."))
+		visible_message(span_warning("\The [src] sticks a proboscis into \the [L], and sucks a viscous substance out."))
 		large_cocoon = TRUE
 		break
 
@@ -142,7 +142,7 @@
 	if(W)
 		return FALSE // Already got webs here.
 
-	visible_message(SPAN_NOTICE("\The [src] begins to secrete a sticky substance."))
+	visible_message(span_notice("\The [src] begins to secrete a sticky substance."))
 	// Get our AI to stay still.
 	set_AI_busy(TRUE)
 
@@ -171,7 +171,7 @@
 	if(E)
 		return FALSE // Already got eggs here.
 
-	visible_message(SPAN_NOTICE("\The [src] begins to lay a cluster of eggs."))
+	visible_message(span_notice("\The [src] begins to lay a cluster of eggs."))
 	// Get our AI to stay still.
 	set_AI_busy(TRUE)
 	// Stop players from spamming eggs.

@@ -44,7 +44,7 @@
 		addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, set_opacity), FALSE), 2 SECONDS, TIMER_UNIQUE | TIMER_OVERRIDE)
 
 /obj/machinery/shield/on_death()
-	visible_message(SPAN_NOTICE("\The [src] dissipates!"))
+	visible_message(span_notice("\The [src] dissipates!"))
 	qdel(src)
 
 /obj/machinery/shieldgen
@@ -176,14 +176,14 @@
 		return TRUE
 
 	if (src.active)
-		user.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [user] deactivated the shield generator."), \
-			SPAN_NOTICE("[icon2html(src,user)] You deactivate the shield generator."), \
+		user.visible_message(span_notice("[icon2html(src, viewers(get_turf(src)))] [user] deactivated the shield generator."), \
+			span_notice("[icon2html(src,user)] You deactivate the shield generator."), \
 			"You hear heavy droning fade out.")
 		src.shields_down()
 	else
 		if(anchored)
-			user.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [user] activated the shield generator."), \
-				SPAN_NOTICE("[icon2html(src, user)] You activate the shield generator."), \
+			user.visible_message(span_notice("[icon2html(src, viewers(get_turf(src)))] [user] activated the shield generator."), \
+				span_notice("[icon2html(src, user)] You activate the shield generator."), \
 				"You hear heavy droning.")
 			src.shields_up()
 		else
@@ -206,13 +206,13 @@
 /obj/machinery/shieldgen/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(isCoil(W) && malfunction && is_open)
 		var/obj/item/stack/cable_coil/coil = W
-		to_chat(user, SPAN_NOTICE("You begin to replace the wires."))
+		to_chat(user, span_notice("You begin to replace the wires."))
 		//if(do_after(user, min(60, round( ((maxhealth/health)*10)+(malfunction*10) ))) //Take longer to repair heavier damage
 		if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 			if (coil.use(1))
 				revive_health()
 				malfunction = 0
-				to_chat(user, SPAN_NOTICE("You repair the [src]!"))
+				to_chat(user, span_notice("You repair the [src]!"))
 		return TRUE
 
 	if (istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer/pda))
@@ -220,7 +220,7 @@
 			locked = !locked
 			to_chat(user, "The controls are now [src.locked ? "locked." : "unlocked."]")
 		else
-			to_chat(user, SPAN_WARNING("Access denied."))
+			to_chat(user, span_warning("Access denied."))
 		return TRUE
 
 	return ..()

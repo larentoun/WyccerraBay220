@@ -78,11 +78,11 @@
 		if(istype(src.loc, /mob/living/carbon/human))
 			var/mob/living/carbon/human/M = src.loc
 			if(M.glasses != src)
-				to_chat(M, SPAN_DANGER("\The [name] malfunction[gender != PLURAL ? "s":""], releasing a small spark."))
+				to_chat(M, span_danger("\The [name] malfunction[gender != PLURAL ? "s":""], releasing a small spark."))
 			else
 				M.eye_blind = 2
 				M.eye_blurry = 4
-				to_chat(M, SPAN_DANGER("\The [name] malfunction[gender != PLURAL ? "s":""], blinding you!"))
+				to_chat(M, span_danger("\The [name] malfunction[gender != PLURAL ? "s":""], blinding you!"))
 				// Don't cure being nearsighted
 				if(!(M.disabilities & NEARSIGHTED))
 					M.disabilities |= NEARSIGHTED

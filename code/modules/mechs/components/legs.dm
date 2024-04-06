@@ -18,7 +18,7 @@
 /obj/item/mech_component/propulsion/show_missing_parts(mob/user)
 	. = ..()
 	if(!motivator)
-		. += SPAN_WARNING("It is missing an actuator.")
+		. += span_warning("It is missing an actuator.")
 
 /obj/item/mech_component/propulsion/ready_to_install()
 	return motivator
@@ -29,7 +29,7 @@
 /obj/item/mech_component/propulsion/attackby(obj/item/thing, mob/user)
 	if(istype(thing,/obj/item/robot_parts/robot_component/actuator))
 		if(motivator)
-			to_chat(user, SPAN_WARNING("\The [src] already has an actuator installed."))
+			to_chat(user, span_warning("\The [src] already has an actuator installed."))
 			return
 		if(install_component(thing, user)) motivator = thing
 	else
@@ -49,15 +49,15 @@
 
 /obj/item/mech_component/propulsion/get_damage_string()
 	if(!motivator || !motivator.is_functional())
-		return SPAN_DANGER("disabled")
+		return span_danger("disabled")
 	return ..()
 
 /obj/item/mech_component/propulsion/return_diagnostics(mob/user)
 	..()
 	if(motivator)
-		to_chat(user, SPAN_NOTICE(" Actuator Integrity: <b>[round((((motivator.max_dam - motivator.total_dam) / motivator.max_dam)) * 100)]%</b>"))
+		to_chat(user, span_notice(" Actuator Integrity: <b>[round((((motivator.max_dam - motivator.total_dam) / motivator.max_dam)) * 100)]%</b>"))
 	else
-		to_chat(user, SPAN_WARNING(" Actuator Missing or Non-functional."))
+		to_chat(user, span_warning(" Actuator Missing or Non-functional."))
 
 //Expand here if the legs increase, reduce or otherwise affect fall damage for exosuit
 /obj/item/mech_component/propulsion/proc/handle_vehicle_fall()
@@ -93,7 +93,7 @@
 
 /obj/item/mech_component/propulsion/light/handle_vehicle_fall()
 	..()
-	visible_message(SPAN_NOTICE("\The [src] creak as they absorb the impact."))
+	visible_message(span_notice("\The [src] creak as they absorb the impact."))
 
 /obj/item/mech_component/propulsion/spider
 	name = "quadlegs"

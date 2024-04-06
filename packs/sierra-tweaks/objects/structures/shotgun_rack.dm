@@ -27,7 +27,7 @@
 				user.unEquip(tool)
 				tool.forceMove(src)
 				rack_shotgun = tool
-				to_chat(user, SPAN_NOTICE("You place \the [tool] in \the [src]."))
+				to_chat(user, span_notice("You place \the [tool] in \the [src]."))
 				icon_state = "shotgun_rack_[tool.icon_state]"
 				return TRUE
 	return ..()
@@ -40,7 +40,7 @@
 	if(!locked)
 		if(rack_shotgun)
 			user.put_in_hands(rack_shotgun)
-			to_chat(user, SPAN_NOTICE("You take \the [rack_shotgun] from \the [src]."))
+			to_chat(user, span_notice("You take \the [rack_shotgun] from \the [src]."))
 			rack_shotgun = null
 			icon_state = "shotgun_rack"
 	else
@@ -51,7 +51,7 @@
 	if(!locked)
 		if(rack_shotgun)
 			rack_shotgun.forceMove(loc)
-			to_chat(user, SPAN_NOTICE("You telekinetically remove \the [rack_shotgun] from \the [src]."))
+			to_chat(user, span_notice("You telekinetically remove \the [rack_shotgun] from \the [src]."))
 			rack_shotgun = null
 			icon_state = "shotgun_rack"
 	else

@@ -167,7 +167,7 @@
 				GLOB.cult.offer_uncult(M)
 			if(prob(2))
 				var/obj/spider/spiderling/S = new /obj/spider/spiderling(M.loc)
-				M.visible_message(SPAN_WARNING("\The [M] coughs up \the [S]!"))
+				M.visible_message(span_warning("\The [M] coughs up \the [S]!"))
 
 /datum/reagent/water/holywater/touch_turf(turf/T)
 	if(volume >= 5)
@@ -353,7 +353,7 @@
 		var/removed_heat = clamp(volume * COOLANT_LATENT_HEAT, 0, -environment.get_thermal_energy_change(min_temperature))
 		environment.add_thermal_energy(-removed_heat)
 		if (prob(5) && environment && environment.temperature > T100C)
-			T.visible_message(SPAN_WARNING("The water sizzles as it lands on \the [T]!"))
+			T.visible_message(span_warning("The water sizzles as it lands on \the [T]!"))
 
 
 /datum/reagent/ultraglue
@@ -453,7 +453,7 @@
 	else
 		M.co2_alert = 0
 	if(warning_message && prob(warning_prob))
-		to_chat(M, SPAN_WARNING("You feel [warning_message]."))
+		to_chat(M, span_warning("You feel [warning_message]."))
 
 /datum/reagent/dye
 	name = "Dye"
@@ -484,8 +484,8 @@
 		M.change_hair(initial(newhair.name))
 		M.change_facial_hair(initial(newbeard.name))
 		M.visible_message(
-			SPAN_NOTICE("\The [M]'s hair grows to extraordinary lengths!"),
-			SPAN_NOTICE("Your hair grows to extraordinary lengths!")
+			span_notice("\The [M]'s hair grows to extraordinary lengths!"),
+			span_notice("Your hair grows to extraordinary lengths!")
 		)
 	remove_self(volume)
 
@@ -493,7 +493,7 @@
 	if (IS_METABOLICALLY_INERT(M))
 		return
 	if (prob(10))
-		to_chat(M, SPAN_WARNING("Your tongue feels... fuzzy."))
+		to_chat(M, span_warning("Your tongue feels... fuzzy."))
 	M.slurring = max(M.slurring, 10)
 
 /datum/reagent/hair_dye
@@ -517,8 +517,8 @@
 			H.change_hair_color(red, green, blue)
 			H.change_facial_hair_color(red, green, blue)
 			H.visible_message(
-				SPAN_NOTICE("\The [H]'s hair changes color!"),
-				SPAN_NOTICE("Your hair changes color!")
+				span_notice("\The [H]'s hair changes color!"),
+				span_notice("Your hair changes color!")
 			)
 	remove_self(volume)
 

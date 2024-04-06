@@ -63,7 +63,7 @@
 	if(istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer))
 		if(allowed(usr))
 			toggle_lock()
-			visible_message(SPAN_NOTICE("[usr] [locked ? "" : "un"]locked [src]!"))
+			visible_message(span_notice("[usr] [locked ? "" : "un"]locked [src]!"))
 			return TRUE
 	if(isitem(W))
 		if(user.drop_from_inventory(W, src.loc))

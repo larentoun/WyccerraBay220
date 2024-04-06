@@ -125,7 +125,7 @@
 				if(shuttle_area_refs_set[ref(get_area(mob_to_notify))])
 					continue
 
-				to_chat(mob_to_notify, SPAN_NOTICE("The rumble of engines are heard as a shuttle lifts off."))
+				to_chat(mob_to_notify, span_notice("The rumble of engines are heard as a shuttle lifts off."))
 
 	addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/shuttle, launch_shuttle), start_location, interim, destination, travel_time), warmup_time)
 
@@ -172,7 +172,7 @@
 				if(shuttle_area_refs_set[ref(get_area(mob_to_notify))])
 					continue
 
-				to_chat(mob_to_notify, SPAN_NOTICE("The rumble of a shuttle's engines fill the area as a ship manuevers in for a landing."))
+				to_chat(mob_to_notify, span_notice("The rumble of a shuttle's engines fill the area as a ship manuevers in for a landing."))
 
 	var/landing_in = arrive_time - world.time
 	if(landing_in > 0)
@@ -339,13 +339,13 @@
 			continue
 
 		if(passenger_to_knockdown.buckled)
-			to_chat(passenger_to_knockdown, SPAN_WARNING("Sudden acceleration presses you into your chair!"))
+			to_chat(passenger_to_knockdown, span_warning("Sudden acceleration presses you into your chair!"))
 			shake_camera(passenger_to_knockdown, 3, 1)
 			continue
 
-		to_chat(passenger_to_knockdown, SPAN_WARNING("The floor lurches beneath you!"))
+		to_chat(passenger_to_knockdown, span_warning("The floor lurches beneath you!"))
 		shake_camera(passenger_to_knockdown, 10, 1)
-		passenger_to_knockdown.visible_message(SPAN_WARNING("[passenger_to_knockdown.name] is tossed around by the sudden acceleration!"))
+		passenger_to_knockdown.visible_message(span_warning("[passenger_to_knockdown.name] is tossed around by the sudden acceleration!"))
 		passenger_to_knockdown.throw_at_random(FALSE, 4, 1)
 
 /// Handler for shuttles landing on atoms. Called by `shuttle_moved()`.

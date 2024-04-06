@@ -77,14 +77,14 @@
 				SSxenoarch.xeno_digsite_turfs -= T
 
 		if(nearestTargetDist >= 0)
-			to_chat(user, SPAN_NOTICE("Exotic energy detected on wavelength '[nearestTargetId]' in a radius of [nearestTargetDist]m[nearestSimpleTargetDist > 0 ? "; small anomaly detected in a radius of [nearestSimpleTargetDist]m" : ""]"))
+			to_chat(user, span_notice("Exotic energy detected on wavelength '[nearestTargetId]' in a radius of [nearestTargetDist]m[nearestSimpleTargetDist > 0 ? "; small anomaly detected in a radius of [nearestSimpleTargetDist]m" : ""]"))
 		else if(nearestSimpleTargetDist >= 0)
-			to_chat(user, SPAN_NOTICE("Small anomaly detected in a radius of [nearestSimpleTargetDist]m."))
+			to_chat(user, span_notice("Small anomaly detected in a radius of [nearestSimpleTargetDist]m."))
 		else
-			to_chat(user, SPAN_NOTICE("Background radiation levels detected."))
+			to_chat(user, span_notice("Background radiation levels detected."))
 		playsound(loc, 'sound/machines/boop2.ogg', 40)
 	else
-		to_chat(user, SPAN_NOTICE("Scanning array is recharging."))
+		to_chat(user, span_notice("Scanning array is recharging."))
 
 /obj/item/device/depth_scanner
 	name = "depth analysis scanner"
@@ -109,7 +109,7 @@
 	var/material = "unknown"
 
 /obj/item/device/depth_scanner/proc/scan_atom(mob/user, atom/A)
-	user.visible_message(SPAN_NOTICE("\The [user] scans \the [A], the air around them humming gently."))
+	user.visible_message(span_notice("\The [user] scans \the [A], the air around them humming gently."))
 
 	if(istype(A, /turf/simulated/mineral))
 		var/turf/simulated/mineral/M = A
@@ -131,7 +131,7 @@
 
 			positive_locations.Add(D)
 
-			to_chat(user, SPAN_NOTICE("[icon2html(src, user)] [src] pings."))
+			to_chat(user, span_notice("[icon2html(src, user)] [src] pings."))
 			playsound(loc, 'sound/machines/twobeep.ogg', 40)
 
 	else if(istype(A, /obj/structure/boulder))
@@ -150,7 +150,7 @@
 
 			positive_locations.Add(D)
 
-			to_chat(user, SPAN_NOTICE("[icon2html(src, user)] [src] pings [pick("madly","wildly","excitedly","crazily")]!"))
+			to_chat(user, span_notice("[icon2html(src, user)] [src] pings [pick("madly","wildly","excitedly","crazily")]!"))
 			playsound(loc, 'sound/machines/triple_beep.ogg', 40)
 
 	updateSelfDialog()

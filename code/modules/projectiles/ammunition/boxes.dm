@@ -83,7 +83,7 @@
 		var/obj/item/ammo_casing/C = stored_ammo[length(stored_ammo)]
 		stored_ammo-=C
 		user.put_in_hands(C)
-		user.visible_message("\The [user] removes \a [C] from [src].", SPAN_NOTICE("You remove \a [C] from [src]."))
+		user.visible_message("\The [user] removes \a [C] from [src].", span_notice("You remove \a [C] from [src]."))
 		update_icon()
 	else
 		..()

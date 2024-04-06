@@ -19,14 +19,14 @@
 	. = ..()
 	if (owner && active)
 		if (prob(100 - (20 * severity))) // 60% chance for EMP_ACT_LIGHT and 80% chance for EMP_ACT_HEAVY severity, respectively
-			to_chat(owner, SPAN_WARNING("You feel a wave of nausea as your [name] deactivates."))
+			to_chat(owner, span_warning("You feel a wave of nausea as your [name] deactivates."))
 			active = FALSE
 
 
 /obj/item/organ/internal/augment/active/leukocyte_breeder/onRoundstart()
 	active = TRUE // We can safely assume that someone starting off with the breeder will have it active
 	ticks_active = ticks_to_acclimate
-	to_chat(owner, SPAN_INFO("Your [name] has started the shift active, granting you its full benefits without needing to break it in."))
+	to_chat(owner, span_info("Your [name] has started the shift active, granting you its full benefits without needing to break it in."))
 
 
 /obj/item/organ/internal/augment/active/leukocyte_breeder/onInstall()
@@ -44,9 +44,9 @@
 	active = !active
 	owner.playsound_local(null, 'sound/effects/fastbeep.ogg', 20, is_global = TRUE)
 	if (active)
-		to_chat(owner, SPAN_NOTICE("Leukocyte breeder engaged and improving immune response."))
+		to_chat(owner, span_notice("Leukocyte breeder engaged and improving immune response."))
 	else
-		to_chat(owner, SPAN_WARNING("Leukocyte breeder disengaged. Short-term health may suffer."))
+		to_chat(owner, span_warning("Leukocyte breeder disengaged. Short-term health may suffer."))
 		if (owner.immunity >= (owner.immunity_norm * 0.9)) // Reduce short-term immunity, but only if it's at around normal levels
 			owner.immunity -= 10
 		ticks_active = 0
@@ -65,5 +65,5 @@
 				if (prob(5))
 					owner.emote(pick("cough", "sneeze"))
 				if (prob(3))
-					to_chat(owner, SPAN_WARNING(pick("You feel uncomfortably hot.", "Your head aches.", "You feel lightheaded.")))
+					to_chat(owner, span_warning(pick("You feel uncomfortably hot.", "Your head aches.", "You feel lightheaded.")))
 					owner.dizziness += rand(3, 5)

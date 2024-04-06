@@ -227,6 +227,6 @@
 	visible_message("<b>[user]</b> starts lay out \the [src.name].")
 	if(do_after(user, 4 SECONDS, src))
 		var/obj/structure/bed/chair/wheelchair/W = new /obj/structure/bed/chair/wheelchair(get_turf(user))
-		visible_message(SPAN_NOTICE("<b>[user]</b> lay out \the [W.name]."))
+		visible_message(span_notice("<b>[user]</b> lay out \the [W.name]."))
 		W.add_fingerprint(user)
 		qdel(src)

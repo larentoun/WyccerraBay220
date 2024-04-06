@@ -79,8 +79,8 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 	prometheans = src
 
 /datum/species/shapeshifter/promethean/hug(mob/living/carbon/human/H,mob/living/target)
-	H.visible_message(SPAN_NOTICE("\The [H] glomps [target] to make [target.p_them()] feel better!"), \
-					SPAN_NOTICE("You glomps [target] to make [target.p_them()] feel better!"))
+	H.visible_message(span_notice("\The [H] glomps [target] to make [target.p_them()] feel better!"), \
+					span_notice("You glomps [target] to make [target.p_them()] feel better!"))
 	H.apply_stored_shock_to(target)
 
 /datum/species/shapeshifter/promethean/handle_death(mob/living/carbon/human/H)
@@ -105,7 +105,7 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 		if(I.damage > 0)
 			I.damage = max(I.damage - heal_rate, 0)
 			if (prob(5))
-				to_chat(H, SPAN_NOTICE("You feel a soothing sensation within your [I.name]..."))
+				to_chat(H, span_notice("You feel a soothing sensation within your [I.name]..."))
 			return 1
 
 	// Replace completely missing limbs.
@@ -120,7 +120,7 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 			var/limb_path = organ_data["path"]
 			var/obj/item/organ/O = new limb_path(H)
 			organ_data["descriptor"] = O.name
-			to_chat(H, SPAN_NOTICE("You feel a slithering sensation as your [O.name] reforms."))
+			to_chat(H, span_notice("You feel a slithering sensation as your [O.name] reforms."))
 			H.update_body()
 			return 1
 
@@ -153,6 +153,6 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 		if(11 to 20)
 			return "[H.p_They()] [H.p_are()] glowing gently with moderate levels of electrical activity.\n"
 		if(21 to 35)
-			return SPAN_WARNING("[H.p_They()] [H.p_are()] glowing brightly with high levels of electrical activity.")
+			return span_warning("[H.p_They()] [H.p_are()] glowing brightly with high levels of electrical activity.")
 		if(35 to INFINITY)
-			return SPAN_DANGER("[H.p_They()] [H.p_are()] radiating massive levels of electrical activity!")
+			return span_danger("[H.p_They()] [H.p_are()] radiating massive levels of electrical activity!")

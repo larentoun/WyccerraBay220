@@ -103,9 +103,9 @@ By design, d1 is the smallest direction and d2 is the highest
 		examinate(user, src)
 		// following code taken from attackby (multitool)
 		if(powernet && (powernet.avail > 0))
-			to_chat(user, SPAN_WARNING("[get_wattage()] in power network."))
+			to_chat(user, span_warning("[get_wattage()] in power network."))
 		else
-			to_chat(user, SPAN_WARNING("The cable is not powered."))
+			to_chat(user, span_warning("The cable is not powered."))
 ///////////////////////////////////
 // General procedures
 ///////////////////////////////////
@@ -139,14 +139,14 @@ By design, d1 is the smallest direction and d2 is the highest
 /obj/structure/cable/multitool_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
 	user.visible_message(
-		SPAN_NOTICE("[user] scans [src] with [tool]."),
-		SPAN_NOTICE("You scan [src] with [tool].")
+		span_notice("[user] scans [src] with [tool]."),
+		span_notice("You scan [src] with [tool].")
 	)
 	shock(user, 5, 0.2)
 	if(!powernet?.avail)
-		to_chat(user, SPAN_WARNING("[src] is not powered."))
+		to_chat(user, span_warning("[src] is not powered."))
 	else
-		to_chat(user, SPAN_INFO("[src] has [get_wattage()] flowing through it."))
+		to_chat(user, span_info("[src] has [get_wattage()] flowing through it."))
 
 /obj/structure/cable/wirecutter_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
@@ -170,14 +170,14 @@ By design, d1 is the smallest direction and d2 is the highest
 			delay_time = 8 SECONDS
 			delay_message = "sawing away roughly at"
 		user.visible_message(
-			SPAN_NOTICE("[user] starts [delay_message] [src] with [tool]."),
-			SPAN_NOTICE("You start [delay_message] [src] with [tool].")
+			span_notice("[user] starts [delay_message] [src] with [tool]."),
+			span_notice("You start [delay_message] [src] with [tool].")
 		)
 		if (!user.do_skilled(delay_time, SKILL_ELECTRICAL, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("[user] cuts through [src] with [tool]."),
-			SPAN_NOTICE("You cut through [src] with [tool].")
+			span_notice("[user] cuts through [src] with [tool]."),
+			span_notice("You cut through [src] with [tool].")
 		)
 		return TRUE
 
@@ -198,8 +198,8 @@ By design, d1 is the smallest direction and d2 is the highest
 	var/obj/item/stack/cable_coil/cable = new (loc, (d1 ? 2 : 1), color)
 	transfer_fingerprints_to(cable)
 	user.visible_message(
-		SPAN_NOTICE("[user] cuts [src] with [tool]."),
-		SPAN_NOTICE("You cut [src] with [tool].")
+		span_notice("[user] cuts [src] with [tool]."),
+		span_notice("You cut [src] with [tool].")
 	)
 	if (HasBelow(z))
 		for (var/turf/turf in GetBelow(src))

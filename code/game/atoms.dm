@@ -401,9 +401,9 @@
 	if(get_max_health())
 		examine_damage_state(user)
 	if(IsFlameSource())
-		. += SPAN_DANGER("It has an open flame.")
+		. += span_danger("It has an open flame.")
 	else if(distance <= 1 && IsHeatSource())
-		. += SPAN_WARNING("It's hot to the touch.")
+		. += span_warning("It's hot to the touch.")
 
 	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE, user, .)
 
@@ -554,7 +554,7 @@
 		fire_act(air, temperature)
 		if (!health_dead())
 			return FALSE
-	visible_message(SPAN_DANGER("\The [src] sizzles and melts away, consumed by the lava!"))
+	visible_message(span_danger("\The [src] sizzles and melts away, consumed by the lava!"))
 	playsound(src, 'sound/effects/flare.ogg', 100, 3)
 	qdel(src)
 	. = TRUE
@@ -589,10 +589,10 @@
 		damage = damage * (TT.speed / THROWFORCE_SPEED_DIVISOR)
 		if (!can_damage_health(damage, damage_type))
 			playsound(src, damage_hitsound, 50)
-			AM.visible_message(SPAN_NOTICE("\The [AM] bounces off \the [src] harmlessly."))
+			AM.visible_message(span_notice("\The [AM] bounces off \the [src] harmlessly."))
 			return
 		damage_health(damage, damage_type, damage_flags, skip_can_damage_check = TRUE)
-		AM.visible_message(SPAN_WARNING("\The [AM] impacts \the [src], causing damage!"))
+		AM.visible_message(span_warning("\The [AM] impacts \the [src], causing damage!"))
 
 
 /**
@@ -801,8 +801,8 @@
 /atom/attack_hand(mob/user)
 	..()
 	if(LAZYLEN(climbers) && !(user in climbers))
-		user.visible_message(SPAN_WARNING("[user.name] shakes \the [src]."), \
-					SPAN_NOTICE("You shake \the [src]."))
+		user.visible_message(span_warning("[user.name] shakes \the [src]."), \
+					span_notice("You shake \the [src]."))
 		object_shaken()
 
 /**
@@ -834,7 +834,7 @@
 		return 0
 
 	if (!user.Adjacent(src))
-		to_chat(user, SPAN_DANGER("You can't climb there, the way is blocked."))
+		to_chat(user, span_danger("You can't climb there, the way is blocked."))
 		return 0
 
 	var/obj/occupied = turf_is_crowded(user)
@@ -854,11 +854,11 @@
 		if(progress_dir != original_dir && progress_dir != 0)
 			var/turf/here = get_turf(src)
 			if(!here.Adjacent_free_dir(user, progress_dir))
-				to_chat(user, SPAN_DANGER("You can't climb there, the way is blocked."))
+				to_chat(user, span_danger("You can't climb there, the way is blocked."))
 				return FALSE
 
 	if(occupied)
-		to_chat(user, SPAN_DANGER("There's \a [occupied] in the way."))
+		to_chat(user, span_danger("There's \a [occupied] in the way."))
 		return 0
 	return 1
 
@@ -879,12 +879,12 @@
 	if(!Adjacent(user))
 		return 0
 	if (user.restrained() || user.buckled)
-		to_chat(user, SPAN_NOTICE("You need your hands and legs free for this."))
+		to_chat(user, span_notice("You need your hands and legs free for this."))
 		return 0
 	if (user.incapacitated())
 		return 0
 	if (check_silicon && issilicon(user))
-		to_chat(user, SPAN_NOTICE("You need hands for this."))
+		to_chat(user, span_notice("You need hands for this."))
 		return 0
 	return 1
 
@@ -924,7 +924,7 @@
 		return 0
 
 	add_fingerprint(user)
-	user.visible_message(SPAN_WARNING("\The [user] starts climbing onto \the [src]!"))
+	user.visible_message(span_warning("\The [user] starts climbing onto \the [src]!"))
 	LAZYDISTINCTADD(climbers,user)
 
 	if(!do_after(user,(issmall(user) ? MOB_CLIMB_TIME_SMALL : MOB_CLIMB_TIME_MEDIUM) * climb_speed_mult, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_BAR_OVER_USER))
@@ -944,7 +944,7 @@
 	user.forceMove(target_turf)
 
 	if (get_turf(user) == target_turf)
-		user.visible_message(SPAN_WARNING("\The [user] climbs onto \the [src]!"))
+		user.visible_message(span_warning("\The [user] climbs onto \the [src]!"))
 	LAZYREMOVE(climbers,user)
 	return 1
 
@@ -954,21 +954,21 @@
 /atom/proc/object_shaken()
 	for(var/mob/living/M in climbers)
 		M.Weaken(1)
-		to_chat(M, SPAN_DANGER("You topple as you are shaken off \the [src]!"))
+		to_chat(M, span_danger("You topple as you are shaken off \the [src]!"))
 		climbers.Cut(1,2)
 
 	for(var/mob/living/M in get_turf(src))
 		if(M.lying) return //No spamming this on people.
 
 		M.Weaken(3)
-		to_chat(M, SPAN_DANGER("You topple as \the [src] moves under you!"))
+		to_chat(M, span_danger("You topple as \the [src] moves under you!"))
 
 		if(prob(25))
 
 			var/damage = rand(15,30)
 			var/mob/living/carbon/human/H = M
 			if(!istype(H))
-				to_chat(H, SPAN_DANGER("You land heavily!"))
+				to_chat(H, span_danger("You land heavily!"))
 				M.adjustBruteLoss(damage)
 				return
 
@@ -978,12 +978,12 @@
 				affecting = H.get_organ(pick(limbs))
 
 			if(affecting)
-				to_chat(M, SPAN_DANGER("You land heavily on your [affecting.name]!"))
+				to_chat(M, span_danger("You land heavily on your [affecting.name]!"))
 				affecting.take_external_damage(damage, 0)
 				if(affecting.parent)
 					affecting.parent.add_autopsy_data("Misadventure", damage)
 			else
-				to_chat(H, SPAN_DANGER("You land heavily!"))
+				to_chat(H, span_danger("You land heavily!"))
 				H.adjustBruteLoss(damage)
 
 			H.UpdateDamageIcon()
@@ -1026,7 +1026,7 @@
  */
 /atom/proc/slam_into(mob/living/L)
 	L.Weaken(2)
-	L.visible_message(SPAN_WARNING("\The [L] [pick("ran", "slammed")] into \the [src]!"))
+	L.visible_message(span_warning("\The [L] [pick("ran", "slammed")] into \the [src]!"))
 	playsound(L, "punch", 25, 1, FALSE)
 
 

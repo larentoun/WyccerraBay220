@@ -23,11 +23,11 @@
 /obj/item/device/augment_implanter/examine(mob/user)
 	. = ..()
 	if(isobserver(user) || (user.mind && user.mind.special_role != null) || user.skill_check(SKILL_DEVICES, SKILL_MASTER))
-		. += SPAN_NOTICE("A single-use augment installer with no medical knowledge necessary! " + SPAN_DANGER("Painkillers not included!"))
+		. += span_notice("A single-use augment installer with no medical knowledge necessary! " + span_danger("Painkillers not included!"))
 	if(isnull(augment))
-		. += SPAN_NOTICE("It seems to be empty.")
+		. += span_notice("It seems to be empty.")
 		return
-	. += SPAN_NOTICE("It contains:")
+	. += span_notice("It contains:")
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(examinate), user, augment), 0.1 SECONDS)
 
 /obj/item/device/augment_implanter/crowbar_act(mob/living/user, obj/item/tool)
@@ -36,16 +36,16 @@
 		USE_FEEDBACK_FAILURE("[src] has no augment to remove.")
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] starts to remove [augment] from [src] with [tool]."),
-		SPAN_NOTICE("You start to remove [augment] from [src] with [tool].")
+		span_notice("[user] starts to remove [augment] from [src] with [tool]."),
+		span_notice("You start to remove [augment] from [src] with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 10 SECONDS, volume = 50, skill_path = SKILL_DEVICES, do_flags = DO_PUBLIC_UNIQUE) || !augment)
 		return
 	user.put_in_hands(augment)
 	playsound(src, 'sound/items/Crowbar.ogg', 50, TRUE)
 	user.visible_message(
-		SPAN_NOTICE("[user] removes [augment] from [src] with [tool]."),
-		SPAN_NOTICE("You remove [augment] from [src] with [tool].")
+		span_notice("[user] removes [augment] from [src] with [tool]."),
+		span_notice("You remove [augment] from [src] with [tool].")
 	)
 	augment = null
 
@@ -55,34 +55,34 @@
 	if (!istype(user))
 		return
 	if (!augment)
-		to_chat(user, SPAN_WARNING("[src] is empty."))
+		to_chat(user, span_warning("[src] is empty."))
 		return
 	if (!ishuman(user))
-		to_chat(user, SPAN_WARNING("[src] is incompatible with you."))
+		to_chat(user, span_warning("[src] is incompatible with you."))
 		return
 	var/target_zone = user.zone_sel.selecting
 	if (!target_zone)
 		return
 	var/obj/item/organ/external/parent = user.get_organ(target_zone)
 	if (!parent)
-		to_chat(user, SPAN_WARNING("You don't have [target_zone]!"))
+		to_chat(user, span_warning("You don't have [target_zone]!"))
 		return
 	var/flavor = (parent.status & ORGAN_ROBOTIC) ? 1 : (parent.status & ORGAN_CRYSTAL) ? 2 : 0
 	if (flavor == 0 && !(augment.augment_flags & AUGMENT_BIOLOGICAL))
-		to_chat(user, SPAN_WARNING("[augment] cannot be installed in biological organs."))
+		to_chat(user, span_warning("[augment] cannot be installed in biological organs."))
 		return
 	if (flavor == 1 && !(augment.augment_flags & AUGMENT_MECHANICAL))
-		to_chat(user, SPAN_WARNING("[augment] cannot be installed in mechanical organs."))
+		to_chat(user, span_warning("[augment] cannot be installed in mechanical organs."))
 		return
 	if (flavor == 2 && !(augment.augment_flags & AUGMENT_CRYSTALINE))
-		to_chat(user, SPAN_WARNING("[augment] cannot be installed in crystaline organs."))
+		to_chat(user, span_warning("[augment] cannot be installed in crystaline organs."))
 		return
 	var/surgery_step = GET_SINGLETON(/singleton/surgery_step/internal/replace_organ)
 	if (augment.surgery_configure(user, user, parent, src, surgery_step))
 		return
 	var/occupied = user.internal_organs_by_name[augment.organ_tag]
 	if (occupied)
-		to_chat(user, SPAN_WARNING("You already have \an [occupied] installed there."))
+		to_chat(user, span_warning("You already have \an [occupied] installed there."))
 		return
 	if (flavor != -1)
 		var/old_loc = loc
@@ -94,15 +94,15 @@
 	var/success = instant
 	if (!instant)
 		working = TRUE
-		to_chat(user, SPAN_WARNING("\icon[src] Commencing procedure. " + SPAN_DANGER("Please remain calm.")))
-		user.visible_message(SPAN_WARNING("[user] places \his [parent.name] against [src]."))
+		to_chat(user, span_warning("\icon[src] Commencing procedure. " + span_danger("Please remain calm.")))
+		user.visible_message(span_warning("[user] places \his [parent.name] against [src]."))
 		if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			goto FailedAugmentImplant
-		user.visible_message(SPAN_DANGER("[src] purrs maliciously and unfurls its armatures with frightening speed!"))
+		user.visible_message(span_danger("[src] purrs maliciously and unfurls its armatures with frightening speed!"))
 		if (flavor != 1)
 			user.custom_pain("Your [parent.name] feels like it's being shredded apart!", 160)
 		else
-			to_chat(user, SPAN_ITALIC("The access panel on your [parent.name] is torn open."))
+			to_chat(user, span_italic("The access panel on your [parent.name] is torn open."))
 			playsound(user, 'sound/items/electronic_assembly_emptying.ogg', 50, TRUE)
 		parent.createwound(INJURY_TYPE_CUT, parent.min_broken_damage / 2, 1)
 		parent.clamp_organ()
@@ -110,18 +110,18 @@
 		parent.fracture()
 		if (!do_after(user, 8 SECONDS, src, DO_PUBLIC_UNIQUE))
 			goto FailedAugmentImplant
-		user.visible_message(SPAN_DANGER("[src] begins to insert its payload into [user]'s [parent.name]!"))
+		user.visible_message(span_danger("[src] begins to insert its payload into [user]'s [parent.name]!"))
 		if (flavor != 1)
 			user.custom_pain("You feel something rooting around violently inside your [parent.name]!", 160)
 		else
-			to_chat(user, SPAN_ITALIC("Your [parent.name] shifts and twitches as [src] works."))
+			to_chat(user, span_italic("Your [parent.name] shifts and twitches as [src] works."))
 		if (!flavor)
 			playsound(user, 'sound/effects/squelch1.ogg', 25, TRUE)
 		else
 			playsound(user, 'sound/items/jaws_pry.ogg', 50, TRUE)
 		if (!do_after(user, 8 SECONDS, src, DO_PUBLIC_UNIQUE))
 			goto FailedAugmentImplant
-		user.visible_message(SPAN_WARNING("[src] withdraws from [user]'s [parent.name] and seals the [flavor != 1 ? "wound" : "hatch"]."))
+		user.visible_message(span_warning("[src] withdraws from [user]'s [parent.name] and seals the [flavor != 1 ? "wound" : "hatch"]."))
 		if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			goto FailedAugmentImplant
 		parent.status &= ~ORGAN_BROKEN
@@ -137,10 +137,10 @@
 	FailedAugmentImplant:
 	working = FALSE
 	if (!success)
-		user.visible_message(SPAN_DANGER("[src] falls away from [user], leaving \his [parent.name] a mangled mess!"))
+		user.visible_message(span_danger("[src] falls away from [user], leaving \his [parent.name] a mangled mess!"))
 		parent.take_general_damage(15)
 		return
-	to_chat(user, SPAN_WARNING("\icon[src] Procedure complete. ") + SPAN_NOTICE("Have a nice day."))
+	to_chat(user, span_warning("\icon[src] Procedure complete. ") + span_notice("Have a nice day."))
 	playsound(user, 'sound/machines/ping.ogg', 50, FALSE)
 	augment.forceMove(user)
 	augment.replaced(user, parent)

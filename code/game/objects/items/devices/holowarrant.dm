@@ -17,11 +17,11 @@
 /obj/item/device/holowarrant/examine(mob/user, distance)
 	. = ..()
 	if(active)
-		. += SPAN_NOTICE("It's a holographic warrant for '[active.fields["namewarrant"]]'.")
+		. += span_notice("It's a holographic warrant for '[active.fields["namewarrant"]]'.")
 	if(distance <= 1)
 		show_content(user)
 	else
-		. += SPAN_NOTICE("You have to be closer if you want to read it.")
+		. += span_notice("You have to be closer if you want to read it.")
 
 // an active warrant with access authorized grants access
 /obj/item/device/holowarrant/GetAccess()
@@ -43,7 +43,7 @@
 		if(!W.archived)
 			warrants["[W.fields["namewarrant"]] ([capitalize(W.fields["arrestsearch"])])"] = W
 	if(length(warrants) == 0)
-		to_chat(user,SPAN_NOTICE("There are no warrants available"))
+		to_chat(user,span_notice("There are no warrants available"))
 		return
 	var/datum/computer_file/data/warrant/temp
 	temp = input(user, "Which warrant would you like to load?") as null|anything in warrants
@@ -72,8 +72,8 @@
 		active.fields["auth"] = "[id.registered_name] - [id.assignment ? id.assignment : "(Unknown)"]"
 		broadcast_security_hud_message("\A [active.fields["arrestsearch"]] warrant for <b>[active.fields["namewarrant"]]</b> has been authorized by [id.assignment ? id.assignment+" " : ""][id.registered_name].", src)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] scans \a [tool] with \a [src]."),
-			SPAN_NOTICE("You authorize \the [src]'s warrant with [id_name].")
+			span_notice("\The [user] scans \a [tool] with \a [src]."),
+			span_notice("You authorize \the [src]'s warrant with [id_name].")
 		)
 		return TRUE
 
@@ -84,8 +84,8 @@
 /obj/item/device/holowarrant/use_before(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	. = FALSE
 	if(istype(M))
-		user.visible_message(SPAN_NOTICE("[user] holds up a warrant projector and shows the contents to [M]."), \
-				SPAN_NOTICE("You show the warrant to [M]."))
+		user.visible_message(span_notice("[user] holds up a warrant projector and shows the contents to [M]."), \
+				span_notice("You show the warrant to [M]."))
 		examinate(M, src)
 		return TRUE
 

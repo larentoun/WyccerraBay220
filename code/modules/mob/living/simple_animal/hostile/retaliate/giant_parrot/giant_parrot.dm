@@ -64,12 +64,12 @@
 		if(prob(70))
 			H.Weaken(rand(2,3))
 			// cooldown_ability(ability_cooldown / 1.5)
-			visible_message(SPAN_MFAUNA("\The [src] flaps its wings mightily and bowls over \the [H] with a gust!"))
+			visible_message(span_mfauna("\The [src] flaps its wings mightily and bowls over \the [H] with a gust!"))
 
 		else if(H.get_equipped_item(slot_head))
 			var/obj/item/clothing/head/HAT = H.get_equipped_item(slot_head)
 			if(H.canUnEquip(HAT))
-				visible_message(SPAN_MFAUNA("\The [src] rips \the [H]'s [HAT] off!"))
+				visible_message(span_mfauna("\The [src] rips \the [H]'s [HAT] off!"))
 				// cooldown_ability(ability_cooldown)
 				H.unEquip(HAT, get_turf(src))
 

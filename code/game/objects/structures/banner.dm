@@ -47,13 +47,13 @@
 
 /obj/structure/banner/attack_hand(mob/user)
 	if (!user.mind || !istype(user.mind.assigned_job, /datum/job/chaplain))
-		to_chat(user, SPAN_WARNING("Only the Chaplain can change the banner!"))
+		to_chat(user, span_warning("Only the Chaplain can change the banner!"))
 	else
 		var/banner = input(user, "Pick a symbol:") as null | anything in banner_type
 		if (!banner)
 			return
 		if (user.stat || !Adjacent(user) || user.restrained())
-			to_chat(user, SPAN_WARNING("You're in no condition to change \the [src]."))
+			to_chat(user, span_warning("You're in no condition to change \the [src]."))
 			return
 		selected = banner
 
@@ -61,7 +61,7 @@
 
 /obj/structure/banner/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("It displays [banner_type[selected]].")
+	. += span_notice("It displays [banner_type[selected]].")
 
 /obj/structure/banner/get_mechanics_info()
 	. = ..()

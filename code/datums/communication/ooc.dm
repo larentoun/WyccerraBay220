@@ -14,7 +14,7 @@
 
 	if(!C.holder)
 		if(!config.dooc_allowed && (C.mob.stat == DEAD))
-			to_chat(C, SPAN_DANGER("[name] for dead mobs has been turned off."))
+			to_chat(C, span_danger("[name] for dead mobs has been turned off."))
 			return FALSE
 
 /singleton/communication_channel/ooc/do_communicate(client/C, message)

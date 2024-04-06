@@ -118,7 +118,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	if(check_interactivity(M))
 		if(!input)
 			input = name
-		to_chat(M, SPAN_NOTICE("The circuit '[name]' is now labeled '[input]'."))
+		to_chat(M, span_notice("The circuit '[name]' is now labeled '[input]'."))
 		displayed_name = input
 
 /obj/item/integrated_circuit/nano_host()
@@ -258,7 +258,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 				pin.handle_wire(linked, held_item, href_list["act"], usr)
 				. = IC_TOPIC_REFRESH
 			else
-				to_chat(usr, SPAN_WARNING("You can't do a whole lot without the proper tools."))
+				to_chat(usr, span_warning("You can't do a whole lot without the proper tools."))
 				success = FALSE
 			if(success && assembly)
 				assembly.add_allowed_scanner(usr.ckey)
@@ -270,9 +270,9 @@ a creative player the means to solve many problems.  Circuits are held inside an
 				D.use_after(src, usr)
 				. = IC_TOPIC_REFRESH
 			else
-				to_chat(usr, SPAN_WARNING("The debugger's 'ref scanner' needs to be on."))
+				to_chat(usr, span_warning("The debugger's 'ref scanner' needs to be on."))
 		else
-			to_chat(usr, SPAN_WARNING("You need a debugger set to 'ref' mode to do that."))
+			to_chat(usr, span_warning("You need a debugger set to 'ref' mode to do that."))
 
 	else if(href_list["refresh"])
 		internal_examine(usr)
@@ -291,7 +291,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 				return
 			disconnect_all()
 			dropInto(loc)
-			to_chat(usr, SPAN_NOTICE("You pop [src] out of the case, and slide it out."))
+			to_chat(usr, span_notice("You pop [src] out of the case, and slide it out."))
 		else
 			balloon_alert(usr, "нужна отвертка!")
 		interact_with_assembly(usr)

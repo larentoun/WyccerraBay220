@@ -33,7 +33,7 @@
 		focus = _focus
 		. = attack_self(owner)
 		if(!.)
-			to_chat(owner, SPAN_WARNING("\The [_focus] is too hefty for you to get a mind-grip on."))
+			to_chat(owner, span_warning("\The [_focus] is too hefty for you to get a mind-grip on."))
 		return FALSE
 
 	focus = _focus
@@ -45,7 +45,7 @@
 	return TRUE
 
 /obj/item/psychic_power/telekinesis/attack_self(mob/user)
-	user.visible_message(SPAN_NOTICE("\The [user] makes a strange gesture."))
+	user.visible_message(span_notice("\The [user] makes a strange gesture."))
 	sparkle()
 	return focus.do_simple_ranged_interaction(user)
 
@@ -59,22 +59,22 @@
 
 	var/user_psi_leech = user.do_psionics_check(5, user)
 	if(user_psi_leech)
-		to_chat(user, SPAN_WARNING("You reach for \the [target] but your telekinetic power is leeched away by \the [user_psi_leech]..."))
+		to_chat(user, span_warning("You reach for \the [target] but your telekinetic power is leeched away by \the [user_psi_leech]..."))
 		return
 
 	if(target.do_psionics_check(5, user))
-		to_chat(user, SPAN_WARNING("Your telekinetic power skates over \the [target] but cannot get a grip..."))
+		to_chat(user, span_warning("Your telekinetic power skates over \the [target] but cannot get a grip..."))
 		return
 
 	var/distance = get_dist(get_turf(user), get_turf(focus ? focus : target))
 	if(distance > user.psi.get_rank(PSI_PSYCHOKINESIS))
-		to_chat(user, SPAN_WARNING("Your telekinetic power won't reach that far."))
+		to_chat(user, span_warning("Your telekinetic power won't reach that far."))
 		return FALSE
 
 	if(target == focus)
 		attack_self(user)
 	else
-		user.visible_message(SPAN_DANGER("\The [user] gestures sharply!"))
+		user.visible_message(span_danger("\The [user] gestures sharply!"))
 		sparkle()
 		if(!istype(target, /turf) && istype(focus,/obj/item) && target.Adjacent(focus))
 			var/obj/item/I = focus

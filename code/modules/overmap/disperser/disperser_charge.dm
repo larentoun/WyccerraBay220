@@ -50,7 +50,7 @@
 		if(prob(strength * 100 / 6)) //6 instead of 5 so there are always leftovers
 			M.GetDrilled(TRUE) //no artifacts survive this
 	for(var/mob/living/L in victims)
-		to_chat(L, SPAN_DANGER("You feel an incredible force ripping and tearing at you."))
+		to_chat(L, span_danger("You feel an incredible force ripping and tearing at you."))
 		L.ex_act(EX_ACT_LIGHT) //no artif- I mean idiot/unfortunate bystanders survive this... much
 
 /obj/structure/ship_munition/disperser_charge/explosive

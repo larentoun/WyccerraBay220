@@ -111,22 +111,22 @@
 
 /obj/item/organ/external/proc/inspect(mob/user)
 	if(is_stump())
-		to_chat(user, SPAN_NOTICE("[owner] is missing that bodypart."))
+		to_chat(user, span_notice("[owner] is missing that bodypart."))
 		return
 
-	user.visible_message(SPAN_NOTICE("[user] starts inspecting [owner]'s [name] carefully."))
+	user.visible_message(span_notice("[user] starts inspecting [owner]'s [name] carefully."))
 	if(LAZYLEN(wounds))
-		to_chat(user, SPAN_WARNING("You find [get_wounds_desc()]"))
+		to_chat(user, span_warning("You find [get_wounds_desc()]"))
 		var/list/stuff = list()
 		for(var/datum/wound/wound in wounds)
 			if(LAZYLEN(wound.embedded_objects))
 				stuff |= wound.embedded_objects
 		if(length(stuff))
-			to_chat(user, SPAN_WARNING("There's [english_list(stuff)] sticking out of [owner]'s [name]."))
+			to_chat(user, span_warning("There's [english_list(stuff)] sticking out of [owner]'s [name]."))
 	else
-		to_chat(user, SPAN_NOTICE("You find no visible wounds."))
+		to_chat(user, span_notice("You find no visible wounds."))
 
-	to_chat(user, SPAN_NOTICE("Checking skin now..."))
+	to_chat(user, span_notice("Checking skin now..."))
 	if(!do_after(user, 1 SECOND, owner, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return
 
@@ -137,29 +137,29 @@
 		if(sign.manifested_in(src))
 			badness += sign.get_description(user)
 	if(!length(badness))
-		to_chat(user, SPAN_NOTICE("[owner]'s skin is normal."))
+		to_chat(user, span_notice("[owner]'s skin is normal."))
 	else
-		to_chat(user, SPAN_WARNING("[owner]'s skin is [english_list(badness)]."))
+		to_chat(user, span_warning("[owner]'s skin is [english_list(badness)]."))
 
-	to_chat(user, SPAN_NOTICE("Checking bones now..."))
+	to_chat(user, span_notice("Checking bones now..."))
 	if(!do_after(user, 1 SECOND, owner, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return
 
 	if(status & ORGAN_BROKEN)
-		to_chat(user, SPAN_WARNING("The [encased ? encased : "bone in the [name]"] moves slightly when you poke it!"))
+		to_chat(user, span_warning("The [encased ? encased : "bone in the [name]"] moves slightly when you poke it!"))
 		owner.custom_pain("Your [name] hurts where it's poked.",40, affecting = src)
 	else
-		to_chat(user, SPAN_NOTICE("The [encased ? encased : "bones in the [name]"] seem to be fine."))
+		to_chat(user, span_notice("The [encased ? encased : "bones in the [name]"] seem to be fine."))
 
 	for (var/obj/item/organ/internal/augment/A in internal_organs) // Locate any non-concealed augments
 		if (A.augment_flags & AUGMENT_INSPECTABLE)
-			to_chat(user, SPAN_WARNING("You feel a foreign object inside of \the [owner]'s [name]!"))
+			to_chat(user, span_warning("You feel a foreign object inside of \the [owner]'s [name]!"))
 			owner.custom_pain("Your [name] hurts as your [A.name] is jostled inside it.", 20, affecting = src)
 			break
 	if(status & ORGAN_TENDON_CUT)
-		to_chat(user, SPAN_WARNING("The tendons in [name] are severed!"))
+		to_chat(user, span_warning("The tendons in [name] are severed!"))
 	if(dislocated >= 1)
-		to_chat(user, SPAN_WARNING("The [joint] is dislocated!"))
+		to_chat(user, span_warning("The [joint] is dislocated!"))
 	return 1
 
 /obj/item/organ/external/listen()
@@ -192,7 +192,7 @@
 	if(.)
 		return
 	if(href_list["show_diagnostic_hint"])
-		to_chat(usr, SPAN_NOTICE("[name] - [explanation]"))
+		to_chat(usr, span_notice("[name] - [explanation]"))
 		return TOPIC_HANDLED
 
 /singleton/diagnostic_sign/shock

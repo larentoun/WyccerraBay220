@@ -93,7 +93,7 @@
 	var/damage_type = pick(DAMAGE_BRUTE, DAMAGE_BURN)
 
 	if (T.density && !T.health_dead())
-		visible_message(SPAN_DANGER("A tendril flies out from [src] and smashes into [T]!"))
+		visible_message(span_danger("A tendril flies out from [src] and smashes into [T]!"))
 		playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 		T.damage_health(damage)
 		return
@@ -122,7 +122,7 @@
 	var/density_check = FALSE
 	for (var/atom/A in T)
 		if (A.can_damage_health(damage, damage_type) && !(A.type in BLOB_BANNED_TARGET_TYPES))
-			visible_message(SPAN_DANGER("A tendril flies out from [src] and smashes into [A]!"))
+			visible_message(span_danger("A tendril flies out from [src] and smashes into [A]!"))
 			if (!sound_played)
 				playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 			A.damage_health(damage, damage_type, skip_can_damage_check = TRUE)
@@ -154,7 +154,7 @@
 	if(!L)
 		return
 	var/blob_damage = pick(DAMAGE_BRUTE, DAMAGE_BURN)
-	L.visible_message(SPAN_DANGER("A tendril flies out from [src] and smashes into [L]!"), SPAN_DANGER("A tendril flies out from [src] and smashes into you!"))
+	L.visible_message(span_danger("A tendril flies out from [src] and smashes into [L]!"), span_danger("A tendril flies out from [src] and smashes into you!"))
 	playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 	L.apply_damage(rand(damage_min, damage_max), blob_damage, used_weapon = "blob tendril")
 
@@ -190,8 +190,8 @@
 	sample.add_fingerprint(user, tool = tool)
 	pruned = TRUE
 	user.visible_message(
-		SPAN_NOTICE("[user] collects [sample] from [src] with [tool]."),
-		SPAN_NOTICE("You collect [sample] from [src] with [tool].")
+		span_notice("[user] collects [sample] from [src] with [tool]."),
+		span_notice("You collect [sample] from [src] with [tool].")
 	)
 
 /obj/blob/core
@@ -289,10 +289,10 @@ regen() will cover update_icon() for this proc
 
 /obj/blob/core/proc/report_shield_status(status)
 	if(status == "low")
-		visible_message(SPAN_DANGER("The [src]'s tendril shield fails, leaving the nucleus vulnerable!"), 3)
+		visible_message(span_danger("The [src]'s tendril shield fails, leaving the nucleus vulnerable!"), 3)
 		reported_low_damage = TRUE
 	if(status == "high")
-		visible_message(SPAN_NOTICE("The [src]'s tendril shield seems to have fully reformed."), 3)
+		visible_message(span_notice("The [src]'s tendril shield seems to have fully reformed."), 3)
 		reported_low_damage = FALSE
 
 // Rough icon state changes that reflect the core's health
@@ -420,7 +420,7 @@ regen() will cover update_icon() for this proc
 	if(is_tendril && prob(50))
 		force--
 		if(force <= 0)
-			visible_message(SPAN_NOTICE("[src] crumbles apart!"))
+			visible_message(span_notice("[src] crumbles apart!"))
 			user.drop_from_inventory(src)
 			new /obj/decal/cleanable/ash(src.loc)
 			qdel(src)

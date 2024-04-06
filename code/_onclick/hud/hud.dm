@@ -169,11 +169,11 @@
 	set hidden = 1
 
 	if(!hud_used)
-		to_chat(usr, SPAN_WARNING("This mob type does not use a HUD."))
+		to_chat(usr, span_warning("This mob type does not use a HUD."))
 		return
 
 	if(!ishuman(src))
-		to_chat(usr, SPAN_WARNING("Inventory hiding is currently only supported for human mobs, sorry."))
+		to_chat(usr, span_warning("Inventory hiding is currently only supported for human mobs, sorry."))
 		return
 
 	if(!client)

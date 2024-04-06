@@ -10,14 +10,14 @@
 	if (isnull(response) || !(response in selection_options))
 		return
 	if (!user.use_sanity_check(src))
-		to_chat(user, SPAN_WARNING("You're not able to do that right now."))
+		to_chat(user, span_warning("You're not able to do that right now."))
 		return
 	user.drop_from_inventory(src)
 	var/obj/obj = selection_options[response]
 	obj = new obj (user.loc)
 	if (isitem(obj))
 		user.put_in_any_hand_if_possible(obj)
-	to_chat(user, SPAN_ITALIC("You take \the [obj] out of \the [src]."))
+	to_chat(user, span_italic("You take \the [obj] out of \the [src]."))
 	qdel(src)
 
 

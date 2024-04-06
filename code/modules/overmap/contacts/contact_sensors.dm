@@ -201,11 +201,11 @@
 	if(tracker in trackers)
 		trackers -= tracker
 		GLOB.destroyed_event.unregister(tracker, src, PROC_REF(remove_tracker))
-		to_chat(user, SPAN_NOTICE("You unlink the tracker in [mtool]'s buffer from [src]"))
+		to_chat(user, span_notice("You unlink the tracker in [mtool]'s buffer from [src]"))
 		return
 	trackers += tracker
 	GLOB.destroyed_event.register(tracker, src, PROC_REF(remove_tracker))
-	to_chat(user, SPAN_NOTICE("You link the tracker in [mtool]'s buffer to [src]"))
+	to_chat(user, span_notice("You link the tracker in [mtool]'s buffer to [src]"))
 
 /obj/machinery/shipsensors/welder_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS

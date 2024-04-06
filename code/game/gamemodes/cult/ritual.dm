@@ -10,16 +10,16 @@
 
 /obj/item/book/tome/attack_self(mob/living/user)
 	if(!iscultist(user))
-		to_chat(user, SPAN_NOTICE("\The [src] seems full of illegible scribbles. Is this a joke?"))
+		to_chat(user, span_notice("\The [src] seems full of illegible scribbles. Is this a joke?"))
 	else
 		to_chat(user, "Hold \the [src] in your hand while drawing a rune to use it.")
 
 /obj/item/book/tome/examine(mob/user)
 	. = ..()
 	if(!iscultist(user))
-		. += SPAN_NOTICE("An old, dusty tome with frayed edges and a sinister looking cover.")
+		. += span_notice("An old, dusty tome with frayed edges and a sinister looking cover.")
 	else
-		. += SPAN_OCCULT("The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though.")
+		. += span_cult("The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though.")
 
 /obj/item/book/tome/use_before(mob/living/M, mob/living/user)
 	. = FALSE
@@ -27,15 +27,15 @@
 		return FALSE
 	if (user.a_intent == I_HELP && user.zone_sel.selecting == BP_EYES)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] shows \the [src] to \the [M]."),
-			SPAN_NOTICE("You open up \the [src] and show it to \the [M].")
+			span_notice("\The [user] shows \the [src] to \the [M]."),
+			span_notice("You open up \the [src] and show it to \the [M].")
 		)
 		if (iscultist(M))
 			if (user != M)
-				to_chat(user, SPAN_NOTICE("But they already know all there is to know."))
-			to_chat(M, SPAN_NOTICE("But you already know all there is to know."))
+				to_chat(user, span_notice("But they already know all there is to know."))
+			to_chat(M, span_notice("But you already know all there is to know."))
 		else
-			to_chat(M, SPAN_NOTICE("\The [src] seems full of illegible scribbles. Is this a joke?"))
+			to_chat(M, span_notice("\The [src] seems full of illegible scribbles. Is this a joke?"))
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 		return TRUE
 
@@ -43,7 +43,7 @@
 	if(!iscultist(user))
 		return FALSE
 	if(A.reagents && A.reagents.has_reagent(/datum/reagent/water/holywater))
-		to_chat(user, SPAN_NOTICE("You unbless \the [A]."))
+		to_chat(user, span_notice("You unbless \the [A]."))
 		var/holy2water = A.reagents.get_reagent_amount(/datum/reagent/water/holywater)
 		A.reagents.del_reagent(/datum/reagent/water/holywater)
 		A.reagents.add_reagent(/datum/reagent/water, holy2water)
@@ -55,19 +55,19 @@
 	var/cult_ground = 0
 
 	if(!has_tome && tome_required && mob_needs_tome())
-		to_chat(src, SPAN_WARNING("This rune is too complex to draw by memory, you need to have a tome in your hand to draw it."))
+		to_chat(src, span_warning("This rune is too complex to draw by memory, you need to have a tome in your hand to draw it."))
 		return
 	if(istype(get_equipped_item(slot_head), /obj/item/clothing/head/culthood) && istype(get_equipped_item(slot_wear_suit), /obj/item/clothing/suit/cultrobes) && istype(get_equipped_item(slot_shoes), /obj/item/clothing/shoes/cult))
 		has_robes = 1
 	var/turf/T = get_turf(src)
 	if(T.holy)
-		to_chat(src, SPAN_WARNING("This place is blessed, you may not draw runes on it - defile it first."))
+		to_chat(src, span_warning("This place is blessed, you may not draw runes on it - defile it first."))
 		return
 	if(!istype(T, /turf/simulated))
-		to_chat(src, SPAN_WARNING("You need more space to draw a rune here."))
+		to_chat(src, span_warning("You need more space to draw a rune here."))
 		return
 	if(locate(/obj/rune) in T)
-		to_chat(src, SPAN_WARNING("There's already a rune here.")) // Don't cross the runes
+		to_chat(src, span_warning("There's already a rune here.")) // Don't cross the runes
 		return
 	if(T.icon_state == "cult" || T.icon_state == "cult-narsie")
 		cult_ground = 1
@@ -105,7 +105,7 @@
 			self += ", having to cut your finger two more times before you make it resemble the pattern in your memory. It still looks a little off."
 			timer = 8 SECONDS
 			damage = 2
-	visible_message(SPAN_WARNING("\The [src] slices open a finger and begins to chant and paint symbols on the floor."), SPAN_NOTICE("[self]"), "You hear chanting.")
+	visible_message(span_warning("\The [src] slices open a finger and begins to chant and paint symbols on the floor."), span_notice("[self]"), "You hear chanting.")
 	if(do_after(src, timer, T, DO_PUBLIC_UNIQUE))
 		remove_blood_simple(cost * damage)
 		if(locate(/obj/rune) in T)
@@ -119,7 +119,7 @@
 
 /mob/living/carbon/human/make_rune(rune, cost, tome_required)
 	if(should_have_organ(BP_HEART) && vessel && !vessel.has_reagent(/datum/reagent/blood, species.blood_volume * 0.7))
-		to_chat(src, SPAN_DANGER("You are too weak to draw runes."))
+		to_chat(src, span_danger("You are too weak to draw runes."))
 		return
 	..()
 
@@ -311,7 +311,7 @@ var/global/list/Tier4Runes = list(
 	set name = "Communicate"
 
 	if(incapacitated())
-		to_chat(src, SPAN_WARNING("Not when you are incapacitated."))
+		to_chat(src, span_warning("Not when you are incapacitated."))
 		return
 
 	message_cult_communicate()
@@ -327,11 +327,11 @@ var/global/list/Tier4Runes = list(
 	log_and_message_admins("used a communicate verb to say '[input]'")
 	for(var/datum/mind/H in GLOB.cult.current_antagonists)
 		if(H.current && !H.current.stat)
-			to_chat(H.current, SPAN_OCCULT("[input]"))
+			to_chat(H.current, span_cult("[input]"))
 
 /mob/living/carbon/cult_communicate()
 	if(incapacitated(INCAPACITATION_RESTRAINED))
-		to_chat(src, SPAN_WARNING("You need at least your hands free to do this."))
+		to_chat(src, span_warning("You need at least your hands free to do this."))
 		return
 	..()
 
@@ -339,7 +339,7 @@ var/global/list/Tier4Runes = list(
 	return
 
 /mob/living/carbon/human/message_cult_communicate()
-	visible_message(SPAN_WARNING("\The [src] cuts \his finger and starts drawing on the back of \his hand."))
+	visible_message(span_warning("\The [src] cuts \his finger and starts drawing on the back of \his hand."))
 
 /mob/proc/obscure()
 	set category = "Cult Magic"

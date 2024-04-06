@@ -154,7 +154,7 @@
  */
 /singleton/crafting_stage/proc/on_progress(mob/user)
 	if(progress_message)
-		to_chat(user, SPAN_NOTICE(progress_message))
+		to_chat(user, span_notice(progress_message))
 
 
 /**

@@ -18,7 +18,7 @@
 /obj/structure/largecrate/attack_hand(mob/user as mob)
 	if (user.a_intent == I_HURT)
 		return ..()
-	to_chat(user, SPAN_NOTICE("You need a crowbar to pry this open!"))
+	to_chat(user, span_notice("You need a crowbar to pry this open!"))
 
 /obj/structure/largecrate/crowbar_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
@@ -28,9 +28,9 @@
 	transfer_fingerprints_to(A)
 	dump_contents()
 	user.visible_message(
-		SPAN_NOTICE("[user] pries [src] open with [tool]."),
-		SPAN_NOTICE("You pry [src] open with [tool]."),
-		SPAN_ITALIC("You hear splitting wood.")
+		span_notice("[user] pries [src] open with [tool]."),
+		span_notice("You pry [src] open with [tool]."),
+		span_italic("You hear splitting wood.")
 	)
 	qdel(src)
 

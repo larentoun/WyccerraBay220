@@ -120,7 +120,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 				if(rewards[choice][1] <= favors)
 					working = TRUE
 					on_update_icon()
-					to_chat(user, SPAN_NOTICE("The Apex rewards you with \the [choice]."))
+					to_chat(user, span_notice("The Apex rewards you with \the [choice]."))
 					sleep(20)
 					working = FALSE
 					on_update_icon()
@@ -129,11 +129,11 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 						if(!isnum(I))
 							new I(get_turf(src))
 				else
-					to_chat(user, SPAN_WARNING("You aren't worthy of \the [choice]!"))
+					to_chat(user, span_warning("You aren't worthy of \the [choice]!"))
 		else
-			to_chat(user, SPAN_WARNING("\The [src.name] is still working!"))
+			to_chat(user, span_warning("\The [src.name] is still working!"))
 	else
-		to_chat(user, SPAN_WARNING("You don't know what to do with \the [src.name]."))
+		to_chat(user, span_warning("You don't know what to do with \the [src.name]."))
 	..()
 
 /obj/structure/voxuplink/use_tool(obj/item/I, mob/user)
@@ -142,8 +142,8 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 		favors += A.favor_value
 		qdel(A)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] inserts \a [A] into \the [src]."),
-			SPAN_NOTICE("You return \the [A] back to the Apex with \the [src].")
+			span_notice("\The [user] inserts \a [A] into \the [src]."),
+			span_notice("You return \the [A] back to the Apex with \the [src].")
 		)
 		return TRUE
 	if(istype(I, /obj/item/bluecrystal))
@@ -151,8 +151,8 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 		favors += A.favor_value
 		qdel(A)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] inserts \a [A] into \the [src]."),
-			SPAN_NOTICE("You offer \the [A.name] to the Apex.")
+			span_notice("\The [user] inserts \a [A] into \the [src]."),
+			span_notice("You offer \the [A.name] to the Apex.")
 		)
 		return TRUE
 	return ..()
@@ -162,8 +162,8 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 		favors += I.favor_value
 		qdel(I)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] inserts \a [I] into \the [src]."),
-			SPAN_NOTICE("You return \the [I] back to the Apex with \the [src].")
+			span_notice("\The [user] inserts \a [I] into \the [src]."),
+			span_notice("You return \the [I] back to the Apex with \the [src].")
 		)
 		return TRUE
 	return ..()
@@ -194,13 +194,13 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 
 /obj/item/voxartifact/attack_self(mob/living/carbon/human/user)
 	user.visible_message(
-		SPAN_NOTICE("\The [user] starts tinkering with [src.name]."),
-		SPAN_NOTICE("You start to analyze \the [src.name]."),
+		span_notice("\The [user] starts tinkering with [src.name]."),
+		span_notice("You start to analyze \the [src.name]."),
 	)
 	var/obj/item/organ/internal/voxstack/stack = user.internal_organs_by_name[BP_STACK]
 	if (istype(stack))
 		if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER))
-			to_chat(user, SPAN_NOTICE("\The [src.name] disappears after a moment, leaving something behind.\nYou were able to send it back to arkship, but Apex did not appreciate your actions."))
+			to_chat(user, span_notice("\The [src.name] disappears after a moment, leaving something behind.\nYou were able to send it back to arkship, but Apex did not appreciate your actions."))
 			var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
@@ -208,13 +208,13 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 	else
 		if (do_after(user, 60 SECONDS, src, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER))
 			if(rand(open_chance))
-				to_chat(user, SPAN_NOTICE("After tinkering with [src.name] for some time, it suddenly disappears leaving something behind!"))
+				to_chat(user, span_notice("After tinkering with [src.name] for some time, it suddenly disappears leaving something behind!"))
 				var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 				s.set_up(10, 1, src)
 				s.start()
 				activate()
 			else
-				to_chat(user, SPAN_NOTICE("You are unable to learn anything useful about [src.name]."))
+				to_chat(user, span_notice("You are unable to learn anything useful about [src.name]."))
 
 /obj/item/voxartifact/proc/activate()
 	new /obj/random/loot(get_turf(src))
@@ -290,7 +290,7 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 /obj/structure/voxanalyzer/attack_hand(mob/living/carbon/human/user)
 	if(activated)
 		if(!working)
-			visible_message(SPAN_NOTICE("<b>\The [src]'s</b> microphone transmits, \"Nice find! We can send you a few of our prototypes in exchange for data about these crystals.\""))
+			visible_message(span_notice("<b>\The [src]'s</b> microphone transmits, \"Nice find! We can send you a few of our prototypes in exchange for data about these crystals.\""))
 			var/choice = input(user, "Choose a prototype.\n [points] crystals sent.", "Oddity analyzer") as null|anything in rewards
 			if (choice)
 				if((rewards[choice][1] <= points) && choice)
@@ -299,32 +299,32 @@ GLOBAL_LIST_EMPTY(vox_artifact_spawners)
 						if(!isnum(I))
 							new I(get_turf(src))
 				else
-					to_chat(user, SPAN_WARNING("\The [src.name] doesn't respond, maybe you should be less greedy next time?"))
+					to_chat(user, span_warning("\The [src.name] doesn't respond, maybe you should be less greedy next time?"))
 		else
-			to_chat(user, SPAN_WARNING("\The [src.name] is used by someone!"))
+			to_chat(user, span_warning("\The [src.name] is used by someone!"))
 	else
-		to_chat(user, SPAN_WARNING("\The [src.name] seems to be powered down."))
+		to_chat(user, span_warning("\The [src.name] seems to be powered down."))
 	..()
 
 /obj/structure/voxanalyzer/use_tool(obj/item/I, mob/user)
 	if(istype(I, /obj/item/bluecrystal))
 		if(!activated)
-			to_chat(user, SPAN_INFO("As soon as you bring [I] closer to [src] it powers up with shower of sparks!."))
+			to_chat(user, span_info("As soon as you bring [I] closer to [src] it powers up with shower of sparks!."))
 			var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
 			activated = TRUE
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts analyzing [I.name]."),
-			SPAN_NOTICE("You begin to analyze [I.name]."),
+			span_notice("\The [user] starts analyzing [I.name]."),
+			span_notice("You begin to analyze [I.name]."),
 		)
 		working = TRUE
 		on_update_icon()
 		if (do_after(user, 1 SECONDS, src, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER))
 			points += crystal_value
 			qdel(I)
-			to_chat(user, SPAN_NOTICE("You finish analyzing \the [I.name]."))
+			to_chat(user, span_notice("You finish analyzing \the [I.name]."))
 		working = FALSE
 		on_update_icon()
 		return TRUE

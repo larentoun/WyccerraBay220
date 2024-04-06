@@ -25,8 +25,8 @@
 	part.master = null
 	transfer_fingerprints_to(chair)
 	user.visible_message(
-		SPAN_NOTICE("[user] removes [part] from [chair] with [tool]."),
-		SPAN_NOTICE("You remove [part] from [chair] with [tool].")
+		span_notice("[user] removes [part] from [chair] with [tool]."),
+		span_notice("You remove [part] from [chair] with [tool].")
 	)
 	part = null
 	qdel(src)
@@ -43,7 +43,7 @@
 	else
 		on = 1
 		icon_state = "echair1"
-	to_chat(usr, SPAN_NOTICE("You switch [on ? "on" : "off"] [src]."))
+	to_chat(usr, span_notice("You switch [on ? "on" : "off"] [src]."))
 	return
 
 /obj/structure/bed/chair/e_chair/rotate()
@@ -75,11 +75,11 @@
 	s.start()
 	if(buckled_mob)
 		buckled_mob.burn_skin(85)
-		to_chat(buckled_mob, SPAN_DANGER("You feel a deep shock course through your body!"))
+		to_chat(buckled_mob, span_danger("You feel a deep shock course through your body!"))
 		sleep(1)
 		buckled_mob.burn_skin(85)
 		buckled_mob.Stun(600)
-	visible_message(SPAN_DANGER("The electric chair went off!"), SPAN_DANGER("You hear a deep sharp shock!"))
+	visible_message(span_danger("The electric chair went off!"), span_danger("You hear a deep sharp shock!"))
 
 	A.power_light = light
 	A.update_icon()

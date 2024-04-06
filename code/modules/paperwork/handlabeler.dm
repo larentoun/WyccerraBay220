@@ -30,7 +30,7 @@
 
 /obj/item/hand_labeler/attack_self(mob/living/user)
 	if (label)
-		to_chat(user, SPAN_ITALIC("You turn off \the [src]."))
+		to_chat(user, span_italic("You turn off \the [src]."))
 		label = null
 		update_icon()
 	else
@@ -39,8 +39,8 @@
 			return
 		response = sanitizeSafe(response, MAX_LNAME_LEN)
 		if (!length(response))
-			to_chat(user, SPAN_WARNING("Invalid Label."))
+			to_chat(user, span_warning("Invalid Label."))
 			return
 		label = response
-		to_chat(user, SPAN_ITALIC("You turn \the [src] on and set its text to \"[label]\"."))
+		to_chat(user, span_italic("You turn \the [src] on and set its text to \"[label]\"."))
 		update_icon()

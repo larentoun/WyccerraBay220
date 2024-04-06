@@ -51,7 +51,7 @@
 			V.update_icon()
 			H.Weaken(1)
 			H.Stun(1)
-			H.visible_message(SPAN_DANGER("\the [holder] latches onto \the [H], pulsating!"))
+			H.visible_message(span_danger("\the [holder] latches onto \the [H], pulsating!"))
 			V.forceMove(V.gripping.loc)
 
 /mob/living/simple_animal/hostile/vagrant/Process_Spacemove()
@@ -86,7 +86,7 @@
 				gripping.vessel.remove_reagent(/datum/reagent/blood, blood_per_tick)
 				health = min(health + health_per_tick, maxHealth)
 				if(prob(15))
-					to_chat(gripping, SPAN_DANGER("You feel your fluids being drained!"))
+					to_chat(gripping, span_danger("You feel your fluids being drained!"))
 			else
 				gripping = null
 

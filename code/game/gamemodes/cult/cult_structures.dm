@@ -34,8 +34,8 @@
 			USE_FEEDBACK_FAILURE("\The [src] does not need repairs.")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] mends some of the cracks on \the [src]."),
-			SPAN_NOTICE("You repair some of \the [src]'s damage.")
+			span_notice("\The [user] mends some of the cracks on \the [src]."),
+			span_notice("You repair some of \the [src]'s damage.")
 		)
 		restore_health(5)
 		return TRUE

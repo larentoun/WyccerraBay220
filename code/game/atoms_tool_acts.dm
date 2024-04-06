@@ -131,7 +131,7 @@
 /atom/proc/multitool_check_buffer(user, obj/item/device/multitool, silent = FALSE)
 	if(!istype(multitool, /obj/item/device/multitool))
 		if(user && !silent)
-			to_chat(user, SPAN_WARNING("[multitool] has no data buffer!"))
+			to_chat(user, span_warning("[multitool] has no data buffer!"))
 		return FALSE
 	return TRUE
 

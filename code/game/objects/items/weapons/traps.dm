@@ -19,12 +19,12 @@
 /obj/item/beartrap/user_unbuckle_mob(mob/user as mob)
 	if(buckled_mob && can_use(user) && can_unbuckle(user))
 		user.visible_message(
-			SPAN_NOTICE("\The [user] begins freeing \the [buckled_mob] from \the [src]."),
-			SPAN_NOTICE("You carefully begin to free \the [buckled_mob] from \the [src]."),
-			SPAN_NOTICE("You hear metal creaking.")
+			span_notice("\The [user] begins freeing \the [buckled_mob] from \the [src]."),
+			span_notice("You carefully begin to free \the [buckled_mob] from \the [src]."),
+			span_notice("You hear metal creaking.")
 			)
 		if(do_after(user, 6 SECONDS, src, DO_PUBLIC_UNIQUE) && can_unbuckle(user))
-			user.visible_message(SPAN_NOTICE("\The [buckled_mob] has been freed from \the [src] by \the [user]."))
+			user.visible_message(span_notice("\The [buckled_mob] has been freed from \the [src] by \the [user]."))
 			unbuckle_mob()
 			anchored = FALSE
 
@@ -32,15 +32,15 @@
 	..()
 	if(!deployed && can_use(user))
 		user.visible_message(
-			SPAN_DANGER("[user] starts to deploy \the [src]."),
-			SPAN_DANGER("You begin deploying \the [src]!"),
+			span_danger("[user] starts to deploy \the [src]."),
+			span_danger("You begin deploying \the [src]!"),
 			"You hear the slow creaking of a spring."
 			)
 
 		if (do_after(user, 6 SECONDS, src, DO_PUBLIC_UNIQUE) && user.unEquip(src))
 			user.visible_message(
-				SPAN_DANGER("\The [user] has deployed \the [src]."),
-				SPAN_DANGER("You have deployed \the [src]!"),
+				span_danger("\The [user] has deployed \the [src]."),
+				span_danger("You have deployed \the [src]!"),
 				"You hear a latch click loudly."
 				)
 
@@ -53,14 +53,14 @@
 		user_unbuckle_mob(user)
 	else if(deployed && can_use(user))
 		user.visible_message(
-			SPAN_DANGER("[user] starts to disarm \the [src]."),
-			SPAN_NOTICE("You begin disarming \the [src]!"),
+			span_danger("[user] starts to disarm \the [src]."),
+			span_notice("You begin disarming \the [src]!"),
 			"You hear a latch click followed by the slow creaking of a spring."
 			)
 		if(do_after(user, 6 SECONDS, src, DO_PUBLIC_UNIQUE))
 			user.visible_message(
-				SPAN_DANGER("[user] has disarmed \the [src]."),
-				SPAN_NOTICE("You have disarmed \the [src]!")
+				span_danger("[user] has disarmed \the [src]."),
+				span_notice("You have disarmed \the [src]!")
 				)
 			deployed = 0
 			anchored = FALSE
@@ -83,9 +83,9 @@
 	if (can_buckle(L))
 		set_dir(L.dir)
 		buckle_mob(L)
-		to_chat(L, SPAN_DANGER("The steel jaws of \the [src] bite into you, trapping you in place!"))
+		to_chat(L, span_danger("The steel jaws of \the [src] bite into you, trapping you in place!"))
 	else
-		to_chat(L, SPAN_DANGER("The steel jaws of \the [src] bite into you, but fail to hold you in place!"))
+		to_chat(L, span_danger("The steel jaws of \the [src] bite into you, but fail to hold you in place!"))
 	deployed = 0
 
 /obj/item/beartrap/Crossed(AM as mob|obj)
@@ -93,8 +93,8 @@
 		var/mob/living/L = AM
 		if(!MOVING_DELIBERATELY(L))
 			L.visible_message(
-				SPAN_DANGER("[L] steps on \the [src]."),
-				SPAN_DANGER("You step on \the [src]!"),
+				span_danger("[L] steps on \the [src]."),
+				span_danger("You step on \the [src]!"),
 				"<b>You hear a loud metallic snap!</b>"
 				)
 			attack_mob(L)

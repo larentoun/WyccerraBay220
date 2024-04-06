@@ -92,7 +92,7 @@
 /datum/nano_module/email_client/proc/mail_received(datum/computer_file/data/email_message/received_message)
 	var/mob/living/L = get_holder_of_type(host, /mob/living)
 	if(L)
-		var/msg = "[SPAN_NOTICE("New mail received from [received_message.source]:")] <b>Subject:</b> [received_message.title]"
+		var/msg = "[span_notice("New mail received from [received_message.source]:")] <b>Subject:</b> [received_message.title]"
 		to_chat(L, msg)
 
 /datum/nano_module/email_client/Destroy()

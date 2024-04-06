@@ -43,7 +43,7 @@ GLOBAL_LIST_EMPTY(gps_list)
 /obj/item/device/gps/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
-		. += SPAN_NOTICE("[src]'s screen shows: <i>[fetch_coordinates()]</i>.")
+		. += span_notice("[src]'s screen shows: <i>[fetch_coordinates()]</i>.")
 
 /obj/item/device/gps/proc/fetch_coordinates()
 	var/turf/T = get_turf(src)
@@ -181,7 +181,7 @@ GLOBAL_LIST_EMPTY(gps_list)
 	emped = FALSE
 	update_icon()
 	if(ismob(loc))
-		to_chat(loc, SPAN_NOTICE("\The [src] appears to be functional again."))
+		to_chat(loc, span_notice("\The [src] appears to be functional again."))
 
 /obj/item/device/gps/on_update_icon()
 	ClearOverlays()
@@ -282,7 +282,7 @@ GLOBAL_LIST_EMPTY(gps_list)
 			var/new_colour = input("Enter a new tracking color.", "GPS Waypoint Color") as color|null
 			if(!new_colour && !istype(gps) && QDELETED(gps) && holder != usr && usr.incapacitated())
 				return
-			to_chat(usr, SPAN_NOTICE("You adjust the colour \the [src] is using to highlight [gps.gps_tag]."))
+			to_chat(usr, span_notice("You adjust the colour \the [src] is using to highlight [gps.gps_tag]."))
 			LAZYSET(tracking_devices, params["track_color"], new_colour)
 			update_compass()
 			return TRUE

@@ -59,8 +59,8 @@
 	if(!can_anchor(tool, user))
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] starts dislodging [src] with [tool]."),
-		SPAN_NOTICE("You start dislodging [src] with [tool].")
+		span_notice("[user] starts dislodging [src] with [tool]."),
+		span_notice("You start dislodging [src] with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 4 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT, extra_checks = CALLBACK(src, PROC_REF(can_anchor), tool, user)))
 		return
@@ -69,8 +69,8 @@
 	set_max_health(50)
 	cover = 25
 	user.visible_message(
-		SPAN_NOTICE("[user] dislodges [src] with [tool]."),
-		SPAN_NOTICE("You dislodge [src] with [tool].")
+		span_notice("[user] dislodges [src] with [tool]."),
+		span_notice("You dislodge [src] with [tool].")
 	)
 
 /obj/structure/girder/screwdriver_act(mob/living/user, obj/item/tool)
@@ -90,34 +90,34 @@
 				return
 			reinforcing = !reinforcing
 			user.visible_message(
-				SPAN_NOTICE("[user] adjusts [src] with [tool]. It can now be [reinforcing ? "reinforced" : "constructed"]."),
-				SPAN_NOTICE("You adjust [src] with [tool]. It can now be [reinforcing ? "reinforced" : "constructed"].")
+				span_notice("[user] adjusts [src] with [tool]. It can now be [reinforcing ? "reinforced" : "constructed"]."),
+				span_notice("You adjust [src] with [tool]. It can now be [reinforcing ? "reinforced" : "constructed"].")
 			)
 		if(GIRDER_STATE_REINFORCEMENT_UNSECURED)
 			. = ITEM_INTERACT_SUCCESS
 			user.visible_message(
-				SPAN_NOTICE("[user] starts securing [src]'s support struts with [tool]."),
-				SPAN_NOTICE("You starts securing [src]'s support struts with [tool].")
+				span_notice("[user] starts securing [src]'s support struts with [tool]."),
+				span_notice("You starts securing [src]'s support struts with [tool].")
 			)
 			if(!tool.use_as_tool(src, user, 4 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT) || state != GIRDER_STATE_REINFORCEMENT_UNSECURED)
 				return
 			state = GIRDER_STATE_REINFORCED
 			user.visible_message(
-				SPAN_NOTICE("[user] secures [src]'s support struts with [tool]."),
-				SPAN_NOTICE("You secure [src]'s support struts with [tool].")
+				span_notice("[user] secures [src]'s support struts with [tool]."),
+				span_notice("You secure [src]'s support struts with [tool].")
 			)
 		if(GIRDER_STATE_REINFORCED)
 			. = ITEM_INTERACT_SUCCESS
 			user.visible_message(
-				SPAN_NOTICE("[user] starts unsecuring [src]'s support struts with [tool]."),
-				SPAN_NOTICE("You starts unsecuring [src]'s support struts with [tool].")
+				span_notice("[user] starts unsecuring [src]'s support struts with [tool]."),
+				span_notice("You starts unsecuring [src]'s support struts with [tool].")
 			)
 			if(!tool.use_as_tool(src, user, 4 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT) || state != GIRDER_STATE_REINFORCED)
 				return
 			state = GIRDER_STATE_REINFORCEMENT_UNSECURED
 			user.visible_message(
-				SPAN_NOTICE("[user] unsecures [src]'s support struts with [tool]."),
-				SPAN_NOTICE("You unsecure [src]'s support struts with [tool].")
+				span_notice("[user] unsecures [src]'s support struts with [tool]."),
+				span_notice("You unsecure [src]'s support struts with [tool].")
 			)
 
 /obj/structure/girder/wrench_act(mob/living/user, obj/item/tool)
@@ -128,26 +128,26 @@
 		return
 	if(anchored)
 		user.visible_message(
-			SPAN_NOTICE("[user] starts dismantling [src] with [tool]."),
-			SPAN_NOTICE("You start dismantling [src] with [tool].")
+			span_notice("[user] starts dismantling [src] with [tool]."),
+			span_notice("You start dismantling [src] with [tool].")
 		)
 		if(!tool.use_as_tool(src, user, 4 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT) || state != GIRDER_STATE_NORMAL || !anchored)
 			return
 		user.visible_message(
-			SPAN_NOTICE("[user] dismantles [src] with [tool]."),
-			SPAN_NOTICE("You dismantle [src] with [tool].")
+			span_notice("[user] dismantles [src] with [tool]."),
+			span_notice("You dismantle [src] with [tool].")
 		)
 		dismantle()
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] starts securing [src] with [tool]."),
-		SPAN_NOTICE("You start securing [src] with [tool].")
+		span_notice("[user] starts securing [src] with [tool]."),
+		span_notice("You start securing [src] with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 4 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT) || state != GIRDER_STATE_NORMAL || anchored)
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] secures [src] with [tool]."),
-		SPAN_NOTICE("You secure [src] with [tool].")
+		span_notice("[user] secures [src] with [tool]."),
+		span_notice("You secure [src] with [tool].")
 	)
 	reset_girder()
 
@@ -159,8 +159,8 @@
 		if (GIRDER_STATE_REINFORCEMENT_UNSECURED)
 			. = ITEM_INTERACT_SUCCESS
 			user.visible_message(
-				SPAN_NOTICE("[user] starts removing [src]'s support struts with [tool]."),
-				SPAN_NOTICE("You start removing [src]'s support struts with [tool].")
+				span_notice("[user] starts removing [src]'s support struts with [tool]."),
+				span_notice("You start removing [src]'s support struts with [tool].")
 			)
 			if(!tool.use_as_tool(src, user, 4 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT) || state != GIRDER_STATE_REINFORCEMENT_UNSECURED)
 				return
@@ -169,8 +169,8 @@
 				reinf_material = null
 			reset_girder()
 			user.visible_message(
-				SPAN_NOTICE("[user] removes [src]'s support struts with [tool]."),
-				SPAN_NOTICE("You remove [src]'s support struts with [tool].")
+				span_notice("[user] removes [src]'s support struts with [tool]."),
+				span_notice("You remove [src]'s support struts with [tool].")
 			)
 
 /obj/structure/girder/welder_act(mob/living/user, obj/item/tool)
@@ -178,14 +178,14 @@
 	if(!tool.tool_start_check(user, 1))
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] starts cutting [src] with [tool]."),
-		SPAN_NOTICE("You start cutting [src] with [tool].")
+		span_notice("[user] starts cutting [src] with [tool]."),
+		span_notice("You start cutting [src] with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, (reinf_material ? 4 : 2) SECONDS, 1, 50, SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] cuts apart [src] with [tool]."),
-		SPAN_NOTICE("You cut apart [src] with [tool].")
+		span_notice("[user] cuts apart [src] with [tool]."),
+		span_notice("You cut apart [src] with [tool].")
 	)
 	if(reinf_material)
 		reinf_material.place_dismantled_product(get_turf(src))
@@ -196,15 +196,15 @@
 	if (istype(tool, /obj/item/pickaxe/diamonddrill) || istype(tool, /obj/item/psychic_power/psiblade/master/grand/paramount))
 		playsound(loc, 'sound/items/Welder.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] starts cutting [src] with [tool]."),
-			SPAN_NOTICE("You start cutting [src] with [tool].")
+			span_notice("[user] starts cutting [src] with [tool]."),
+			span_notice("You start cutting [src] with [tool].")
 		)
 		if (!user.do_skilled((reinf_material ? 4 : 2) SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		playsound(loc, 'sound/items/Welder.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] cuts apart [src] with [tool]."),
-			SPAN_NOTICE("You cut apart [src] with [tool].")
+			span_notice("[user] cuts apart [src] with [tool]."),
+			span_notice("You cut apart [src] with [tool].")
 		)
 		if (reinf_material)
 			reinf_material.place_dismantled_product(get_turf(src))
@@ -224,7 +224,7 @@
 
 /obj/structure/girder/proc/construct_wall(obj/item/stack/material/S, mob/user)
 	if(S.get_amount() < 2)
-		to_chat(user, SPAN_NOTICE("There isn't enough material here to construct a wall."))
+		to_chat(user, span_notice("There isn't enough material here to construct a wall."))
 		return 0
 
 	var/material/M = SSmaterials.get_material_by_name(S.default_type)
@@ -235,18 +235,18 @@
 	add_hiddenprint(usr)
 
 	if(M.integrity < 50)
-		to_chat(user, SPAN_NOTICE("This material is too soft for use in wall construction."))
+		to_chat(user, span_notice("This material is too soft for use in wall construction."))
 		return 0
 
-	to_chat(user, SPAN_NOTICE("You begin adding the plating..."))
+	to_chat(user, span_notice("You begin adding the plating..."))
 
 	if(!do_after(user,4 SECONDS, src, DO_REPAIR_CONSTRUCT) || !S.use(2))
 		return 1 //once we've gotten this far don't call parent attackby()
 
 	if(anchored)
-		to_chat(user, SPAN_NOTICE("You added the plating!"))
+		to_chat(user, span_notice("You added the plating!"))
 	else
-		to_chat(user, SPAN_NOTICE("You create a false wall! Push on it to open or close the passage."))
+		to_chat(user, span_notice("You create a false wall! Push on it to open or close the passage."))
 		wall_fake = 1
 
 	var/turf/Tsrc = get_turf(src)
@@ -261,11 +261,11 @@
 
 /obj/structure/girder/proc/reinforce_with_material(obj/item/stack/material/S, mob/user) //if the verb is removed this can be renamed.
 	if(reinf_material)
-		to_chat(user, SPAN_NOTICE("[src] is already reinforced."))
+		to_chat(user, span_notice("[src] is already reinforced."))
 		return 0
 
 	if(S.get_amount() < 2)
-		to_chat(user, SPAN_NOTICE("There isn't enough material here to reinforce the girder."))
+		to_chat(user, span_notice("There isn't enough material here to reinforce the girder."))
 		return 0
 
 	var/material/M = S.material
@@ -273,10 +273,10 @@
 		to_chat(user, "You cannot reinforce [src] with that; it is too soft.")
 		return 0
 
-	to_chat(user, SPAN_NOTICE("Now reinforcing..."))
+	to_chat(user, span_notice("Now reinforcing..."))
 	if (!do_after(user, 4 SECONDS, src, DO_REPAIR_CONSTRUCT) || !S.use(2))
 		return 1 //don't call parent attackby() past this point
-	to_chat(user, SPAN_NOTICE("You added reinforcement!"))
+	to_chat(user, span_notice("You added reinforcement!"))
 
 	reinf_material = M
 	reinforce_girder()

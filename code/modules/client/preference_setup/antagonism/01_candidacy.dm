@@ -39,22 +39,22 @@
 		var/datum/antagonist/antag = all_antag_types[antag_type]
 		. += "<tr><td>[antag.role_text]: </td><td>"
 		if(jobban_isbanned(preference_mob(), antag.id) || (antag.id == MODE_MALFUNCTION && jobban_isbanned(preference_mob(), "AI")))
-			. += "[SPAN_DANGER("\[BANNED\]")]<br>"
+			. += "[span_danger("\[BANNED\]")]<br>"
 		else if(antag.id in pref.be_special_role)
-			. += "[SPAN_CLASS("linkOn", "High")] <a href='?src=\ref[src];add_maybe=[antag.id]'>Low</a> <a href='?src=\ref[src];del_special=[antag.id]'>Never</a></br>"
+			. += "[span_linkon("High")] <a href='?src=\ref[src];add_maybe=[antag.id]'>Low</a> <a href='?src=\ref[src];del_special=[antag.id]'>Never</a></br>"
 		else if(antag.id in pref.may_be_special_role)
-			. += "<a href='?src=\ref[src];add_special=[antag.id]'>High</a> [SPAN_CLASS("linkOn", "Low")] <a href='?src=\ref[src];del_special=[antag.id]'>Never</a></br>"
+			. += "<a href='?src=\ref[src];add_special=[antag.id]'>High</a> [span_linkon("Low")] <a href='?src=\ref[src];del_special=[antag.id]'>Never</a></br>"
 		else
-			. += "<a href='?src=\ref[src];add_special=[antag.id]'>High</a> <a href='?src=\ref[src];add_maybe=[antag.id]'>Low</a> [SPAN_CLASS("linkOn", "Never")]</br>"
+			. += "<a href='?src=\ref[src];add_special=[antag.id]'>High</a> <a href='?src=\ref[src];add_maybe=[antag.id]'>Low</a> [span_linkon("Never")]</br>"
 
 		. += "</td></tr>"
 
 	// Special handling for pAI role
 	. += "<tr></tr><tr><td>pAI:</td>"
 	if (BE_PAI in pref.be_special_role)
-		. += "<td>[SPAN_CLASS("linkOn", "Yes")] <a href='?src=\ref[src];del_special=[BE_PAI]'>No</a></br></td></tr>"
+		. += "<td>[span_linkon("Yes")] <a href='?src=\ref[src];del_special=[BE_PAI]'>No</a></br></td></tr>"
 	else
-		. += "<td><a href='?src=\ref[src];add_special=[BE_PAI]'>Yes</a> [SPAN_CLASS("linkOn", "No")]</br></td></tr>"
+		. += "<td><a href='?src=\ref[src];add_special=[BE_PAI]'>Yes</a> [span_linkon("No")]</br></td></tr>"
 	. += "</table>"
 	. = jointext(.,null)
 

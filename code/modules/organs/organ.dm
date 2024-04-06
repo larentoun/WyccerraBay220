@@ -153,10 +153,10 @@ var/global/list/organ_cache = list()
 /obj/item/organ/proc/show_decay_status(mob/user)
 	if(BP_IS_ROBOTIC(src))
 		if(status & ORGAN_DEAD)
-			. += SPAN_NOTICE("[src] looks completely spent.")
+			. += span_notice("[src] looks completely spent.")
 	else
 		if(status & ORGAN_DEAD)
-			. += SPAN_NOTICE("The decay has set into [src].")
+			. += span_notice("The decay has set into [src].")
 
 /obj/item/organ/proc/handle_germ_effects()
 	//** Handle the effects of infections
@@ -309,7 +309,7 @@ var/global/list/organ_cache = list()
 		return FALSE
 
 	if (alert("Do you really want to use this organ as food? It will be useless for anything else afterwards.",,"Ew, no.","Bon appetit!") == "Ew, no.")
-		to_chat(user, SPAN_NOTICE("You successfully repress your cannibalistic tendencies."))
+		to_chat(user, span_notice("You successfully repress your cannibalistic tendencies."))
 		return TRUE
 	if (!user.unEquip(src))
 		return TRUE

@@ -9,19 +9,19 @@
 /obj/item/organ/internal/augment/active/item/circuit/crowbar_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
 	if(!item)
-		to_chat(user, SPAN_WARNING("The augment is empty!"))
+		to_chat(user, span_warning("The augment is empty!"))
 		return
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	item.canremove = TRUE
 	item.dropInto(loc)
-	to_chat(user, SPAN_NOTICE("You take out [item]."))
+	to_chat(user, span_notice("You take out [item]."))
 	item = null
 
 /obj/item/organ/internal/augment/active/item/circuit/attackby(obj/item/I, mob/user)
 	if (istype(I, /obj/item/device/electronic_assembly/augment))
 		if (item)
-			to_chat(user, SPAN_WARNING("There's already an assembly in there."))
+			to_chat(user, span_warning("There's already an assembly in there."))
 		else if (user.unEquip(I, src))
 			item = I
 			item.canremove = FALSE

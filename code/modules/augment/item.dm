@@ -69,11 +69,11 @@
 		playsound(owner, deploy_sound, 30)
 	if (as_owner)
 		owner.visible_message(
-			SPAN_WARNING("\The [owner] extends \his [item.name] from \his [limb.name]."),
-			SPAN_NOTICE("You extend your [item.name] from your [limb.name].")
+			span_warning("\The [owner] extends \his [item.name] from \his [limb.name]."),
+			span_notice("You extend your [item.name] from your [limb.name].")
 		)
 	else
-		visible_message(SPAN_WARNING("\The [item.name] extend\s."))
+		visible_message(span_warning("\The [item.name] extend\s."))
 	return TRUE
 
 
@@ -92,11 +92,11 @@
 		playsound(owner, retract_sound, 30)
 	if (as_owner)
 		M.visible_message(
-			SPAN_WARNING("\The [M] retracts \his [item.name] into \his [limb.name]."),
-			SPAN_NOTICE("You retract your [item.name] into your [limb.name].")
+			span_warning("\The [M] retracts \his [item.name] into \his [limb.name]."),
+			span_notice("You retract your [item.name] into your [limb.name].")
 		)
 	else
-		visible_message(SPAN_WARNING("\The [item.name] retract\s."))
+		visible_message(span_warning("\The [item.name] retract\s."))
 	return TRUE
 
 
@@ -114,6 +114,6 @@
 	if (!..())
 		return FALSE
 	if (!item)
-		to_chat(owner, SPAN_WARNING("The device is damaged and fails to deploy."))
+		to_chat(owner, span_warning("The device is damaged and fails to deploy."))
 		return FALSE
 	return TRUE

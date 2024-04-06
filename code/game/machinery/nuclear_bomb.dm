@@ -93,14 +93,14 @@ var/global/bomb_set
 					if(!O.tool_start_check(user, 5))
 						return TRUE
 					user.visible_message(
-						SPAN_NOTICE("[user] starts cutting loose the anchoring bolt covers on [src]."),
-						SPAN_NOTICE("You start cutting loose the anchoring bolt covers on [src] with [O].")
+						span_notice("[user] starts cutting loose the anchoring bolt covers on [src]."),
+						span_notice("You start cutting loose the anchoring bolt covers on [src] with [O].")
 					)
 					if(!O.use_as_tool(src, user, 4 SECONDS, 5, 50, SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT))
 						return TRUE
 					user.visible_message(
-						SPAN_NOTICE("[user] cuts through the bolt covers on [src]."),
-						SPAN_NOTICE("You cut through the bolt covers on [src].")
+						span_notice("[user] cuts through the bolt covers on [src]."),
+						span_notice("You cut through the bolt covers on [src].")
 					)
 					removal_stage = 1
 					return TRUE
@@ -108,15 +108,15 @@ var/global/bomb_set
 			if(1)
 				if(O.tool_behaviour == TOOL_CROWBAR)
 					user.visible_message(
-						SPAN_NOTICE("[user] starts forcing open the bolt covers on [src]."),
-						SPAN_NOTICE("You start forcing open the anchoring bolt covers on [src] with [O].")
+						span_notice("[user] starts forcing open the bolt covers on [src]."),
+						span_notice("You start forcing open the anchoring bolt covers on [src] with [O].")
 					)
 
 					if(do_after(user, (O.toolspeed * 1.5) SECONDS, src, DO_REPAIR_CONSTRUCT))
 						if(!src || !user) return TRUE
 						user.visible_message(
-							SPAN_NOTICE("[user] forces open the bolt covers on [src]."),
-							SPAN_NOTICE("You force open the bolt covers.")
+							span_notice("[user] forces open the bolt covers on [src]."),
+							span_notice("You force open the bolt covers.")
 						)
 						removal_stage = 2
 					return TRUE
@@ -126,14 +126,14 @@ var/global/bomb_set
 					if(!O.tool_start_check(user, 5))
 						return TRUE
 					user.visible_message(
-						SPAN_NOTICE("[user] starts cutting apart the anchoring system sealant on [src]."),
-						SPAN_NOTICE("You start cutting apart the anchoring system's sealant on [src] with [O].")
+						span_notice("[user] starts cutting apart the anchoring system sealant on [src]."),
+						span_notice("You start cutting apart the anchoring system's sealant on [src] with [O].")
 					)
 					if(!O.use_as_tool(src, user, 4 SECONDS, 5, 50, SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT))
 						return TRUE
 					user.visible_message(
-						SPAN_NOTICE("[user] cuts apart the anchoring system sealant on [src]."),
-						SPAN_NOTICE("You cut apart the anchoring system's sealant.")
+						span_notice("[user] cuts apart the anchoring system sealant on [src]."),
+						span_notice("You cut apart the anchoring system's sealant.")
 					)
 					removal_stage = 3
 					return TRUE
@@ -141,8 +141,8 @@ var/global/bomb_set
 			if(3)
 				if(O.tool_behaviour == TOOL_WRENCH)
 					user.visible_message(
-						SPAN_NOTICE("[user] begins unwrenching the anchoring bolts on [src]."),
-						SPAN_NOTICE("You begin unwrenching the anchoring bolts on [src].")
+						span_notice("[user] begins unwrenching the anchoring bolts on [src]."),
+						span_notice("You begin unwrenching the anchoring bolts on [src].")
 					)
 					if(do_after(user, (O.toolspeed * 5) SECONDS, src, DO_REPAIR_CONSTRUCT))
 						if(!src || !user) return TRUE
@@ -153,14 +153,14 @@ var/global/bomb_set
 			if(4)
 				if(O.tool_behaviour == TOOL_CROWBAR)
 					user.visible_message(
-						SPAN_NOTICE("[user] begins lifting [src] off of its anchors."),
-						SPAN_NOTICE("You begin lifting [src] off its anchors.")
+						span_notice("[user] begins lifting [src] off of its anchors."),
+						span_notice("You begin lifting [src] off its anchors.")
 						)
 					if(do_after(user, (O.toolspeed * 8) SECONDS, src, DO_REPAIR_CONSTRUCT))
 						if(!src || !user) return TRUE
 						user.visible_message(
-							SPAN_NOTICE("[user] crowbars [src] off of the anchors. It can now be moved."),
-							SPAN_NOTICE("You jam the crowbar under [src] and lift it off its anchors. You can now move it!")
+							span_notice("[user] crowbars [src] off of the anchors. It can now be moved."),
+							span_notice("You jam the crowbar under [src] and lift it off its anchors. You can now move it!")
 						)
 						anchored = FALSE
 						removal_stage = 5
@@ -172,9 +172,9 @@ var/global/bomb_set
 		. = TRUE
 		if(removal_stage < 5)
 			src.anchored = TRUE
-			visible_message(SPAN_WARNING("With a steely snap, bolts slide out of [src] and anchor it to the flooring!"))
+			visible_message(span_warning("With a steely snap, bolts slide out of [src] and anchor it to the flooring!"))
 		else
-			visible_message(SPAN_WARNING("[src] makes a highly unpleasant crunching noise. It looks like the anchoring bolts have been cut."))
+			visible_message(span_warning("[src] makes a highly unpleasant crunching noise. It looks like the anchoring bolts have been cut."))
 		extended = 1
 		if(!src.lighthack)
 			flick("lock", src)
@@ -229,10 +229,10 @@ var/global/bomb_set
 		return
 
 	if(deployable)
-		to_chat(usr, SPAN_WARNING("You close several panels to make [src] undeployable."))
+		to_chat(usr, span_warning("You close several panels to make [src] undeployable."))
 		deployable = 0
 	else
-		to_chat(usr, SPAN_WARNING("You adjust some panels to make [src] deployable."))
+		to_chat(usr, span_warning("You adjust some panels to make [src] deployable."))
 		deployable = 1
 	return
 
@@ -282,7 +282,7 @@ var/global/bomb_set
 		if(yes_code)
 			if(href_list["time"])
 				if(timing)
-					to_chat(usr, SPAN_WARNING("Cannot alter the timing during countdown."))
+					to_chat(usr, span_warning("Cannot alter the timing during countdown."))
 					return
 
 				var/time = text2num(href_list["time"]) SECONDS
@@ -292,13 +292,13 @@ var/global/bomb_set
 				if(timing == -1)
 					return 1
 				if(!anchored)
-					to_chat(usr, SPAN_WARNING("[src] needs to be anchored."))
+					to_chat(usr, span_warning("[src] needs to be anchored."))
 					return 1
 				if(safety)
-					to_chat(usr, SPAN_WARNING("The safety is still on."))
+					to_chat(usr, span_warning("The safety is still on."))
 					return 1
 				if(wires.IsIndexCut(NUCLEARBOMB_WIRE_TIMING))
-					to_chat(usr, SPAN_WARNING("Nothing happens, something might be wrong with the wiring."))
+					to_chat(usr, span_warning("Nothing happens, something might be wrong with the wiring."))
 					return 1
 				if(!timing && !safety)
 					start_bomb()
@@ -306,7 +306,7 @@ var/global/bomb_set
 					secure_device()
 			if(href_list["safety"])
 				if (wires.IsIndexCut(NUCLEARBOMB_WIRE_SAFETY))
-					to_chat(usr, SPAN_WARNING("Nothing happens, something might be wrong with the wiring."))
+					to_chat(usr, span_warning("Nothing happens, something might be wrong with the wiring."))
 					return 1
 				safety = !safety
 				if(safety)
@@ -314,24 +314,24 @@ var/global/bomb_set
 				update_icon()
 			if(href_list["evacuate"])
 				if(timing)
-					to_chat(usr, SPAN_WARNING("Cannot alter evacuation during countdown."))
+					to_chat(usr, span_warning("Cannot alter evacuation during countdown."))
 					return
 				evacuate = !evacuate
 			if(href_list["anchor"])
 				if(removal_stage == 5)
 					anchored = FALSE
-					visible_message(SPAN_WARNING("[src] makes a highly unpleasant crunching noise. It looks like the anchoring bolts have been cut."))
+					visible_message(span_warning("[src] makes a highly unpleasant crunching noise. It looks like the anchoring bolts have been cut."))
 					return 1
 
 				if(!isinspace())
 					anchored = !anchored
 					if(anchored)
-						visible_message(SPAN_WARNING("With a steely snap, bolts slide out of [src] and anchor it to the flooring."))
+						visible_message(span_warning("With a steely snap, bolts slide out of [src] and anchor it to the flooring."))
 					else
 						secure_device()
-						visible_message(SPAN_WARNING("The anchoring bolts slide back into the depths of [src]."))
+						visible_message(span_warning("The anchoring bolts slide back into the depths of [src]."))
 				else
-					to_chat(usr, SPAN_WARNING("There is nothing to anchor to!"))
+					to_chat(usr, span_warning("There is nothing to anchor to!"))
 	return 1
 
 /obj/machinery/nuclearbomb/proc/start_bomb()
@@ -430,7 +430,7 @@ var/global/bomb_set
 
 /obj/item/storage/secure/briefcase/nukedisk/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("On closer inspection, you see [GLOB.using_map.company_name] emblem is etched into the front of it.")
+	. += span_notice("On closer inspection, you see [GLOB.using_map.company_name] emblem is etched into the front of it.")
 
 /obj/item/folder/envelope/nuke_instructions
 	name = "instructions envelope"
@@ -510,13 +510,13 @@ var/global/bomb_set
 	for(var/inserter in inserters)
 		var/obj/machinery/self_destruct/sd = inserter
 		if(!istype(sd) || !sd.armed)
-			to_chat(usr, SPAN_WARNING("An inserter has not been armed or is damaged."))
+			to_chat(usr, span_warning("An inserter has not been armed or is damaged."))
 			return
 	..()
-	visible_message(SPAN_WARNING("Warning. The self-destruct sequence override will be disabled [self_destruct_cutoff/10] seconds before detonation."))
+	visible_message(span_warning("Warning. The self-destruct sequence override will be disabled [self_destruct_cutoff/10] seconds before detonation."))
 	if(evacuate)
 		if(!evacuation_controller)
-			visible_message(SPAN_DANGER("Warning. Unable to initiate evacuation procedures."))
+			visible_message(span_danger("Warning. Unable to initiate evacuation procedures."))
 			return
 		for (var/datum/evacuation_option/EO in evacuation_controller.available_evac_options())
 			if(EO.abandon_ship)
@@ -526,7 +526,7 @@ var/global/bomb_set
 
 /obj/machinery/nuclearbomb/station/secure_device()
 	if(timing && timeleft - world.time <= self_destruct_cutoff)
-		visible_message(SPAN_WARNING("Self-Destruct abort is no longer possible."))
+		visible_message(span_warning("Self-Destruct abort is no longer possible."))
 		return
 	..()
 	announced = FALSE

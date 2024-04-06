@@ -108,13 +108,13 @@
 		user.setClickCooldown(user.get_attack_speed(weapon))
 		user.do_attack_animation(src)
 		user.visible_message(
-			SPAN_WARNING("\The [user] baps \the [src] on the nose with a rolled up [weapon.name]!"),
-			SPAN_DANGER("You bap \the [src] on the nose with the rolled up [weapon.name]!"),
+			span_warning("\The [user] baps \the [src] on the nose with a rolled up [weapon.name]!"),
+			span_danger("You bap \the [src] on the nose with the rolled up [weapon.name]!"),
 			exclude_mobs = list(src)
 		)
 		if (stat)
 			return TRUE
-		to_chat(src, SPAN_DANGER("\The [user] baps you on the nose with a rolle up [weapon.name]!"))
+		to_chat(src, span_danger("\The [user] baps you on the nose with a rolle up [weapon.name]!"))
 		spawn(0)
 			for(var/i in list(1,2,4,8,4,2,1,2))
 				set_dir(i)
@@ -159,7 +159,7 @@
 //pupplies cannot wear anything.
 /mob/living/simple_animal/passive/corgi/puppy/OnTopic(mob/user, href_list)
 	if(href_list["remove_inv"] || href_list["add_inv"])
-		to_chat(user, SPAN_WARNING("You can't fit this on [src]"))
+		to_chat(user, span_warning("You can't fit this on [src]"))
 		return TOPIC_HANDLED
 	return ..()
 
@@ -181,7 +181,7 @@
 //Lisa already has a cute bow!
 /mob/living/simple_animal/passive/corgi/Lisa/OnTopic(mob/user, href_list)
 	if(href_list["remove_inv"] || href_list["add_inv"])
-		to_chat(user, SPAN_WARNING("[src] already has a cute bow!"))
+		to_chat(user, span_warning("[src] already has a cute bow!"))
 		return TOPIC_HANDLED
 	return ..()
 

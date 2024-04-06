@@ -30,7 +30,7 @@
 
 /mob/living/exosuit/resolve_item_attack(obj/item/I, mob/living/user, def_zone)
 	if(!I.force)
-		user.visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly with \the [I]."))
+		user.visible_message(span_notice("\The [user] bonks \the [src] harmlessly with \the [I]."))
 		return
 
 	switch(def_zone)
@@ -58,7 +58,7 @@
 				message = "\The [AM] gets in \the [src]'s cockpit in one fluid motion."
 			if (prob(chance))
 				if (enter(AM, silent = TRUE, check_incap = FALSE, instant = TRUE))
-					visible_message(SPAN_NOTICE("[message]"))
+					visible_message(span_notice("[message]"))
 					return
 
 	if (LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
@@ -190,11 +190,11 @@
 
 	if(ratio >= 0.5)
 		for(var/mob/living/m in pilots)
-			to_chat(m, SPAN_NOTICE("Your Faraday shielding absorbed the pulse!"))
+			to_chat(m, span_notice("Your Faraday shielding absorbed the pulse!"))
 		return
 	else if(ratio > 0)
 		for(var/mob/living/m in pilots)
-			to_chat(m, SPAN_NOTICE("Your Faraday shielding mitigated the pulse!"))
+			to_chat(m, span_notice("Your Faraday shielding mitigated the pulse!"))
 
 	emp_damage += round((12 - (severity*3))*( 1 - ratio))
 	for(var/obj/item/thing in list(arms,legs,head,body))

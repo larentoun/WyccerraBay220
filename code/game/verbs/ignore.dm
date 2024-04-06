@@ -8,11 +8,11 @@
 	key_to_ignore = ckey(sanitize(key_to_ignore))
 	if(prefs && prefs.ignored_players)
 		if(key_to_ignore in prefs.ignored_players && key_to_ignore != ckey)
-			to_chat(usr, SPAN_WARNING("[key_to_ignore] is already being ignored."))
+			to_chat(usr, span_warning("[key_to_ignore] is already being ignored."))
 			return
 		prefs.ignored_players |= key_to_ignore
 		SScharacter_setup.queue_preferences_save(prefs)
-		to_chat(usr, SPAN_NOTICE("Now ignoring <b>[key_to_ignore]</b>."))
+		to_chat(usr, span_notice("Now ignoring <b>[key_to_ignore]</b>."))
 
 /client/verb/unignore(key_to_unignore as text)
 	set name = "Unignore"
@@ -24,11 +24,11 @@
 	key_to_unignore = ckey(sanitize(key_to_unignore))
 	if(prefs && prefs.ignored_players)
 		if(!(key_to_unignore in prefs.ignored_players))
-			to_chat(usr, SPAN_WARNING("[key_to_unignore] isn't being ignored."))
+			to_chat(usr, span_warning("[key_to_unignore] isn't being ignored."))
 			return
 		prefs.ignored_players -= key_to_unignore
 		SScharacter_setup.queue_preferences_save(prefs)
-		to_chat(usr, SPAN_NOTICE("Reverted ignore on <b>[key_to_unignore]</b>."))
+		to_chat(usr, span_notice("Reverted ignore on <b>[key_to_unignore]</b>."))
 
 /mob/proc/is_key_ignored(key_to_check)
 	if(client)

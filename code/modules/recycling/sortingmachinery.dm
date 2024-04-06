@@ -29,7 +29,7 @@
 /obj/structure/bigDelivery/on_death()
 	. = ..()
 	visible_message(
-		SPAN_WARNING("\The [src]'s wrapping falls away!")
+		span_warning("\The [src]'s wrapping falls away!")
 	)
 	if (wrapped)
 		wrapped.dropInto(loc)
@@ -75,8 +75,8 @@
 		update_icon()
 		playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] tags \the [src] with \a [tool]."),
-			SPAN_NOTICE("You tag \the [src] as [sortTag] with \the [tool].")
+			span_notice("\The [user] tags \the [src] with \a [tool]."),
+			span_notice("You tag \the [src] as [sortTag] with \the [tool].")
 		)
 		return TRUE
 
@@ -91,8 +91,8 @@
 			if (!new_title || !user.use_sanity_check(src, tool))
 				return TRUE
 			user.visible_message(
-				SPAN_NOTICE("\The [user] updates \the [src]'s label with \a [tool]."),
-				SPAN_NOTICE("You set \the [src]'s label title to '[new_title]' with \the [tool].")
+				span_notice("\The [user] updates \the [src]'s label with \a [tool]."),
+				span_notice("You set \the [src]'s label title to '[new_title]' with \the [tool].")
 			)
 			SetName("[initial(name)] ([new_title])")
 			nameset = TRUE
@@ -103,8 +103,8 @@
 			if (!new_desc || !user.use_sanity_check(src, tool))
 				return TRUE
 			user.visible_message(
-				SPAN_NOTICE("\The [user] updates \the [src]'s label with \a [tool]."),
-				SPAN_NOTICE("You set \the [src]'s label description to '[new_desc]' with \the [tool].")
+				span_notice("\The [user] updates \the [src]'s label with \a [tool]."),
+				span_notice("You set \the [src]'s label description to '[new_desc]' with \the [tool].")
 			)
 			examtext = new_desc
 			nameset = TRUE
@@ -113,8 +113,8 @@
 
 	if (is_sharp(tool))
 		user.visible_message(
-			SPAN_NOTICE("\The [user] cuts open \the [src] with \a [tool]."),
-			SPAN_NOTICE("You cut open \the [src] with \the [tool].")
+			span_notice("\The [user] cuts open \the [src] with \a [tool]."),
+			span_notice("You cut open \the [src] with \the [tool].")
 		)
 		unwrap(user)
 		return TRUE
@@ -125,9 +125,9 @@
 	. = ..()
 	if(distance <= 4)
 		if(sortTag)
-			. += SPAN_NOTICE("It is labeled \"[sortTag]\"")
+			. += span_notice("It is labeled \"[sortTag]\"")
 		if(examtext)
-			. += SPAN_NOTICE("It has a note attached which reads, \"[examtext]\"")
+			. += span_notice("It has a note attached which reads, \"[examtext]\"")
 
 ///Procs exclusive to the package subtype.
 /obj/structure/bigDelivery/package/Initialize(mapload, obj/structure/closet/parcel, wrap_type)
@@ -234,7 +234,7 @@
 /obj/structure/bigDelivery/mobpresent/relaymove(mob/user)
 	if (user.stat)
 		return
-	to_chat(user, SPAN_WARNING("You can't move!"))
+	to_chat(user, span_warning("You can't move!"))
 
 /obj/structure/bigDelivery/mobpresent/on_death()
 	. = ..()
@@ -253,25 +253,25 @@
 	. = TRUE
 	escapee.setClickCooldown(100)
 
-	to_chat(escapee, SPAN_WARNING("You start squirming inside \the [src] and start weakening the wrapping paper. (this will take about [breakout_time/(1 SECOND)] second\s)"))
-	visible_message(SPAN_DANGER("\The [src] begins to shake violently!"))
+	to_chat(escapee, span_warning("You start squirming inside \the [src] and start weakening the wrapping paper. (this will take about [breakout_time/(1 SECOND)] second\s)"))
+	visible_message(span_danger("\The [src] begins to shake violently!"))
 	shake_animation()
 
 	var/stages = 3
 	breakout = TRUE
 	for (var/i = 1 to stages)
 		if (do_after(escapee, breakout_time*(1/stages), do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
-			to_chat(escapee, SPAN_WARNING("You try to slip free of \the [src] ([i*100/stages]% done)."))
+			to_chat(escapee, span_warning("You try to slip free of \the [src] ([i*100/stages]% done)."))
 		else
-			to_chat(escapee, SPAN_WARNING("You stop trying to slip free of \the [src]."))
+			to_chat(escapee, span_warning("You stop trying to slip free of \the [src]."))
 			breakout = FALSE
 			return
 		shake_animation()
 
 	//Well then break it!
 	breakout = FALSE
-	to_chat(escapee, SPAN_WARNING("You successfully break out!"))
-	visible_message(SPAN_DANGER("\The [escapee] successfully broke out of \the [src]!"))
+	to_chat(escapee, span_warning("You successfully break out!"))
+	visible_message(span_danger("\The [escapee] successfully broke out of \the [src]!"))
 	unwrap()
 
 /obj/item/smallDelivery
@@ -321,7 +321,7 @@
 /obj/item/smallDelivery/on_death()
 	. = ..()
 	visible_message(
-		SPAN_WARNING("\The [src]'s wrapping falls away!")
+		span_warning("\The [src]'s wrapping falls away!")
 	)
 	if (wrapped)
 		wrapped.dropInto(loc)
@@ -335,7 +335,7 @@
 	if (!Adjacent(user))
 		return
 	if (!length(contents) || !wrapped)
-		to_chat(user, SPAN_NOTICE("\The [src] was empty!"))
+		to_chat(user, span_notice("\The [src] was empty!"))
 		qdel_self()
 		return
 
@@ -361,8 +361,8 @@
 /obj/item/smallDelivery/use_tool(obj/item/tool, mob/living/user, list/click_params)
 	if (is_sharp(tool))
 		user.visible_message(
-			SPAN_NOTICE("\The [user] cuts open \the [src] with \a [tool]."),
-			SPAN_NOTICE("You cut open \the [src] with \the [tool].")
+			span_notice("\The [user] cuts open \the [src] with \a [tool]."),
+			span_notice("You cut open \the [src] with \the [tool].")
 		)
 		unwrap(user)
 		return TRUE
@@ -371,7 +371,7 @@
 		var/obj/item/device/destTagger/tagger = tool
 		if (tagger.currTag)
 			if (sortTag != tagger.currTag)
-				to_chat(user, SPAN_NOTICE("You have labeled the destination as [tagger.currTag]."))
+				to_chat(user, span_notice("You have labeled the destination as [tagger.currTag]."))
 				if (!sortTag)
 					sortTag = tagger.currTag
 					update_icon()
@@ -380,10 +380,10 @@
 				playsound(loc, 'sound/machines/twobeep.ogg', 50, 1)
 				return TRUE
 			else
-				to_chat(user, SPAN_WARNING("The package is already labeled for [tagger.currTag]."))
+				to_chat(user, span_warning("The package is already labeled for [tagger.currTag]."))
 				return TRUE
 		else
-			to_chat(user, SPAN_WARNING("You need to set a destination first!"))
+			to_chat(user, span_warning("You need to set a destination first!"))
 			return TRUE
 
 	if (istype(tool, /obj/item/pen))
@@ -391,10 +391,10 @@
 			if ("Title")
 				var/str = sanitizeSafe(input(user,"Label text?","Set label",""), MAX_NAME_LEN)
 				if (!str || !length(str))
-					to_chat(usr, SPAN_WARNING(" Invalid text."))
+					to_chat(usr, span_warning(" Invalid text."))
 					return TRUE
 				user.visible_message("\The [user] titles \the [src] with \a [tool], marking down: \"[str]\"",\
-				SPAN_NOTICE("You title \the [src]: \"[str]\""),\
+				span_notice("You title \the [src]: \"[str]\""),\
 				"You hear someone scribbling a note.")
 				SetName("[name] ([str])")
 				if (!examtext && !nameset)
@@ -407,7 +407,7 @@
 			if ("Description")
 				var/str = sanitize(input(user,"Label text?","Set label",""))
 				if(!str || !length(str))
-					to_chat(user, SPAN_WARNING("Invalid text."))
+					to_chat(user, span_warning("Invalid text."))
 					return TRUE
 				if (!examtext && !nameset)
 					examtext = str
@@ -415,7 +415,7 @@
 				else
 					examtext = str
 				user.visible_message("\The [user] labels \the [src] with \a [tool], scribbling down: \"[examtext]\"",\
-				SPAN_NOTICE("You label \the [src]: \"[examtext]\""),\
+				span_notice("You label \the [src]: \"[examtext]\""),\
 				"You hear someone scribbling a note.")
 				return TRUE
 	return ..()
@@ -457,9 +457,9 @@
 	. = ..()
 	if(distance <= 4)
 		if(sortTag)
-			. += SPAN_NOTICE("It is labeled \"[sortTag]\"")
+			. += span_notice("It is labeled \"[sortTag]\"")
 		if(examtext)
-			. += SPAN_NOTICE("It has a note attached which reads, \"[examtext]\"")
+			. += span_notice("It has a note attached which reads, \"[examtext]\"")
 
 /obj/item/device/destTagger
 	name = "destination tagger"
@@ -494,7 +494,7 @@
 /obj/item/device/destTagger/OnTopic(user, href_list, state)
 	if(href_list["nextTag"] && (href_list["nextTag"] in GLOB.tagger_locations))
 		src.currTag = href_list["nextTag"]
-		to_chat(user, SPAN_NOTICE("You set [src] to <b>[src.currTag]</b>."))
+		to_chat(user, span_notice("You set [src] to <b>[src.currTag]</b>."))
 		playsound(src.loc, 'sound/machines/chime.ogg', 50, 1)
 		. = TOPIC_REFRESH
 	if(href_list["nextTag"] == "CUSTOM")
@@ -502,11 +502,11 @@
 		if(CanUseTopic(user, state))
 			if(dest && lowertext(dest) != "none")
 				src.currTag = dest
-				to_chat(user, SPAN_NOTICE("You designate a custom location on [src], set to <b>[src.currTag]</b>."))
+				to_chat(user, span_notice("You designate a custom location on [src], set to <b>[src.currTag]</b>."))
 				playsound(src.loc, 'sound/machines/chime.ogg', 50, 1)
 			else
 				src.currTag = 0
-				to_chat(user, SPAN_NOTICE("You clear [src]'s custom location."))
+				to_chat(user, span_notice("You clear [src]'s custom location."))
 				playsound(src.loc, 'sound/machines/chime.ogg', 50, 1)
 			. = TOPIC_REFRESH
 		else

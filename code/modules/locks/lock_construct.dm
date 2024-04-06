@@ -16,15 +16,15 @@
 	if(istype(I,/obj/item/key))
 		var/obj/item/key/K = I
 		if(!K.key_data)
-			to_chat(user, SPAN_NOTICE("You fashion \the [I] to unlock \the [src]"))
+			to_chat(user, span_notice("You fashion \the [I] to unlock \the [src]"))
 			K.key_data = lock_data
 		else
-			to_chat(user, SPAN_WARNING("\The [I] already unlocks something..."))
+			to_chat(user, span_warning("\The [I] already unlocks something..."))
 		return
 	if(istype(I,/obj/item/material/lock_construct))
 		var/obj/item/material/lock_construct/L = I
 		src.lock_data = L.lock_data
-		to_chat(user, SPAN_NOTICE("You copy the lock from \the [L] to \the [src], making them identical."))
+		to_chat(user, span_notice("You copy the lock from \the [L] to \the [src], making them identical."))
 		return
 	..()
 

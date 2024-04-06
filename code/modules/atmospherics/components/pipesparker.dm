@@ -63,42 +63,42 @@
 	playsound(loc, "button", 30, 1)
 	if (cant_ignite())
 		user.visible_message(
-			SPAN_NOTICE("[user] tries to activate [src], but nothing happens."),
-			SPAN_NOTICE("You try to activate [src], but nothing happens.")
+			span_notice("[user] tries to activate [src], but nothing happens."),
+			span_notice("You try to activate [src], but nothing happens.")
 		)
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] activates [src]."),
-		SPAN_NOTICE("You activate [src].")
+		span_notice("[user] activates [src]."),
+		span_notice("You activate [src].")
 	)
 	ignite()
 
 /obj/machinery/atmospherics/pipe/cap/sparker/wrench_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
 	if(signaler || disabled)
-		to_chat(user, SPAN_NOTICE("Remove signalers and check the wiring before unwrenching [src]."))
+		to_chat(user, span_notice("Remove signalers and check the wiring before unwrenching [src]."))
 		return
 	var/turf/T = src.loc
 	if(level == ATOM_LEVEL_UNDER_TILE && isturf(T) && !T.is_plating())
-		to_chat(user, SPAN_WARNING("You must remove the plating first."))
+		to_chat(user, span_warning("You must remove the plating first."))
 		return
 	if(clamp)
-		to_chat(user, SPAN_WARNING("You must remove [clamp] first."))
+		to_chat(user, span_warning("You must remove [clamp] first."))
 		return
 
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()
 
 	if((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-		to_chat(user, SPAN_WARNING("You cannot unwrench [src], it is too exerted due to internal pressure."))
+		to_chat(user, span_warning("You cannot unwrench [src], it is too exerted due to internal pressure."))
 		return
 
-	to_chat(user, SPAN_NOTICE("You begin to unfasten [src]..."))
+	to_chat(user, span_notice("You begin to unfasten [src]..."))
 	if(!tool.use_as_tool(src, user, 4 SECONDS, volume = 50, skill_path = SKILL_ATMOS, do_flags = DO_REPAIR_CONSTRUCT) || clamp)
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] unfastens [src]."),
-		SPAN_NOTICE("You have unfastened [src]."),
+		span_notice("[user] unfastens [src]."),
+		span_notice("You have unfastened [src]."),
 		"You hear a ratchet.")
 
 	new /obj/item/pipe(loc, src)
@@ -115,8 +115,8 @@
 		signaler.mholder = null
 		signaler.dropInto(loc)
 		user.visible_message(
-			SPAN_WARNING("[user] disconnects [signaler] from [src]."),
-			SPAN_WARNING("You disconnect [signaler] from [src].")
+			span_warning("[user] disconnects [signaler] from [src]."),
+			span_warning("You disconnect [signaler] from [src].")
 		)
 		signaler = null
 		update_icon()
@@ -125,27 +125,27 @@
 		return
 	disabled = !disabled
 	user.visible_message(
-		SPAN_WARNING("[user] has [disabled ? "disabled" : "reconnected wiring on"] [src]."),
-		SPAN_WARNING("You [disabled ? "disable" : "fix"] the connection on [src].")
+		span_warning("[user] has [disabled ? "disabled" : "reconnected wiring on"] [src]."),
+		span_warning("You [disabled ? "disable" : "fix"] the connection on [src].")
 	)
 	update_icon()
 
 /obj/machinery/atmospherics/pipe/cap/sparker/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if (istype(W, /obj/item/device/assembly/signaler) && isnull(signaler))
 		if (disabled)
-			to_chat(user, SPAN_WARNING("[src] is disabled!"))
+			to_chat(user, span_warning("[src] is disabled!"))
 			return TRUE
 		signaler = W
 		if (signaler.secured)
-			to_chat(user, SPAN_WARNING("[signaler] is secured!"))
+			to_chat(user, span_warning("[signaler] is secured!"))
 			signaler = null
 			return TRUE
 		signaler.mholder = src
 		user.unEquip(signaler)
 		signaler.forceMove(src)
 		user.visible_message(
-			SPAN_NOTICE("[user] connects [signaler] to [src]."),
-			SPAN_NOTICE("You connect [signaler] to [src].")
+			span_notice("[user] connects [signaler] to [src]."),
+			span_notice("You connect [signaler] to [src].")
 		)
 		update_icon()
 		return TRUE

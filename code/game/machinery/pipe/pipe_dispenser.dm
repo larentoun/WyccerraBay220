@@ -88,7 +88,7 @@
 	if (istype(W, /obj/item/pipe) || istype(W, /obj/item/machine_chassis))
 		if(!user.unEquip(W))
 			return TRUE
-		to_chat(user, SPAN_NOTICE("You put \the [W] back into \the [src]."))
+		to_chat(user, span_notice("You put \the [W] back into \the [src]."))
 		qdel(W)
 		return TRUE
 

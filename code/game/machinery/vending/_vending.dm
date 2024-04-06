@@ -126,7 +126,7 @@
 /obj/machinery/vending/examine(mob/user)
 	. = ..()
 	if(IsShowingAntag())
-		. += SPAN_WARNING("A secret panel is open, revealing a small compartment that is dimly lit with red lighting.")
+		. += span_warning("A secret panel is open, revealing a small compartment that is dimly lit with red lighting.")
 
 /obj/machinery/vending/Process()
 	if(inoperable())
@@ -240,25 +240,25 @@
 		return TRUE
 	if(is_type_in_list(item, simple_coins))
 		if(!length(premium))
-			to_chat(user, SPAN_WARNING("\The [src] does not accept the [item]."))
+			to_chat(user, span_warning("\The [src] does not accept the [item]."))
 			return TRUE
 		if(!user.unEquip(item, src))
 			return FALSE
 		coin = item
 		UpdateShowPremium(TRUE)
-		to_chat(user, SPAN_NOTICE("You insert \the [item] into \the [src]."))
+		to_chat(user, span_notice("You insert \the [item] into \the [src]."))
 		SStgui.update_uis(src)
 		return TRUE
 
 	if(istype(item, /obj/item/material/coin/challenge/syndie))
 		if(!LAZYLEN(antag))
-			to_chat(user, SPAN_WARNING("\The [src] does not have a secret compartment installed."))
+			to_chat(user, span_warning("\The [src] does not have a secret compartment installed."))
 			return TRUE
 		if(IsShowingAntag())
-			to_chat(user, SPAN_WARNING("\The [src]'s secret compartment is already unlocked!"))
+			to_chat(user, span_warning("\The [src]'s secret compartment is already unlocked!"))
 			return TRUE
 		if(!user.unEquip(item, src))
-			to_chat(user, SPAN_WARNING("You can't drop \the [item]."))
+			to_chat(user, span_warning("You can't drop \the [item]."))
 			return TRUE
 		ProcessAntag(item, user)
 		return TRUE
@@ -270,8 +270,8 @@
 
 /// Proc that enables hidden antag items and replaces slogan list with anti-Sol slogans if any.
 /obj/machinery/vending/proc/ProcessAntag(obj/item/item, mob/living/user)
-	to_chat(user, SPAN_NOTICE("You insert \the [item] into \the [src]."))
-	visible_message(SPAN_WARNING("\The [src] hisses as a hidden panel swings open with a loud thud."))
+	to_chat(user, span_notice("You insert \the [item] into \the [src]."))
+	visible_message(span_warning("\The [src] hisses as a hidden panel swings open with a loud thud."))
 	playsound(loc, 'sound/items/metal_clack.ogg', 50)
 	UpdateShowAntag(TRUE)
 	req_access.Cut()
@@ -286,14 +286,14 @@
 	if(!isnull(antagcoin.string_color))
 		if(prob(10))
 			user.put_in_hands(item)
-			to_chat(user, SPAN_NOTICE("You successfully pull \the [item] out before \the [src] could swallow it."))
+			to_chat(user, span_notice("You successfully pull \the [item] out before \the [src] could swallow it."))
 			return TRUE
 		else
-			to_chat(user, SPAN_NOTICE("You weren't able to pull \the [item] out fast enough, \the [src] ate it, string and all."))
+			to_chat(user, span_notice("You weren't able to pull \the [item] out fast enough, \the [src] ate it, string and all."))
 			qdel(item)
 			return TRUE
 	else
-		to_chat(user, SPAN_NOTICE("You hear a loud clink as \the [item] is swallowed by \the [src]"))
+		to_chat(user, span_notice("You hear a loud clink as \the [item] is swallowed by \the [src]"))
 		qdel(item)
 		return TRUE
 
@@ -377,7 +377,7 @@
 			coin.dropInto(loc)
 			if(!usr.get_active_hand())
 				usr.put_in_hands(coin)
-			to_chat(usr, SPAN_NOTICE("You remove \the [coin] from \the [src]"))
+			to_chat(usr, span_notice("You remove \the [coin] from \the [src]"))
 			coin = null
 			UpdateShowPremium(FALSE)
 			return TRUE
@@ -393,7 +393,7 @@
 			if(product.price <= 0)
 				vend(product, usr)
 			else if(istype(usr, /mob/living/silicon))
-				to_chat(usr, SPAN_WARNING("Artificial unit recognized. Purchase canceled."))
+				to_chat(usr, span_warning("Artificial unit recognized. Purchase canceled."))
 			else
 				currently_vending = product
 				if(!vendor_account || vendor_account.suspended)
@@ -432,9 +432,9 @@
 
 /obj/machinery/vending/proc/pay_with_cash(obj/item/spacecash/bundle/cash)
 	if (currently_vending.price > cash.worth)
-		to_chat(usr, "[icon2html(cash, usr)] [SPAN_WARNING("That is not enough money.")]")
+		to_chat(usr, "[icon2html(cash, usr)] [span_warning("That is not enough money.")]")
 		return FALSE
-	visible_message(SPAN_INFO("\The [usr] inserts some cash into \the [src]."))
+	visible_message(span_info("\The [usr] inserts some cash into \the [src]."))
 	cash.worth -= currently_vending.price
 	if (cash.worth <= 0)
 		qdel(cash)
@@ -444,7 +444,7 @@
 	return TRUE
 
 /obj/machinery/vending/proc/pay_with_ewallet(obj/item/spacecash/ewallet/ewallet)
-	visible_message(SPAN_INFO("\The [usr] swipes \the [ewallet] through \the [src]."))
+	visible_message(span_info("\The [usr] swipes \the [ewallet] through \the [src]."))
 	if (currently_vending.price > ewallet.worth)
 		status_message = "Insufficient funds on chargecard."
 		status_error = TRUE
@@ -455,9 +455,9 @@
 
 /obj/machinery/vending/proc/pay_with_card(obj/item/card/id/id, obj/item/item)
 	if (id == item || isnull(item))
-		visible_message(SPAN_INFO("\The [usr] swipes \the [id] through \the [src]."))
+		visible_message(span_info("\The [usr] swipes \the [id] through \the [src]."))
 	else
-		visible_message(SPAN_INFO("\The [usr] swipes \the [item] through \the [src]."))
+		visible_message(span_info("\The [usr] swipes \the [item] through \the [src]."))
 	var/datum/money_account/customer_account = get_account(id.associated_account_number)
 	if (!customer_account)
 		status_message = "Ошибка: Нет доступа к аккаунту. Обратитесь в поддержку."
@@ -490,7 +490,7 @@
 
 /obj/machinery/vending/proc/vend(datum/stored_items/vending_products/product, mob/user)
 	if (scan_id && !emagged && !allowed(user))
-		to_chat(user, SPAN_WARNING("Access denied."))
+		to_chat(user, span_warning("Access denied."))
 		flick(icon_deny, src)
 		return
 	vend_ready = FALSE
@@ -500,13 +500,13 @@
 	update_icon()
 	if (product.category & VENDOR_CATEGORY_COIN)
 		if(!coin)
-			to_chat(user, SPAN_NOTICE("You need to insert a coin to get this item."))
+			to_chat(user, span_notice("You need to insert a coin to get this item."))
 			return
 		if(!isnull(coin.string_color))
 			if(prob(50))
-				to_chat(user, SPAN_NOTICE("You successfully pull the coin out before \the [src] could swallow it."))
+				to_chat(user, span_notice("You successfully pull the coin out before \the [src] could swallow it."))
 			else
-				to_chat(user, SPAN_NOTICE("You weren't able to pull the coin out fast enough, the machine ate it, string and all."))
+				to_chat(user, span_notice("You weren't able to pull the coin out fast enough, the machine ate it, string and all."))
 				qdel(coin)
 				coin = null
 				UpdateShowPremium(FALSE)
@@ -528,7 +528,7 @@
 		if (prob(1))
 			sleep(3)
 			if (product.get_product(get_turf(src)))
-				visible_message(SPAN_NOTICE("\The [src] clunks as it vends an additional [product.item_name]."))
+				visible_message(span_notice("\The [src] clunks as it vends an additional [product.item_name]."))
 		status_message = ""
 		status_error = FALSE
 		vend_ready = TRUE
@@ -540,7 +540,7 @@
 	if (!user.unEquip(item))
 		return
 	if (stored.add_product(item))
-		to_chat(user, SPAN_NOTICE("You insert \the [item] into \the [src]."))
+		to_chat(user, span_notice("You insert \the [item] into \the [src]."))
 		SStgui.update_uis(src)
 		return TRUE
 	SStgui.update_uis(src)
@@ -550,7 +550,7 @@
 		return
 	if (!message)
 		return
-	audible_message(SPAN_CLASS("game say", "[SPAN_CLASS("name", "\The [src]")] beeps, \"[message]\""))
+	audible_message(SPAN_CLASS("game say", "[span_name("\The [src]")] beeps, \"[message]\""))
 	return
 
 /obj/machinery/vending/proc/malfunction()
@@ -577,7 +577,7 @@
 		return FALSE
 	spawn(0)
 		throw_item.throw_at(target, rand(1,2), 3)
-	visible_message(SPAN_WARNING("\The [src] launches \a [throw_item] at \the [target]!"))
+	visible_message(span_warning("\The [src] launches \a [throw_item] at \the [target]!"))
 	return TRUE
 
 /obj/machinery/vending/proc/build_inventory(populate_parts)

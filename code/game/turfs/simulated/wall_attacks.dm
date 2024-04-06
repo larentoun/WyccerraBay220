@@ -57,11 +57,11 @@
 
 
 /turf/simulated/wall/proc/fail_smash(mob/user)
-	to_chat(user, SPAN_DANGER("You smash against [src]!"))
+	to_chat(user, span_danger("You smash against [src]!"))
 	damage_health(rand(25, 75), DAMAGE_BRUTE)
 
 /turf/simulated/wall/proc/success_smash(mob/user)
-	to_chat(user, SPAN_DANGER("You smash through [src]!"))
+	to_chat(user, span_danger("You smash through [src]!"))
 	user.do_attack_animation(src)
 	kill_health()
 
@@ -69,14 +69,14 @@
 
 	if(rotting)
 		if(reinf_material)
-			to_chat(user, SPAN_DANGER("[reinf_material.display_name] feels porous and crumbly."))
+			to_chat(user, span_danger("[reinf_material.display_name] feels porous and crumbly."))
 		else
-			to_chat(user, SPAN_DANGER("[material.display_name] crumbles under your touch!"))
+			to_chat(user, span_danger("[material.display_name] crumbles under your touch!"))
 			kill_health()
 			return 1
 
 	if(!can_open)
-		to_chat(user, SPAN_NOTICE("You push [src], but nothing happens."))
+		to_chat(user, span_notice("You push [src], but nothing happens."))
 		playsound(src, hitsound, 25, 1)
 	else
 		toggle_open(user)
@@ -95,7 +95,7 @@
 				try_touch(M, rotting)
 			if(I_HURT)
 				if(rotting && !reinf_material)
-					M.visible_message(SPAN_DANGER("[M.name] punches [src] and it crumbles!"), SPAN_DANGER("You punch [src] and it crumbles!"))
+					M.visible_message(span_danger("[M.name] punches [src] and it crumbles!"), span_danger("You punch [src] and it crumbles!"))
 					kill_health()
 					playsound(src, pick(GLOB.punch_sound), 20)
 					return TRUE
@@ -130,7 +130,7 @@
 /turf/simulated/wall/use_tool(obj/item/W, mob/living/user, list/click_params)
 	var/area/A = get_area(src)
 	if (!A.can_modify_area())
-		to_chat(user, SPAN_NOTICE("[src] deflects all attempts to interact with it!"))
+		to_chat(user, span_notice("[src] deflects all attempts to interact with it!"))
 		return TRUE
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -139,7 +139,7 @@
 		return TRUE
 
 	if (!user.IsAdvancedToolUser())
-		to_chat(user, SPAN_WARNING("You don't have the dexterity to do this!"))
+		to_chat(user, span_warning("You don't have the dexterity to do this!"))
 		return TRUE
 
 	if(!istype(user.loc, /turf))
@@ -154,12 +154,12 @@
 		if(W.tool_behaviour == TOOL_WELDER)
 			if(!W.use_as_tool(src, user, amount = 1, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 				return TRUE
-			to_chat(user, SPAN_NOTICE("You burn away the fungi with [W]."))
+			to_chat(user, span_notice("You burn away the fungi with [W]."))
 			for(var/obj/overlay/wallrot/WR in src)
 				qdel(WR)
 			return TRUE
 		else if(!is_sharp(W) && W.force >= 10 || W.force >= 20)
-			to_chat(user, SPAN_NOTICE("[src] crumbles away under the force of your [W]."))
+			to_chat(user, span_notice("[src] crumbles away under the force of your [W]."))
 			kill_health()
 			return TRUE
 
@@ -174,7 +174,7 @@
 		else if( istype(W, /obj/item/melee/energy/blade) )
 			var/obj/item/melee/energy/blade/EB = W
 			EB.spark_system.start()
-			to_chat(user, SPAN_NOTICE("You slash [src] with [W]; the thermite ignites!"))
+			to_chat(user, span_notice("You slash [src] with [W]; the thermite ignites!"))
 			playsound(src, "sparks", 50, 1)
 			playsound(src, 'sound/weapons/blade1.ogg', 50, 1)
 			thermitemelt(user)
@@ -187,7 +187,7 @@
 		if(!W.tool_start_check(user, 2))
 			return
 		USE_FEEDBACK_REPAIR_START(user)
-		to_chat(user, SPAN_NOTICE("You start repairing the damage to [src]."))
+		to_chat(user, span_notice("You start repairing the damage to [src]."))
 		if(!W.use_as_tool(src, user, (max(5, damage / 5)) SECONDS, 2, 50, SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT))
 			return
 		USE_FEEDBACK_REPAIR_FINISH(user)
@@ -235,7 +235,7 @@
 
 			if (do_after(user, cut_delay, src, strict_timer_flags ? DO_PUBLIC_UNIQUE : DO_REPAIR_CONSTRUCT))
 				dismantle_wall()
-				user.visible_message(SPAN_WARNING("[src] was torn open by [user]!"), SPAN_NOTICE("You remove the outer plating."))
+				user.visible_message(span_warning("[src] was torn open by [user]!"), span_notice("You remove the outer plating."))
 			return TRUE
 
 	//Reinforced dismantling.
@@ -243,15 +243,15 @@
 		switch(construction_stage)
 			if(6)
 				if(istype(W, /obj/item/psychic_power/psiblade/master/grand/paramount))
-					to_chat(user, SPAN_NOTICE("You sink [W] into the wall and begin trying to rip out the support frame..."))
+					to_chat(user, span_notice("You sink [W] into the wall and begin trying to rip out the support frame..."))
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
 
 					if(!do_after(user, 6 SECONDS, src, DO_PUBLIC_UNIQUE))
 						return TRUE
 
-					to_chat(user, SPAN_NOTICE("You tear through the wall's support system and plating!"))
+					to_chat(user, span_notice("You tear through the wall's support system and plating!"))
 					kill_health()
-					user.visible_message(SPAN_WARNING("The wall was torn open by [user]!"))
+					user.visible_message(span_warning("The wall was torn open by [user]!"))
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
 					return TRUE
 
@@ -259,17 +259,17 @@
 					playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
 					construction_stage = 5
 					new /obj/item/stack/material/rods( src )
-					to_chat(user, SPAN_NOTICE("You cut the outer grille."))
+					to_chat(user, span_notice("You cut the outer grille."))
 					update_icon()
 					return TRUE
 			if(5)
 				if(W.tool_behaviour == TOOL_SCREWDRIVER)
-					to_chat(user, SPAN_NOTICE("You begin removing the support lines."))
+					to_chat(user, span_notice("You begin removing the support lines."))
 					if(!W.use_as_tool(src, user, 4 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT) || construction_stage != 5)
 						return TRUE
 					construction_stage = 4
 					update_icon()
-					to_chat(user, SPAN_NOTICE("You remove the support lines."))
+					to_chat(user, span_notice("You remove the support lines."))
 					return TRUE
 				else if( istype(W, /obj/item/stack/material/rods) )
 					var/obj/item/stack/O = W
@@ -279,7 +279,7 @@
 					O.use(1)
 					construction_stage = 6
 					update_icon()
-					to_chat(user, SPAN_NOTICE("You replace the outer grille."))
+					to_chat(user, span_notice("You replace the outer grille."))
 					return TRUE
 			if(4)
 				var/cut_cover
@@ -298,33 +298,33 @@
 					strict_timer_flags = TRUE
 
 				if(cut_cover)
-					to_chat(user, SPAN_NOTICE("You begin slicing through the metal cover."))
+					to_chat(user, span_notice("You begin slicing through the metal cover."))
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
 					if(!do_after(user, (W.toolspeed * 6) SECONDS, src, strict_timer_flags ? DO_PUBLIC_UNIQUE : DO_REPAIR_CONSTRUCT) || construction_stage != 4)
 						return TRUE
 					construction_stage = 3
 					update_icon()
-					to_chat(user, SPAN_NOTICE("You press firmly on the cover, dislodging it."))
+					to_chat(user, span_notice("You press firmly on the cover, dislodging it."))
 					return TRUE
 			if(3)
 				if(W.tool_behaviour == TOOL_CROWBAR)
-					to_chat(user, SPAN_NOTICE("You struggle to pry off the cover."))
+					to_chat(user, span_notice("You struggle to pry off the cover."))
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
 					if(!do_after(user, (W.toolspeed * 10) SECONDS, src, DO_REPAIR_CONSTRUCT) || construction_stage != 3)
 						return TRUE
 					construction_stage = 2
 					update_icon()
-					to_chat(user, SPAN_NOTICE("You pry off the cover."))
+					to_chat(user, span_notice("You pry off the cover."))
 					return TRUE
 			if(2)
 				if(W.tool_behaviour == TOOL_WRENCH)
-					to_chat(user, SPAN_NOTICE("You start loosening the anchoring bolts which secure the support rods to their frame."))
+					to_chat(user, span_notice("You start loosening the anchoring bolts which secure the support rods to their frame."))
 					playsound(src, 'sound/items/Ratchet.ogg', 100, 1)
 					if(!do_after(user, (W.toolspeed * 4) SECONDS, src, DO_REPAIR_CONSTRUCT) || construction_stage != 2)
 						return TRUE
 					construction_stage = 1
 					update_icon()
-					to_chat(user, SPAN_NOTICE("You remove the bolts anchoring the support rods."))
+					to_chat(user, span_notice("You remove the bolts anchoring the support rods."))
 					return TRUE
 			if(1)
 				var/cut_cover
@@ -343,23 +343,23 @@
 					strict_timer_flags = TRUE
 
 				if(cut_cover)
-					to_chat(user, SPAN_NOTICE("You begin slicing through the support rods."))
+					to_chat(user, span_notice("You begin slicing through the support rods."))
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
 					if(!do_after(user, (W.toolspeed * 7) SECONDS, src, strict_timer_flags ? DO_PUBLIC_UNIQUE : DO_REPAIR_CONSTRUCT) || construction_stage != 1)
 						return TRUE
 					construction_stage = 0
 					update_icon()
 					new /obj/item/stack/material/rods(src)
-					to_chat(user, SPAN_NOTICE("The support rods drop out as you cut them loose from the frame."))
+					to_chat(user, span_notice("The support rods drop out as you cut them loose from the frame."))
 					return TRUE
 			if(0)
 				if(W.tool_behaviour == TOOL_CROWBAR)
-					to_chat(user, SPAN_NOTICE("You struggle to pry off the outer sheath."))
+					to_chat(user, span_notice("You struggle to pry off the outer sheath."))
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
 					if(!do_after(user, (W.toolspeed * 10) SECONDS, src, DO_REPAIR_CONSTRUCT) || !W || !T )
 						return TRUE
 					if(user.loc == T && user.get_active_hand() == W )
-						to_chat(user, SPAN_NOTICE("You pry off the outer sheath."))
+						to_chat(user, span_notice("You pry off the outer sheath."))
 						dismantle_wall()
 					return TRUE
 

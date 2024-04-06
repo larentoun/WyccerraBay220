@@ -61,20 +61,20 @@
 	if((!(mover in exosuit.pilots) && mover != exosuit) || exosuit.incapacitated() || mover.incapacitated())
 		return MOVEMENT_STOP
 	if(!exosuit.legs)
-		to_chat(mover, SPAN_WARNING("\The [exosuit] has no means of propulsion!"))
+		to_chat(mover, span_warning("\The [exosuit] has no means of propulsion!"))
 		exosuit.SetMoveCooldown(3)
 		return MOVEMENT_STOP
 	if(!exosuit.legs.motivator || !exosuit.legs.motivator.is_functional())
-		to_chat(mover, SPAN_WARNING("Your motivators are damaged! You can't move!"))
+		to_chat(mover, span_warning("Your motivators are damaged! You can't move!"))
 		exosuit.SetMoveCooldown(15)
 		return MOVEMENT_STOP
 	if(exosuit.maintenance_protocols)
-		to_chat(mover, SPAN_WARNING("Maintenance protocols are in effect."))
+		to_chat(mover, span_warning("Maintenance protocols are in effect."))
 		exosuit.SetMoveCooldown(3)
 		return MOVEMENT_STOP
 	var/obj/item/cell/C = exosuit.get_cell()
 	if(!C || !C.check_charge(exosuit.legs.power_use * CELLRATE))
-		to_chat(mover, SPAN_WARNING("The power indicator flashes briefly."))
+		to_chat(mover, span_warning("The power indicator flashes briefly."))
 		exosuit.SetMoveCooldown(3) //On fast exosuits this got annoying fast
 		return MOVEMENT_STOP
 
@@ -87,7 +87,7 @@
 	var/failed = FALSE
 	var/fail_prob = mover != host ? (mover.skill_check(SKILL_MECH, HAS_PERK) ? 0 : 25) : 0
 	if(prob(fail_prob))
-		to_chat(mover, SPAN_DANGER("You clumsily fumble with the exosuit joystick."))
+		to_chat(mover, span_danger("You clumsily fumble with the exosuit joystick."))
 		failed = TRUE
 	else if(exosuit.emp_damage >= EMP_MOVE_DISRUPT && prob(30))
 		failed = TRUE
@@ -98,7 +98,7 @@
 
 	if(direction & (UP|DOWN))
 		var/txt_dir = direction & UP ? "upwards" : "downwards"
-		exosuit.visible_message(SPAN_NOTICE("\The [exosuit] moves [txt_dir]."))
+		exosuit.visible_message(span_notice("\The [exosuit] moves [txt_dir]."))
 
 	if(exosuit.dir != moving_dir && !(direction & (UP|DOWN)))
 		playsound(exosuit.loc, exosuit.legs.mech_turn_sound, 40,1)

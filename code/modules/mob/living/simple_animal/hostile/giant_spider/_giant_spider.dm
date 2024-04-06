@@ -111,5 +111,5 @@ GLOBAL_VAR_INIT(SPIDER_COUNT, 0)
 		return
 
 	if(prob(poison_chance))
-		to_chat(L, SPAN_WARNING("You feel a tiny prick."))
+		to_chat(L, span_warning("You feel a tiny prick."))
 		L.reagents.add_reagent(poison_type, poison_per_bite)

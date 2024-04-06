@@ -26,9 +26,9 @@
 /obj/machinery/cell_charger/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 5)
-		. += SPAN_NOTICE("There's [charging ? "a" : "no"] cell in the charger.")
+		. += span_notice("There's [charging ? "a" : "no"] cell in the charger.")
 		if(charging)
-			. += SPAN_NOTICE("Current charge: [charging.charge]")
+			. += span_notice("Current charge: [charging.charge]")
 
 /obj/machinery/cell_charger/post_anchor_change()
 	..()
@@ -40,7 +40,7 @@
 		return ITEM_INTERACT_BLOCKING
 	if(charging)
 		USE_FEEDBACK_FAILURE("Remove the cell first!")
-		to_chat(user, SPAN_WARNING("Remove the cell first!"))
+		to_chat(user, span_warning("Remove the cell first!"))
 		return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/cell_charger/use_tool(obj/item/W, mob/living/user, list/click_params)
@@ -49,12 +49,12 @@
 
 	if(istype(W, /obj/item/cell) && anchored)
 		if(charging)
-			to_chat(user, SPAN_WARNING("There is already a cell in the charger."))
+			to_chat(user, span_warning("There is already a cell in the charger."))
 			return TRUE
 
 		var/area/a = get_area(loc)
 		if(a.power_equip == 0) // There's no APC in this area, don't try to cheat power!
-			to_chat(user, SPAN_WARNING("The [name] blinks red as you try to insert the cell!"))
+			to_chat(user, span_warning("The [name] blinks red as you try to insert the cell!"))
 			return TRUE
 		if(!user.unEquip(W, src))
 			return TRUE

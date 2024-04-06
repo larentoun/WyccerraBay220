@@ -43,7 +43,7 @@
 /obj/machinery/light_switch/examine(mob/user, distance)
 	. = ..()
 	if(distance)
-		. += SPAN_NOTICE("It is [on? "on" : "off"].")
+		. += span_notice("It is [on? "on" : "off"].")
 
 /obj/machinery/light_switch/proc/set_state(newstate)
 	if(on != newstate)

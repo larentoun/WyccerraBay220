@@ -75,9 +75,9 @@
 						if(blinding)
 							H.eye_blurry = max(H.eye_blurry, 10)
 							H.eye_blind = max(H.eye_blind, 5)
-							to_chat(H, SPAN_DANGER("You are blinded by a spray of blood!"))
+							to_chat(H, span_danger("You are blinded by a spray of blood!"))
 						else
-							to_chat(H, SPAN_DANGER("You are hit by a spray of blood!"))
+							to_chat(H, span_danger("You are hit by a spray of blood!"))
 						hit_mob = TRUE
 
 				if(hit_mob || !A.CanPass(src, sprayloc))

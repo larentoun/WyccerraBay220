@@ -269,7 +269,7 @@
 	. = ITEM_INTERACT_SUCCESS
 	if(!p_open || arePowerSystemsOn())
 		return
-	user.visible_message(SPAN_WARNING("[user.name] starts frantically pumping the bolt override mechanism!"), SPAN_WARNING("You start frantically pumping the bolt override mechanism!"))
+	user.visible_message(span_warning("[user.name] starts frantically pumping the bolt override mechanism!"), span_warning("You start frantically pumping the bolt override mechanism!"))
 	if(!tool.use_as_tool(src, user, 16 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	visible_message("[src] bolts [locked ? "disengage" : "engage"]!")
@@ -458,7 +458,7 @@ About the new airlock wires panel:
 		else if (prob(10) && operating == DOOR_OPERATING_NO)
 			var/mob/living/carbon/C = user
 			if(istype(C) && C.hallucination_power > 25)
-				to_chat(user, SPAN_DANGER("You feel a powerful shock course through your body!"))
+				to_chat(user, span_danger("You feel a powerful shock course through your body!"))
 				user.adjustHalLoss(20)
 				user.Stun(5)
 				return
@@ -811,10 +811,10 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/attack_hand(mob/user)
 	if (MUTATION_FERAL in user.mutations)
 		if (src.welded)
-			to_chat(user, SPAN_WARNING("You can't pry [src] open, it's welded shut!"))
+			to_chat(user, span_warning("You can't pry [src] open, it's welded shut!"))
 			return
 		if (src.locked)
-			to_chat(user, SPAN_WARNING("You can't pry [src] open, it's bolted tight!"))
+			to_chat(user, span_warning("You can't pry [src] open, it's bolted tight!"))
 			return
 	return ..()
 
@@ -826,13 +826,13 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/CanUseTopic(mob/user)
 	if (operating == DOOR_OPERATING_BROKEN) //emagged
-		to_chat(user, SPAN_WARNING("Unable to interface: Internal error."))
+		to_chat(user, span_warning("Unable to interface: Internal error."))
 		return STATUS_CLOSE
 	if(issilicon(user) && !src.canAIControl())
 		if (src.isAllPowerLoss()) //don't really like how this gets checked a second time, but not sure how else to do it.
-			to_chat(user, SPAN_WARNING("Unable to interface: Connection timed out."))
+			to_chat(user, span_warning("Unable to interface: Connection timed out."))
 		else
-			to_chat(user, SPAN_WARNING("Unable to interface: Connection refused."))
+			to_chat(user, span_warning("Unable to interface: Connection refused."))
 		return STATUS_CLOSE
 
 	return ..()
@@ -924,8 +924,8 @@ About the new airlock wires panel:
 		if (!F.wielded)
 			return 0
 		user.visible_message(
-			SPAN_DANGER("[user] smashes the bolt cover open!"),
-			SPAN_WARNING("You smash the bolt cover open!")
+			span_danger("[user] smashes the bolt cover open!"),
+			span_warning("You smash the bolt cover open!")
 			)
 		playsound(src, 'sound/weapons/smash.ogg', 100, 1)
 		src.lock_cut_state = BOLTS_EXPOSED
@@ -937,29 +937,29 @@ About the new airlock wires panel:
 
 	if (src.lock_cut_state == BOLTS_FINE)
 		user.visible_message(
-			SPAN_NOTICE("[user] begins [cut_verb] through the bolt cover on [src]."),
-			SPAN_NOTICE("You begin [cut_verb] through the bolt cover.")
+			span_notice("[user] begins [cut_verb] through the bolt cover on [src]."),
+			span_notice("You begin [cut_verb] through the bolt cover.")
 			)
 
 		playsound(src, cut_sound, 100, 1)
 		if (do_after(user, cut_delay, src, DO_REPAIR_CONSTRUCT))
 			user.visible_message(
-				SPAN_NOTICE("[user] removes the bolt cover from [src]"),
-				SPAN_NOTICE("You remove the cover and expose the door bolts.")
+				span_notice("[user] removes the bolt cover from [src]"),
+				span_notice("You remove the cover and expose the door bolts.")
 				)
 			src.lock_cut_state = BOLTS_EXPOSED
 		return 1
 
 	if (src.lock_cut_state == BOLTS_EXPOSED)
 		user.visible_message(
-			SPAN_NOTICE("[user] begins [cut_verb] through [src]'s bolts."),
-			SPAN_NOTICE("You begin [cut_verb] through the door bolts.")
+			span_notice("[user] begins [cut_verb] through [src]'s bolts."),
+			span_notice("You begin [cut_verb] through the door bolts.")
 			)
 		playsound(src, cut_sound, 100, 1)
 		if (do_after(user, cut_delay, src, DO_REPAIR_CONSTRUCT))
 			user.visible_message(
-				SPAN_NOTICE("[user] severs the door bolts, unlocking [src]."),
-				SPAN_NOTICE("You sever the door bolts, unlocking the door.")
+				span_notice("[user] severs the door bolts, unlocking [src]."),
+				span_notice("You sever the door bolts, unlocking the door.")
 				)
 			src.lock_cut_state = BOLTS_CUT
 			src.unlock(1) //force it
@@ -971,17 +971,17 @@ About the new airlock wires panel:
 		user.visible_message("[user] starts removing the electronics from the airlock assembly.", "You start to remove electronics from the airlock assembly.")
 		if(!tool.use_as_tool(src, user, 4 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT))
 			return
-		to_chat(user, SPAN_NOTICE("You've removed the airlock electronics!"))
+		to_chat(user, span_notice("You've removed the airlock electronics!"))
 		deconstruct(user)
 		return
 	if(arePowerSystemsOn())
-		to_chat(user, SPAN_NOTICE("The airlock's motors resist your efforts to force it."))
+		to_chat(user, span_notice("The airlock's motors resist your efforts to force it."))
 		return
 	if(locked)
-		to_chat(user, SPAN_NOTICE("The airlock's bolts prevent it from being forced."))
+		to_chat(user, span_notice("The airlock's bolts prevent it from being forced."))
 		return
 	if(brace)
-		to_chat(user, SPAN_NOTICE("The airlock's brace holds it firmly in place."))
+		to_chat(user, span_notice("The airlock's brace holds it firmly in place."))
 		return
 	if(density)
 		spawn(0)
@@ -1042,7 +1042,7 @@ About the new airlock wires panel:
 	if(!brace && istype(C, /obj/item/airlock_brace))
 		var/obj/item/airlock_brace/A = C
 		if(!density)
-			to_chat(user, SPAN_WARNING("You must close [src] before installing [A]!"))
+			to_chat(user, span_warning("You must close [src] before installing [A]!"))
 			return TRUE
 
 		if(!length(A.req_access) && (alert("[A]'s 'Access Not Set' light is flashing. Install it anyway?", "Access not set", "Yes", "No") == "No"))
@@ -1050,7 +1050,7 @@ About the new airlock wires panel:
 
 		playsound(user, 'sound/machines/lockreset.ogg', 50, 1)
 		if(do_after(user, 6 SECONDS, src, DO_REPAIR_CONSTRUCT) && density && A && user.unEquip(A, src))
-			to_chat(user, SPAN_NOTICE("You successfully install [A]."))
+			to_chat(user, span_notice("You successfully install [A]."))
 			brace = A
 			brace.airlock = src
 			update_icon()
@@ -1078,14 +1078,14 @@ About the new airlock wires panel:
 		if (F.wielded)
 			playsound(src, 'sound/weapons/smash.ogg', 100, 1)
 			if (damage_health(F.force_wielded * 2, F.damtype))
-				user.visible_message(SPAN_DANGER("[user] smashes [C] into the airlock's control panel! It explodes in a shower of sparks!"), SPAN_DANGER("You smash [C] into the airlock's control panel! It explodes in a shower of sparks!"))
+				user.visible_message(span_danger("[user] smashes [C] into the airlock's control panel! It explodes in a shower of sparks!"), span_danger("You smash [C] into the airlock's control panel! It explodes in a shower of sparks!"))
 			else
-				user.visible_message(SPAN_DANGER("[user] smashes [C] into the airlock's control panel!"))
+				user.visible_message(span_danger("[user] smashes [C] into the airlock's control panel!"))
 			return TRUE
 
 	if (istype(C, /obj/item/material/twohanded/fireaxe) && !arePowerSystemsOn())
 		if(locked)
-			to_chat(user, SPAN_NOTICE("The airlock's bolts prevent it from being forced."))
+			to_chat(user, span_notice("The airlock's bolts prevent it from being forced."))
 			return TRUE
 		else if(!welded && !operating )
 			if(density)
@@ -1093,14 +1093,14 @@ About the new airlock wires panel:
 				if(F.wielded)
 					spawn(0)	open(1)
 				else
-					to_chat(user, SPAN_WARNING("You need to be wielding [C] to do that."))
+					to_chat(user, span_warning("You need to be wielding [C] to do that."))
 				return TRUE
 			else
 				var/obj/item/material/twohanded/fireaxe/F = C
 				if(F.wielded)
 					spawn(0)	close(1)
 				else
-					to_chat(user, SPAN_WARNING("You need to be wielding [C] to do that."))
+					to_chat(user, span_warning("You need to be wielding [C] to do that."))
 				return TRUE
 
 	return ..()
@@ -1364,11 +1364,11 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/examine(mob/user)
 	. = ..()
 	if (lock_cut_state == BOLTS_EXPOSED)
-		. += SPAN_NOTICE("The bolt cover has been cut open.")
+		. += span_notice("The bolt cover has been cut open.")
 	if (lock_cut_state == BOLTS_CUT)
-		. += SPAN_NOTICE("The door bolts have been cut.")
+		. += span_notice("The door bolts have been cut.")
 	if(brace)
-		. += SPAN_NOTICE("[brace] is installed on [src], preventing it from opening.")
+		. += span_notice("[brace] is installed on [src], preventing it from opening.")
 		brace.examine_damage_state(user)
 
 /obj/machinery/door/airlock/autoname

@@ -19,13 +19,13 @@
 
 /proc/medical_scan_action(atom/target, mob/living/user, obj/scanner, verbose)
 	if (!user.IsAdvancedToolUser())
-		to_chat(user, SPAN_WARNING("You are not nimble enough to use this device."))
+		to_chat(user, span_warning("You are not nimble enough to use this device."))
 		return
 
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
-		user.visible_message(SPAN_NOTICE("\The [user] runs \the [scanner] over the floor."))
-		to_chat(user, SPAN_NOTICE("<b>Scan results for the floor:</b>"))
-		to_chat(user, SPAN_NOTICE("Overall Status: Healthy"))
+		user.visible_message(span_notice("\The [user] runs \the [scanner] over the floor."))
+		to_chat(user, span_notice("<b>Scan results for the floor:</b>"))
+		to_chat(user, span_notice("Overall Status: Healthy"))
 		return
 
 	var/mob/living/carbon/human/scan_subject = null
@@ -42,7 +42,7 @@
 				for(var/mob/living/carbon/human/L in scan_content)
 					scan_subject = L
 			else if (length(scan_content) > 1)
-				to_chat(user, SPAN_WARNING("\The [scanner] picks up multiple readings inside \the [target], too close together to scan properly."))
+				to_chat(user, span_warning("\The [scanner] picks up multiple readings inside \the [target], too close together to scan properly."))
 				return
 			else
 				to_chat(user, "\The [scanner] does not detect anyone inside \the [target].")
@@ -52,7 +52,7 @@
 		return
 
 	if (scan_subject.isSynthetic())
-		to_chat(user, SPAN_WARNING("\The [scanner] is designed for organic humanoid patients only."))
+		to_chat(user, span_warning("\The [scanner] is designed for organic humanoid patients only."))
 		return
 
 	. = medical_scan_results(scan_subject, verbose, user.get_skill_value(SKILL_MEDICAL))

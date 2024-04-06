@@ -22,7 +22,7 @@
 	settings["access_list"] = list()
 
 /datum/build_mode/turret/Help()
-	to_chat(user, SPAN_NOTICE(help_text))
+	to_chat(user, span_notice(help_text))
 
 /datum/build_mode/turret/Configurate()
 	ui_interact(user)
@@ -144,7 +144,7 @@
 		var/obj/machinery/porta_turret/P
 		if (istype(object, /obj/machinery/porta_turret))
 			P = object
-			to_chat(usr, SPAN_NOTICE("Updated turret settings."))
+			to_chat(usr, span_notice("Updated turret settings."))
 		else
 			P = new /obj/machinery/porta_turret(T)
 

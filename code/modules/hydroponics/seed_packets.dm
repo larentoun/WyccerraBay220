@@ -63,7 +63,7 @@
 /obj/item/seeds/examine(mob/user)
 	. = ..()
 	if(seed && !seed.roundstart)
-		. += SPAN_NOTICE("It's tagged as variety #[seed.uid].")
+		. += span_notice("It's tagged as variety #[seed.uid].")
 
 /obj/item/seeds/cutting
 	name = "cuttings"

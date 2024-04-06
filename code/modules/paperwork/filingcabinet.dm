@@ -55,8 +55,8 @@
 			return
 		flick("[initial(icon_state)]-open", src)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] puts \a [tool] in \the [src]."),
-			SPAN_NOTICE("You put \the [tool] in \the [src].")
+			span_notice("\The [user] puts \a [tool] in \the [src]."),
+			span_notice("You put \the [tool] in \the [src].")
 		)
 		updateUsrDialog()
 		return TRUE
@@ -66,7 +66,7 @@
 
 /obj/structure/filingcabinet/attack_hand(mob/user as mob)
 	if(length(contents) <= 0)
-		to_chat(user, SPAN_NOTICE("\The [src] is empty."))
+		to_chat(user, span_notice("\The [src] is empty."))
 		return
 
 	user.set_machine(src)

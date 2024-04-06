@@ -123,33 +123,33 @@
 	//So this is a workaround. This also makes more sense from an IC standpoint. ~Carn
 	var/cleaned = FALSE
 	if(user.client && (target in user.client.screen))
-		to_chat(user, SPAN_NOTICE("You need to take that [target.name] off before cleaning it."))
+		to_chat(user, span_notice("You need to take that [target.name] off before cleaning it."))
 	else if(istype(target,/obj/decal/cleanable/blood))
-		to_chat(user, SPAN_NOTICE("You scrub \the [target.name] out."))
+		to_chat(user, span_notice("You scrub \the [target.name] out."))
 		target.clean_blood() //Blood is a cleanable decal, therefore needs to be accounted for before all cleanable decals.
 		cleaned = TRUE
 	else if(istype(target,/obj/decal/cleanable))
-		to_chat(user, SPAN_NOTICE("You scrub \the [target.name] out."))
+		to_chat(user, span_notice("You scrub \the [target.name] out."))
 		qdel(target)
 		cleaned = TRUE
 	else if(istype(target,/turf) || istype(target, /obj/structure/catwalk))
 		var/turf/T = get_turf(target)
 		if(!T)
 			return TRUE
-		user.visible_message(SPAN_WARNING("[user] starts scrubbing \the [T]."))
-		T.clean(src, user, 80, SPAN_NOTICE("You scrub \the [target.name] clean."))
+		user.visible_message(span_warning("[user] starts scrubbing \the [T]."))
+		T.clean(src, user, 80, span_notice("You scrub \the [target.name] clean."))
 		cleaned = TRUE
 	else if(istype(target,/obj/structure/hygiene/sink))
-		to_chat(user, SPAN_NOTICE("You wet \the [src] in the sink."))
+		to_chat(user, span_notice("You wet \the [src] in the sink."))
 		wet()
 	else if(ishuman(target))
-		to_chat(user, SPAN_NOTICE("You clean \the [target.name]."))
+		to_chat(user, span_notice("You clean \the [target.name]."))
 		if(reagents)
 			reagents.trans_to(target, reagents.total_volume / 8)
 		target.clean_blood() //Clean bloodied atoms. Blood decals themselves need to be handled above.
 		cleaned = TRUE
 	else
-		to_chat(user, SPAN_NOTICE("You clean \the [target.name]."))
+		to_chat(user, span_notice("You clean \the [target.name]."))
 		target.clean_blood() //Clean bloodied atoms. Blood decals themselves need to be handled above.
 		cleaned = TRUE
 
@@ -161,7 +161,7 @@
 /obj/item/soap/use_before(mob/living/target, mob/living/user)
 	. = FALSE
 	if (target && user && ishuman(target) && ishuman(user) && !target.stat && !user.stat && user.zone_sel.selecting == BP_MOUTH)
-		user.visible_message(SPAN_DANGER("\The [user] washes \the [target]'s mouth out with soap!"))
+		user.visible_message(span_danger("\The [user] washes \the [target]'s mouth out with soap!"))
 		if (reagents)
 			reagents.trans_to_mob(target, reagents.total_volume / 2, CHEM_INGEST)
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN) //prevent spam
@@ -170,7 +170,7 @@
 /obj/item/soap/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/key))
 		if(!key_data)
-			to_chat(user, SPAN_NOTICE("You imprint \the [I] into \the [src]."))
+			to_chat(user, span_notice("You imprint \the [I] into \the [src]."))
 			var/obj/item/key/K = I
 			key_data = K.key_data
 			update_icon()

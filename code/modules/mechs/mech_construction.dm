@@ -84,8 +84,8 @@
 		var/delay = 3 SECONDS * user.skill_delay_mult(SKILL_DEVICES)
 		if(delay > 0)
 			user.visible_message(
-				SPAN_NOTICE("\The [user] begins trying to install \the [system] into \the [src]."),
-				SPAN_NOTICE("You begin trying to install \the [system] into \the [src].")
+				span_notice("\The [user] begins trying to install \the [system] into \the [src]."),
+				span_notice("You begin trying to install \the [system] into \the [src].")
 			)
 			if(!do_after(user, delay, src, DO_PUBLIC_UNIQUE) || user.get_active_hand() != system || !user.use_sanity_check(src, system, SANITY_CHECK_DEFAULT | SANITY_CHECK_TOOL_UNEQUIP))
 				return FALSE
@@ -95,8 +95,8 @@
 
 			if(user.unEquip(system))
 				user.visible_message(
-					SPAN_NOTICE("\The [user] installs \the [system] into \the [src]'s [system_hardpoint]."),
-					SPAN_NOTICE("You install \the [system] in \the [src]'s [system_hardpoint].")
+					span_notice("\The [user] installs \the [system] into \the [src]'s [system_hardpoint]."),
+					span_notice("You install \the [system] in \the [src]'s [system_hardpoint].")
 				)
 				playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 			else return FALSE
@@ -128,7 +128,7 @@
 	if(user)
 		var/delay = 3 SECONDS * user.skill_delay_mult(SKILL_DEVICES)
 		if(delay > 0)
-			user.visible_message(SPAN_NOTICE("\The [user] begins trying to remove \the [system] from \the [src]."))
+			user.visible_message(span_notice("\The [user] begins trying to remove \the [system] from \the [src]."))
 			if(!do_after(user, delay, src, DO_PUBLIC_UNIQUE) || hardpoints[system_hardpoint] != system)
 				return FALSE
 
@@ -160,7 +160,7 @@
 	if(user)
 		system.forceMove(get_turf(user))
 		user.put_in_hands(system)
-		to_chat(user, SPAN_NOTICE("You remove \the [system] from \the [src]'s [system_hardpoint]."))
+		to_chat(user, span_notice("You remove \the [system] from \the [src]'s [system_hardpoint]."))
 		playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 
 	return 1

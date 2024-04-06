@@ -58,18 +58,18 @@
 				var/mob/living/carbon/C = usr
 				C.toggle_throw_mode()
 			else
-				to_chat(usr, SPAN_WARNING("This mob type cannot throw items."))
+				to_chat(usr, span_warning("This mob type cannot throw items."))
 			return
 		if(NORTHWEST)
 			mob.hotkey_drop()
 
 /mob/proc/hotkey_drop()
-	to_chat(src, SPAN_WARNING("This mob type cannot drop items."))
+	to_chat(src, span_warning("This mob type cannot drop items."))
 
 /mob/living/carbon/hotkey_drop()
 	var/obj/item/hand = get_active_hand()
 	if(!hand)
-		to_chat(src, SPAN_WARNING("You have nothing to drop in your hand."))
+		to_chat(src, span_warning("You have nothing to drop in your hand."))
 	else if(hand.can_be_dropped_by_client(src))
 		drop_item()
 
@@ -78,7 +78,7 @@
 	set hidden = 1
 
 	if(!usr.pulling)
-		to_chat(usr, SPAN_NOTICE("You are not pulling anything."))
+		to_chat(usr, span_notice("You are not pulling anything."))
 		return
 	usr.stop_pulling()
 
@@ -254,7 +254,7 @@
 //return 1 if slipped, 0 otherwise
 /mob/proc/handle_spaceslipping()
 	if(prob(skill_fail_chance(SKILL_EVA, slip_chance(10), SKILL_EXPERIENCED)))
-		to_chat(src, SPAN_WARNING("You slipped!"))
+		to_chat(src, span_warning("You slipped!"))
 		step(src,turn(last_move, pick(45,-45)))
 		return 1
 	return 0

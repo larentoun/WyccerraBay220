@@ -17,8 +17,8 @@
 	if (!can_use_scanner(user, target, proximity))
 		return
 	user.visible_message(
-		SPAN_NOTICE("\The [user] runs \the [src] over \the [target]."),
-		SPAN_NOTICE("You run \the [src] over \the [target]."),
+		span_notice("\The [user] runs \the [src] over \the [target]."),
+		span_notice("You run \the [src] over \the [target]."),
 		range = 2
 	)
 	var/data = scan_data(user, target, proximity)

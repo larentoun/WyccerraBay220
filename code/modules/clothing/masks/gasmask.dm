@@ -31,16 +31,16 @@
 /obj/item/clothing/mask/gas/examine(mob/user)
 	. = ..()
 	if(clogged)
-		. += SPAN_WARNING("The intakes are clogged with [clogged]!")
+		. += span_warning("The intakes are clogged with [clogged]!")
 
 /obj/item/clothing/mask/gas/filters_water()
 	return (filter_water && !clogged)
 
 /obj/item/clothing/mask/gas/attack_self(mob/user)
 	if(clogged)
-		user.visible_message(SPAN_NOTICE("\The [user] begins unclogging the intakes of \the [src]."))
+		user.visible_message(span_notice("\The [user] begins unclogging the intakes of \the [src]."))
 		if(do_after(user, 10 SECONDS, src, DO_PUBLIC_UNIQUE) && clogged)
-			user.visible_message(SPAN_NOTICE("\The [user] has unclogged \the [src]."))
+			user.visible_message(span_notice("\The [user] has unclogged \the [src]."))
 			clogged = FALSE
 		return
 	. = ..()

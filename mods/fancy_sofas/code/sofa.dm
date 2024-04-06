@@ -65,7 +65,7 @@
 
 /obj/structure/bed/sofa/m/rotate(mob/user)
 	if(!CanPhysicallyInteract(user) || anchored)
-		to_chat(user, SPAN_NOTICE("You can't interact with \the [src] right now!"))
+		to_chat(user, span_notice("You can't interact with \the [src] right now!"))
 		return
 
 	set_dir(turn(dir, 45))
@@ -73,7 +73,7 @@
 
 /obj/structure/bed/sofa/rotate(mob/user)
 	if(!CanPhysicallyInteract(user) || anchored)
-		to_chat(user, SPAN_NOTICE("You can't interact with \the [src] right now!"))
+		to_chat(user, span_notice("You can't interact with \the [src] right now!"))
 		return
 
 	set_dir(turn(dir, 90))

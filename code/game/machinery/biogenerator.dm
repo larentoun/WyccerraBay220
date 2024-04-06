@@ -85,15 +85,15 @@
 
 /obj/machinery/biogenerator/cannot_transition_to(state_path)
 	if(processing)
-		return SPAN_NOTICE("You must turn \the [src] off first.")
+		return span_notice("You must turn \the [src] off first.")
 	return ..()
 
 /obj/machinery/biogenerator/examine(mob/user)
 	. = ..()
 	if(processing)
-		. += SPAN_NOTICE("[src] is currently processing.")
+		. += span_notice("[src] is currently processing.")
 	if(stored_plants >= max_storable_plants)
-		. += SPAN_NOTICE("[src] is full!")
+		. += span_notice("[src] is full!")
 
 /obj/machinery/biogenerator/use_tool(obj/item/O, mob/living/user, list/click_params)
 	. = ..()
@@ -141,7 +141,7 @@
 		SStgui.update_uis(src)
 		return TRUE
 	else
-		to_chat(user, SPAN_NOTICE("You cannot put this in \the [src]."))
+		to_chat(user, span_notice("You cannot put this in \the [src]."))
 
 /obj/machinery/biogenerator/interface_interact(mob/user)
 	tgui_interact(user)

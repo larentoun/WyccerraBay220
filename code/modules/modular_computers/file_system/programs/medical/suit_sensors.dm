@@ -24,7 +24,7 @@
 			program_icon_state = "crew-red"
 			ui_header = "crew_red.gif"
 			if(!beeping)
-				computer.visible_notification(SPAN_WARNING("Warning: vital signs beyond acceptable parameters."))
+				computer.visible_notification(span_warning("Warning: vital signs beyond acceptable parameters."))
 				computer.audible_notification("sound/machines/twobeep.ogg")
 				beeping = TRUE //For medical sanity purposes, it'll only beep once per emergency.
 		else

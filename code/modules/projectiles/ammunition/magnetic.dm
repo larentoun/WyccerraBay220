@@ -13,7 +13,7 @@
 
 /obj/item/magnetic_ammo/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("There [(remaining == 1)? "is" : "are"] [remaining] [projectile_name]\s left!")
+	. += span_notice("There [(remaining == 1)? "is" : "are"] [remaining] [projectile_name]\s left!")
 
 /obj/item/magnetic_ammo/skrell
 	name = "flechette cylinder"

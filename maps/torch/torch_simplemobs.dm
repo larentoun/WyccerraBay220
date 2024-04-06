@@ -167,14 +167,14 @@
 		return
 	set_AI_busy(TRUE)
 	deactivated = TRUE
-	visible_message(SPAN_MFAUNA("\The [src]'s rigsuit flashes hastily, locking into place!"))
+	visible_message(span_mfauna("\The [src]'s rigsuit flashes hastily, locking into place!"))
 	update_icon()
 	addtimer(CALLBACK(src, PROC_REF(reactivate)), 6 SECONDS)
 
 /mob/living/simple_animal/hostile/human/fleet/space/proc/reactivate()
 	set_AI_busy(FALSE)
 	deactivated = FALSE
-	visible_message(SPAN_MFAUNA("\The [src]'s rigsuit stops flashing, regaining motion!"))
+	visible_message(span_mfauna("\The [src]'s rigsuit stops flashing, regaining motion!"))
 	update_icon()
 
 /mob/living/simple_animal/hostile/human/fleet/space/neutral
@@ -258,7 +258,7 @@
 			num_shots = 2
 			fire_desc = "fires a laser"
 			time_last_used_ability = special_attack_cooldown + world.time
-			visible_message(SPAN_MFAUNA("\The [src]'s rig-mounted laser cannon shines brightly!"))
+			visible_message(span_mfauna("\The [src]'s rig-mounted laser cannon shines brightly!"))
 		if(ATTACK_MODE_SAW)
 			attack_mode = ATTACK_MODE_SAW
 			ranged = TRUE
@@ -266,7 +266,7 @@
 			num_shots = 10
 			fire_desc = "fires a burst"
 			time_last_used_ability = base_attack_cooldown + world.time
-			visible_message(SPAN_MFAUNA("\The [src] pulls up \the machinegun to bear!"))
+			visible_message(span_mfauna("\The [src] pulls up \the machinegun to bear!"))
 
 	update_icon()
 

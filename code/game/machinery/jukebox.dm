@@ -52,7 +52,7 @@
 
 /obj/machinery/jukebox/CanUseTopic(mob/user, datum/topic_state/state)
 	if (!anchored)
-		to_chat(user, SPAN_WARNING("Secure \the [src] first."))
+		to_chat(user, span_warning("Secure \the [src] first."))
 		return STATUS_CLOSE
 	return ..()
 

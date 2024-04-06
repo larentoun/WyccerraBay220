@@ -17,16 +17,16 @@
 		return ..()
 	else if (user.a_intent == I_HURT)
 		user.visible_message(
-			SPAN_WARNING("\The [user] hammers on \a [src]."),
-			SPAN_WARNING("You hammer on \the [src]."),
-			SPAN_WARNING("You hear a bell sounding. A lot.")
+			span_warning("\The [user] hammers on \a [src]."),
+			span_warning("You hammer on \the [src]."),
+			span_warning("You hear a bell sounding. A lot.")
 		)
 		playsound(src, angry_sound, 60)
 	else
 		user.visible_message(
-			SPAN_ITALIC("\The [user] rings \a [src]."),
-			SPAN_ITALIC("You ring \the [src]."),
-			SPAN_WARNING("You hear a bell sounding.")
+			span_italic("\The [user] rings \a [src]."),
+			span_italic("You ring \the [src]."),
+			span_warning("You hear a bell sounding.")
 		)
 		playsound(src, normal_sound, 20)
 	flick("bell_dingeth", src)

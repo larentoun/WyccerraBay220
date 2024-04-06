@@ -54,7 +54,7 @@
 		var/list/options = list("[holder_atom] seems to be listening intently to [source]...",\
 			"[holder_atom] seems to be focusing on [source]...",\
 			"[holder_atom] seems to turn it's attention to [source]...")
-		holder_atom.loc.visible_message(SPAN_NOTICE("[icon2html(holder_atom, viewers(get_turf(holder_atom)))] [pick(options)]"))
+		holder_atom.loc.visible_message(span_notice("[icon2html(holder_atom, viewers(get_turf(holder_atom)))] [pick(options)]"))
 
 	if(prob(20))
 		spawn(2)
@@ -108,5 +108,5 @@
 		else
 			msg+="!"
 
-	holder_atom.audible_message(SPAN_BOLD(holder_atom.name) + " reverberates, \"[msg]\"", SPAN_ITALIC("\The [holder_atom] vibrates and lights up for a moment, but you hear no sound..."))
+	holder_atom.audible_message(span_bold(holder_atom.name) + " reverberates, \"[msg]\"", span_italic("\The [holder_atom] vibrates and lights up for a moment, but you hear no sound..."))
 	last_talk_time = world.time

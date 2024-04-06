@@ -10,7 +10,7 @@
 	var/old_stun = stun
 	stun = max(stun, amount)
 	if(amount && !old_stun)
-		to_chat(owner, SPAN_DANGER("Your concentration has been shattered! You cannot focus your psi power!"))
+		to_chat(owner, span_danger("Your concentration has been shattered! You cannot focus your psi power!"))
 		ui.update_icon()
 	cancel()
 
@@ -77,7 +77,7 @@
 		return FALSE
 
 	sound_to(owner, sound('sound/effects/psi/power_feedback.ogg'))
-	to_chat(owner, SPAN_DANGER(FONT_LARGE("Wild energistic feedback blasts across your psyche!")))
+	to_chat(owner, span_danger(FONT_LARGE("Wild energistic feedback blasts across your psyche!")))
 	stunned(value * 2)
 	set_cooldown(value * 100)
 

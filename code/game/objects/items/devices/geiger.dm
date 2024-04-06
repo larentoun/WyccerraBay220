@@ -43,9 +43,9 @@
 	. = ..()
 	var/msg = "[scanning ? "ambient" : "stored"] Radiation level: [radiation_count ? radiation_count : "0"] IU/s."
 	if(radiation_count > RAD_LEVEL_LOW)
-		. += SPAN_WARNING("[msg]")
+		. += span_warning("[msg]")
 	else
-		. += SPAN_NOTICE("[msg]")
+		. += span_notice("[msg]")
 
 /obj/item/device/geiger/attack_self(mob/user)
 	scanning = !scanning
@@ -54,7 +54,7 @@
 	else
 		STOP_PROCESSING(SSobj, src)
 	update_icon()
-	to_chat(user, SPAN_NOTICE("[icon2html(src, user)] You switch [scanning ? "on" : "off"] [src]."))
+	to_chat(user, span_notice("[icon2html(src, user)] You switch [scanning ? "on" : "off"] [src]."))
 
 /obj/item/device/geiger/on_update_icon()
 	if(!scanning)

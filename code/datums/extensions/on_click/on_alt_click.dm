@@ -20,7 +20,7 @@
 	if(alert(user, "Do you wish to kill [key_name]?", "Kill [living_holder]?", "No", "Yes") != "Yes")
 		return FALSE
 	if(!valid_preconditions(user))
-		to_chat(user, SPAN_NOTICE("You were unable to kill [key_name]"))
+		to_chat(user, span_notice("You were unable to kill [key_name]"))
 		return FALSE
 
 	call(living_holder, death_proc)()
@@ -36,10 +36,10 @@
 	if(!check_rights(R_INVESTIGATE, 0, user)) // And only if they're investigators - Power creep
 		return FALSE
 	if(!living_holder.client)                 // And only if the target mob is currently possessed
-		to_chat(user, SPAN_NOTICE("\The [living_holder] is not currently possessed."))
+		to_chat(user, span_notice("\The [living_holder] is not currently possessed."))
 		return FALSE
 	if(living_holder.stat == DEAD)            // No point in killing the already dead
-		to_chat(user, SPAN_NOTICE("\The [living_holder] is already dead."))
+		to_chat(user, span_notice("\The [living_holder] is already dead."))
 		return FALSE
 	return TRUE
 

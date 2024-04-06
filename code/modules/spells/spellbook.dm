@@ -53,7 +53,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 			to_chat(user, "You can't make heads or tails of this book.")
 			return
 		if (spellbook.book_flags & LOCKED)
-			to_chat(user, SPAN_WARNING("Drat! This spellbook's apprentice-proof lock is on!"))
+			to_chat(user, span_warning("Drat! This spellbook's apprentice-proof lock is on!"))
 			return
 	else if (spellbook.book_flags & LOCKED)
 		to_chat(user, "You notice the apprentice-proof lock is on. Luckily you are beyond such things.")
@@ -61,7 +61,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 
 /obj/item/spellbook/proc/make_sacrifice(obj/item/I as obj, mob/user as mob, reagent)
 	if(has_sacrificed)
-		to_chat(user, SPAN_WARNING("\The [src] is already sated! Wait for a return on your investment before you sacrifice more to it."))
+		to_chat(user, span_warning("\The [src] is already sated! Wait for a return on your investment before you sacrifice more to it."))
 		return
 	if(reagent)
 		var/datum/reagents/R = I.reagents
@@ -70,10 +70,10 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 		if(istype(I,/obj/item/stack))
 			var/obj/item/stack/S = I
 			if(S.amount < S.max_amount)
-				to_chat(usr, SPAN_WARNING("You must sacrifice [S.max_amount] stacks of [S]!"))
+				to_chat(usr, span_warning("You must sacrifice [S.max_amount] stacks of [S]!"))
 				return
 		qdel(I)
-	to_chat(user, SPAN_NOTICE("Your sacrifice was accepted!"))
+	to_chat(user, span_notice("Your sacrifice was accepted!"))
 	has_sacrificed = 1
 	investing_time = max(investing_time - 6000,1) //subtract 10 minutes. Make sure it doesn't act funky at the beginning of the game.
 
@@ -191,7 +191,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 		if(!path)
 			return TOPIC_HANDLED
 		if(uses < spellbook.spells[path])
-			to_chat(user, SPAN_NOTICE("You do not have enough spell slots to purchase this."))
+			to_chat(user, span_notice("You do not have enough spell slots to purchase this."))
 			return TOPIC_HANDLED
 		if(ispath(path,/datum/spellbook))
 			src.set_spellbook(path)
@@ -227,7 +227,7 @@ var/global/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		
 			user.spellremove()
 			temp = "All spells and investments have been removed. You may now memorize a new set of spells."
 		else
-			to_chat(user, SPAN_WARNING("You must be in the wizard academy to re-memorize your spells."))
+			to_chat(user, span_warning("You must be in the wizard academy to re-memorize your spells."))
 		. = TOPIC_REFRESH
 
 	src.interact(user)

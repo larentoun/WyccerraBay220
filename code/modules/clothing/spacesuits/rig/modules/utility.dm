@@ -200,9 +200,9 @@
 				break
 
 	if(total_transferred)
-		to_chat(user, SPAN_INFO("You transfer [total_transferred] units into the suit reservoir."))
+		to_chat(user, span_info("You transfer [total_transferred] units into the suit reservoir."))
 	else
-		to_chat(user, SPAN_DANGER("None of the reagents seem suitable."))
+		to_chat(user, span_danger("None of the reagents seem suitable."))
 	return 1
 
 /obj/item/rig_module/chem_dispenser/engage(atom/target)
@@ -213,7 +213,7 @@
 	var/mob/living/carbon/human/H = holder.wearer
 
 	if(!charge_selected)
-		to_chat(H, SPAN_DANGER("You have not selected a chemical type."))
+		to_chat(H, span_danger("You have not selected a chemical type."))
 		return 0
 
 	var/datum/rig_charge/charge = charges[charge_selected]
@@ -223,7 +223,7 @@
 
 	var/chems_to_use = 5
 	if(charge.charges <= 0)
-		to_chat(H, SPAN_DANGER("Insufficient chems!"))
+		to_chat(H, span_danger("Insufficient chems!"))
 		return 0
 	else if(charge.charges < chems_to_use)
 		chems_to_use = charge.charges
@@ -238,7 +238,7 @@
 		target_mob = H
 
 	if(target_mob != H)
-		to_chat(H, SPAN_DANGER("You inject [target_mob] with [chems_to_use] unit\s of [charge.display_name]."))
+		to_chat(H, span_danger("You inject [target_mob] with [chems_to_use] unit\s of [charge.display_name]."))
 	to_chat(target_mob, SPAN_CLASS("danger", "You feel a rushing in your veins as [chems_to_use] unit\s of [charge.display_name] [chems_to_use == 1 ? "is" : "are"] injected."))
 	target_mob.reagents.add_reagent(charge.product_type, chems_to_use)
 
@@ -323,17 +323,17 @@
 		if("Enable")
 			active = 1
 			voice_holder.active = 1
-			to_chat(usr, SPAN_INFO("You enable the speech synthesiser."))
+			to_chat(usr, span_info("You enable the speech synthesiser."))
 		if("Disable")
 			active = 0
 			voice_holder.active = 0
-			to_chat(usr, SPAN_INFO("You disable the speech synthesiser."))
+			to_chat(usr, span_info("You disable the speech synthesiser."))
 		if("Set Name")
 			var/raw_choice = sanitize(input(usr, "Please enter a new name.")  as text|null, MAX_NAME_LEN)
 			if(!raw_choice)
 				return 0
 			voice_holder.voice = raw_choice
-			to_chat(usr, SPAN_INFO("You are now mimicking <B>[voice_holder.voice]</B>."))
+			to_chat(usr, span_info("You are now mimicking <B>[voice_holder.voice]</B>."))
 	return 1
 
 /obj/item/rig_module/maneuvering_jets
@@ -459,10 +459,10 @@
 	if(!target)
 		if(device == stamp)
 			device = deniedstamp
-			to_chat(holder.wearer, SPAN_NOTICE("Switched to denied stamp."))
+			to_chat(holder.wearer, span_notice("Switched to denied stamp."))
 		else if(device == deniedstamp)
 			device = stamp
-			to_chat(holder.wearer, SPAN_NOTICE("Switched to rubber stamp."))
+			to_chat(holder.wearer, span_notice("Switched to rubber stamp."))
 		return 1
 
 /obj/item/rig_module/device/decompiler
@@ -523,7 +523,7 @@
 		beam = null
 	if(locked)
 		if(holder.wearer)
-			to_chat(holder.wearer, SPAN_NOTICE("Lock on \the [locked] disengaged."))
+			to_chat(holder.wearer, span_notice("Lock on \the [locked] disengaged."))
 		endanimation()
 		locked = null
 	//It's possible beam self destroyed, match active
@@ -545,7 +545,7 @@
 		if(!locked && (get_dist(holder.wearer, target) <= max_dist))
 			var/atom/movable/AM = target
 			if(!istype(AM) || AM.anchored || !AM.simulated)
-				to_chat(user, SPAN_NOTICE("Unable to lock on [target]."))
+				to_chat(user, span_notice("Unable to lock on [target]."))
 				return
 			locked = AM
 			beam = holder.wearer.Beam(BeamTarget = target, icon_state = "r_beam", maxdistance = max_dist, beam_type = /obj/ebeam/warp)
@@ -556,7 +556,7 @@
 
 			active = TRUE
 
-			to_chat(user, SPAN_NOTICE("Locked on [AM]."))
+			to_chat(user, span_notice("Locked on [AM]."))
 			return
 		else if(target != locked)
 			if(locked in view(holder.wearer))

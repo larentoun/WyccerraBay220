@@ -179,16 +179,16 @@ ranks - ec
 	icon_state = "collar_bkholo"
 
 /obj/item/clothing/accessory/necklace/collar/holo/attack_self(mob/user as mob)
-	to_chat(user, SPAN_NOTICE("[name]'s interface is projected onto your hand."))
+	to_chat(user, span_notice("[name]'s interface is projected onto your hand."))
 
 	var/str = copytext(reject_bad_text(input(user,"Tag text?","Set tag","")),1,MAX_NAME_LEN)
 
 	if(!str || !length(str))
-		to_chat(user, SPAN_NOTICE("[name]'s tag set to be blank."))
+		to_chat(user, span_notice("[name]'s tag set to be blank."))
 		name = initial(name)
 		desc = initial(desc)
 	else
-		to_chat(user, SPAN_NOTICE("You set the [name]'s tag to '[str]'."))
+		to_chat(user, span_notice("You set the [name]'s tag to '[str]'."))
 		name = initial(name) + " ([str])"
 		desc = initial(desc) + " The tag says \"[str]\"."
 
@@ -263,7 +263,7 @@ ranks - ec
 			M = loc
 		if(ismob(loc.loc))
 			M = loc.loc // This is about as terse as I can make my solution to the whole 'collar won't work when attached as accessory' thing.
-		to_chat(M, SPAN_DANGER("You feel a sharp shock!"))
+		to_chat(M, span_danger("You feel a sharp shock!"))
 		var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 		s.set_up(3, 1, M)
 		s.start()

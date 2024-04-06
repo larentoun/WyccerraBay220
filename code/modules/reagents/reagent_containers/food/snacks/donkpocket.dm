@@ -48,9 +48,9 @@
 	if (can_self_heat)
 		if (feeder)
 			feeder.visible_message(
-				SPAN_ITALIC("\The [feeder] tears open \a [src], destroying the self-heating packaging."),
-				SPAN_ITALIC("You tear open \the [src], destroying the self-heating packaging."),
-				SPAN_ITALIC("You hear plastic packaging crinkling."),
+				span_italic("\The [feeder] tears open \a [src], destroying the self-heating packaging."),
+				span_italic("You tear open \the [src], destroying the self-heating packaging."),
+				span_italic("You hear plastic packaging crinkling."),
 				range = 3
 			)
 		can_self_heat = FALSE
@@ -63,7 +63,7 @@
 		return
 	if (!initial(can_self_heat))
 		return
-	. += SPAN_NOTICE("This one can self-heat[can_self_heat ? "." : " but the heaters are used up."]")
+	. += span_notice("This one can self-heat[can_self_heat ? "." : " but the heaters are used up."]")
 
 
 /obj/item/reagent_containers/food/snacks/donkpocket/attack_self(mob/living/user)
@@ -74,18 +74,18 @@
 
 /obj/item/reagent_containers/food/snacks/donkpocket/proc/SetHot(mob/living/user, attempt_self_heat)
 	if (is_hot)
-		to_chat(user, SPAN_NOTICE("\The [src] is already hot!"))
+		to_chat(user, span_notice("\The [src] is already hot!"))
 		return
 	if (attempt_self_heat)
 		if (!can_self_heat)
 			if (!initial(can_self_heat))
 				return
-			to_chat(user, SPAN_WARNING("\The [src]'s heaters are used up. Use a microwave."))
+			to_chat(user, span_warning("\The [src]'s heaters are used up. Use a microwave."))
 			return
 		can_self_heat = FALSE
 	is_hot = TRUE
 	if (attempt_self_heat)
-		to_chat(user, SPAN_NOTICE("A comforting warmth spreads through \the [src]. It's ready to eat!"))
+		to_chat(user, span_notice("A comforting warmth spreads through \the [src]. It's ready to eat!"))
 	if (!was_heated)
 		for(var/reagent in hot_reagents)
 			reagents.add_reagent(reagent, hot_reagents[reagent])
@@ -99,7 +99,7 @@
 		return
 	is_hot = FALSE
 	SetName(initial(name))
-	visible_message(SPAN_ITALIC("\The [src] cools down."), range = 1)
+	visible_message(span_italic("\The [src] cools down."), range = 1)
 	for (var/reagent in hot_reagents)
 		reagents.del_reagent(reagent)
 

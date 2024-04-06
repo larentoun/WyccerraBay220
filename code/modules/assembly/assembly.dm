@@ -96,8 +96,8 @@
 		return
 	set_secure(!secured)
 	user.visible_message(
-		SPAN_NOTICE("[user] adjusts [src] with [tool]."),
-		SPAN_NOTICE("You adjust [src] with [tool]. It [secured ? "is now ready to use" : "can now be taken apart"].")
+		span_notice("[user] adjusts [src] with [tool]."),
+		span_notice("You adjust [src] with [tool]. It [secured ? "is now ready to use" : "can now be taken apart"].")
 	)
 
 /obj/item/device/assembly/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -132,8 +132,8 @@
 		set_secure(TRUE)
 		assembly.set_secure(TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] attaches [tool] to [src]."),
-			SPAN_NOTICE("You attach [tool] to [src]."),
+			span_notice("[user] attaches [tool] to [src]."),
+			span_notice("You attach [tool] to [src]."),
 			range = 3
 		)
 		return TRUE
@@ -147,9 +147,9 @@
 	. = ..()
 	if(distance <= 1 || loc == user)
 		if(secured)
-			. += SPAN_NOTICE("[src] is ready!")
+			. += span_notice("[src] is ready!")
 		else
-			. += SPAN_NOTICE("[src] can be attached!")
+			. += span_notice("[src] can be attached!")
 
 
 /obj/item/device/assembly/attack_self(mob/user as mob)

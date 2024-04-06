@@ -43,11 +43,11 @@
 				return
 			items += I
 			owner.visible_message(
-				SPAN_WARNING("[owner] retracts \his [I] into [limb]."),
-				SPAN_NOTICE("You retract your [I] into [limb].")
+				span_warning("[owner] retracts \his [I] into [limb]."),
+				span_notice("You retract your [I] into [limb].")
 			)
 		else
-			to_chat(owner, SPAN_WARNING("You must drop [I] before tool can be extend."))
+			to_chat(owner, span_warning("You must drop [I] before tool can be extend."))
 	else
 		var/obj/item = input(owner, "Select item for deploy") as null|anything in src
 		if (!item || !(src in owner.internal_organs))
@@ -57,6 +57,6 @@
 			//Keep track of it, make sure it returns
 			GLOB.item_unequipped_event.register(item, src, TYPE_PROC_REF(/obj/item/organ/internal/augment/active/polytool, holding_dropped))
 			owner.visible_message(
-				SPAN_WARNING("[owner] extends \his [item.name] from [limb]."),
-				SPAN_NOTICE("You extend your [item.name] from [limb].")
+				span_warning("[owner] extends \his [item.name] from [limb]."),
+				span_notice("You extend your [item.name] from [limb].")
 			)

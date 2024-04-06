@@ -39,8 +39,8 @@
 		return
 	disable = !disable
 	user.visible_message(
-		SPAN_WARNING("[user] has [disable ? "dis" : ""]connected [src]'s flashbulb!"),
-		SPAN_WARNING("You [disable? "dis" : ""]connect [src]'s flashbulb!")
+		span_warning("[user] has [disable ? "dis" : ""]connected [src]'s flashbulb!"),
+		span_warning("You [disable? "dis" : ""]connect [src]'s flashbulb!")
 	)
 
 //Let the AI trigger them directly.

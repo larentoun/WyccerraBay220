@@ -66,27 +66,27 @@
 /obj/proc/can_buckle(mob/living/target, mob/living/user, silent = FALSE)
 	if (!can_buckle)
 		if (!silent)
-			to_chat(user, SPAN_WARNING("\The [src] cannot have mobs buckled to it."))
+			to_chat(user, span_warning("\The [src] cannot have mobs buckled to it."))
 		return FALSE
 	if (!istype(target))
 		if (!silent)
-			to_chat(user, SPAN_DEBUG("You attempted to buckle a non-mob. This shouldn't be possible and is a bug."))
+			to_chat(user, span_debug("You attempted to buckle a non-mob. This shouldn't be possible and is a bug."))
 		return FALSE
 	if (!target.can_be_buckled)
 		if (!silent)
-			to_chat(user, SPAN_WARNING("\The [target] cannot be buckled."))
+			to_chat(user, span_warning("\The [target] cannot be buckled."))
 		return FALSE
 	if (buckled_mob)
 		if (!silent)
-			to_chat(user, SPAN_WARNING("\The [src] already has \the [buckled_mob] buckled to it."))
+			to_chat(user, span_warning("\The [src] already has \the [buckled_mob] buckled to it."))
 		return FALSE
 	if (target.buckled)
 		if (!silent)
-			to_chat(user, SPAN_WARNING("\The [target] is already buckled to \the [target.buckled]."))
+			to_chat(user, span_warning("\The [target] is already buckled to \the [target.buckled]."))
 		return FALSE
 	if (length(target.pinned))
 		if (!silent)
-			to_chat(user, SPAN_WARNING("\The [target] is currently pinned down by [english_list(target.pinned)] and cannot be buckled."))
+			to_chat(user, span_warning("\The [target] is currently pinned down by [english_list(target.pinned)] and cannot be buckled."))
 		return FALSE
 	var/list/grabbed_by_mobs = list()
 	for (var/obj/item/grab/grab in target.grabbed_by)
@@ -95,20 +95,20 @@
 		grabbed_by_mobs += "\the [grab.assailant]"
 	if (length(grabbed_by_mobs))
 		if (!silent)
-			to_chat(user, SPAN_WARNING("\The [target] is being grabbed by [english_list(grabbed_by_mobs)] and can't be buckled by you."))
+			to_chat(user, span_warning("\The [target] is being grabbed by [english_list(grabbed_by_mobs)] and can't be buckled by you."))
 		return FALSE
 	if (!Adjacent(target))
 		if (!silent)
-			to_chat(user, SPAN_WARNING("\The [target] has to be next to \the [src] to buckle them to it."))
+			to_chat(user, span_warning("\The [target] has to be next to \the [src] to buckle them to it."))
 		return FALSE
 	if (buckle_require_restraints && !target.restrained())
 		if (!silent)
-			to_chat(user, SPAN_WARNING("\The [target] must be restrained to buckle them to \the [src]."))
+			to_chat(user, span_warning("\The [target] must be restrained to buckle them to \the [src]."))
 		return FALSE
 	if (user)
 		if (user != target && user.incapacitated())
 			if (!silent)
-				to_chat(user, SPAN_WARNING("You're in no condition to buckle things right now."))
+				to_chat(user, span_warning("You're in no condition to buckle things right now."))
 			return FALSE
 		if (!CheckDexterity(user))
 			if (!silent)
@@ -116,15 +116,15 @@
 			return FALSE
 		if (target != user && istype(user, /mob/living/silicon/pai))
 			if (!silent)
-				to_chat(user, SPAN_WARNING("pAIs cannot buckle other mobs."))
+				to_chat(user, span_warning("pAIs cannot buckle other mobs."))
 			return FALSE
 		if (!Adjacent(user))
 			if (!silent)
-				to_chat(user, SPAN_WARNING("You have to be next to \the [src] to buckle mobs to it."))
+				to_chat(user, span_warning("You have to be next to \the [src] to buckle mobs to it."))
 			return FALSE
 		if (!user.Adjacent(target))
 			if (!silent)
-				to_chat(user, SPAN_WARNING("You have to be next to \the [target] to buckle them."))
+				to_chat(user, span_warning("You have to be next to \the [target] to buckle them."))
 			return FALSE
 	return TRUE
 
@@ -141,18 +141,18 @@
 /obj/proc/can_unbuckle(mob/living/user, silent = FALSE)
 	if (!buckled_mob)
 		if (!silent)
-			to_chat(user, SPAN_WARNING("\The [src] has no mob buckled to it."))
+			to_chat(user, span_warning("\The [src] has no mob buckled to it."))
 		return FALSE
 	if (buckled_mob.buckled != src)
 		log_debug(append_admin_tools("A buckled mob ([buckled_mob.name] ([buckled_mob.type])) is buckled to multiple objects at once. This has been auto-corrected.", buckled_mob, get_turf(src)))
 		if (!silent)
-			to_chat(user, SPAN_DEBUG("\The [buckled_mob] is buckled to \the [buckled_mob.buckled] instead of \the [src]. This is a bug and has been auto-corrected. You will need to unbuckle them from \the [buckled_mob.buckled] instead of the object you clicked on."))
+			to_chat(user, span_debug("\The [buckled_mob] is buckled to \the [buckled_mob.buckled] instead of \the [src]. This is a bug and has been auto-corrected. You will need to unbuckle them from \the [buckled_mob.buckled] instead of the object you clicked on."))
 		buckled_mob = null
 		return FALSE
 	if (user)
 		if (user.incapacitated(INCAPACITATION_DISABLED))
 			if (!silent)
-				to_chat(user, SPAN_WARNING("You're in no condition to unbuckle things right now."))
+				to_chat(user, span_warning("You're in no condition to unbuckle things right now."))
 			return FALSE
 		if (user != buckled_mob)
 			if (!CheckDexterity(user))
@@ -161,11 +161,11 @@
 				return FALSE
 			if (istype(user, /mob/living/silicon/pai))
 				if (!silent)
-					to_chat(user, SPAN_WARNING("pAIs cannot unbuckle other mobs."))
+					to_chat(user, span_warning("pAIs cannot unbuckle other mobs."))
 				return FALSE
 			if (!Adjacent(user))
 				if (!silent)
-					to_chat(user, SPAN_WARNING("You have to be next to \the [src] to unbuckle \the [buckled_mob]."))
+					to_chat(user, span_warning("You have to be next to \the [src] to unbuckle \the [buckled_mob]."))
 				return FALSE
 	return TRUE
 
@@ -322,18 +322,18 @@
 	if(.)
 		if(M == user)
 			user.visible_message(
-				SPAN_NOTICE("\The [user] buckles themselves to \the [src]."),
-				SPAN_NOTICE("You buckle yourself to \the [src]."),
-				SPAN_NOTICE("You hear metal clanking.")
+				span_notice("\The [user] buckles themselves to \the [src]."),
+				span_notice("You buckle yourself to \the [src]."),
+				span_notice("You hear metal clanking.")
 			)
 		else
 			user.visible_message(
-				SPAN_WARNING("\The [user] buckles \the [M] to \the [src]."),
-				SPAN_DANGER("You buckle \the [M] to \the [src]."),
-				SPAN_NOTICE("You hear metal clanking."),
+				span_warning("\The [user] buckles \the [M] to \the [src]."),
+				span_danger("You buckle \the [M] to \the [src]."),
+				span_notice("You hear metal clanking."),
 				exclude_mobs = list(M)
 			)
-			to_chat(M, SPAN_DANGER("\The [user] buckles you to \the [src]."))
+			to_chat(M, span_danger("\The [user] buckles you to \the [src]."))
 			add_fingerprint(M)
 
 
@@ -355,17 +355,17 @@
 	if(M)
 		if(M != user)
 			user.visible_message(
-				SPAN_WARNING("\The [user] unbuckles \the [M] from \the [src]."),
-				SPAN_DANGER("You unbuckle \the [M] from \the [src]"),
-				SPAN_NOTICE("You hear metal clanking."),
+				span_warning("\The [user] unbuckles \the [M] from \the [src]."),
+				span_danger("You unbuckle \the [M] from \the [src]"),
+				span_notice("You hear metal clanking."),
 				exclude_mobs = list(M)
 			)
-			to_chat(M, SPAN_DANGER("\The [user] unbuckles you from \the [src]."))
+			to_chat(M, span_danger("\The [user] unbuckles you from \the [src]."))
 		else
 			user.visible_message(\
-				SPAN_WARNING("\The [user] unbuckles themselves from \the [src]."),
-				SPAN_DANGER("You unbuckle yourself from \the [src]."),
-				SPAN_NOTICE("You hear metal clanking.")
+				span_warning("\The [user] unbuckles themselves from \the [src]."),
+				span_danger("You unbuckle yourself from \the [src]."),
+				span_notice("You hear metal clanking.")
 			)
 		add_fingerprint(user)
 	return M

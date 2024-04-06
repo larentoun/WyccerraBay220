@@ -67,7 +67,7 @@ var/global/cat_number = 0
 /mob/living/simple_animal/passive/cat/real_runtime/post_use_item(obj/item/O, interaction_handled, use_call, mob/living/user)
 	. = ..()
 	if(interaction_handled)
-		visible_message(SPAN_DANGER("[user]'s [O.name] harmlessly passes through \the [src]."))
+		visible_message(span_danger("[user]'s [O.name] harmlessly passes through \the [src]."))
 		strike_back(user)
 
 
@@ -76,10 +76,10 @@ var/global/cat_number = 0
 	switch(M.a_intent)
 
 		if(I_HELP)
-			M.visible_message(SPAN_NOTICE("[M] pets \the [src]."))
+			M.visible_message(span_notice("[M] pets \the [src]."))
 
 		if(I_DISARM)
-			M.visible_message(SPAN_NOTICE("[M]'s hand passes through \the [src]."))
+			M.visible_message(span_notice("[M]'s hand passes through \the [src]."))
 			M.do_attack_animation(src)
 
 		if(I_GRAB)
@@ -88,13 +88,13 @@ var/global/cat_number = 0
 			if(!(status_flags & CANPUSH))
 				return
 
-			M.visible_message(SPAN_NOTICE("[M]'s hand passes through \the [src]."))
+			M.visible_message(span_notice("[M]'s hand passes through \the [src]."))
 			M.do_attack_animation(src)
 
 		if(I_HURT)
-			M.visible_message(SPAN_WARNING("[M] tries to kick \the [src] but [M.gender == FEMALE ? "her" : "his"] foot passes through."))
+			M.visible_message(span_warning("[M] tries to kick \the [src] but [M.gender == FEMALE ? "her" : "his"] foot passes through."))
 			M.do_attack_animation(src)
-			visible_message(SPAN_WARNING("\The [src] hisses."))
+			visible_message(span_warning("\The [src] hisses."))
 			strike_back(M)
 
 /mob/living/simple_animal/passive/cat/real_runtime/proc/say_runtime(runtime_file, runtime_line)

@@ -85,7 +85,7 @@
 	if (~body_parts_covered & EYES)
 		icon_state += "_up"
 		action = "raises"
-	visible_message(SPAN_ITALIC("\The [user] [action] the visor on \the [src]."), range = 3)
+	visible_message(span_italic("\The [user] [action] the visor on \the [src]."), range = 3)
 	update_clothing_icon()
 
 /obj/item/clothing/head/helmet/ablative

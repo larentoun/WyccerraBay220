@@ -66,9 +66,9 @@
 				state_message = "It is bolted to the floor, but lacks securing welds."
 			if (EMITTER_WELDED)
 				state_message = "It is firmly secured in place."
-		. += SPAN_NOTICE(state_message)
+		. += span_notice(state_message)
 		if (emagged && (user.skill_check(core_skill, SKILL_TRAINED) || is_observer))
-			. += SPAN_WARNING("Its control locks have been fried.")
+			. += span_warning("Its control locks have been fried.")
 
 /obj/machinery/power/emitter/on_update_icon()
 	ClearOverlays()
@@ -88,7 +88,7 @@
 
 	if (state == EMITTER_WELDED)
 		if (!powernet)
-			to_chat(user, SPAN_WARNING("You try to turn on [src], but it doesn't seem to be receiving power."))
+			to_chat(user, span_warning("You try to turn on [src], but it doesn't seem to be receiving power."))
 			return TRUE
 		if (!locked)
 			var/area/A = get_area(src)
@@ -96,12 +96,12 @@
 				active = FALSE
 				if (user?.Adjacent(src))
 					user.visible_message(
-						SPAN_NOTICE("[user] turns off [src]."),
-						SPAN_NOTICE("You power down [src]."),
-						SPAN_ITALIC("You hear a switch being flicked.")
+						span_notice("[user] turns off [src]."),
+						span_notice("You power down [src]."),
+						span_italic("You hear a switch being flicked.")
 					)
 				else
-					visible_message(SPAN_NOTICE("[src] turns off."))
+					visible_message(span_notice("[src] turns off."))
 				playsound(src, "switch", 50)
 				log_and_message_admins("turned off [src] in [A.name]", user, src)
 				investigate_log("turned [SPAN_COLOR("red", "off")] by [key_name_admin(user || usr)] in [A.name]","singulo")
@@ -111,12 +111,12 @@
 					operator_skill = user.get_skill_value(core_skill)
 				if (user?.Adjacent(src))
 					user.visible_message(
-						SPAN_NOTICE("[user] turns on [src]."),
-						SPAN_NOTICE("You configure [src] and turn it on."), // Mention configuration to allude to operator skill playing into efficiency
-						SPAN_ITALIC("You hear a switch being flicked.")
+						span_notice("[user] turns on [src]."),
+						span_notice("You configure [src] and turn it on."), // Mention configuration to allude to operator skill playing into efficiency
+						span_italic("You hear a switch being flicked.")
 					)
 				else
-					visible_message(SPAN_NOTICE("[src] turns on."))
+					visible_message(span_notice("[src] turns on."))
 				playsound(src, "switch", 50)
 				update_efficiency()
 				shot_number = 0
@@ -125,9 +125,9 @@
 				investigate_log("turned [SPAN_COLOR("green", "on")] by [key_name_admin(user || usr)] in [A.name]","singulo")
 			update_icon()
 		else
-			to_chat(user, SPAN_WARNING("The controls are locked!"))
+			to_chat(user, span_warning("The controls are locked!"))
 	else
-		to_chat(user, SPAN_WARNING("[src] needs to be firmly secured to the floor first."))
+		to_chat(user, span_warning("[src] needs to be firmly secured to the floor first."))
 		return TRUE
 
 /obj/machinery/power/emitter/proc/update_efficiency()
@@ -155,13 +155,13 @@
 			if (!powered)
 				powered = TRUE
 				update_icon()
-				visible_message(SPAN_WARNING("[src] powers up!"))
+				visible_message(span_warning("[src] powers up!"))
 				investigate_log("regained power and turned [SPAN_COLOR("green", "on")]","singulo")
 		else
 			if (powered)
 				powered = FALSE
 				update_icon()
-				visible_message(SPAN_WARNING("[src] powers down!"))
+				visible_message(span_warning("[src] powers down!"))
 				investigate_log("lost power and turned [SPAN_COLOR("red", "off")]","singulo")
 			return
 
@@ -196,10 +196,10 @@
 
 /obj/machinery/power/emitter/wrench_act(mob/living/user, obj/item/tool)
 	if(active)
-		to_chat(user, SPAN_WARNING("Turn [src] off first."))
+		to_chat(user, span_warning("Turn [src] off first."))
 		return ITEM_INTERACT_SUCCESS
 	if(state == EMITTER_WELDED)
-		to_chat(user, SPAN_WARNING("[src] needs to be unwelded from the floor before you raise its bolts."))
+		to_chat(user, span_warning("[src] needs to be unwelded from the floor before you raise its bolts."))
 		return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/power/emitter/welder_act(mob/living/user, obj/item/tool)
@@ -232,16 +232,16 @@
 /obj/machinery/power/emitter/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if (istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer))
 		if (emagged)
-			to_chat(user, SPAN_WARNING("The control lock seems to be broken."))
+			to_chat(user, span_warning("The control lock seems to be broken."))
 			return TRUE
 		if (has_access(req_lock_access, W.GetAccess()))
 			locked = !locked
 			user.visible_message(
-				SPAN_NOTICE("[user] [locked ? "locks" : "unlocks"] [src]'s controls."),
-				SPAN_NOTICE("You [locked ? "lock" : "unlock"] the controls.")
+				span_notice("[user] [locked ? "locks" : "unlocks"] [src]'s controls."),
+				span_notice("You [locked ? "lock" : "unlock"] the controls.")
 			)
 		else
-			to_chat(user, SPAN_WARNING("[src]'s controls flash an 'Access denied' warning."))
+			to_chat(user, span_warning("[src]'s controls flash an 'Access denied' warning."))
 		return TRUE
 
 	return ..()
@@ -252,7 +252,7 @@
 		emagged = TRUE
 		req_access.Cut()
 		req_lock_access.Cut()
-		user.visible_message(SPAN_WARNING("[user] messes with [src]'s controls."), SPAN_WARNING("You short out the control lock."))
+		user.visible_message(span_warning("[user] messes with [src]'s controls."), span_warning("You short out the control lock."))
 		user.playsound_local(loc, "sparks", 50, TRUE)
 		return TRUE
 

@@ -78,7 +78,7 @@
 			return FALSE
 		beaker = B
 		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
-		to_chat(user, SPAN_NOTICE("You add \the [B] to \the [src]!"))
+		to_chat(user, span_notice("You add \the [B] to \the [src]!"))
 		update_icon()
 		SStgui.update_uis(src)
 		return TRUE
@@ -90,7 +90,7 @@
 		if(!user.unEquip(B, src))
 			return FALSE
 		loaded_pill_bottle = B
-		to_chat(user, SPAN_NOTICE("You add \the [B] into \the [src]'s dispenser slot!"))
+		to_chat(user, span_notice("You add \the [B] into \the [src]'s dispenser slot!"))
 		update_icon()
 		SStgui.update_uis(src)
 		return TRUE

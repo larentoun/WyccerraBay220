@@ -23,10 +23,10 @@
 				if (H.hand)
 					temp = H.organs_by_name[BP_L_HAND]
 				if(temp && !temp.is_usable())
-					to_chat(user, SPAN_NOTICE("You try to move your [temp.name], but cannot!"))
+					to_chat(user, span_notice("You try to move your [temp.name], but cannot!"))
 					return
 
-				to_chat(user, SPAN_NOTICE("You pick up the [src]."))
+				to_chat(user, span_notice("You pick up the [src]."))
 				user.put_in_hands(src)
 
 	return
@@ -38,7 +38,7 @@
 		if (H.hand)
 			temp = H.organs_by_name[BP_L_HAND]
 		if(temp && !temp.is_usable())
-			to_chat(user, SPAN_NOTICE("You try to move your [temp.name], but cannot!"))
+			to_chat(user, span_notice("You try to move your [temp.name], but cannot!"))
 			return
 	var/response = ""
 	if(!length(papers) > 0)
@@ -61,9 +61,9 @@
 			else if (response == "Carbon-Copy")
 				P = new /obj/item/paper/carbon
 		user.put_in_hands(P)
-		to_chat(user, SPAN_NOTICE("You take [P] out of the [src]."))
+		to_chat(user, span_notice("You take [P] out of the [src]."))
 	else
-		to_chat(user, SPAN_NOTICE("[src] is empty!"))
+		to_chat(user, span_notice("[src] is empty!"))
 
 	add_fingerprint(user)
 	return
@@ -73,12 +73,12 @@
 	if(istype(i, /obj/item/paper))
 		if(!user.unEquip(i, src))
 			return
-		to_chat(user, SPAN_NOTICE("You put [i] in [src]."))
+		to_chat(user, span_notice("You put [i] in [src]."))
 		papers.Add(i)
 		update_icon()
 		amount++
 	else if(istype(i, /obj/item/paper_bundle))
-		to_chat(user, SPAN_NOTICE("You loosen \the [i] and add its papers into \the [src]."))
+		to_chat(user, span_notice("You loosen \the [i] and add its papers into \the [src]."))
 		var/was_there_a_photo = 0
 		for(var/obj/item/bundleitem in i) //loop through items in bundle
 			if(istype(bundleitem, /obj/item/paper)) //if item is paper, add into the bin
@@ -91,16 +91,16 @@
 				bundleitem.reset_plane_and_layer()
 		qdel(i)
 		if(was_there_a_photo)
-			to_chat(user, SPAN_NOTICE("The photo cannot go into \the [src]."))
+			to_chat(user, span_notice("The photo cannot go into \the [src]."))
 
 
 /obj/item/paper_bin/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
 		if(amount)
-			. += SPAN_NOTICE("There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.")
+			. += span_notice("There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.")
 		else
-			. += SPAN_NOTICE("There are no papers in the bin.")
+			. += span_notice("There are no papers in the bin.")
 
 
 /obj/item/paper_bin/on_update_icon()

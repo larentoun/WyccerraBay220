@@ -89,12 +89,12 @@
 	if(M.chem_doses[/datum/reagent/toxin/amatoxin] > 0)
 		M.reagents.add_reagent(/datum/reagent/toxin/amaspores, metabolism) // The spores lay dormant for as long as any traces of amatoxin remain
 		if (prob(5))
-			to_chat(M, SPAN_DANGER("Everything itches, how uncomfortable!"))
+			to_chat(M, span_danger("Everything itches, how uncomfortable!"))
 		if (prob(10))
-			to_chat(M, SPAN_WARNING("Your eyes are watering, it's hard to see!"))
+			to_chat(M, span_warning("Your eyes are watering, it's hard to see!"))
 			M.eye_blurry = max(M.eye_blurry, 10)
 		if (prob(10))
-			to_chat(M, SPAN_DANGER("Your throat itches uncomfortably!"))
+			to_chat(M, span_danger("Your throat itches uncomfortably!"))
 			M.custom_emote(2, "coughs!")
 		return
 
@@ -159,7 +159,7 @@
 		return
 	M.bodytemperature = max(M.bodytemperature - 15 * TEMPERATURE_DAMAGE_COEFFICIENT, 215)
 	if (prob(15))
-		to_chat(M, SPAN_DANGER("Your insides feel freezing cold!"))
+		to_chat(M, span_danger("Your insides feel freezing cold!"))
 	if (prob(1))
 		M.emote("shiver")
 	holder.remove_reagent("capsaicin", 5)
@@ -179,9 +179,9 @@
 	if (prob(50))
 		M.custom_pain("You are getting unbearably hot!", 30)
 		if (prob(10))
-			to_chat(M, SPAN_DANGER("You feel like your insides are burning!"))
+			to_chat(M, span_danger("You feel like your insides are burning!"))
 		else if (prob(20))
-			M.visible_message(SPAN_WARNING("[M] [pick("dry heaves!","coughs!","splutters!","rubs at their eyes!")]"))
+			M.visible_message(span_warning("[M] [pick("dry heaves!","coughs!","splutters!","rubs at their eyes!")]"))
 	else
 		M.eye_blurry = max(M.eye_blurry, 10)
 
@@ -200,13 +200,13 @@
 	if (IS_METABOLICALLY_INERT(M))
 		return
 	if (prob(10))
-		to_chat(M, SPAN_WARNING("Your veins feel like they're on fire!"))
+		to_chat(M, span_warning("Your veins feel like they're on fire!"))
 		M.adjust_fire_stacks(0.1)
 	else if (prob(5))
 		M.IgniteMob()
 		M.visible_message(
-			SPAN_WARNING("Some of \the [M]'s veins rupture, the exposed blood igniting!"),
-			SPAN_DANGER("Some of your veins rupture, the exposed blood igniting!")
+			span_warning("Some of \the [M]'s veins rupture, the exposed blood igniting!"),
+			span_danger("Some of your veins rupture, the exposed blood igniting!")
 		)
 
 /datum/reagent/toxin/serotrotium
@@ -240,8 +240,8 @@
 		M.emote(pick("twitch", "blink_r", "shiver"))
 	if (prob(15))
 		M.visible_message(
-			SPAN_WARNING("\The [M] shudders violently."),
-			SPAN_WARNING("You shudder uncontrollably, it hurts.")
+			span_warning("\The [M] shudders violently."),
+			span_warning("You shudder uncontrollably, it hurts.")
 		)
 		M.take_organ_damage(6 * removed, 0)
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
@@ -252,7 +252,7 @@
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/internal/heart/O = H.internal_organs_by_name[BP_HEART]
 		O.take_internal_damage(1)
-		to_chat(M, SPAN_WARNING("You feel a stabbing pain in your heart as it beats out of control!"))
+		to_chat(M, span_warning("You feel a stabbing pain in your heart as it beats out of control!"))
 
 /datum/reagent/toxin/chlorine
 	name = "Chlorine"
@@ -470,7 +470,7 @@
 		if(locate(/obj/overlay/wallrot) in W)
 			for(var/obj/overlay/wallrot/E in W)
 				qdel(E)
-			W.visible_message(SPAN_NOTICE("The fungi are completely dissolved by the solution!"))
+			W.visible_message(span_notice("The fungi are completely dissolved by the solution!"))
 
 /datum/reagent/toxin/plantbgone/touch_obj(obj/O, volume)
 	if(istype(O, /obj/vine))
@@ -520,8 +520,8 @@
 	M.take_organ_damage((10 - (2 * permeability)) * removed, 0, ORGAN_DAMAGE_FLESH_ONLY)
 	if (prob(10))
 		M.visible_message(
-			SPAN_WARNING("\The [M]'s skin fizzles and flakes away!"),
-			SPAN_DANGER("Your skin fizzles and flakes away!")
+			span_warning("\The [M]'s skin fizzles and flakes away!"),
+			span_danger("Your skin fizzles and flakes away!")
 		)
 	if(M.losebreath < (30 + (15 * permeability)))
 		M.losebreath++
@@ -535,8 +535,8 @@
 
 	// The warning messages should only display once per splash, all of the chemicals upon the skin should be absorbed in one tick.
 	M.visible_message(
-		SPAN_WARNING("\The [M]'s skin fizzles and flakes on contact with the liquid!"),
-		SPAN_DANGER("You feel a painful fizzling and your skin begins to flake!.")
+		span_warning("\The [M]'s skin fizzles and flakes on contact with the liquid!"),
+		span_danger("You feel a painful fizzling and your skin begins to flake!.")
 	)
 
 	var/permeability = GET_TRAIT_LEVEL(carbon, /singleton/trait/general/permeable_skin)
@@ -593,7 +593,7 @@
 	if (IS_METABOLICALLY_INERT(M))
 		return
 	if(prob(10))
-		to_chat(M, SPAN_DANGER("Your insides are burning!"))
+		to_chat(M, span_danger("Your insides are burning!"))
 		M.adjustToxLoss(rand(100, 300) * removed)
 	else if(prob(40))
 		M.heal_organ_damage(25 * removed, 0)
@@ -697,7 +697,7 @@
 		M.make_dizzy(3)
 		M.Weaken(2)
 	if(M.chem_doses[type] == round(threshold * 0.5, metabolism))
-		to_chat(M, SPAN_WARNING("Your muscles slacken and cease to obey you."))
+		to_chat(M, span_warning("Your muscles slacken and cease to obey you."))
 	if(M.chem_doses[type] >= threshold)
 		M.add_chemical_effect(CE_SEDATE, 1)
 		M.eye_blurry = max(M.eye_blurry, 10)
@@ -762,11 +762,11 @@
 		if(world.time > last_message_time + 30 SECONDS && volume > 0.5) /// Spam prevention.
 			last_message_time = world.time
 			var/msg = pick(high_message_list)
-			to_chat(M, SPAN_DANGER("[msg]"))
+			to_chat(M, span_danger("[msg]"))
 		else if(volume <= 0.2 && data != -1)
 			data = -1
 			var/msg = pick(sober_message_list)
-			to_chat(M, SPAN_DANGER("[msg]"))
+			to_chat(M, span_danger("[msg]"))
 	if(prob(5) && prob_proc == FALSE) /// Enables procs to activate, remains true until THAT PROC sets it to false again.
 		prob_proc = TRUE
 
@@ -999,7 +999,7 @@
 		var/mob/living/carbon/human/H = M
 		H.seizure()
 	if(prob(10))
-		to_chat(M, SPAN_DANGER(SPAN_SIZE(rand(2,4), pick(overdose_messages))))
+		to_chat(M, span_danger(SPAN_SIZE(rand(2,4), pick(overdose_messages))))
 	if(M.psi)
 		M.psi.check_latency_trigger(30, "a Three Eye overdose")
 
@@ -1030,13 +1030,13 @@
 			meatchunks += E
 	if(!length(meatchunks))
 		if(prob(10))
-			to_chat(H, SPAN_DANGER("Your flesh rapidly mutates!"))
+			to_chat(H, span_danger("Your flesh rapidly mutates!"))
 			H.set_species(SPECIES_PROMETHEAN)
 			H.shapeshifter_set_colour("#05ff9b")
 			H.verbs -= /mob/living/carbon/human/proc/shapeshifter_select_colour
 		return
 	var/obj/item/organ/external/O = pick(meatchunks)
-	to_chat(H, SPAN_DANGER("Your [O.name]'s flesh mutates rapidly!"))
+	to_chat(H, span_danger("Your [O.name]'s flesh mutates rapidly!"))
 	if(!wrapped_species_by_ref["\ref[H]"])
 		wrapped_species_by_ref["\ref[H]"] = H.species.name
 	meatchunks = list(O) | O.children
@@ -1053,7 +1053,7 @@
 		E.update_icon(1)
 	O.max_damage = 15
 	if(prob(10))
-		to_chat(H, SPAN_DANGER("Your slimy [O.name] plops off!"))
+		to_chat(H, span_danger("Your slimy [O.name] plops off!"))
 		O.droplimb()
 	H.update_body()
 
@@ -1067,7 +1067,7 @@
 /datum/reagent/aslimetoxin/affect_blood(mob/living/carbon/M, removed) // TODO: check if there's similar code anywhere else
 	if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(M))
 		return
-	to_chat(M, SPAN_DANGER("Your flesh rapidly mutates!"))
+	to_chat(M, span_danger("Your flesh rapidly mutates!"))
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(M)
 	M.icon = null
 	M.ClearOverlays()
@@ -1120,7 +1120,7 @@
 	if (!(M.species.appearance_flags & SPECIES_APPEARANCE_HAS_STATIC_HAIR))
 		return
 	M.species.set_default_hair(M)
-	to_chat(M, SPAN_WARNING("You feel a chill and your skin feels lighter.."))
+	to_chat(M, span_warning("You feel a chill and your skin feels lighter.."))
 	remove_self(volume)
 
 /datum/reagent/toxin/bromide
@@ -1165,7 +1165,7 @@
 				for(var/obj/spider/spider in E.implants)
 					if(prob(25))
 						E.implants -= spider
-						M.visible_message(SPAN_NOTICE("The dying form of \a [spider] emerges from inside \the [M]'s [E.name]."))
+						M.visible_message(span_notice("The dying form of \a [spider] emerges from inside \the [M]'s [E.name]."))
 						qdel(spider)
 						break
 

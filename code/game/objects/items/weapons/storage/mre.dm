@@ -29,7 +29,7 @@ MRE Stuff
 
 /obj/item/storage/mre/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("[meal_desc]")
+	. += span_notice("[meal_desc]")
 
 /obj/item/storage/mre/on_update_icon()
 	if(opened)
@@ -41,7 +41,7 @@ MRE Stuff
 
 /obj/item/storage/mre/open(mob/user)
 	if(!opened)
-		to_chat(usr, SPAN_NOTICE("You tear open the bag, breaking the vacuum seal."))
+		to_chat(usr, span_notice("You tear open the bag, breaking the vacuum seal."))
 	. = ..()
 
 /obj/item/storage/mre/menu2
@@ -205,7 +205,7 @@ MRE Stuff
 
 /obj/item/storage/mrebag/open(mob/user)
 	if(!opened)
-		to_chat(usr, SPAN_NOTICE("The pouch heats up as you break the vaccum seal."))
+		to_chat(usr, span_notice("The pouch heats up as you break the vaccum seal."))
 	. = ..()
 
 /obj/item/storage/mrebag/menu2

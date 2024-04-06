@@ -161,8 +161,8 @@
 		return
 	dismantle()
 	user.visible_message(
-		SPAN_NOTICE("[user] cuts [src] apart with [tool]."),
-		SPAN_NOTICE("You cut [src] apart with [tool].")
+		span_notice("[user] cuts [src] apart with [tool]."),
+		span_notice("You cut [src] apart with [tool].")
 	)
 
 /obj/structure/grille/welder_act(mob/living/user, obj/item/tool)
@@ -170,8 +170,8 @@
 	if(!tool.use_as_tool(src, user, amount = 1, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] cuts [src] apart with [tool]."),
-		SPAN_NOTICE("You cut [src] apart with [tool].")
+		span_notice("[user] cuts [src] apart with [tool]."),
+		span_notice("You cut [src] apart with [tool].")
 	)
 	dismantle()
 
@@ -193,13 +193,13 @@
 	qdel(src)
 
 /obj/structure/grille/on_death(new_death_state)
-	visible_message(SPAN_WARNING("[src] falls to pieces!"))
+	visible_message(span_warning("[src] falls to pieces!"))
 	new /obj/item/stack/material/rods(get_turf(src), 1, material.name)
 	new /obj/structure/grille/broken(get_turf(src), material.name)
 	qdel(src)
 
 /obj/structure/grille/broken/on_death(new_death_state)
-	visible_message(SPAN_WARNING("The remains of [src] break apart!"))
+	visible_message(span_warning("The remains of [src] break apart!"))
 	new /obj/item/stack/material/rods(get_turf(src), 1, material.name)
 	qdel(src)
 
@@ -251,9 +251,9 @@
 		USE_FEEDBACK_FAILURE("There is another grille here!")
 		return
 	if(ST.get_amount() < 2)
-		to_chat(user, SPAN_WARNING("You need at least two rods to do this."))
+		to_chat(user, span_warning("You need at least two rods to do this."))
 		return
-	to_chat(user, SPAN_NOTICE("Assembling grille..."))
+	to_chat(user, span_notice("Assembling grille..."))
 	ST.in_use = 1
 	if (!do_after(user, 1 SECOND, loc, DO_REPAIR_CONSTRUCT))
 		ST.in_use = 0
@@ -261,6 +261,6 @@
 	if(!ST.use(2))
 		return
 	var/obj/structure/grille/F = new /obj/structure/grille(loc, ST.material.name)
-	to_chat(user, SPAN_NOTICE("You assemble a grille"))
+	to_chat(user, span_notice("You assemble a grille"))
 	ST.in_use = 0
 	F.add_fingerprint(user)

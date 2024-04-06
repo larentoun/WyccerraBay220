@@ -9,7 +9,7 @@
 		message = "There is \a [src]."
 	else
 		message = "There is \a ["\improper[initial_name]"] labeled '[name]'."
-	return SPAN_NOTICE("[message]")
+	return span_notice("[message]")
 
 
 /obj/item/integrated_circuit/input/button
@@ -27,7 +27,7 @@
 
 /obj/item/integrated_circuit/input/button/OnICTopic(href_list, user)
 	if(href_list["press"])
-		to_chat(user, SPAN_NOTICE("You press the button labeled '[src.displayed_name]'."))
+		to_chat(user, span_notice("You press the button labeled '[src.displayed_name]'."))
 		activate_pin(1)
 		return IC_TOPIC_REFRESH
 
@@ -54,7 +54,7 @@
 		set_pin_data(IC_OUTPUT, 1, !get_pin_data(IC_OUTPUT, 1))
 		push_data()
 		activate_pin(1)
-		to_chat(user, SPAN_NOTICE("You toggle the button labeled '[src.name]' [get_pin_data(IC_OUTPUT, 1) ? "on" : "off"]."))
+		to_chat(user, span_notice("You toggle the button labeled '[src.name]' [get_pin_data(IC_OUTPUT, 1) ? "on" : "off"]."))
 		return IC_TOPIC_REFRESH
 
 /obj/item/integrated_circuit/input/numberpad
@@ -941,7 +941,7 @@
 		return FALSE
 	set_pin_data(IC_OUTPUT, 1, weakref(A))
 	push_data()
-	to_chat(user, SPAN_NOTICE("You scan [A] with [assembly]."))
+	to_chat(user, span_notice("You scan [A] with [assembly]."))
 	activate_pin(1)
 	return TRUE
 
@@ -973,7 +973,7 @@
 		return FALSE
 	set_pin_data(IC_OUTPUT, 1, weakref(A))
 	push_data()
-	to_chat(user, SPAN_NOTICE("You scan [A] with [assembly]."))
+	to_chat(user, span_notice("You scan [A] with [assembly]."))
 	activate_pin(1)
 	return TRUE
 
@@ -1000,7 +1000,7 @@
 		return FALSE
 	set_pin_data(IC_OUTPUT, 1, weakref(A))
 	push_data()
-	to_chat(user, SPAN_NOTICE("You let [assembly] scan [A]."))
+	to_chat(user, span_notice("You let [assembly] scan [A]."))
 	activate_pin(1)
 	return TRUE
 

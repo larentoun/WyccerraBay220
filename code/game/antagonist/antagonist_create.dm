@@ -59,7 +59,7 @@
 /datum/antagonist/proc/greet(datum/mind/player)
 
 	// Basic intro text.
-	to_chat(player.current, SPAN_DANGER(FONT_LARGE("You are a [role_text]!")))
+	to_chat(player.current, span_danger(FONT_LARGE("You are a [role_text]!")))
 	if(leader_welcome_text && player == leader)
 		to_chat(player.current, SPAN_CLASS("antagdesc", "[get_leader_welcome_text(player.current)]"))
 	else

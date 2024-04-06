@@ -165,7 +165,7 @@
 
 	// Don't cycle if this engage() is being called by activate().
 	if(starting_up)
-		to_chat(holder.wearer, SPAN_INFO("You activate your visual sensors."))
+		to_chat(holder.wearer, span_info("You activate your visual sensors."))
 		return 1
 
 	if(length(vision_modes) > 1)
@@ -174,9 +174,9 @@
 			vision_index = 1
 		vision = vision_modes[vision_index]
 
-		to_chat(holder.wearer, SPAN_INFO("You cycle your sensors to <b>[vision.mode]</b> mode."))
+		to_chat(holder.wearer, span_info("You cycle your sensors to <b>[vision.mode]</b> mode."))
 	else
-		to_chat(holder.wearer, SPAN_INFO("Your sensors only have one mode."))
+		to_chat(holder.wearer, span_info("Your sensors only have one mode."))
 	return 1
 
 /obj/item/rig_module/vision/Initialize()

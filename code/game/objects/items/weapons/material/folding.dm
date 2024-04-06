@@ -40,10 +40,10 @@
 	update_force()
 	update_icon()
 	if(open)
-		user.visible_message(SPAN_WARNING("\The [user] opens \the [src]."))
+		user.visible_message(span_warning("\The [user] opens \the [src]."))
 		playsound(user, 'sound/weapons/flipblade.ogg', 15, 1)
 	else
-		user.visible_message(SPAN_NOTICE("\The [user] closes \the [src]."))
+		user.visible_message(span_notice("\The [user] closes \the [src]."))
 	add_fingerprint(user)
 
 /obj/item/material/knife/folding/update_force()

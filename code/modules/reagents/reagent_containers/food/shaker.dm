@@ -14,13 +14,13 @@
 		mix()
 		return
 	if(user.skill_check(SKILL_COOKING, SKILL_TRAINED))
-		user.visible_message(SPAN_NOTICE("\The [user] shakes \the [src] briskly, with some skill."), SPAN_NOTICE("You shake \the [src] briskly, with some skill."))
+		user.visible_message(span_notice("\The [user] shakes \the [src] briskly, with some skill."), span_notice("You shake \the [src] briskly, with some skill."))
 		mix()
 		return
 	else
-		user.visible_message(SPAN_NOTICE("\The [user] shakes \the [src] gingerly."), SPAN_NOTICE("You shake \the [src] gingerly."))
+		user.visible_message(span_notice("\The [user] shakes \the [src] gingerly."), span_notice("You shake \the [src] gingerly."))
 		if(prob(15) && (reagents && reagents.total_volume))
-			user.visible_message(SPAN_WARNING("\The [user] spills the contents of \the [src] over themselves!"), SPAN_WARNING("You spill the contents of \the [src] over yourself!"))
+			user.visible_message(span_warning("\The [user] spills the contents of \the [src] over themselves!"), span_warning("You spill the contents of \the [src] over yourself!"))
 			reagents.splash(user, reagents.total_volume)
 		else
 			mix()

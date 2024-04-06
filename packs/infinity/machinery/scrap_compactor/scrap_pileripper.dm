@@ -61,9 +61,9 @@
 
 /obj/machinery/pile_ripper/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("The power light is [(stat & MACHINE_STAT_NOPOWER) ? "off" : "on"].")
-	. += SPAN_NOTICE("The safety-mode light is [safety_mode ? "on" : "off"].")
-	. += SPAN_NOTICE("The safety-sensors status light is [emagged ? "off" : "on"].")
+	. += span_notice("The power light is [(stat & MACHINE_STAT_NOPOWER) ? "off" : "on"].")
+	. += span_notice("The safety-mode light is [safety_mode ? "on" : "off"].")
+	. += span_notice("The safety-sensors status light is [emagged ? "off" : "on"].")
 
 /obj/machinery/pile_ripper/power_change()
 	..()
@@ -93,7 +93,7 @@
 			safety_mode = 0
 			update_icon()
 		playsound(src.loc, "sparks", 75, 1, -1)
-		to_chat(user, SPAN_NOTICE ("You use the cryptographic sequencer on the [src.name]."))
+		to_chat(user, span_notice ("You use the cryptographic sequencer on the [src.name]."))
 
 /obj/machinery/pile_ripper/on_update_icon()
 	..()

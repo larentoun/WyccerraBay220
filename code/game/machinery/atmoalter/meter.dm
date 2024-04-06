@@ -83,25 +83,25 @@
 	. = ..()
 
 	if(distance > 3 && !(istype(user, /mob/living/silicon/ai) || isghost(user)))
-		. += SPAN_WARNING("You are too far away to read it.")
+		. += span_warning("You are too far away to read it.")
 
 	else if(inoperable())
-		. += SPAN_WARNING("The display is off.")
+		. += span_warning("The display is off.")
 
 	else if(src.target)
 		var/datum/gas_mixture/environment = target.return_air()
 		if(environment)
-			. += SPAN_NOTICE("The pressure gauge reads [round(environment.return_pressure(), 0.01)] kPa; [round(environment.temperature,0.01)]K ([round(environment.temperature-T0C,0.01)]&deg;C)")
+			. += span_notice("The pressure gauge reads [round(environment.return_pressure(), 0.01)] kPa; [round(environment.temperature,0.01)]K ([round(environment.temperature-T0C,0.01)]&deg;C)")
 		else
-			. += SPAN_NOTICE("The sensor error light is blinking.")
+			. += span_notice("The sensor error light is blinking.")
 	else
-		. += SPAN_NOTICE("The connect error light is blinking.")
+		. += span_notice("The connect error light is blinking.")
 
 
 /obj/machinery/meter/interface_interact(mob/user)
 	if (!target)
 		log_debug(append_admin_tools("\A [src] interacted with by \the [user] had no target.", user, get_turf(src)))
-		to_chat(user, SPAN_WARNING("\The [src] has no target! This might be a bug. Please report it."))
+		to_chat(user, span_warning("\The [src] has no target! This might be a bug. Please report it."))
 		return TRUE
 	var/datum/gas_mixture/environment = target.return_air()
 	to_chat(user, "The pressure gauge reads [round(environment.return_pressure(), 0.01)] kPa; [round(environment.temperature,0.01)]K ([round(environment.temperature-T0C,0.01)]&deg;C)")

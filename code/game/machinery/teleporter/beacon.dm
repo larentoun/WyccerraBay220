@@ -47,7 +47,7 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 /obj/machinery/tele_beacon/can_anchor(obj/item/tool, mob/user, silent)
 	var/turf/T = get_turf(src)
 	if (!T.is_plating())
-		to_chat(user, SPAN_WARNING("You cannot anchor \the [src] to \the [T]. You must connect it to the underplating."))
+		to_chat(user, span_warning("You cannot anchor \the [src] to \the [T]. You must connect it to the underplating."))
 		return FALSE
 	return ..()
 
@@ -71,15 +71,15 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 		autoset_name = TRUE
 		generate_name()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] reconfigures \the [src] with \the [tool]."),
-			SPAN_NOTICE("You enable \the [src]'s automatic labeling with \the [tool].")
+			span_notice("\The [user] reconfigures \the [src] with \the [tool]."),
+			span_notice("You enable \the [src]'s automatic labeling with \the [tool].")
 		)
 	else
 		beacon_name = new_name
 		autoset_name = FALSE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] reconfigures \the [src] with \the [tool]."),
-			SPAN_NOTICE("You reconfigure \the [src]'s relay label to \"[beacon_name]\" with \the [tool].")
+			span_notice("\The [user] reconfigures \the [src] with \the [tool]."),
+			span_notice("You reconfigure \the [src]'s relay label to \"[beacon_name]\" with \the [tool].")
 		)
 
 /obj/machinery/tele_beacon/emp_act(severity)
@@ -101,19 +101,19 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 	. = ..()
 
 	if (!anchored)
-		. += SPAN_WARNING("It is disconnected from [get_turf(src)].")
+		. += span_warning("It is disconnected from [get_turf(src)].")
 		return
 
 	if (!functioning())
 		if (user.skill_check(SKILL_DEVICES, SKILL_BASIC))
-			. += SPAN_WARNING("It appears to be offline or disabled.")
+			. += span_warning("It appears to be offline or disabled.")
 		return
 
 	if (user.skill_check(SKILL_DEVICES, SKILL_TRAINED))
 		if (wires.IsIndexCut(TELEBEACON_WIRE_SIGNALLER))
-			. += SPAN_WARNING("The signal lights appear to be disabled.")
+			. += span_warning("The signal lights appear to be disabled.")
 		else if (LAZYLEN(connected_computers))
-			. += SPAN_WARNING("The signal lights indicate it has an active teleporter connection.")
+			. += span_warning("The signal lights indicate it has an active teleporter connection.")
 
 
 /obj/machinery/tele_beacon/power_change()
@@ -182,7 +182,7 @@ var/global/const/TELEBEACON_WIRE_SIGNALLER = 4
 /obj/machinery/tele_beacon/proc/notify_connection()
 	if (wires.IsIndexCut(TELEBEACON_WIRE_SIGNALLER))
 		return
-	audible_message(SPAN_NOTICE("\The [src] beeps as a new teleporter links to it."))
+	audible_message(span_notice("\The [src] beeps as a new teleporter links to it."))
 	playsound(loc, 'sound/machines/twobeep.ogg', 75, 1)
 
 

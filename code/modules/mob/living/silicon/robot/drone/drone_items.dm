@@ -183,7 +183,7 @@
 /obj/item/gripper/examine(mob/user)
 	. = ..()
 	if(wrapped)
-		. += SPAN_NOTICE("It is holding \a [wrapped].")
+		. += span_notice("It is holding \a [wrapped].")
 
 /obj/item/gripper/attack_self(mob/user as mob)
 	if(wrapped)
@@ -206,7 +206,7 @@
 		update_icon()
 		return
 
-	to_chat(src.loc, SPAN_WARNING("You drop \the [wrapped]."))
+	to_chat(src.loc, span_warning("You drop \the [wrapped]."))
 	wrapped.dropInto(loc)
 	wrapped = null
 	update_icon()
@@ -263,12 +263,12 @@
 					return
 			else
 				I.forceMove(src)
-			to_chat(user, SPAN_NOTICE("You collect \the [I]."))
+			to_chat(user, span_notice("You collect \the [I]."))
 			wrapped = I
 			update_icon()
 			return
 		else
-			to_chat(user, SPAN_DANGER("Your gripper cannot hold \the [target]."))
+			to_chat(user, span_danger("Your gripper cannot hold \the [target]."))
 
 	else if(istype(target,/obj/machinery/power/apc))
 		var/obj/machinery/power/apc/A = target
@@ -290,7 +290,7 @@
 				A.update_icon()
 				A.cell.forceMove(src)
 				A.cell = null
-				user.visible_message(SPAN_DANGER("[user] removes the power cell from [A]!"), "You remove the power cell.")
+				user.visible_message(span_danger("[user] removes the power cell from [A]!"), "You remove the power cell.")
 				A.power_down()
 				update_icon()
 
@@ -351,8 +351,8 @@
 	for(var/mob/M in T)
 		if(istype(M,/mob/living/simple_animal/passive/lizard) || istype(M,/mob/living/simple_animal/passive/mouse))
 			loc.visible_message(
-				SPAN_DANGER("\The [loc] sucks \the [M] into its decompiler. There's a horrible crunching noise."),
-				SPAN_DANGER("It's a bit of a struggle, but you manage to suck \the [M] into your decompiler. It makes a series of visceral crunching noises.")
+				span_danger("\The [loc] sucks \the [M] into its decompiler. There's a horrible crunching noise."),
+				span_danger("It's a bit of a struggle, but you manage to suck \the [M] into your decompiler. It makes a series of visceral crunching noises.")
 			)
 			new/obj/decal/cleanable/blood/splatter(get_turf(src))
 			qdel(M)
@@ -368,14 +368,14 @@
 			if(!istype(D))
 				return TRUE
 
-			to_chat(D, SPAN_DANGER("You begin decompiling \the [M]."))
+			to_chat(D, span_danger("You begin decompiling \the [M]."))
 
 			if(!do_after(D, 5 SECONDS, M, DO_PUBLIC_UNIQUE))
 				return TRUE
 
 			if(!M || !D) return TRUE
 
-			to_chat(D, SPAN_DANGER("You carefully and thoroughly decompile \the [M], storing as much of its resources as you can within yourself."))
+			to_chat(D, span_danger("You carefully and thoroughly decompile \the [M], storing as much of its resources as you can within yourself."))
 			qdel(M)
 			new/obj/decal/cleanable/blood/oil(get_turf(src))
 
@@ -437,7 +437,7 @@
 			var/obj/item/stack/material/rods/R = W
 			var/amt = R.get_amount()
 			if(amt > 3)
-				to_chat(user, SPAN_NOTICE("The amount of rods is too high to fit into your decompiler."))
+				to_chat(user, span_notice("The amount of rods is too high to fit into your decompiler."))
 				continue
 			if(metal)
 				metal.add_charge(500*amt)
@@ -456,9 +456,9 @@
 		grabbed_something = 1
 
 	if(grabbed_something)
-		to_chat(user, SPAN_NOTICE("You deploy your decompiler and clear out the contents of \the [T]."))
+		to_chat(user, span_notice("You deploy your decompiler and clear out the contents of \the [T]."))
 	else
-		to_chat(user, SPAN_DANGER("Nothing on \the [T] is useful to you."))
+		to_chat(user, span_danger("Nothing on \the [T] is useful to you."))
 	return TRUE
 
 //PRETTIER TOOL LIST.

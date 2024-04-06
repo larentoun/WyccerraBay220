@@ -27,7 +27,7 @@
 	if(!renamed)
 		sandwich_label = sanitizeSafe(input(user, "Enter a new name for \the [src].", "Name", label_text), MAX_NAME_LEN)
 		if(sandwich_label)
-			to_chat(user, SPAN_NOTICE("You rename \the [src] to \"[sandwich_label] sandwich\"."))
+			to_chat(user, span_notice("You rename \the [src] to \"[sandwich_label] sandwich\"."))
 			SetName("\improper [sandwich_label] sandwich")
 			renamed = 1
 
@@ -39,12 +39,12 @@
 			sandwich_limit += 4
 
 	if(length(src.contents) > sandwich_limit)
-		to_chat(user, SPAN_WARNING("If you put anything else on \the [src] it's going to collapse."))
+		to_chat(user, span_warning("If you put anything else on \the [src] it's going to collapse."))
 		return
 	else if(istype(W,/obj/item/material/shard))
 		if(!user.unEquip(W, src))
 			return
-		to_chat(user, SPAN_WARNING("You hide [W] in \the [src]."))
+		to_chat(user, span_warning("You hide [W] in \the [src]."))
 		update()
 		return
 	else if(istype(W,/obj/item/reagent_containers/food/snacks))
@@ -53,8 +53,8 @@
 		if(!user.unEquip(W, src))
 			return
 		user.visible_message(
-			SPAN_NOTICE("\The [user] layers \the [W] over \the [src]."),
-			SPAN_NOTICE("You layer \the [W] over \the [src].")
+			span_notice("\The [user] layers \the [W] over \the [src]."),
+			span_notice("You layer \the [W] over \the [src].")
 		)
 		var/obj/item/reagent_containers/F = W
 		F.reagents.trans_to_obj(src, F.reagents.total_volume)
@@ -99,7 +99,7 @@
 /obj/item/reagent_containers/food/snacks/csandwich/examine(mob/user)
 	. = ..(user)
 	var/obj/item/O = pick(contents)
-	. += SPAN_NOTICE("You think you can see [O] in there.")
+	. += span_notice("You think you can see [O] in there.")
 
 /obj/item/reagent_containers/food/snacks/csandwich/use_before(mob/living/M as mob, mob/user as mob)
 	. = FALSE
@@ -112,6 +112,6 @@
 			break
 
 	if (shard && M == user)
-		to_chat(M, SPAN_WARNING("You lacerate your mouth on a [shard.name] in the sandwich!"))
+		to_chat(M, span_warning("You lacerate your mouth on a [shard.name] in the sandwich!"))
 		M.adjustBruteLoss(5) //TODO: Target head if human.
 	return ..()

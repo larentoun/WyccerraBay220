@@ -29,11 +29,11 @@
 		return 1
 	if(!holstered && storage.storage_slots != null && length(storage.contents) >= storage.storage_slots - 1)
 		if(!can_holster(I))
-			to_chat(user, SPAN_NOTICE("\The [I] won't fit in \the [atom_holder]'s holster!."))
+			to_chat(user, span_notice("\The [I] won't fit in \the [atom_holder]'s holster!."))
 			return 1
 	if(can_holster(I))
 		if(holstered && istype(user))
-			to_chat(user, SPAN_WARNING("There is already \a [holstered] holstered here!"))
+			to_chat(user, span_warning("There is already \a [holstered] holstered here!"))
 			return 1
 		if(sound_in)
 			playsound(get_turf(atom_holder), sound_in, 50)
@@ -48,7 +48,7 @@
 		storage.handle_item_insertion(holstered, 1)
 		holstered.add_fingerprint(user)
 		storage.w_class = max(storage.w_class, holstered.w_class)
-		user.visible_message(SPAN_NOTICE("\The [user] holsters \the [holstered]."), SPAN_NOTICE("You holster \the [holstered]."))
+		user.visible_message(span_notice("\The [user] holsters \the [holstered]."), span_notice("You holster \the [holstered]."))
 		atom_holder.SetName("occupied [initial(atom_holder.name)]")
 		atom_holder.update_icon()
 		GLOB.moved_event.register(holstered, src, PROC_REF(check_holster))
@@ -66,7 +66,7 @@
 	if(!holstered)
 		return 0
 	if (!user.HasFreeHand())
-		to_chat(user, SPAN_WARNING("You need an empty hand to draw \the [holstered]!"))
+		to_chat(user, span_warning("You need an empty hand to draw \the [holstered]!"))
 		return 0
 	var/using_intent_preference = user.client ? user.client.get_preference_value(/datum/client_preference/holster_on_intent) == GLOB.PREF_YES : FALSE
 	if(avoid_intent || (using_intent_preference && user.a_intent != I_HELP))
@@ -79,13 +79,13 @@
 				if(G.safety() && user.skill_check(SKILL_WEAPONS, SKILL_EXPERIENCED)) // Experienced shooter will disable safety before shooting.
 					G.toggle_safety(user)
 			usr.visible_message(
-				SPAN_DANGER("\The [user] draws \the [holstered], ready to go!"),
-				SPAN_WARNING("You draw \the [holstered], ready to go!")
+				span_danger("\The [user] draws \the [holstered], ready to go!"),
+				span_warning("You draw \the [holstered], ready to go!")
 				)
 		else
 			user.visible_message(
-				SPAN_NOTICE("\The [user] draws \the [holstered], pointing it at the ground."),
-				SPAN_NOTICE("You draw \the [holstered], pointing it at the ground.")
+				span_notice("\The [user] draws \the [holstered], pointing it at the ground."),
+				span_notice("You draw \the [holstered], pointing it at the ground.")
 				)
 		if(sound_out)
 			playsound(get_turf(atom_holder), sound_out, sound_vol)
@@ -100,9 +100,9 @@
 /datum/extension/holster/proc/examine_holster(mob/user)
 	. = list()
 	if (holstered)
-		. += SPAN_NOTICE("[holstered] is holstered here.")
+		. += span_notice("[holstered] is holstered here.")
 	else
-		. += SPAN_NOTICE("It is empty.")
+		. += span_notice("It is empty.")
 
 /datum/extension/holster/proc/check_holster()
 	if(holstered.loc != storage)
@@ -148,7 +148,7 @@
 	if(!H.holstered)
 		var/obj/item/W = usr.get_active_hand()
 		if(!istype(W, /obj/item))
-			to_chat(usr, SPAN_WARNING("You're not holding anything to holster."))
+			to_chat(usr, span_warning("You're not holding anything to holster."))
 			return
 		H.holster(W, usr)
 	else

@@ -49,7 +49,7 @@
 	run_if_this_close = 3
 
 /mob/living/simple_animal/hostile/hivebot/ranged_damage/fleet_robot/death()
-	visible_message(SPAN_DANGER("\The [src]'s body ruptures and explodes!"))
+	visible_message(span_danger("\The [src]'s body ruptures and explodes!"))
 	playsound(src,'sound/weapons/smg_empty_alarm.ogg', 50, 1, -6)
 	explosion(loc, explosion_radius, explosion_max_power)
 	var/turf/origin = get_turf(src)
@@ -127,7 +127,7 @@
 
 	if(prob(chance))
 		if(A.opacity)
-			A.visible_message(SPAN_WARNING("\The [src] pierces through \the [A]!"))
+			A.visible_message(span_warning("\The [src] pierces through \the [A]!"))
 		return TRUE
 	return FALSE
 
@@ -226,7 +226,7 @@
 
 /mob/living/simple_animal/hostile/fleet_heavy/shoot_target(atom/A)
 	set waitfor = FALSE
-	visible_message(SPAN_DANGER("\The [src]'s weapons begin humming loudly as they're aimed against [A]!"))
+	visible_message(span_danger("\The [src]'s weapons begin humming loudly as they're aimed against [A]!"))
 	playsound(src,'sound/weapons/smg_empty_alarm.ogg', 50, 1, -6)
 	//This thing doesn't actually shoot at you, it shoots at where you were when proc was called. Bit of a different thing.
 	. = ..(get_turf(A))
@@ -244,7 +244,7 @@
 	set_AI_busy(FALSE)
 
 /mob/living/simple_animal/hostile/fleet_heavy/death()
-	visible_message(SPAN_DANGER("\The [src]'s back begins to crack and hum!"))
+	visible_message(span_danger("\The [src]'s back begins to crack and hum!"))
 	playsound(src,'sound/effects/cascade.ogg', 50, 1, -6)
 	var/delay = rand(explosion_delay_lower, explosion_delay_upper)
 	addtimer(CALLBACK(src, PROC_REF(flash), delay), 0)
@@ -265,7 +265,7 @@
 /mob/living/simple_animal/hostile/fleet_heavy/proc/detonate()
 	// The actual boom.
 	if (src && !exploded)
-		visible_message(SPAN_DANGER("\The [src]'s body detonates!"))
+		visible_message(span_danger("\The [src]'s body detonates!"))
 		exploded = TRUE
 		explosion(loc, explosion_radius, explosion_max_power)
 		qdel(src)
@@ -315,12 +315,12 @@
 
 /obj/aura/mobshield/aura_check_bullet(obj/item/projectile/proj, def_zone)
 	if (prob(block_chance(proj.damage, proj.armor_penetration, source = proj)))
-		user.visible_message(SPAN_WARNING("\The [user]'s shields flash and crackle."))
+		user.visible_message(span_warning("\The [user]'s shields flash and crackle."))
 		flick("shield_drop", src)
 		playsound(user,'sound/effects/basscannon.ogg',35,1)
 		new /obj/effect/smoke/illumination(user.loc, 5, 4, 1, "#ffffff")
 		return AURA_FALSE|AURA_CANCEL
-	visible_message(SPAN_DANGER("\The [src]'s exposed back dents and buckles!"))
+	visible_message(span_danger("\The [src]'s exposed back dents and buckles!"))
 	playsound(user,'sound/items/Welder2.ogg',35,1)
 	return EMPTY_BITFIELD
 
@@ -332,7 +332,7 @@
 		throw_damage = object.throwforce * (thrown_datum.speed / THROWFORCE_SPEED_DIVISOR)
 
 	if (prob(block_chance(throw_damage, 0, source = thrown_atom, attacker = thrown_datum.thrower)))
-		user.visible_message(SPAN_WARNING("\The [thrown_atom] bounces off \the [user]'s shields."))
+		user.visible_message(span_warning("\The [thrown_atom] bounces off \the [user]'s shields."))
 		playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
 		flick("shield_drop", src)
 		return AURA_FALSE|AURA_CANCEL
@@ -340,7 +340,7 @@
 /obj/aura/mobshield/aura_check_weapon(obj/item/weapon, mob/attacker, click_params)
 	. = ..()
 	if (prob(block_chance(weapon.force, weapon.armor_penetration, source = weapon, attacker = attacker)))
-		user.visible_message(SPAN_WARNING("\The [weapon] is blocked by \the [user]'s shields."))
+		user.visible_message(span_warning("\The [weapon] is blocked by \the [user]'s shields."))
 		playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, TRUE)
 		flick("shield_drop", src)
 		return AURA_FALSE|AURA_CANCEL

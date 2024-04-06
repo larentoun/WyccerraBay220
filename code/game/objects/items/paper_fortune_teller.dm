@@ -42,7 +42,7 @@
 /obj/item/paper_fortune_teller/attack_self(mob/user)
 	var/datum/state_machine/fsm = get_state_machine(src, /datum/state_machine/paper_fortune)
 	if(!fsm || !istype(fsm.current_state, /singleton/state/paper_fortune))
-		to_chat(user, SPAN_WARNING("You can't seem to work out how \the [src] works."))
+		to_chat(user, span_warning("You can't seem to work out how \the [src] works."))
 		return TRUE
 
 	var/singleton/state/paper_fortune/fsm_state = fsm.current_state
@@ -57,16 +57,16 @@
 
 	choice_counter++
 	if(choice_counter >= 3)
-		to_chat(user, SPAN_NOTICE("The fortune under fold [option] reads: \"[fortunes[option] || "???"]\""))
+		to_chat(user, span_notice("The fortune under fold [option] reads: \"[fortunes[option] || "???"]\""))
 		fsm.evaluate()
 	else if(istext(option))
-		to_chat(user, SPAN_NOTICE("You pick '[option]'."))
+		to_chat(user, span_notice("You pick '[option]'."))
 		alternate_by_color(option, user)
 	else if(isnum(option))
-		to_chat(user, SPAN_NOTICE("You pick '[option]'."))
+		to_chat(user, span_notice("You pick '[option]'."))
 		alternate_by_number(option, user)
 	else
-		to_chat(user, SPAN_WARNING("You can't seem to work out how to use \the [src]."))
+		to_chat(user, span_warning("You can't seem to work out how to use \the [src]."))
 	return TRUE
 
 /obj/item/paper_fortune_teller/proc/alternate(amount, mob/user)
@@ -74,7 +74,7 @@
 	for(var/i = 1 to amount)
 		advance()
 		if(user)
-			user.visible_message(SPAN_NOTICE("\The [user] opens and closes \the [src]."))
+			user.visible_message(span_notice("\The [user] opens and closes \the [src]."))
 		sleep(0.5 SECONDS)
 		if(QDELETED(src))
 			break

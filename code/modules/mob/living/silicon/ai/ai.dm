@@ -269,7 +269,7 @@ var/global/list/ai_verbs_default = list(
 			var/dead_icon_state = "[Entry[3]]-ai-crash"
 
 			if(!ICON_HAS_STATE(CUSTOM_ITEM_SYNTH, alive_icon_state))
-				to_chat(src, SPAN_WARNING("Custom display entry found but the icon state '[alive_icon_state]' is missing!"))
+				to_chat(src, span_warning("Custom display entry found but the icon state '[alive_icon_state]' is missing!"))
 				continue
 
 			if(!ICON_HAS_STATE(CUSTOM_ITEM_SYNTH, dead_icon_state))
@@ -377,16 +377,16 @@ var/global/list/ai_verbs_default = list(
 	if(check_unable(AI_CHECK_WIRELESS))
 		return
 	if(!is_relay_online())
-		to_chat(usr, SPAN_WARNING("No Emergency Bluespace Relay detected. Unable to transmit message."))
+		to_chat(usr, span_warning("No Emergency Bluespace Relay detected. Unable to transmit message."))
 		return
 	if(emergency_message_cooldown)
-		to_chat(usr, SPAN_WARNING("Arrays recycling. Please stand by."))
+		to_chat(usr, span_warning("Arrays recycling. Please stand by."))
 		return
 	var/input = sanitize(input(usr, "Please choose a message to transmit to [GLOB.using_map.boss_short] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", ""))
 	if(!input)
 		return
 	Centcomm_announce(input, usr)
-	to_chat(usr, SPAN_NOTICE("Message transmitted."))
+	to_chat(usr, span_notice("Message transmitted."))
 	log_say("[key_name(usr)] has made an IA [GLOB.using_map.boss_short] announcement: [input]")
 	emergency_message_cooldown = 1
 	spawn(300)
@@ -433,7 +433,7 @@ var/global/list/ai_verbs_default = list(
 				if(H)
 					H.attack_ai(src) //may as well recycle
 				else
-					to_chat(src, SPAN_NOTICE("Unable to locate the holopad."))
+					to_chat(src, span_notice("Unable to locate the holopad."))
 			return TOPIC_HANDLED
 
 		if (href_list["track"])
@@ -443,7 +443,7 @@ var/global/list/ai_verbs_default = list(
 			if(!istype(H) || (html_decode(href_list["trackname"]) == H.get_visible_name()) || (html_decode(href_list["trackname"]) == H.get_id_name()))
 				ai_actual_track(target)
 			else
-				to_chat(src, SPAN_WARNING("System error. Cannot locate [html_decode(href_list["trackname"])]."))
+				to_chat(src, span_warning("System error. Cannot locate [html_decode(href_list["trackname"])]."))
 			return TOPIC_HANDLED
 
 	return ..()
@@ -517,7 +517,7 @@ var/global/list/ai_verbs_default = list(
 		if(network in C.network)
 			eyeobj.setLoc(get_turf(C))
 			break
-	to_chat(src, SPAN_NOTICE("Switched to [network] camera network."))
+	to_chat(src, span_notice("Switched to [network] camera network."))
 //End of code by Mord_Sith
 
 /mob/living/silicon/ai/proc/ai_statuschange()
@@ -621,15 +621,15 @@ var/global/list/ai_verbs_default = list(
 /mob/living/silicon/ai/wrench_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
 	user.visible_message(
-		SPAN_NOTICE("[user] starts [anchored ? "unbolting" : "bolting"] [src] from the floor with [tool]."),
-		SPAN_NOTICE("You start [anchored ? "unbolting" : "bolting"] [src] from the floor with [tool].")
+		span_notice("[user] starts [anchored ? "unbolting" : "bolting"] [src] from the floor with [tool]."),
+		span_notice("You start [anchored ? "unbolting" : "bolting"] [src] from the floor with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 4 SECONDS, volume = 50, skill_path = list(SKILL_CONSTRUCTION, SKILL_DEVICES), do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	anchored = !anchored
 	user.visible_message(
-		SPAN_NOTICE("[user] [anchored ? "bolts" : "unbolts"] [src] from the floor with [tool]."),
-		SPAN_NOTICE("You [anchored ? "bolts" : "unbolts"] [src] from the floor with [tool].")
+		span_notice("[user] [anchored ? "bolts" : "unbolts"] [src] from the floor with [tool]."),
+		span_notice("You [anchored ? "bolts" : "unbolts"] [src] from the floor with [tool].")
 	)
 
 /mob/living/silicon/ai/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -664,26 +664,26 @@ var/global/list/ai_verbs_default = list(
 	set desc = "Toggles hologram movement based on moving with your virtual eye."
 
 	hologram_follow = !hologram_follow
-	to_chat(usr, SPAN_INFO("Your hologram will now [hologram_follow ? "follow" : "no longer follow"] you."))
+	to_chat(usr, span_info("Your hologram will now [hologram_follow ? "follow" : "no longer follow"] you."))
 
 /mob/living/silicon/ai/proc/check_unable(flags = 0, feedback = 1)
 	if(stat == DEAD)
-		if(feedback) to_chat(src, SPAN_WARNING("You are dead!"))
+		if(feedback) to_chat(src, span_warning("You are dead!"))
 		return 1
 
 	if(!has_power())
-		if(feedback) to_chat(src, SPAN_WARNING("You lack power!"))
+		if(feedback) to_chat(src, span_warning("You lack power!"))
 		return 1
 
 	if(self_shutdown)
-		if(feedback) to_chat(src, SPAN_WARNING("You are offline!"))
+		if(feedback) to_chat(src, span_warning("You are offline!"))
 		return 1
 
 	if((flags & AI_CHECK_WIRELESS) && src.control_disabled)
-		if(feedback) to_chat(src, SPAN_WARNING("Wireless control is disabled!"))
+		if(feedback) to_chat(src, span_warning("Wireless control is disabled!"))
 		return 1
 	if((flags & AI_CHECK_RADIO) && src.ai_radio.disabledAi)
-		if(feedback) to_chat(src, SPAN_WARNING("System Error - Transceiver Disabled!"))
+		if(feedback) to_chat(src, span_warning("System Error - Transceiver Disabled!"))
 		return 1
 	return 0
 
@@ -695,14 +695,14 @@ var/global/list/ai_verbs_default = list(
 	set category = "Silicon Commands"
 
 	multitool_mode = !multitool_mode
-	to_chat(src, SPAN_NOTICE("Multitool mode: [multitool_mode ? "E" : "Dise"]ngaged"))
+	to_chat(src, span_notice("Multitool mode: [multitool_mode ? "E" : "Dise"]ngaged"))
 
 /mob/living/silicon/ai/proc/ai_reset_radio_keys()
 	set name = "Reset Radio Encryption Keys"
 	set category = "Silicon Commands"
 
 	silicon_radio.recalculateChannels()
-	to_chat(src, SPAN_NOTICE("Integrated radio encryption keys have been reset."))
+	to_chat(src, span_notice("Integrated radio encryption keys have been reset."))
 
 /mob/living/silicon/ai/on_update_icon()
 	if(!selected_sprite || !(selected_sprite in available_icons()))

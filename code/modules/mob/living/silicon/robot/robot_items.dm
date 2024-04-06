@@ -85,14 +85,14 @@
 	if(!isturf(target.loc)) // Don't load up stuff if it's inside a container or mob!
 		return FALSE
 	if(loaded_item)
-		to_chat(user, SPAN_WARNING("\The [src] already has something inside.  Analyze or eject it first."))
+		to_chat(user, span_warning("\The [src] already has something inside.  Analyze or eject it first."))
 		return TRUE
 
 	var/obj/item/I = target
 	I.forceMove(src)
 	loaded_item = I
 	for(var/mob/M in viewers())
-		M.show_message(text(SPAN_NOTICE("[user] adds the [I] to the [src].")), 1)
+		M.show_message(text(span_notice("[user] adds the [I] to the [src].")), 1)
 	desc = initial(desc) + "<br>It is holding \the [loaded_item]."
 	flick("portable_analyzer_load", src)
 	icon_state = "portable_analyzer_full"
@@ -177,7 +177,7 @@
 
 /obj/item/robot_harvester/use_after(atom/target, mob/living/user, click_parameters)
 	if(!istype(target,/obj/machinery/portable_atmospherics/hydroponics))
-		to_chat(user, SPAN_WARNING("Harvesting \a [target] is not the purpose of this tool. \The [src] is for plants being grown."))
+		to_chat(user, span_warning("Harvesting \a [target] is not the purpose of this tool. \The [src] is for plants being grown."))
 		return TRUE
 
 	var/obj/machinery/portable_atmospherics/hydroponics/T = target
@@ -265,7 +265,7 @@
 	deploy_paper(get_turf(src))
 
 /obj/item/form_printer/proc/deploy_paper(turf/T)
-	T.visible_message(SPAN_NOTICE("\The [src.loc] dispenses a sheet of crisp white paper."))
+	T.visible_message(span_notice("\The [src.loc] dispenses a sheet of crisp white paper."))
 	new /obj/item/paper(T)
 
 
@@ -315,8 +315,8 @@
 
 /obj/item/inflatable_dispenser/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("It has [stored_walls] wall segment\s and [stored_doors] door segment\s stored.")
-	. += SPAN_NOTICE("It is set to deploy [mode ? "doors" : "walls"]")
+	. += span_notice("It has [stored_walls] wall segment\s and [stored_doors] door segment\s stored.")
+	. += span_notice("It is set to deploy [mode ? "doors" : "walls"]")
 
 /obj/item/inflatable_dispenser/attack_self()
 	mode = !mode
@@ -345,9 +345,9 @@
 			else
 				I = new /obj/item/inflatable/wall(T)
 		user.visible_message(
-			SPAN_ITALIC("\The [user] picks up \an [target] with \an [src]."),
-			SPAN_NOTICE("You deflate \the [target] with \the [src]."),
-			SPAN_ITALIC("You can hear rushing air."),
+			span_italic("\The [user] picks up \an [target] with \an [src]."),
+			span_notice("You deflate \the [target] with \the [src]."),
+			span_italic("You can hear rushing air."),
 			range = 5
 		)
 		if (I)
@@ -368,29 +368,29 @@
 				collected = TRUE
 		if (collected)
 			user.visible_message(
-				SPAN_ITALIC("\The [user] picks up \an [target] with \an [src]."),
-				SPAN_ITALIC("You pick up \the [target] with \the [src]."),
+				span_italic("\The [user] picks up \an [target] with \an [src]."),
+				span_italic("You pick up \the [target] with \the [src]."),
 				range = 3
 			)
 			qdel(target)
 		else
-			to_chat(user, SPAN_WARNING("\The [src] is already full of those."))
+			to_chat(user, span_warning("\The [src] is already full of those."))
 		return TRUE
 
 	else
 		var/active_mode = mode
 		if (active_mode ? (!stored_doors) : (!stored_walls))
-			to_chat(user, SPAN_WARNING("\The [src] is out of [active_mode ? "doors" : "walls"]."))
+			to_chat(user, span_warning("\The [src] is out of [active_mode ? "doors" : "walls"]."))
 			return TRUE
 		var/obstruction = T.get_obstruction()
 		if (obstruction)
-			to_chat(user, SPAN_WARNING("\The [english_list(obstruction)] is blocking that spot."))
+			to_chat(user, span_warning("\The [english_list(obstruction)] is blocking that spot."))
 			return TRUE
 		if (!do_after(user, 0.5 SECONDS, T, DO_PUBLIC_UNIQUE))
 			return TRUE
 		obstruction = T.get_obstruction()
 		if (obstruction)
-			to_chat(user, SPAN_WARNING("\The [english_list(obstruction)] is blocking that spot."))
+			to_chat(user, span_warning("\The [english_list(obstruction)] is blocking that spot."))
 			return TRUE
 		var/placed
 		if (active_mode)
@@ -400,8 +400,8 @@
 			placed = new /obj/structure/inflatable/wall(T)
 			--stored_walls
 		user.visible_message(
-			SPAN_ITALIC("\The [user] inflates \an [placed]."),
-			SPAN_NOTICE("You inflate \an [placed]."),
+			span_italic("\The [user] inflates \an [placed]."),
+			span_notice("You inflate \an [placed]."),
 			range = 5
 		)
 		playsound(loc, 'sound/items/zip.ogg', 75, 1)
@@ -423,7 +423,7 @@
 
 /obj/item/robot_rack/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("It can hold up to [capacity] item[capacity == 1 ? "" : "s"].")
+	. += span_notice("It can hold up to [capacity] item[capacity == 1 ? "" : "s"].")
 
 /obj/item/robot_rack/Initialize(mapload, starting_objects = 0)
 	. = ..()
@@ -432,24 +432,24 @@
 
 /obj/item/robot_rack/attack_self(mob/user)
 	if(!length(held))
-		to_chat(user, SPAN_WARNING("\The [src] is empty."))
+		to_chat(user, span_warning("\The [src] is empty."))
 		return
 	var/obj/item/R = held[length(held)]
 	R.dropInto(loc)
 	held -= R
 	if (attack_self_on_deploy)
 		R.attack_self(user) // deploy it
-	to_chat(user, SPAN_NOTICE("You deploy \a [R]."))
+	to_chat(user, span_notice("You deploy \a [R]."))
 	R.add_fingerprint(user)
 
 /obj/item/robot_rack/resolve_attackby(obj/O, mob/user, click_params)
 	if(istype(O, object_type))
 		if(length(held) < capacity)
-			to_chat(user, SPAN_NOTICE("You collect \the [O]."))
+			to_chat(user, span_notice("You collect \the [O]."))
 			O.forceMove(src)
 			held += O
 			return
-		to_chat(user, SPAN_WARNING("\The [src] is full and can't store any more items."))
+		to_chat(user, span_warning("\The [src] is full and can't store any more items."))
 		return
 	if(istype(O, interact_type))
 		O.attack_hand(user)
@@ -461,7 +461,7 @@
 	set desc = "Empty all items from the rack."
 	set category = "Silicon Commands"
 	if(!length(held))
-		to_chat(usr, SPAN_WARNING("\The [src] is empty."))
+		to_chat(usr, span_warning("\The [src] is empty."))
 		return
 	while(length(held))
 		attack_self(usr)
@@ -483,9 +483,9 @@
 	if(length(contents) >= 1)
 		var/obj/item/removing = contents[1]
 		user.put_in_hands(removing)
-		to_chat(user, SPAN_NOTICE("You remove \the [removing] from \the [src]."))
+		to_chat(user, span_notice("You remove \the [removing] from \the [src]."))
 	else
-		to_chat(user, SPAN_WARNING("There is nothing loaded into \the [src]."))
+		to_chat(user, span_warning("There is nothing loaded into \the [src]."))
 
 /obj/item/bioreactor/use_after(atom/movable/target, mob/living/user, click_parameters)
 	if(!istype(target))
@@ -495,14 +495,14 @@
 	is_fuel = is_fuel || is_type_in_list(target, fuel_types)
 
 	if(!is_fuel)
-		to_chat(user, SPAN_WARNING("\The [target] cannot be used as fuel by \the [src]."))
+		to_chat(user, span_warning("\The [target] cannot be used as fuel by \the [src]."))
 		return TRUE
 	if(length(contents) >= max_fuel_items)
-		to_chat(user, SPAN_WARNING("\The [src] can fit no more fuel inside."))
+		to_chat(user, span_warning("\The [src] can fit no more fuel inside."))
 		return TRUE
 
 	target.forceMove(src)
-	to_chat(user, SPAN_NOTICE("You load \the [target] into \the [src]."))
+	to_chat(user, span_notice("You load \the [target] into \the [src]."))
 	return TRUE
 
 /obj/item/bioreactor/Initialize()

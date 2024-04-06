@@ -15,7 +15,7 @@
 /obj/item/device/scanner/reagent/scan(obj/O, mob/user)
 	scan_data = reagent_scan_results(O, details)
 	scan_data = jointext(scan_data, "<br>")
-	user.show_message(SPAN_NOTICE(scan_data))
+	user.show_message(span_notice(scan_data))
 
 /proc/reagent_scan_results(obj/O, details = 0)
 	RETURN_TYPE(/list)

@@ -50,7 +50,7 @@
 /obj/item/grab/examine(mob/user)
 	. = ..()
 	var/obj/item/O = get_targeted_organ()
-	. += SPAN_NOTICE("A grab on [affecting]'s [O].")
+	. += span_notice("A grab on [affecting]'s [O].")
 
 /obj/item/grab/Process()
 	if (!use_sanity_check(affecting))
@@ -123,11 +123,11 @@
 	var/obj/item/organ/O = get_targeted_organ()
 
 	if (!O)
-		to_chat(assailant, SPAN_WARNING("You fail to grab \the [affecting] there as they do not have that bodypart!"))
+		to_chat(assailant, span_warning("You fail to grab \the [affecting] there as they do not have that bodypart!"))
 		return
 
 	SetName("[initial(name)] ([O.name])")
-	to_chat(assailant, SPAN_NOTICE("You are now holding \the [affecting] by \the [O]."))
+	to_chat(assailant, span_notice("You are now holding \the [affecting] by \the [O]."))
 	if(!istype(get_targeted_organ(), /obj/item/organ))
 		current_grab.let_go(src)
 		return
@@ -154,27 +154,27 @@
 	if(assailant.anchored || affecting.anchored)
 		return 0
 	if(assailant.get_active_hand())
-		to_chat(assailant, SPAN_NOTICE("You can't grab someone if your hand is full."))
+		to_chat(assailant, span_notice("You can't grab someone if your hand is full."))
 		return 0
 	if(length(assailant.grabbed_by))
-		to_chat(assailant, SPAN_NOTICE("You can't grab someone if you're being grabbed."))
+		to_chat(assailant, span_notice("You can't grab someone if you're being grabbed."))
 		return 0
 	var/obj/item/organ/organ = get_targeted_organ()
 	if(!istype(organ))
-		to_chat(assailant, SPAN_NOTICE("\The [affecting] is missing that body part!"))
+		to_chat(assailant, span_notice("\The [affecting] is missing that body part!"))
 		return 0
 	if(assailant == affecting)
 		if(!current_grab.can_grab_self)	//let's not nab ourselves
-			to_chat(assailant, SPAN_NOTICE("You can't grab yourself!"))
+			to_chat(assailant, span_notice("You can't grab yourself!"))
 			return 0
 		var/list/bad_parts = assailant.hand ? list(BP_L_ARM, BP_L_HAND) :  list(BP_R_ARM, BP_R_HAND)
 		if(organ.organ_tag in bad_parts)
-			to_chat(assailant, SPAN_NOTICE("You can't grab your own [organ.name] with itself!"))
+			to_chat(assailant, span_notice("You can't grab your own [organ.name] with itself!"))
 			return 0
 	for(var/obj/item/grab/G in affecting.grabbed_by)
 		if(G.assailant == assailant && G.target_zone == target_zone)
 			var/obj/O = G.get_targeted_organ()
-			to_chat(assailant, SPAN_NOTICE("You already grabbed [affecting]'s [O.name]."))
+			to_chat(assailant, span_notice("You already grabbed [affecting]'s [O.name]."))
 			return 0
 	return 1
 
@@ -229,7 +229,7 @@
 
 /obj/item/grab/proc/upgrade(bypass_cooldown = FALSE)
 	if(!check_upgrade_cooldown() && !bypass_cooldown)
-		to_chat(assailant, SPAN_DANGER("It's too soon to upgrade."))
+		to_chat(assailant, span_danger("It's too soon to upgrade."))
 		return
 
 	var/datum/grab/upgrab = current_grab.upgrade(src)

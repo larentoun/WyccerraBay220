@@ -53,4 +53,4 @@
 			continue
 		window.reinitialize()
 		refreshed_count++
-	to_chat(usr, SPAN_NOTICE("TGUI окон обновлено - [refreshed_count].<br>Если у вас появилось белое окно - переподключитесь, или откройте предыдущий TGUI интерфейс."))
+	to_chat(usr, span_notice("TGUI окон обновлено - [refreshed_count].<br>Если у вас появилось белое окно - переподключитесь, или откройте предыдущий TGUI интерфейс."))

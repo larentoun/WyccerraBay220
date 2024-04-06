@@ -45,14 +45,14 @@
 
 /obj/item/cane/telescopic/attack_self(mob/user)
 	if(!extended)
-		user.visible_message(SPAN_NOTICE("[user] extends \the [src] with a flick of their wrist."))
+		user.visible_message(span_notice("[user] extends \the [src] with a flick of their wrist."))
 		icon_state = "[initial(icon_state)]_active"
 		item_state = "[initial(item_state)]_active"
 		w_class = ITEM_SIZE_LARGE
 		extended = TRUE
 		can_support = TRUE
 	else
-		user.visible_message(SPAN_NOTICE("[user] retracts \the [src] back into its handle."))
+		user.visible_message(span_notice("[user] retracts \the [src] back into its handle."))
 		icon_state = "[initial(icon_state)]"
 		item_state = "[initial(item_state)]"
 		w_class = initial(w_class)
@@ -77,7 +77,7 @@
 
 /obj/item/cane/concealed/attack_self(mob/user)
 	if(concealed_blade)
-		user.visible_message(SPAN_WARNING("[user] has unsheathed \a [concealed_blade] from [src]!"), "You unsheathe \the [concealed_blade] from [src].")
+		user.visible_message(span_warning("[user] has unsheathed \a [concealed_blade] from [src]!"), "You unsheathe \the [concealed_blade] from [src].")
 		// Calling drop/put in hands to properly call item drop/pickup procs
 		playsound(user.loc, 'sound/weapons/flipblade.ogg', 50, 1)
 		user.drop_from_inventory(src)
@@ -92,7 +92,7 @@
 
 /obj/item/cane/concealed/attackby(obj/item/material/knife/folding/W, mob/user)
 	if(!src.concealed_blade && istype(W) && user.unEquip(W, src))
-		user.visible_message(SPAN_WARNING("[user] has sheathed \a [W] into [src]!"), "You sheathe \the [W] into [src].")
+		user.visible_message(span_warning("[user] has sheathed \a [W] into [src]!"), "You sheathe \the [W] into [src].")
 		src.concealed_blade = W
 		update_icon()
 		user.update_inv_l_hand()
@@ -141,20 +141,20 @@
 /obj/item/gun/projectile/shotgun/cane/examine(mob/user, distance)
 	. = ..()
 	if (distance <= 1 && !safety_state && user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
-		. += SPAN_NOTICE("You notice a small trigger sticking out from the bottom of [src].")
+		. += span_notice("You notice a small trigger sticking out from the bottom of [src].")
 
 /obj/item/gun/projectile/shotgun/cane/on_update_icon()
 	return
 
 /obj/item/gun/projectile/shotgun/cane/Fire(atom/target, mob/living/user, clickparams, pointblank, reflex)
 	if (safety_state)
-		to_chat(user, SPAN_WARNING("You can't fire \the [src] without readying it!"))
+		to_chat(user, span_warning("You can't fire \the [src] without readying it!"))
 		return
 	..()
 
 /obj/item/gun/projectile/shotgun/cane/CtrlClick(mob/user)
 	if (src == user.get_active_hand() || src == user.get_inactive_hand())
-		to_chat(user, SPAN_NOTICE("You [safety_state ? "flick out a hidden trigger on \the [src] and shift your grip" : "flick back the hidden trigger and relax your grip"]."))
+		to_chat(user, span_notice("You [safety_state ? "flick out a hidden trigger on \the [src] and shift your grip" : "flick back the hidden trigger and relax your grip"]."))
 		return ..()
 	return FALSE
 

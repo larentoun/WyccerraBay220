@@ -89,8 +89,8 @@
 			take_organ_damage(0, 7, ORGAN_DAMAGE_SILICON_EMP)
 			mod_confused(2, 30)
 	flash_eyes(affect_silicon = 1)
-	to_chat(src, SPAN_DANGER("<B>*BZZZT*</B>"))
-	to_chat(src, SPAN_DANGER("Warning: Electromagnetic pulse detected."))
+	to_chat(src, span_danger("<B>*BZZZT*</B>"))
+	to_chat(src, span_danger("Warning: Electromagnetic pulse detected."))
 	..()
 
 /mob/living/silicon/stun_effect_act(stun_amount, agony_amount)
@@ -105,9 +105,9 @@
 
 		shock_damage *= 0.75	//take reduced damage
 		take_overall_damage(0, shock_damage)
-		visible_message(SPAN_WARNING("\The [src] was shocked by \the [source]!"), \
-			SPAN_DANGER("Energy pulse detected, system damaged!"), \
-			SPAN_WARNING("You hear an electrical crack"))
+		visible_message(span_warning("\The [src] was shocked by \the [source]!"), \
+			span_danger("Energy pulse detected, system damaged!"), \
+			span_warning("You hear an electrical crack"))
 		if(prob(20))
 			Stun(2)
 		return
@@ -174,7 +174,7 @@
 
 //can't inject synths
 /mob/living/silicon/can_inject(mob/user, target_zone, ignore_thick_clothing)
-	to_chat(user, SPAN_WARNING("The armoured plating is too tough."))
+	to_chat(user, span_warning("The armoured plating is too tough."))
 	return 0
 
 
@@ -230,10 +230,10 @@
 	switch(sensor_type)
 		if ("Security")
 			sensor_mode = SEC_HUD
-			to_chat(src, SPAN_NOTICE("Security records overlay enabled."))
+			to_chat(src, span_notice("Security records overlay enabled."))
 		if ("Medical")
 			sensor_mode = MED_HUD
-			to_chat(src, SPAN_NOTICE("Life signs monitor overlay enabled."))
+			to_chat(src, span_notice("Life signs monitor overlay enabled."))
 		if ("Disable")
 			sensor_mode = 0
 			to_chat(src, "Sensor augmentations disabled.")

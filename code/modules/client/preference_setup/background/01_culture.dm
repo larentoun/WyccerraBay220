@@ -74,16 +74,16 @@
 				// html_encode() doesn't properly sanitize + symbols, otherwise we could just use that
 				// instead, we manually rip out the plus symbol and then replace it on OnTopic
 				var/sanitized_value = html_encode(replacetext(V, "+", "PLUS"))
-				
+
 				// [SIERRA-EDIT] - EXPANDED_CULTURE_DESCRIPTOR - Изменение схемы получения названия культуры, чтобы поддерживать возможность их перевода без переработки всей сабсистемы культур
 				// if (pref.cultural_info[token] == V) // SIERRA-EDIT - ORIGINAL
-				// 	. += "[SPAN_CLASS("linkOn", "[V]")] " // SIERRA-EDIT - ORIGINAL
+				// 	. += "[span_linkon("[V]")] " // SIERRA-EDIT - ORIGINAL
 				// else // SIERRA-EDIT - ORIGINAL
 				// 	. += "<a href='?src=\ref[src];set_token_entry_[token]=[sanitized_value]'>[V]</a> " // SIERRA-EDIT - ORIGINAL
 				var/singleton/cultural_info/VCulture = SSculture.get_culture(V)
 				if(VCulture)
 					if (pref.cultural_info[token] == V)
-						. += "[SPAN_CLASS("linkOn", "[VCulture.get_nickname()]")] "
+						. += "[span_linkon("[VCulture.get_nickname()]")] "
 					else
 						. += "<a href='?src=\ref[src];set_token_entry_[token]=[sanitized_value]'>[VCulture.get_nickname()]</a> "
 				// [SIERRA-EDIT]

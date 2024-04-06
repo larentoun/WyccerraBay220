@@ -421,11 +421,11 @@ var/global/list/admin_verbs_mod = list(
 	if(holder && mob)
 		if(mob.invisibility == INVISIBILITY_OBSERVER)
 			mob.set_invisibility(initial(mob.invisibility))
-			to_chat(mob, SPAN_DANGER("Invisimin off. Invisibility reset."))
+			to_chat(mob, span_danger("Invisimin off. Invisibility reset."))
 			mob.alpha = max(mob.alpha + 100, 255)
 		else
 			mob.set_invisibility(INVISIBILITY_OBSERVER)
-			to_chat(mob, SPAN_NOTICE("Invisimin on. You are now as invisible as a ghost."))
+			to_chat(mob, span_notice("Invisimin on. You are now as invisible as a ghost."))
 			mob.alpha = max(mob.alpha - 100, 0)
 
 
@@ -714,7 +714,7 @@ var/global/list/admin_verbs_mod = list(
 	var/mob/living/carbon/human/M = input("Select mob.", "Edit Appearance") as null|anything in GLOB.human_mobs
 
 	if(!istype(M, /mob/living/carbon/human))
-		to_chat(usr, SPAN_WARNING("You can only do this to humans!"))
+		to_chat(usr, span_warning("You can only do this to humans!"))
 		return
 	switch(alert("Are you sure you wish to edit this mob's appearance? Skrell, Unathi and Vox can result in unintended consequences.",,"Yes","No"))
 		if("No")
@@ -885,8 +885,8 @@ var/global/list/admin_verbs_mod = list(
 	set name = "Man Up"
 	set desc = "Tells mob to man up and deal with it."
 
-	to_chat(T, SPAN_NOTICE("<b>[FONT_LARGE("Man up and deal with it.")]</b>"))
-	to_chat(T, SPAN_NOTICE("Move on."))
+	to_chat(T, span_notice("<b>[FONT_LARGE("Man up and deal with it.")]</b>"))
+	to_chat(T, span_notice("Move on."))
 
 	log_and_message_admins("told [key_name(T)] to man up and deal with it.")
 
@@ -896,7 +896,7 @@ var/global/list/admin_verbs_mod = list(
 	set desc = "Tells everyone to man up and deal with it."
 
 	for (var/mob/T as mob in SSmobs.mob_list)
-		to_chat(T, "<br><center>[SPAN_NOTICE("<b>[FONT_HUGE("Man up.<br> Deal with it.")]</b><br>Move on.")]</center><br>")
+		to_chat(T, "<br><center>[span_notice("<b>[FONT_HUGE("Man up.<br> Deal with it.")]</b><br>Move on.")]</center><br>")
 		sound_to(T, 'sound/voice/ManUp1.ogg')
 
 	log_and_message_admins("told everyone to man up and deal with it.")

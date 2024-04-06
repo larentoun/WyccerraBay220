@@ -59,7 +59,7 @@
 				fpcopy(copyitem)
 				sleep(15)
 			else
-				to_chat(user, SPAN_WARNING("\The [copyitem] can't be copied by \the [src]."))
+				to_chat(user, span_warning("\The [copyitem] can't be copied by \the [src]."))
 				break
 
 			use_power_oneoff(active_power_usage)
@@ -104,7 +104,7 @@
 /obj/machinery/photocopier/proc/OnRemove(mob/user)
 	if(copyitem)
 		user.put_in_hands(copyitem)
-		to_chat(user, SPAN_NOTICE("You take \the [copyitem] out of \the [src]."))
+		to_chat(user, span_notice("You take \the [copyitem] out of \the [src]."))
 		copyitem = null
 
 /obj/machinery/photocopier/use_tool(obj/item/O, mob/living/user, list/click_params)
@@ -113,24 +113,24 @@
 			if(!user.unEquip(O, src))
 				return TRUE
 			copyitem = O
-			to_chat(user, SPAN_NOTICE("You insert \the [O] into \the [src]."))
+			to_chat(user, span_notice("You insert \the [O] into \the [src]."))
 			flick(insert_anim, src)
 			updateUsrDialog()
 		else
-			to_chat(user, SPAN_NOTICE("There is already something in \the [src]."))
+			to_chat(user, span_notice("There is already something in \the [src]."))
 		return TRUE
 
 	if (istype(O, /obj/item/device/toner))
 		if(toner <= 10) //allow replacing when low toner is affecting the print darkness
 			if(!user.unEquip(O, src))
 				return TRUE
-			to_chat(user, SPAN_NOTICE("You insert the toner cartridge into \the [src]."))
+			to_chat(user, span_notice("You insert the toner cartridge into \the [src]."))
 			var/obj/item/device/toner/T = O
 			toner += T.toner_amount
 			qdel(O)
 			updateUsrDialog()
 		else
-			to_chat(user, SPAN_NOTICE("This cartridge is not yet ready for replacement! Use up the rest of the toner."))
+			to_chat(user, span_notice("This cartridge is not yet ready for replacement! Use up the rest of the toner."))
 		return TRUE
 
 	return ..()
@@ -191,7 +191,7 @@
 	if(need_toner)
 		toner--
 	if(toner == 0)
-		visible_message(SPAN_NOTICE("A red light on \the [src] flashes, indicating that it is out of toner."))
+		visible_message(span_notice("A red light on \the [src] flashes, indicating that it is out of toner."))
 	c.update_icon()
 	return c
 
@@ -209,7 +209,7 @@
 		toner -= 5	//photos use a lot of ink!
 	if(toner < 0)
 		toner = 0
-		visible_message(SPAN_NOTICE("A red light on \the [src] flashes, indicating that it is out of toner."))
+		visible_message(span_notice("A red light on \the [src] flashes, indicating that it is out of toner."))
 
 	return p
 
@@ -219,7 +219,7 @@
 	for(var/obj/item/W in bundle.pages)
 		if(toner <= 0 && need_toner)
 			toner = 0
-			visible_message(SPAN_NOTICE("A red light on \the [src] flashes, indicating that it is out of toner."))
+			visible_message(span_notice("A red light on \the [src] flashes, indicating that it is out of toner."))
 			break
 
 		if(istype(W, /obj/item/paper))
@@ -244,7 +244,7 @@
 	if(need_toner)
 		toner--
 	if(toner < 1)
-		visible_message(SPAN_NOTICE("A red light on \the [src] flashes, indicating that it is out of toner."))
+		visible_message(span_notice("A red light on \the [src] flashes, indicating that it is out of toner."))
 	p.update_icon()
 	return p
 

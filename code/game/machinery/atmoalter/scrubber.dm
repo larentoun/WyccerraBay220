@@ -180,7 +180,7 @@
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/attack_hand(mob/user)
 	if((. = ..()))
 		return
-	to_chat(user, SPAN_NOTICE("You can't directly interact with this machine. Use the scrubber control console."))
+	to_chat(user, span_notice("You can't directly interact with this machine. Use the scrubber control console."))
 	return TRUE
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/on_update_icon()
@@ -207,4 +207,4 @@
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/wrench_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_BLOCKING
-	to_chat(user, SPAN_WARNING("The bolts are too tight for you to unscrew!"))
+	to_chat(user, span_warning("The bolts are too tight for you to unscrew!"))

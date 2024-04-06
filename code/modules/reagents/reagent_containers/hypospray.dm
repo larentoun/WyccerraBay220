@@ -33,7 +33,7 @@
 	if (!istype(M))
 		return FALSE
 	if (!reagents.total_volume)
-		to_chat(user, SPAN_WARNING("[src] is empty."))
+		to_chat(user, span_warning("[src] is empty."))
 		return TRUE
 
 	var/allow = M.can_inject(user, check_zone(user.zone_sel.selecting))
@@ -42,9 +42,9 @@
 
 	if (allow == INJECTION_PORT)
 		if(M != user)
-			user.visible_message(SPAN_WARNING("\The [user] begins hunting for an injection port on \the [M]'s suit!"))
+			user.visible_message(span_warning("\The [user] begins hunting for an injection port on \the [M]'s suit!"))
 		else
-			to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
+			to_chat(user, span_notice("You begin hunting for an injection port on your suit."))
 		if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M, do_flags = DO_MEDICAL))
 			return TRUE
 
@@ -52,7 +52,7 @@
 	user.do_attack_animation(M)
 
 	if(user != M && !M.incapacitated() && time) // you're injecting someone else who is concious, so apply the device's intrisic delay
-		to_chat(user, SPAN_WARNING("\The [user] is trying to inject \the [M] with \the [name]."))
+		to_chat(user, span_warning("\The [user] is trying to inject \the [M] with \the [name]."))
 		if(!user.do_skilled(time, SKILL_MEDICAL, M, do_flags = DO_MEDICAL))
 			return TRUE
 
@@ -60,13 +60,13 @@
 		atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER // Prevents autoinjectors to be refilled.
 		update_icon()
 
-	to_chat(user, SPAN_NOTICE("You inject [M] with [src]."))
+	to_chat(user, span_notice("You inject [M] with [src]."))
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		H.custom_pain(SPAN_WARNING("You feel a tiny prick!"), 1, TRUE, H.get_organ(user.zone_sel.selecting))
+		H.custom_pain(span_warning("You feel a tiny prick!"), 1, TRUE, H.get_organ(user.zone_sel.selecting))
 
 	playsound(src, 'sound/effects/hypospray.ogg',25)
-	user.visible_message(SPAN_WARNING("[user] injects [M] with [src]."))
+	user.visible_message(span_warning("[user] injects [M] with [src]."))
 
 	if(M.reagents)
 		var/should_admin_log = reagents.should_admin_log()
@@ -74,7 +74,7 @@
 		var/trans = reagents.trans_to_mob(M, amount_per_transfer_from_this, CHEM_BLOOD)
 		if (should_admin_log)
 			admin_inject_log(user, M, src, contained, trans)
-		to_chat(user, SPAN_NOTICE("[trans] units injected. [reagents.total_volume] units remaining in \the [src]."))
+		to_chat(user, span_notice("[trans] units injected. [reagents.total_volume] units remaining in \the [src]."))
 	return TRUE
 
 /obj/item/reagent_containers/hypospray/vial
@@ -109,7 +109,7 @@
 /obj/item/reagent_containers/hypospray/vial/attack_hand(mob/user)
 	if(user.get_inactive_hand() == src)
 		if(!loaded_vial)
-			to_chat(user, SPAN_NOTICE("There is no vial loaded in the [src]."))
+			to_chat(user, span_notice("There is no vial loaded in the [src]."))
 			return
 		remove_vial(user)
 		update_icon()
@@ -135,7 +135,7 @@
 		loaded_vial = W
 		reagents.maximum_volume = loaded_vial.reagents.maximum_volume
 		loaded_vial.reagents.trans_to_holder(reagents,volume)
-		user.visible_message(SPAN_NOTICE("[user] has loaded [W] into \the [src]."),SPAN_NOTICE("[usermessage]"))
+		user.visible_message(span_notice("[user] has loaded [W] into \the [src]."),span_notice("[usermessage]"))
 		update_icon()
 		playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 		return
@@ -150,13 +150,13 @@
 		if (!good_target)
 			return
 		if (!target.is_open_container())
-			to_chat(user, SPAN_ITALIC("\The [target] is closed."))
+			to_chat(user, span_italic("\The [target] is closed."))
 			return TRUE
 		if (!target.reagents?.total_volume)
-			to_chat(user, SPAN_ITALIC("\The [target] is empty."))
+			to_chat(user, span_italic("\The [target] is empty."))
 			return TRUE
 		var/trans = target.reagents.trans_to_obj(src, amount_per_transfer_from_this)
-		to_chat(user, SPAN_NOTICE("You fill \the [src] with [trans] units of the solution."))
+		to_chat(user, span_notice("You fill \the [src] with [trans] units of the solution."))
 		return TRUE
 	else
 		standard_pour_into(user, target)
@@ -204,9 +204,9 @@
 /obj/item/reagent_containers/hypospray/autoinjector/examine(mob/user)
 	. = ..(user)
 	if(reagents && length(reagents.reagent_list))
-		. += SPAN_NOTICE("It is currently loaded.")
+		. += span_notice("It is currently loaded.")
 	else
-		. += SPAN_NOTICE("It is spent.")
+		. += span_notice("It is spent.")
 
 /obj/item/reagent_containers/hypospray/autoinjector/detox
 	name = "autoinjector (antitox)"

@@ -103,14 +103,14 @@
 		if (!input)
 			SetName(initial(name))
 			user.visible_message(
-				SPAN_NOTICE("\The [user] clears \the [src]'s label with \a [tool]."),
-				SPAN_NOTICE("You clear \the [src]'s label with \the [tool].")
+				span_notice("\The [user] clears \the [src]'s label with \a [tool]."),
+				span_notice("You clear \the [src]'s label with \the [tool].")
 			)
 		else
 			SetName("[initial(name)] - '[input]'")
 			user.visible_message(
-				SPAN_NOTICE("\The [user] labels \the [src] with \a [tool]."),
-				SPAN_NOTICE("You label \the [src] with \the [tool].")
+				span_notice("\The [user] labels \the [src] with \a [tool]."),
+				span_notice("You label \the [src] with \the [tool].")
 			)
 		return TRUE
 
@@ -179,7 +179,7 @@
 	if (user != O)
 		for(var/mob/B in viewers(user, 3))
 			if ((B.client && !( B.blinded )))
-				to_chat(B, SPAN_WARNING("\The [user] stuffs [O] into [src]!"))
+				to_chat(B, span_warning("\The [user] stuffs [O] into [src]!"))
 	return
 
 
@@ -242,7 +242,7 @@
 
 /obj/structure/crematorium/attack_hand(mob/user)
 	if(cremating)
-		to_chat(usr, SPAN_WARNING("It's locked."))
+		to_chat(usr, span_warning("It's locked."))
 		return
 	if(src.connected && (src.locked == FALSE))
 		for(var/atom/movable/A as mob|obj in src.connected.loc)
@@ -279,14 +279,14 @@
 		if (!input)
 			SetName(initial(name))
 			user.visible_message(
-				SPAN_NOTICE("\The [user] clears \the [src]'s label with \a [tool]."),
-				SPAN_NOTICE("You clear \the [src]'s label with \the [tool].")
+				span_notice("\The [user] clears \the [src]'s label with \a [tool]."),
+				span_notice("You clear \the [src]'s label with \the [tool].")
 			)
 		else
 			SetName("[initial(name)] - '[input]'")
 			user.visible_message(
-				SPAN_NOTICE("\The [user] labels \the [src] with \a [tool]."),
-				SPAN_NOTICE("You label \the [src] with \the [tool].")
+				span_notice("\The [user] labels \the [src] with \a [tool]."),
+				span_notice("You label \the [src] with \the [tool].")
 			)
 		return TRUE
 
@@ -314,14 +314,14 @@
 		return //don't let you cremate something twice or w/e
 
 	if(length(contents) <= 0)
-		src.audible_message(SPAN_WARNING("You hear a hollow crackle."), 1)
+		src.audible_message(span_warning("You hear a hollow crackle."), 1)
 		return
 
 	else
 		if(length(search_contents_for(/obj/item/disk/nuclear)))
 			to_chat(loc, "The button's status indicator flashes yellow, indicating that something important is inside the crematorium, and must be removed.")
 			return
-		src.audible_message(SPAN_WARNING("You hear a roar as the [src] activates."), 1)
+		src.audible_message(span_warning("You hear a roar as the [src] activates."), 1)
 
 		cremating = 1
 		locked = 1
@@ -436,7 +436,7 @@
 		return
 	O.forceMove(src.loc)
 	if (user != O)
-		user.visible_message(SPAN_WARNING("\The [user] stuffs \the [O] into \the [src]!"))
+		user.visible_message(span_warning("\The [user] stuffs \the [O] into \the [src]!"))
 
 /obj/machinery/button/crematorium
 	name = "crematorium igniter"

@@ -231,11 +231,11 @@
 	if(body_parts_covered >= FACE)
 		body_parts_covered &= ~FACE
 		icon_state = lowered_icon_state
-		to_chat(user, SPAN_NOTICE("You lowered your scarf."))
+		to_chat(user, span_notice("You lowered your scarf."))
 	else
 		body_parts_covered |= FACE
 		icon_state = rised_icon_state
-		to_chat(user, SPAN_NOTICE("You rised your scarf. Let's rrrobe someone!"))
+		to_chat(user, span_notice("You rised your scarf. Let's rrrobe someone!"))
 
 /obj/item/clothing/accessory/amulet
 	name = "talisman"

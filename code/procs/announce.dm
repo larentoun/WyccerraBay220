@@ -55,23 +55,23 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = ANNOUNC
 
 /////// ANNOUNCEMENT PROCS VIA RADIO ///////
 /datum/announcement/proc/FormRadioMessage(message as text, message_title as text, zlevel)
-	GLOB.global_announcer.autosay(SPAN_BOLD(FONT_LARGE("[SPAN_WARNING("[title]:")] [message]")), announcer ? announcer : AUTO_ANNOUNCER_NAME,, zlevel)
+	GLOB.global_announcer.autosay(span_bold(FONT_LARGE("[span_warning("[title]:")] [message]")), announcer ? announcer : AUTO_ANNOUNCER_NAME,, zlevel)
 
 /datum/announcement/minor/FormRadioMessage(message as text, message_title as text, zlevel)
 	GLOB.global_announcer.autosay(message, AUTO_ANNOUNCER_NAME,, zlevel)
 
 /datum/announcement/priority/FormRadioMessage(message as text, message_title as text, zlevel)
-	GLOB.global_announcer.autosay(SPAN_BOLD(FONT_LARGE("[SPAN_WARNING("[message_title]:")] [message]")), announcer ? announcer : AUTO_ANNOUNCER_NAME,, zlevel)
+	GLOB.global_announcer.autosay(span_bold(FONT_LARGE("[span_warning("[message_title]:")] [message]")), announcer ? announcer : AUTO_ANNOUNCER_NAME,, zlevel)
 
 /datum/announcement/priority/command/FormRadioMessage(message as text, message_title as text, zlevel)
-	GLOB.global_announcer.autosay(SPAN_BOLD(FONT_LARGE("[SPAN_WARNING("[GLOB.using_map.boss_name] Update[message_title ? " — [message_title]" : ""]:")] [message]")), AUTO_ANNOUNCER_NAME,, zlevel)
+	GLOB.global_announcer.autosay(span_bold(FONT_LARGE("[span_warning("[GLOB.using_map.boss_name] Update[message_title ? " — [message_title]" : ""]:")] [message]")), AUTO_ANNOUNCER_NAME,, zlevel)
 
 /datum/announcement/priority/security/FormRadioMessage(message as text, message_title as text, zlevel)
-	GLOB.global_announcer.autosay(SPAN_BOLD(FONT_LARGE("[SPAN_WARNING("[message_title]:")] [message]")), AUTO_ANNOUNCER_NAME,, zlevel)
+	GLOB.global_announcer.autosay(span_bold(FONT_LARGE("[span_warning("[message_title]:")] [message]")), AUTO_ANNOUNCER_NAME,, zlevel)
 
 /////// ANNOUNCEMENT PROCS ///////
 /datum/announcement/proc/Message(message as text, message_title as text)
-	GLOB.global_announcer.autosay(FONT_LARGE("[SPAN_WARNING("[title]:")] [message]"), announcer ? announcer : AUTO_ANNOUNCER_NAME)
+	GLOB.global_announcer.autosay(FONT_LARGE("[span_warning("[title]:")] [message]"), announcer ? announcer : AUTO_ANNOUNCER_NAME)
 
 /datum/announcement/minor/Message(message as text, message_title as text)
 	GLOB.global_announcer.autosay(message, AUTO_ANNOUNCER_NAME)
@@ -80,7 +80,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = ANNOUNC
 	GLOB.global_announcer.autosay(FONT_LARGE("[SPAN_CLASS("alert", "[message_title]:")] [message]"), announcer ? announcer : AUTO_ANNOUNCER_NAME)
 
 /datum/announcement/priority/command/Message(message as text, message_title as text)
-	GLOB.global_announcer.autosay(FONT_LARGE("[SPAN_WARNING("[GLOB.using_map.boss_name] [message_title]:")] [message]"), AUTO_ANNOUNCER_NAME)
+	GLOB.global_announcer.autosay(FONT_LARGE("[span_warning("[GLOB.using_map.boss_name] [message_title]:")] [message]"), AUTO_ANNOUNCER_NAME)
 
 /datum/announcement/priority/security/Message(message as text, message_title as text)
 	GLOB.global_announcer.autosay(FONT_LARGE("[SPAN_COLOR("red", "[message_title]:")] [message]"), AUTO_ANNOUNCER_NAME)

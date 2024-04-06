@@ -15,7 +15,7 @@
 		if(status[1] == HUMAN_EATING_NBP_MOUTH)
 			to_chat(src, "Where do you intend to put \the [food]? You don't have a mouth!")
 		else if(status[1] == HUMAN_EATING_BLOCKED_MOUTH)
-			to_chat(src, SPAN_WARNING("\The [status[2]] is in the way!"))
+			to_chat(src, span_warning("\The [status[2]] is in the way!"))
 	return 0
 
 /mob/living/carbon/human/can_force_feed(feeder, food, feedback = 1)
@@ -26,7 +26,7 @@
 		if(status[1] == HUMAN_EATING_NBP_MOUTH)
 			to_chat(feeder, "Where do you intend to put \the [food]? \The [src] doesn't have a mouth!")
 		else if(status[1] == HUMAN_EATING_BLOCKED_MOUTH)
-			to_chat(feeder, SPAN_WARNING("\The [status[2]] is in the way!"))
+			to_chat(feeder, span_warning("\The [status[2]] is in the way!"))
 	return 0
 
 /mob/living/carbon/human/proc/can_eat_status()
@@ -178,17 +178,17 @@
 	set category = "IC"
 
 	if(incapacitated())
-		to_chat(src, SPAN_WARNING("You need to recover before you can use this ability."))
+		to_chat(src, span_warning("You need to recover before you can use this ability."))
 		return
 	if(world.time < next_sonar_ping)
-		to_chat(src, SPAN_WARNING("You need another moment to focus."))
+		to_chat(src, span_warning("You need another moment to focus."))
 		return
 	if(is_deaf() || is_below_sound_pressure(get_turf(src)))
-		to_chat(src, SPAN_WARNING("You are for all intents and purposes currently deaf!"))
+		to_chat(src, span_warning("You are for all intents and purposes currently deaf!"))
 		return
 	next_sonar_ping += 10 SECONDS
 	var/heard_something = FALSE
-	to_chat(src, SPAN_NOTICE("You take a moment to listen in to your environment..."))
+	to_chat(src, span_notice("You take a moment to listen in to your environment..."))
 	for(var/mob/living/L in range(client.view, src))
 		var/turf/T = get_turf(L)
 		if(!T || L == src || L.stat == DEAD || is_below_sound_pressure(T))
@@ -219,9 +219,9 @@
 					feedback += "far away."
 		else // No need to check distance if they're standing right on-top of us
 			feedback += "right on top of you."
-		to_chat(src, SPAN_NOTICE(jointext(feedback,null)))
+		to_chat(src, span_notice(jointext(feedback,null)))
 	if(!heard_something)
-		to_chat(src, SPAN_NOTICE("You hear no movement but your own."))
+		to_chat(src, span_notice("You hear no movement but your own."))
 
 /mob/living/carbon/human/reset_layer()
 	if(hiding)
@@ -241,30 +241,30 @@
 	var/safety = eyecheck()
 	switch(safety)
 		if(FLASH_PROTECTION_MODERATE)
-			to_chat(src, SPAN_WARNING("Your eyes sting a little."))
+			to_chat(src, span_warning("Your eyes sting a little."))
 			E.damage += rand(1, 2)
 			if(E.damage > 12)
 				eye_blurry += rand(3,6)
 		if(FLASH_PROTECTION_MINOR)
-			to_chat(src, SPAN_WARNING("Your eyes stings!"))
+			to_chat(src, span_warning("Your eyes stings!"))
 			E.damage += rand(1, 4)
 			if(E.damage > 10)
 				eye_blurry += rand(3,6)
 				E.damage += rand(1, 4)
 		if(FLASH_PROTECTION_NONE)
-			to_chat(src, SPAN_WARNING("Your eyes burn!"))
+			to_chat(src, span_warning("Your eyes burn!"))
 			E.damage += rand(2, 4)
 			if(E.damage > 10)
 				E.damage += rand(4,10)
 		if(FLASH_PROTECTION_REDUCED)
-			to_chat(src, SPAN_DANGER("Your equipment intensifies the welder's glow. Your eyes itch and burn severely."))
+			to_chat(src, span_danger("Your equipment intensifies the welder's glow. Your eyes itch and burn severely."))
 			eye_blurry += rand(12,20)
 			E.damage += rand(12, 16)
 	if(safety<FLASH_PROTECTION_MAJOR)
 		if(E.damage > 10)
-			to_chat(src, SPAN_WARNING("Your eyes are really starting to hurt. This can't be good for you!"))
+			to_chat(src, span_warning("Your eyes are really starting to hurt. This can't be good for you!"))
 		if (E.damage >= E.min_bruised_damage)
-			to_chat(src, SPAN_DANGER("You go blind!"))
+			to_chat(src, span_danger("You go blind!"))
 			eye_blind = 5
 			eye_blurry = 5
 			disabilities |= NEARSIGHTED
@@ -293,12 +293,12 @@
 	// We don't present the cloaking message if the human was already cloaked just before cleanup.
 	if(!has_uncloaked && LAZYLEN(cloaking_sources) == 1)
 		update_icons()
-		src.visible_message(SPAN_WARNING("\The [src] seems to disappear before your eyes!"), SPAN_NOTICE("You feel completely invisible."))
+		src.visible_message(span_warning("\The [src] seems to disappear before your eyes!"), span_notice("You feel completely invisible."))
 		return TRUE
 	return FALSE
 
-#define CLOAK_APPEAR_OTHER SPAN_WARNING("\The [src] appears from thin air!")
-#define CLOAK_APPEAR_SELF SPAN_NOTICE("You have re-appeared.")
+#define CLOAK_APPEAR_OTHER span_warning("\The [src] appears from thin air!")
+#define CLOAK_APPEAR_SELF span_notice("You have re-appeared.")
 
 // Returns true if, and only if, the human has gone from cloaked to uncloaked
 /mob/living/carbon/human/proc/remove_cloaking_source(datum/cloaking_source)

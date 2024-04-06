@@ -62,7 +62,7 @@
 	. = ..()
 	if(user.Adjacent(src))
 		if(beaker)
-			. += SPAN_NOTICE("It is loaded with a beaker.")
+			. += span_notice("It is loaded with a beaker.")
 		if(occupant)
 			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(examinate), user, occupant), 0.1 SECONDS)
 
@@ -229,7 +229,7 @@
 		return ..()
 
 	if (beaker)
-		to_chat(user, SPAN_WARNING("A beaker is already loaded into the machine."))
+		to_chat(user, span_warning("A beaker is already loaded into the machine."))
 		return TRUE
 	if (!user.unEquip(G, src))
 		return TRUE
@@ -293,7 +293,7 @@
 		if(beaker && !has_cryo_medicine)
 			beaker.reagents.trans_to_mob(occupant, REM, CHEM_BLOOD)
 		if (prob(2))
-			to_chat(occupant, SPAN_NOTICE(SPAN_BOLD("... [pick("floating", "cold")] ...")))
+			to_chat(occupant, span_notice(span_bold("... [pick("floating", "cold")] ...")))
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/heat_gas_contents()
 	if(air_contents.total_moles < 1)
@@ -352,7 +352,7 @@
 	target.forceMove(src)
 	target.ExtinguishMob()
 	if (target.health > -100 && (target.health < 0 || target.sleeping))
-		to_chat(target, SPAN_NOTICE("<b>You feel a cold liquid surround you. Your skin starts to freeze up.</b>"))
+		to_chat(target, span_notice("<b>You feel a cold liquid surround you. Your skin starts to freeze up.</b>"))
 	occupant = target
 	current_heat_capacity = HEAT_CAPACITY_HUMAN
 	update_use_power(POWER_USE_ACTIVE)
@@ -365,10 +365,10 @@
 
 /obj/machinery/atmospherics/unary/cryo_cell/user_can_move_target_inside(mob/target, mob/user)
 	if (occupant)
-		to_chat(user, SPAN_WARNING("\The [src] is already occupied!"))
+		to_chat(user, span_warning("\The [src] is already occupied!"))
 		return FALSE
 	if (!node)
-		to_chat(usr, SPAN_WARNING("The cell is not correctly connected to its pipe network!"))
+		to_chat(usr, span_warning("The cell is not correctly connected to its pipe network!"))
 		return FALSE
 	return ..()
 
@@ -378,7 +378,7 @@
 	if (!user_can_move_target_inside(target, user))
 		return
 
-	user.visible_message(SPAN_NOTICE("\The [user] begins placing \the [target] into \the [src]."), SPAN_NOTICE("You start placing \the [target] into \the [src]."))
+	user.visible_message(span_notice("\The [user] begins placing \the [target] into \the [src]."), span_notice("You start placing \the [target] into \the [src]."))
 	put_mob(target, user)
 
 /obj/machinery/atmospherics/unary/cryo_cell/use_grab(obj/item/grab/grab, list/click_params) //Grab is deleted at the level of put_mob if all checks are passed.
@@ -392,7 +392,7 @@
 	if(usr == occupant)//If the user is inside the tube...
 		if (usr.stat == 2)//and he's not dead....
 			return
-		to_chat(usr, SPAN_NOTICE("Release sequence activated. This will take two minutes."))
+		to_chat(usr, span_notice("Release sequence activated. This will take two minutes."))
 		sleep(1200)
 		if(!src || !usr || !occupant || (occupant != usr)) //Check if someone's released/replaced/bombed him already
 			return

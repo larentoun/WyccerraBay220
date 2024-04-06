@@ -23,7 +23,7 @@
 /spell/targeted/equip_item/holy_relic/cast(list/targets, mob/user = usr)
 	..()
 	for(var/mob/M in targets)
-		M.visible_message(SPAN_DANGER("A rod of metal appears in \the [M]'s hand!"))
+		M.visible_message(span_danger("A rod of metal appears in \the [M]'s hand!"))
 
 /spell/targeted/equip_item/holy_relic/empower_spell()
 	if(!..())

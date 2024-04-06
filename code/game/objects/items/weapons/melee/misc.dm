@@ -103,32 +103,32 @@
 		return FALSE
 
 	if (A.locked)
-		to_chat(user, SPAN_WARNING("The airlock's bolts prevent it from being forced."))
+		to_chat(user, span_warning("The airlock's bolts prevent it from being forced."))
 		return TRUE
 
 	if (A.welded)
-		A.visible_message(SPAN_DANGER("\The [user] forces the fingers of \the [src] in through the welded metal, beginning to pry \the [A] open!"))
+		A.visible_message(span_danger("\The [user] forces the fingers of \the [src] in through the welded metal, beginning to pry \the [A] open!"))
 		if (do_after(user, 11 SECONDS, A, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && !A.locked)
 			A.welded = FALSE
 			A.update_icon()
 			playsound(A, 'sound/effects/bang.ogg', 100, 1)
 			playsound(A, 'sound/machines/airlock_creaking.ogg', 100, 1)
-			A.visible_message(SPAN_DANGER("\The [user] tears \the [A] open with \a [src]!"))
+			A.visible_message(span_danger("\The [user] tears \the [A] open with \a [src]!"))
 			addtimer(CALLBACK(A, TYPE_PROC_REF(/obj/machinery/door/airlock, open), TRUE), 0)
 			A.set_broken(TRUE)
 		return TRUE
 	else
-		A.visible_message(SPAN_DANGER("\The [user] pries the fingers of \a [src] in, beginning to force \the [A]!"))
+		A.visible_message(span_danger("\The [user] pries the fingers of \a [src] in, beginning to force \the [A]!"))
 		if ((MACHINE_IS_BROKEN(A) || !A.is_powered() || do_after(user, 8 SECONDS, A, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS)) && !(A.operating || A.welded || A.locked))
 			playsound(A, 'sound/machines/airlock_creaking.ogg', 100, 1)
 			if (A.density)
 				addtimer(CALLBACK(A, TYPE_PROC_REF(/obj/machinery/door/airlock, open), TRUE), 0)
 				if(!MACHINE_IS_BROKEN(A) && A.is_powered())
 					A.set_broken(TRUE)
-				A.visible_message(SPAN_DANGER("\The [user] forces \the [A] open with \a [src]!"))
+				A.visible_message(span_danger("\The [user] forces \the [A] open with \a [src]!"))
 			else
 				addtimer(CALLBACK(A, TYPE_PROC_REF(/obj/machinery/door/airlock, close), TRUE), 0)
 				if (!MACHINE_IS_BROKEN(A) && A.is_powered())
 					A.set_broken(TRUE)
-				A.visible_message(SPAN_DANGER("\The [user] forces \the [A] closed with \a [src]!"))
+				A.visible_message(span_danger("\The [user] forces \the [A] closed with \a [src]!"))
 		return TRUE

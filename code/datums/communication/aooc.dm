@@ -18,10 +18,10 @@
 
 	if(!C.holder)
 		if(isghost(C.mob))
-			to_chat(src, SPAN_WARNING("You cannot use [name] while ghosting/observing!"))
+			to_chat(src, span_warning("You cannot use [name] while ghosting/observing!"))
 			return FALSE
 		if(!(C.mob?.mind?.special_role))
-			to_chat(C, SPAN_DANGER("You must be an antag to use [name]."))
+			to_chat(C, span_danger("You must be an antag to use [name]."))
 			return FALSE
 
 

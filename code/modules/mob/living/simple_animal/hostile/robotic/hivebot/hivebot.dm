@@ -89,7 +89,7 @@ Teleporter beacon, and its subtypes
 	var/datum/effect/smoke_spread/smoke = new
 	smoke.set_up(5, 0, loc)
 	smoke.start()
-	visible_message(SPAN_DANGER("\The [src] warps in!"))
+	visible_message(span_danger("\The [src] warps in!"))
 	playsound(src, 'sound/effects/EMPulse.ogg', 25, TRUE)
 	set_AI_busy(TRUE)
 	spawn_time = world.time + spawn_delay
@@ -219,7 +219,7 @@ The megabot
 			projectilesound = null
 			projectiletype = null
 			num_shots = 0
-			visible_message(SPAN_MFAUNA("\The [src]'s circular saw spins up!"))
+			visible_message(span_mfauna("\The [src]'s circular saw spins up!"))
 			deactivate()
 		if(ATTACK_MODE_LASER)
 			attack_mode = ATTACK_MODE_LASER
@@ -228,7 +228,7 @@ The megabot
 			projectiletype = /obj/item/projectile/beam/megabot
 			num_shots = 12
 			fire_desc = "fires a laser"
-			visible_message(SPAN_MFAUNA("\The [src]'s laser cannon whines!"))
+			visible_message(span_mfauna("\The [src]'s laser cannon whines!"))
 		if(ATTACK_MODE_ROCKET)
 			attack_mode = ATTACK_MODE_ROCKET
 			ranged = TRUE
@@ -237,14 +237,14 @@ The megabot
 			num_shots = 4
 			fire_desc = "launches a microrocket"
 			time_last_used_ability = special_attack_cooldown + world.time
-			visible_message(SPAN_MFAUNA("\The [src]'s missile pod rumbles!"))
+			visible_message(span_mfauna("\The [src]'s missile pod rumbles!"))
 
 	update_icon()
 
 /mob/living/simple_animal/hostile/hivebot/mega/proc/deactivate()
 	set_AI_busy(TRUE)
 	deactivated = TRUE
-	visible_message(SPAN_MFAUNA("\The [src] clicks loudly as its lights fade and its motors grind to a halt!"))
+	visible_message(span_mfauna("\The [src] clicks loudly as its lights fade and its motors grind to a halt!"))
 	update_icon()
 	var/datum/extension/armor/toggle/armor = get_extension(src, /datum/extension/armor)
 	if(armor)
@@ -254,7 +254,7 @@ The megabot
 /mob/living/simple_animal/hostile/hivebot/mega/proc/reactivate()
 	set_AI_busy(FALSE)
 	deactivated = FALSE
-	visible_message(SPAN_MFAUNA("\The [src] whirs back to life!"))
+	visible_message(span_mfauna("\The [src] whirs back to life!"))
 	var/datum/extension/armor/toggle/armor = get_extension(src, /datum/extension/armor)
 	if(armor)
 		armor.toggle(TRUE)
@@ -288,7 +288,7 @@ The megabot
 	var/mob/living/simple_animal/hostile/hivebot/tele/T = holder
 	if(..() && !T.spawn_time)
 		T.spawn_time = world.time + T.spawn_delay
-		T.visible_message(SPAN_DANGER("\The [src] turns on!"))
+		T.visible_message(span_danger("\The [src] turns on!"))
 		T.icon_state = "def_radar"
 	return null
 

@@ -136,7 +136,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	if(prob(20))
 		var/turf/T = get_turf_or_move(loc)
 		for (var/mob/M in viewers(T))
-			M.show_message(SPAN_WARNING("A shower of sparks spray from [src]'s inner workings."), 3, SPAN_WARNING("You hear and smell the ozone hiss of electrical sparks being expelled violently."), 2)
+			M.show_message(span_warning("A shower of sparks spray from [src]'s inner workings."), 3, span_warning("You hear and smell the ozone hiss of electrical sparks being expelled violently."), 2)
 		return death(0)
 
 	switch(pick(1,2,3))
@@ -189,7 +189,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 				if(card in affecting.implants)
 					affecting.take_external_damage(rand(30,50))
 					affecting.implants -= card
-					H.visible_message(SPAN_DANGER("\The [src] explodes out of \the [H]'s [affecting.name] in a shower of gore!"))
+					H.visible_message(span_danger("\The [src] explodes out of \the [H]'s [affecting.name] in a shower of gore!"))
 					break
 		holder.drop_from_inventory(card)
 
@@ -254,7 +254,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	else
 		resting = !resting
 		icon_state = resting ? "[chassis]_rest" : "[chassis]"
-		to_chat(src, SPAN_NOTICE("You are now [resting ? "resting" : "getting up"]"))
+		to_chat(src, span_notice("You are now [resting ? "resting" : "getting up"]"))
 
 
 /mob/living/silicon/pai/use_weapon(obj/item/weapon, mob/user, list/click_params)
@@ -264,8 +264,8 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 		user.do_attack_animation(src)
 		playsound(src, weapon.hitsound, 75, TRUE)
 		user.visible_message(
-			SPAN_DANGER("\The [user] hits \the [src] with \a [weapon]!"),
-			SPAN_DANGER("You hit \the [src] with \the [weapon]!")
+			span_danger("\The [user] hits \the [src] with \a [weapon]!"),
+			span_danger("You hit \the [src] with \the [weapon]!")
 		)
 		adjustBruteLoss(weapon.force)
 		updatehealth()
@@ -282,8 +282,8 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 		var/list/new_access = id.GetAccess()
 		idcard.access = new_access
 		user.visible_message(
-			SPAN_NOTICE("\The [user] scans \a [tool] over \the [src], updating \his access."),
-			SPAN_NOTICE("You scan [id_name] over \the [src], updating \his access.")
+			span_notice("\The [user] scans \a [tool] over \the [src], updating \his access."),
+			span_notice("You scan [id_name] over \the [src], updating \his access.")
 		)
 		return TRUE
 
@@ -291,7 +291,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 
 
 /mob/living/silicon/pai/attack_hand(mob/user as mob)
-	visible_message(SPAN_DANGER("[user] boops [src] on the head."))
+	visible_message(span_danger("[user] boops [src] on the head."))
 	fold()
 
 // No binary for pAIs.
@@ -326,11 +326,11 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 /mob/living/silicon/pai/proc/toggle_integrated_light()
 	if(!light_on)
 		set_light(flashlight_range, flashlight_power, 2)
-		to_chat(src, SPAN_NOTICE("You enable your integrated light."))
+		to_chat(src, span_notice("You enable your integrated light."))
 		light_on = TRUE
 	else
 		set_light(0, 0)
-		to_chat(src, SPAN_NOTICE("You disable your integrated light."))
+		to_chat(src, span_notice("You disable your integrated light."))
 		light_on = FALSE
 
 /mob/living/silicon/pai/start_pulling(atom/movable/AM)

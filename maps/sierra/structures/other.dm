@@ -60,7 +60,7 @@
 
 	hp -= projectile.damage
 	if (hp <= 0)
-		visible_message(SPAN_WARNING("\The [src] breaks into tiny pieces and collapses!"))
+		visible_message(span_warning("\The [src] breaks into tiny pieces and collapses!"))
 		qdel(src)
 		return FALSE // The projectile stops
 

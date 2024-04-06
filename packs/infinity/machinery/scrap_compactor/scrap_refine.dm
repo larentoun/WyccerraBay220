@@ -42,10 +42,10 @@
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	if (istype(tool, /obj/item))
 		if(tool.force >=8)
-			visible_message(SPAN_NOTICE ("The [user] smashes the [src], restoring it's original form."))
+			visible_message(span_notice ("The [user] smashes the [src], restoring it's original form."))
 			make_pile()
 		else
-			visible_message(SPAN_NOTICE ("The [user] smashes the [src], but [tool] is too weak to break it!"))
+			visible_message(span_notice ("The [user] smashes the [src], but [tool] is too weak to break it!"))
 		return TRUE
 	return ..()
 

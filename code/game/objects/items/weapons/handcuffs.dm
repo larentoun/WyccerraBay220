@@ -31,7 +31,7 @@
 		return FALSE
 
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
-		to_chat(user, SPAN_WARNING("Uh ... how do those things work?!"))
+		to_chat(user, span_warning("Uh ... how do those things work?!"))
 		place_handcuffs(user, user)
 		return TRUE
 
@@ -46,9 +46,9 @@
 			if (C.has_danger_grab(user))
 				place_handcuffs(C, user)
 			else
-				to_chat(user, SPAN_DANGER("You need to have a firm grip on [C] before you can put \the [src] on!"))
+				to_chat(user, span_danger("You need to have a firm grip on [C] before you can put \the [src] on!"))
 		else
-			to_chat(user, SPAN_WARNING("\The [C] is already handcuffed!"))
+			to_chat(user, span_warning("\The [C] is already handcuffed!"))
 		return TRUE
 
 /obj/item/handcuffs/proc/can_place(mob/target, mob/user)
@@ -68,14 +68,14 @@
 		return 0
 
 	if (!H.has_organ_for_slot(slot_handcuffed))
-		to_chat(user, SPAN_DANGER("\The [H] needs at least two wrists before you can cuff them together!"))
+		to_chat(user, span_danger("\The [H] needs at least two wrists before you can cuff them together!"))
 		return 0
 
 	if((H.gloves && H.gloves.item_flags & ITEM_FLAG_NOCUFFS) && !elastic)
-		to_chat(user, SPAN_DANGER("\The [src] won't fit around \the [H.gloves]!"))
+		to_chat(user, span_danger("\The [src] won't fit around \the [H.gloves]!"))
 		return 0
 
-	user.visible_message(SPAN_DANGER("\The [user] is attempting to put [cuff_type] on \the [H]!"))
+	user.visible_message(span_danger("\The [user] is attempting to put [cuff_type] on \the [H]!"))
 
 	if(!do_after(user, 3 SECONDS, target, DO_EQUIP | DO_TARGET_UNIQUE_ACT))
 		return 0
@@ -94,7 +94,7 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(H)
 
-	user.visible_message(SPAN_DANGER("\The [user] has put [cuff_type] on \the [H]!"))
+	user.visible_message(span_danger("\The [user] has put [cuff_type] on \the [H]!"))
 
 	// Apply cuffs.
 	target.equip_to_slot(cuffs,slot_handcuffed)
@@ -104,28 +104,28 @@ var/global/last_chew = 0
 /mob/living/carbon/human/RestrainedClickOn(atom/A)
 	if (A != src) return ..()
 	if (last_chew + 26 > world.time)
-		to_chat(src, SPAN_WARNING("You need a break from chewing your own hand off, the pain is too much!"))
+		to_chat(src, span_warning("You need a break from chewing your own hand off, the pain is too much!"))
 		return
 
 	var/mob/living/carbon/human/H = A
 	if (!H.handcuffed) return
 	if (H.a_intent != I_HURT)
-		to_chat(src, SPAN_WARNING("You consider chewing your hands out of the restraints, but choose not to harm yourself."))
+		to_chat(src, span_warning("You consider chewing your hands out of the restraints, but choose not to harm yourself."))
 		return
 	if (H.zone_sel.selecting != BP_MOUTH)
-		to_chat(src, SPAN_WARNING("You need to target your mouth to start chewing through your restraints!"))
+		to_chat(src, span_warning("You need to target your mouth to start chewing through your restraints!"))
 		return
 	if (istype(H.wear_suit, /obj/item/clothing/suit/straight_jacket))
-		to_chat(src, SPAN_WARNING("Try as you might, you cannot chew through \the [H.wear_suit.name]."))
+		to_chat(src, span_warning("Try as you might, you cannot chew through \the [H.wear_suit.name]."))
 		return
 	if (H.wear_mask)
-		to_chat(src, SPAN_WARNING("Your mouth is covered, you cannot chew through your restraints!"))
+		to_chat(src, span_warning("Your mouth is covered, you cannot chew through your restraints!"))
 		return
 
 	var/obj/item/organ/external/O = H.organs_by_name[(H.hand ? BP_L_HAND : BP_R_HAND)]
 	if (!O) return
 
-	H.visible_message(SPAN_DANGER("\The [H] chews on \his [O.name]!"), SPAN_DANGER("You chew on your [O.name]!"))
+	H.visible_message(span_danger("\The [H] chews on \his [O.name]!"), span_danger("You chew on your [O.name]!"))
 	admin_attacker_log(H, "chewed on their [O.name]!")
 
 	O.take_external_damage(3,0, DAMAGE_FLAG_SHARP|DAMAGE_FLAG_EDGE ,"teeth marks")

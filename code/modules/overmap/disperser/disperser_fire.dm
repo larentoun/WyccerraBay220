@@ -65,7 +65,7 @@
 				shouldstumble = MOVING_QUICKLY(M) ? prob(RUNNING_FALL_PROB) : prob(WALKING_FALL_PROB)
 
 			if(shouldstumble)
-				to_chat(M, SPAN_DANGER("You stumble onto the floor from the shaking!"))
+				to_chat(M, span_danger("You stumble onto the floor from the shaking!"))
 				M.AdjustStunned(2)
 				M.AdjustWeakened(2)
 

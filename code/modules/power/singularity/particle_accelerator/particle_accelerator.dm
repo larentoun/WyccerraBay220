@@ -95,16 +95,16 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	. = ..()
 	switch(construction_state)
 		if(0)
-			. += SPAN_NOTICE("Looks like it's not attached to the flooring")
+			. += span_notice("Looks like it's not attached to the flooring")
 		if(1)
-			. += SPAN_NOTICE("It is missing some cables")
+			. += span_notice("It is missing some cables")
 		if(2)
-			. += SPAN_NOTICE("The panel is open")
+			. += span_notice("The panel is open")
 		if(3)
 			if(powered)
-				. += SPAN_NOTICE(desc_holder)
+				. += span_notice(desc_holder)
 			else
-				. += SPAN_NOTICE("[src] is assembled")
+				. += span_notice("[src] is assembled")
 
 
 /obj/structure/particle_accelerator/can_anchor(obj/item/tool, mob/user, silent)
@@ -151,8 +151,8 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	update_state()
 	update_icon()
 	user.visible_message(
-		SPAN_NOTICE("[user] cuts [src]'s wiring with [tool]."),
-		SPAN_NOTICE("You cut [src]'s wiring with [tool].")
+		span_notice("[user] cuts [src]'s wiring with [tool]."),
+		span_notice("You cut [src]'s wiring with [tool].")
 	)
 
 /obj/structure/particle_accelerator/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -172,8 +172,8 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 		update_state()
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] wires [src] with [tool]."),
-			SPAN_NOTICE("You wire [src] with [tool].")
+			span_notice("[user] wires [src] with [tool]."),
+			span_notice("You wire [src] with [tool].")
 		)
 		return TRUE
 	return ..()
@@ -265,16 +265,16 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	. = ..()
 	switch(construction_state)
 		if(0)
-			. += SPAN_NOTICE("Looks like it's not attached to the flooring")
+			. += span_notice("Looks like it's not attached to the flooring")
 		if(1)
-			. += SPAN_NOTICE("It is missing some cables")
+			. += span_notice("It is missing some cables")
 		if(2)
-			. += SPAN_NOTICE("The panel is open")
+			. += span_notice("The panel is open")
 		if(3)
 			if(powered)
-				. += SPAN_NOTICE(desc_holder)
+				. += span_notice(desc_holder)
 			else
-				. += SPAN_NOTICE("[src] is assembled")
+				. += span_notice("[src] is assembled")
 
 /obj/machinery/particle_accelerator/ex_act(severity)
 	switch(severity)

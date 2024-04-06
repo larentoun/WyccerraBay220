@@ -36,7 +36,7 @@
 	if(ismob(user) && check_restraints)
 		var/mob/M = user
 		if(M.restrained())
-			to_chat(user, SPAN_WARNING("You are restrained and cannot do that."))
+			to_chat(user, span_warning("You are restrained and cannot do that."))
 			return
 
 	var/atom/target
@@ -48,12 +48,12 @@
 				break
 
 	if (targetted_emote && !target)
-		to_chat(user, SPAN_WARNING("You can't do that to thin air."))
+		to_chat(user, span_warning("You can't do that to thin air."))
 		return
 
 	if (target && target != user && check_range)
 		if (get_dist(user, target) > check_range)
-			to_chat(user, SPAN_WARNING("\The [target] is too far away."))
+			to_chat(user, span_warning("\The [target] is too far away."))
 			return
 
 	var/use_3p

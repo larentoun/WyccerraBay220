@@ -152,9 +152,9 @@
 			var/did_generate_goal = generate_goals(assigned_job, TRUE, 1, bypass_goal_checks = is_admin)
 			if(did_generate_goal && goals)
 				var/datum/goal/goal = goals[LAZYLEN(goals)]
-				to_chat(current, SPAN_NOTICE("<b>You have received a new goal:</b> '[goal.summarize(FALSE, FALSE)]'."))
+				to_chat(current, span_notice("<b>You have received a new goal:</b> '[goal.summarize(FALSE, FALSE)]'."))
 				if(usr != current)
-					to_chat(usr, SPAN_NOTICE("<b>You have added a new goal to \the [current]:</b> '[goal.summarize(FALSE, FALSE)]'."))
+					to_chat(usr, span_notice("<b>You have added a new goal to \the [current]:</b> '[goal.summarize(FALSE, FALSE)]'."))
 					log_admin("[key_name_admin(usr)] added a random goal to [key_name(current)].")
 		return TRUE // To avoid 'you are not an admin' spam.
 
@@ -172,10 +172,10 @@
 		if(can_modify && goal && (goal in goals))
 			if(delete_goal(assigned_job, goal, is_admin))
 				if(usr == current)
-					to_chat(current, SPAN_NOTICE("<b>You have abandoned your goal:</b> '[goal.summarize(FALSE, FALSE)]'."))
+					to_chat(current, span_notice("<b>You have abandoned your goal:</b> '[goal.summarize(FALSE, FALSE)]'."))
 				else
-					to_chat(usr, SPAN_NOTICE("<b>You have removed a goal from \the [current]:</b> '[goal.summarize(FALSE, FALSE)]'."))
-					to_chat(current, SPAN_NOTICE("<b>A goal has been removed:</b> '[goal.summarize(FALSE, FALSE)]'."))
+					to_chat(usr, span_notice("<b>You have removed a goal from \the [current]:</b> '[goal.summarize(FALSE, FALSE)]'."))
+					to_chat(current, span_notice("<b>A goal has been removed:</b> '[goal.summarize(FALSE, FALSE)]'."))
 					log_admin("[key_name_admin(usr)] removed a goal from [key_name(current)].")
 		return TRUE
 
@@ -191,10 +191,10 @@
 				if(goals)
 					goal = goals[LAZYLEN(goals)]
 					if(usr == current)
-						to_chat(usr, SPAN_NOTICE("<b>You have re-rolled a goal. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
+						to_chat(usr, span_notice("<b>You have re-rolled a goal. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
 					else
-						to_chat(usr, SPAN_NOTICE("<b>You have re-rolled a goal for \the [current]. Their new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
-						to_chat(current, SPAN_NOTICE("<b>A goal has been re-rolled. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
+						to_chat(usr, span_notice("<b>You have re-rolled a goal for \the [current]. Their new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
+						to_chat(current, span_notice("<b>A goal has been re-rolled. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
 						log_admin("[key_name_admin(usr)] rerolled a goal for [key_name(current)].")
 		return TRUE
 
@@ -212,19 +212,19 @@
 		var/datum/antagonist/antag = GLOB.all_antag_types_[href_list["add_antagonist"]]
 		if(antag)
 			if(!current)
-				to_chat(usr, SPAN_WARNING("\The [src] could not be made into a [antag.role_text]! They do not have a mob."))
+				to_chat(usr, span_warning("\The [src] could not be made into a [antag.role_text]! They do not have a mob."))
 				return
 			if(src in antag.current_antagonists)
-				to_chat(usr, SPAN_WARNING("\The [src] is already a [antag.role_text]!"))
+				to_chat(usr, span_warning("\The [src] is already a [antag.role_text]!"))
 				return
 			var/result = antag.can_become_antag_detailed(src, TRUE, TRUE)
 			if(result)
-				to_chat(usr, SPAN_WARNING("\The [src] could not be made into a [antag.role_text]! [result]."))
+				to_chat(usr, span_warning("\The [src] could not be made into a [antag.role_text]! [result]."))
 				return
 			if(antag.add_antagonist(src, TRUE, TRUE, FALSE, TRUE, TRUE, TRUE)) // Ignore equipment and role type for this.
 				log_admin("[key_name_admin(usr)] made [key_name(src)] into a [antag.role_text].")
 			else
-				to_chat(usr, SPAN_WARNING("\The [src] could not be made into a [antag.role_text]!"))
+				to_chat(usr, span_warning("\The [src] could not be made into a [antag.role_text]!"))
 
 	else if(href_list["remove_antagonist"])
 		var/datum/antagonist/antag = GLOB.all_antag_types_[href_list["remove_antagonist"]]
@@ -268,15 +268,15 @@
 				if(!ambition)
 					ambition = new /datum/goal/ambition(mind)
 				ambition.description = new_ambition
-				to_chat(mind.current, SPAN_WARNING("Your ambitions have been changed by higher powers, they are now: [ambition.description]"))
+				to_chat(mind.current, span_warning("Your ambitions have been changed by higher powers, they are now: [ambition.description]"))
 				log_and_message_admins("made [key_name(mind.current)]'s ambitions be '[ambition.description]'.")
 			else
-				to_chat(mind.current, SPAN_WARNING("Your ambitions have been unmade by higher powers."))
+				to_chat(mind.current, span_warning("Your ambitions have been unmade by higher powers."))
 				log_and_message_admins("has cleared [key_name(mind.current)]'s ambitions.")
 				if(ambition)
 					qdel(ambition)
 		else
-			to_chat(usr, SPAN_WARNING("The mind has ceased to be."))
+			to_chat(usr, span_warning("The mind has ceased to be."))
 
 	else if (href_list["obj_edit"] || href_list["obj_add"])
 		var/datum/objective/objective
@@ -412,10 +412,10 @@
 						if(I in organs.implants)
 							qdel(I)
 							break
-				to_chat(H, SPAN_NOTICE(FONT_LARGE("<B>Your loyalty implant has been deactivated.</B>")))
+				to_chat(H, span_notice(FONT_LARGE("<B>Your loyalty implant has been deactivated.</B>")))
 				log_admin("[key_name_admin(usr)] has de-loyalty implanted [current].")
 			if("add")
-				to_chat(H, SPAN_DANGER(FONT_LARGE("You somehow have become the recepient of a loyalty transplant, and it just activated!")))
+				to_chat(H, span_danger(FONT_LARGE("You somehow have become the recepient of a loyalty transplant, and it just activated!")))
 				H.implant_loyalty(H, override = TRUE)
 				log_admin("[key_name_admin(usr)] has loyalty implanted [current].")
 	else if (href_list["silicon"])
@@ -446,7 +446,7 @@
 				if (usr.client.holder.rights & R_FUN)
 					var/obj/item/device/uplink/suplink = find_syndicate_uplink()
 					if(!suplink)
-						to_chat(usr, SPAN_WARNING("Failed to find an uplink."))
+						to_chat(usr, span_warning("Failed to find an uplink."))
 						return
 					var/crystals = suplink.uses
 					crystals = input("Amount of telecrystals for [key]","Operative uplink", crystals) as null|num
@@ -456,7 +456,7 @@
 
 	else if (href_list["obj_announce"])
 		var/obj_count = 1
-		to_chat(current, SPAN_NOTICE("Your current objectives:"))
+		to_chat(current, span_notice("Your current objectives:"))
 		for(var/datum/objective/objective in objectives)
 			to_chat(current, "<B>Objective #[obj_count]</B>: [objective.explanation_text]")
 			obj_count++

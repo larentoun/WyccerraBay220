@@ -75,7 +75,7 @@
 /obj/item/device/flashlight/examine(mob/user, distance)
 	. = ..()
 	if(light_wedge && isturf(loc))
-		. += SPAN_NOTICE("[src] is facing [dir2text(dir)].")
+		. += span_notice("[src] is facing [dir2text(dir)].")
 
 /obj/item/device/flashlight/dropped(mob/user)
 	. = ..()
@@ -99,22 +99,22 @@
 		if(istype(H))
 			for(var/obj/item/clothing/C in list(H.head,H.wear_mask,H.glasses))
 				if(istype(C) && (C.body_parts_covered & EYES))
-					to_chat(user, SPAN_WARNING("You're going to need to remove [C] first."))
+					to_chat(user, span_warning("You're going to need to remove [C] first."))
 					return TRUE
 
 			var/obj/item/organ/vision
 			if(!H.species.vision_organ || !H.should_have_organ(H.species.vision_organ))
-				to_chat(user, SPAN_WARNING("You can't find anything on [H] to direct [src] into!"))
+				to_chat(user, span_warning("You can't find anything on [H] to direct [src] into!"))
 				return TRUE
 
 			vision = H.internal_organs_by_name[H.species.vision_organ]
 			if(!vision)
 				vision = H.species.has_organ[H.species.vision_organ]
-				to_chat(user, SPAN_WARNING("\The [H] is missing \his [initial(vision.name)]!"))
+				to_chat(user, span_warning("\The [H] is missing \his [initial(vision.name)]!"))
 				return TRUE
 
-			user.visible_message(SPAN_NOTICE("\The [user] directs [src] into [M]'s [vision.name]."), \
-								 SPAN_NOTICE("You direct [src] into [M]'s [vision.name]."))
+			user.visible_message(span_notice("\The [user] directs [src] into [M]'s [vision.name]."), \
+								 span_notice("You direct [src] into [M]'s [vision.name]."))
 
 			inspect_vision(vision, user)
 
@@ -132,26 +132,26 @@
 	if(!BP_IS_ROBOTIC(vision))
 
 		if(vision.owner.stat == DEAD || H.blinded)	//mob is dead or fully blind
-			to_chat(user, SPAN_WARNING("\The [H]'s pupils do not react to the light!"))
+			to_chat(user, span_warning("\The [H]'s pupils do not react to the light!"))
 			return
 		if(MUTATION_XRAY in H.mutations)
-			to_chat(user, SPAN_NOTICE("\The [H]'s pupils give an eerie glow!"))
+			to_chat(user, span_notice("\The [H]'s pupils give an eerie glow!"))
 		if(vision.damage)
-			to_chat(user, SPAN_WARNING("There's visible damage to [H]'s [vision.name]!"))
+			to_chat(user, span_warning("There's visible damage to [H]'s [vision.name]!"))
 		else if(H.eye_blurry)
-			to_chat(user, SPAN_NOTICE("\The [H]'s pupils react slower than normally."))
+			to_chat(user, span_notice("\The [H]'s pupils react slower than normally."))
 		if(H.getBrainLoss() > 15)
-			to_chat(user, SPAN_NOTICE("There's visible lag between left and right pupils' reactions."))
+			to_chat(user, span_notice("There's visible lag between left and right pupils' reactions."))
 
 		var/list/pinpoint = list(/datum/reagent/tramadol/oxycodone=1,/datum/reagent/tramadol=5)
 		var/list/dilating = list(/datum/reagent/drugs/hextro=5,/datum/reagent/drugs/mindbreaker=1,/datum/reagent/adrenaline=1)
 		var/datum/reagents/ingested = H.get_ingested_reagents()
 		if(H.reagents.has_any_reagent(pinpoint) || ingested.has_any_reagent(pinpoint))
-			to_chat(user, SPAN_NOTICE("\The [H]'s pupils are already pinpoint and cannot narrow any more."))
+			to_chat(user, span_notice("\The [H]'s pupils are already pinpoint and cannot narrow any more."))
 		else if(H.shock_stage >= 30 || H.reagents.has_any_reagent(dilating) || ingested.has_any_reagent(dilating))
-			to_chat(user, SPAN_NOTICE("\The [H]'s pupils narrow slightly, but are still very dilated."))
+			to_chat(user, span_notice("\The [H]'s pupils narrow slightly, but are still very dilated."))
 		else
-			to_chat(user, SPAN_NOTICE("\The [H]'s pupils narrow."))
+			to_chat(user, span_notice("\The [H]'s pupils narrow."))
 
 	//if someone wants to implement inspecting robot eyes here would be the place to do it.
 
@@ -309,7 +309,7 @@
 
 /obj/item/device/flashlight/flare/attack_self(mob/user)
 	if(fuel <= 0)
-		to_chat(user,SPAN_NOTICE("\The [src] is spent."))
+		to_chat(user,span_notice("\The [src] is spent."))
 		return 0
 
 	. = ..()
@@ -329,7 +329,7 @@
 
 /obj/item/device/flashlight/flare/proc/activate(mob/user)
 	if(istype(user))
-		user.visible_message(SPAN_NOTICE("[user] pulls the cord on \the [src], activating it."), SPAN_NOTICE("You pull the cord on \the [src], activating it!"))
+		user.visible_message(span_notice("[user] pulls the cord on \the [src], activating it."), span_notice("You pull the cord on \the [src], activating it!"))
 
 /obj/item/device/flashlight/flare/proc/update_damage()
 	if(on)
@@ -390,7 +390,7 @@
 
 /obj/item/device/flashlight/flare/glowstick/activate(mob/user)
 	if(istype(user))
-		user.visible_message(SPAN_NOTICE("[user] cracks and shakes \the [src]."), SPAN_NOTICE("You crack and shake \the [src], turning it on!"))
+		user.visible_message(span_notice("[user] cracks and shakes \the [src]."), span_notice("You crack and shake \the [src], turning it on!"))
 
 /obj/item/device/flashlight/flare/glowstick/red
 	name = "red glowstick"

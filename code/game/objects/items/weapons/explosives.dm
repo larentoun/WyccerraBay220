@@ -48,7 +48,7 @@
 /obj/item/plastique/attack_self(mob/user as mob)
 	var/newtime = input(usr, "Please set the timer.", "Timer", 10) as num
 	if (newtime < 10)
-		to_chat(user, SPAN_WARNING("You cannot set the timer to be less than 10 seconds."))
+		to_chat(user, span_warning("You cannot set the timer to be less than 10 seconds."))
 		return
 
 	if (user.get_active_hand() == src)
@@ -72,7 +72,7 @@
 
 		if (ismob(target))
 			admin_attack_log(user, target, "Planted \a [src] with a [timer] second fuse.", "Had \a [src] with a [timer] second fuse planted on them.", "planted \a [src] with a [timer] second fuse on")
-			user.visible_message(SPAN_DANGER("[user.name] finished planting an explosive on [target.name]!"))
+			user.visible_message(span_danger("[user.name] finished planting an explosive on [target.name]!"))
 			log_game("[key_name(user)] planted [src.name] on [key_name(target)] with [timer] second fuse")
 
 		else

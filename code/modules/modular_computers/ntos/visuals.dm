@@ -35,12 +35,12 @@
 /datum/extension/interactive/ntos/proc/visible_error(message)
 	var/atom/A = holder
 	if(istype(A))
-		A.visible_message(SPAN_WARNING("\The [A]'s screen displays an error: \"[message]\""), range = 1)
+		A.visible_message(span_warning("\The [A]'s screen displays an error: \"[message]\""), range = 1)
 
 /datum/extension/interactive/ntos/proc/visible_notification(message)
 	var/atom/A = holder
 	if(istype(A))
-		A.visible_message(SPAN_NOTICE("\The [A] screen displays a notification: \"[message]\""), range = 1)
+		A.visible_message(span_notice("\The [A] screen displays a notification: \"[message]\""), range = 1)
 
 /datum/extension/interactive/ntos/proc/audible_notification(notification)
 	var/atom/A = holder
@@ -48,4 +48,4 @@
 		playsound(A, notification, 5, falloff = 1)
 
 /datum/extension/interactive/ntos/proc/show_error(user, message)
-	to_chat(user, SPAN_WARNING("[message]"))
+	to_chat(user, span_warning("[message]"))

@@ -71,8 +71,8 @@
 		locked = TRUE
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] installs \a [tool] into \a [src]."),
-			SPAN_NOTICE("You install \the [tool] into \the [src].")
+			span_notice("\The [user] installs \a [tool] into \a [src]."),
+			span_notice("You install \the [tool] into \the [src].")
 		)
 		return TRUE
 
@@ -88,8 +88,8 @@
 			return TRUE
 		locked = !locked
 		user.visible_message(
-			SPAN_NOTICE("\The [user] toggles \a [src]'s lock with \a [tool]."),
-			SPAN_NOTICE("You [locked ? "lock" : "unlock"] \the [src] with [id_name].")
+			span_notice("\The [user] toggles \a [src]'s lock with \a [tool]."),
+			span_notice("You [locked ? "lock" : "unlock"] \the [src] with [id_name].")
 		)
 		return TRUE
 
@@ -98,11 +98,11 @@
 	//TODO: ORGAN REMOVAL UPDATE. Make the brain remain in the MMI so it doesn't lose organ data.
 /obj/item/device/mmi/attack_self(mob/user as mob)
 	if(!brainmob)
-		to_chat(user, SPAN_WARNING("You upend the MMI, but there's nothing in it."))
+		to_chat(user, span_warning("You upend the MMI, but there's nothing in it."))
 	else if(locked)
-		to_chat(user, SPAN_WARNING("You upend the MMI, but the brain is clamped into place."))
+		to_chat(user, span_warning("You upend the MMI, but the brain is clamped into place."))
 	else
-		to_chat(user, SPAN_NOTICE("You upend the MMI, spilling the brain onto the floor."))
+		to_chat(user, span_notice("You upend the MMI, spilling the brain onto the floor."))
 		var/obj/item/organ/internal/brain/brain
 		if (brainobj)	//Pull brain organ out of MMI.
 			brainobj.forceMove(user.loc)
@@ -168,7 +168,7 @@
 	if (brainmob.stat)
 		to_chat(brainmob, "Can't do that while incapacitated or dead.")
 	radio.listening = !radio.listening
-	to_chat(brainmob, SPAN_NOTICE("Radio is [radio.broadcasting==1 ? "now" : "no longer"] broadcasting."))
+	to_chat(brainmob, span_notice("Radio is [radio.broadcasting==1 ? "now" : "no longer"] broadcasting."))
 
 
 /obj/item/device/mmi/radio_enabled/verb/Toggle_Listening()
@@ -180,7 +180,7 @@
 	if (brainmob.stat)
 		to_chat(brainmob, "Can't do that while incapacitated or dead.")
 	radio.listening = !radio.listening
-	to_chat(brainmob, SPAN_NOTICE("Radio is [radio.listening==1 ? "now" : "no longer"] receiving broadcast."))
+	to_chat(brainmob, span_notice("Radio is [radio.listening==1 ? "now" : "no longer"] receiving broadcast."))
 
 
 /obj/item/device/mmi/emp_act(severity)

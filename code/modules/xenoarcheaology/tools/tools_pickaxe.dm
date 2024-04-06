@@ -15,7 +15,7 @@
 
 /obj/item/pickaxe/xeno/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("This tool has a [excavation_amount] centimeter excavation depth.")
+	. += span_notice("This tool has a [excavation_amount] centimeter excavation depth.")
 
 /obj/item/pickaxe/xeno/brush
 	name = "wire brush"
@@ -103,10 +103,10 @@
 	if (isnull(depth))
 		return
 	if(depth>max_depth || depth<1)
-		to_chat(user, SPAN_WARNING("Invalid depth, input a number from 1 to [max_depth]."))
+		to_chat(user, span_warning("Invalid depth, input a number from 1 to [max_depth]."))
 		return
 	excavation_amount = depth
-	to_chat(user, SPAN_NOTICE("You set the depth to [depth]cm."))
+	to_chat(user, span_notice("You set the depth to [depth]cm."))
 	playsound(loc, 'sound/items/Screwdriver.ogg', 40)
 	update_icon()
 
@@ -120,7 +120,7 @@
 
 /obj/item/pickaxe/xeno/drill/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("This tool can have its excavation depth adjusted up to [max_depth]cm.")
+	. += span_notice("This tool can have its excavation depth adjusted up to [max_depth]cm.")
 
 /obj/item/pickaxe/xeno/drill/plasma
 	name = "excavation plasma torch"
@@ -142,10 +142,10 @@
 /obj/item/pickaxe/xeno/drill/plasma/attack_self(mob/user)
 	var/depth = round(input("Input the desired depth.", "Set Depth", excavation_amount) as num | null)
 	if(depth>max_depth || depth<1)
-		to_chat(user, SPAN_WARNING("Invalid depth, input a number from 1 to [max_depth]."))
+		to_chat(user, span_warning("Invalid depth, input a number from 1 to [max_depth]."))
 		return
 	excavation_amount = depth
-	to_chat(user, SPAN_NOTICE("You set the depth to [depth]cm."))
+	to_chat(user, span_notice("You set the depth to [depth]cm."))
 	playsound(loc, 'sound/weapons/armbomb.ogg', 40)
 	update_icon()
 

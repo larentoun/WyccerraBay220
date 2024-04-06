@@ -95,7 +95,7 @@
 
 /obj/machinery/power/singularity_beacon/proc/Activate(mob/user = null)
 	if(surplus() < 1500)
-		if(user) to_chat(user, SPAN_NOTICE("The connected wire doesn't have enough current."))
+		if(user) to_chat(user, span_notice("The connected wire doesn't have enough current."))
 		return
 	for(var/obj/singularity/singulo in world)
 		if(singulo.z == z)
@@ -105,7 +105,7 @@
 
 	START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 	if(user)
-		to_chat(user, SPAN_NOTICE("You activate the beacon."))
+		to_chat(user, span_notice("You activate the beacon."))
 
 
 /obj/machinery/power/singularity_beacon/proc/Deactivate(mob/user = null)
@@ -115,7 +115,7 @@
 	icon_state = "[icontype]0"
 	active = 0
 	if(user)
-		to_chat(user, SPAN_NOTICE("You deactivate the beacon."))
+		to_chat(user, span_notice("You deactivate the beacon."))
 
 
 /obj/machinery/power/singularity_beacon/physical_attack_hand(mob/user)
@@ -126,7 +126,7 @@
 		else
 			Activate(user)
 	else
-		to_chat(user, SPAN_DANGER("You need to screw the beacon to the floor first!"))
+		to_chat(user, span_danger("You need to screw the beacon to the floor first!"))
 
 /obj/machinery/power/singularity_beacon/screwdriver_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS

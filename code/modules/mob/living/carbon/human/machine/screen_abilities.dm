@@ -2,18 +2,18 @@
 	set category = "Abilities"
 	set name = "Change Screen"
 	if (stat)
-		to_chat(src, SPAN_WARNING("You're in no condition to do that."))
+		to_chat(src, span_warning("You're in no condition to do that."))
 		return
 	var/obj/item/organ/external/head/head = get_organ(BP_HEAD)
 	var/datum/robolimb/robohead = all_robolimbs[head.model]
 	if (!head || head.is_stump())
-		to_chat(src, SPAN_WARNING("You have no head!"))
+		to_chat(src, span_warning("You have no head!"))
 		return
 	if (head.is_broken())
-		to_chat(src, SPAN_WARNING("Your head is broken!"))
+		to_chat(src, span_warning("Your head is broken!"))
 		return
 	if (!robohead.has_screen)
-		to_chat(src, SPAN_WARNING("Your head has no screen!"))
+		to_chat(src, span_warning("Your head has no screen!"))
 		return
 	var/list/options = list()
 	for (var/datum/sprite_accessory/facial_hair/ipc/entry as anything in subtypesof(/datum/sprite_accessory/facial_hair/ipc))
@@ -29,18 +29,18 @@
 	set category = "Abilities"
 	set name = "Disable Screen"
 	if (stat)
-		to_chat(src, SPAN_WARNING("You're in no condition to do that."))
+		to_chat(src, span_warning("You're in no condition to do that."))
 		return
 	var/obj/item/organ/external/head/head = get_organ(BP_HEAD)
 	var/datum/robolimb/robohead = all_robolimbs[head.model]
 	if (!head || head.is_stump())
-		to_chat(src, SPAN_WARNING("You have no head!"))
+		to_chat(src, span_warning("You have no head!"))
 		return
 	if (head.is_broken())
-		to_chat(src, SPAN_WARNING("Your head is broken!"))
+		to_chat(src, span_warning("Your head is broken!"))
 		return
 	if (!robohead.has_screen)
-		to_chat(src, SPAN_WARNING("Your head has no screen!"))
+		to_chat(src, span_warning("Your head has no screen!"))
 		return
 	facial_hair_style = "Off"
 	update_hair()
@@ -50,18 +50,18 @@
 	set category = "Abilities"
 	set name = "Set Screen Text"
 	if (stat)
-		to_chat(src, SPAN_WARNING("You're in no condition to do that."))
+		to_chat(src, span_warning("You're in no condition to do that."))
 		return
 	var/obj/item/organ/external/head/head = get_organ(BP_HEAD)
 	var/datum/robolimb/robohead = all_robolimbs[head.model]
 	if (!head || head.is_stump())
-		to_chat(src, SPAN_WARNING("You have no head!"))
+		to_chat(src, span_warning("You have no head!"))
 		return
 	if (head.is_broken())
-		to_chat(src, SPAN_WARNING("Your head is broken!"))
+		to_chat(src, span_warning("Your head is broken!"))
 		return
 	if (!robohead.has_screen)
-		to_chat(src, SPAN_WARNING("Your head has no screen!"))
+		to_chat(src, span_warning("Your head has no screen!"))
 		return
 	var/text = input(src, null, "Display Text") as null | text
 	if (isnull(text))

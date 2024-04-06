@@ -62,15 +62,15 @@
 			if(!AM.anchored)
 				content_size += content_size(AM)
 		if(!content_size)
-			. += SPAN_NOTICE("It is empty.")
+			. += span_notice("It is empty.")
 		else if(storage_capacity > content_size*4)
-			. += SPAN_NOTICE("It is barely filled.")
+			. += span_notice("It is barely filled.")
 		else if(storage_capacity > content_size*2)
-			. += SPAN_NOTICE("It is less than half full.")
+			. += span_notice("It is less than half full.")
 		else if(storage_capacity > content_size)
-			. += SPAN_NOTICE("There is still some free space.")
+			. += span_notice("There is still some free space.")
 		else
-			. += SPAN_NOTICE("It is full.")
+			. += span_notice("It is full.")
 
 /obj/structure/closet/damage_health(damage, damage_type, damage_flags, severity, skip_can_damage_check)
 	. = ..()
@@ -220,7 +220,7 @@
 	if(locked)
 		togglelock(user)
 	else if(!(src.opened ? src.close() : src.open()))
-		to_chat(user, SPAN_NOTICE("It won't budge!"))
+		to_chat(user, span_notice("It won't budge!"))
 		update_icon()
 
 /obj/structure/closet/ex_act(severity)
@@ -266,9 +266,9 @@
 		if (opened)
 			return ..()
 		if (!emag_act(INFINITY, user,
-			SPAN_WARNING("[user] slices [src] open with [weapon]!"),
-			SPAN_DANGER("You slice [src] open with [weapon]!"),
-			SPAN_ITALIC("You hear metal being sliced and sparks flying.")
+			span_warning("[user] slices [src] open with [weapon]!"),
+			span_danger("You slice [src] open with [weapon]!"),
+			span_italic("You hear metal being sliced and sparks flying.")
 		))
 			return TRUE
 		var/datum/effect/spark_spread/spark_system = new /datum/effect/spark_spread()
@@ -293,8 +293,8 @@
 			basket.remove_from_storage(item, loc, TRUE)
 		basket.finish_bulk_removal()
 		user.visible_message(
-			SPAN_NOTICE("[user] empties [weapon] into [src]."),
-			SPAN_NOTICE("You empty [weapon] into [src].")
+			span_notice("[user] empties [weapon] into [src]."),
+			span_notice("You empty [weapon] into [src].")
 		)
 		return TRUE
 
@@ -349,8 +349,8 @@
 
 /obj/structure/closet/proc/slice_into_parts(obj/W, mob/user)
 	material.place_sheet(src.loc, 2)
-	user.visible_message(SPAN_NOTICE("[src] has been cut apart by [user] with [W]."), \
-						 SPAN_NOTICE("You have cut [src] apart with [W]."), \
+	user.visible_message(span_notice("[src] has been cut apart by [user] with [W]."), \
+						 span_notice("You have cut [src] apart with [W]."), \
 						 "You hear welding.")
 	qdel(src)
 
@@ -375,7 +375,7 @@
 		return
 	step_towards(O, src.loc)
 	if(user != O)
-		user.show_viewers(SPAN_DANGER("[user] stuffs [O] into [src]!"))
+		user.show_viewers(span_danger("[user] stuffs [O] into [src]!"))
 	src.add_fingerprint(user)
 	return
 
@@ -388,7 +388,7 @@
 		return
 
 	if(!src.open())
-		to_chat(user, SPAN_NOTICE("It won't budge!"))
+		to_chat(user, span_notice("It won't budge!"))
 
 /obj/structure/closet/attack_hand(mob/user as mob)
 	if (user.a_intent == I_HURT)
@@ -414,7 +414,7 @@
 		src.add_fingerprint(usr)
 		src.toggle(usr)
 	else
-		to_chat(usr, SPAN_WARNING("This mob type can't use this verb."))
+		to_chat(usr, span_warning("This mob type can't use this verb."))
 
 /obj/structure/closet/on_update_icon()
 	if(opened)
@@ -455,8 +455,8 @@
 	. = TRUE
 	escapee.setClickCooldown(100)
 
-	to_chat(escapee, SPAN_WARNING("You lean on the back of [src] and start pushing the door open. (this will take about [breakout_time/(1 SECOND)] second\s)"))
-	visible_message(SPAN_DANGER("[src] begins to shake violently!"))
+	to_chat(escapee, span_warning("You lean on the back of [src] and start pushing the door open. (this will take about [breakout_time/(1 SECOND)] second\s)"))
+	visible_message(span_danger("[src] begins to shake violently!"))
 	shake_animation()
 
 	var/stages = 4
@@ -467,13 +467,13 @@
 				breakout = FALSE
 				open()
 				return
-			to_chat(escapee, SPAN_WARNING("You try to slip free of [src] ([i*100/stages]% done)."))
+			to_chat(escapee, span_warning("You try to slip free of [src] ([i*100/stages]% done)."))
 		else
 			if (!req_breakout())
 				breakout = FALSE
 				open()
 				return
-			to_chat(escapee, SPAN_WARNING("You stop trying to slip free of [src]."))
+			to_chat(escapee, span_warning("You stop trying to slip free of [src]."))
 			breakout = FALSE
 			return
 
@@ -483,8 +483,8 @@
 
 	//Well then break it!
 	breakout = FALSE
-	to_chat(escapee, SPAN_WARNING("You successfully break out!"))
-	visible_message(SPAN_DANGER("[escapee] successfully broke out of [src]!"))
+	to_chat(escapee, span_warning("You successfully break out!"))
+	visible_message(span_danger("[escapee] successfully broke out of [src]!"))
 	playsound(src.loc, 'sound/effects/grillehit.ogg', 100, 1)
 	break_open()
 	shake_animation()
@@ -518,13 +518,13 @@
 	if(!CanPhysicallyInteract(user))
 		return FALSE
 	if(src.opened)
-		to_chat(user, SPAN_NOTICE("Close [src] first."))
+		to_chat(user, span_notice("Close [src] first."))
 		return FALSE
 	if(src.broken)
-		to_chat(user, SPAN_WARNING("[src] appears to be broken."))
+		to_chat(user, span_warning("[src] appears to be broken."))
 		return FALSE
 	if(user.loc == src)
-		to_chat(user, SPAN_NOTICE("You can't reach the lock from inside."))
+		to_chat(user, span_notice("You can't reach the lock from inside."))
 		return FALSE
 
 	add_fingerprint(user)
@@ -539,13 +539,13 @@
 	if(CanToggleLock(user, id_card))
 		locked = !locked
 		visible_message(
-			SPAN_NOTICE("[src] has been [locked ? null : "un"]locked by [user]."),
+			span_notice("[src] has been [locked ? null : "un"]locked by [user]."),
 			range = 3
 		)
 		update_icon()
 		return TRUE
 	else
-		to_chat(user, SPAN_WARNING("Access denied!"))
+		to_chat(user, span_warning("Access denied!"))
 		return FALSE
 
 /obj/structure/closet/proc/CanToggleLock(mob/user, obj/item/card/id/id_card)
@@ -580,9 +580,9 @@
 		if(visual_feedback)
 			visible_message(visual_feedback, audible_feedback)
 		else if(user && emag_source)
-			visible_message(SPAN_WARNING("[src] has been broken by [user] with \an [emag_source]!"), "You hear a faint electrical spark.")
+			visible_message(span_warning("[src] has been broken by [user] with \an [emag_source]!"), "You hear a faint electrical spark.")
 		else
-			visible_message(SPAN_WARNING("[src] sparks and breaks open!"), "You hear a faint electrical spark.")
+			visible_message(span_warning("[src] sparks and breaks open!"), "You hear a faint electrical spark.")
 		return 1
 	else
 		. = ..()

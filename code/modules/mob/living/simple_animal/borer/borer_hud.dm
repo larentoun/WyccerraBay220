@@ -40,15 +40,15 @@
 		return
 
 	if(worm.neutered)
-		to_chat(worm, SPAN_WARNING("You cannot do that."))
+		to_chat(worm, span_warning("You cannot do that."))
 		return
 
-	to_chat(worm, SPAN_NOTICE("You begin delicately adjusting your connection to the host brain..."))
+	to_chat(worm, span_notice("You begin delicately adjusting your connection to the host brain..."))
 	if(!do_after(worm, 100+(worm.host.getBrainLoss()*5), do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT) || !worm.host || !worm.can_use_borer_ability())
 		return
 
-	to_chat(worm, SPAN_DANGER("You plunge your probosci deep into the cortex of the host brain, interfacing directly with their nervous system."))
-	to_chat(worm.host, SPAN_DANGER("You feel a strange shifting sensation behind your eyes as an alien consciousness displaces yours."))
+	to_chat(worm, span_danger("You plunge your probosci deep into the cortex of the host brain, interfacing directly with their nervous system."))
+	to_chat(worm.host, span_danger("You feel a strange shifting sensation behind your eyes as an alien consciousness displaces yours."))
 	worm.host.add_language(LANGUAGE_BORER_GLOBAL)
 
 	// host -> brain
@@ -97,14 +97,14 @@
 		return
 
 	if(worm.chemicals < 50)
-		to_chat(worm, SPAN_WARNING("You don't have enough chemicals!"))
+		to_chat(worm, span_warning("You don't have enough chemicals!"))
 		return
 
 	var/chem = input("Select a chemical to secrete.", "Chemicals") as null|anything in worm.chemical_types
 	if(!chem || !worm.chemical_types[chem] || !worm || QDELETED(worm) || worm.chemicals < 50 || !worm.can_use_borer_ability())
 		return
 
-	to_chat(worm, SPAN_NOTICE("You squirt a measure of [chem] from your reservoirs into \the [worm.host]'s bloodstream."))
+	to_chat(worm, span_notice("You squirt a measure of [chem] from your reservoirs into \the [worm.host]'s bloodstream."))
 	worm.host.reagents.add_reagent(worm.chemical_types[chem], 10)
 	worm.chemicals -= 50
 	return TRUE
@@ -123,19 +123,19 @@
 	if(!worm.can_use_borer_ability())
 		return
 
-	to_chat(worm, SPAN_NOTICE("You begin disconnecting from \the [worm.host]'s synapses and prodding at their internal ear canal."))
+	to_chat(worm, span_notice("You begin disconnecting from \the [worm.host]'s synapses and prodding at their internal ear canal."))
 	if(worm.host.stat == CONSCIOUS)
-		to_chat(worm.host, SPAN_WARNING("An odd, uncomfortable pressure begins to build inside your skull, behind your ear..."))
+		to_chat(worm.host, span_warning("An odd, uncomfortable pressure begins to build inside your skull, behind your ear..."))
 
 	if(!do_after(worm, 10 SECONDS, do_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT) || !worm.can_use_borer_ability())
 		return
 
 	if(worm.host)
-		to_chat(worm, SPAN_WARNING("You wiggle out of [worm.host]'s ear and plop to the ground."))
+		to_chat(worm, span_warning("You wiggle out of [worm.host]'s ear and plop to the ground."))
 		if(worm.host.stat != DEAD)
-			to_chat(worm.host, SPAN_DANGER("Something slimy wiggles out of your ear and plops to the ground!"))
+			to_chat(worm.host, span_danger("Something slimy wiggles out of your ear and plops to the ground!"))
 			if(!worm.neutered)
-				to_chat(worm.host, SPAN_DANGER("As though waking from a dream, you shake off the insidious mind control of the brain worm. Your thoughts are your own again."))
+				to_chat(worm.host, span_danger("As though waking from a dream, you shake off the insidious mind control of the brain worm. Your thoughts are your own again."))
 		worm.detatch()
 		worm.leave_host()
 

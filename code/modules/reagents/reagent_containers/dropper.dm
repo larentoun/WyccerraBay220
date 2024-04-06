@@ -18,10 +18,10 @@
 
 	if(reagents.total_volume)
 		if(!target.reagents.get_free_space())
-			to_chat(user, SPAN_NOTICE("[target] is full."))
+			to_chat(user, span_notice("[target] is full."))
 			return TRUE
 		if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/reagent_containers/food) && !istype(target, /obj/item/clothing/mask/smokable/cigarette)) //You can inject humans and food but you can't remove the shit.
-			to_chat(user, SPAN_NOTICE("You cannot directly fill this object."))
+			to_chat(user, span_notice("You cannot directly fill this object."))
 			return TRUE
 
 		var/trans = 0
@@ -31,7 +31,7 @@
 				return TRUE
 
 			var/time = 20 //2/3rds the time of a syringe
-			user.visible_message(SPAN_WARNING("[user] is trying to squirt something into [target]'s eyes!"))
+			user.visible_message(span_warning("[user] is trying to squirt something into [target]'s eyes!"))
 
 			if(!do_after(user, time, target, DO_MEDICAL))
 				return TRUE
@@ -52,7 +52,7 @@
 
 				if(safe_thing)
 					trans = reagents.splash(safe_thing, amount_per_transfer_from_this, max_spill=30)
-					user.visible_message(SPAN_WARNING("[user] tries to squirt something into [target]'s eyes, but fails!"), SPAN_NOTICE("You transfer [trans] units of the solution."))
+					user.visible_message(span_warning("[user] tries to squirt something into [target]'s eyes, but fails!"), span_notice("You transfer [trans] units of the solution."))
 					return TRUE
 
 			var/mob/living/M = target
@@ -63,25 +63,25 @@
 			var/spill_amt = M.incapacitated()? 0 : 30
 			trans += reagents.splash(target, reagents.total_volume/2, max_spill = spill_amt)
 			trans += reagents.trans_to_mob(target, reagents.total_volume/2, CHEM_BLOOD) //I guess it gets into the bloodstream through the eyes or something
-			user.visible_message(SPAN_WARNING("[user] squirts something into [target]'s eyes!"), SPAN_NOTICE("You transfer [trans] units of the solution."))
+			user.visible_message(span_warning("[user] squirts something into [target]'s eyes!"), span_notice("You transfer [trans] units of the solution."))
 			return TRUE
 
 		else
 			trans = reagents.splash(target, amount_per_transfer_from_this, max_spill=0) //sprinkling reagents on generic non-mobs. Droppers are very precise
-			to_chat(user, SPAN_NOTICE("You transfer [trans] units of the solution."))
+			to_chat(user, span_notice("You transfer [trans] units of the solution."))
 			return TRUE
 
 	else // Taking from something
 
 		if(!target.is_open_container() && !istype(target,/obj/structure/reagent_dispensers))
-			to_chat(user, SPAN_NOTICE("You cannot directly remove reagents from [target]."))
+			to_chat(user, span_notice("You cannot directly remove reagents from [target]."))
 			return TRUE
 		if(!target.reagents || !target.reagents.total_volume)
-			to_chat(user, SPAN_NOTICE("[target] is empty."))
+			to_chat(user, span_notice("[target] is empty."))
 			return TRUE
 
 		var/trans = target.reagents.trans_to_obj(src, amount_per_transfer_from_this)
-		to_chat(user, SPAN_NOTICE("You fill the dropper with [trans] units of the solution."))
+		to_chat(user, span_notice("You fill the dropper with [trans] units of the solution."))
 		return TRUE
 
 /obj/item/reagent_containers/dropper/on_reagent_change()

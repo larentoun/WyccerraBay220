@@ -3,7 +3,7 @@
 	set category = null
 	set name = "Admin PM Mob"
 	if(!holder)
-		to_chat(src, SPAN_WARNING("Error: Admin-PM-Context: Only administrators may use this command."))
+		to_chat(src, span_warning("Error: Admin-PM-Context: Only administrators may use this command."))
 		return
 	if( !ismob(M) || !M.client )	return
 	cmd_admin_pm(M.client,null)
@@ -13,7 +13,7 @@
 	set category = "Admin"
 	set name = "Admin PM"
 	if(!holder)
-		to_chat(src, SPAN_WARNING("Error: Admin-PM-Panel: Only administrators may use this command."))
+		to_chat(src, span_warning("Error: Admin-PM-Panel: Only administrators may use this command."))
 		return
 	var/list/client/targets[0]
 	for(var/client/T)
@@ -36,12 +36,12 @@
 
 /client/proc/cmd_admin_pm(client/C, msg = null, datum/ticket/ticket = null)
 	if(prefs.muted & MUTE_ADMINHELP)
-		to_chat(src, SPAN_WARNING("Error: Private-Message: You are unable to use PM-s (muted)."))
+		to_chat(src, span_warning("Error: Private-Message: You are unable to use PM-s (muted)."))
 		return
 
 	if(!istype(C,/client))
-		if(holder)	to_chat(src, SPAN_WARNING("Error: Private-Message: Client not found."))
-		else		to_chat(src, SPAN_WARNING("Error: Private-Message: Client not found. They may have lost connection, so please be patient!"))
+		if(holder)	to_chat(src, span_warning("Error: Private-Message: Client not found."))
+		else		to_chat(src, span_warning("Error: Private-Message: Client not found. They may have lost connection, so please be patient!"))
 		return
 
 	var/recieve_pm_type = "Player"
@@ -52,7 +52,7 @@
 			recieve_pm_type = holder.rank
 
 	else if(C && !C.holder)
-		to_chat(src, SPAN_WARNING("Error: Admin-PM: Non-admin to non-admin PM communication is forbidden."))
+		to_chat(src, span_warning("Error: Admin-PM: Non-admin to non-admin PM communication is forbidden."))
 		return
 
 	msg = sanitize(msg)
@@ -63,8 +63,8 @@
 
 		if(!msg)	return
 		if(!C)
-			if(holder)	to_chat(src, SPAN_WARNING("Error: Private-Message: Client not found."))
-			else		to_chat(src, SPAN_WARNING("Error: Private-Message: Client not found. They may have lost connection, so try using an adminhelp!"))
+			if(holder)	to_chat(src, span_warning("Error: Private-Message: Client not found."))
+			else		to_chat(src, span_warning("Error: Private-Message: Client not found. They may have lost connection, so try using an adminhelp!"))
 			return
 
 		msg = sanitize(msg)
@@ -88,10 +88,10 @@
 			ticket = new /datum/ticket(receiver_lite)
 			ticket.take(sender_lite)
 		else
-			to_chat(src, SPAN_NOTICE("You do not have an open ticket. Please use the adminhelp verb to open a ticket."))
+			to_chat(src, span_notice("You do not have an open ticket. Please use the adminhelp verb to open a ticket."))
 			return
 	else if(ticket.status != TICKET_ASSIGNED && sender_lite.ckey == ticket.owner.ckey)
-		to_chat(src, SPAN_NOTICE("Your ticket is not open for conversation. Please wait for an administrator to receive your adminhelp."))
+		to_chat(src, span_notice("Your ticket is not open for conversation. Please wait for an administrator to receive your adminhelp."))
 		return
 
 	// if the sender is an admin and they're not assigned to the ticket, ask them if they want to take/join it, unless the admin is responding to their own ticket
@@ -107,7 +107,7 @@
 			to_chat(C, recieve_message)
 			C.adminhelped = 0
 
-	var/sender_message = "[create_text_tag("pm_out_alt", "PM", src)] to [SPAN_CLASS("name", get_options_bar(C, holder ? 1 : 0, holder ? 1 : 0, 1))]"
+	var/sender_message = "[create_text_tag("pm_out_alt", "PM", src)] to [span_name(get_options_bar(C, holder ? 1 : 0, holder ? 1 : 0, 1))]"
 	if(holder)
 		sender_message += " (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>)"
 		sender_message += ": [SPAN_CLASS("message linkify", generate_ahelp_key_words(mob, msg))]"
@@ -116,7 +116,7 @@
 	sender_message = SPAN_CLASS("pm", SPAN_CLASS("out", sender_message))
 	to_chat(src, sender_message)
 
-	var/receiver_message = create_text_tag("pm_in", "", C) + " <b>\[[recieve_pm_type] PM\]</b> [SPAN_CLASS("name", get_options_bar(src, C.holder ? 1 : 0, C.holder ? 1 : 0, 1))]"
+	var/receiver_message = create_text_tag("pm_in", "", C) + " <b>\[[recieve_pm_type] PM\]</b> [span_name(get_options_bar(src, C.holder ? 1 : 0, C.holder ? 1 : 0, 1))]"
 	if(C.holder)
 		receiver_message += " (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>)"
 		receiver_message += ": [SPAN_CLASS("message linkify", generate_ahelp_key_words(C.mob, msg))]"
@@ -143,11 +143,11 @@
 		if(X == C || X == src)
 			continue
 		if(X.key != key && X.key != C.key && (X.holder.rights & R_ADMIN|R_MOD))
-			to_chat(X, "[SPAN_CLASS("pm", "[SPAN_CLASS("other", create_text_tag("pm_other", "PM:", X) + " [SPAN_CLASS("name", key_name(src, X, 0, ticket))] to [SPAN_CLASS("name", key_name(C, X, 0, ticket))] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [SPAN_CLASS("message linkify", msg)]")]")]")
+			to_chat(X, "[SPAN_CLASS("pm", "[SPAN_CLASS("other", create_text_tag("pm_other", "PM:", X) + " [span_name(key_name(src, X, 0, ticket))] to [span_name(key_name(C, X, 0, ticket))] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [SPAN_CLASS("message linkify", msg)]")]")]")
 
 /client/proc/cmd_admin_irc_pm(sender)
 	if(prefs.muted & MUTE_ADMINHELP)
-		to_chat(src, SPAN_WARNING("Error: Private-Message: You are unable to use PM-s (muted)."))
+		to_chat(src, span_warning("Error: Private-Message: You are unable to use PM-s (muted)."))
 		return
 
 	var/msg = input(src,"Message:", "Reply private message to [sender] on IRC / 400 character limit") as text|null
@@ -157,8 +157,8 @@
 
 	// Handled on Bot32's end, unsure about other bots
 //	if(length(msg) > 400) // TODO: if message length is over 400, divide it up into separate messages, the message length restriction is based on IRC limitations.  Probably easier to do this on the bots ends.
-//		to_chat(src, SPAN_WARNING("Your message was not sent because it was more then 400 characters find your message below for ease of copy/pasting"))
-//		to_chat(src, SPAN_NOTICE("[msg]"))
+//		to_chat(src, span_warning("Your message was not sent because it was more then 400 characters find your message below for ease of copy/pasting"))
+//		to_chat(src, span_notice("[msg]"))
 //		return
 
 	send_to_admin_discord(EXCOM_MSG_AHELP, "PM: [key_name(src, highlight_special_characters = FALSE)]->DISC-[sender]:[html_decode(msg)]")
@@ -166,9 +166,9 @@
 	log_admin("PM: [key_name(src)]->IRC-[sender]: [msg]")
 	admin_pm_repository.store_pm(src, "IRC-[sender]", msg)
 
-	to_chat(src, "[SPAN_CLASS("pm", "[SPAN_CLASS("out", create_text_tag("pm_out_alt", "PM", src) + " to [SPAN_CLASS("name", sender)]: [SPAN_CLASS("message linkify", msg)]")]")]")
+	to_chat(src, "[SPAN_CLASS("pm", "[SPAN_CLASS("out", create_text_tag("pm_out_alt", "PM", src) + " to [span_name(sender)]: [SPAN_CLASS("message linkify", msg)]")]")]")
 	for(var/client/X as anything in GLOB.admins)
 		if(X == src)
 			continue
 		if(X.holder.rights & R_ADMIN|R_MOD)
-			to_chat(X, "[SPAN_CLASS("pm", "[SPAN_CLASS("other", create_text_tag("pm_other", "PM:", X) + " [SPAN_CLASS("name", key_name(src, X, 0))] to [SPAN_CLASS("name", sender)]: [SPAN_CLASS("message linkify", msg)]")]")]")
+			to_chat(X, "[SPAN_CLASS("pm", "[SPAN_CLASS("other", create_text_tag("pm_other", "PM:", X) + " [span_name(key_name(src, X, 0))] to [span_name(sender)]: [SPAN_CLASS("message linkify", msg)]")]")]")

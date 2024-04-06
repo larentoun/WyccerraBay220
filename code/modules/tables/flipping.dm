@@ -22,10 +22,10 @@
 		return
 
 	if(reinforced || flipped < 0 || !flip(get_cardinal_dir(usr,src)))
-		to_chat(usr, SPAN_NOTICE("It won't budge."))
+		to_chat(usr, span_notice("It won't budge."))
 		return
 
-	usr.visible_message(SPAN_WARNING("[usr] flips \the [src]!"))
+	usr.visible_message(span_warning("[usr] flips \the [src]!"))
 
 	if(atom_flags & ATOM_FLAG_CLIMBABLE)
 		object_shaken()
@@ -65,7 +65,7 @@
 		return
 
 	if (!unflipping_check())
-		to_chat(usr, SPAN_NOTICE("It won't budge."))
+		to_chat(usr, span_notice("It won't budge."))
 		return
 	unflip()
 

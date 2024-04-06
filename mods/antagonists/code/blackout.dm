@@ -31,15 +31,15 @@
 		var/obj/machinery/power/terminal/terminal = target
 
 		if(!terminal.powernet)
-			to_chat(user, SPAN_WARNING("This power station isn't connected to power net."))
+			to_chat(user, span_warning("This power station isn't connected to power net."))
 			return
 
 		if(check_to_use())
-			to_chat(user, SPAN_WARNING("Device does not respond. Perhaps you need to try later."))
+			to_chat(user, span_warning("Device does not respond. Perhaps you need to try later."))
 			return
 
 		if(!shots)
-			to_chat(user, SPAN_WARNING("Device does not respond."))
+			to_chat(user, span_warning("Device does not respond."))
 			return
 
 		hacktheenergy(terminal, user)
@@ -76,4 +76,4 @@
 /obj/item/device/blackout/examine(mob/user)
 	. = ..()
 	if(isobserver(user) || (user.mind && user.mind.special_role != null) || user.skill_check(SKILL_DEVICES, SKILL_EXPERIENCED) || user.skill_check(SKILL_ELECTRICAL, SKILL_EXPERIENCED))
-		. += SPAN_NOTICE("This device appears to be able to send a signal to overload the power grid.")
+		. += span_notice("This device appears to be able to send a signal to overload the power grid.")

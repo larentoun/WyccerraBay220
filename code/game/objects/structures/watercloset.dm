@@ -43,15 +43,15 @@
 			sleep(5)
 			playsound(loc, 'sound/effects/plunger.ogg', 75, 1)
 		user.visible_message(
-			SPAN_NOTICE("[user] strives valiantly to unclog [src] with [tool]!"),
-			SPAN_NOTICE("You attempt to unclog [src] with [tool].")
+			span_notice("[user] strives valiantly to unclog [src] with [tool]!"),
+			span_notice("You attempt to unclog [src] with [tool].")
 		)
 		if (!do_after(user, (tool.toolspeed * 4.5) SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
 			return TRUE
 		if (!clogged)
 			USE_FEEDBACK_FAILURE("[src] isn't clogged.")
 			return TRUE
-		visible_message(SPAN_NOTICE("With a loud gurgle, [src] begins flowing more freely."))
+		visible_message(span_notice("With a loud gurgle, [src] begins flowing more freely."))
 		playsound(src, pick(SSfluids.gurgles), 100, TRUE)
 		clogged--
 		if (clogged <= 0)
@@ -64,7 +64,7 @@
 /obj/structure/hygiene/examine(mob/user)
 	. = ..()
 	if(clogged > 0)
-		. += SPAN_WARNING("It seems to be badly clogged.")
+		. += span_warning("It seems to be badly clogged.")
 
 /obj/structure/hygiene/Process()
 	if(clogged <= 0)
@@ -122,13 +122,13 @@
 
 /obj/structure/hygiene/toilet/attack_hand(mob/living/user)
 	if(swirlie)
-		usr.visible_message(SPAN_DANGER("[user] slams the toilet seat onto [swirlie.name]'s head!"), SPAN_NOTICE("You slam the toilet seat onto [swirlie.name]'s head!"), "You hear reverberating porcelain.")
+		usr.visible_message(span_danger("[user] slams the toilet seat onto [swirlie.name]'s head!"), span_notice("You slam the toilet seat onto [swirlie.name]'s head!"), "You hear reverberating porcelain.")
 		swirlie.adjustBruteLoss(8)
 		return
 
 	if(cistern && !open)
 		if(!length(contents))
-			to_chat(user, SPAN_NOTICE("The cistern is empty."))
+			to_chat(user, span_notice("The cistern is empty."))
 			return
 		else
 			var/obj/item/I = pick(contents)
@@ -136,7 +136,7 @@
 				user.put_in_hands(I)
 			else
 				I.dropInto(loc)
-			to_chat(user, SPAN_NOTICE("You find \an [I] in the cistern."))
+			to_chat(user, span_notice("You find \an [I] in the cistern."))
 			w_items -= I.w_class
 			return
 
@@ -157,14 +157,14 @@
 		grab.affecting.adjustBruteLoss(8)
 		playsound(src, 'sound/weapons/tablehit1.ogg', 50, TRUE)
 		grab.assailant.visible_message(
-			SPAN_WARNING("[grab.assailant] slams [grab.affecting] into [src]!"),
-			SPAN_DANGER("You slam [grab.affecting] into [src]!"),
+			span_warning("[grab.assailant] slams [grab.affecting] into [src]!"),
+			span_danger("You slam [grab.affecting] into [src]!"),
 			exclude_mobs = list(grab.affecting)
 		)
 		grab.affecting.show_message(
-			SPAN_DANGER("[grab.assailant] slams you into [src]!"),
+			span_danger("[grab.assailant] slams you into [src]!"),
 			VISIBLE_MESSAGE,
-			SPAN_DANGER("You feel yourself being slammed against something hard!")
+			span_danger("You feel yourself being slammed against something hard!")
 		)
 		return TRUE
 
@@ -176,26 +176,26 @@
 		USE_FEEDBACK_GRAB_FAILURE("[grab.affecting] must be next [src] to give them a swirlie.")
 		return TRUE
 	grab.assailant.visible_message(
-		SPAN_WARNING("[grab.assailant] starts jamming [grab.affecting]'s face into [src]!"),
-		SPAN_DANGER("You start jamming [grab.affecting]'s face into [src]!"),
+		span_warning("[grab.assailant] starts jamming [grab.affecting]'s face into [src]!"),
+		span_danger("You start jamming [grab.affecting]'s face into [src]!"),
 		exclude_mobs = list(grab.affecting)
 	)
 	grab.affecting.show_message(
-		SPAN_DANGER("[grab.assailant] starts jamming your face into [src]!"),
+		span_danger("[grab.assailant] starts jamming your face into [src]!"),
 		VISIBLE_MESSAGE,
-		SPAN_DANGER("You feel your head being dunked in cold water!")
+		span_danger("You feel your head being dunked in cold water!")
 	)
 	if (!do_after(grab.assailant, 3 SECONDS, src, DO_PUBLIC_UNIQUE) || !grab.use_sanity_check(src))
 		return TRUE
 	grab.assailant.visible_message(
-		SPAN_WARNING("[grab.assailant] gives [grab.affecting] a swirlie in [src]!"),
-		SPAN_DANGER("You give [grab.affecting] a swirlie in [src]!"),
+		span_warning("[grab.assailant] gives [grab.affecting] a swirlie in [src]!"),
+		span_danger("You give [grab.affecting] a swirlie in [src]!"),
 		exclude_mobs = list(grab.affecting)
 	)
 	grab.affecting.show_message(
-		SPAN_DANGER("[grab.assailant] gives you a swirlie in [src]!"),
+		span_danger("[grab.assailant] gives you a swirlie in [src]!"),
 		VISIBLE_MESSAGE,
-		SPAN_DANGER("You hear the sound of flushing and feel water and air being sucked out around you!")
+		span_danger("You hear the sound of flushing and feel water and air being sucked out around you!")
 	)
 	grab.affecting.adjustOxyLoss(5)
 	return TRUE
@@ -204,15 +204,15 @@
 	. = ITEM_INTERACT_SUCCESS
 	playsound(loc, 'sound/effects/stonedoor_openclose.ogg', 50, TRUE)
 	user.visible_message(
-		SPAN_NOTICE("[user] starts to [cistern ? "lift" : "replace"] [src]'s cistern with [tool]."),
-		SPAN_NOTICE("You start to [cistern ? "lift" : "replace"] [src]'s cistern with [tool].")
+		span_notice("[user] starts to [cistern ? "lift" : "replace"] [src]'s cistern with [tool]."),
+		span_notice("You start to [cistern ? "lift" : "replace"] [src]'s cistern with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 3 SECONDS, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	playsound(loc, 'sound/effects/stonedoor_openclose.ogg', 50, TRUE)
 	user.visible_message(
-		SPAN_NOTICE("[user] [cistern ? "lifts" : "replaces"] [src]'s cistern with [tool]."),
-		SPAN_NOTICE("You [cistern ? "lift" : "replace"] [src]'s cistern with [tool].")
+		span_notice("[user] [cistern ? "lifts" : "replaces"] [src]'s cistern with [tool]."),
+		span_notice("You [cistern ? "lift" : "replace"] [src]'s cistern with [tool].")
 	)
 	cistern = !cistern
 	update_icon()
@@ -231,8 +231,8 @@
 			return TRUE
 		w_items += tool.w_class
 		user.visible_message(
-			SPAN_NOTICE("[user] slips [tool] into [src]'s cistern."),
-			SPAN_NOTICE("You carefully place [tool] into [src]'s cistern."),
+			span_notice("[user] slips [tool] into [src]'s cistern."),
+			span_notice("You carefully place [tool] into [src]'s cistern."),
 			range = 2
 		)
 		return TRUE
@@ -259,11 +259,11 @@
 		grab.affecting.adjustBruteLoss(8)
 		playsound(src, 'sound/weapons/tablehit1.ogg', 50, TRUE)
 		grab.assailant.visible_message(
-			SPAN_WARNING("[grab.assailant] slams [grab.affecting] into [src]!"),
-			SPAN_DANGER("You slam [grab.affecting] into [src]!"),
+			span_warning("[grab.assailant] slams [grab.affecting] into [src]!"),
+			span_danger("You slam [grab.affecting] into [src]!"),
 			exclude_mobs = list(grab.affecting)
 		)
-		to_chat(grab.affecting, SPAN_DANGER("[grab.assailant] slams you into [src]!"))
+		to_chat(grab.affecting, span_danger("[grab.assailant] slams you into [src]!"))
 		return TRUE
 
 	return ..()
@@ -333,23 +333,23 @@
 	if(!input)
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] starts adjusting [src]'s temperature with [tool]."),
-		SPAN_NOTICE("You start adjusting [src]'s temperature with [tool].")
+		span_notice("[user] starts adjusting [src]'s temperature with [tool]."),
+		span_notice("You start adjusting [src]'s temperature with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 5 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	watertemp = input
 	user.visible_message(
-		SPAN_NOTICE("[user] adjusts [src]'s temperature with [tool]."),
-		SPAN_NOTICE("You set [src]'s temperature to [watertemp] with [tool].")
+		span_notice("[user] adjusts [src]'s temperature with [tool]."),
+		span_notice("You set [src]'s temperature to [watertemp] with [tool].")
 	)
 
 /obj/structure/hygiene/shower/use_tool(obj/item/tool, mob/user, list/click_params)
 	// Gas Scanner - Fetch temperature
 	if (istype(tool, /obj/item/device/scanner/gas))
 		user.visible_message(
-			SPAN_NOTICE("[user] scans [src] with [tool]."),
-			SPAN_NOTICE("You scan [src] with [tool]. The water temperature seems to be [watertemp].")
+			span_notice("[user] scans [src] with [tool]."),
+			span_notice("You scan [src] with [tool]. The water temperature seems to be [watertemp].")
 		)
 		return TRUE
 
@@ -428,9 +428,9 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(water_temperature >= H.species.heat_level_1)
-			to_chat(H, SPAN_DANGER("The water is searing hot!"))
+			to_chat(H, span_danger("The water is searing hot!"))
 		else if(water_temperature <= H.species.cold_level_1)
-			to_chat(H, SPAN_WARNING("The water is freezing cold!"))
+			to_chat(H, span_warning("The water is freezing cold!"))
 
 /obj/item/bikehorn/rubberducky
 	name = "rubber ducky"
@@ -454,10 +454,10 @@
 	if(!usr.Adjacent(src))
 		return ..()
 	if(!thing.reagents || thing.reagents.total_volume == 0)
-		to_chat(usr, SPAN_WARNING("[thing] is empty."))
+		to_chat(usr, span_warning("[thing] is empty."))
 		return
 	// Clear the vessel.
-	visible_message(SPAN_NOTICE("[usr] tips the contents of [thing] into [src]."))
+	visible_message(span_notice("[usr] tips the contents of [thing] into [src]."))
 	thing.reagents.clear_reagents()
 	thing.update_icon()
 
@@ -468,7 +468,7 @@
 		if (user.hand)
 			temp = H.organs_by_name[BP_L_HAND]
 		if(temp && !temp.is_usable())
-			to_chat(user,SPAN_NOTICE("You try to move your [temp.name], but cannot!"))
+			to_chat(user,span_notice("You try to move your [temp.name], but cannot!"))
 			return
 
 	if(isrobot(user) || isAI(user))
@@ -478,10 +478,10 @@
 		return
 
 	if(busy)
-		to_chat(user, SPAN_WARNING("Someone's already washing here."))
+		to_chat(user, span_warning("Someone's already washing here."))
 		return
 
-	to_chat(usr, SPAN_NOTICE("You start washing your hands."))
+	to_chat(usr, span_notice("You start washing your hands."))
 	playsound(loc, 'sound/effects/sink_long.ogg', 75, 1)
 
 	busy = 1
@@ -492,8 +492,8 @@
 
 	user.clean_blood()
 	user.visible_message( \
-		SPAN_NOTICE("[user] washes their hands using [src]."), \
-		SPAN_NOTICE("You wash your hands using [src]."))
+		span_notice("[user] washes their hands using [src]."), \
+		span_notice("You wash your hands using [src]."))
 
 
 /obj/structure/hygiene/sink/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -514,9 +514,9 @@
 		playsound(src, 'sound/effects/sink.ogg', 50, TRUE)
 		container.reagents.add_reagent(/datum/reagent/water, container.amount_per_transfer_from_this)
 		user.visible_message(
-			SPAN_NOTICE("[user] fills [tool] with some water from [src]."),
-			SPAN_NOTICE("You fill [tool] with some water from [src]."),
-			SPAN_ITALIC("You hear running water.")
+			span_notice("[user] fills [tool] with some water from [src]."),
+			span_notice("You fill [tool] with some water from [src]."),
+			span_italic("You hear running water.")
 		)
 		return TRUE
 
@@ -525,25 +525,25 @@
 		tool.reagents.add_reagent(/datum/reagent/water, 5)
 		playsound(src, 'sound/effects/slosh.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] wets [tool] with [src]."),
-			SPAN_NOTICE("You wet [tool] with [src]."),
-			SPAN_ITALIC("You hear running water.")
+			span_notice("[user] wets [tool] with [src]."),
+			span_notice("You wet [tool] with [src]."),
+			span_italic("You hear running water.")
 		)
 		return TRUE
 
 	// Everything else - Wash
 	playsound(src, 'sound/effects/sink_long.ogg', 50, TRUE)
 	user.visible_message(
-		SPAN_NOTICE("[user] starts washing [tool] in [src]."),
-		SPAN_NOTICE("You start washing [tool] in [src]."),
-		SPAN_ITALIC("You hear running water.")
+		span_notice("[user] starts washing [tool] in [src]."),
+		span_notice("You start washing [tool] in [src]."),
+		span_italic("You hear running water.")
 	)
 	if (!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
 		return TRUE
 	tool.clean_blood()
 	user.visible_message(
-		SPAN_NOTICE("[user] washes [tool] in [src]."),
-		SPAN_NOTICE("You wash [tool] in [src].")
+		span_notice("[user] washes [tool] in [src]."),
+		span_notice("You wash [tool] in [src].")
 	)
 	return TRUE
 
@@ -582,8 +582,8 @@
 			FEEDBACK_UNEQUIP_FAILURE(user, tool)
 			return TRUE
 		user.visible_message(
-			SPAN_WARNING("[user] starts stuffing [src] with [tool]!"),
-			SPAN_WARNING("You start stuffing [src] with [tool]!")
+			span_warning("[user] starts stuffing [src] with [tool]!"),
+			span_warning("You start stuffing [src] with [tool]!")
 		)
 		if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
 			return TRUE
@@ -597,8 +597,8 @@
 			FEEDBACK_UNEQUIP_FAILURE(user, tool)
 			return TRUE
 		user.visible_message(
-			SPAN_WARNING("[user] unceremoniously jams [src] with [tool]. What a rebel."),
-			SPAN_WARNING("You unceremoniously jam [src] with [tool]. What a rebel.")
+			span_warning("[user] unceremoniously jams [src] with [tool]. What a rebel."),
+			span_warning("You unceremoniously jam [src] with [tool]. What a rebel.")
 		)
 		clog(1)
 		qdel(tool)
@@ -680,8 +680,8 @@
 	var/obj/item/faucet/faucet = new(loc)
 	transfer_fingerprints_to(faucet)
 	user.visible_message(
-		SPAN_NOTICE("[user] detaches [src] from the floor with [tool]."),
-		SPAN_NOTICE("You detach [src] from the floor with [tool].")
+		span_notice("[user] detaches [src] from the floor with [tool]."),
+		span_notice("You detach [src] from the floor with [tool].")
 	)
 	qdel(src)
 
@@ -694,8 +694,8 @@
 		playsound(loc, 'sound/effects/closet_close.ogg', 20, 1)
 
 	user.visible_message(
-		SPAN_NOTICE("[user] has [open ? "opened" : "closed"] [src]."),
-		SPAN_NOTICE("You [open ? "open" : "close"] [src].")
+		span_notice("[user] has [open ? "opened" : "closed"] [src]."),
+		span_notice("You [open ? "open" : "close"] [src].")
 	)
 	update_icon()
 
@@ -715,15 +715,15 @@
 	. = ITEM_INTERACT_SUCCESS
 	var/turf/simulated/floor/F = loc
 	if(!istype(F) || !istype(F.flooring, /singleton/flooring/pool))
-		to_chat(user, SPAN_WARNING("[src] can only be secured to pool tiles!"))
+		to_chat(user, span_warning("[src] can only be secured to pool tiles!"))
 		return
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	var/obj/O = new constructed_type(loc)
 	O.dir = dir
 	user.visible_message(
-		SPAN_WARNING("[user] wrenches [src] down."),
-		SPAN_WARNING("You wrench [src] down.")
+		span_warning("[user] wrenches [src] down."),
+		span_warning("You wrench [src] down.")
 	)
 	qdel(src)
 
@@ -750,4 +750,4 @@
 
 /obj/structure/hygiene/faucet/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("It is turned [open ? "on" : "off"]")
+	. += span_notice("It is turned [open ? "on" : "off"]")

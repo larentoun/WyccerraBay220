@@ -144,7 +144,7 @@ var/global/list/mining_floors = list()
 
 /turf/simulated/mineral/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if (!user.IsAdvancedToolUser())
-		to_chat(usr, SPAN_WARNING("You don't have the dexterity to do this!"))
+		to_chat(usr, span_warning("You don't have the dexterity to do this!"))
 		return TRUE
 
 	if (istype(W, /obj/item/device/core_sampler))
@@ -160,9 +160,9 @@ var/global/list/mining_floors = list()
 
 	if (istype(W, /obj/item/device/measuring_tape))
 		var/obj/item/device/measuring_tape/P = W
-		user.visible_message(SPAN_NOTICE("\The [user] extends [P] towards [src]."),SPAN_NOTICE("You extend [P] towards [src]."))
+		user.visible_message(span_notice("\The [user] extends [P] towards [src]."),span_notice("You extend [P] towards [src]."))
 		if(do_after(user, 1 SECOND, src, DO_PUBLIC_UNIQUE))
-			to_chat(user, SPAN_NOTICE("\The [src] has been excavated to a depth of [excavation_level]cm."))
+			to_chat(user, span_notice("\The [src] has been excavated to a depth of [excavation_level]cm."))
 		return TRUE
 
 	if (istype(W, /obj/item/pickaxe))
@@ -171,7 +171,7 @@ var/global/list/mining_floors = list()
 
 		var/obj/item/pickaxe/P = W
 		if(last_act + P.digspeed > world.time)//prevents message spam
-			to_chat(user, SPAN_WARNING("You cannot use \the [W] again so soon!"))
+			to_chat(user, span_warning("You cannot use \the [W] again so soon!"))
 			return TRUE
 
 		last_act = world.time
@@ -185,7 +185,7 @@ var/global/list/mining_floors = list()
 			if(newDepth > F.excavation_required) // Digging too deep can break the item. At least you won't summon a Balrog (probably)
 				fail_message = ". <b>[pick("There is a crunching noise","[W] collides with some different rock","Part of the rock face crumbles away","Something breaks under [W]")]</b>"
 
-		to_chat(user, SPAN_NOTICE("You start [P.drill_verb][fail_message]."))
+		to_chat(user, span_notice("You start [P.drill_verb][fail_message]."))
 
 		if(fail_message && prob(90))
 			if(prob(25))
@@ -203,7 +203,7 @@ var/global/list/mining_floors = list()
 				else if(newDepth > F.excavation_required - F.clearance_range) // Not quite right but you still extract your find, the closer to the bottom the better, but not above 80%
 					excavate_find(prob(80 * (F.excavation_required - newDepth) / F.clearance_range), F)
 
-			to_chat(user, SPAN_NOTICE("You finish [P.drill_verb] \the [src]."))
+			to_chat(user, span_notice("You finish [P.drill_verb] \the [src]."))
 
 			if(newDepth >= 200) // This means the rock is mined out fully
 				var/obj/structure/boulder/B
@@ -459,20 +459,20 @@ var/global/list/mining_floors = list()
 
 	if(valid_tool)
 		if (dug)
-			to_chat(user, SPAN_WARNING("This area has already been dug"))
+			to_chat(user, span_warning("This area has already been dug"))
 			return TRUE
 
 		var/turf/T = user.loc
 		if (!(istype(T)))
 			return
 
-		to_chat(user, SPAN_WARNING("You start digging."))
+		to_chat(user, span_warning("You start digging."))
 		playsound(user.loc, 'sound/effects/rustle1.ogg', 50, 1)
 
 		if (!do_after(user, 4 SECONDS, src,  DO_DEFAULT | DO_PUBLIC_PROGRESS))
 			return TRUE
 
-		to_chat(user, SPAN_NOTICE("You dug a hole."))
+		to_chat(user, span_notice("You dug a hole."))
 		gets_dug()
 		return TRUE
 

@@ -54,11 +54,11 @@ var/global/const/TTV_WIRE_DEVICECHANGE = FLAG(4)
 		if (TTV_WIRE_DEVICECHANGE)
 			if (!mended)
 				if (prob(40))
-					T.visible_message(SPAN_DANGER("\The [T] beeps defeatedly!"))
+					T.visible_message(span_danger("\The [T] beeps defeatedly!"))
 					playsound(T, 'sound/items/timer.ogg', 50)
 					T.toggle_armed()
 				else
-					T.visible_message(SPAN_WARNING("\The [T] starts beeping angrily!"))
+					T.visible_message(span_warning("\The [T] starts beeping angrily!"))
 					while (timer > 0)
 						playsound(T, 'sound/items/timer.ogg', 50)
 						timer--

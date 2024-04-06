@@ -432,7 +432,7 @@ var/global/list/gear_datums = list()
 		. += "<br>"
 
 		. += "<br><b>Actions:</b><br>"
-		var/not_available_message = SPAN_NOTICE("This item will never spawn with you, using your current preferences.")
+		var/not_available_message = span_notice("This item will never spawn with you, using your current preferences.")
 		if(selected_gear.allowed_donation_tier(user))
 			var/class = ticked ? "linkOn" : (gear_points_left >= selected_gear.cost ? "" : "linkOff")
 			var/label = ticked ? "Drop" : "Take"

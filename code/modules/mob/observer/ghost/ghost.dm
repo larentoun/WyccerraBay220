@@ -168,7 +168,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set desc = "Relinquish your life and enter the land of the dead."
 
 	if (admin_paralyzed)
-		to_chat(usr, SPAN_DEBUG("You cannot ghost while admin paralyzed."))
+		to_chat(usr, span_debug("You cannot ghost while admin paralyzed."))
 		return
 
 	if(stat == DEAD)
@@ -212,10 +212,10 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Re-enter Corpse"
 	if(!client)	return
 	if(!(mind && mind.current && can_reenter_corpse))
-		to_chat(src, SPAN_WARNING("You have no body."))
+		to_chat(src, span_warning("You have no body."))
 		return
 	if(mind.current.key && copytext(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any clients
-		to_chat(src, SPAN_WARNING("Another consciousness is in your body... it is resisting you."))
+		to_chat(src, span_warning("Another consciousness is in your body... it is resisting you."))
 		return
 	stop_following()
 	mind.current.key = key
@@ -242,10 +242,10 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 	if(medHUD)
 		medHUD = FALSE
-		to_chat(src, SPAN_NOTICE("Medical HUD Disabled"))
+		to_chat(src, span_notice("Medical HUD Disabled"))
 	else
 		medHUD = TRUE
-		to_chat(src, SPAN_NOTICE("Medical HUD Enabled"))
+		to_chat(src, span_notice("Medical HUD Enabled"))
 
 /mob/observer/ghost/verb/toggle_antagHUD()
 	set category = "Ghost"
@@ -255,11 +255,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(!client)
 		return
 	if(!config.antag_hud_allowed && !client.holder)
-		to_chat(src, SPAN_WARNING("Admins have disabled this for this round"))
+		to_chat(src, span_warning("Admins have disabled this for this round"))
 		return
 	var/mob/observer/ghost/M = src
 	if(jobban_isbanned(M, "AntagHUD"))
-		to_chat(src, SPAN_WARNING("You have been banned from using this feature"))
+		to_chat(src, span_warning("You have been banned from using this feature"))
 		return
 	if(config.antag_hud_restricted && !M.has_enabled_antagHUD && !client.holder)
 		var/response = alert(src, "If you turn this on, you will not be able to take any part in the round.","Are you sure you want to turn this feature on?","Yes","No")
@@ -269,10 +269,10 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		M.has_enabled_antagHUD = 1
 	if(M.antagHUD)
 		M.antagHUD = 0
-		to_chat(src, SPAN_NOTICE("AntagHUD Disabled"))
+		to_chat(src, span_notice("AntagHUD Disabled"))
 	else
 		M.antagHUD = 1
-		to_chat(src, SPAN_NOTICE("AntagHUD Enabled"))
+		to_chat(src, span_notice("AntagHUD Enabled"))
 
 /mob/observer/ghost/verb/dead_tele()
 	set category = "Ghost"
@@ -287,7 +287,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	var/list/area_turfs = get_area_turfs(thearea, shall_check_if_holy() ? list(GLOBAL_PROC_REF(is_not_holy_turf)) : list())
 	if(!length(area_turfs))
-		to_chat(src, SPAN_WARNING("This area has been entirely made into sacred grounds, you cannot enter it while you are in this plane of existence!"))
+		to_chat(src, span_warning("This area has been entirely made into sacred grounds, you cannot enter it while you are in this plane of existence!"))
 		return
 
 	ghost_to_turf(pick(area_turfs))
@@ -301,7 +301,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(T)
 		ghost_to_turf(T)
 	else
-		to_chat(src, SPAN_WARNING("Invalid coordinates."))
+		to_chat(src, span_warning("Invalid coordinates."))
 /mob/observer/ghost/verb/follow()
 	set category = "Ghost"
 	set name = "Follow"
@@ -311,34 +311,34 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/observer/ghost/proc/ghost_to_turf(turf/target_turf)
 	if(check_is_holy_turf(target_turf))
-		to_chat(src, SPAN_WARNING("The target location is holy grounds!"))
+		to_chat(src, span_warning("The target location is holy grounds!"))
 		return
 	stop_following()
 	forceMove(target_turf)
 
 /mob/observer/ghost/start_following(atom/a)
 	..()
-	to_chat(src, SPAN_NOTICE("Now following \the [following]."))
+	to_chat(src, span_notice("Now following \the [following]."))
 
 /mob/observer/ghost/stop_following()
 	if(following)
-		to_chat(src, SPAN_NOTICE("No longer following \the [following]"))
+		to_chat(src, span_notice("No longer following \the [following]"))
 	..()
 
 /mob/observer/ghost/keep_following(obj/AM, old_loc, new_loc)
 	var/turf/T = get_turf(new_loc)
 	if(check_is_holy_turf(T))
-		to_chat(src, SPAN_WARNING("You cannot follow something standing on holy grounds!"))
+		to_chat(src, span_warning("You cannot follow something standing on holy grounds!"))
 		return
 	..()
 
 /mob/observer/ghost/StoreMemory()
 	set hidden = 1
-	to_chat(src, SPAN_WARNING("You are dead! You have no mind to store memory!"))
+	to_chat(src, span_warning("You are dead! You have no mind to store memory!"))
 
 /mob/observer/ghost/AddMemory()
 	set hidden = 1
-	to_chat(src, SPAN_WARNING("You are dead! You have no mind to store memory!"))
+	to_chat(src, span_warning("You are dead! You have no mind to store memory!"))
 /mob/observer/ghost/PostIncorporealMovement()
 	stop_following()
 
@@ -357,7 +357,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	var/turf/t = get_turf(src)
 	if(t)
 		var/rads = SSradiation.get_rads_at_turf(t)
-		to_chat(src, SPAN_NOTICE("Radiation level: [rads ? rads : "0"] IU/s."))
+		to_chat(src, span_notice("Radiation level: [rads ? rads : "0"] IU/s."))
 
 /mob/observer/ghost/verb/scan_target()
 	set name = "Scan Target"
@@ -367,14 +367,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(ishuman(following))
 		to_chat(src, medical_scan_results(following, 1, SKILL_MAX))
 
-	else to_chat(src, SPAN_NOTICE("Not a scannable target."))
+	else to_chat(src, span_notice("Not a scannable target."))
 
 /mob/observer/ghost/verb/become_mouse()
 	set name = "Become mouse"
 	set category = "Ghost"
 
 	if(config.disable_player_mice)
-		to_chat(src, SPAN_WARNING("Spawning as a mouse is currently disabled."))
+		to_chat(src, span_warning("Spawning as a mouse is currently disabled."))
 		return
 
 	if(!MayRespawn(1, ANIMAL_SPAWN_DELAY))
@@ -382,7 +382,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	var/turf/T = get_turf(src)
 	if(!T || (T.z in GLOB.using_map.admin_levels))
-		to_chat(src, SPAN_WARNING("You may not spawn as a mouse on this Z-level."))
+		to_chat(src, span_warning("You may not spawn as a mouse on this Z-level."))
 		return
 
 	var/response = alert(src, "Are you -sure- you want to become a mouse?","Are you sure you want to squeek?","Squeek!","Nope!")
@@ -400,14 +400,14 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		vent_found = pick(found_vents)
 		host = new /mob/living/simple_animal/passive/mouse(vent_found.loc)
 	else
-		to_chat(src, SPAN_WARNING("Unable to find any unwelded vents to spawn mice at."))
+		to_chat(src, span_warning("Unable to find any unwelded vents to spawn mice at."))
 	if(host)
 		if(config.uneducated_mice)
 			host.universal_understand = FALSE
 		announce_ghost_joinleave(src, 0, "They are now a mouse.")
 		host.ckey = src.ckey
 		host.status_flags |= NO_ANTAG
-		to_chat(host, SPAN_INFO("You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent."))
+		to_chat(host, span_info("You are now a mouse. Try to avoid interaction with players, and do not give hints away that you are more than a simple rodent."))
 
 /mob/observer/ghost/verb/view_manfiest()
 	set name = "Show Crew Manifest"
@@ -441,10 +441,10 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/observer/ghost/proc/try_possession(mob/living/target)
 	if(target.is_zombie())
 		if(!config.ghosts_can_possess_zombies)
-			to_chat(src, SPAN_WARNING("Ghosts are not permitted to possess zombies."))
+			to_chat(src, span_warning("Ghosts are not permitted to possess zombies."))
 			return 0
 	else if(!config.ghosts_can_possess_animals)
-		to_chat(src, SPAN_WARNING("Ghosts are not permitted to possess animals."))
+		to_chat(src, span_warning("Ghosts are not permitted to possess animals."))
 		return 0
 	if(!target.can_be_possessed_by(src))
 		return 0
@@ -526,7 +526,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	if(mind && mind.current && mind.current.stat != DEAD && can_reenter_corpse == CORPSE_CAN_REENTER)
 		if(feedback)
-			to_chat(src, SPAN_WARNING("Your non-dead body prevents you from respawning."))
+			to_chat(src, span_warning("Your non-dead body prevents you from respawning."))
 		return FALSE
 
 	if(!config.respawn_delay)
@@ -534,13 +534,13 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	if(config.antag_hud_restricted && has_enabled_antagHUD == 1)
 		if(feedback)
-			to_chat(src, SPAN_WARNING("antagHUD restrictions prevent you from respawning."))
+			to_chat(src, span_warning("antagHUD restrictions prevent you from respawning."))
 		return FALSE
 
 	var/timedifference = world.time - timeofdeath
 	if(!client.holder && respawn_time && timeofdeath && timedifference < respawn_time MINUTES)
 		var/timedifference_text = time2text(respawn_time MINUTES - timedifference,"mm:ss")
-		to_chat(src, SPAN_WARNING("You must have been dead for [respawn_time] minute\s to respawn. You have [timedifference_text] left."))
+		to_chat(src, span_warning("You must have been dead for [respawn_time] minute\s to respawn. You have [timedifference_text] left."))
 		return FALSE
 
 	return TRUE
@@ -577,16 +577,16 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set category = "OOC"
 
 	if (!(config.abandon_allowed))
-		to_chat(usr, SPAN_WARNING("Respawn is disabled."))
+		to_chat(usr, span_warning("Respawn is disabled."))
 		return
 	if (SSticker.mode)
 		if (SSticker.mode.deny_respawn)
-			to_chat(usr, SPAN_WARNING("Respawn is disabled for this roundtype."))
+			to_chat(usr, span_warning("Respawn is disabled for this roundtype."))
 			return
 		else if (!MayRespawn(TRUE, config.respawn_delay))
 			return
-	to_chat(usr, SPAN_NOTICE("You can respawn now, enjoy your new life!"))
-	to_chat(usr, SPAN_NOTICE("<b>Make sure to play a different character, and please roleplay correctly!</b>"))
+	to_chat(usr, span_notice("You can respawn now, enjoy your new life!"))
+	to_chat(usr, span_notice("<b>Make sure to play a different character, and please roleplay correctly!</b>"))
 	announce_ghost_joinleave(client, 0)
 
 	sound_to(src, sound(null))

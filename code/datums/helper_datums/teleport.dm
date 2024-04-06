@@ -8,7 +8,7 @@ GLOBAL_VAR_INIT(minimum_safe_teleport_distance, 5)
 
 /singleton/teleport/proc/teleport(atom/target, atom/destination, precision = 0)
 	if(!can_teleport(target,destination))
-		target.visible_message(SPAN_WARNING("\The [target] bounces off the teleporter!"))
+		target.visible_message(span_warning("\The [target] bounces off the teleporter!"))
 		return
 
 	teleport_target(target, destination, precision)

@@ -136,7 +136,7 @@ GLOBAL_LIST_INIT(mimic_protected, list(
 		if(istype(L))
 			if(prob(15))
 				L.Weaken(1)
-				L.visible_message(SPAN_DANGER("\the [src] knocks down \the [L]!"))
+				L.visible_message(span_danger("\the [src] knocks down \the [L]!"))
 
 /mob/living/simple_animal/hostile/mimic/Destroy()
 	copy_of = null

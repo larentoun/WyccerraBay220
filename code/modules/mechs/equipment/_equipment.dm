@@ -26,7 +26,7 @@
 			return 0
 
 		if(!(owner.get_cell()?.check_charge(active_power_use * CELLRATE)))
-			to_chat(user, SPAN_WARNING("The power indicator flashes briefly as you attempt to use \the [src]"))
+			to_chat(user, span_warning("The power indicator flashes briefly as you attempt to use \the [src]"))
 			return 0
 		return 1
 	else
@@ -35,7 +35,7 @@
 /obj/item/mech_equipment/attack_self(mob/user)
 	if (owner && loc == owner && ((user in owner.pilots) || user == owner))
 		if(!(owner.get_cell()?.check_charge(active_power_use * CELLRATE)))
-			to_chat(user, SPAN_WARNING("The power indicator flashes briefly as you attempt to use \the [src]"))
+			to_chat(user, span_warning("The power indicator flashes briefly as you attempt to use \the [src]"))
 			return 0
 		return 1
 	else
@@ -45,9 +45,9 @@
 	. = ..()
 	if(user.skill_check(SKILL_DEVICES, SKILL_BASIC))
 		if(length(restricted_software))
-			. += SPAN_NOTICE("It seems it would require [english_list(restricted_software)] to be used.")
+			. += span_notice("It seems it would require [english_list(restricted_software)] to be used.")
 		if(length(restricted_hardpoints))
-			. += SPAN_NOTICE("You figure it could be mounted in the [english_list(restricted_hardpoints)].")
+			. += span_notice("You figure it could be mounted in the [english_list(restricted_hardpoints)].")
 
 /obj/item/mech_equipment/proc/deactivate()
 	active = FALSE

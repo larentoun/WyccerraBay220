@@ -102,7 +102,7 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 		var/datum/pipe/cat = category
 		. += "<tr><td>[SPAN_COLOR("#517087", "<strong>[initial(cat.category)]</strong>")]</td></tr>"
 		for(var/datum/pipe/pipe in pipe_categories[category])
-			. += "<tr><td>[pipe.name]</td><td>[P.type == pipe.type ? SPAN_CLASS("linkOn", "Select") : "<a href='?src=\ref[src];select=\ref[pipe]'>Select</a>"]</td></tr>"
+			. += "<tr><td>[pipe.name]</td><td>[P.type == pipe.type ? span_linkon("Select") : "<a href='?src=\ref[src];select=\ref[pipe]'>Select</a>"]</td></tr>"
 	.+= "</table>"
 	. = JOINTEXT(.)
 
@@ -139,7 +139,7 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 		if (user.skill_fail_prob(SKILL_ATMOS, 80, SKILL_TRAINED))
 			var/C = pick(GLOB.rpd_pipe_selection)
 			P = pick(GLOB.rpd_pipe_selection[C])
-			user.visible_message(SPAN_WARNING("\The [user] cluelessly fumbles with \the [src]."))
+			user.visible_message(span_warning("\The [user] cluelessly fumbles with \the [src]."))
 		var/turf/T = get_turf(A)
 		if (!T.Adjacent(loc))
 			return TRUE
@@ -159,9 +159,9 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 	. = ..()
 	if(distance <= 1)
 		if(user.skill_check(SKILL_ATMOS,SKILL_BASIC))
-			. += "[SPAN_NOTICE("Current selection reads:")] [P]"
+			. += "[span_notice("Current selection reads:")] [P]"
 		else
-			. += SPAN_WARNING("The readout is flashing some atmospheric jargon, you can't understand.")
+			. += span_warning("The readout is flashing some atmospheric jargon, you can't understand.")
 
 /obj/item/rpd/attack_self(mob/user)
 	interact(user)

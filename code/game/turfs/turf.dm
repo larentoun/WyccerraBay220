@@ -319,7 +319,7 @@ var/global/const/enterloopsanity = 100
 		if(message)
 			to_chat(user, message)
 	else
-		to_chat(user, SPAN_WARNING("\The [source] is too dry to wash that."))
+		to_chat(user, span_warning("\The [source] is too dry to wash that."))
 	source.reagents.trans_to_turf(src, 1, 10)	//10 is the multiplier for the reaction effect. probably needed to wet the floor properly.
 
 /turf/proc/remove_cleanables(skip_blood = TRUE)
@@ -362,14 +362,14 @@ var/global/const/enterloopsanity = 100
 		return FALSE
 
 	if(jobban_isbanned(vandal, "Graffiti"))
-		to_chat(vandal, SPAN_WARNING("You are banned from leaving persistent information across rounds."))
+		to_chat(vandal, span_warning("You are banned from leaving persistent information across rounds."))
 		return
 
 	var/too_much_graffiti = 0
 	for(var/obj/decal/writing/W in src)
 		too_much_graffiti++
 	if(too_much_graffiti >= 5)
-		to_chat(vandal, SPAN_WARNING("There's too much graffiti here to add more."))
+		to_chat(vandal, span_warning("There's too much graffiti here to add more."))
 		return FALSE
 
 	var/message = sanitize(input("Enter a message to engrave.", "Graffiti") as null|text, trim = TRUE)
@@ -379,19 +379,19 @@ var/global/const/enterloopsanity = 100
 	if(!vandal || vandal.incapacitated() || !Adjacent(vandal) || !tool.loc == vandal)
 		return FALSE
 
-	vandal.visible_message(SPAN_WARNING("\The [vandal] begins carving something into \the [src]."))
+	vandal.visible_message(span_warning("\The [vandal] begins carving something into \the [src]."))
 
 	if(!do_after(vandal, max(20, length(message)), src, DO_PUBLIC_UNIQUE))
 		return FALSE
 
-	vandal.visible_message(SPAN_DANGER("\The [vandal] carves some graffiti into \the [src]."))
+	vandal.visible_message(span_danger("\The [vandal] carves some graffiti into \the [src]."))
 	var/obj/decal/writing/graffiti = new(src)
 	graffiti.message = message
 	graffiti.author = vandal.ckey
 	vandal.update_personal_goal(/datum/goal/achievement/graffiti, TRUE)
 
 	if(lowertext(message) == "elbereth")
-		to_chat(vandal, SPAN_NOTICE("You feel much safer."))
+		to_chat(vandal, span_notice("You feel much safer."))
 
 	return TRUE
 

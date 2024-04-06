@@ -59,10 +59,10 @@
 /obj/machinery/computer/shuttle_control/proc/can_move(datum/shuttle/autodock/shuttle, user)
 	var/cannot_depart = shuttle.current_location.cannot_depart(shuttle)
 	if(cannot_depart)
-		to_chat(user, SPAN_WARNING(cannot_depart))
+		to_chat(user, span_warning(cannot_depart))
 		return FALSE
 	if(!shuttle.next_location.is_valid(shuttle))
-		to_chat(user, SPAN_WARNING("Destination zone is invalid or obstructed."))
+		to_chat(user, span_warning("Destination zone is invalid or obstructed."))
 		return FALSE
 	return TRUE
 
@@ -95,7 +95,7 @@
 /obj/machinery/computer/shuttle_control/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/datum/shuttle/autodock/shuttle = SSshuttle.shuttles[shuttle_tag]
 	if (!istype(shuttle))
-		to_chat(user,SPAN_WARNING("Unable to establish link with the shuttle."))
+		to_chat(user,span_warning("Unable to establish link with the shuttle."))
 		return
 
 	var/list/data = get_ui_data(shuttle)

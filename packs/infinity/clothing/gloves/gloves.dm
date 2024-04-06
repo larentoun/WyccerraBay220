@@ -22,4 +22,4 @@
 
 /obj/item/clothing/gloves/wristwatch/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("It displays [stationtime2text()]")
+	. += span_notice("It displays [stationtime2text()]")

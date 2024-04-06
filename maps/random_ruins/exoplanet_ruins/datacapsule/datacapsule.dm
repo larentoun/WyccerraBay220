@@ -69,8 +69,8 @@
 	drive.add_fingerprint(user, tool = tool)
 	user.put_in_hands(drive)
 	user.visible_message(
-		SPAN_NOTICE("[user] pries a drive from [src] with [tool]."),
-		SPAN_NOTICE("You pry [drive] from [src] with [tool].")
+		span_notice("[user] pries a drive from [src] with [tool]."),
+		span_notice("You pry [drive] from [src] with [tool].")
 	)
 	drive = null
 

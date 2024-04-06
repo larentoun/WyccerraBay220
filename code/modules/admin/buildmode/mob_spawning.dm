@@ -50,13 +50,13 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 	M.alpha = spawner ? 255 : 0
 
 /datum/build_mode/mob_mode/Help()
-	to_chat(user, SPAN_NOTICE(help_text))
+	to_chat(user, span_notice(help_text))
 
 /datum/build_mode/mob_mode/ui_interact(mob/user, ui_key = "mob_spawner", datum/nanoui/ui = null, force_open = 1, master_ui = null, datum/topic_state/state = GLOB.default_state)
 	. = ..()
 
 	if (!current_turf || !current_area)
-		to_chat(user, SPAN_WARNING("Could not get an area and/or turf from the selected atom!"))
+		to_chat(user, span_warning("Could not get an area and/or turf from the selected atom!"))
 		return
 
 	var/datum/mob_spawner/spawner = GLOB.mob_spawners[current_turf]
@@ -239,11 +239,11 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 	current_turf = get_turf(object)
 
 	if(!current_area)
-		to_chat(user, SPAN_WARNING("Selected atom is not in an area, a spawner cannot be put here!"))
+		to_chat(user, span_warning("Selected atom is not in an area, a spawner cannot be put here!"))
 		return
 
 	if(!current_turf)
-		to_chat(user, SPAN_WARNING("That atom does not have a turf!"))
+		to_chat(user, span_warning("That atom does not have a turf!"))
 		return
 
 	var/datum/mob_spawner/spawner = GLOB.mob_spawners[current_turf]
@@ -264,7 +264,7 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 
 		else if (LAZYACCESS(modifiers, RIGHT_CLICK))
 			if (length(copied_spawner) == 0)
-				to_chat(user, SPAN_WARNING("No spawner copied, cannot paste settings!"))
+				to_chat(user, span_warning("No spawner copied, cannot paste settings!"))
 				return
 
 			spawner.paste(copied_spawner)

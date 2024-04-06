@@ -155,10 +155,10 @@
 
 /obj/structure/foamedmetal/attack_hand(mob/user)
 	if ((MUTATION_FERAL in user.mutations) || prob(75 - metal * 25))
-		user.visible_message(SPAN_WARNING("[user] smashes through the foamed metal."), SPAN_NOTICE("You smash through the metal foam wall."))
+		user.visible_message(span_warning("[user] smashes through the foamed metal."), span_notice("You smash through the metal foam wall."))
 		qdel(src)
 	else
-		to_chat(user, SPAN_NOTICE("You hit the metal foam but bounce off it."))
+		to_chat(user, span_notice("You hit the metal foam but bounce off it."))
 	return
 
 
@@ -169,14 +169,14 @@
 			USE_FEEDBACK_GRAB_FAILURE("\The [grab.affecting] must be next to \the [src] to smash them into it.")
 			return TRUE
 		grab.assailant.visible_message(
-			SPAN_WARNING("\The [grab.assailant] smashes \the [grab.affecting] through \the [src]!"),
-			SPAN_DANGER("You smash \the [grab.affecting] through \the [src]!"),
+			span_warning("\The [grab.assailant] smashes \the [grab.affecting] through \the [src]!"),
+			span_danger("You smash \the [grab.affecting] through \the [src]!"),
 			exclude_mobs = list(grab.affecting)
 		)
 		grab.affecting.show_message(
-			SPAN_DANGER("\The [grab.assailant] smashes you through \the [src]!"),
+			span_danger("\The [grab.assailant] smashes you through \the [src]!"),
 			VISIBLE_MESSAGE,
-			SPAN_DANGER("You feel yourself being smashed through something!")
+			span_danger("You feel yourself being smashed through something!")
 		)
 		qdel(grab)
 		qdel_self()
@@ -193,15 +193,15 @@
 		if (prob(weapon.force * 20 - metal * 25))
 			playsound(src, damage_hitsound, 75, TRUE)
 			user.visible_message(
-				SPAN_WARNING("\The [user] smashes through \the [src] with \a [weapon]!"),
-				SPAN_DANGER("You smash through \the [src] with \the [weapon]!")
+				span_warning("\The [user] smashes through \the [src] with \a [weapon]!"),
+				span_danger("You smash through \the [src] with \the [weapon]!")
 			)
 			qdel_self()
 			return TRUE
 		playsound(src, damage_hitsound, 50, TRUE)
 		user.visible_message(
-			SPAN_WARNING("\The [user] hits \the [src] with \a [weapon]!"),
-			SPAN_DANGER("You hit \the [src] with \the [weapon]!")
+			span_warning("\The [user] hits \the [src] with \a [weapon]!"),
+			span_danger("You hit \the [src] with \the [weapon]!")
 		)
 		return TRUE
 

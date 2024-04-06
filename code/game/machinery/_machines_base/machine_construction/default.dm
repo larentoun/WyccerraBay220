@@ -23,7 +23,7 @@
 	if((. = ..()))
 		return
 	if (!machine.can_use_tools)
-		to_chat(user, SPAN_WARNING("[machine] cannot be modified!"))
+		to_chat(user, span_warning("[machine] cannot be modified!"))
 		return TRUE
 	if(I.tool_behaviour == TOOL_SCREWDRIVER)
 		if(!I.use_as_tool(machine, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))

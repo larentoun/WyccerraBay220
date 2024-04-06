@@ -39,14 +39,14 @@
 			if(BP_IS_CRYSTAL(E))
 				if((E.brute_dam + E.burn_dam) > 0)
 					if(prob(35))
-						to_chat(M, SPAN_NOTICE("You feel a crawling sensation as fresh crystal grows over your [E.name]."))
+						to_chat(M, span_notice("You feel a crawling sensation as fresh crystal grows over your [E.name]."))
 					E.heal_damage(rand(5,8), rand(5,8))
 					break
 				if(BP_IS_BRITTLE(E))
 					E.status &= ~ORGAN_BRITTLE
 					break
 			else if(prob(15))
-				to_chat(H, SPAN_DANGER("Your [E.name] is being lacerated from within!"))
+				to_chat(H, span_danger("Your [E.name] is being lacerated from within!"))
 				if(E.can_feel_pain())
 					H.emote("scream")
 				if(prob(25))
@@ -65,14 +65,14 @@
 
 			if(BP_IS_CRYSTAL(I))
 				if(prob(35))
-					to_chat(M, SPAN_NOTICE("You feel a deep, sharp tugging sensation as your [I.name] is mended."))
+					to_chat(M, span_notice("You feel a deep, sharp tugging sensation as your [I.name] is mended."))
 				I.heal_damage(rand(1,3))
 				break
 				if(BP_IS_BRITTLE(I))
 					I.status &= ~ORGAN_BRITTLE
 					break
 			else if(prob(15))
-				to_chat(H, SPAN_DANGER("You feel visceral, sharp twisting within your body!"))
+				to_chat(H, span_danger("You feel visceral, sharp twisting within your body!"))
 				if(I.can_feel_pain())
 					H.emote("scream")
 				if(prob(25))
@@ -83,7 +83,7 @@
 					I.status |= ORGAN_BRITTLE
 				break
 	else
-		to_chat(M, SPAN_DANGER("Your flesh is being lacerated from within!"))
+		to_chat(M, span_danger("Your flesh is being lacerated from within!"))
 		M.adjustBruteLoss(rand(3,6))
 		if(prob(10))
 			new /obj/item/material/shard(get_turf(M), result_mat)

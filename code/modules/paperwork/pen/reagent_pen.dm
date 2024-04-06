@@ -20,9 +20,9 @@
 
 	if (allow == INJECTION_PORT)
 		if (M != user)
-			to_chat(user, SPAN_WARNING("You begin hunting for an injection port on \the [M]'s suit!"))
+			to_chat(user, span_warning("You begin hunting for an injection port on \the [M]'s suit!"))
 		else
-			to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
+			to_chat(user, span_notice("You begin hunting for an injection port on your suit."))
 
 		if (!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M, do_flags = DO_MEDICAL))
 			return TRUE
@@ -37,8 +37,8 @@
 	if (user.a_intent == I_HURT && allow != INJECTION_PORT)
 		return M.use_weapon(src, user)
 	else
-		to_chat(user, SPAN_WARNING("You prick \the [M] with \the [src]."))
-		to_chat(M, SPAN_NOTICE("You feel a tiny prick."))
+		to_chat(user, span_warning("You prick \the [M] with \the [src]."))
+		to_chat(M, span_notice("You feel a tiny prick."))
 		return TRUE
 
 /*

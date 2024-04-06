@@ -53,9 +53,9 @@
 	. = ..()
 	if(distance <= 1)
 		if(!uses_charge)
-			. += SPAN_NOTICE("There [amount == 1 ? "is 1 [singular_name]" : "are [amount] [plural_name]"] in the stack.")
+			. += span_notice("There [amount == 1 ? "is 1 [singular_name]" : "are [amount] [plural_name]"] in the stack.")
 		else
-			. += SPAN_NOTICE("There is enough charge for [get_amount() == 1 ? "1 [singular_name]" : "[amount] [plural_name]"].")
+			. += span_notice("There is enough charge for [get_amount() == 1 ? "1 [singular_name]" : "[amount] [plural_name]"].")
 
 /obj/item/stack/attack_self(mob/user as mob)
 	list_recipes(user)
@@ -122,27 +122,27 @@
 
 	var/area/A = get_area(user)
 	if (!A.can_modify_area())
-		to_chat(user, SPAN_WARNING("You can't seem to make anything with \the [src] here."))
+		to_chat(user, span_warning("You can't seem to make anything with \the [src] here."))
 		return
 
 	if (!can_use(required))
 		if (produced>1)
-			to_chat(user, SPAN_WARNING("You haven't got enough [src] to build \the [produced] [recipe.display_name()]\s!"))
+			to_chat(user, span_warning("You haven't got enough [src] to build \the [produced] [recipe.display_name()]\s!"))
 		else
-			to_chat(user, SPAN_WARNING("You haven't got enough [src] to build \the [recipe.display_name()]!"))
+			to_chat(user, span_warning("You haven't got enough [src] to build \the [recipe.display_name()]!"))
 		return
 
 	if(!recipe.can_make(user))
 		return
 
 	if (recipe.time)
-		to_chat(user, SPAN_NOTICE("Building [recipe.display_name()] ..."))
+		to_chat(user, span_notice("Building [recipe.display_name()] ..."))
 		if (!user.do_skilled(recipe.time, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT | DO_BAR_OVER_USER))
 			return
 
 	if (use(required))
 		if(user.skill_fail_prob(SKILL_CONSTRUCTION, 90, recipe.difficulty))
-			to_chat(user, SPAN_WARNING("You waste some [name] and fail to build \the [recipe.display_name()]!"))
+			to_chat(user, span_warning("You waste some [name] and fail to build \the [recipe.display_name()]!"))
 			return
 		var/atom/O = recipe.spawn_result(user, user.loc, produced)
 		// Stack recipes will delete the created item if it merges with a stack already in hand.
@@ -305,7 +305,7 @@
 			continue
 		var/transfer = src.transfer_to(item)
 		if (transfer)
-			to_chat(user, SPAN_NOTICE("You add a new [item.singular_name] to the stack. It now contains [item.get_exact_name(item.amount)]."))
+			to_chat(user, span_notice("You add a new [item.singular_name] to the stack. It now contains [item.get_exact_name(item.amount)]."))
 		if(!amount)
 			break
 
@@ -429,12 +429,12 @@
 
 /datum/stack_recipe/proc/can_make(mob/user)
 	if (one_per_turf && (locate(result_type) in user.loc))
-		to_chat(user, SPAN_WARNING("There is another [display_name()] here!"))
+		to_chat(user, span_warning("There is another [display_name()] here!"))
 		return FALSE
 
 	var/turf/T = get_turf(user.loc)
 	if (on_floor && !T.is_floor())
-		to_chat(user, SPAN_WARNING("\The [display_name()] must be constructed on the floor!"))
+		to_chat(user, span_warning("\The [display_name()] must be constructed on the floor!"))
 		return FALSE
 
 	return TRUE

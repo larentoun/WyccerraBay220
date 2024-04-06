@@ -194,11 +194,11 @@
 	if(href_list["launch_shuttle"])
 		var/datum/shuttle/autodock/ferry/supply/shuttle = SSsupply.shuttle
 		if(!shuttle)
-			to_chat(user, SPAN_WARNING("Error connecting to the shuttle."))
+			to_chat(user, span_warning("Error connecting to the shuttle."))
 			return
 		if(shuttle.at_station())
 			if (shuttle.forbidden_atoms_check())
-				to_chat(usr, SPAN_WARNING("For safety reasons the automated supply shuttle cannot transport live organisms, classified nuclear weaponry or homing beacons."))
+				to_chat(usr, span_warning("For safety reasons the automated supply shuttle cannot transport live organisms, classified nuclear weaponry or homing beacons."))
 			else
 				shuttle.launch(user)
 		else
@@ -219,14 +219,14 @@
 		var/datum/supply_order/SO = find_order_by_id(id, SSsupply.requestlist)
 		if(SO)
 			if(SO.object.cost >= SSsupply.points)
-				to_chat(usr, SPAN_WARNING("Not enough points to purchase \the [SO.object.name]!"))
+				to_chat(usr, span_warning("Not enough points to purchase \the [SO.object.name]!"))
 			else
 				SSsupply.requestlist -= SO
 				SSsupply.shoppinglist += SO
 				SSsupply.points -= SO.object.cost
 
 		else
-			to_chat(user, SPAN_WARNING("Could not find order number [id] to approve."))
+			to_chat(user, span_warning("Could not find order number [id] to approve."))
 
 		return 1
 
@@ -236,7 +236,7 @@
 		if(SO)
 			SSsupply.requestlist -= SO
 		else
-			to_chat(user, SPAN_WARNING("Could not find order number [id] to deny."))
+			to_chat(user, span_warning("Could not find order number [id] to deny."))
 
 		return 1
 
@@ -247,7 +247,7 @@
 			SSsupply.shoppinglist -= SO
 			SSsupply.points += SO.object.cost
 		else
-			to_chat(user, SPAN_WARNING("Could not find order number [id] to cancel."))
+			to_chat(user, span_warning("Could not find order number [id] to cancel."))
 
 		return 1
 
@@ -257,13 +257,13 @@
 		if(SO)
 			SSsupply.donelist -= SO
 		else
-			to_chat(user, SPAN_WARNING("Could not find order number [id] to delete."))
+			to_chat(user, span_warning("Could not find order number [id] to delete."))
 
 		return 1
 
 	if(href_list["print_receipt"])
 		if(!can_print())
-			to_chat(user, SPAN_WARNING("No printer connected to print receipts."))
+			to_chat(user, span_warning("No printer connected to print receipts."))
 			return 1
 
 		var/id = text2num(href_list["print_receipt"])
@@ -277,14 +277,14 @@
 			if(SUPPLY_LIST_ID_DONE)
 				list_to_search = SSsupply.donelist
 			else
-				to_chat(user, SPAN_WARNING("Invalid list ID for order number [id]. Receipt not printed."))
+				to_chat(user, span_warning("Invalid list ID for order number [id]. Receipt not printed."))
 				return 1
 
 		var/datum/supply_order/SO = find_order_by_id(id, list_to_search)
 		if(SO)
 			print_order(SO, user)
 		else
-			to_chat(user, SPAN_WARNING("Could not find order number [id] to print receipt."))
+			to_chat(user, span_warning("Could not find order number [id] to print receipt."))
 
 		return 1
 

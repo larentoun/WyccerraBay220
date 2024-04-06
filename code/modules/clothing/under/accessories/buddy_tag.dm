@@ -66,4 +66,4 @@
 		playsound(src, 'sound/machines/chime.ogg', 10)
 		var/turf/T = get_turf(src)
 		if (T)
-			T.visible_message(SPAN_WARNING("[src] beeps anxiously."), range = 3)
+			T.visible_message(span_warning("[src] beeps anxiously."), range = 3)

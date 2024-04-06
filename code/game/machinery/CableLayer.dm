@@ -20,7 +20,7 @@
 
 /obj/machinery/cablelayer/physical_attack_hand(mob/user)
 	if(!cable && !on)
-		to_chat(user, SPAN_WARNING("\The [src] doesn't have any cable loaded."))
+		to_chat(user, span_warning("\The [src] doesn't have any cable loaded."))
 		return TRUE
 	on = !on
 	user.visible_message("\The [user] [!on?"dea":"a"]ctivates \the [src].", "You switch [src] [on? "on" : "off"]")
@@ -29,7 +29,7 @@
 /obj/machinery/cablelayer/wirecutter_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
 	if(!cable || !cable?.amount)
-		to_chat(usr, SPAN_WARNING("There's no more cable on the reel."))
+		to_chat(usr, span_warning("There's no more cable on the reel."))
 		return
 	var/m = round(input(usr,"Please specify the length of cable to cut","Cut cable",min(cable.amount,30)) as num, 1)
 	m = min(m, cable.amount)
@@ -45,7 +45,7 @@
 	if(istype(O, /obj/item/stack/cable_coil))
 		var/result = load_cable(O)
 		if(!result)
-			to_chat(user, SPAN_WARNING("\The [src]'s cable reel is full."))
+			to_chat(user, span_warning("\The [src]'s cable reel is full."))
 		else
 			to_chat(user, "You load [result] lengths of cable into [src].")
 		return TRUE
@@ -53,7 +53,7 @@
 
 /obj/machinery/cablelayer/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("[src]'s cable reel has [cable.amount] length\s left.")
+	. += span_notice("[src]'s cable reel has [cable.amount] length\s left.")
 
 /obj/machinery/cablelayer/proc/load_cable(obj/item/stack/cable_coil/CC)
 	if(istype(CC) && CC.amount)

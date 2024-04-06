@@ -15,27 +15,27 @@
 	if (!user.TurfAdjacent(T))
 		return
 	if (isspaceturf(T) || isopenspace(T))
-		to_chat(user, SPAN_WARNING("You cannot use \the [src] in open space."))
+		to_chat(user, span_warning("You cannot use \the [src] in open space."))
 		return TRUE
 	var/obstruction = T.get_obstruction()
 	if (obstruction)
-		to_chat(user, SPAN_WARNING("\The [english_list(obstruction)] is blocking that spot."))
+		to_chat(user, span_warning("\The [english_list(obstruction)] is blocking that spot."))
 		return TRUE
 	user.visible_message(
-		SPAN_ITALIC("\The [user] starts inflating \an [src]."),
-		SPAN_ITALIC("You start inflating \the [src]."),
-		SPAN_ITALIC("You can hear rushing air."),
+		span_italic("\The [user] starts inflating \an [src]."),
+		span_italic("You start inflating \the [src]."),
+		span_italic("You can hear rushing air."),
 		range = 5
 	)
 	if (!do_after(user, 1 SECOND, target, DO_PUBLIC_UNIQUE) || QDELETED(src))
 		return TRUE
 	obstruction = T.get_obstruction()
 	if (obstruction)
-		to_chat(user, SPAN_WARNING("\The [english_list(obstruction)] is blocking that spot."))
+		to_chat(user, span_warning("\The [english_list(obstruction)] is blocking that spot."))
 		return TRUE
 	user.visible_message(
-		SPAN_ITALIC("\The [user] finishes inflating \an [src]."),
-		SPAN_NOTICE("You inflate \the [src]."),
+		span_italic("\The [user] finishes inflating \an [src]."),
+		span_notice("You inflate \the [src]."),
 		range = 5
 	)
 	playsound(loc, 'sound/items/zip.ogg', 75, 1)
@@ -116,14 +116,14 @@
 		damage_health(1)
 		var/damage_percentage = get_damage_percentage()
 		if (damage_percentage >= 70 && initial_damage_percentage < 70)
-			visible_message(SPAN_WARNING("\The [src] is barely holding up!"))
+			visible_message(span_warning("\The [src] is barely holding up!"))
 		else if (damage_percentage >= 30 && initial_damage_percentage < 30)
-			visible_message(SPAN_WARNING("\The [src] is taking damage!"))
+			visible_message(span_warning("\The [src] is taking damage!"))
 
 /obj/structure/inflatable/examine(mob/user)
 	. = ..()
 	if(taped)
-		. += SPAN_NOTICE("It's been duct taped in few places.")
+		. += span_notice("It's been duct taped in few places.")
 
 /obj/structure/inflatable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 0
@@ -167,8 +167,8 @@
 		taped = TRUE
 		restore_health(3)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] patches some of \the [src]'s damage with \a [tool]."),
-			SPAN_NOTICE("You patch some of \the [src]'s damage with \the [tool].")
+			span_notice("\The [user] patches some of \the [src]'s damage with \a [tool]."),
+			span_notice("You patch some of \the [src]'s damage with \the [tool].")
 		)
 		return TRUE
 
@@ -315,7 +315,7 @@
 	icon_state = "folded_wall_torn"
 
 /obj/item/inflatable/torn/attack_self(mob/user)
-	to_chat(user, SPAN_NOTICE("The inflatable wall is too torn to be inflated!"))
+	to_chat(user, span_notice("The inflatable wall is too torn to be inflated!"))
 	add_fingerprint(user)
 
 /obj/item/inflatable/door/torn
@@ -325,7 +325,7 @@
 	icon_state = "folded_door_torn"
 
 /obj/item/inflatable/door/torn/attack_self(mob/user)
-	to_chat(user, SPAN_NOTICE("The inflatable door is too torn to be inflated!"))
+	to_chat(user, span_notice("The inflatable door is too torn to be inflated!"))
 	add_fingerprint(user)
 
 /obj/item/storage/briefcase/inflatable

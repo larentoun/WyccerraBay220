@@ -26,7 +26,7 @@
 			M.weakened = max(M.weakened, 3)
 			victims++
 			if(prob(5))
-				to_chat(M, SPAN_WARNING("[pick("You feel tingly","You feel like floating","It is hard to speak","You can barely move")]."))
+				to_chat(M, span_warning("[pick("You feel tingly","You feel like floating","It is hard to speak","You can barely move")]."))
 		if(victims)
 			use_power_oneoff(active_power_usage * victims)
 
@@ -68,7 +68,7 @@
 				if(anchored)
 					activate()
 				else
-					to_chat(user, SPAN_WARNING("You are unable to activate [src] until it is properly secured on the ground."))
+					to_chat(user, span_warning("You are unable to activate [src] until it is properly secured on the ground."))
 		else
 			deactivate()
 		. = TOPIC_REFRESH
@@ -88,12 +88,12 @@
 
 /obj/machinery/suspension_gen/cannot_transition_to(state_path)
 	if(suspension_field)
-		return SPAN_NOTICE("Turn \the [src] off first.")
+		return span_notice("Turn \the [src] off first.")
 	return ..()
 
 /obj/machinery/suspension_gen/can_anchor(obj/item/tool, mob/user, silent)
 	if (suspension_field)
-		to_chat(user, SPAN_WARNING("You are unable to wrench \the [src] while it is active!"))
+		to_chat(user, span_warning("You are unable to wrench \the [src] while it is active!"))
 		return FALSE
 	return ..()
 
@@ -113,10 +113,10 @@
 
 	for(var/mob/living/M in T)
 		M.weakened += 5
-		M.visible_message(SPAN_NOTICE("[icon2html(M, viewers(get_turf(M)))] [M] begins to float in the air!"),"You feel tingly and light, but it is difficult to move.")
+		M.visible_message(span_notice("[icon2html(M, viewers(get_turf(M)))] [M] begins to float in the air!"),"You feel tingly and light, but it is difficult to move.")
 
 	suspension_field = new(T)
-	src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [src] activates with a low hum."))
+	src.visible_message(span_notice("[icon2html(src, viewers(get_turf(src)))] [src] activates with a low hum."))
 	icon_state = "suspension_on"
 	playsound(loc, 'sound/machines/quiet_beep.ogg', 40)
 	update_icon()
@@ -129,7 +129,7 @@
 	if(collected)
 		suspension_field.icon_state = "energynet"
 		suspension_field.AddOverlays("shield2")
-		src.visible_message(SPAN_NOTICE("[icon2html(suspension_field, viewers(get_turf(src)))] [suspension_field] gently absconds [collected > 1 ? "something" : "several things"]."))
+		src.visible_message(span_notice("[icon2html(suspension_field, viewers(get_turf(src)))] [suspension_field] gently absconds [collected > 1 ? "something" : "several things"]."))
 	else
 		if(istype(T,/turf/simulated/mineral) || istype(T,/turf/simulated/wall))
 			suspension_field.icon_state = "shieldsparkles"
@@ -143,10 +143,10 @@
 	var/turf/T = get_turf(suspension_field)
 
 	for(var/mob/living/M in T)
-		to_chat(M, SPAN_INFO("You no longer feel like floating."))
+		to_chat(M, span_info("You no longer feel like floating."))
 		M.weakened = min(M.weakened, 3)
 
-	src.visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [src] deactivates with a gentle shudder."))
+	src.visible_message(span_notice("[icon2html(src, viewers(get_turf(src)))] [src] deactivates with a gentle shudder."))
 	qdel(suspension_field)
 	suspension_field = null
 	icon_state = "suspension_wrenched"
@@ -164,7 +164,7 @@
 	set category = "Object"
 
 	if(anchored)
-		to_chat(usr, SPAN_WARNING("You cannot rotate [src], it has been firmly fixed to the floor."))
+		to_chat(usr, span_warning("You cannot rotate [src], it has been firmly fixed to the floor."))
 	else
 		set_dir(turn(dir, 90))
 
@@ -174,7 +174,7 @@
 	set category = "Object"
 
 	if(anchored)
-		to_chat(usr, SPAN_WARNING("You cannot rotate [src], it has been firmly fixed to the floor."))
+		to_chat(usr, span_warning("You cannot rotate [src], it has been firmly fixed to the floor."))
 	else
 		set_dir(turn(dir, -90))
 

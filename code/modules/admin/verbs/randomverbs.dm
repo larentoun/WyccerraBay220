@@ -37,7 +37,7 @@
 			prisoner.equip_to_slot_or_del(new /obj/item/clothing/under/color/orange(prisoner), slot_w_uniform)
 			prisoner.equip_to_slot_or_del(new /obj/item/clothing/shoes/orange(prisoner), slot_shoes)
 		spawn(50)
-			to_chat(M, SPAN_WARNING("You have been sent to the prison station!"))
+			to_chat(M, span_warning("You have been sent to the prison station!"))
 		log_and_message_admins("sent [key_name_admin(M)] to the prison station.")
 
 /client/proc/cmd_check_new_players()	//Allows admins to determine who the newer players are.
@@ -134,7 +134,7 @@
 
 	if (style == "unsafe")
 		if (!config.allow_unsafe_narrates)
-			to_chat(user, SPAN_WARNING("Unsafe narrates are not permitted by the server configuration."))
+			to_chat(user, span_warning("Unsafe narrates are not permitted by the server configuration."))
 			return
 
 	if (style != "unsafe")
@@ -162,10 +162,10 @@
 			if ("italic")  result = "<i>[result]</i>"
 			if ("bold")    result = "<b>[result]</b>"
 			if ("subtle")  result = "<b>You hear a voice in your head... [result]</b>"
-			if ("notice")  result = SPAN_NOTICE(result)
-			if ("warning") result = SPAN_WARNING(result)
-			if ("danger")  result = SPAN_DANGER(result)
-			if ("occult")  result = SPAN_OCCULT(result)
+			if ("notice")  result = span_notice(result)
+			if ("warning") result = span_warning(result)
+			if ("danger")  result = span_danger(result)
+			if ("occult")  result = span_cult(result)
 		switch (size)
 			if ("small")  result = FONT_SMALL(result)
 			if ("large")  result = FONT_LARGE(result)
@@ -301,7 +301,7 @@
 		to_chat(src, "Only administrators may use this command.")
 		return
 	M.status_flags ^= GODMODE
-	to_chat(usr, SPAN_NOTICE("Toggled [(M.status_flags & GODMODE) ? "ON" : "OFF"]"))
+	to_chat(usr, span_notice("Toggled [(M.status_flags & GODMODE) ? "ON" : "OFF"]"))
 	log_admin("[key_name(usr)] has toggled [key_name(M)]'s nodamage to [(M.status_flags & GODMODE) ? "On" : "Off"]")
 	message_admins("[key_name_admin(usr)] has toggled [key_name_admin(M)]'s nodamage to [(M.status_flags & GODMODE) ? "On" : "Off"]", 1)
 
@@ -416,7 +416,7 @@ Ccomp's first proc.
 	var/list/ghosts = get_ghosts_by_key()
 	var/mob/observer/ghost/G = ghosts[selection]
 	if(!istype(G))
-		to_chat(src, SPAN_WARNING("[selection] no longer has an associated ghost."))
+		to_chat(src, span_warning("[selection] no longer has an associated ghost."))
 		return
 
 	if(G.has_enabled_antagHUD == 1 && config.antag_hud_restricted)
@@ -433,7 +433,7 @@ Ccomp's first proc.
 	G.has_enabled_antagHUD = 2
 	G.can_reenter_corpse = CORPSE_CAN_REENTER_AND_RESPAWN
 
-	G.show_message(SPAN_NOTICE("<b>You may now respawn.  You should roleplay as if you learned nothing about the round during your time with the dead.</b>"), 1)
+	G.show_message(span_notice("<b>You may now respawn.  You should roleplay as if you learned nothing about the round during your time with the dead.</b>"), 1)
 	log_and_message_admins("has allowed [key_name(G)] to bypass the [config.respawn_delay] minute respawn limit.")
 
 
@@ -461,7 +461,7 @@ Ccomp's first proc.
 		else if (candidate.mob.type == /mob/observer/ghost)
 			candidates["[candidate.ckey] (Ghost)"] = list(candidate, 2)
 	if (!length(candidates))
-		to_chat(usr, SPAN_WARNING("There are no users eligible to be respawned."))
+		to_chat(usr, span_warning("There are no users eligible to be respawned."))
 		return
 	var/response = input(usr, null, "Allow Respawn") in null | candidates
 	if (!response)
@@ -482,7 +482,7 @@ Ccomp's first proc.
 					if (selected.mob.type == /mob/new_player)
 						state = 1
 					else
-						to_chat(usr, SPAN_WARNING("Something went wrong. [selected.ckey] re-entered their body or disconnected."))
+						to_chat(usr, span_warning("Something went wrong. [selected.ckey] re-entered their body or disconnected."))
 						return
 			if (state == 2)
 				subject.timeofdeath = -1e5
@@ -497,9 +497,9 @@ Ccomp's first proc.
 		state = 3
 	if (state == 3)
 		log_and_message_admins("has allowed [key_name(selected)] to bypass respawn timers.")
-		to_chat(selected, SPAN_NOTICE("You have been allowed to bypass respawn timers."))
+		to_chat(selected, span_notice("You have been allowed to bypass respawn timers."))
 	else
-		to_chat(usr, SPAN_WARNING("Something went wrong. [selected.ckey] re-entered their body or disconnected."))
+		to_chat(usr, span_warning("Something went wrong. [selected.ckey] re-entered their body or disconnected."))
 
 
 /client/proc/toggle_antagHUD_use()
@@ -517,19 +517,19 @@ Ccomp's first proc.
 			if(g.antagHUD)
 				g.antagHUD = 0						// Disable it on those that have it enabled
 				g.has_enabled_antagHUD = 2				// We'll allow them to respawn
-				to_chat(g, SPAN_DANGER("The Administrator has disabled AntagHUD"))
+				to_chat(g, span_danger("The Administrator has disabled AntagHUD"))
 		config.antag_hud_allowed = 0
-		to_chat(src, SPAN_DANGER("AntagHUD usage has been disabled"))
+		to_chat(src, span_danger("AntagHUD usage has been disabled"))
 		action = "disabled"
 	else
 		for(var/mob/observer/ghost/g in get_ghosts())
 			if(!g.client.holder)						// Add the verb back for all non-admin ghosts
 				g.verbs += /mob/observer/ghost/verb/toggle_antagHUD
-				to_chat(g, SPAN_NOTICE("<B>The Administrator has enabled AntagHUD </B>"))// Notify all observers they can now use AntagHUD
+				to_chat(g, span_notice("<B>The Administrator has enabled AntagHUD </B>"))// Notify all observers they can now use AntagHUD
 
 		config.antag_hud_allowed = 1
 		action = "enabled"
-		to_chat(src, SPAN_NOTICE("<B>AntagHUD usage has been enabled</B>"))
+		to_chat(src, span_notice("<B>AntagHUD usage has been enabled</B>"))
 
 
 	log_admin("[key_name(usr)] has [action] antagHUD usage for observers")
@@ -546,19 +546,19 @@ Ccomp's first proc.
 	var/action=""
 	if(config.antag_hud_restricted)
 		for(var/mob/observer/ghost/g in get_ghosts())
-			to_chat(g, SPAN_NOTICE("<B>The administrator has lifted restrictions on joining the round if you use AntagHUD</B>"))
+			to_chat(g, span_notice("<B>The administrator has lifted restrictions on joining the round if you use AntagHUD</B>"))
 		action = "lifted restrictions"
 		config.antag_hud_restricted = 0
-		to_chat(src, SPAN_NOTICE("<B>AntagHUD restrictions have been lifted</B>"))
+		to_chat(src, span_notice("<B>AntagHUD restrictions have been lifted</B>"))
 	else
 		for(var/mob/observer/ghost/g in get_ghosts())
-			to_chat(g, SPAN_DANGER("The administrator has placed restrictions on joining the round if you use AntagHUD"))
-			to_chat(g, SPAN_DANGER("Your AntagHUD has been disabled, you may choose to re-enabled it but will be under restrictions"))
+			to_chat(g, span_danger("The administrator has placed restrictions on joining the round if you use AntagHUD"))
+			to_chat(g, span_danger("Your AntagHUD has been disabled, you may choose to re-enabled it but will be under restrictions"))
 			g.antagHUD = 0
 			g.has_enabled_antagHUD = 0
 		action = "placed restrictions"
 		config.antag_hud_restricted = 1
-		to_chat(src, SPAN_DANGER("AntagHUD restrictions have been enabled"))
+		to_chat(src, span_danger("AntagHUD restrictions have been enabled"))
 
 	log_admin("[key_name(usr)] has [action] on joining the round if they use AntagHUD")
 	message_admins("Admin [key_name_admin(usr)] has [action] on joining the round if they use AntagHUD", 1)
@@ -580,7 +580,7 @@ Ccomp's first proc.
 		else
 			M.add_ion_law(input)
 			for(var/mob/living/silicon/ai/O in SSmobs.mob_list)
-				to_chat(O, SPAN_WARNING("" + input + "...LAWS UPDATED"))
+				to_chat(O, span_warning("" + input + "...LAWS UPDATED"))
 				O.show_laws()
 
 	log_admin("Admin [key_name(usr)] has added a new AI law - [input]")
@@ -856,7 +856,7 @@ Ccomp's first proc.
 	set category = "Special Verbs"
 	set name = "Attack Log"
 
-	to_chat(usr, SPAN_DANGER("Attack Log for [mob]"))
+	to_chat(usr, span_danger("Attack Log for [mob]"))
 	for(var/t in M.attack_logs_)
 		to_chat(usr, t)
 
@@ -887,15 +887,15 @@ Ccomp's first proc.
 		return
 	var/mob/mob = user.mob
 	if (!mob || !isliving(mob) && !isobserver(mob))
-		to_chat(user, SPAN_WARNING("You must be in the game world to use this command."))
+		to_chat(user, span_warning("You must be in the game world to use this command."))
 		return
 	var/turf/turf = get_turf(mob)
 	if (!turf)
-		to_chat(user, SPAN_WARNING("You must be in the game world to use this command."))
+		to_chat(user, span_warning("You must be in the game world to use this command."))
 		return
 	var/list/levels = GetConnectedZlevels(turf.z)
 	if (!length(levels))
-		to_chat(user, SPAN_WARNING("No levels connected to this z-group."))
+		to_chat(user, span_warning("No levels connected to this z-group."))
 		return
 	levels = sortList(levels)
 	var/mode
@@ -935,7 +935,7 @@ Ccomp's first proc.
 			else
 				fall = MOVING_QUICKLY(mob) ? prob(75) : prob(50)
 		if (fall)
-			to_chat(mob, SPAN_DANGER("You stumble onto the floor from the shaking!"))
+			to_chat(mob, span_danger("You stumble onto the floor from the shaking!"))
 			mob.AdjustWeakened(2)
 			mob.AdjustStunned(2)
 			++floored

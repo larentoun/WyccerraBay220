@@ -24,9 +24,9 @@
 /obj/structure/lift/proc/pressed(mob/user)
 	if(!istype(user, /mob/living/silicon))
 		if(user.a_intent == I_HURT)
-			user.visible_message(SPAN_DANGER("\The [user] hammers on the lift button!"))
+			user.visible_message(span_danger("\The [user] hammers on the lift button!"))
 		else
-			user.visible_message(SPAN_NOTICE("\The [user] presses the lift button."))
+			user.visible_message(span_notice("\The [user] presses the lift button."))
 
 
 /obj/structure/lift/New(newloc, datum/turbolift/_lift)

@@ -80,7 +80,7 @@ Tiny, weak, and mostly harmless alone. dangerous in groups.
 /obj/structure/leech_spawner/proc/burst()
 	for(var/i in 1 to number_to_spawn)
 		new /mob/living/simple_animal/hostile/leech(get_turf(src))
-	visible_message(SPAN_MFAUNA("A swarm of leeches burst out from \the [src]!"))
+	visible_message(span_mfauna("A swarm of leeches burst out from \the [src]!"))
 	playsound(src, 'sound/voice/BugHiss.ogg', 50, 5)
 	icon_state = "alien4-1" // looks close enough to an exploded plant.
 	desc = "A pile of strewn together, half-dissolved plant matter pieces, covered in a thin, transparent liquid."

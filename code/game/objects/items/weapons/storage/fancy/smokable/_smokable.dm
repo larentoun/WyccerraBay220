@@ -48,19 +48,19 @@
 		queue_icon_update()
 	var/obj/item/clothing/mask/smokable/smokable = locate() in contents
 	if (!smokable)
-		to_chat(user, SPAN_WARNING("\The [src] has nothing smokable left inside."))
+		to_chat(user, span_warning("\The [src] has nothing smokable left inside."))
 		return TRUE
 	if (user.wear_mask)
-		to_chat(user, SPAN_WARNING("Your [user.wear_mask.name] is in the way."))
+		to_chat(user, span_warning("Your [user.wear_mask.name] is in the way."))
 		return TRUE
 	if (!smokable.mob_can_equip(user, slot_wear_mask))
 		return TRUE
 	remove_from_storage(smokable, user.loc)
 	update_icon()
 	if (!user.equip_to_slot_if_possible(smokable, slot_wear_mask))
-		to_chat(user, SPAN_WARNING("\The [smokable] falls from you. Oh no."))
+		to_chat(user, span_warning("\The [smokable] falls from you. Oh no."))
 		return TRUE
-	to_chat(user, SPAN_NOTICE("You take \a [smokable] from \the [src]."))
+	to_chat(user, span_notice("You take \a [smokable] from \the [src]."))
 	return TRUE
 
 

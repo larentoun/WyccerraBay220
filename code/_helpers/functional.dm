@@ -36,47 +36,47 @@
 /proc/is_atom_predicate(value, feedback_receiver)
 	. = isatom(value)
 	if(!. && feedback_receiver)
-		to_chat(feedback_receiver, SPAN_WARNING("Value must be an atom."))
+		to_chat(feedback_receiver, span_warning("Value must be an atom."))
 
 /proc/is_num_predicate(value, feedback_receiver)
 	. = isnum(value)
 	if(!. && feedback_receiver)
-		to_chat(feedback_receiver, SPAN_WARNING("Value must be a numeral."))
+		to_chat(feedback_receiver, span_warning("Value must be a numeral."))
 
 /proc/is_int_predicate(value, feedback_receiver)
 	. = value == round(value)
 	if (!. && feedback_receiver)
-		to_chat(feedback_receiver, SPAN_WARNING("Value must be a whole number."))
+		to_chat(feedback_receiver, span_warning("Value must be a whole number."))
 
 /proc/is_non_zero_predicate(value, feedback_receiver)
 	. = value != 0
 	if (!. && feedback_receiver)
-		to_chat(feedback_receiver, SPAN_WARNING("Value cannot be 0."))
+		to_chat(feedback_receiver, span_warning("Value cannot be 0."))
 
 /proc/is_non_negative_predicate(value, feedback_receiver)
 	. = value >= 0
 	if (!. && feedback_receiver)
-		to_chat(feedback_receiver, SPAN_WARNING("Value must be a positive number."))
+		to_chat(feedback_receiver, span_warning("Value must be a positive number."))
 
 /proc/is_non_positive_predicate(value, feedback_receiver)
 	. = value <= 0
 	if (!. && feedback_receiver)
-		to_chat(feedback_receiver, SPAN_WARNING("Value must be a negative number."))
+		to_chat(feedback_receiver, span_warning("Value must be a negative number."))
 
 /proc/is_text_predicate(value, feedback_receiver)
 	. = !value || istext(value)
 	if(!. && feedback_receiver)
-		to_chat(feedback_receiver, SPAN_WARNING("Value must be a text."))
+		to_chat(feedback_receiver, span_warning("Value must be a text."))
 
 /proc/is_dir_predicate(value, feedback_receiver)
 	. = (value in GLOB.alldirs)
 	if(!. && feedback_receiver)
-		to_chat(feedback_receiver, SPAN_WARNING("Value must be a direction."))
+		to_chat(feedback_receiver, span_warning("Value must be a direction."))
 
 /proc/is_strict_bool_predicate(value, feedback_receiver)
 	. = (value == TRUE || value == FALSE)
 	if (!. && feedback_receiver)
-		to_chat(feedback_receiver, SPAN_WARNING("Value must be a boolean (Strict)."))
+		to_chat(feedback_receiver, span_warning("Value must be a boolean (Strict)."))
 
 /proc/can_locate(atom/container, container_thing)
 	return (locate(container_thing) in container)

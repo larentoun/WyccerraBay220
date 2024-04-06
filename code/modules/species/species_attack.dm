@@ -39,20 +39,20 @@
 	var/obj/item/organ/external/affecting = target.get_organ(zone)
 
 	if (!affecting)
-		to_chat(user, SPAN_WARNING("\The [target] does not have that bodypart!"))
+		to_chat(user, span_warning("\The [target] does not have that bodypart!"))
 		return
 
 	attack_damage = clamp(attack_damage, 1, 5)
 
 	if(target == user)
-		user.visible_message(SPAN_DANGER("[user] [pick(attack_verb)] \himself in the [affecting.name]!"))
+		user.visible_message(span_danger("[user] [pick(attack_verb)] \himself in the [affecting.name]!"))
 		return 0
 
 	switch(zone)
 		if(BP_HEAD, BP_MOUTH, BP_EYES)
 			// ----- HEAD ----- //
 			switch(attack_damage)
-				if(1 to 2) user.visible_message(SPAN_DANGER("[user] scratched [target] across \his cheek!"))
+				if(1 to 2) user.visible_message(span_danger("[user] scratched [target] across \his cheek!"))
 				if(3 to 4)
 					user.visible_message(pick(
 						80; user.visible_message(SPAN_CLASS("danger", "[user] [pick(attack_verb)] [target]'s [pick("face", "neck", affecting.name)]!")),
@@ -69,7 +69,7 @@
 				if(1 to 2)	user.visible_message(SPAN_CLASS("danger", "[user] [pick("scratched", "grazed")] [target]'s [affecting.name]!"))
 				if(3 to 4)
 					user.visible_message(pick(
-						80; user.visible_message(SPAN_DANGER("[user] [pick(attack_verb)] [target]'s [affecting.name]!")),
+						80; user.visible_message(span_danger("[user] [pick(attack_verb)] [target]'s [affecting.name]!")),
 						20; user.visible_message(SPAN_CLASS("danger", "[user] [pick(attack_verb)] [pick("[target] in the [affecting.name]", "[target] across \his [affecting.name]")]!")),
 						))
 				if(5)		user.visible_message(SPAN_CLASS("danger", "[user] tears \his [pick(attack_noun)] [pick("deep into", "into", "across")] [target]'s [affecting.name]!"))
@@ -108,7 +108,7 @@
 
 /datum/unarmed_attack/stomp/weak/show_attack(mob/living/carbon/human/user, mob/living/carbon/human/target, zone, attack_damage)
 	var/obj/item/organ/external/affecting = target.get_organ(zone)
-	user.visible_message(SPAN_WARNING("[user] jumped up and down on \the [target]'s [affecting.name]!"))
+	user.visible_message(span_warning("[user] jumped up and down on \the [target]'s [affecting.name]!"))
 	playsound(user.loc, attack_sound, 25, 1, -1)
 
 /datum/unarmed_attack/tail //generally meant for people like unathi
@@ -146,11 +146,11 @@
 	attack_damage = 3 + attack_damage - rand(1, 5)
 	switch(attack_damage)
 
-		if(1 to 5)	user.visible_message(SPAN_DANGER("[user] glanced [target] with their [pick(attack_noun)] in the [organ]!"))
+		if(1 to 5)	user.visible_message(span_danger("[user] glanced [target] with their [pick(attack_noun)] in the [organ]!"))
 
-		if(6 to 7)	user.visible_message(SPAN_DANGER("[user] [pick(attack_verb)] [target] in \his [organ] with their [pick(attack_noun)]!"))
+		if(6 to 7)	user.visible_message(span_danger("[user] [pick(attack_verb)] [target] in \his [organ] with their [pick(attack_noun)]!"))
 
-		if(8)		user.visible_message(SPAN_DANGER("[user] landed a heavy blow with their [pick(attack_noun)] against [target]'s [organ]!"))
+		if(8)		user.visible_message(span_danger("[user] landed a heavy blow with their [pick(attack_noun)] against [target]'s [organ]!"))
 
 /datum/unarmed_attack/nabber
 	attack_verb = list("mauled", "slashed", "struck", "pierced")

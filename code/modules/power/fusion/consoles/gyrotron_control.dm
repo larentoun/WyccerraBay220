@@ -23,7 +23,7 @@
 			if(!istype(G))
 				return TOPIC_NOACTION
 			if(!new_val)
-				to_chat(user, SPAN_WARNING("That's not a valid number."))
+				to_chat(user, span_warning("That's not a valid number."))
 				return TOPIC_NOACTION
 			G.mega_energy = clamp(new_val, 1, 50)
 			G.change_power_consumption(G.mega_energy * 1500, POWER_USE_ACTIVE)
@@ -34,7 +34,7 @@
 			if(!istype(G))
 				return TOPIC_NOACTION
 			if(!new_val)
-				to_chat(user, SPAN_WARNING("That's not a valid number."))
+				to_chat(user, span_warning("That's not a valid number."))
 				return TOPIC_NOACTION
 			G.rate = clamp(new_val, 2, 10)
 			return TOPIC_REFRESH

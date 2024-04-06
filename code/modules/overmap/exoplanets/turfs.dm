@@ -37,13 +37,13 @@
 
 /turf/simulated/floor/exoplanet/use_tool(obj/item/C, mob/living/user, list/click_params)
 	if(diggable && istype(C,/obj/item/shovel))
-		visible_message(SPAN_NOTICE("[user] starts digging [src]"))
+		visible_message(span_notice("[user] starts digging [src]"))
 		if(do_after(user, 5 SECONDS, src, DO_PUBLIC_UNIQUE))
-			to_chat(user,SPAN_NOTICE("You dig a deep pit."))
+			to_chat(user,span_notice("You dig a deep pit."))
 			new /obj/structure/pit(src)
 			diggable = 0
 		else
-			to_chat(user,SPAN_NOTICE("You stop shoveling."))
+			to_chat(user,span_notice("You stop shoveling."))
 		return TRUE
 
 	else if(istype(C, /obj/item/stack/tile))
@@ -114,7 +114,7 @@
 	var/obj/item/reagent_containers/RG = O
 	if (reagent_type && istype(RG) && RG.is_open_container() && RG.reagents)
 		RG.reagents.add_reagent(reagent_type, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
-		user.visible_message(SPAN_NOTICE("[user] fills [RG] from [src]."),SPAN_NOTICE("You fill [RG] from [src]."))
+		user.visible_message(span_notice("[user] fills [RG] from [src]."),span_notice("You fill [RG] from [src]."))
 		return TRUE
 	else
 		return ..()

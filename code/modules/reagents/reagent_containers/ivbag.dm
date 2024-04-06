@@ -58,7 +58,7 @@
 			message = "two thirds full"
 		else
 			message = "full"
-	. += SPAN_NOTICE("It has a flow rate of [transfer_amount]u of fluid per cycle and looks [message].")
+	. += span_notice("It has a flow rate of [transfer_amount]u of fluid per cycle and looks [message].")
 
 
 /obj/item/reagent_containers/ivbag/on_reagent_change()
@@ -107,11 +107,11 @@
 	if (!patient)
 		return ..()
 	if (!reagents.total_volume)
-		to_chat(user, SPAN_WARNING("You can't squeeze \the [src] - it's empty."))
+		to_chat(user, span_warning("You can't squeeze \the [src] - it's empty."))
 		return
 	var/diff = next_squeeze - world.time
 	if (diff > 0)
-		to_chat(user, SPAN_WARNING("Wait another [Roundm(diff * 0.1, 0.1)] seconds before squeezing again."))
+		to_chat(user, span_warning("Wait another [Roundm(diff * 0.1, 0.1)] seconds before squeezing again."))
 		return
 	next_squeeze = world.time + SQUEEZE_DELAY
 	if (user.a_intent == I_HURT)
@@ -121,8 +121,8 @@
 		reagents.trans_to_mob(patient, transfer_amount * SQUEEZE_MULTIPLIER_FRIEND, CHEM_BLOOD)
 		patient.custom_pain("That's not comfortable...", 10)
 	user.visible_message(
-		SPAN_WARNING("\The [user] squeezes \the [src]!"),
-		SPAN_ITALIC("You squeeze \the [src]."),
+		span_warning("\The [user] squeezes \the [src]!"),
+		span_italic("You squeeze \the [src]."),
 		range = 3
 	)
 
@@ -150,23 +150,23 @@
 
 /obj/item/reagent_containers/ivbag/proc/AttachDrip(mob/living/carbon/human/target, mob/living/user)
 	user.visible_message(
-		SPAN_ITALIC("\The [user] starts to hook up \the [target] to \the [src]."),
-		SPAN_ITALIC("You start to hook up \the [target] to \the [src]."),
+		span_italic("\The [user] starts to hook up \the [target] to \the [src]."),
+		span_italic("You start to hook up \the [target] to \the [src]."),
 		range = 5
 	)
 	if (!user.do_skilled(5 SECONDS, SKILL_MEDICAL, target)) //slower than stands and beds
 		return
 	if (prob(user.skill_fail_chance(SKILL_MEDICAL, 80, SKILL_TRAINED))) // harder than stands and beds
 		user.visible_message(
-			SPAN_DANGER("\The [user] fishes for a vein on \the [target] and fails, stabbing them instead!"),
-			SPAN_DANGER("You fish inexpertly for a vein on \the [target] and stab them instead!"),
+			span_danger("\The [user] fishes for a vein on \the [target] and fails, stabbing them instead!"),
+			span_danger("You fish inexpertly for a vein on \the [target] and stab them instead!"),
 			range = 5
 		)
 		target.apply_damage(rand(2, 6), DAMAGE_BRUTE, pick(BP_R_ARM, BP_L_ARM), damage_flags = DAMAGE_FLAG_SHARP, armor_pen = 100)
 		return
 	user.visible_message(
-		SPAN_ITALIC("\The [user] successfully inserts \a [src]'s cannula into \the [target]."),
-		SPAN_NOTICE("You successfully insert \the [src]'s cannula into \the [target]."),
+		span_italic("\The [user] successfully inserts \a [src]'s cannula into \the [target]."),
+		span_notice("You successfully insert \the [src]'s cannula into \the [target]."),
 		range = 1
 	)
 	patient = target
@@ -175,14 +175,14 @@
 
 /obj/item/reagent_containers/ivbag/proc/RemoveDrip(mob/living/user)
 	if (!patient)
-		to_chat(user, SPAN_WARNING("\The [src] is not attached to anything."))
+		to_chat(user, span_warning("\The [src] is not attached to anything."))
 		return
 	if (!CanPhysicallyInteractWith(user, src))
-		to_chat(user, SPAN_WARNING("You're in no condition to do that!"))
+		to_chat(user, span_warning("You're in no condition to do that!"))
 		return
 	user.visible_message(
-		SPAN_ITALIC("\The [user] starts unhooking \the [patient] from \a [src]."),
-		SPAN_ITALIC("You extract \the [src]'s cannula from \the [patient]."),
+		span_italic("\The [user] starts unhooking \the [patient] from \a [src]."),
+		span_italic("You extract \the [src]'s cannula from \the [patient]."),
 		range = 5
 	)
 	if (!user.skill_check(SKILL_MEDICAL, SKILL_BASIC))
@@ -190,8 +190,8 @@
 		return
 	STOP_PROCESSING(SSobj, src)
 	user.visible_message(
-		SPAN_WARNING("\The [user] extracts \the [src]'s cannula from \the [patient]."),
-		SPAN_NOTICE("You extract \the [src]'s cannula from \the [patient]."),
+		span_warning("\The [user] extracts \the [src]'s cannula from \the [patient]."),
+		span_notice("You extract \the [src]'s cannula from \the [patient]."),
 		range = 1
 	)
 	patient = null
@@ -203,8 +203,8 @@
 		return
 	STOP_PROCESSING(SSobj, src)
 	patient.visible_message(
-		SPAN_WARNING("\The cannula from \a [src] is ripped out of \the [patient][user ? " by \the [user]" : ""]!"),
-		SPAN_DANGER("\The cannula from \the [src] is ripped out of you[user ? " by \the [user]": ""]!"),
+		span_warning("\The cannula from \a [src] is ripped out of \the [patient][user ? " by \the [user]" : ""]!"),
+		span_danger("\The cannula from \the [src] is ripped out of you[user ? " by \the [user]": ""]!"),
 		range = 5
 	)
 	patient.custom_pain(power = 20)
@@ -222,7 +222,7 @@
 
 /obj/item/reagent_containers/ivbag/proc/UpdateTransferAmount(mob/living/user, atom/origin)
 	if (!origin.Adjacent(user) || user.incapacitated())
-		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
+		to_chat(user, span_warning("You're in no condition to do that."))
 		return
 	var/title = "[origin]"
 	if (origin != src)
@@ -231,11 +231,11 @@
 	if (isnull(response) || !(response in allowed_transfer_amounts))
 		return
 	if (!origin.Adjacent(user) || user.incapacitated())
-		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
+		to_chat(user, span_warning("You're in no condition to do that."))
 		return
 	user.visible_message(
-		SPAN_ITALIC("\The [user] adjusts the flow rate on \a [origin]'s IV bag."),
-		SPAN_ITALIC("You adjust the flow rate on \the [origin]'s IV bag to [response]u."),
+		span_italic("\The [user] adjusts the flow rate on \a [origin]'s IV bag."),
+		span_italic("You adjust the flow rate on \the [origin]'s IV bag to [response]u."),
 		range = 1
 	)
 	transfer_amount = response

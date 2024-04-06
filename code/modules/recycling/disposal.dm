@@ -73,13 +73,13 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	if (ismob(G.affecting))
 		var/mob/GM = G.affecting
 		var/mob/user = G.assailant
-		user.visible_message(SPAN_DANGER("[user] starts putting [GM.name] into the disposal."))
+		user.visible_message(span_danger("[user] starts putting [GM.name] into the disposal."))
 		if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 			if (GM.client)
 				GM.client.perspective = EYE_PERSPECTIVE
 				GM.client.eye = src
 			GM.forceMove(src)
-			user.visible_message(SPAN_DANGER("[GM] has been placed in [src] by [user]."))
+			user.visible_message(span_danger("[GM] has been placed in [src] by [user]."))
 			GM.remove_grabs_and_pulls()
 			admin_attack_log(user, GM, "Placed the victim into [src].", "Was placed into [src] by the attacker.", "stuffed [src] with")
 		return TRUE
@@ -132,7 +132,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 	if (istype(I, /obj/item/storage/bag/trash))
 		var/obj/item/storage/bag/trash/T = I
-		to_chat(user, SPAN_NOTICE("You empty the bag."))
+		to_chat(user, span_notice("You empty the bag."))
 		for(var/obj/item/O in T.contents)
 			T.remove_from_storage(O,src, 1)
 		T.finish_bulk_removal()
@@ -146,8 +146,8 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		return TRUE
 
 	user.visible_message(
-		SPAN_NOTICE("[user] places [I] into [src]."),
-		SPAN_NOTICE("You place [I] into [src].")
+		span_notice("[user] places [I] into [src]."),
+		span_notice("You place [I] into [src].")
 	)
 	update_icon()
 	return TRUE
@@ -184,11 +184,11 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	src.add_fingerprint(user)
 	var/old_loc = AM.loc
 	if(AM == user)
-		user.visible_message(SPAN_WARNING("[user] starts climbing into [src]."), \
-							 SPAN_NOTICE("You start climbing into [src]."))
+		user.visible_message(span_warning("[user] starts climbing into [src]."), \
+							 span_notice("You start climbing into [src]."))
 	else
 		user.visible_message(SPAN_CLASS("[is_dangerous ? "warning" : "notice"]", "[user] starts stuffing [AM] into [src]."), \
-							 SPAN_NOTICE("You start stuffing [AM] into [src]."))
+							 span_notice("You start stuffing [AM] into [src]."))
 
 	if(!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 		return
@@ -203,12 +203,12 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 	// Messages and logging
 	if(AM == user)
-		user.visible_message(SPAN_DANGER("[user] climbs into [src]."), \
-							 SPAN_NOTICE("You climb into [src]."))
+		user.visible_message(span_danger("[user] climbs into [src]."), \
+							 span_notice("You climb into [src]."))
 		admin_attack_log(user, null, "Stuffed themselves into [src].", null, "stuffed themselves into [src].")
 	else
 		user.visible_message(SPAN_CLASS("[is_dangerous ? "danger" : "notice"]", "[user] stuffs [AM] into [src][is_dangerous ? "!" : "."]"), \
-							 SPAN_NOTICE("You stuff [AM] into [src]."))
+							 span_notice("You stuff [AM] into [src]."))
 		if(ismob(M))
 			admin_attack_log(user, M, "Placed the victim into [src].", "Was placed into [src] by the attacker.", "stuffed [src] with")
 			if (M.client)
@@ -265,7 +265,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	. = TRUE
 
 	if(usr.loc == src)
-		to_chat(usr, SPAN_WARNING("Вы не можете дотянуться до панели управления, находясь внутри!"))
+		to_chat(usr, span_warning("Вы не можете дотянуться до панели управления, находясь внутри!"))
 		return
 
 	src.add_fingerprint(usr)
@@ -295,8 +295,8 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	if (!isliving(usr) || usr.incapacitated())
 		return
 	usr.visible_message(
-		SPAN_NOTICE("[usr] ejects [src]'s contents'."),
-		SPAN_NOTICE("You eject [initial(name)]'s contents."),
+		span_notice("[usr] ejects [src]'s contents'."),
+		span_notice("You eject [initial(name)]'s contents."),
 	)
 	eject()
 	add_fingerprint(usr)
@@ -307,7 +307,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		AM.forceMove(src.loc)
 		AM.pipe_eject(0)
 	if(reagents.total_volume)
-		visible_message(SPAN_DANGER("Vomit spews out of the disposal unit!"))
+		visible_message(span_danger("Vomit spews out of the disposal unit!"))
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 		if(istype(src.loc, /turf/simulated))
 			var/obj/decal/cleanable/vomit/splat = new /obj/decal/cleanable/vomit(src.loc)
@@ -471,7 +471,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 /obj/machinery/disposal/slam_into(mob/living/L)
 	L.forceMove(src)
 	L.Weaken(5)
-	L.visible_message(SPAN_WARNING("[L] falls into [src]!"))
+	L.visible_message(span_warning("[L] falls into [src]!"))
 	playsound(L, "punch", 25, 1, FALSE)
 
 /obj/machinery/disposal_switch
@@ -502,7 +502,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		return
 	var/obj/item/disposal_switch_construct/C = new/obj/item/disposal_switch_construct(src.loc, id_tag)
 	transfer_fingerprints_to(C)
-	user.visible_message(SPAN_NOTICE("[user] deattaches [src]."))
+	user.visible_message(span_notice("[user] deattaches [src]."))
 	qdel(src)
 
 /obj/machinery/disposal_switch/interface_interact(mob/user)
@@ -541,7 +541,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 			found = 1
 			break
 	if(!found)
-		to_chat(user, "[icon2html(src, user)][SPAN_NOTICE("[src] is not linked to any junctions!")]")
+		to_chat(user, "[icon2html(src, user)][span_notice("[src] is not linked to any junctions!")]")
 		return TRUE
 	var/obj/machinery/disposal_switch/NC = new/obj/machinery/disposal_switch(A, id_tag)
 	transfer_fingerprints_to(NC)
@@ -576,7 +576,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	animate_expel()
 	if(H)
 		if(H.reagents?.total_volume)
-			visible_message(SPAN_DANGER("Vomit seeps out of the disposal outlet!"))
+			visible_message(span_danger("Vomit seeps out of the disposal outlet!"))
 			playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 			if(istype(src.loc, /turf/simulated))
 				var/obj/decal/cleanable/vomit/splat = new /obj/decal/cleanable/vomit(src.loc)

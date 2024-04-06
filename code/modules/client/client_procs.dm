@@ -74,10 +74,10 @@ GLOBAL_LIST_INIT(localhost_addresses, list(
 
 	if(href_list["irc_msg"])
 		if(!holder && received_irc_pm < world.time - 6000) //Worse they can do is spam IRC for 10 minutes
-			to_chat(usr, SPAN_WARNING("You are no longer able to use this, it's been more then 10 minutes since an admin on IRC has responded to you"))
+			to_chat(usr, span_warning("You are no longer able to use this, it's been more then 10 minutes since an admin on IRC has responded to you"))
 			return
 		if(mute_irc)
-			to_chat(usr, SPAN_WARNING("You cannot use this as your client has been muted from sending messages to the admins on IRC"))
+			to_chat(usr, span_warning("You cannot use this as your client has been muted from sending messages to the admins on IRC"))
 			return
 		cmd_admin_irc_pm(href_list["irc_msg"])
 		return
@@ -171,7 +171,7 @@ GLOBAL_LIST_INIT(localhost_addresses, list(
 
 	for (var/datum/ticket/T in tickets)
 		if (T.status == TICKET_OPEN && T.owner.ckey == ckey)
-			message_staff("[key_name_admin(src)] has joined the game with an open ticket. Status: [length(T.assigned_admins) ? "Assigned to: [english_list(T.assigned_admin_ckeys())]" : SPAN_DANGER("Unassigned.")]")
+			message_staff("[key_name_admin(src)] has joined the game with an open ticket. Status: [length(T.assigned_admins) ? "Assigned to: [english_list(T.assigned_admin_ckeys())]" : span_danger("Unassigned.")]")
 			break
 
 	// Change the way they should download resources.
@@ -180,9 +180,9 @@ GLOBAL_LIST_INIT(localhost_addresses, list(
 	else src.preload_rsc = 1 // If config.resource_urls is not set, preload like normal.
 
 	if(byond_version < DM_VERSION)
-		to_chat(src, SPAN_WARNING("You are running an older version of BYOND than the server and may experience issues."))
-		to_chat(src, SPAN_WARNING("It is recommended that you update to at least [DM_VERSION] at http://www.byond.com/download/."))
-	to_chat(src, SPAN_WARNING("If the title screen is black, resources are still downloading. Please be patient until the title screen appears."))
+		to_chat(src, span_warning("You are running an older version of BYOND than the server and may experience issues."))
+		to_chat(src, span_warning("It is recommended that you update to at least [DM_VERSION] at http://www.byond.com/download/."))
+	to_chat(src, span_warning("If the title screen is black, resources are still downloading. Please be patient until the title screen appears."))
 	GLOB.clients += src
 	GLOB.ckey_directory[ckey] = src
 
@@ -241,7 +241,7 @@ GLOBAL_LIST_INIT(localhost_addresses, list(
 	send_resources()
 
 	if (GLOB.changelog_hash && prefs.lastchangelog != GLOB.changelog_hash) //bolds the changelog button on the interface so we know there are updates.
-		to_chat(src, SPAN_INFO("You have unread updates in the changelog."))
+		to_chat(src, span_info("You have unread updates in the changelog."))
 		// [SIERRA-EDIT] - Interface
 		// winset(src, "rpane.changelog", "background-color=#eaeaea;font-style=bold") // SIERRA-EDIT - ORIGINAL
 		winset(src, "rpane.changelog", "font-style=bold")
@@ -250,7 +250,7 @@ GLOBAL_LIST_INIT(localhost_addresses, list(
 			src.changes()
 
 	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
-		to_chat(src, SPAN_WARNING("Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you."))
+		to_chat(src, span_warning("Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you."))
 
 	if(!tooltips)
 		tooltips = new /datum/tooltip(src)
@@ -274,12 +274,12 @@ GLOBAL_LIST_INIT(localhost_addresses, list(
 			var/list/connections = fetch_connections()
 			var/list/ckeys = _unique_ckeys_from_connections(connections) - ckey
 			if (length(ckeys))
-				log_and_message_staff(SPAN_INFO("[key_name_admin(src)] has connection details associated with [length(ckeys)] other ckeys in the log."))
+				log_and_message_staff(span_info("[key_name_admin(src)] has connection details associated with [length(ckeys)] other ckeys in the log."))
 
 			// Check bans
 			var/list/bans = _find_bans_in_connections(connections)
 			if (length(bans))
-				log_and_message_staff(SPAN_DANGER("[key_name_admin(src)] has connection details associated with [length(bans)] active bans."))
+				log_and_message_staff(span_danger("[key_name_admin(src)] has connection details associated with [length(bans)] active bans."))
 
 	//////////////
 	//DISCONNECT//
@@ -293,7 +293,7 @@ GLOBAL_LIST_INIT(localhost_addresses, list(
 /client/Destroy()
 	for (var/datum/ticket/T in tickets)
 		if (T.status == TICKET_OPEN && T.owner.ckey == ckey)
-			message_staff("[key_name_admin(src)] has left the game with an open ticket. Status: [length(T.assigned_admins) ? "Assigned to: [english_list(T.assigned_admin_ckeys())]" : SPAN_DANGER("Unassigned.")]")
+			message_staff("[key_name_admin(src)] has left the game with an open ticket. Status: [length(T.assigned_admins) ? "Assigned to: [english_list(T.assigned_admin_ckeys())]" : span_danger("Unassigned.")]")
 			break
 	if (holder)
 		holder.owner = null

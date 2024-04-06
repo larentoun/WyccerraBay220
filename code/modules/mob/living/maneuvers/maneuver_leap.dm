@@ -8,7 +8,7 @@
 	if(.)
 		var/old_pass_flags = user.pass_flags
 		user.pass_flags |= PASS_FLAG_TABLE
-		user.visible_message(SPAN_DANGER("\The [user] takes a flying leap!"))
+		user.visible_message(span_danger("\The [user] takes a flying leap!"))
 		strength = max(2, strength * user.get_jump_distance())
 		if(reflexively)
 			strength *= reflexive_modifier
@@ -23,7 +23,7 @@
 	user.post_maneuver()
 
 /singleton/maneuver/leap/show_initial_message(mob/living/user, atom/target)
-	user.visible_message(SPAN_WARNING("\The [user] crouches, preparing for a leap!"))
+	user.visible_message(span_warning("\The [user] crouches, preparing for a leap!"))
 
 /singleton/maneuver/leap/can_be_used_by(mob/living/user, atom/target, silent = FALSE)
 	. = ..()
@@ -31,15 +31,15 @@
 		var/can_leap_distance = user.get_jump_distance() * user.get_acrobatics_multiplier()
 		if (can_leap_distance <= 0)
 			if (!silent)
-				to_chat(user, SPAN_WARNING("You can't leap in your current state."))
+				to_chat(user, span_warning("You can't leap in your current state."))
 			return FALSE
 		if (!istype(target))
 			if (!silent)
-				to_chat(user, SPAN_WARNING("That is not a valid leap target."))
+				to_chat(user, span_warning("That is not a valid leap target."))
 			return FALSE
 		if (get_dist(user, target) > can_leap_distance)
 			if (!silent)
-				to_chat(user, SPAN_WARNING("You can't leap that far."))
+				to_chat(user, span_warning("You can't leap that far."))
 			return FALSE
 		return TRUE
 
@@ -47,7 +47,7 @@
 	stamina_cost = 0
 
 /singleton/maneuver/leap/spider/show_initial_message(mob/living/user, atom/target)
-	user.visible_message(SPAN_WARNING("\The [user] reels back and prepares to launch itself at \the [target]!"))
+	user.visible_message(span_warning("\The [user] reels back and prepares to launch itself at \the [target]!"))
 
 /singleton/maneuver/leap/grab
 	name = "spring leap"
@@ -73,7 +73,7 @@
 	. = ..()
 	strength = 1
 	if (.)
-		user.visible_message(SPAN_DANGER("\The [user] pulls off a quick leap!"))
+		user.visible_message(span_danger("\The [user] pulls off a quick leap!"))
 		if(reflexively)
 			strength *= reflexive_modifier
 		user.jump_layer_shift()

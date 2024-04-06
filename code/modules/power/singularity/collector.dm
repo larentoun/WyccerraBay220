@@ -80,14 +80,14 @@ var/global/list/rad_collectors = list()
 		return FALSE
 	. = TRUE
 	if(MACHINE_IS_BROKEN(src) || melted)
-		to_chat(user, SPAN_WARNING("The [src] is completely destroyed!"))
+		to_chat(user, span_warning("The [src] is completely destroyed!"))
 	if(!src.locked)
 		toggle_power()
 		user.visible_message("[user.name] turns the [src.name] [active? "on":"off"].", \
 		"You turn the [src.name] [active? "on":"off"].")
 		investigate_log("turned [active ? SPAN_COLOR("green", "on") : SPAN_COLOR("red", "off")] by [user.key]. [P ? "Fuel: [round(P.air_contents.gas[GAS_PHORON]/0.29)]%" : SPAN_COLOR("red", "It is empty")].","singulo")
 	else
-		to_chat(user, SPAN_WARNING("The controls are locked!"))
+		to_chat(user, span_warning("The controls are locked!"))
 
 /obj/machinery/power/rad_collector/crowbar_act(mob/living/user, obj/item/tool)
 	if(P && !locked)
@@ -98,20 +98,20 @@ var/global/list/rad_collectors = list()
 
 /obj/machinery/power/rad_collector/wrench_act(mob/living/user, obj/item/tool)
 	if(P)
-		to_chat(user, SPAN_NOTICE("Remove the phoron tank first."))
+		to_chat(user, span_notice("Remove the phoron tank first."))
 		return ITEM_INTERACT_SUCCESS
 	for(var/obj/machinery/power/rad_collector/R in get_turf(src))
 		if(R != src)
-			to_chat(user, SPAN_WARNING("You cannot install more than one collector on the same spot."))
+			to_chat(user, span_warning("You cannot install more than one collector on the same spot."))
 			return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/power/rad_collector/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/tank/phoron))
 		if(!anchored)
-			to_chat(user, SPAN_WARNING("The [src] needs to be secured to the floor first."))
+			to_chat(user, span_warning("The [src] needs to be secured to the floor first."))
 			return TRUE
 		if(P)
-			to_chat(user, SPAN_WARNING("There's already a phoron tank loaded."))
+			to_chat(user, span_warning("There's already a phoron tank loaded."))
 			return TRUE
 		if(!user.unEquip(W, src))
 			return TRUE
@@ -126,9 +126,9 @@ var/global/list/rad_collectors = list()
 				to_chat(user, "The controls are now [locked ? "locked." : "unlocked."]")
 			else
 				locked = 0 //just in case it somehow gets locked
-				to_chat(user, SPAN_WARNING("The controls can only be locked when the [src] is active"))
+				to_chat(user, span_warning("The controls can only be locked when the [src] is active"))
 		else
-			to_chat(user, SPAN_WARNING("Access denied!"))
+			to_chat(user, span_warning("Access denied!"))
 		return TRUE
 
 	return ..()
@@ -136,7 +136,7 @@ var/global/list/rad_collectors = list()
 /obj/machinery/power/rad_collector/examine(mob/user, distance)
 	. = ..()
 	if (distance <= 3 && !MACHINE_IS_BROKEN(src))
-		. += SPAN_NOTICE("The meter indicates that [src] is collecting [last_power] W.")
+		. += span_notice("The meter indicates that [src] is collecting [last_power] W.")
 
 /obj/machinery/power/rad_collector/ex_act(severity)
 	switch(severity)
@@ -149,7 +149,7 @@ var/global/list/rad_collectors = list()
 		var/turf/T = get_turf(src)
 		if(T)
 			T.assume_air(P.air_contents)
-			audible_message(SPAN_DANGER("[P] detonates, sending shrapnel flying!"))
+			audible_message(span_danger("[P] detonates, sending shrapnel flying!"))
 			fragmentate(T, 2, 4, list(/obj/item/projectile/bullet/pellet/fragment/tank/small = 3, /obj/item/projectile/bullet/pellet/fragment/tank = 1))
 			explosion(T, 1, EX_ACT_LIGHT)
 			QDEL_NULL(P)

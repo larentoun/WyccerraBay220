@@ -47,25 +47,25 @@
 
 			if (!fail_chance)
 				user.visible_message(
-					SPAN_NOTICE("\The [user] racks \the [src] with one hand."),
-					SPAN_NOTICE("You manage to rack \the [src] with one hand.")
+					span_notice("\The [user] racks \the [src] with one hand."),
+					span_notice("You manage to rack \the [src] with one hand.")
 				)
 				pump(user)
 			else if (prob(fail_chance))
 				if (prob(drop_chance) && user.unEquip(src, user.loc))
 					user.visible_message(
-						SPAN_WARNING("\The [user] attempts to rack \the [src], but it falls out of their hands!"),
-						SPAN_WARNING("You attempt to rack \the [src], but it falls out of your hands!")
+						span_warning("\The [user] attempts to rack \the [src], but it falls out of their hands!"),
+						span_warning("You attempt to rack \the [src], but it falls out of your hands!")
 					)
 				else
 					user.visible_message(
-						SPAN_WARNING("\The [user] fails to rack \the [src]!"),
-						SPAN_WARNING("You fail to rack \the [src]!")
+						span_warning("\The [user] fails to rack \the [src]!"),
+						span_warning("You fail to rack \the [src]!")
 					)
 			else
 				user.visible_message(
-					SPAN_NOTICE("\The [user] manages to akwardly rack \the [src] with one hand."),
-					SPAN_NOTICE("You manage to awkwardly rack \the [src] with one hand.")
+					span_notice("\The [user] manages to akwardly rack \the [src] with one hand."),
+					span_notice("You manage to awkwardly rack \the [src] with one hand.")
 				)
 				pump(user)
 
@@ -110,8 +110,8 @@
 			if (!plasmacutter.slice(user))
 				return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts sawing \a [src]'s stock off with \a [tool]."),
-			SPAN_NOTICE("You start sawing \the [src]'s stock off with \the [tool].")
+			span_notice("\The [user] starts sawing \a [src]'s stock off with \a [tool]."),
+			span_notice("You start sawing \the [src]'s stock off with \the [tool].")
 		)
 		if (!user.do_skilled(5 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool, SANITY_CHECK_TARGET_UNEQUIP))
 			return TRUE
@@ -120,8 +120,8 @@
 		transfer_fingerprints_to(sawn)
 		sawn.add_fingerprint(user, tool = tool)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] saws \a [src]'s stock off with \a [tool]."),
-			SPAN_NOTICE("You saw \the [src]'s stock off with \the [tool].")
+			span_notice("\The [user] saws \a [src]'s stock off with \a [tool]."),
+			span_notice("You saw \the [src]'s stock off with \the [tool].")
 		)
 		qdel_self()
 		return TRUE
@@ -179,25 +179,25 @@
 
 			if (!fail_chance)
 				user.visible_message(
-					SPAN_NOTICE("\The [user] racks \the [src] with one hand."),
-					SPAN_NOTICE("You manage to rack \the [src] with one hand.")
+					span_notice("\The [user] racks \the [src] with one hand."),
+					span_notice("You manage to rack \the [src] with one hand.")
 				)
 				pump(user)
 			else if (prob(fail_chance))
 				if (prob(drop_chance) && user.unEquip(src, user.loc))
 					user.visible_message(
-						SPAN_WARNING("\The [user] attempts to rack \the [src], but it falls out of their hands!"),
-						SPAN_WARNING("You attempt to rack \the [src], but it falls out of your hands!")
+						span_warning("\The [user] attempts to rack \the [src], but it falls out of their hands!"),
+						span_warning("You attempt to rack \the [src], but it falls out of your hands!")
 					)
 				else
 					user.visible_message(
-						SPAN_WARNING("\The [user] fails to rack \the [src]!"),
-						SPAN_WARNING("You fail to rack \the [src]!")
+						span_warning("\The [user] fails to rack \the [src]!"),
+						span_warning("You fail to rack \the [src]!")
 					)
 			else
 				user.visible_message(
-					SPAN_NOTICE("\The [user] manages to akwardly rack \the [src] with one hand."),
-					SPAN_NOTICE("You manage to awkwardly rack \the [src] with one hand.")
+					span_notice("\The [user] manages to akwardly rack \the [src] with one hand."),
+					span_notice("You manage to awkwardly rack \the [src] with one hand.")
 				)
 				pump(user)
 
@@ -304,15 +304,15 @@
 			if (!plasmacutter.slice(user))
 				return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts shortening \a [src]'s barrel with \a [tool]."),
-			SPAN_NOTICE("You start shortening \the [src]'s barrel with \the [tool].")
+			span_notice("\The [user] starts shortening \a [src]'s barrel with \a [tool]."),
+			span_notice("You start shortening \the [src]'s barrel with \the [tool].")
 		)
 		if (length(loaded))
 			for (var/i in 1 to max_shells)
 				Fire(user, user)
 			visible_message(
-				SPAN_DANGER("\The [src] goes off!"),
-				SPAN_DANGER("You hear a gunshot!")
+				span_danger("\The [src] goes off!"),
+				span_danger("You hear a gunshot!")
 			)
 			return TRUE
 		if (!user.do_skilled(3 SECONDS, SKILL_CONSTRUCTION, src) || !user.use_sanity_check(src, tool, SANITY_CHECK_TARGET_UNEQUIP))
@@ -331,8 +331,8 @@
 		transfer_fingerprints_to(new_gun)
 		new_gun.add_fingerprint(user, tool = tool)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] shortens \a [src]'s barrel with \a [tool]."),
-			SPAN_NOTICE("You shorten \the [src]'s barrel with \the [tool].")
+			span_notice("\The [user] shortens \a [src]'s barrel with \a [tool]."),
+			span_notice("You shorten \the [src]'s barrel with \the [tool].")
 		)
 		qdel_self()
 		return TRUE

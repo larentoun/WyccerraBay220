@@ -70,7 +70,7 @@
 		if (answer == "Yes")
 			var/turf/T = get_turf_or_move(P.loc)
 			for (var/mob/v in viewers(T))
-				v.show_message(SPAN_NOTICE("[M] presses \his thumb against [P]."), 3, SPAN_NOTICE("[P] makes a sharp clicking sound as it extracts DNA material from [M]."), 2)
+				v.show_message(span_notice("[M] presses \his thumb against [P]."), 3, span_notice("[P] makes a sharp clicking sound as it extracts DNA material from [M]."), 2)
 			var/datum/dna/dna = M.dna
 			to_chat(P, "<h3 style='font-color: red'>[M]'s UE string : [dna.unique_enzymes]</h3>")
 			if (dna.unique_enzymes == P.master_dna)
@@ -151,9 +151,9 @@
 		P.hack_aborted = 0
 		P.cable = new (T)
 		P.visible_message(
-			SPAN_ITALIC("A port on [P] opens to reveal \a [P.cable], which promptly falls to the floor."),
-			SPAN_ITALIC("You open a port to reveal your [P.cable] and unspool it to the floor."),
-			SPAN_ITALIC("You hear the soft click something falling to the floor.")
+			span_italic("A port on [P] opens to reveal \a [P.cable], which promptly falls to the floor."),
+			span_italic("You open a port to reveal your [P.cable] and unspool it to the floor."),
+			span_italic("You hear the soft click something falling to the floor.")
 		)
 		return TRUE
 

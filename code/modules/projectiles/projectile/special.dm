@@ -78,7 +78,7 @@
 				H.apply_damage((rand(30,80)), DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
 				H.Weaken(5)
 				for (var/mob/V in viewers(src))
-					V.show_message(SPAN_WARNING("[M] writhes in pain as \his vacuoles boil."), 3, SPAN_WARNING("You hear the crunching of leaves."), 2)
+					V.show_message(span_warning("[M] writhes in pain as \his vacuoles boil."), 3, span_warning("You hear the crunching of leaves."), 2)
 			if(prob(35))
 				if(prob(80))
 					randmutb(M)
@@ -88,9 +88,9 @@
 					domutcheck(M,null)
 			else
 				M.adjustFireLoss(rand(5,15))
-				M.show_message(SPAN_DANGER("The radiation beam singes you!"))
+				M.show_message(span_danger("The radiation beam singes you!"))
 	else if(istype(target, /mob/living/carbon))
-		M.show_message(SPAN_NOTICE("The radiation beam dissipates harmlessly through your body."))
+		M.show_message(span_notice("The radiation beam dissipates harmlessly through your body."))
 	else
 		return 1
 
@@ -118,7 +118,7 @@
 		if((H.species.species_flags & SPECIES_FLAG_IS_PLANT) && (H.nutrition < 500))
 			H.adjust_nutrition(30)
 	else if (istype(target, /mob/living/carbon))
-		M.show_message(SPAN_NOTICE("The radiation beam dissipates harmlessly through your body."))
+		M.show_message(span_notice("The radiation beam dissipates harmlessly through your body."))
 	else
 		return 1
 
@@ -154,9 +154,9 @@
 		var/mob/living/M = target
 		M.Weaken(3)
 		M.visible_message(
-			SPAN_WARNING("\The [M] is hit with a glob of webbing!"),
-			SPAN_DANGER("You are hit with a glob of webbing, causing you to trip!"),
-			SPAN_DANGER("Some sort of sticky substance hits you and causes you to fall over!")
+			span_warning("\The [M] is hit with a glob of webbing!"),
+			span_danger("You are hit with a glob of webbing, causing you to trip!"),
+			span_danger("Some sort of sticky substance hits you and causes you to fall over!")
 		)
 	..()
 
@@ -172,7 +172,7 @@
 	if (isturf(target.loc))
 		var/obj/spider/stickyweb/W = locate() in get_turf(target)
 		if (!W && prob(75))
-			visible_message(SPAN_DANGER("\The [src] splatters a layer of web on \the [target]!"))
+			visible_message(span_danger("\The [src] splatters a layer of web on \the [target]!"))
 			new /obj/spider/stickyweb(target.loc)
 
 			if (isliving(target))
@@ -225,6 +225,6 @@
 	. = ..()
 	if(isliving(target))
 		var/mob/living/L = target
-		to_chat(target, SPAN_WARNING("You feel a wave of heat wash over you!"))
+		to_chat(target, span_warning("You feel a wave of heat wash over you!"))
 		L.adjust_fire_stacks(rand(5,8))
 		L.IgniteMob()

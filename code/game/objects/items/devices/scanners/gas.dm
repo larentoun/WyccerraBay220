@@ -15,7 +15,7 @@
 /obj/item/device/scanner/gas/scan(atom/A, mob/user)
 	var/air_contents = A.return_air()
 	if(!air_contents)
-		to_chat(user, SPAN_WARNING("Your [name] flashes a red light as it fails to analyze \the [A]."))
+		to_chat(user, span_warning("Your [name] flashes a red light as it fails to analyze \the [A]."))
 		return
 	scan_data = atmosanalyzer_scan(A, air_contents)
 	show_menu(user)
@@ -72,4 +72,4 @@
 		. += "[text_summary][text_details]"
 
 	else
-		. += SPAN_DANGER("\The [target] has no gases!")
+		. += span_danger("\The [target] has no gases!")

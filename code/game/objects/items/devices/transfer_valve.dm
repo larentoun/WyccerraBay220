@@ -74,8 +74,8 @@
 		GLOB.bombers += "[key_name(user)] attach [tool] to a transfer valve."
 		log_and_message_admins("[key_name_admin(user)] attached [tool] to a transfer valve.", user, get_turf(src))
 		user.visible_message(
-			SPAN_NOTICE("[user] attaches [tool] to [src]."),
-			SPAN_NOTICE("You attach [tool] to [src].")
+			span_notice("[user] attaches [tool] to [src]."),
+			span_notice("You attach [tool] to [src].")
 		)
 		return TRUE
 
@@ -96,8 +96,8 @@
 		update_icon()
 		SSnano.update_uis(src)
 		user.visible_message(
-			SPAN_NOTICE("[user] attaches [tool] to [src]."),
-			SPAN_NOTICE("You attach [tool] to [src].")
+			span_notice("[user] attaches [tool] to [src]."),
+			span_notice("You attach [tool] to [src].")
 		)
 		return TRUE
 
@@ -113,7 +113,7 @@
 
 /obj/item/device/transfer_valve/attack_self(mob/user as mob)
 	if (panel_open)
-		to_chat(user, SPAN_WARNING("The device's panel is open!"))
+		to_chat(user, span_warning("The device's panel is open!"))
 		return
 	ui_interact(user)
 
@@ -165,7 +165,7 @@
 				toggle_armed()
 	if(armed && href_list["activate"])
 		attached_device.activate()
-		visible_message(SPAN_WARNING("The [attached_device] blips!"), range = 3)
+		visible_message(span_warning("The [attached_device] blips!"), range = 3)
 		message_admins("[key_name_admin(usr)] triggered [src]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.loc.x];Y=[src.loc.y];Z=[src.loc.z]'>JMP</a>)")
 	return TRUE // Returning 1 sends an update to attached UIs
 
@@ -242,7 +242,7 @@
 /obj/item/device/transfer_valve/examine(mob/user, distance)
 	. = ..()
 	if (armed && distance < 3)
-		. += SPAN_DANGER("This one looks like a bomb.")
+		. += span_danger("This one looks like a bomb.")
 
 	/*
 	Exadv1: I know this isn't how it's going to work, but this was just to check

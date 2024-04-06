@@ -212,8 +212,8 @@ var/global/list/meteors_cataclysm = list(\
 	// Pickaxe - Delete meteor
 	if (istype(tool, /obj/item/pickaxe))
 		user.visible_message(
-			SPAN_WARNING("\The [user] hits \the [src] with \a [tool], breaking it apart!"),
-			SPAN_WARNING("You hit \the [src] with \the [tool], breaking it apart!")
+			span_warning("\The [user] hits \the [src] with \a [tool], breaking it apart!"),
+			span_warning("You hit \the [src] with \the [tool], breaking it apart!")
 		)
 		qdel(src)
 		return TRUE

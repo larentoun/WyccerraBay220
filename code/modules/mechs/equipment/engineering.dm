@@ -51,10 +51,10 @@
 /obj/item/mech_equipment/atmos_shields/CtrlClick(mob/user)
 	if (owner && ((user in owner.pilots) || user == owner))
 		if (active)
-			to_chat(user, SPAN_WARNING("You cannot modify the projection mode while the shield is active."))
+			to_chat(user, span_warning("You cannot modify the projection mode while the shield is active."))
 		else
 			current_mode = !current_mode
-			to_chat(user, SPAN_NOTICE("You set the shields to [current_mode ? "bubble" : "barrier"] mode."))
+			to_chat(user, span_notice("You set the shields to [current_mode ? "bubble" : "barrier"] mode."))
 		return TRUE
 	return ..()
 
@@ -98,10 +98,10 @@
 		deactivate()
 
 /obj/item/mech_equipment/atmos_shields/proc/activate()
-	owner.visible_message(SPAN_WARNING("\The [src] starts glowing as it becomes energized!"), blind_message = SPAN_WARNING("You hear the crackle of electricity"))
+	owner.visible_message(span_warning("\The [src] starts glowing as it becomes energized!"), blind_message = span_warning("You hear the crackle of electricity"))
 	owner.setClickCooldown(2.5 SECONDS)
 	if (do_after(owner, 0.5 SECONDS, get_turf(owner), DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && owner)
-		owner.visible_message(SPAN_WARNING("The air shimmers as energy shields form in front of \the [owner]!"))
+		owner.visible_message(span_warning("The air shimmers as energy shields form in front of \the [owner]!"))
 		playsound(src ,'sound/effects/phasein.ogg',35,1)
 		active = TRUE
 		var/list/turfs = list()
@@ -153,7 +153,7 @@
 		if(istype(MS))
 			GLOB.moved_event.unregister(MS, src, PROC_REF(on_moved))
 	if(length(segments))
-		owner.visible_message(SPAN_WARNING("The energy shields in front of \the [owner] disappear!"))
+		owner.visible_message(span_warning("The energy shields in front of \the [owner] disappear!"))
 	QDEL_NULL_LIST(segments)
 	passive_power_use = 0
 	GLOB.moved_event.unregister(owner, src, PROC_REF(on_moved))
@@ -169,4 +169,4 @@
 			deactivate()
 		else
 			activate()
-		to_chat(user, SPAN_NOTICE("You toggle \the [src] [active ? "on" : "off"]"))
+		to_chat(user, span_notice("You toggle \the [src] [active ? "on" : "off"]"))

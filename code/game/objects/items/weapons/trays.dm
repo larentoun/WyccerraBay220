@@ -27,7 +27,7 @@
 		for (var/obj/item/carried in carrying)
 			carried.dropInto(T)
 			LAZYREMOVE(carrying, carried)
-		user.visible_message(SPAN_NOTICE("[user] dumps out \the [src]."), SPAN_NOTICE("You empty out \the [src]."))
+		user.visible_message(span_notice("[user] dumps out \the [src]."), span_notice("You empty out \the [src]."))
 		return TRUE
 	. = ..()
 
@@ -50,17 +50,17 @@
 /obj/item/tray/attackby(obj/item/W, mob/living/user)
 	if(istype(W, /obj/item/material/kitchen/rollingpin) && user.a_intent == I_HURT)
 		if(bash_cooldown < world.time)
-			user.visible_message(SPAN_WARNING("[user] bashes [src] with [W]!"))
+			user.visible_message(span_warning("[user] bashes [src] with [W]!"))
 			playsound(user.loc, 'sound/effects/shieldbash.ogg', 50, 1)
 			bash_cooldown = world.time + 25
 		return TRUE
 	else if (user.a_intent != I_HURT && !istype(W, /obj/item/projectile) && !istype(W, /obj/item/clothing))
 		if (calc_carry() + storage_cost_for_item(W) > max_carry)
-			to_chat(user, SPAN_WARNING("\The [src] can't fit \the [W]!"))
+			to_chat(user, span_warning("\The [src] can't fit \the [W]!"))
 		else if (!can_add_item(W))
-			to_chat(user, SPAN_WARNING("\The [src] can't hold \the [W]!"))
+			to_chat(user, span_warning("\The [src] can't hold \the [W]!"))
 		else
-			to_chat(user, SPAN_NOTICE("You add \the [W] to \the [src]."))
+			to_chat(user, span_notice("You add \the [W] to \the [src]."))
 			user.drop_item()
 			pickup_item(W)
 		return TRUE
@@ -110,7 +110,7 @@
 			for (var/obj/item/carried in carrying)
 				carried.dropInto(T)
 				LAZYREMOVE(carrying, carried)
-			user.visible_message(SPAN_NOTICE("[user] dumps \the [src] onto \the [A]."), SPAN_NOTICE("You empty \the [src] onto \the [A]."))
+			user.visible_message(span_notice("[user] dumps \the [src] onto \the [A]."), span_notice("You empty \the [src] onto \the [A]."))
 			return FALSE
 		else if (istype(A, /obj/machinery/smartfridge))
 			var/obj/machinery/smartfridge/fridge = A
@@ -125,11 +125,11 @@
 				else
 					add_item_overlay(carried) // Re-add overlays for items we're keeping on the tray, since we fully cut overlays earlier
 			if (!fed_in)
-				to_chat(user, SPAN_WARNING("Nothing in \the [src] is valid for \the [A]!"))
+				to_chat(user, span_warning("Nothing in \the [src] is valid for \the [A]!"))
 			else if (LAZYLEN(carrying))
-				user.visible_message(SPAN_NOTICE("[user] fills \the [A] with \the [src]."), SPAN_NOTICE("You fill \the [A] with some of \the [src]'s contents."))
+				user.visible_message(span_notice("[user] fills \the [A] with \the [src]."), span_notice("You fill \the [A] with some of \the [src]'s contents."))
 			else
-				user.visible_message(SPAN_NOTICE("[user] fills \the [A] with \the [src]."), SPAN_NOTICE("You fill \the [A] with \the [src]."))
+				user.visible_message(span_notice("[user] fills \the [A] with \the [src]."), span_notice("You fill \the [A] with \the [src]."))
 
 			return FALSE
 
@@ -143,9 +143,9 @@
 				added_items++
 
 		if (!added_items)
-			to_chat(user, SPAN_WARNING("You fail to pick anything up with \the [src]."))
+			to_chat(user, span_warning("You fail to pick anything up with \the [src]."))
 		else
-			user.visible_message(SPAN_NOTICE("[user] scoops up some things with \the [src]."), SPAN_NOTICE("You put everything you could onto \the [src]."))
+			user.visible_message(span_notice("[user] scoops up some things with \the [src]."), span_notice("You put everything you could onto \the [src]."))
 
 		return FALSE
 

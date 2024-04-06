@@ -46,9 +46,9 @@
 			"You start treating damage to [target]'s [I.name] with [tool_name]." )
 		else if(I && !(I.status & ORGAN_CUT_AWAY) && (I.status & ORGAN_DEAD) && I.parent_organ == affected.organ_tag && !BP_IS_ROBOTIC(I))
 			if (!I.can_recover())
-				to_chat(user, SPAN_WARNING("\The [target]'s [I.name] is fully necrotic; [tool_name] won't help here."))
+				to_chat(user, span_warning("\The [target]'s [I.name] is fully necrotic; [tool_name] won't help here."))
 			else
-				to_chat(user, SPAN_WARNING("\The [target]'s [I.name] is decaying; you'll need more than just [tool_name] here."))
+				to_chat(user, span_warning("\The [target]'s [I.name] is decaying; you'll need more than just [tool_name] here."))
 	target.custom_pain("The pain in your [affected.name] is living hell!",100,affecting = affected)
 	playsound(target.loc, 'sound/items/bonegel.ogg', 50, TRUE)
 	..()
@@ -63,19 +63,19 @@
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
 		if(I && I.damage > 0 && !BP_IS_ROBOTIC(I) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
 			if(I.status & ORGAN_DEAD && I.can_recover())
-				user.visible_message(SPAN_NOTICE("\The [user] treats damage to [target]'s [I.name] with [tool_name], though it needs to be recovered further."), \
-				SPAN_NOTICE("You treat damage to [target]'s [I.name] with [tool_name], though it needs to be recovered further.") )
+				user.visible_message(span_notice("\The [user] treats damage to [target]'s [I.name] with [tool_name], though it needs to be recovered further."), \
+				span_notice("You treat damage to [target]'s [I.name] with [tool_name], though it needs to be recovered further.") )
 			else
-				user.visible_message(SPAN_NOTICE("[user] treats damage to [target]'s [I.name] with [tool_name]."), \
-				SPAN_NOTICE("You treat damage to [target]'s [I.name] with [tool_name].") )
+				user.visible_message(span_notice("[user] treats damage to [target]'s [I.name] with [tool_name]."), \
+				span_notice("You treat damage to [target]'s [I.name] with [tool_name].") )
 			I.surgical_fix(user)
 	user.visible_message("\The [user] finishes treating damage within \the [target]'s [affected.name] with [tool_name].", \
 	"You finish treating damage within \the [target]'s [affected.name] with [tool_name]." )
 
 /singleton/surgery_step/internal/fix_organ/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_WARNING("[user]'s hand slips, getting mess and tearing the inside of [target]'s [affected.name] with \the [tool]!"), \
-	SPAN_WARNING("Your hand slips, getting mess and tearing the inside of [target]'s [affected.name] with \the [tool]!"))
+	user.visible_message(span_warning("[user]'s hand slips, getting mess and tearing the inside of [target]'s [affected.name] with \the [tool]!"), \
+	span_warning("Your hand slips, getting mess and tearing the inside of [target]'s [affected.name] with \the [tool]!"))
 	var/dam_amt = 2
 	if(istype(tool, /obj/item/stack/medical/advanced/bruise_pack))
 		target.adjustToxLoss(5)
@@ -109,7 +109,7 @@
 			radial_button.name = "Detach \the [I.name]"
 			attached_organs[I.organ_tag] = radial_button
 	if (!length(attached_organs))
-		to_chat(user, SPAN_WARNING("You can't find any organs to separate."))
+		to_chat(user, span_warning("You can't find any organs to separate."))
 		return FALSE
 	if (length(attached_organs) == 1 && user.get_preference_value(/datum/client_preference/surgery_skip_radial))
 		return attached_organs[1]
@@ -126,8 +126,8 @@
 	..()
 
 /singleton/surgery_step/internal/detatch_organ/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message(SPAN_NOTICE("[user] has separated [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].") , \
-	SPAN_NOTICE("You have separated [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool]."))
+	user.visible_message(span_notice("[user] has separated [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].") , \
+	span_notice("You have separated [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool]."))
 
 	var/obj/item/organ/I = target.internal_organs_by_name[LAZYACCESS(target.surgeries_in_progress, target_zone)]
 	if(I && istype(I))
@@ -135,8 +135,8 @@
 
 /singleton/surgery_step/internal/detatch_organ/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_WARNING("[user]'s hand slips, slicing an artery inside [target]'s [affected.name] with \the [tool]!"), \
-	SPAN_WARNING("Your hand slips, slicing an artery inside [target]'s [affected.name] with \the [tool]!"))
+	user.visible_message(span_warning("[user]'s hand slips, slicing an artery inside [target]'s [affected.name] with \the [tool]!"), \
+	span_warning("Your hand slips, slicing an artery inside [target]'s [affected.name] with \the [tool]!"))
 	affected.take_external_damage(rand(30,50), 0, (DAMAGE_FLAG_SHARP|DAMAGE_FLAG_EDGE), used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
@@ -166,7 +166,7 @@
 		radial_button.name = "Remove \the [I.name]"
 		removable_organs[I] = radial_button
 	if (!length(removable_organs))
-		to_chat(user, SPAN_WARNING("You can't find any removable organs."))
+		to_chat(user, span_warning("You can't find any removable organs."))
 		return FALSE
 	if (length(removable_organs) == 1 && user.get_preference_value(/datum/client_preference/surgery_skip_radial))
 		return removable_organs[1]
@@ -196,8 +196,8 @@
 	..()
 
 /singleton/surgery_step/internal/remove_organ/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message(SPAN_NOTICE("\The [user] has removed \the [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool]."), \
-	SPAN_NOTICE("You have removed \the [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool]."))
+	user.visible_message(span_notice("\The [user] has removed \the [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool]."), \
+	span_notice("You have removed \the [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool]."))
 
 	// Extract the organ!
 	var/obj/item/organ/O = LAZYACCESS(target.surgeries_in_progress, target_zone)
@@ -220,8 +220,8 @@
 
 /singleton/surgery_step/internal/remove_organ/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_WARNING("[user]'s hand slips, damaging [target]'s [affected.name] with \the [tool]!"), \
-	SPAN_WARNING("Your hand slips, damaging [target]'s [affected.name] with \the [tool]!"))
+	user.visible_message(span_warning("[user]'s hand slips, damaging [target]'s [affected.name] with \the [tool]!"), \
+	span_warning("Your hand slips, damaging [target]'s [affected.name] with \the [tool]!"))
 	affected.take_external_damage(20, used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
@@ -257,26 +257,26 @@
 
 	if(istype(O) && istype(affected))
 		if(BP_IS_CRYSTAL(O) && !BP_IS_CRYSTAL(affected))
-			to_chat(user, SPAN_WARNING("You cannot install a crystalline organ into a non-crystalline bodypart."))
+			to_chat(user, span_warning("You cannot install a crystalline organ into a non-crystalline bodypart."))
 		else if(!BP_IS_CRYSTAL(O) && BP_IS_CRYSTAL(affected))
-			to_chat(user, SPAN_WARNING("You cannot install a non-crystalline organ into a crystalline bodypart."))
+			to_chat(user, span_warning("You cannot install a non-crystalline organ into a crystalline bodypart."))
 		else if(BP_IS_ROBOTIC(affected) && !BP_IS_ROBOTIC(O))
-			to_chat(user, SPAN_WARNING("You cannot install a naked organ into a robotic body."))
+			to_chat(user, span_warning("You cannot install a naked organ into a robotic body."))
 		else if(!target.species)
 			CRASH("Target ([target]) of surgery [type] has no species!")
 		else
 			var/o_is = (O.gender == PLURAL) ? "are" : "is"
 			var/o_a =  (O.gender == PLURAL) ? "" : "a "
 			if(O.organ_tag == BP_POSIBRAIN && !target.species.has_organ[BP_POSIBRAIN])
-				to_chat(user, SPAN_WARNING("There's no place in [target] to fit \the [O.organ_tag]."))
+				to_chat(user, span_warning("There's no place in [target] to fit \the [O.organ_tag]."))
 			else if(O.damage > (O.max_damage * 0.75))
-				to_chat(user, SPAN_WARNING("\The [O.name] [o_is] in no state to be transplanted."))
+				to_chat(user, span_warning("\The [O.name] [o_is] in no state to be transplanted."))
 			else if(O.w_class > affected.cavity_max_w_class)
-				to_chat(user, SPAN_WARNING("\The [O.name] [o_is] too big for [affected.cavity_name] cavity!"))
+				to_chat(user, span_warning("\The [O.name] [o_is] too big for [affected.cavity_name] cavity!"))
 			else
 				var/obj/item/organ/internal/I = target.internal_organs_by_name[O.organ_tag]
 				if(I && (I.parent_organ == affected.organ_tag))
-					to_chat(user, SPAN_WARNING("\The [target] already has [o_a][O.name]."))
+					to_chat(user, span_warning("\The [target] already has [o_a][O.name]."))
 				else
 					. = TRUE
 
@@ -290,8 +290,8 @@
 
 /singleton/surgery_step/internal/replace_organ/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_NOTICE("\The [user] has [robotic_surgery ? "reinstalled" : "transplanted"] \the [tool] into [target]'s [affected.name]."), \
-	SPAN_NOTICE("You have [robotic_surgery ? "reinstalled" : "transplanted"] \the [tool] into [target]'s [affected.name]."))
+	user.visible_message(span_notice("\The [user] has [robotic_surgery ? "reinstalled" : "transplanted"] \the [tool] into [target]'s [affected.name]."), \
+	span_notice("You have [robotic_surgery ? "reinstalled" : "transplanted"] \the [tool] into [target]'s [affected.name]."))
 	var/obj/item/organ/O = tool
 	if(istype(O) && user.unEquip(O, target))
 		affected.implants |= O //move the organ into the patient. The organ is properly reattached in the next step
@@ -302,8 +302,8 @@
 		playsound(target.loc, 'sound/effects/squelch1.ogg', 15, 1)
 
 /singleton/surgery_step/internal/replace_organ/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message(SPAN_WARNING("[user]'s hand slips, damaging \the [tool]!"), \
-	SPAN_WARNING("Your hand slips, damaging \the [tool]!"))
+	user.visible_message(span_warning("[user]'s hand slips, damaging \the [tool]!"), \
+	span_warning("Your hand slips, damaging \the [tool]!"))
 	var/obj/item/organ/internal/I = tool
 	if(istype(I))
 		I.take_internal_damage(rand(3,5))
@@ -358,22 +358,22 @@
 		return FALSE
 
 	if(organ_to_replace.parent_organ != affected.organ_tag)
-		to_chat(user, SPAN_WARNING("You can't find anywhere to attach \the [organ_to_replace] to!"))
+		to_chat(user, span_warning("You can't find anywhere to attach \the [organ_to_replace] to!"))
 		return FALSE
 
 	if(istype(organ_to_replace, /obj/item/organ/internal/augment))
 		var/obj/item/organ/internal/augment/A = organ_to_replace
 		if(!(A.augment_flags & AUGMENT_BIOLOGICAL))
-			to_chat(user, SPAN_WARNING("\The [A] cannot function within a non-robotic limb."))
+			to_chat(user, span_warning("\The [A] cannot function within a non-robotic limb."))
 			return FALSE
 
 	if(BP_IS_ROBOTIC(organ_to_replace) && target.species.spawn_flags & SPECIES_NO_ROBOTIC_INTERNAL_ORGANS)
-		user.visible_message(SPAN_NOTICE("[target]'s biology has rejected the attempts to attach \the [organ_to_replace]."))
+		user.visible_message(span_notice("[target]'s biology has rejected the attempts to attach \the [organ_to_replace]."))
 		return FALSE
 
 	var/obj/item/organ/internal/I = target.internal_organs_by_name[organ_to_replace.organ_tag]
 	if(I && (I.parent_organ == affected.organ_tag))
-		to_chat(user, SPAN_WARNING("\The [target] already has \a [organ_to_replace]."))
+		to_chat(user, span_warning("\The [target] already has \a [organ_to_replace]."))
 		return FALSE
 	return organ_to_replace
 
@@ -387,8 +387,8 @@
 /singleton/surgery_step/internal/attach_organ/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/I = LAZYACCESS(target.surgeries_in_progress, target_zone)
 
-	user.visible_message(SPAN_NOTICE("[user] has reattached [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].") , \
-	SPAN_NOTICE("You have reattached [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool]."))
+	user.visible_message(span_notice("[user] has reattached [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].") , \
+	span_notice("You have reattached [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool]."))
 
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(istype(I) && I.parent_organ == target_zone && affected && (I in affected.implants))
@@ -406,8 +406,8 @@
 
 /singleton/surgery_step/internal/attach_organ/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_WARNING("[user]'s hand slips, damaging the flesh in [target]'s [affected.name] with \the [tool]!"), \
-	SPAN_WARNING("Your hand slips, damaging the flesh in [target]'s [affected.name] with \the [tool]!"))
+	user.visible_message(span_warning("[user]'s hand slips, damaging the flesh in [target]'s [affected.name] with \the [tool]!"), \
+	span_warning("Your hand slips, damaging the flesh in [target]'s [affected.name] with \the [tool]!"))
 	affected.take_external_damage(20, used_weapon = tool)
 
 //////////////////////////////////////////////////////////////////
@@ -448,10 +448,10 @@
 	if(!organ_to_fix || !user.use_sanity_check(target, tool))
 		return FALSE
 	if(!organ_to_fix.can_recover())
-		to_chat(user, SPAN_WARNING("The [organ_to_fix.name] is necrotic and can't be saved, it will need to be replaced."))
+		to_chat(user, span_warning("The [organ_to_fix.name] is necrotic and can't be saved, it will need to be replaced."))
 		return FALSE
 	if(organ_to_fix.damage >= organ_to_fix.max_damage)
-		to_chat(user, SPAN_WARNING("The [organ_to_fix.name] needs to be repaired before it is regenerated."))
+		to_chat(user, span_warning("The [organ_to_fix.name] needs to be repaired before it is regenerated."))
 		return FALSE
 	return organ_to_fix
 
@@ -479,8 +479,8 @@
 			affected.status &= ~ORGAN_DEAD
 			affected.owner.update_body(1)
 
-		user.visible_message("[SPAN_NOTICE("[user] applies [trans] unit\s of the solution to affected tissue in [target]'s [affected.name]")].", \
-			SPAN_NOTICE("You apply [trans] unit\s of the solution to affected tissue in [target]'s [affected.name] with \the [tool]."))
+		user.visible_message("[span_notice("[user] applies [trans] unit\s of the solution to affected tissue in [target]'s [affected.name]")].", \
+			span_notice("You apply [trans] unit\s of the solution to affected tissue in [target]'s [affected.name] with \the [tool]."))
 	qdel(temp_reagents)
 
 /singleton/surgery_step/internal/treat_necrosis/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -493,7 +493,7 @@
 
 	var/trans = container.reagents.trans_to_mob(target, container.amount_per_transfer_from_this, CHEM_BLOOD)
 
-	user.visible_message(SPAN_WARNING("[user]'s hand slips, applying [trans] units of the solution to the wrong place in [target]'s [affected.name] with the [tool]!") , \
-	SPAN_WARNING("Your hand slips, applying [trans] units of the solution to the wrong place in [target]'s [affected.name] with the [tool]!"))
+	user.visible_message(span_warning("[user]'s hand slips, applying [trans] units of the solution to the wrong place in [target]'s [affected.name] with the [tool]!") , \
+	span_warning("Your hand slips, applying [trans] units of the solution to the wrong place in [target]'s [affected.name] with the [tool]!"))
 
 	//no damage or anything, just wastes medicine

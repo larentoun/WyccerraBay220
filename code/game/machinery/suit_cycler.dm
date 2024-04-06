@@ -96,11 +96,11 @@
 
 	if (istype(I,/obj/item/clothing/head/helmet/space) && !istype(I, /obj/item/clothing/head/helmet/space/rig))
 		if(locked)
-			to_chat(user, SPAN_DANGER("The suit cycler is locked."))
+			to_chat(user, span_danger("The suit cycler is locked."))
 			return TRUE
 
 		if(helmet)
-			to_chat(user, SPAN_DANGER("The cycler already contains a helmet."))
+			to_chat(user, span_danger("The cycler already contains a helmet."))
 			return TRUE
 
 		if(I.icon_override == CUSTOM_ITEM_MOB)
@@ -115,11 +115,11 @@
 
 	if (istype(I,/obj/item/clothing/suit/space/void))
 		if(locked)
-			to_chat(user, SPAN_DANGER("The suit cycler is locked."))
+			to_chat(user, span_danger("The suit cycler is locked."))
 			return TRUE
 
 		if(suit)
-			to_chat(user, SPAN_DANGER("The cycler already contains a voidsuit."))
+			to_chat(user, span_danger("The cycler already contains a voidsuit."))
 			return TRUE
 
 		if(I.icon_override == CUSTOM_ITEM_MOB)
@@ -135,7 +135,7 @@
 	return ..()
 
 /obj/machinery/suit_cycler/proc/move_target_inside(mob/target, mob/user)
-	visible_message(SPAN_NOTICE("\The [user] starts putting \the [target] into \the [src]."), range = 3)
+	visible_message(span_notice("\The [user] starts putting \the [target] into \the [src]."), range = 3)
 	add_fingerprint(user)
 	if (do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
 		if (!user_can_move_target_inside(target, user))
@@ -152,10 +152,10 @@
 
 /obj/machinery/suit_cycler/user_can_move_target_inside(mob/target, mob/user)
 	if (locked)
-		to_chat(user, SPAN_WARNING("\The [src] is locked."))
+		to_chat(user, span_warning("\The [src] is locked."))
 		return FALSE
 	if (suit || helmet || occupant)
-		to_chat(user, SPAN_WARNING("There is no room inside \the [src] for \the [target]."))
+		to_chat(user, span_warning("There is no room inside \the [src] for \the [target]."))
 		return FALSE
 	return ..()
 
@@ -169,7 +169,7 @@
 	if (!ismob(target) || !CanMouseDrop(target, user))
 		return
 	if (user != target)
-		to_chat(user, SPAN_WARNING("You need to grab \the [target] to be able to do that!"))
+		to_chat(user, span_warning("You need to grab \the [target] to be able to do that!"))
 		return
 	else if (user_can_move_target_inside(target, user))
 		move_target_inside(target, user)
@@ -177,11 +177,11 @@
 
 /obj/machinery/suit_cycler/emag_act(remaining_charges, mob/user)
 	if(emagged)
-		to_chat(user, SPAN_DANGER("The cycler has already been subverted."))
+		to_chat(user, span_danger("The cycler has already been subverted."))
 		return
 
 	//Clear the access reqs, disable the safeties, and open up all paintjobs.
-	to_chat(user, SPAN_DANGER("You run the sequencer across the interface, corrupting the operating protocols."))
+	to_chat(user, span_danger("You run the sequencer across the interface, corrupting the operating protocols."))
 
 	var/additional_modifications = list_values(Singletons.GetMap(emagged_modifications))
 	available_modifications |= additional_modifications
@@ -292,7 +292,7 @@
 	else if(href_list["begin_decontamination"])
 
 		if(safeties && occupant)
-			to_chat(usr, SPAN_DANGER("The cycler has detected an occupant. Please remove the occupant before commencing the decontamination cycle."))
+			to_chat(usr, span_danger("The cycler has detected an occupant. Please remove the occupant before commencing the decontamination cycle."))
 			return
 
 		active = 1
@@ -345,7 +345,7 @@
 
 /obj/machinery/suit_cycler/proc/finished_job()
 	var/turf/T = get_turf(src)
-	T.visible_message("[icon2html(src, viewers(get_turf(src)))][SPAN_NOTICE("\The [src] pings loudly.")]")
+	T.visible_message("[icon2html(src, viewers(get_turf(src)))][span_notice("\The [src] pings loudly.")]")
 	active = 0
 	updateUsrDialog()
 
@@ -369,7 +369,7 @@
 /obj/machinery/suit_cycler/proc/eject_occupant(mob/user as mob)
 
 	if(locked || active)
-		to_chat(user, SPAN_WARNING("The cycler is locked."))
+		to_chat(user, span_warning("The cycler is locked."))
 		return
 
 	if (!occupant)

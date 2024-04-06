@@ -126,7 +126,7 @@
 	if(RCon)
 		..()
 	else // RCON wire cut
-		to_chat(user, SPAN_WARNING("Connection error: Destination Unreachable."))
+		to_chat(user, span_warning("Connection error: Destination Unreachable."))
 
 // Proc: recalc_coils()
 // Parameters: None
@@ -188,9 +188,9 @@
 			s.set_up(2, 1, src)
 			s.start()
 			if(user_protected && prob(80))
-				to_chat(h_user, SPAN_WARNING("Small electrical arc almost burns your hand. Luckily you had your gloves on!"))
+				to_chat(h_user, span_warning("Small electrical arc almost burns your hand. Luckily you had your gloves on!"))
 			else
-				to_chat(h_user, SPAN_DANGER("Small electrical arc sparks and burns your hand as you touch the [src]!"))
+				to_chat(h_user, span_danger("Small electrical arc sparks and burns your hand as you touch the [src]!"))
 				h_user.electrocute_act(rand(5,20), src, def_zone = h_user.hand ? BP_L_HAND : BP_R_HAND)//corrected to counter act armor and stuff
 			charge = 0
 
@@ -200,9 +200,9 @@
 			s.set_up(4,1,src)
 			s.start()
 			if (user_protected && prob(25))
-				to_chat(h_user, SPAN_WARNING("Medium electrical arc sparks and almost burns your hand. Luckily you had your gloves on!"))
+				to_chat(h_user, span_warning("Medium electrical arc sparks and almost burns your hand. Luckily you had your gloves on!"))
 			else
-				to_chat(h_user, SPAN_DANGER("Medium electrical sparks as you touch the [src], severely burning your hand!"))
+				to_chat(h_user, span_danger("Medium electrical sparks as you touch the [src], severely burning your hand!"))
 				h_user.electrocute_act(rand(15,35), src, def_zone = h_user.hand ? BP_L_HAND : BP_R_HAND)
 			spawn(0)
 				empulse(src.loc, 2, 4)
@@ -216,11 +216,11 @@
 			s.set_up(7,1,src)
 			s.start()
 			if (user_protected)
-				to_chat(h_user, SPAN_DANGER("Strong electrical arc sparks between you and [src], ignoring your gloves and burning your hand!"))
+				to_chat(h_user, span_danger("Strong electrical arc sparks between you and [src], ignoring your gloves and burning your hand!"))
 				h_user.electrocute_act(rand(30,60), src, def_zone = h_user.hand ? BP_L_HAND : BP_R_HAND)
 				h_user.Paralyse(3)
 			else
-				to_chat(h_user, SPAN_DANGER("Strong electrical arc sparks between you and [src], knocking you out for a while!"))
+				to_chat(h_user, span_danger("Strong electrical arc sparks between you and [src], knocking you out for a while!"))
 				h_user.electrocute_act(rand(40,80), src, def_zone = ran_zone(null))
 				h_user.Paralyse(6)
 			spawn(0)
@@ -236,7 +236,7 @@
 			// Sparks, Near - instantkill shock, Strong EMP, 25% light overload, 5% APC failure. 50% of SMES explosion. This is bad.
 			s.set_up(10,1,src)
 			s.start()
-			to_chat(h_user, SPAN_WARNING("Massive electrical arc sparks between you and [src].<br>Last thing you can think about is [SPAN_CLASS("danger", "\"Oh shit...\"")]"))
+			to_chat(h_user, span_warning("Massive electrical arc sparks between you and [src].<br>Last thing you can think about is [SPAN_CLASS("danger", "\"Oh shit...\"")]"))
 			// Remember, we have few gigajoules of electricity here.. Turn them into crispy toast.
 			h_user.electrocute_act(rand(170,210), src, def_zone = ran_zone(null))
 			h_user.Paralyse(8)
@@ -288,15 +288,15 @@
 
 /obj/machinery/power/smes/buildable/cannot_transition_to(state_path, mob/user)
 	if(failing)
-		return SPAN_WARNING("[src]'s screen is flashing with alerts. It seems to be overloaded! Touching it now is probably not a good idea.")
+		return span_warning("[src]'s screen is flashing with alerts. It seems to be overloaded! Touching it now is probably not a good idea.")
 
 	if(state_path == /singleton/machine_construction/default/deconstructed)
 		if(charge > (capacity/100) && safeties_enabled)
-			return SPAN_WARNING("[src]'s safety circuit is preventing modifications while it's charged!")
+			return span_warning("[src]'s safety circuit is preventing modifications while it's charged!")
 		if(output_attempt || input_attempt)
-			return SPAN_WARNING("Turn [src] off first!")
+			return span_warning("Turn [src] off first!")
 		if(!MACHINE_IS_BROKEN(src))
-			return SPAN_WARNING("You have to disassemble the terminal[num_terminals > 1 ? "s" : ""] first!")
+			return span_warning("You have to disassemble the terminal[num_terminals > 1 ? "s" : ""] first!")
 		if(user)
 			var/obj/item/tool = user.get_active_hand()
 			if(!do_after(user, 5 SECONDS * number_of_components(/obj/item/stock_parts/smes_coil), src, DO_REPAIR_CONSTRUCT) && tool.tool_behaviour == TOOL_CROWBAR)
@@ -307,25 +307,25 @@
 
 /obj/machinery/power/smes/buildable/can_add_component(obj/item/stock_parts/component, mob/user)
 	if(charge > (capacity/100) && safeties_enabled)
-		to_chat(user,  SPAN_WARNING("[src]'s safety circuit is preventing modifications while it's charged!"))
+		to_chat(user,  span_warning("[src]'s safety circuit is preventing modifications while it's charged!"))
 		return FALSE
 	. = ..()
 	if(!.)
 		return
 	if(istype(component,/obj/item/stock_parts/smes_coil))
 		if(output_attempt || input_attempt)
-			to_chat(user, SPAN_WARNING("Turn [src] off first!"))
+			to_chat(user, span_warning("Turn [src] off first!"))
 			return FALSE
 		if(!do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT) || check_total_system_failure(user))
 			return FALSE
 
 /obj/machinery/power/smes/buildable/remove_part_and_give_to_user(path, mob/user)
 	if(charge > (capacity/100) && safeties_enabled)
-		to_chat(user,  SPAN_WARNING("[src]'s safety circuit is preventing modifications while it's charged!"))
+		to_chat(user,  span_warning("[src]'s safety circuit is preventing modifications while it's charged!"))
 		return
 	if(ispath(path,/obj/item/stock_parts/smes_coil))
 		if(output_attempt || input_attempt)
-			to_chat(user, SPAN_WARNING("Turn [src] off first!"))
+			to_chat(user, span_warning("Turn [src] off first!"))
 			return
 		if(!do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT) || check_total_system_failure(user))
 			return
@@ -343,7 +343,7 @@
 	var/newtag = input(user, "Enter new RCON tag. Use \"NO_TAG\" to disable RCON or leave empty to cancel.", "SMES RCON system") as text
 	if(newtag)
 		RCon_tag = newtag
-		to_chat(user, SPAN_NOTICE("You changed the RCON tag to: [newtag]"))
+		to_chat(user, span_notice("You changed the RCON tag to: [newtag]"))
 
 // Proc: toggle_input()
 // Parameters: None

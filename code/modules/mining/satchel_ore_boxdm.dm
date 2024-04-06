@@ -19,8 +19,8 @@
 			return TRUE
 		update_ore_count()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] puts \a [tool] in \the [src]."),
-			SPAN_NOTICE("You put \the [tool] in \the [src].")
+			span_notice("\The [user] puts \a [tool] in \the [src]."),
+			span_notice("You put \the [tool] in \the [src].")
 		)
 		return TRUE
 
@@ -33,8 +33,8 @@
 		storage.finish_bulk_removal()
 		update_ore_count()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] empties \a [tool] into \the [src]."),
-			SPAN_NOTICE("You empty \the [tool] into \the [src].")
+			span_notice("\The [user] empties \a [tool] into \the [src]."),
+			span_notice("You empty \the [tool] into \the [src].")
 		)
 		return TRUE
 
@@ -65,16 +65,16 @@
 	add_fingerprint(user)
 
 	if(!length(contents))
-		. += SPAN_NOTICE("It is empty.")
+		. += span_notice("It is empty.")
 		return
 
 	if(world.time > last_update + 10)
 		update_ore_count()
 		last_update = world.time
 
-	. += SPAN_NOTICE("It holds:")
+	. += span_notice("It holds:")
 	for(var/ore in stored_ore)
-		. += SPAN_NOTICE("- [stored_ore[ore]] [ore]")
+		. += span_notice("- [stored_ore[ore]] [ore]")
 	return
 
 
@@ -84,7 +84,7 @@
 	set src in view(1)
 
 	if(!istype(usr, /mob/living/carbon/human)) //Only living, intelligent creatures with hands can empty ore boxes.
-		to_chat(usr, SPAN_WARNING("You are physically incapable of emptying the ore box."))
+		to_chat(usr, span_warning("You are physically incapable of emptying the ore box."))
 		return
 
 	if( usr.stat || usr.restrained() )
@@ -97,12 +97,12 @@
 	add_fingerprint(usr)
 
 	if(length(contents) < 1)
-		to_chat(usr, SPAN_WARNING("The ore box is empty"))
+		to_chat(usr, span_warning("The ore box is empty"))
 		return
 
 	for (var/obj/item/ore/O in contents)
 		O.dropInto(loc)
-	to_chat(usr, SPAN_NOTICE("You empty the ore box"))
+	to_chat(usr, span_notice("You empty the ore box"))
 
 /obj/structure/ore_box/ex_act(severity)
 	if(severity == EX_ACT_DEVASTATING || (severity < EX_ACT_LIGHT && prob(50)))

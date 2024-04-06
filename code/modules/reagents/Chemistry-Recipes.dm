@@ -70,7 +70,7 @@
 /datum/chemical_reaction/proc/post_reaction(datum/reagents/holder)
 	var/atom/container = holder.my_atom
 	if(mix_message && container && !ismob(container))
-		container.visible_message(SPAN_NOTICE("[icon2html(container, viewers(get_turf(container)))] [mix_message]"))
+		container.visible_message(span_notice("[icon2html(container, viewers(get_turf(container)))] [mix_message]"))
 		playsound(container, reaction_sound, 80, 1)
 
 //obtains any special data that will be provided to the reaction products
@@ -667,7 +667,7 @@
 	var/location = get_turf(holder.my_atom)
 
 	for(var/mob/M in viewers(5, location))
-		to_chat(M, SPAN_WARNING("The solution spews out foam!"))
+		to_chat(M, span_warning("The solution spews out foam!"))
 
 	var/datum/effect/foam_spread/s = new()
 	s.set_up(created_volume, location, holder, 0)
@@ -686,7 +686,7 @@
 	var/location = get_turf(holder.my_atom)
 
 	for(var/mob/M in viewers(5, location))
-		to_chat(M, SPAN_WARNING("The solution spews out a metalic foam!"))
+		to_chat(M, span_warning("The solution spews out a metalic foam!"))
 
 	var/datum/effect/foam_spread/s = new()
 	s.set_up(created_volume, location, holder, 1)
@@ -704,7 +704,7 @@
 	var/location = get_turf(holder.my_atom)
 
 	for(var/mob/M in viewers(5, location))
-		to_chat(M, SPAN_WARNING("The solution spews out a metalic foam!"))
+		to_chat(M, span_warning("The solution spews out a metalic foam!"))
 
 	var/datum/effect/foam_spread/s = new()
 	s.set_up(created_volume, location, holder, 2)
@@ -964,7 +964,7 @@
 	var/obj/item/slime_extract/T = holder.my_atom
 	T.Uses--
 	if(T.Uses <= 0)
-		T.visible_message("[icon2html(T, viewers(get_turf(T)))][SPAN_NOTICE("\The [T]'s power is consumed in the reaction.")]")
+		T.visible_message("[icon2html(T, viewers(get_turf(T)))][span_notice("\The [T]'s power is consumed in the reaction.")]")
 		T.SetName("used slime extract")
 		T.desc = "This extract has been used up."
 
@@ -978,7 +978,7 @@
 
 /datum/chemical_reaction/slime/spawn/on_reaction(datum/reagents/holder)
 	..()
-	holder.my_atom.visible_message(SPAN_WARNING("Infused with phoron, the core begins to quiver and grow, and soon a new baby slime emerges from it!"))
+	holder.my_atom.visible_message(span_warning("Infused with phoron, the core begins to quiver and grow, and soon a new baby slime emerges from it!"))
 	new /mob/living/carbon/slime(get_turf(holder.my_atom))
 
 /datum/chemical_reaction/slime/monkey
@@ -1124,7 +1124,7 @@
 	playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
 	for(var/mob/living/M in range (get_turf(holder.my_atom), 7))
 		M.bodytemperature -= 140
-		to_chat(M, SPAN_WARNING("You feel a chill!"))
+		to_chat(M, span_warning("You feel a chill!"))
 
 //Orange
 /datum/chemical_reaction/slime/casp
@@ -1239,7 +1239,7 @@
 	..()
 	for(var/mob/living/carbon/slime/slime in viewers(get_turf(holder.my_atom), null))
 		slime.rabid = 1
-		slime.visible_message(SPAN_WARNING("The [slime] is driven into a frenzy!"))
+		slime.visible_message(span_warning("The [slime] is driven into a frenzy!"))
 
 //Pink
 /datum/chemical_reaction/slime/ppotion

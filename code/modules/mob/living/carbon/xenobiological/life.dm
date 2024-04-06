@@ -145,7 +145,7 @@
 	if(nutrition <= 0)
 		adjustToxLoss(2)
 		if (client && prob(5))
-			to_chat(src, SPAN_DANGER("You are starving!"))
+			to_chat(src, span_danger("You are starving!"))
 
 	else if (nutrition >= get_grow_nutrition() && amount_grown < SLIME_EVOLUTION_THRESHOLD)
 		adjust_nutrition(-20)

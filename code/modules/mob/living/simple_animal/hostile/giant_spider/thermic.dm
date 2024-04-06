@@ -21,6 +21,6 @@
 	if(istype(A, /mob/living/exosuit))
 		if (prob(poison_chance))
 			var/mob/living/exosuit/E = A
-			visible_message(SPAN_DANGER("\The [src] melts some of \the [E]'s components with its pyrotoxin!"))
+			visible_message(span_danger("\The [src] melts some of \the [E]'s components with its pyrotoxin!"))
 			E.apply_damage(rand(25, 55), DAMAGE_BURN, used_weapon = natural_weapon)
 	. = ..()

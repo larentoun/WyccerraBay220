@@ -33,7 +33,7 @@
 	..()
 	if(!user)
 		return
-	to_chat(user, SPAN_NOTICE("You have suppressed the IDS system of nearby quantum relay. Your hacks will no longer be prevented or detected."))
+	to_chat(user, span_notice("You have suppressed the IDS system of nearby quantum relay. Your hacks will no longer be prevented or detected."))
 	user.hack_can_fail = 0
 
 
@@ -46,7 +46,7 @@
 	..()
 	if(!user)
 		return
-	to_chat(user, SPAN_NOTICE("You have completely overtaken a nearby quantum relay. No remote communications will work."))
+	to_chat(user, span_notice("You have completely overtaken a nearby quantum relay. No remote communications will work."))
 	user.intercepts_communication = 1
 
 

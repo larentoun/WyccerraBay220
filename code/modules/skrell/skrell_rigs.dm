@@ -300,7 +300,7 @@
 	change_tool_behaviour(tool_modes[new_index])
 	name = "[initial(name)] ([tool_behaviour])"
 	playsound(user, 'sound/machines/bolts_down.ogg', 10)
-	to_chat(user, SPAN_NOTICE("You select the [tool_behaviour] attachment."))
+	to_chat(user, span_notice("You select the [tool_behaviour] attachment."))
 	update_icon()
 
 /obj/item/clustertool/on_update_icon()

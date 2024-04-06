@@ -21,8 +21,8 @@
 	S.sign_state = icon_state
 	transfer_fingerprints_to(S)
 	user.visible_message(
-		SPAN_NOTICE("[user] unfastens [src] with [tool]."),
-		SPAN_NOTICE("You unfasten [src] with [tool].")
+		span_notice("[user] unfastens [src] with [tool]."),
+		span_notice("You unfasten [src] with [tool].")
 	)
 	qdel(src)
 
@@ -455,13 +455,13 @@
 
 /obj/item/sign/medipolma/attack_self(mob/user)
 	if(!claimant)
-		to_chat(user, SPAN_NOTICE("You fill in your name in the blanks with a permanent marker."))
+		to_chat(user, span_notice("You fill in your name in the blanks with a permanent marker."))
 		claimant = user.real_name
 	..()
 
 /obj/item/sign/medipolma/examine(mob/user)
 	. = ..()
 	if(claimant)
-		. += SPAN_NOTICE("This one belongs to Dr.[claimant], MD.")
+		. += span_notice("This one belongs to Dr.[claimant], MD.")
 	else
-		. += SPAN_NOTICE("The name is left blank for some reason.")
+		. += span_notice("The name is left blank for some reason.")

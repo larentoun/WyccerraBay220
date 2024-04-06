@@ -1,6 +1,6 @@
 /proc/animated_teleportation(atom/movable/target, atom/anchor)
 	if(ismob(target))
-		to_chat(target, SPAN_WARNING("You feel like something pulling you in bluespace."))
+		to_chat(target, span_warning("You feel like something pulling you in bluespace."))
 	var/obj/temporary/A = new(get_turf(target), 24.5, 'mods/antagonists/icons/effects/bs_silk.dmi', "silc_teleport_back")
 	target.set_dir(2)
 	target.forceMove(A)

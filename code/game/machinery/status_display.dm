@@ -59,7 +59,7 @@
 /obj/machinery/status_display/on_death()
 	..()
 	playsound(src, "shatter", 70, 1)
-	visible_message(SPAN_DANGER("\The [src] is smashed into many pieces!"))
+	visible_message(span_danger("\The [src] is smashed into many pieces!"))
 	remove_display()
 	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 
@@ -82,7 +82,7 @@
 		if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
 		mats.use(2)
-		to_chat(user, SPAN_NOTICE("You repair the broken glass on \the [src]."))
+		to_chat(user, span_notice("You repair the broken glass on \the [src]."))
 		revive_health()
 		return TRUE
 	return ..()
@@ -189,10 +189,10 @@
 /obj/machinery/status_display/examine(mob/user)
 	. = ..()
 	if(mode != STATUS_DISPLAY_BLANK && mode != STATUS_DISPLAY_ALERT)
-		. += SPAN_NOTICE("The display says:<br>\t[sanitize(message1)]<br>\t[sanitize(message2)]")
+		. += span_notice("The display says:<br>\t[sanitize(message1)]<br>\t[sanitize(message2)]")
 	if(mode == STATUS_DISPLAY_ALERT || status_display_show_alert_border)
 		var/singleton/security_state/security_state = GET_SINGLETON(GLOB.using_map.security_state)
-		. += SPAN_NOTICE("The current alert level is [security_state.current_security_level.name].")
+		. += span_notice("The current alert level is [security_state.current_security_level.name].")
 
 /obj/machinery/status_display/proc/set_message(m1, m2)
 	if(m1)

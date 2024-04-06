@@ -48,8 +48,8 @@
 	if(distance > 1 || !radio_desc)
 		return
 
-	. += SPAN_NOTICE("The following channels are available:")
-	. += SPAN_NOTICE("[radio_desc]")
+	. += span_notice("The following channels are available:")
+	. += span_notice("[radio_desc]")
 
 /obj/item/device/radio/headset/handle_message_mode(mob/living/M as mob, message, channel)
 	if (channel == "special")
@@ -362,8 +362,8 @@
 		encryption_keys += tool
 		recalculateChannels(TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] inserts [tool] into [src]."),
-			SPAN_NOTICE("You insert [tool] into [src]."),
+			span_notice("[user] inserts [tool] into [src]."),
+			span_notice("You insert [tool] into [src]."),
 			range = 2
 		)
 		return TRUE

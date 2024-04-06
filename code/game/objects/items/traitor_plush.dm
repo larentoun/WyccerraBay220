@@ -14,21 +14,21 @@
 
 /obj/item/reagent_containers/food/snacks/dehydrated_carp/attack_self(mob/user)
 	if (user.a_intent == I_HELP)
-		user.visible_message(SPAN_NOTICE("\The [user] hugs [src]!"), SPAN_NOTICE("You hug [src]!"))
+		user.visible_message(span_notice("\The [user] hugs [src]!"), span_notice("You hug [src]!"))
 	else if (user.a_intent == I_HURT)
-		user.visible_message(SPAN_WARNING("\The [user] punches [src]!"), SPAN_WARNING("You punch [src]!"))
+		user.visible_message(span_warning("\The [user] punches [src]!"), span_warning("You punch [src]!"))
 	else if (user.a_intent == I_GRAB)
-		user.visible_message(SPAN_WARNING("\The [user] attempts to strangle [src]!"), SPAN_WARNING("You attempt to strangle [src]!"))
+		user.visible_message(span_warning("\The [user] attempts to strangle [src]!"), span_warning("You attempt to strangle [src]!"))
 	else
-		user.visible_message(SPAN_NOTICE("\The [user] pokes [src]."), SPAN_NOTICE("You poke [src]."))
+		user.visible_message(span_notice("\The [user] pokes [src]."), span_notice("You poke [src]."))
 
 /obj/item/reagent_containers/food/snacks/dehydrated_carp/on_reagent_change()
 	if (reagents.has_reagent(/datum/reagent/water))
-		visible_message(SPAN_WARNING("\The [src] begins to shake as the liquid touches it."))
+		visible_message(span_warning("\The [src] begins to shake as the liquid touches it."))
 		addtimer(CALLBACK(src, PROC_REF(expand)), 5 SECONDS)
 
 /obj/item/reagent_containers/food/snacks/dehydrated_carp/proc/expand()
-	visible_message(SPAN_WARNING("\The [src] rapidly expands into a living space carp!"))
+	visible_message(span_warning("\The [src] rapidly expands into a living space carp!"))
 	new spawned_mob(get_turf(src))
 	qdel(src)
 
@@ -54,24 +54,24 @@
 
 /obj/item/plushbomb/attack_self(mob/user)
 	if (user.a_intent == I_HELP)
-		user.visible_message(SPAN_NOTICE("\The [user] hugs [src]!"), SPAN_NOTICE("You hug [src]!"))
+		user.visible_message(span_notice("\The [user] hugs [src]!"), span_notice("You hug [src]!"))
 	else if (user.a_intent == I_GRAB)
 		if (!phrase)
 			phrase = sanitize_phrase(input("Choose activation phrase:") as text)
-			to_chat(user, SPAN_NOTICE("You set the activation phrase to be '[phrase]'."))
+			to_chat(user, span_notice("You set the activation phrase to be '[phrase]'."))
 		else
-			user.visible_message(SPAN_WARNING("\The [user] attempts to strangle [src]!"), SPAN_WARNING("You attempt to strangle [src]!"))
+			user.visible_message(span_warning("\The [user] attempts to strangle [src]!"), span_warning("You attempt to strangle [src]!"))
 	else if (user.a_intent == I_HURT)
-		user.visible_message(SPAN_WARNING("\The [user] punches [src]!"), SPAN_WARNING("You punch [src]!"))
+		user.visible_message(span_warning("\The [user] punches [src]!"), span_warning("You punch [src]!"))
 	else
-		user.visible_message(SPAN_NOTICE("\The [user] pokes [src]."), SPAN_NOTICE("You poke [src]."))
+		user.visible_message(span_notice("\The [user] pokes [src]."), span_notice("You poke [src]."))
 
 /obj/item/plushbomb/hear_talk(mob/M, msg)
 	if (!phrase)
 		return
 	if (findtext(sanitize_phrase(msg), phrase))
 		addtimer(CALLBACK(src, PROC_REF(activate)), 5 SECONDS)
-		audible_message(SPAN_DANGER("\The [src] begins to beep ominously, letting out a loud '[last_words]'!"))
+		audible_message(span_danger("\The [src] begins to beep ominously, letting out a loud '[last_words]'!"))
 		playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 
 /obj/item/plushbomb/proc/sanitize_phrase(phrase)

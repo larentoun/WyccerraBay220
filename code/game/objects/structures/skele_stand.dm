@@ -28,7 +28,7 @@
 		if(C)
 			swag -= get_key_by_value(swag, C)
 			user.put_in_hands(C)
-			to_chat(user,SPAN_NOTICE("You take \the [C] off \the [src]"))
+			to_chat(user,span_notice("You take \the [C] off \the [src]"))
 			update_icon()
 	else
 		rattle_bones(user, null)
@@ -44,7 +44,7 @@
 			var/obj/item/clothing/C = swag[slot]
 			if (C)
 				swagnames += C.get_examine_line()
-		. += SPAN_NOTICE("[p_They()] [p_are()] wearing [english_list(swagnames)].")
+		. += span_notice("[p_They()] [p_are()] wearing [english_list(swagnames)].")
 
 
 /obj/structure/skele_stand/use_weapon(obj/item/weapon, mob/user, list/click_params)
@@ -61,8 +61,8 @@
 		if (!input || input == name || !user.use_sanity_check(src, tool))
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [src] renames \the [src] to '[input]' with \a [tool]."),
-			SPAN_NOTICE("You rename \the [src] to '[input]' with \the [tool].")
+			span_notice("\The [src] renames \the [src] to '[input]' with \a [tool]."),
+			span_notice("You rename \the [src] to '[input]' with \the [tool].")
 		)
 		SetName(input)
 		return TRUE
@@ -92,8 +92,8 @@
 		swag[slot] = tool
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] puts \a [tool] on \the [src]."),
-			SPAN_NOTICE("You put \the [tool] on \the [src].")
+			span_notice("\The [user] puts \a [tool] on \the [src]."),
+			span_notice("You put \the [tool] on \the [src].")
 		)
 		return TRUE
 

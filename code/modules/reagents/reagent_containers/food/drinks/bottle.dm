@@ -37,7 +37,7 @@
 					reagents.splash(other, reagents.total_volume * 0.2, copy = TRUE)
 				reagents.splash(hit_atom, reagents.total_volume)
 				hit_atom.visible_message(
-					SPAN_WARNING("The contents of \the [src] splash all over \the [hit_atom]![length(others)?" Some gets on [english_list(others)] as well!":""]")
+					span_warning("The contents of \the [src] splash all over \the [hit_atom]![length(others)?" Some gets on [english_list(others)] as well!":""]")
 				)
 			smash(loc, hit_atom)
 
@@ -91,7 +91,7 @@
 	if (!can_shatter || rag)
 		return
 	if (user.unEquip(R))
-		to_chat(user, SPAN_NOTICE("You stuff \the [R] into \the [src]."))
+		to_chat(user, span_notice("You stuff \the [R] into \the [src]."))
 		rag = R
 		rag.forceMove(src)
 		atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER
@@ -101,7 +101,7 @@
 /obj/item/reagent_containers/food/drinks/bottle/proc/remove_rag(mob/user)
 	if (!rag)
 		return
-	to_chat(user, SPAN_NOTICE("You pull \the [rag] out of \the [src]."))
+	to_chat(user, span_notice("You pull \the [rag] out of \the [src]."))
 	user.put_in_hands(rag)
 	rag = null
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
@@ -133,15 +133,15 @@
 	var/mob/living/carbon/human/H = target
 	if (istype(H) && H.headcheck(hit_zone))
 		var/obj/item/organ/affecting = H.get_organ(hit_zone)
-		user.visible_message(SPAN_DANGER("\The [user] smashes \the [src] into \the [H]'s [affecting.name]!"))
+		user.visible_message(span_danger("\The [user] smashes \the [src] into \the [H]'s [affecting.name]!"))
 		var/blocked = target.get_blocked_ratio(hit_zone, DAMAGE_BRUTE, damage = 10) * 100
 		var/weaken_duration = smash_duration + min(0, force - blocked + 10)
 		if (weaken_duration)
 			target.apply_effect(min(weaken_duration, 5), EFFECT_WEAKEN, blocked)
 	else
-		user.visible_message(SPAN_DANGER("\The [user] smashes [src] into [target]!"))
+		user.visible_message(span_danger("\The [user] smashes [src] into [target]!"))
 	if (reagents)
-		user.visible_message(SPAN_NOTICE("The contents of \the [src] splash all over \the [target]!"))
+		user.visible_message(span_notice("The contents of \the [src] splash all over \the [target]!"))
 		reagents.splash(target, reagents.total_volume)
 	var/obj/item/broken_bottle/B = smash(get_turf(target), target)
 	user.put_in_active_hand(B)

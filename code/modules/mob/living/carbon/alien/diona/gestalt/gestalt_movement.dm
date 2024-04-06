@@ -19,7 +19,7 @@
 			gestalt.nymphs.Cut()
 		var/gestalt_loc = gestalt.loc
 		qdel(gestalt)
-		visible_message(SPAN_NOTICE("The nascent gestalts combine together!")) // Combine!
+		visible_message(span_notice("The nascent gestalts combine together!")) // Combine!
 		step_towards(src, gestalt_loc)
 
 /obj/structure/diona_gestalt/Bumped(atom/A)

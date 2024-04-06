@@ -248,35 +248,35 @@
 /atom/proc/examine_damage_state(mob/user)
 	. = list()
 	if(health_dead())
-		. += SPAN_DANGER("[p_they()] looks broken.")
+		. += span_danger("[p_they()] looks broken.")
 		return
 	var/damage_percentage = get_damage_percentage()
 	switch(damage_percentage)
 		if(0)
-			. += SPAN_NOTICE("[p_they()] looks fully intact.")
+			. += span_notice("[p_they()] looks fully intact.")
 		if(1 to 32)
-			. += SPAN_WARNING("[p_they()] looks slightly damaged.")
+			. += span_warning("[p_they()] looks slightly damaged.")
 		if(33 to 65)
-			. += SPAN_WARNING("[p_they()] looks moderately damaged.")
+			. += span_warning("[p_they()] looks moderately damaged.")
 		else
-			. += SPAN_DANGER("[p_they()] looks severely damaged.")
+			. += span_danger("[p_they()] looks severely damaged.")
 
 /mob/examine_damage_state(mob/user)
 	. = list()
 	if (health_dead())
-		. += SPAN_DANGER("[p_they()] looks severely hurt and [p_are()] not moving or responding to anything around [p_them()].")
+		. += span_danger("[p_they()] looks severely hurt and [p_are()] not moving or responding to anything around [p_them()].")
 		return
 
 	var/damage_percentage = get_damage_percentage()
 	switch (damage_percentage)
 		if (0)
-			. += SPAN_NOTICE("[p_they()] appears unhurt.")
+			. += span_notice("[p_they()] appears unhurt.")
 		if (1 to 32)
-			. += SPAN_WARNING("[p_they()] looks slightly hurt.")
+			. += span_warning("[p_they()] looks slightly hurt.")
 		if (33 to 65)
-			. += SPAN_WARNING("[p_they()] looks moderately hurt.")
+			. += span_warning("[p_they()] looks moderately hurt.")
 		else
-			. += SPAN_DANGER("[p_they()] looks severely hurt.")
+			. += span_danger("[p_they()] looks severely hurt.")
 
 /**
  * Copies the state of health from one atom to another.

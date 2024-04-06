@@ -50,8 +50,8 @@
 	bulk = initial(bulk)
 	update_icon()
 	user.visible_message(
-		SPAN_NOTICE("[user] removes [reinforced] from [src] with [tool]."),
-		SPAN_NOTICE("You remove [reinforced] from [src] with [tool].")
+		span_notice("[user] removes [reinforced] from [src] with [tool]."),
+		span_notice("You remove [reinforced] from [src] with [tool].")
 	)
 
 /obj/item/gun/projectile/shotgun/pump/exploration/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -69,8 +69,8 @@
 		update_icon()
 		playsound(src, 'sound/effects/tape.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] reinforces [src] with [tool]."),
-			SPAN_NOTICE("You reinforce [src] with [tool].")
+			span_notice("[user] reinforces [src] with [tool]."),
+			span_notice("You reinforce [src] with [tool].")
 		)
 		return TRUE
 
@@ -86,7 +86,7 @@
 		if(damage > 30)
 			var/mob/living/carbon/C = loc
 			if(istype(loc))
-				C.visible_message(SPAN_DANGER("[src] explodes in [C]'s hands!"), SPAN_DANGER("[src] explodes in your face!"))
+				C.visible_message(span_danger("[src] explodes in [C]'s hands!"), span_danger("[src] explodes in your face!"))
 				C.drop_from_inventory(src)
 				if(reinforced)
 					reinforced.dropInto(loc)
@@ -95,7 +95,7 @@
 				for(var/zone in list(BP_L_HAND, BP_R_HAND, BP_HEAD))
 					C.apply_damage(rand(10,20), def_zone=zone)
 			else
-				visible_message(SPAN_DANGER("[src] explodes!"))
+				visible_message(span_danger("[src] explodes!"))
 			explosion(get_turf(src), -1, -1, 1)
 			qdel(src)
 			return FALSE

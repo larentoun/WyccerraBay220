@@ -9,4 +9,4 @@
 	health_min_damage = 5
 
 /obj/structure/closet/secure_closet/slice_into_parts(obj/item/weldingtool/WT, mob/user)
-	to_chat(user, SPAN_NOTICE("\The [src] is too strong to be taken apart."))
+	to_chat(user, span_notice("\The [src] is too strong to be taken apart."))

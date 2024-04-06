@@ -71,9 +71,9 @@ var/global/photo_count = 0
 		return
 	if(distance <= 1)
 		show(user)
-		. += SPAN_NOTICE(desc)
+		. += span_notice(desc)
 	else
-		. += SPAN_NOTICE("It is too far away.")
+		. += span_notice("It is too far away.")
 
 /obj/item/photo/proc/show(mob/user as mob)
 	send_rsc(user, img, "tmp_photo_[id].png")
@@ -172,7 +172,7 @@ var/global/photo_count = 0
 	var/nsize = input("Photo Size","Pick a size of resulting photo.") as null|anything in list(1,3,5,7)
 	if(nsize)
 		size = nsize
-		to_chat(usr, SPAN_NOTICE("Camera will now take [size]x[size] photos."))
+		to_chat(usr, span_notice("Camera will now take [size]x[size] photos."))
 
 /obj/item/device/camera/attack_self(mob/user as mob)
 	on = !on
@@ -189,8 +189,8 @@ var/global/photo_count = 0
 			return TRUE
 		pictures_left = pictures_max
 		user.visible_message(
-			SPAN_NOTICE("\The [user] adds \a [tool] to \a [src]."),
-			SPAN_NOTICE("You add \the [tool] to \the [src]."),
+			span_notice("\The [user] adds \a [tool] to \a [src]."),
+			span_notice("You add \the [tool] to \the [src]."),
 			range = 2
 		)
 		qdel(tool)
@@ -221,14 +221,14 @@ var/global/photo_count = 0
 	playsound(loc, pick('sound/items/polaroid1.ogg', 'sound/items/polaroid2.ogg'), 75, 1, -3)
 
 	pictures_left--
-	to_chat(user, SPAN_NOTICE("[pictures_left] photos left."))
+	to_chat(user, span_notice("[pictures_left] photos left."))
 
 	on = 0
 	update_icon()
 
 /obj/item/device/camera/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("It has [pictures_left] photo\s left.")
+	. += span_notice("It has [pictures_left] photo\s left.")
 
 //Proc for capturing check
 /mob/living/proc/can_capture_turf(turf/T)

@@ -70,11 +70,11 @@
 /obj/item/mech_component/chassis/show_missing_parts(mob/user)
 	. = ..()
 	if(!cell)
-		. += SPAN_WARNING("It is missing a power cell.")
+		. += span_warning("It is missing a power cell.")
 	if(!diagnostics)
-		. += SPAN_WARNING("It is missing a diagnostics unit.")
+		. += span_warning("It is missing a diagnostics unit.")
 	if(!m_armour)
-		. += SPAN_WARNING("It is missing exosuit armour plating.")
+		. += span_warning("It is missing exosuit armour plating.")
 
 /obj/item/mech_component/chassis/Initialize()
 	. = ..()
@@ -148,17 +148,17 @@
 /obj/item/mech_component/chassis/attackby(obj/item/thing, mob/user)
 	if(istype(thing,/obj/item/robot_parts/robot_component/diagnosis_unit))
 		if(diagnostics)
-			to_chat(user, SPAN_WARNING("\The [src] already has a diagnostic system installed."))
+			to_chat(user, span_warning("\The [src] already has a diagnostic system installed."))
 			return
 		if(install_component(thing, user)) diagnostics = thing
 	else if(istype(thing, /obj/item/cell))
 		if(cell)
-			to_chat(user, SPAN_WARNING("\The [src] already has a cell installed."))
+			to_chat(user, span_warning("\The [src] already has a cell installed."))
 			return
 		if(install_component(thing,user)) cell = thing
 	else if(istype(thing, /obj/item/robot_parts/robot_component/armour/exosuit))
 		if(m_armour)
-			to_chat(user, SPAN_WARNING("\The [src] already has armour installed."))
+			to_chat(user, span_warning("\The [src] already has armour installed."))
 			return
 		if(install_component(thing, user))
 			m_armour = thing
@@ -170,11 +170,11 @@
 	if(!istype(C))
 		return ..()
 	if(pilot_coverage < 100)
-		to_chat(user, SPAN_NOTICE("This type of chassis doesn't support internals."))
+		to_chat(user, span_notice("This type of chassis doesn't support internals."))
 	if(!C.anchored && do_after(user, 0.5 SECONDS, src, DO_PUBLIC_UNIQUE))
 		if(C.anchored)
 			return
-		to_chat(user, SPAN_NOTICE("You install the canister in the [src]."))
+		to_chat(user, span_notice("You install the canister in the [src]."))
 		if(air_supply)
 			air_supply.forceMove(get_turf(src))
 			air_supply = null
@@ -192,13 +192,13 @@
 /obj/item/mech_component/chassis/return_diagnostics(mob/user)
 	..()
 	if(diagnostics)
-		to_chat(user, SPAN_NOTICE(" Diagnostics Unit Integrity: <b>[round((((diagnostics.max_dam - diagnostics.total_dam) / diagnostics.max_dam)) * 100)]%</b>"))
+		to_chat(user, span_notice(" Diagnostics Unit Integrity: <b>[round((((diagnostics.max_dam - diagnostics.total_dam) / diagnostics.max_dam)) * 100)]%</b>"))
 	else
-		to_chat(user, SPAN_WARNING(" Diagnostics Unit Missing or Non-functional."))
+		to_chat(user, span_warning(" Diagnostics Unit Missing or Non-functional."))
 	if(m_armour)
-		to_chat(user, SPAN_NOTICE(" Armor Integrity: <b>[round((((m_armour.max_dam - m_armour.total_dam) / m_armour.max_dam)) * 100)]%</b>"))
+		to_chat(user, span_notice(" Armor Integrity: <b>[round((((m_armour.max_dam - m_armour.total_dam) / m_armour.max_dam)) * 100)]%</b>"))
 	else
-		to_chat(user, SPAN_WARNING(" Armor Missing or Non-functional."))
+		to_chat(user, span_warning(" Armor Missing or Non-functional."))
 
 
 /obj/item/mech_component/chassis/powerloader

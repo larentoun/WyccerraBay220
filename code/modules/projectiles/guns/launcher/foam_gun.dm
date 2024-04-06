@@ -31,11 +31,11 @@
 			return TRUE
 		darts += tool
 		user.visible_message(
-			SPAN_NOTICE("\The [user] loads \the [src] with \a [tool]."),
-			SPAN_NOTICE("You load \the [src] with \the [tool].")
+			span_notice("\The [user] loads \the [src] with \a [tool]."),
+			span_notice("You load \the [src] with \the [tool].")
 		)
 		if (max_darts > 1)
-			to_chat(user, SPAN_INFO("\The [src] now has [length(darts)]/[max_darts] darts loaded."))
+			to_chat(user, span_info("\The [src] now has [length(darts)]/[max_darts] darts loaded."))
 		return TRUE
 
 	return ..()
@@ -84,7 +84,7 @@
 /obj/item/gun/launcher/foam/revolver/tampered/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
-		. += SPAN_NOTICE("The hammer is a lot more resistant than you'd expect.")
+		. += span_notice("The hammer is a lot more resistant than you'd expect.")
 
 //the projectile
 /obj/item/foam_dart
@@ -114,7 +114,7 @@
 /obj/item/foam_dart/tampered/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
-		. += SPAN_WARNING("Closer inspection reveals some weights in the rubber dome.")
+		. += span_warning("Closer inspection reveals some weights in the rubber dome.")
 
 //boxes of the projectile
 /obj/item/storage/box/foam_darts

@@ -142,7 +142,7 @@
 
 	if(href_list["observe"])
 		if(GAME_STATE < RUNLEVEL_LOBBY)
-			to_chat(src, SPAN_WARNING("Please wait for server initialization to complete..."))
+			to_chat(src, span_warning("Please wait for server initialization to complete..."))
 			return
 
 		if(!config.respawn_delay || client.holder || alert(src,"Are you sure you wish to observe? You will have to wait [config.respawn_delay] minute\s before being able to respawn!","Player Setup","Yes","No") == "Yes")
@@ -157,10 +157,10 @@
 			close_spawn_windows()
 			var/obj/O = locate("landmark*Observer-Start")
 			if(istype(O))
-				to_chat(src, SPAN_NOTICE("Now teleporting."))
+				to_chat(src, span_notice("Now teleporting."))
 				observer.forceMove(O.loc)
 			else
-				to_chat(src, SPAN_DANGER("Could not locate an observer spawn point. Use the Teleport verb to jump to the map."))
+				to_chat(src, span_danger("Could not locate an observer spawn point. Use the Teleport verb to jump to the map."))
 			observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 
 			var/should_announce = client.get_preference_value(/datum/client_preference/announce_ghost_join) == GLOB.PREF_YES
@@ -185,12 +185,12 @@
 
 	if(href_list["late_join"])
 		if(GAME_STATE != RUNLEVEL_GAME)
-			to_chat(usr, SPAN_WARNING("The round has either not started yet or already ended."))
+			to_chat(usr, span_warning("The round has either not started yet or already ended."))
 			return
 		if (!client.holder)
 			var/dsdiff = config.respawn_menu_delay MINUTES - (world.time - respawned_time)
 			if (dsdiff > 0)
-				to_chat(usr, SPAN_WARNING("You must wait [time2text(dsdiff, "mm:ss")] before rejoining."))
+				to_chat(usr, span_warning("You must wait [time2text(dsdiff, "mm:ss")] before rejoining."))
 				return
 		LateChoices() //show the latejoin job selection menu
 
@@ -231,10 +231,10 @@
 	if(src != usr)
 		return 0
 	if(GAME_STATE != RUNLEVEL_GAME)
-		to_chat(usr, SPAN_WARNING("The round is either not ready, or has already finished..."))
+		to_chat(usr, span_warning("The round is either not ready, or has already finished..."))
 		return 0
 	if(!config.enter_allowed)
-		to_chat(usr, SPAN_NOTICE("There is an administrative lock on entering the game!"))
+		to_chat(usr, span_notice("There is an administrative lock on entering the game!"))
 		return 0
 
 	if(!job || !job.is_available(client))

@@ -12,7 +12,7 @@
 /obj/item/documents/examine(mob/user)
 	. = ..()
 	if(description_antag)
-		. += SPAN_NOTICE("[description_antag]")
+		. += span_notice("[description_antag]")
 
 /obj/item/documents/nanotrasen
 	name = "secret corporate documents"

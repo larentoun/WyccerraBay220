@@ -40,13 +40,13 @@
 	else
 		. += "<b>Shackle: </b>"
 		if(!pref.is_shackled)
-			. += SPAN_CLASS("linkOn", "Off")
+			. += span_linkon("Off")
 			. += "<a href='?src=\ref[src];toggle_shackle=[pref.is_shackled]'>On</a>"
 			. += "<br>Only shackled positronics have laws in an integrated positronic chassis."
 			. += "<hr>"
 		else
 			. += "<a href='?src=\ref[src];toggle_shackle=[pref.is_shackled]'>Off</a>"
-			. += SPAN_CLASS("linkOn", "On")
+			. += span_linkon("On")
 			. += "<br>You are shackled and have laws that restrict your behaviour."
 			. += "<hr>"
 

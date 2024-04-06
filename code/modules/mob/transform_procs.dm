@@ -97,7 +97,7 @@
 				if (sloc.name == "AI")
 					loc_landmark = sloc
 		if (!loc_landmark)
-			to_chat(O, SPAN_DEBUG("We still failed to find a AI spawn location. Where you're standing is now you're new home."))
+			to_chat(O, span_debug("We still failed to find a AI spawn location. Where you're standing is now you're new home."))
 		else
 			O.forceMove(loc_landmark.loc)
 		O.on_mob_init()
@@ -211,7 +211,7 @@
 	var/mobpath = input("Which type of mob should [src] turn into?", "Choose a type") in mobtypes
 
 	if(!safe_animal(mobpath))
-		to_chat(usr, SPAN_WARNING("Sorry but this mob type is currently unavailable."))
+		to_chat(usr, span_warning("Sorry but this mob type is currently unavailable."))
 		return
 
 	if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
@@ -244,7 +244,7 @@
 	var/mobpath = input("Which type of mob should [src] turn into?", "Choose a type") in mobtypes
 
 	if(!safe_animal(mobpath))
-		to_chat(usr, SPAN_WARNING("Sorry but this mob type is currently unavailable."))
+		to_chat(usr, span_warning("Sorry but this mob type is currently unavailable."))
 		return
 
 	var/mob/new_mob = new mobpath(src.loc)

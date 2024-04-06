@@ -92,10 +92,10 @@
 		user.ClickOn(src)
 		return
 	if (!CheckDexterity(user))
-		to_chat(user, SPAN_WARNING("You're not dextrous enough to do that."))
+		to_chat(user, span_warning("You're not dextrous enough to do that."))
 		return
 	if (user.incapacitated())
-		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
+		to_chat(user, span_warning("You're in no condition to do that."))
 		return
 	if (patient == dropped)
 		RemoveDrip(user)
@@ -113,8 +113,8 @@
 			FEEDBACK_UNEQUIP_FAILURE(user, tool)
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] attaches \a [tool] to \a [src]."),
-			SPAN_NOTICE("You attach \the [tool] to \the [src]."),
+			span_notice("\The [user] attaches \a [tool] to \a [src]."),
+			span_notice("You attach \the [tool] to \the [src]."),
 			range = 5
 		)
 		iv_bag = tool
@@ -142,7 +142,7 @@
 			if (prob(15))
 				playsound(src, 'sound/effects/3beep.ogg', 50, TRUE)
 				audible_message(
-					SPAN_NOTICE("\The [src] pings."),
+					span_notice("\The [src] pings."),
 					hearing_distance = 5
 				)
 			return
@@ -155,7 +155,7 @@
 			if (prob(15))
 				playsound(src, 'sound/effects/3beep.ogg', 50, TRUE)
 				audible_message(
-					SPAN_NOTICE("\The [src] pings."),
+					span_notice("\The [src] pings."),
 					hearing_distance = 5
 				)
 			return
@@ -165,7 +165,7 @@
 			if (prob(30))
 				playsound(src, 'sound/effects/3beep.ogg', 50, TRUE)
 				audible_message(
-					SPAN_NOTICE("\The [src] pings."),
+					span_notice("\The [src] pings."),
 					hearing_distance = 5
 				)
 		if (patient.take_blood(iv_bag, difference))
@@ -196,16 +196,16 @@
 	if (distance >= 2 && !isghost(user))
 		return
 	if (patient)
-		. += SPAN_NOTICE("[patient] is hooked up to it.")
+		. += span_notice("[patient] is hooked up to it.")
 	if (!iv_bag)
-		. += SPAN_NOTICE("It has no IV bag attached.")
+		. += span_notice("It has no IV bag attached.")
 		return
 	var/volume = floor(iv_bag.reagents.total_volume)
 	if (!volume)
-		. += SPAN_NOTICE("It has an empty [iv_bag] attached.")
+		. += span_notice("It has an empty [iv_bag] attached.")
 		return
-	. += SPAN_NOTICE("It has [iv_bag] attached with [volume] units of liquid inside.")
-	. += SPAN_NOTICE("\
+	. += span_notice("It has [iv_bag] attached with [volume] units of liquid inside.")
+	. += span_notice("\
 		It is set to [drip_mode == MODE_INJECT ? "inject" : drip_mode == MODE_EXTRACT ? "extract" : ""] \
 		[iv_bag.transfer_amount]u of fluid per cycle.\
 	")
@@ -217,27 +217,27 @@
 
 /obj/structure/iv_stand/proc/AttachDrip(mob/living/carbon/human/target, mob/living/user)
 	if (patient)
-		to_chat(user, SPAN_WARNING("\The [patient] is already hooked up to \the [src]."))
+		to_chat(user, span_warning("\The [patient] is already hooked up to \the [src]."))
 		return
 	user.visible_message(
-		SPAN_ITALIC("\The [user] starts to hook up \the [target] to \the [src]."),
-		SPAN_ITALIC("You start to hook up \the [target] to \the [src]."),
+		span_italic("\The [user] starts to hook up \the [target] to \the [src]."),
+		span_italic("You start to hook up \the [target] to \the [src]."),
 		range = 5
 	)
 	if (!user.do_skilled(3 SECONDS, SKILL_MEDICAL, target))
 		return
 	if (prob(user.skill_fail_chance(SKILL_MEDICAL, 67, SKILL_BASIC)))
 		user.visible_message(
-			SPAN_DANGER("\The [user] fishes for a vein on \the [target] and fails, stabbing them instead!"),
-			SPAN_DANGER("You fish inexpertly for a vein on \the [target] and stab them instead!"),
+			span_danger("\The [user] fishes for a vein on \the [target] and fails, stabbing them instead!"),
+			span_danger("You fish inexpertly for a vein on \the [target] and stab them instead!"),
 			range = 5
 		)
 		target.apply_damage(rand(2, 6), DAMAGE_BRUTE, pick(BP_R_ARM, BP_L_ARM), damage_flags = DAMAGE_FLAG_SHARP, armor_pen = 100)
 		return
 	START_PROCESSING(SSobj, src)
 	user.visible_message(
-		SPAN_ITALIC("\The [user] successfully inserts \a [src]'s cannula into \the [target]."),
-		SPAN_NOTICE("You successfully insert \the [src]'s cannula into \the [target]."),
+		span_italic("\The [user] successfully inserts \a [src]'s cannula into \the [target]."),
+		span_notice("You successfully insert \the [src]'s cannula into \the [target]."),
 		range = 1
 	)
 	patient = target
@@ -248,8 +248,8 @@
 	if (!patient)
 		return
 	user.visible_message(
-		SPAN_ITALIC("\The [user] starts unhooking \the [patient] from \a [src]."),
-		SPAN_ITALIC("You start extracting \the [src]'s cannula from \the [patient]."),
+		span_italic("\The [user] starts unhooking \the [patient] from \a [src]."),
+		span_italic("You start extracting \the [src]'s cannula from \the [patient]."),
 		range = 5
 	)
 	if (!user.do_skilled(1.5 SECONDS, SKILL_MEDICAL, patient))
@@ -259,8 +259,8 @@
 		return
 	STOP_PROCESSING(SSobj, src)
 	user.visible_message(
-		SPAN_WARNING("\The [user] extracts \the [src]'s cannula from \the [patient]."),
-		SPAN_NOTICE("You successfully unhook \the [patient] from \the [src]."),
+		span_warning("\The [user] extracts \the [src]'s cannula from \the [patient]."),
+		span_notice("You successfully unhook \the [patient] from \the [src]."),
 		range = 1
 	)
 	patient = null
@@ -272,8 +272,8 @@
 		return
 	STOP_PROCESSING(SSobj, src)
 	patient.visible_message(
-		SPAN_WARNING("\The cannula from \a [src] is ripped out of \the [patient][user ? " by \the [user]" : ""]!"),
-		SPAN_DANGER("\The cannula from \the [src] is ripped out of you[user ? " by \the [user]": ""]!"),
+		span_warning("\The cannula from \a [src] is ripped out of \the [patient][user ? " by \the [user]" : ""]!"),
+		span_danger("\The cannula from \the [src] is ripped out of you[user ? " by \the [user]": ""]!"),
 		range = 5
 	)
 	patient.custom_pain(power = 20)
@@ -290,10 +290,10 @@
 	if (!istype(user))
 		return
 	if (!Adjacent(user) || user.incapacitated())
-		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
+		to_chat(user, span_warning("You're in no condition to do that."))
 		return
 	if (!iv_bag)
-		to_chat(user, SPAN_WARNING("\The [src] does not have an attached IV bag."))
+		to_chat(user, span_warning("\The [src] does not have an attached IV bag."))
 		return
 	iv_bag.UpdateTransferAmount(user, src)
 
@@ -306,10 +306,10 @@
 	if (!istype(user))
 		return
 	if (!patient)
-		to_chat(user, SPAN_WARNING("\The [src] is not hooked up to anyone."))
+		to_chat(user, span_warning("\The [src] is not hooked up to anyone."))
 		return
 	if (!Adjacent(user) || user.incapacitated())
-		to_chat(user, SPAN_WARNING("You're in no condition do that."))
+		to_chat(user, span_warning("You're in no condition do that."))
 	RemoveDrip(user)
 
 
@@ -321,7 +321,7 @@
 	if (!istype(user))
 		return
 	if (!Adjacent(user) || user.incapacitated())
-		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
+		to_chat(user, span_warning("You're in no condition to do that."))
 		return
 	var/action_word
 	switch (drip_mode)
@@ -332,7 +332,7 @@
 			action_word = "extract"
 			drip_mode = MODE_EXTRACT
 	user.visible_message(
-		SPAN_ITALIC("\The [user] adjusts \a [src] to [action_word] fluids."),
-		SPAN_ITALIC("You adjust \the [src] to [action_word] fluids."),
+		span_italic("\The [user] adjusts \a [src] to [action_word] fluids."),
+		span_italic("You adjust \the [src] to [action_word] fluids."),
 		range = 3
 	)

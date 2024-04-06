@@ -19,14 +19,14 @@
 /obj/item/weldingtool/electric/examine(mob/user, distance)
 	. = ..()
 	if (!cell)
-		. += SPAN_NOTICE("There is no [welding_resource] source attached.")
+		. += span_notice("There is no [welding_resource] source attached.")
 	else
-		. += SPAN_NOTICE((distance == 0 ? "It has [get_fuel()] [welding_resource] remaining. " : "") + "[cell] is attached.")
+		. += span_notice((distance == 0 ? "It has [get_fuel()] [welding_resource] remaining. " : "") + "[cell] is attached.")
 
 /obj/item/weldingtool/electric/use_after(obj/O, mob/living/user)
 	if(istype(O, /obj/structure/reagent_dispensers/fueltank))
 		if(!welding)
-			to_chat(user, SPAN_WARNING("[src] runs on an internal charge and does not need to be refuelled."))
+			to_chat(user, span_warning("[src] runs on an internal charge and does not need to be refuelled."))
 		return TRUE
 	return ..()
 
@@ -64,11 +64,11 @@
 		return
 	if(istype(W, /obj/item/cell))
 		if(cell)
-			to_chat(user, SPAN_WARNING("[src] already has a cell installed."))
+			to_chat(user, span_warning("[src] already has a cell installed."))
 		else if(user.unEquip(W))
 			cell = W
 			cell.forceMove(src)
-			to_chat(user, SPAN_NOTICE("You slot [cell] into [src]."))
+			to_chat(user, span_notice("You slot [cell] into [src]."))
 			update_icon()
 		return
 	. = ..()

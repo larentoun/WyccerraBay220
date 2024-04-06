@@ -108,7 +108,7 @@
 /obj/item/organ/internal/cooling_system/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 0)
-		. += SPAN_NOTICE(text("[icon2html(src, viewers(get_turf(src)))] [] contains [] units of liquid left!", src, src.reagents.total_volume))
+		. += span_notice(text("[icon2html(src, viewers(get_turf(src)))] [] contains [] units of liquid left!", src, src.reagents.total_volume))
 
 /obj/item/organ/internal/cooling_system/attack_self(mob/user as mob)
 	safety = !safety
@@ -125,15 +125,15 @@
 	var/amount = reagents.get_free_space()
 	if (safety)
 		if (amount <= 0)
-			to_chat(user, SPAN_NOTICE("\The [src] is full."))
+			to_chat(user, span_notice("\The [src] is full."))
 			return
 		if (beaker.reagents.total_volume <= 0)
-			to_chat(user, SPAN_NOTICE("\The [beaker] is empty."))
+			to_chat(user, span_notice("\The [beaker] is empty."))
 			return
 		amount = beaker.reagents.trans_to_obj(src, refrigerant_max)
-		to_chat(user, SPAN_NOTICE("You fill \the [src] with [amount] units from \the [beaker]."))
+		to_chat(user, span_notice("You fill \the [src] with [amount] units from \the [beaker]."))
 		playsound(src.loc, 'sound/effects/pour.ogg', 25, 1)
 	else
 		amount = src.reagents.trans_to_obj(beaker, refrigerant_max)
-		to_chat(user, SPAN_NOTICE("You fill \the [beaker] with [amount] units from \the [src]."))
+		to_chat(user, span_notice("You fill \the [beaker] with [amount] units from \the [src]."))
 		playsound(src.loc, 'sound/effects/pour.ogg', 25, 1)

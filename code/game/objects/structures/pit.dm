@@ -13,14 +13,14 @@
 	// Shovel - Dig or fill pit
 	if (istype(tool, /obj/item/shovel))
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts [open ? "filling" : "digging open"] \the [src] with \a [tool]."),
-			SPAN_NOTICE("You start [open ? "filling" : "digging open"] \the [src] with \the [tool].")
+			span_notice("\The [user] starts [open ? "filling" : "digging open"] \the [src] with \a [tool]."),
+			span_notice("You start [open ? "filling" : "digging open"] \the [src] with \the [tool].")
 		)
 		if (!user.do_skilled((tool.toolspeed * 5) SECONDS, SKILL_HAULING, src) || !user.use_sanity_check(src, tool))
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] [open ? "fills" : "digs open"] \the [src] with \a [tool]."),
-			SPAN_NOTICE("You [open ? "fill" : "dig open"] \the [src] with \the [tool].")
+			span_notice("\The [user] [open ? "fills" : "digs open"] \the [src] with \a [tool]."),
+			span_notice("You [open ? "fill" : "dig open"] \the [src] with \the [tool].")
 		)
 		if (open)
 			close(user)
@@ -42,8 +42,8 @@
 			USE_FEEDBACK_STACK_NOT_ENOUGH(stack, 1, "to make a grave marker")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts making a grave marker on top of \the [src] with \a [tool]."),
-			SPAN_NOTICE("You start making a grave marker on top of \the [src] with \the [tool].")
+			span_notice("\The [user] starts making a grave marker on top of \the [src] with \a [tool]."),
+			span_notice("You start making a grave marker on top of \the [src] with \the [tool].")
 		)
 		if (!user.do_skilled(5 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
@@ -55,8 +55,8 @@
 		var/obj/structure/gravemarker/new_grave = new(loc)
 		new_grave.add_fingerprint(user, tool = tool)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] makes a grave marker on top of \the [src] with \a [tool]."),
-			SPAN_NOTICE("You make a grave marker on top of \the [src] with \the [tool].")
+			span_notice("\The [user] makes a grave marker on top of \the [src] with \a [tool]."),
+			span_notice("You make a grave marker on top of \the [src] with \the [tool].")
 		)
 		return TRUE
 
@@ -103,23 +103,23 @@
 		return
 
 	escapee.setClickCooldown(100)
-	to_chat(escapee, SPAN_WARNING("You start digging your way out of \the [src] (this will take about [breakout_time] minute\s)"))
-	visible_message(SPAN_DANGER("Something is scratching its way out of \the [src]!"))
+	to_chat(escapee, span_warning("You start digging your way out of \the [src] (this will take about [breakout_time] minute\s)"))
+	visible_message(span_danger("Something is scratching its way out of \the [src]!"))
 
 	for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
 		playsound(src.loc, 'sound/weapons/bite.ogg', 100, 1)
 
 		if(!do_after(escapee, 5 SECONDS, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
-			to_chat(escapee, SPAN_WARNING("You have stopped digging."))
+			to_chat(escapee, span_warning("You have stopped digging."))
 			return
 		if(open)
 			return
 
 		if(i == 6*breakout_time)
-			to_chat(escapee, SPAN_WARNING("Halfway there..."))
+			to_chat(escapee, span_warning("Halfway there..."))
 
-	to_chat(escapee, SPAN_WARNING("You successfuly dig yourself out!"))
-	visible_message(SPAN_DANGER("\the [escapee] emerges from \the [src]!"))
+	to_chat(escapee, span_warning("You successfuly dig yourself out!"))
+	visible_message(span_danger("\the [escapee] emerges from \the [src]!"))
 	playsound(src.loc, 'sound/effects/squelch1.ogg', 100, 1)
 	open()
 
@@ -168,7 +168,7 @@
 
 /obj/structure/gravemarker/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("It says: '[message]'")
+	. += span_notice("It says: '[message]'")
 
 /obj/structure/gravemarker/random/Initialize()
 	generate()
@@ -190,16 +190,16 @@
 	// Hatchet - Remove marker
 	if (isHatchet(tool))
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts hacking away at \the [src] with \a [tool]."),
-			SPAN_NOTICE("You start hacking away at \the [src] with \the [tool].")
+			span_notice("\The [user] starts hacking away at \the [src] with \a [tool]."),
+			span_notice("You start hacking away at \the [src] with \the [tool].")
 		)
 		if (!user.do_skilled((tool.toolspeed * 2) SECONDS, list(SKILL_CONSTRUCTION, SKILL_HAULING), src) || !user.use_sanity_check(src, tool))
 			return TRUE
 		var/obj/item/stack/material/wood/stack = new(loc, 1)
 		transfer_fingerprints_to(stack)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] hacks \the [src] apart with \a [tool]."),
-			SPAN_NOTICE("You hack \the [src] apart with \the [tool].")
+			span_notice("\The [user] hacks \the [src] apart with \a [tool]."),
+			span_notice("You hack \the [src] apart with \the [tool].")
 		)
 		qdel_self()
 		return TRUE
@@ -212,8 +212,8 @@
 			return TRUE
 		message = input
 		user.visible_message(
-			SPAN_NOTICE("\The [user] labels \the [src] with \a [tool]."),
-			SPAN_NOTICE("You label \the [src] with '[message]' using \the [tool].")
+			span_notice("\The [user] labels \the [src] with \a [tool]."),
+			span_notice("You label \the [src] with '[message]' using \the [tool].")
 		)
 		return TRUE
 

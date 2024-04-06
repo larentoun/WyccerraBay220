@@ -24,7 +24,7 @@
 		return
 	if (!I.mob_can_equip(src, slot, equip_flags & TRYEQUIP_SILENT, equip_flags & TRYEQUIP_FORCE))
 		if (!(equip_flags & TRYEQUIP_SILENT))
-			to_chat(src, SPAN_WARNING("You are unable to equip \the [I]."))
+			to_chat(src, span_warning("You are unable to equip \the [I]."))
 		if (equip_flags & TRYEQUIP_DESTROY)
 			qdel(I)
 		return

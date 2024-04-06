@@ -350,7 +350,7 @@
 	amount = max(0, round(amount))
 	damage += amount
 	if(damage > maxdamage)
-		visible_message(SPAN_DANGER("[src] explodes in large rain of sparks and smoke!"))
+		visible_message(span_danger("[src] explodes in large rain of sparks and smoke!"))
 		// Depending on stored charge percentage cause damage.
 		switch(Percentage())
 			if(75 to INFINITY)
@@ -391,16 +391,16 @@
 
 /obj/machinery/power/smes/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("The service hatch is [panel_open ? "open" : "closed"].")
+	. += span_notice("The service hatch is [panel_open ? "open" : "closed"].")
 	if(!damage)
 		return
 	var/damage_percentage = round((damage / maxdamage) * 100)
 	switch(damage_percentage)
 		if(75 to INFINITY)
-			. += SPAN_DANGER("It's casing is severely damaged, and sparking circuitry may be seen through the holes!")
+			. += span_danger("It's casing is severely damaged, and sparking circuitry may be seen through the holes!")
 		if(50 to 74)
-			. += SPAN_NOTICE("It's casing is considerably damaged, and some of the internal circuits appear to be exposed!")
+			. += span_notice("It's casing is considerably damaged, and some of the internal circuits appear to be exposed!")
 		if(25 to 49)
-			. += SPAN_NOTICE("It's casing is quite seriously damaged.")
+			. += span_notice("It's casing is quite seriously damaged.")
 		if(0 to 24)
-			. += SPAN_NOTICE("It's casing has some minor damage.")
+			. += span_notice("It's casing has some minor damage.")

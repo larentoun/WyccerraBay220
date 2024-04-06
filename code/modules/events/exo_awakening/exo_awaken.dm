@@ -116,9 +116,9 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 /datum/event/exo_awakening/proc/notify_players()
 	for (var/mob/M in players_on_site[chosen_area])
 		if (event_severity > EVENT_LEVEL_MODERATE)
-			to_chat(M, SPAN_DANGER(chosen_mob_list.arrival_message))
+			to_chat(M, span_danger(chosen_mob_list.arrival_message))
 		else
-			to_chat(M, SPAN_WARNING(chosen_mob_list.arrival_message))
+			to_chat(M, span_warning(chosen_mob_list.arrival_message))
 
 		sound_to(M, chosen_mob_list.arrival_sound)
 
@@ -192,7 +192,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 		if (prob(spawn_chance))
 			var/mob/living/simple_animal/hostile/M = new mob_to_spawn(T)
 			if (istype(M))
-				M.visible_message(SPAN_DANGER("\The [M] bursts forth from the ground!"))
+				M.visible_message(span_danger("\The [M] bursts forth from the ground!"))
 				GLOB.death_event.register(M,src, TYPE_PROC_REF(/datum/event/exo_awakening, reduce_mob_count))
 				GLOB.destroyed_event.register(M,src,  TYPE_PROC_REF(/datum/event/exo_awakening, reduce_mob_count))
 				LAZYADD(GLOB.exo_event_mob_count, M)
@@ -227,4 +227,4 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	if (!failed)
 		for (var/mob/M in GLOB.player_list)
 			if (M && M.z == chosen_area.z)
-				to_chat(M, SPAN_NOTICE("The planet grows calm, the ground no longer heaving its horrors to the surface."))
+				to_chat(M, span_notice("The planet grows calm, the ground no longer heaving its horrors to the surface."))

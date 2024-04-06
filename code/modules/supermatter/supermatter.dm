@@ -216,7 +216,7 @@
 			continue
 
 		mob.Weaken(DETONATION_MOB_CONCUSSION)
-		to_chat(mob, SPAN_DANGER("An invisible force slams you against the ground!"))
+		to_chat(mob, span_danger("An invisible force slams you against the ground!"))
 
 	// Effect 2: Z-level wide electrical pulse
 	for(var/obj/machinery/power/apc/A as anything in SSmachines.get_machinery_of_type(/obj/machinery/power/apc))
@@ -260,16 +260,16 @@
 	if(user.skill_check(SKILL_ENGINES, SKILL_EXPERIENCED))
 		switch(get_integrity())
 			if(0 to 30)
-				. += SPAN_DANGER("It looks highly unstable!")
+				. += span_danger("It looks highly unstable!")
 			if(31 to 70)
-				. += SPAN_WARNING("It appears to be losing cohesion!")
+				. += span_warning("It appears to be losing cohesion!")
 			else
-				. += SPAN_NOTICE("At a glance, it seems to be in sound shape.")
+				. += span_notice("At a glance, it seems to be in sound shape.")
 		if(user.skill_check(SKILL_ENGINES, SKILL_MASTER))
 			var/display_power = power
 			display_power *= (0.85 + 0.3 * rand())
 			display_power = round(display_power, 20)
-			. += SPAN_NOTICE("Eyeballing it, you place the relative EER at around [display_power] MeV/cm3.")
+			. += span_notice("Eyeballing it, you place the relative EER at around [display_power] MeV/cm3.")
 
 //Changes color and luminosity of the light to these values if they were not already set
 /obj/machinery/power/supermatter/proc/shift_light(lum, clr)
@@ -475,9 +475,9 @@
 
 /obj/machinery/power/supermatter/attack_hand(mob/user as mob)
 	user.visible_message(
-		SPAN_WARNING("\The [user] reaches out and touches \the [src], inducing a resonance. For a brief instant, \his body glows brilliantly, then flashes into ash."),
-		SPAN_DANGER(FONT_LARGE("You reach out and touch \the [src]. Instantly, you feel a curious sensation as your body turns into new and exciting forms of plasma. That was not a wise decision.")),
-		SPAN_WARNING("You hear an unearthly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.")
+		span_warning("\The [user] reaches out and touches \the [src], inducing a resonance. For a brief instant, \his body glows brilliantly, then flashes into ash."),
+		span_danger(FONT_LARGE("You reach out and touch \the [src]. Instantly, you feel a curious sensation as your body turns into new and exciting forms of plasma. That was not a wise decision.")),
+		span_warning("You hear an unearthly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.")
 	)
 	Consume(user)
 
@@ -511,14 +511,14 @@
 
 /obj/machinery/power/supermatter/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/tape_roll))
-		to_chat(user, SPAN_NOTICE("You repair some of the damage to \the [src] with \the [W]."))
+		to_chat(user, span_notice("You repair some of the damage to \the [src] with \the [W]."))
 		damage = max(damage - 10, 0)
 		playsound(src, 'sound/effects/tape.ogg', 25)
 
 	user.visible_message(
-		SPAN_WARNING("\The [user] touches \a [W] to \the [src], then flinches away as it flashes instantly into dust. Silence blankets the air."),
-		SPAN_DANGER("You touch \the [W] to \the [src]. Everything suddenly goes silent as it flashes into dust, and you flinch away."),
-		SPAN_WARNING("For a brief moment, you hear an oppressive, unnatural silence.")
+		span_warning("\The [user] touches \a [W] to \the [src], then flinches away as it flashes instantly into dust. Silence blankets the air."),
+		span_danger("You touch \the [W] to \the [src]. Everything suddenly goes silent as it flashes into dust, and you flinch away."),
+		span_warning("For a brief moment, you hear an oppressive, unnatural silence.")
 	)
 
 	user.apply_damage(150, DAMAGE_RADIATION, damage_flags = DAMAGE_FLAG_DISPERSED)
@@ -533,14 +533,14 @@
 		return
 	if(istype(AM, /mob/living))
 		AM.visible_message(
-			SPAN_WARNING("\The [AM] slams into \the [src], inducing a resonance. For a brief instant, \his body glows brilliantly, then flashes into ash."),
-			SPAN_DANGER(FONT_LARGE("You slam into \the [src], and your mind fills with unearthly shrieking. Your vision floods with light as your body instantly dissolves into dust.")),
-			SPAN_WARNING("You hear an unearthly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.")
+			span_warning("\The [AM] slams into \the [src], inducing a resonance. For a brief instant, \his body glows brilliantly, then flashes into ash."),
+			span_danger(FONT_LARGE("You slam into \the [src], and your mind fills with unearthly shrieking. Your vision floods with light as your body instantly dissolves into dust.")),
+			span_warning("You hear an unearthly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.")
 		)
 	else if(!grav_pulling) //To prevent spam, detonating supermatter does not indicate non-mobs being destroyed
 		AM.visible_message(
-			SPAN_WARNING("\The [AM] smacks into \the [src] and rapidly flashes to ash."),
-			SPAN_WARNING("You hear a loud crack as you are washed with a wave of heat.")
+			span_warning("\The [AM] smacks into \the [src] and rapidly flashes to ash."),
+			span_warning("You hear a loud crack as you are washed with a wave of heat.")
 		)
 
 	Consume(AM)
@@ -558,9 +558,9 @@
 	//Some poor sod got eaten, go ahead and irradiate people nearby.
 	for(var/mob/living/l in range(10))
 		if(l in view())
-			to_chat(l, SPAN_WARNING("As \the [src] slowly stops resonating, you feel an intense wave of heat wash over you."))
+			to_chat(l, span_warning("As \the [src] slowly stops resonating, you feel an intense wave of heat wash over you."))
 		else
-			to_chat(l, SPAN_WARNING("You hear a muffled, shrill ringing as an intense wave of heat washes over you."))
+			to_chat(l, span_warning("You hear a muffled, shrill ringing as an intense wave of heat washes over you."))
 	var/rads = 500
 	SSradiation.radiate(src, rads)
 

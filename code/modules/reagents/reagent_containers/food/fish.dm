@@ -23,7 +23,7 @@
 		return ..()
 	var/turf/turf = get_turf(src)
 	if (turf != loc || !(locate(/obj/structure/table) in turf))
-		to_chat(user, SPAN_WARNING("You need a table to cut \the [src]."))
+		to_chat(user, span_warning("You need a table to cut \the [src]."))
 		return TRUE
 	var/list/toxins = reagents.get_reagent_amount_list(/datum/reagent/toxin)
 	for (var/toxin_type in toxins)
@@ -34,7 +34,7 @@
 	for(var/i = 1 to 3)
 		var/obj/item/reagent_containers/food/snacks/sashimi/sashimi = new (turf, fish_type, color)
 		reagents.trans_to(sashimi, transfer)
-	user.visible_message(SPAN_ITALIC("\The [user] slices \the [src] into thin strips."))
+	user.visible_message(span_italic("\The [user] slices \the [src] into thin strips."))
 	qdel(src)
 	return TRUE
 

@@ -4,13 +4,13 @@
 	switch(choice)
 		if ("My area")
 			var/area/usr_area = get_area(user)
-			if (!usr_area) return to_chat(user, SPAN_DANGER("Invalid area!"))
+			if (!usr_area) return to_chat(user, span_danger("Invalid area!"))
 			for (var/obj/machinery/power/apc/apc in usr_area)
 				apc.overload_lighting()
 
 		if ("My Z-Level")
 			var/user_z = get_z(user)
-			if (!user_z) return to_chat(user, SPAN_DANGER("Invalid Z-Level!"))
+			if (!user_z) return to_chat(user, span_danger("Invalid Z-Level!"))
 			for (var/obj/machinery/power/apc/apc as anything in SSmachines.get_machinery_of_type(/obj/machinery/power/apc))
 				if (apc.z == user_z) apc.overload_lighting()
 
@@ -28,13 +28,13 @@
 	switch(choice)
 		if ("My area")
 			var/area/usr_area = get_area(user)
-			if (!usr_area) return to_chat(user, SPAN_DANGER("Invalid area!"))
+			if (!usr_area) return to_chat(user, span_danger("Invalid area!"))
 			for (var/obj/machinery/light/light in usr_area)
 				light.fix()
 
 		if ("My Z-Level")
 			var/user_z = get_z(user)
-			if (!user_z) return to_chat(user, SPAN_DANGER("Invalid Z-Level!"))
+			if (!user_z) return to_chat(user, span_danger("Invalid Z-Level!"))
 			for (var/obj/machinery/light/light as anything in SSmachines.get_machinery_of_type(/obj/machinery/light))
 				if (light.z == user_z) light.fix()
 

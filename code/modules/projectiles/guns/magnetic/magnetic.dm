@@ -89,21 +89,21 @@
 
 /obj/item/gun/magnetic/proc/show_ammo(mob/user)
 	if(loaded)
-		to_chat(user, SPAN_NOTICE("It has [loaded] loaded."))
+		to_chat(user, span_notice("It has [loaded] loaded."))
 
 /obj/item/gun/magnetic/examine(mob/user)
 	. = ..()
 	if(cell)
-		. += SPAN_NOTICE("The installed [cell.name] has a charge level of [round((cell.charge/cell.maxcharge)*100)]%.")
+		. += span_notice("The installed [cell.name] has a charge level of [round((cell.charge/cell.maxcharge)*100)]%.")
 	if(capacitor)
-		. += SPAN_NOTICE("The installed [capacitor.name] has a charge level of [round((capacitor.charge/capacitor.max_charge)*100)]%.")
+		. += span_notice("The installed [capacitor.name] has a charge level of [round((capacitor.charge/capacitor.max_charge)*100)]%.")
 	if(!cell || !capacitor)
-		. += SPAN_NOTICE("The capacitor charge indicator is blinking [SPAN_COLOR("[COLOR_RED]", "red")]. Maybe you should check the cell or capacitor.")
+		. += span_notice("The capacitor charge indicator is blinking [SPAN_COLOR("[COLOR_RED]", "red")]. Maybe you should check the cell or capacitor.")
 	else
 		if(capacitor.charge < power_cost)
-			. += SPAN_NOTICE("The capacitor charge indicator is [SPAN_COLOR("[COLOR_ORANGE]", "amber")].")
+			. += span_notice("The capacitor charge indicator is [SPAN_COLOR("[COLOR_ORANGE]", "amber")].")
 		else
-			. += SPAN_NOTICE("The capacitor charge indicator is [SPAN_COLOR("[COLOR_GREEN]", "green")].")
+			. += span_notice("The capacitor charge indicator is [SPAN_COLOR("[COLOR_GREEN]", "green")].")
 
 /obj/item/gun/magnetic/screwdriver_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
@@ -138,8 +138,8 @@
 		update_icon()
 		playsound(src, 'sound/machines/click.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] slots [tool] into [src]."),
-			SPAN_NOTICE("You slot [tool] into [src].")
+			span_notice("[user] slots [tool] into [src]."),
+			span_notice("You slot [tool] into [src].")
 		)
 		return TRUE
 
@@ -158,8 +158,8 @@
 		update_icon()
 		playsound(src, 'sound/machines/click.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] slots [tool] into [src]."),
-			SPAN_NOTICE("You slot [tool] into [src].")
+			span_notice("[user] slots [tool] into [src]."),
+			span_notice("You slot [tool] into [src].")
 		)
 		return TRUE
 
@@ -189,11 +189,11 @@
 				return TRUE
 			ammo.use(ammo_count)
 			user.visible_message(
-				SPAN_NOTICE("[user] loads [src] with [ammo.get_vague_name(ammo_count > 1)]."),
-				SPAN_NOTICE("You load [src] with [ammo.get_exact_name(ammo_count)].")
+				span_notice("[user] loads [src] with [ammo.get_vague_name(ammo_count > 1)]."),
+				span_notice("You load [src] with [ammo.get_exact_name(ammo_count)].")
 			)
 			if (load_sheet_max > 1)
-				to_chat(user, SPAN_INFO("[src] now has [loaded_ammo.get_exact_name()] out of [load_sheet_max] loaded."))
+				to_chat(user, span_info("[src] now has [loaded_ammo.get_exact_name()] out of [load_sheet_max] loaded."))
 		else
 			if (loaded)
 				USE_FEEDBACK_FAILURE("[src] already has [loaded] loaded.")
@@ -228,7 +228,7 @@
 
 		if(removing)
 			user.put_in_hands(removing)
-			user.visible_message(SPAN_NOTICE("[user] removes [removing] from [src]."))
+			user.visible_message(span_notice("[user] removes [removing] from [src]."))
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
 			update_icon()
 			return
@@ -252,7 +252,7 @@
 
 	if(gun_unreliable && prob(gun_unreliable))
 		spawn(3) // So that it will still fire - considered modifying Fire() to return a value but burst fire makes that annoying.
-			visible_message(SPAN_DANGER("[src] explodes with the force of the shot!"))
+			visible_message(span_danger("[src] explodes with the force of the shot!"))
 			explosion(get_turf(src), 2, EX_ACT_LIGHT)
 			qdel(src)
 

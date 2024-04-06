@@ -21,10 +21,10 @@
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.species.name != SPECIES_SKRELL)
-			to_chat(H, SPAN_WARNING("You have no idea how to use \the [src]."))
+			to_chat(H, span_warning("You have no idea how to use \the [src]."))
 			return
 
-	user.visible_message(SPAN_NOTICE("\The [user] switches \the [src] [on ? "off" : "on"]."))
+	user.visible_message(span_notice("\The [user] switches \the [src] [on ? "off" : "on"]."))
 	on = !on
 	update_icon()
 

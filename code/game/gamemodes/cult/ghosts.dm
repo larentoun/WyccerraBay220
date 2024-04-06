@@ -19,10 +19,10 @@
 /mob/observer/ghost/proc/ghost_ability_check()
 	var/turf/T = get_turf(src)
 	if(T.holy)
-		to_chat(src, SPAN_NOTICE("You may not use your abilities on the blessed ground."))
+		to_chat(src, span_notice("You may not use your abilities on the blessed ground."))
 		return 0
 	if(ghost_magic_cd > world.time)
-		to_chat(src, SPAN_NOTICE("You need [round((ghost_magic_cd - world.time) / 10)] more seconds before you can use your abilities."))
+		to_chat(src, span_notice("You need [round((ghost_magic_cd - world.time) / 10)] more seconds before you can use your abilities."))
 		return 0
 	return 1
 
@@ -54,14 +54,14 @@
 
 	var/turf/simulated/T = get_turf(src)
 	if(!istype(T))
-		to_chat(src, SPAN_WARNING("You cannot doodle there."))
+		to_chat(src, span_warning("You cannot doodle there."))
 		return
 
 	var/num_doodles = 0
 	for(var/obj/decal/cleanable/blood/writing/W in T)
 		num_doodles++
 	if(num_doodles > 4)
-		to_chat(src, SPAN_WARNING("There is no space to write on!"))
+		to_chat(src, span_warning("There is no space to write on!"))
 		return
 
 	var/obj/decal/cleanable/blood/choice
@@ -72,7 +72,7 @@
 				choices += B
 
 		if(!length(choices))
-			to_chat(src, SPAN_WARNING("There is no blood to use nearby."))
+			to_chat(src, span_warning("There is no blood to use nearby."))
 			return
 
 		choice = input(src, "What blood would you like to use?") as null|anything in choices
@@ -92,7 +92,7 @@
 	if(message && (bloodless || (choice && (choice in range(1)))))
 		if(length(message) > max_length)
 			message += "-"
-			to_chat(src, SPAN_WARNING("You ran out of blood to write with!"))
+			to_chat(src, span_warning("You ran out of blood to write with!"))
 
 		var/obj/decal/cleanable/blood/writing/W = new(T)
 		W.basecolor = doodle_color
@@ -100,9 +100,9 @@
 		W.message = message
 		W.add_hiddenprint(src)
 		if(!bloodless)
-			W.visible_message(SPAN_WARNING("Invisible fingers crudely paint something in blood on \the [T]."))
+			W.visible_message(span_warning("Invisible fingers crudely paint something in blood on \the [T]."))
 		else
-			W.visible_message(SPAN_WARNING("Blood appears out of nowhere as invisible fingers crudely paint something on \the [T]."))
+			W.visible_message(span_warning("Blood appears out of nowhere as invisible fingers crudely paint something on \the [T]."))
 
 		log_admin("[src] ([src.key]) used ghost magic to write '[message]' - [x]-[y]-[z]")
 
@@ -148,7 +148,7 @@
 			choices += I
 
 	if(!length(choices))
-		to_chat(src, SPAN_WARNING("There are no suitable items nearby."))
+		to_chat(src, span_warning("There are no suitable items nearby."))
 		return
 
 	var/obj/item/choice = input(src, "What item would you like to pull?") as null|anything in choices
@@ -159,7 +159,7 @@
 		return
 
 	if(step_to(choice, T))
-		choice.visible_message(SPAN_WARNING("\The [choice] suddenly moves!"))
+		choice.visible_message(span_warning("\The [choice] suddenly moves!"))
 
 	ghost_magic_cd = world.time + 60 SECONDS
 
@@ -189,10 +189,10 @@
 
 	if(message)
 		if(iscultist(choice) || anyone)
-			to_chat(choice, SPAN_NOTICE("You hear a faint whisper... It says... \"[message]\""))
+			to_chat(choice, span_notice("You hear a faint whisper... It says... \"[message]\""))
 			log_and_message_admins("used ghost magic to say '[message]' to \the [choice] and was heard - [x]-[y]-[z]")
 		else
-			to_chat(choice, SPAN_NOTICE("You hear a faint whisper, but you can't make out the words."))
+			to_chat(choice, span_notice("You hear a faint whisper, but you can't make out the words."))
 			log_and_message_admins("used ghost magic to say '[message]' to \the [choice] but wasn't heard - [x]-[y]-[z]")
 		to_chat(src, "You whisper to \the [choice]. Perhaps they heard you.")
 
@@ -218,9 +218,9 @@
 		return
 
 	var/method = pick("bit", "scratched")
-	to_chat(choice, SPAN_DANGER("Something invisible [method] you!"))
+	to_chat(choice, span_danger("Something invisible [method] you!"))
 	choice.apply_effect(5, EFFECT_PAIN, 0)
-	to_chat(src, SPAN_NOTICE("You [method] \the [choice]."))
+	to_chat(src, span_notice("You [method] \the [choice]."))
 
 	log_and_message_admins("used ghost magic to bite \the [choice] - [x]-[y]-[z]")
 
@@ -245,10 +245,10 @@
 	if(!ghost_ability_check())
 		return
 
-	to_chat(choice, SPAN_DANGER("You feel as if something cold passed through you!"))
+	to_chat(choice, span_danger("You feel as if something cold passed through you!"))
 	if(choice.bodytemperature >= choice.species.cold_level_1 + 1)
 		choice.bodytemperature = max(choice.species.cold_level_1 + 1, choice.bodytemperature - 30)
-	to_chat(src, SPAN_NOTICE("You pass through \the [choice], giving them a sudden chill."))
+	to_chat(src, span_notice("You pass through \the [choice], giving them a sudden chill."))
 
 	log_and_message_admins("used ghost magic to chill \the [choice] - [x]-[y]-[z]")
 
@@ -278,12 +278,12 @@
 
 	if(invisibility == 0)
 		ghost_magic_cd = world.time + 60 SECONDS
-		to_chat(src, SPAN_INFO("You are now invisible."))
+		to_chat(src, span_info("You are now invisible."))
 		visible_message(SPAN_CLASS("emote", "It fades from sight..."))
 		set_invisibility(INVISIBILITY_OBSERVER)
 		mouse_opacity = 1
 	else
 		ghost_magic_cd = world.time + 60 SECONDS
-		to_chat(src, SPAN_INFO("You are now visible."))
+		to_chat(src, span_info("You are now visible."))
 		set_invisibility(0)
 		mouse_opacity = 0 // This is so they don't make people invincible to melee attacks by hovering over them

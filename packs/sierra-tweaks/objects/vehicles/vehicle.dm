@@ -212,7 +212,7 @@
 		return 1
 
 /obj/vehicle/proc/explode()
-	src.visible_message(SPAN_DANGER("[src] blows apart!"))
+	src.visible_message(span_danger("[src] blows apart!"))
 	var/turf/Tsec = get_turf(src)
 
 	new /obj/item/stack/material/rods(Tsec)
@@ -265,13 +265,13 @@
 		return
 	cell = C
 	powercheck()
-	to_chat(usr, SPAN_NOTICE("You install [C] in [src]."))
+	to_chat(usr, span_notice("You install [C] in [src]."))
 
 /obj/vehicle/proc/remove_cell(mob/living/carbon/human/H)
 	if(!cell)
 		return
 
-	to_chat(usr, SPAN_NOTICE("You remove [cell] from [src]."))
+	to_chat(usr, span_notice("You remove [cell] from [src]."))
 	H.put_in_hands(cell)
 	cell = null
 	powercheck()
@@ -378,7 +378,7 @@
 /obj/vehicle/attack_generic(mob/user, damage, attack_message)
 	if(!damage)
 		return
-	visible_message(SPAN_DANGER("[user] [attack_message] the [src]!"))
+	visible_message(span_danger("[user] [attack_message] the [src]!"))
 	if(istype(user))
 		admin_attacker_log(user, "attacked [src]")
 		user.do_attack_animation(src)

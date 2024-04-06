@@ -80,7 +80,7 @@ var/global/list/narsie_list = list()
 			if(M.status_flags & GODMODE)
 				continue
 			if(!iscultist(M))
-				to_chat(M, SPAN_DANGER(" You feel your sanity crumble away in an instant as you gaze upon [src.name]..."))
+				to_chat(M, span_danger(" You feel your sanity crumble away in an instant as you gaze upon [src.name]..."))
 				M.apply_effect(3, EFFECT_STUN)
 
 
@@ -309,13 +309,13 @@ var/global/list/narsie_list = list()
 /obj/singularity/narsie/proc/acquire(mob/food)
 	var/capname = uppertext(name)
 
-	to_chat(target, SPAN_NOTICE("<b>[capname] HAS LOST INTEREST IN YOU.</b>"))
+	to_chat(target, span_notice("<b>[capname] HAS LOST INTEREST IN YOU.</b>"))
 	target = food
 
 	if (ishuman(target))
-		to_chat(target, SPAN_DANGER("[capname] HUNGERS FOR YOUR SOUL."))
+		to_chat(target, span_danger("[capname] HUNGERS FOR YOUR SOUL."))
 	else
-		to_chat(target, SPAN_DANGER("[capname] HAS CHOSEN YOU TO LEAD HIM TO HIS NEXT MEAL."))
+		to_chat(target, span_danger("[capname] HAS CHOSEN YOU TO LEAD HIM TO HIS NEXT MEAL."))
 /obj/singularity/narsie/on_capture()
 	chained = 1
 	move_self = 0

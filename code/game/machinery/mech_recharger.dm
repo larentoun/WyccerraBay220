@@ -58,7 +58,7 @@
 		return
 
 	if(inoperable())
-		charging.show_message(SPAN_WARNING("Internal system Error - Charging aborted."))
+		charging.show_message(span_warning("Internal system Error - Charging aborted."))
 		stop_charging()
 		return
 
@@ -79,13 +79,13 @@
 				break
 		charging.updatehealth()
 		if(fully_repaired())
-			charging.show_message(SPAN_NOTICE("Exosuit integrity has been fully restored."))
+			charging.show_message(span_notice("Exosuit integrity has been fully restored."))
 
 	var/obj/item/cell/cell = charging.get_cell(TRUE)
 	if(cell && !cell.fully_charged() && remaining_energy > 0)
 		cell.give(remaining_energy * CELLRATE)
 		if(cell.fully_charged())
-			charging.show_message(SPAN_NOTICE("Exosuit power reserves are at maximum."))
+			charging.show_message(span_notice("Exosuit power reserves are at maximum."))
 
 	if((!repair || fully_repaired()) && cell.fully_charged())
 		stop_charging()
@@ -96,10 +96,10 @@
 
 /obj/machinery/mech_recharger/proc/start_charging(mob/living/exosuit/M)
 	if(inoperable())
-		M.show_message(SPAN_WARNING("Power port not responding. Terminating."))
+		M.show_message(span_warning("Power port not responding. Terminating."))
 		return
 	if(M.get_cell(TRUE))
-		M.show_message(SPAN_NOTICE("Now charging..."))
+		M.show_message(span_notice("Now charging..."))
 		charging = M
 		update_use_power(POWER_USE_ACTIVE)
 

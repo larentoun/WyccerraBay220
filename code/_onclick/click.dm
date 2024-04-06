@@ -494,7 +494,7 @@
 		adjust_nutrition(-(rand(1,5)))
 		handle_regular_hud_updates()
 	else
-		to_chat(src, SPAN_WARNING("You're out of energy! You need food!"))
+		to_chat(src, span_warning("You're out of energy! You need food!"))
 
 // Simple helper to face what you clicked on, in case it should be needed in more than one place
 /mob/proc/face_atom(atom/A)

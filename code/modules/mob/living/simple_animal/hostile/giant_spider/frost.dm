@@ -24,7 +24,7 @@
 
 /datum/ai_holder/simple_animal/spider/frost/special_attack(atom/movable/AM)
 	. = ..()
-	holder.visible_message(SPAN_DANGER("\The [holder] shakes rapidly as it releases freezing particles into the air!"))
+	holder.visible_message(span_danger("\The [holder] shakes rapidly as it releases freezing particles into the air!"))
 	holder.shake_animation(1.5)
 	set_busy(TRUE)
 	addtimer(CALLBACK(src, PROC_REF(finish_special)), 2 SECONDS)

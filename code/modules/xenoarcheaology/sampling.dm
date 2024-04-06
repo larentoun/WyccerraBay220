@@ -94,7 +94,7 @@
 /obj/item/device/core_sampler/examine(mob/user, distance)
 	. = ..(user)
 	if(distance <= 2)
-		. += SPAN_NOTICE("Used to extract geological core samples - this one is [sampled_turf ? "full" : "empty"], and has [num_stored_bags] bag[num_stored_bags != 1 ? "s" : ""] remaining.")
+		. += span_notice("Used to extract geological core samples - this one is [sampled_turf ? "full" : "empty"], and has [num_stored_bags] bag[num_stored_bags != 1 ? "s" : ""] remaining.")
 
 
 /obj/item/device/core_sampler/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -111,8 +111,8 @@
 			return TRUE
 		num_stored_bags++
 		user.visible_message(
-			SPAN_NOTICE("\The [user] adds \a [tool] to \a [src]."),
-			SPAN_NOTICE("You add \the [tool] to \the [src]. It now holds [num_stored_bags].")
+			span_notice("\The [user] adds \a [tool] to \a [src]."),
+			span_notice("You add \the [tool] to \the [src]. It now holds [num_stored_bags].")
 		)
 		qdel(tool)
 		return TRUE
@@ -133,9 +133,9 @@
 
 	if(geo_data)
 		if(filled_bag)
-			to_chat(user, SPAN_WARNING("The core sampler is full."))
+			to_chat(user, span_warning("The core sampler is full."))
 		else if(num_stored_bags < 1)
-			to_chat(user, SPAN_WARNING("The core sampler is out of sample bags."))
+			to_chat(user, span_warning("The core sampler is out of sample bags."))
 		else
 			//create a new sample bag which we'll fill with rock samples
 			filled_bag = new /obj/item/evidencebag(src)
@@ -159,13 +159,13 @@
 			filled_bag.w_class = ITEM_SIZE_TINY
 			filled_bag.stored_item = R
 
-			to_chat(user, SPAN_NOTICE("You take a core sample of the [item_to_sample]."))
+			to_chat(user, span_notice("You take a core sample of the [item_to_sample]."))
 	else
-		to_chat(user, SPAN_WARNING("You are unable to take a sample of [item_to_sample]."))
+		to_chat(user, span_warning("You are unable to take a sample of [item_to_sample]."))
 
 /obj/item/device/core_sampler/attack_self(mob/living/user)
 	if(filled_bag)
-		to_chat(user, SPAN_NOTICE("You eject the full sample bag."))
+		to_chat(user, span_notice("You eject the full sample bag."))
 		var/success = 0
 		if(istype(src.loc, /mob))
 			var/mob/M = src.loc
@@ -175,4 +175,4 @@
 		filled_bag = null
 		icon_state = "sampler0"
 	else
-		to_chat(user, SPAN_WARNING("The core sampler is empty."))
+		to_chat(user, span_warning("The core sampler is empty."))

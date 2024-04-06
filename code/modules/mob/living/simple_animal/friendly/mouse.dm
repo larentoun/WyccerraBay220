@@ -88,7 +88,7 @@
 /mob/living/simple_animal/passive/mouse/Crossed(atom/movable/movable)
 	if (ishuman(movable))
 		if (!stat)
-			to_chat(movable, SPAN_WARNING("[icon2html(src, movable)] Squeek!"))
+			to_chat(movable, span_warning("[icon2html(src, movable)] Squeek!"))
 			sound_to(movable, 'sound/effects/mousesqueek.ogg')
 	..()
 

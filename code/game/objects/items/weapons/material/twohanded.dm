@@ -170,9 +170,9 @@
 				var/home_run = prob(25)
 				if(home_run)
 					playsound(src, 'sound/items/baseball/play_ball.wav', 75)
-					visible_message(SPAN_NOTICE("\The [user] strikes the incoming [AM] with full force! It's a home run!"))
+					visible_message(span_notice("\The [user] strikes the incoming [AM] with full force! It's a home run!"))
 				else
-					visible_message(SPAN_NOTICE("\The [user] hits the incoming [AM], sending it flying back!"))
+					visible_message(span_notice("\The [user] hits the incoming [AM], sending it flying back!"))
 
 				user.do_windup_animation(attacker, attack_cooldown)
 
@@ -180,7 +180,7 @@
 
 			else
 				playsound(src, 'sound/items/baseball/swing_woosh.wav', 75, 1)
-				visible_message(SPAN_NOTICE("\The [user] tries to hit the icoming [AM] but misses!"))
+				visible_message(span_notice("\The [user] tries to hit the icoming [AM] but misses!"))
 				user.do_windup_animation(attacker, attack_cooldown)
 				return FALSE //Strike!
 		else
@@ -198,11 +198,11 @@
 			var/skill = 0.25 + (user.get_skill_value(SKILL_HAULING) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN)
 			var/dist = O.throw_range * skill
 			O.throw_at(get_ranged_target_turf(user, user.dir, dist), dist, O.throw_speed * skill, user, TRUE)
-			visible_message(SPAN_NOTICE("\The [user] hits \the [O], sending it flying!"))
+			visible_message(span_notice("\The [user] hits \the [O], sending it flying!"))
 			playsound(src, pick('sound/items/baseball/baseball_hit_01.wav', 'sound/items/baseball/baseball_hit_02.wav'), 75, 1)
 		else
 			playsound(src, 'sound/items/baseball/swing_woosh.wav', 75, 1)
-			visible_message(SPAN_NOTICE("\The [user] tries to bat \the [O] but misses!"))
+			visible_message(span_notice("\The [user] tries to bat \the [O] but misses!"))
 		user.do_attack_animation(O)
 		return TRUE
 

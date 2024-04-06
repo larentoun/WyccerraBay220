@@ -67,7 +67,7 @@
 		return
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
-	to_chat(user, SPAN_NOTICE("You [hatch_open? "close" : "open"] [src]'s access hatch."))
+	to_chat(user, span_notice("You [hatch_open? "close" : "open"] [src]'s access hatch."))
 	hatch_open = !hatch_open
 	update_icon()
 	if(alwaysactive && wires_intact)
@@ -77,7 +77,7 @@
 	if(!hatch_open)
 		return
 	. = ITEM_INTERACT_SUCCESS
-	to_chat(user, SPAN_NOTICE("You toggle [src]'s activation behavior to [alwaysactive? "emergency" : "always-on"]."))
+	to_chat(user, span_notice("You toggle [src]'s activation behavior to [alwaysactive? "emergency" : "always-on"]."))
 	alwaysactive = !alwaysactive
 	update_icon()
 
@@ -87,7 +87,7 @@
 	. = ITEM_INTERACT_SUCCESS
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
-	to_chat(user, SPAN_WARNING("You [wires_intact? "cut" : "mend"] [src]'s wires!"))
+	to_chat(user, span_warning("You [wires_intact? "cut" : "mend"] [src]'s wires!"))
 	wires_intact = !wires_intact
 	update_icon()
 

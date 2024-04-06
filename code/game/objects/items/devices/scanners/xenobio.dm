@@ -25,7 +25,7 @@
 /obj/item/device/scanner/xenobio/scan(mob/O, mob/user)
 	scan_title = O.name
 	scan_data = xenobio_scan_results(O)
-	user.show_message(SPAN_NOTICE(scan_data))
+	user.show_message(span_notice(scan_data))
 
 /proc/list_gases(gases)
 	RETURN_TYPE(/list)
@@ -74,7 +74,7 @@
 		if(T.nutrition < T.get_starve_nutrition())
 			. += SPAN_CLASS("alert", "Warning:\tthe slime is starving!")
 		else if (T.nutrition < T.get_hunger_nutrition())
-			. += SPAN_WARNING("Warning:\tthe slime is hungry.")
+			. += span_warning("Warning:\tthe slime is hungry.")
 		. += "Electric charge strength:\t[T.powerlevel]"
 		. += "Health:\t[round((T.health * 100) / T.maxHealth)]%"
 

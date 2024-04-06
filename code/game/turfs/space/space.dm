@@ -65,7 +65,7 @@
 			USE_FEEDBACK_STACK_NOT_ENOUGH(R, 1, "to lay down support lattice.")
 			return TRUE
 
-		to_chat(user, SPAN_NOTICE("You lay down the support lattice."))
+		to_chat(user, span_notice("You lay down the support lattice."))
 		playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 		ReplaceWithLattice(R.material.name)
 		R.use(1)
@@ -74,7 +74,7 @@
 	if (istype(C, /obj/item/stack/tile))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(!L)
-			to_chat(user, SPAN_WARNING("The plating is going to need some support."))
+			to_chat(user, span_warning("The plating is going to need some support."))
 			return TRUE
 		var/obj/item/stack/tile/floor/S = C
 		if (!S.can_use(1))
@@ -95,7 +95,7 @@
 			coil.PlaceCableOnTurf(src, user)
 			return TRUE
 		else
-			to_chat(user, SPAN_WARNING("The cable needs something to be secured to."))
+			to_chat(user, span_warning("The cable needs something to be secured to."))
 			return TRUE
 
 	return ..()

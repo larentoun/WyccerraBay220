@@ -27,7 +27,7 @@
 	if(holding_item || hat)
 		drop_item()
 	else
-		to_chat(usr, SPAN_WARNING("You have nothing to drop."))
+		to_chat(usr, span_warning("You have nothing to drop."))
 
 /mob/living/carbon/alien/diona/proc/can_collect(obj/item/collecting)
 	return (!holding_item && \
@@ -42,7 +42,7 @@
 /mob/living/carbon/alien/diona/proc/collect(obj/item/collecting)
 	collecting.forceMove(src)
 	holding_item = collecting
-	visible_message(SPAN_NOTICE("\The [src] engulfs \the [holding_item]."))
+	visible_message(span_notice("\The [src] engulfs \the [holding_item]."))
 
 	// This means dionaea can hoover up beakers as a kind of impromptu chem disposal
 	// technique, so long as they're okay with the reagents reacting inside them.
@@ -73,9 +73,9 @@
 
 /mob/living/carbon/alien/diona/drop_item()
 	if(holding_item && unEquip(holding_item))
-		visible_message(SPAN_NOTICE("\The [src] regurgitates \the [holding_item]."))
+		visible_message(span_notice("\The [src] regurgitates \the [holding_item]."))
 	else if(hat && unEquip(hat))
-		visible_message(SPAN_NOTICE("\The [src] wriggles out from under \the [hat]."))
+		visible_message(span_notice("\The [src] wriggles out from under \the [hat]."))
 		update_icons()
 	else
 		. = ..()

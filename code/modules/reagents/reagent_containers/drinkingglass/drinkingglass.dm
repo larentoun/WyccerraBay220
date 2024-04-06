@@ -35,17 +35,17 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	. = ..()
 	for(var/I in extras)
 		if(istype(I, /obj/item/glass_extra))
-			. += SPAN_NOTICE("There is [I] in [src].")
+			. += span_notice("There is [I] in [src].")
 		else if(istype(I, /obj/item/reagent_containers/food/snacks/fruit_slice))
-			. += SPAN_NOTICE("There is [I] on the rim.")
+			. += span_notice("There is [I] on the rim.")
 		else
-			. += SPAN_NOTICE("There is [I] somewhere on the glass. Somehow.")
+			. += span_notice("There is [I] somewhere on the glass. Somehow.")
 
 	if(has_ice())
-		. += SPAN_NOTICE("There is some ice floating in the drink.")
+		. += span_notice("There is some ice floating in the drink.")
 
 	if(has_fizz())
-		. += SPAN_NOTICE("It is fizzing slightly.")
+		. += span_notice("It is fizzing slightly.")
 
 /obj/item/reagent_containers/food/drinks/glass2/proc/has_ice()
 	if(length(reagents?.reagent_list))
@@ -98,14 +98,14 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	if(prob(80))
 		if(length(reagents?.reagent_list))
 			visible_message(
-				SPAN_DANGER("\The [src] shatters from the impact and spills all its contents!"),
-				SPAN_DANGER("You hear the sound of glass shattering!")
+				span_danger("\The [src] shatters from the impact and spills all its contents!"),
+				span_danger("You hear the sound of glass shattering!")
 			)
 			reagents.splash(hit_atom, reagents.total_volume)
 		else
 			visible_message(
-				SPAN_DANGER("\The [src] shatters from the impact!"),
-				SPAN_DANGER("You hear the sound of glass shattering!")
+				span_danger("\The [src] shatters from the impact!"),
+				span_danger("You hear the sound of glass shattering!")
 			)
 		playsound(src.loc, pick(GLOB.shatter_sound), 100)
 		new /obj/item/material/shard(src.loc)
@@ -113,14 +113,14 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 	else
 		if (length(reagents?.reagent_list))
 			visible_message(
-				SPAN_DANGER("\The [src] bounces and spills all its contents!"),
-				SPAN_WARNING("You hear the sound of glass hitting something.")
+				span_danger("\The [src] bounces and spills all its contents!"),
+				span_warning("You hear the sound of glass hitting something.")
 			)
 			reagents.splash(hit_atom, reagents.total_volume)
 		else
 			visible_message(
-				SPAN_WARNING("\The [src] bounces dangerously. Luckily it didn't break."),
-				SPAN_WARNING("You hear the sound of glass hitting something.")
+				span_warning("\The [src] bounces dangerously. Luckily it didn't break."),
+				span_warning("You hear the sound of glass hitting something.")
 			)
 		playsound(src.loc, "sound/effects/Glasshit.ogg", 50)
 
@@ -210,14 +210,14 @@ var/global/const/DRINK_ICON_NOISY = "noise"
 /obj/item/reagent_containers/food/drinks/glass2/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/material/kitchen/utensil/spoon))
 		if(user.a_intent == I_HURT)
-			user.visible_message(SPAN_WARNING("[user] bashes \the [src] with a spoon, shattering it to pieces! What a rube."))
+			user.visible_message(span_warning("[user] bashes \the [src] with a spoon, shattering it to pieces! What a rube."))
 			playsound(src, "shatter", 30, 1)
 			if(reagents)
-				user.visible_message(SPAN_NOTICE("The contents of \the [src] splash all over [user]!"))
+				user.visible_message(span_notice("The contents of \the [src] splash all over [user]!"))
 				reagents.splash(user, reagents.total_volume)
 			qdel(src)
 			return
-		user.visible_message(SPAN_NOTICE("[user] gently strikes \the [src] with a spoon, calling the room to attention."))
+		user.visible_message(span_notice("[user] gently strikes \the [src] with a spoon, calling the room to attention."))
 		playsound(src, "sound/items/wineglass.ogg", 65, 1)
 	else return ..()
 

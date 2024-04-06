@@ -440,8 +440,8 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		if(FEMALE)
 			t_him = "her"
 
-	H.visible_message(SPAN_NOTICE("[H] hugs [target] to make [t_him] feel better!"), \
-					SPAN_NOTICE("You hug [target] to make [t_him] feel better!"))
+	H.visible_message(span_notice("[H] hugs [target] to make [t_him] feel better!"), \
+					span_notice("You hug [target] to make [t_him] feel better!"))
 
 	if(H != target)
 		H.update_personal_goal(/datum/goal/achievement/givehug, TRUE)
@@ -691,9 +691,9 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		target.apply_effect(2, EFFECT_WEAKEN, armor_check)
 		playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 		if(armor_check < 100)
-			target.visible_message(SPAN_DANGER("[attacker] has pushed [target]!"))
+			target.visible_message(span_danger("[attacker] has pushed [target]!"))
 		else
-			target.visible_message(SPAN_WARNING("[attacker] attempted to push [target]!"))
+			target.visible_message(span_warning("[attacker] attempted to push [target]!"))
 		return
 
 	if(randn <= disarm_threshold)
@@ -705,15 +705,15 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		//Actually disarm them
 		for(var/obj/item/I in holding)
 			if(I && target.unEquip(I))
-				target.visible_message(SPAN_DANGER("[attacker] has disarmed [target]!"))
+				target.visible_message(span_danger("[attacker] has disarmed [target]!"))
 				playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 				return
 
 	playsound(target.loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-	target.visible_message(SPAN_DANGER("[attacker] attempted to disarm \the [target]!"))
+	target.visible_message(span_danger("[attacker] attempted to disarm \the [target]!"))
 
 /datum/species/proc/disfigure_msg(mob/living/carbon/human/H) //Used for determining the message a disfigured face has on examine. To add a unique message, just add this onto a specific species and change the "return" message.
-	return "[SPAN_DANGER("[H.p_Their()] face is horribly mangled!")]\n"
+	return "[span_danger("[H.p_Their()] face is horribly mangled!")]\n"
 
 /datum/species/proc/max_skin_tone()
 	if(appearance_flags & SPECIES_APPEARANCE_HAS_SKIN_TONE_GRAV)

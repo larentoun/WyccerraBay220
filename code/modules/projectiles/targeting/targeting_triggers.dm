@@ -26,10 +26,10 @@
 		addtimer(CALLBACK(G, TYPE_PROC_REF(/obj/item/gun, handle_suicide), owner, 2))
 		return
 	if (prob(owner.skill_fail_chance(SKILL_WEAPONS, 30, SKILL_TRAINED, 3)))
-		to_chat(owner, SPAN_WARNING("You fumble with the gun, throwing your aim off!"))
+		to_chat(owner, span_warning("You fumble with the gun, throwing your aim off!"))
 		owner.stop_aiming(aiming_with)
 		return
 	owner.setClickCooldown(DEFAULT_QUICK_COOLDOWN) // Spam prevention, essentially.
-	owner.visible_message(SPAN_DANGER("\The [owner] pulls the trigger reflexively!"))
+	owner.visible_message(span_danger("\The [owner] pulls the trigger reflexively!"))
 	G.Fire(aiming_at, owner)
 	toggle_active(FALSE, TRUE)

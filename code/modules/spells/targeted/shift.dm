@@ -11,13 +11,13 @@
 	hud_state = "const_shift"
 
 /spell/targeted/ethereal_jaunt/shift/jaunt_disappear(atom/movable/fake_overlay/animation, mob/living/target)
-	to_chat(target, SPAN_DANGER("You silently phase out.")) // no visible message - phase shift is silent
+	to_chat(target, span_danger("You silently phase out.")) // no visible message - phase shift is silent
 	animation.icon_state = "phase_shift"
 	animation.dir = target.dir
 	flick("phase_shift", animation)
 
 /spell/targeted/ethereal_jaunt/shift/jaunt_reappear(atom/movable/fake_overlay/animation, mob/living/target)
-	to_chat(target, SPAN_DANGER("You return from your jaunt."))
+	to_chat(target, span_danger("You return from your jaunt."))
 	animation.icon_state = "phase_shift2"
 	animation.dir = target.dir
 	flick("phase_shift2", animation)

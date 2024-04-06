@@ -21,9 +21,9 @@ LINEN BINS
 
 /obj/item/bedsheet/use_tool(obj/item/tool, mob/living/user, list/click_params)
 	if (is_sharp(tool))
-		user.visible_message(SPAN_NOTICE("\The [user] begins cutting up \the [src] with \a [tool]."), SPAN_NOTICE("You begin cutting up \the [src] with \the [tool]."))
+		user.visible_message(span_notice("\The [user] begins cutting up \the [src] with \a [tool]."), span_notice("You begin cutting up \the [src] with \the [tool]."))
 		if (do_after(user, 5 SECONDS, src, DO_REPAIR_CONSTRUCT))
-			to_chat(user, SPAN_NOTICE("You cut \the [src] into pieces!"))
+			to_chat(user, span_notice("You cut \the [src] into pieces!"))
 			for(var/i in 1 to rand(2,5))
 				new /obj/item/reagent_containers/glass/rag(get_turf(src))
 			qdel(src)
@@ -110,12 +110,12 @@ LINEN BINS
 	. = ..()
 
 	if(amount < 1)
-		. += SPAN_NOTICE("There are no bed sheets in the bin.")
+		. += span_notice("There are no bed sheets in the bin.")
 		return
 	if(amount == 1)
-		. += SPAN_NOTICE("There is one bed sheet in the bin.")
+		. += span_notice("There is one bed sheet in the bin.")
 		return
-	. += SPAN_NOTICE("There are [amount] bed sheets in the bin.")
+	. += span_notice("There are [amount] bed sheets in the bin.")
 
 
 /obj/structure/bedsheetbin/on_update_icon()
@@ -140,8 +140,8 @@ LINEN BINS
 		amount++
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] adds \a [tool] to \the [src]."),
-			SPAN_NOTICE("You add \the [tool] to \the [src].")
+			span_notice("\The [user] adds \a [tool] to \the [src]."),
+			span_notice("You add \the [tool] to \the [src].")
 		)
 		return TRUE
 
@@ -160,8 +160,8 @@ LINEN BINS
 		return TRUE
 	hidden = tool
 	user.visible_message(
-		SPAN_NOTICE("\The [user] stuffs \a [tool] into \the [src]'s sheets."),
-		SPAN_NOTICE("You hide \the [tool] among \the [src]'s sheets."),
+		span_notice("\The [user] stuffs \a [tool] into \the [src]'s sheets."),
+		span_notice("You hide \the [tool] among \the [src]'s sheets."),
 		3
 	)
 	return TRUE
@@ -171,7 +171,7 @@ LINEN BINS
 	var/obj/item/bedsheet/B = remove_sheet()
 	if(B)
 		user.put_in_hands(B)
-		to_chat(user, SPAN_NOTICE("You take \a [B] out of \the [src]."))
+		to_chat(user, span_notice("You take \a [B] out of \the [src]."))
 		add_fingerprint(user)
 
 /obj/structure/bedsheetbin/do_simple_ranged_interaction(mob/user)
@@ -195,5 +195,5 @@ LINEN BINS
 	sleep(-1)
 	if(hidden)
 		hidden.dropInto(loc)
-		visible_message(SPAN_NOTICE("\The [hidden] falls out!"))
+		visible_message(span_notice("\The [hidden] falls out!"))
 		hidden = null

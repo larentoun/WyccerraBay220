@@ -35,7 +35,7 @@
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo) || istype(W, /obj/item/paper_bundle))
 		if(!user.unEquip(W, src))
 			return
-		to_chat(user, SPAN_NOTICE("You put the [W] into \the [src]."))
+		to_chat(user, span_notice("You put the [W] into \the [src]."))
 		update_icon()
 	else if(istype(W, /obj/item/pen))
 		var/n_name = sanitizeSafe(input(usr, "What would you like to label the folder?", "Folder Labelling", null)  as text, MAX_NAME_LEN)
@@ -121,7 +121,7 @@
 
 /obj/item/folder/envelope/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("The seal is [sealed ? "intact" : "broken"].")
+	. += span_notice("The seal is [sealed ? "intact" : "broken"].")
 
 /obj/item/folder/envelope/proc/sealcheck(user)
 	var/ripperoni = alert("Are you sure you want to break the seal on \the [src]?", "Confirmation","Yes", "No")

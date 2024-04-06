@@ -1,8 +1,8 @@
 #define FEEDBACK_YOU_LACK_DEXTERITY USE_FEEDBACK_FAILURE("You don't have the dexterity to do this!")
-#define FEEDBACK_ACCESS_DENIED(USER, SRC) FEEDBACK_FAILURE(USER, SPAN_WARNING("\The [SRC] flashes, 'Access Denied!'"))
+#define FEEDBACK_ACCESS_DENIED(USER, SRC) FEEDBACK_FAILURE(USER, span_warning("\The [SRC] flashes, 'Access Denied!'"))
 
 /// Generic feedback failure message handler.
-#define FEEDBACK_FAILURE(USER, MSG) to_chat(USER, SPAN_WARNING(MSG))
+#define FEEDBACK_FAILURE(USER, MSG) to_chat(USER, span_warning(MSG))
 /// User can't unequip/drop item.
 #define FEEDBACK_UNEQUIP_FAILURE(USER, ITEM) FEEDBACK_FAILURE(USER, "You can't drop \the [ITEM].")
 

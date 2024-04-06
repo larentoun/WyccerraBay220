@@ -27,7 +27,7 @@
 		languages[speaking.name] = 1
 	languages[speaking.name] = languages[speaking.name] + 1
 	if(!imp_in.say_understands(M, speaking) && languages[speaking.name] > learning_threshold)
-		to_chat(imp_in, SPAN_NOTICE("You feel like you can understand [speaking.name] now..."))
+		to_chat(imp_in, span_notice("You feel like you can understand [speaking.name] now..."))
 		imp_in.add_language(speaking.name)
 
 /obj/item/implant/translator/implanted(mob/target)

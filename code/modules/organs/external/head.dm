@@ -39,7 +39,7 @@
 	. = ..()
 
 	if(forehead_graffiti && graffiti_style)
-		. += SPAN_NOTICE("It has \"[forehead_graffiti]\" written on it in [graffiti_style]!")
+		. += span_notice("It has \"[forehead_graffiti]\" written on it in [graffiti_style]!")
 
 /obj/item/organ/external/head/proc/write_on(mob/penman, style)
 	var/head_name = name
@@ -49,27 +49,27 @@
 		target = owner
 
 	if(forehead_graffiti)
-		to_chat(penman, SPAN_NOTICE("There is no room left to write on [head_name]!"))
+		to_chat(penman, span_notice("There is no room left to write on [head_name]!"))
 		return
 
 	var/graffiti = sanitizeSafe(input(penman, "Enter a message to write on [head_name]:") as text|null, MAX_NAME_LEN)
 	if(graffiti)
 		if(!target.Adjacent(penman))
-			to_chat(penman, SPAN_NOTICE("[head_name] is too far away."))
+			to_chat(penman, span_notice("[head_name] is too far away."))
 			return
 
 		if(owner && owner.check_head_coverage())
-			to_chat(penman, SPAN_NOTICE("[head_name] is covered up."))
+			to_chat(penman, span_notice("[head_name] is covered up."))
 			return
 
-		penman.visible_message(SPAN_WARNING("[penman] begins writing something on [head_name]!"), "You begin writing something on [head_name].")
+		penman.visible_message(span_warning("[penman] begins writing something on [head_name]!"), "You begin writing something on [head_name].")
 
 		if(do_after(penman, 3 SECONDS, target, DO_PUBLIC_UNIQUE))
 			if(owner && owner.check_head_coverage())
-				to_chat(penman, SPAN_NOTICE("[head_name] is covered up."))
+				to_chat(penman, span_notice("[head_name] is covered up."))
 				return
 
-			penman.visible_message(SPAN_WARNING("[penman] writes something on [head_name]!"), "You write something on [head_name].")
+			penman.visible_message(span_warning("[penman] writes something on [head_name]!"), "You write something on [head_name].")
 			forehead_graffiti = graffiti
 			graffiti_style = style
 

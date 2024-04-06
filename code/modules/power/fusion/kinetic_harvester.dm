@@ -47,7 +47,7 @@
 /obj/machinery/kinetic_harvester/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 
 	if(!harvest_from && !find_core())
-		to_chat(user, SPAN_WARNING("This machine cannot locate a fusion core. Please ensure the machine is correctly configured to share a fusion plant network."))
+		to_chat(user, span_warning("This machine cannot locate a fusion core. Please ensure the machine is correctly configured to share a fusion plant network."))
 		return
 
 	var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)

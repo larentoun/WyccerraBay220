@@ -23,7 +23,7 @@
 /obj/machinery/self_destruct/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/nuclear_cylinder))
 		if(damaged)
-			to_chat(user, SPAN_WARNING("[src] is damaged, you cannot place the cylinder."))
+			to_chat(user, span_warning("[src] is damaged, you cannot place the cylinder."))
 			return TRUE
 		if(cylinder)
 			to_chat(user, "There is already a cylinder here.")
@@ -43,14 +43,14 @@
 		. = TRUE
 		if(armed)
 			if(damaged)
-				to_chat(user, SPAN_WARNING("The inserter has been damaged, unable to disarm."))
+				to_chat(user, span_warning("The inserter has been damaged, unable to disarm."))
 				return
 			var/obj/machinery/nuclearbomb/nuke = locate(/obj/machinery/nuclearbomb/station) in get_area(src)
 			if(!nuke)
-				to_chat(user, SPAN_WARNING("Unable to interface with the self destruct terminal, unable to disarm."))
+				to_chat(user, span_warning("Unable to interface with the self destruct terminal, unable to disarm."))
 				return
 			if(nuke.timing)
-				to_chat(user, SPAN_WARNING("The self destruct sequence is in progress, unable to disarm."))
+				to_chat(user, span_warning("The self destruct sequence is in progress, unable to disarm."))
 				return
 			user.visible_message("[user] begins extracting [cylinder].", "You begin extracting [cylinder].")
 			if(do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE))
@@ -98,19 +98,19 @@
 				set_damaged()
 
 /obj/machinery/self_destruct/proc/set_damaged()
-		src.visible_message(SPAN_WARNING("[src] dents and chars."))
+		src.visible_message(span_warning("[src] dents and chars."))
 		damaged = 1
 
 /obj/machinery/self_destruct/examine(mob/user)
 	. = ..()
 	if(damaged)
-		. += SPAN_WARNING("[src] is damaged, it needs repairs.")
+		. += span_warning("[src] is damaged, it needs repairs.")
 		return
 	if(armed)
-		. += SPAN_NOTICE("[src] is armed and ready.")
+		. += span_notice("[src] is armed and ready.")
 		return
 	if(cylinder)
-		. += SPAN_NOTICE("[src] is loaded and ready to be armed.")
+		. += span_notice("[src] is loaded and ready to be armed.")
 
 /obj/machinery/self_destruct/on_update_icon()
 	if(armed)

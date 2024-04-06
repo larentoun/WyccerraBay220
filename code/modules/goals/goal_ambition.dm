@@ -14,4 +14,4 @@
 	return ""
 
 /datum/goal/ambition/summarize(show_success = FALSE, allow_modification = FALSE, mob/caller)
-	. = SPAN_DANGER(..(show_success))
+	. = span_danger(..(show_success))

@@ -46,7 +46,7 @@ SUBSYSTEM_DEF(customitems)
 /datum/controller/subsystem/customitems/proc/place_custom_item(mob/living/carbon/human/M, datum/custom_item/citem)
 	. = M && citem && citem.spawn_item(get_turf(M))
 	if(. && !M.equip_to_appropriate_slot(.) && !M.equip_to_storage(.))
-		to_chat(M, SPAN_WARNING("Your custom item, \the [.], could not be placed on your character."))
+		to_chat(M, span_warning("Your custom item, \the [.], could not be placed on your character."))
 		QDEL_NULL(.)
 
 //gets the relevant list for the key from the listlist if it exists, check to make sure they are meant to have it and then calls the giving function
@@ -111,22 +111,22 @@ SUBSYSTEM_DEF(customitems)
 
 /datum/custom_item/proc/validate()
 	if(!ispath(item_path, /obj/item))
-		return SPAN_WARNING("The given item path is invalid or does not exist.")
+		return span_warning("The given item path is invalid or does not exist.")
 
 	if(apply_to_target_type && !ispath(apply_to_target_type, /obj/item))
-		return SPAN_WARNING("The target item path is invalid or does not exist.")
+		return span_warning("The target item path is invalid or does not exist.")
 
 	else if(item_icon_state)
 		if(ispath(item_path, /obj/item/device/kit/suit))
 			for(var/state in list("[item_icon_state]_suit", "[item_icon_state]_helmet"))
 				if(!SScustomitems.mob_state_valid(state))
-					return SPAN_WARNING("The given item icon [state] does not exist.")
+					return span_warning("The given item icon [state] does not exist.")
 
 				if(!SScustomitems.item_state_valid(state))
-					return SPAN_WARNING("The given mob icon [state] does not exist.")
+					return span_warning("The given mob icon [state] does not exist.")
 		else
 			if(!SScustomitems.item_state_valid(item_icon_state))
-				return SPAN_WARNING("The given item icon [item_icon_state] does not exist.")
+				return span_warning("The given item icon [item_icon_state] does not exist.")
 
 /datum/custom_item/proc/spawn_item(newloc)
 	. = new item_path(newloc)

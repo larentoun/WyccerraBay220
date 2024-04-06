@@ -117,10 +117,10 @@
 		return
 	if(!lit)
 		if(is_wet())
-			to_chat(usr, SPAN_WARNING("You are too wet to light [src]."))
+			to_chat(usr, span_warning("You are too wet to light [src]."))
 			return
 		if(submerged())
-			to_chat(usr, SPAN_WARNING("You cannot light [src] underwater."))
+			to_chat(usr, span_warning("You cannot light [src] underwater."))
 			return
 		lit = 1
 		damtype = DAMAGE_BURN
@@ -177,7 +177,7 @@
 	. = FALSE
 	if (istype(M) && M.on_fire)
 		user.do_attack_animation(M)
-		light(SPAN_NOTICE("[user] coldly lights the [src] with the burning body of [M]."))
+		light(span_notice("[user] coldly lights the [src] with the burning body of [M]."))
 		return TRUE
 
 
@@ -239,7 +239,7 @@
 		if(ismob(loc))
 			var/mob/living/M = loc
 			if (!no_message)
-				to_chat(M, SPAN_NOTICE("Your [name] goes out."))
+				to_chat(M, span_notice("Your [name] goes out."))
 			// if the mob has free hands, put the cig in them
 			M.put_in_any_hand_if_possible(butt)
 		qdel(src)
@@ -339,7 +339,7 @@
 	if(istype(W, /obj/item/melee/energy/sword))
 		var/obj/item/melee/energy/sword/S = W
 		if(S.active)
-			light(SPAN_WARNING("[user] swings their [W], barely missing their nose. They light their [name] in the process."))
+			light(span_warning("[user] swings their [W], barely missing their nose. They light their [name] in the process."))
 
 	return
 
@@ -347,7 +347,7 @@
 	if (lit && H == user && istype(H))
 		var/obj/item/blocked = H.check_mouth_coverage()
 		if (blocked)
-			to_chat(H, SPAN_WARNING("[blocked] is in the way!"))
+			to_chat(H, span_warning("[blocked] is in the way!"))
 			return TRUE
 		user.visible_message(\
 			"[user] takes a [pick("drag","puff","pull")] on \his [name].", \
@@ -368,22 +368,22 @@
 	if(!istype(glass))
 		return FALSE
 	if(!glass.is_open_container())
-		to_chat(user, SPAN_NOTICE("You need to take the lid off first."))
+		to_chat(user, span_notice("You need to take the lid off first."))
 		return TRUE
 
 	var/transfered = glass.reagents.trans_to_obj(src, chem_volume)
 	if(transfered)
-		to_chat(user, SPAN_NOTICE("You dip [src] into [glass]."))
+		to_chat(user, span_notice("You dip [src] into [glass]."))
 	else
 		if(!glass.reagents.total_volume)
-			to_chat(user, SPAN_NOTICE("[glass] is empty."))
+			to_chat(user, span_notice("[glass] is empty."))
 		else
-			to_chat(user, SPAN_NOTICE("[src] is full."))
+			to_chat(user, span_notice("[src] is full."))
 	return TRUE
 
 /obj/item/clothing/mask/smokable/cigarette/attack_self(mob/user)
 	if(lit == 1)
-		user.visible_message(SPAN_NOTICE("[user] puts out the lit [src]."))
+		user.visible_message(span_notice("[user] puts out the lit [src]."))
 		extinguish(no_message = 1)
 	return ..()
 
@@ -507,7 +507,7 @@
 /obj/item/clothing/mask/smokable/pipe/light(flavor_text = "[usr] lights the [name].")
 	if(!lit && smoketime)
 		if(submerged())
-			to_chat(usr, SPAN_WARNING("You cannot light [src] underwater."))
+			to_chat(usr, span_warning("You cannot light [src] underwater."))
 			return
 		lit = 1
 		damtype = DAMAGE_BURN
@@ -529,19 +529,19 @@
 	if(ismob(loc))
 		var/mob/living/M = loc
 		if (!no_message)
-			to_chat(M, SPAN_NOTICE("Your [name] goes out, and you empty the ash."))
+			to_chat(M, span_notice("Your [name] goes out, and you empty the ash."))
 	remove_extension(src, /datum/extension/scent)
 
 /obj/item/clothing/mask/smokable/pipe/attack_self(mob/user)
 	if(lit == 1)
-		user.visible_message(SPAN_NOTICE("[user] puts out [src]."), SPAN_NOTICE("You put out [src]."))
+		user.visible_message(span_notice("[user] puts out [src]."), span_notice("You put out [src]."))
 		lit = 0
 		update_icon()
 		STOP_PROCESSING(SSobj, src)
 		remove_extension(src, /datum/extension/scent)
 	else if (smoketime)
 		var/turf/location = get_turf(user)
-		user.visible_message(SPAN_NOTICE("[user] empties out [src]."), SPAN_NOTICE("You empty out [src]."))
+		user.visible_message(span_notice("[user] empties out [src]."), span_notice("You empty out [src]."))
 		new /obj/decal/cleanable/ash(location)
 		smoketime = 0
 		reagents.clear_reagents()
@@ -556,10 +556,10 @@
 	if (istype(W, /obj/item/reagent_containers/food/snacks))
 		var/obj/item/reagent_containers/food/snacks/grown/G = W
 		if (!G.dry)
-			to_chat(user, SPAN_NOTICE("[G] must be dried before you stuff it into [src]."))
+			to_chat(user, span_notice("[G] must be dried before you stuff it into [src]."))
 			return
 		if (smoketime)
-			to_chat(user, SPAN_NOTICE("[src] is already packed."))
+			to_chat(user, span_notice("[src] is already packed."))
 			return
 		smoketime = 1000
 		if(G.reagents)
@@ -570,15 +570,15 @@
 	else if(istype(W, /obj/item/flame/lighter))
 		var/obj/item/flame/lighter/L = W
 		if(L.lit)
-			light(SPAN_NOTICE("[user] manages to light their [name] with [W]."))
+			light(span_notice("[user] manages to light their [name] with [W]."))
 
 	else if(istype(W, /obj/item/flame/match))
 		var/obj/item/flame/match/M = W
 		if(M.lit)
-			light(SPAN_NOTICE("[user] lights their [name] with their [W]."))
+			light(span_notice("[user] lights their [name] with their [W]."))
 
 	else if(istype(W, /obj/item/device/assembly/igniter))
-		light(SPAN_NOTICE("[user] fiddles with [W], and manages to light their [name] with the power of science."))
+		light(span_notice("[user] fiddles with [W], and manages to light their [name] with the power of science."))
 
 	user.update_inv_wear_mask(0)
 	user.update_inv_l_hand(0)

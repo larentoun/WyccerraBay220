@@ -46,7 +46,7 @@
 		if(env && env.temperature < target_temp)
 			env.temperature += rand(2, 10)
 		if (send_message)
-			holder.visible_message(SPAN_DANGER("\The [holder] [pick(activation_messages)]"))
+			holder.visible_message(span_danger("\The [holder] [pick(activation_messages)]"))
 
 //Helper procs
 
@@ -94,9 +94,9 @@
 		H.apply_damage(damage * weakness, DAMAGE_BURN, damage_flags = DAMAGE_FLAG_DISPERSED)
 		if (send_message)
 			if (weakness == 0)
-				to_chat(H, SPAN_WARNING("Some unseen force tries to tear into your suit, but fails!"))
+				to_chat(H, span_warning("Some unseen force tries to tear into your suit, but fails!"))
 			else
-				to_chat(H, SPAN_DANGER("Searing pain strikes your body as you briefly find yourself in a burning hellscape!"))
+				to_chat(H, span_danger("Searing pain strikes your body as you briefly find yourself in a burning hellscape!"))
 
 /datum/artifact_effect/hellportal/proc/reduce_portal_count(obj/gateway/artifact/P)
 	GLOB.destroyed_event.unregister(P, src)
@@ -123,7 +123,7 @@
 	DoEffectPulse(FALSE)
 	for(var/mob/M in GLOB.player_list)
 		if((M.z == holder.z) && !istype(M,/mob/new_player))
-			to_chat(M, SPAN_DANGER(FONT_LARGE("Agonized screams fill your ears as the world around you briefly burns in hellfire!")))
+			to_chat(M, span_danger(FONT_LARGE("Agonized screams fill your ears as the world around you briefly burns in hellfire!")))
 			if (istype(M, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
 				H.apply_damage((damage / 4), DAMAGE_BRUTE, damage_flags = DAMAGE_FLAG_DISPERSED)

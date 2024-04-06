@@ -92,17 +92,17 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 		return FALSE
 	var/obj/item/organ/external/organ = target.organs_by_name[user.zone_sel.selecting]
 	if (!organ)
-		to_chat(user, SPAN_WARNING("[target] is missing that organ."))
+		to_chat(user, span_warning("[target] is missing that organ."))
 		return TRUE
 	if (!BP_IS_ROBOTIC(organ))
-		to_chat(user, SPAN_WARNING("[target]'s [organ.name] is not robotic. [src] is useless."))
+		to_chat(user, span_warning("[target]'s [organ.name] is not robotic. [src] is useless."))
 		return TRUE
 	if (BP_IS_BRITTLE(organ))
-		to_chat(user, SPAN_WARNING("[target]'s [organ.name] is hard and brittle - [src] cannot repair it."))
+		to_chat(user, span_warning("[target]'s [organ.name] is hard and brittle - [src] cannot repair it."))
 		return TRUE
 	var/use_amount = min(amount, ceil(organ.burn_dam / 3), 5)
 	if (!can_use(use_amount))
-		to_chat(user, SPAN_WARNING("You don't have enough of [src] left to repair [target]'s [organ.name]."))
+		to_chat(user, span_warning("You don't have enough of [src] left to repair [target]'s [organ.name]."))
 		return TRUE
 
 	if (organ.robo_repair(3 * use_amount, DAMAGE_BURN, "some damaged wiring", src, user))
@@ -131,8 +131,8 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 		return
 	set_color(new_color_code)
 	user.visible_message(
-		SPAN_NOTICE("[user] changes [src]'s color with [tool]."),
-		SPAN_NOTICE("You set [src]'s color to '[new_color]' with [tool].")
+		span_notice("[user] changes [src]'s color with [tool]."),
+		span_notice("You set [src]'s color to '[new_color]' with [tool].")
 	)
 
 
@@ -180,26 +180,26 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 	if (!isturf(user.loc))
 		return
 	if (get_amount() < 1)
-		to_chat(user, SPAN_WARNING("There is no cable left."))
+		to_chat(user, span_warning("There is no cable left."))
 		return
 	if (!user.Adjacent(target))
-		to_chat(user, SPAN_WARNING("You can't lay cable at a place that far away."))
+		to_chat(user, span_warning("You can't lay cable at a place that far away."))
 		return
 	if (istype(target, /turf/simulated/floor) && !target.is_plating()) // Making sure it's not a floor tile
-		to_chat(user, SPAN_WARNING("Remove the tiling first."))
+		to_chat(user, span_warning("Remove the tiling first."))
 		return
 	var/obj/structure/catwalk/catwalk = locate(/obj/structure/catwalk, target)
 	if (catwalk)
 		if (catwalk.plated_tile && !catwalk.hatch_open)
-			to_chat(user, SPAN_WARNING("Open the catwalk hatch first."))
+			to_chat(user, span_warning("Open the catwalk hatch first."))
 			return
 		else if (!catwalk.plated_tile)
-			to_chat(user, SPAN_WARNING("You can't reach underneath the catwalk."))
+			to_chat(user, span_warning("You can't reach underneath the catwalk."))
 			return
 	var/to_dir = 0
 	if (istype(target, /turf/simulated/open) && !locate(/obj/structure/lattice, target))
 		if (!can_use(2))
-			to_chat(user, SPAN_WARNING("You don't have enough cable to hang a wire down."))
+			to_chat(user, span_warning("You don't have enough cable to hang a wire down."))
 			return
 		to_dir = DOWN
 	var/from_dir = user.dir
@@ -207,7 +207,7 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 		from_dir = get_dir(target, user)
 	for (var/obj/structure/cable/cable in target)
 		if ((cable.d1 == from_dir && cable.d2 == to_dir) || (cable.d2 == from_dir && cable.d1 == to_dir))
-			to_chat(user, SPAN_WARNING("There's already a cable at that position."))
+			to_chat(user, span_warning("There's already a cable at that position."))
 			return
 	CreateCable(target, user, to_dir, from_dir)
 	if (to_dir != DOWN)
@@ -226,16 +226,16 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 	var/from_dir = get_dir(cable, user)
 	if (cable.d1 == from_dir || cable.d2 == from_dir)
 		if (istype(user_turf, /turf/simulated/floor) && !user_turf.is_plating())
-			to_chat(user, SPAN_WARNING("Remove the tiling first."))
+			to_chat(user, span_warning("Remove the tiling first."))
 			return
 		else if ((istype(user_turf, /turf/space) || istype(user_turf, /turf/simulated/open)) && !locate(/obj/structure/lattice, user_turf))
-			to_chat(user, SPAN_WARNING("The cable connection needs something to be secured to."))
+			to_chat(user, span_warning("The cable connection needs something to be secured to."))
 			return
 		else
 			var/opposite_dir = turn(from_dir, 180)
 			for (var/obj/structure/cable/other_cable in user_turf)
 				if (other_cable.d1 == opposite_dir || other_cable.d2 == opposite_dir)
-					to_chat(user, SPAN_WARNING("There's already a cable at that position."))
+					to_chat(user, span_warning("There's already a cable at that position."))
 					return
 			CreateCable(user_turf, user, 0, opposite_dir)
 			return
@@ -249,7 +249,7 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 			if (other_cable == cable)
 				continue
 			if ((other_cable.d1 == new_from_dir && other_cable.d2 == new_to_dir) || (other_cable.d1 == new_to_dir && other_cable.d2 == new_from_dir))
-				to_chat(user, SPAN_WARNING("There's already a cable at that position."))
+				to_chat(user, span_warning("There's already a cable at that position."))
 				return
 		cable.set_color(color)
 		cable.d1 = new_from_dir
@@ -276,26 +276,26 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 
 /obj/item/stack/cable_coil/proc/MakeCuffs(mob/living/carbon/human/user)
 	if (!istype(user))
-		to_chat(user, SPAN_WARNING("You cannot do that."))
+		to_chat(user, span_warning("You cannot do that."))
 		return
 	if (user.incapacitated())
-		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
+		to_chat(user, span_warning("You're in no condition to do that."))
 		return
 	if (!isturf(user.loc))
-		to_chat(user, SPAN_WARNING("You don't have enough free space to do that."))
+		to_chat(user, span_warning("You don't have enough free space to do that."))
 		return
 	if (!can_use(15))
-		to_chat(user, SPAN_WARNING("You need at least 15 cable to make restraints."))
+		to_chat(user, span_warning("You need at least 15 cable to make restraints."))
 		return
 	user.visible_message(
-		SPAN_ITALIC("[user] begins winding some cable together."),
-		SPAN_ITALIC("You begin to wind the cable into crude restraints.")
+		span_italic("[user] begins winding some cable together."),
+		span_italic("You begin to wind the cable into crude restraints.")
 	)
 	if (!do_after(user, 10 SECONDS, null, DO_DEFAULT | DO_PUBLIC_PROGRESS))
 		return
 	user.visible_message(
-		SPAN_ITALIC("[user] makes some crude cable restraints."),
-		SPAN_NOTICE("You finish making the restraints.")
+		span_italic("[user] makes some crude cable restraints."),
+		span_notice("You finish making the restraints.")
 	)
 	use(15)
 	var/obj/item/handcuffs/cable/cuffs = new (user.loc)
@@ -360,7 +360,7 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 	if (isnull(response) || color == response)
 		return
 	set_color(response)
-	to_chat(usr, SPAN_NOTICE("You change [src]'s color to [lowertext(color)]."))
+	to_chat(usr, span_notice("You change [src]'s color to [lowertext(color)]."))
 
 
 /obj/item/stack/cable_coil/fabricator

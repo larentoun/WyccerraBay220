@@ -140,7 +140,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 	if(href_list["printwarrant"])
 		. = TRUE
 		if(!program.computer.has_component(PART_PRINTER))
-			to_chat(src, SPAN_WARNING("Hardware Error: Printer not found."))
+			to_chat(src, span_warning("Hardware Error: Printer not found."))
 			return
 		if(!activewarrant)
 			var/puid = text2num(href_list["printwarrant"])
@@ -151,7 +151,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		if(activewarrant)
 			program.computer.print_paper(warranttotext(activewarrant), capitalize(activewarrant.fields["arrestsearch"]) + " Warrant - " + activewarrant.fields["namewarrant"])
 		else
-			to_chat(src, SPAN_WARNING("Internal error: Warrant not found."))
+			to_chat(src, span_warning("Internal error: Warrant not found."))
 
 
 	if(href_list["editwarrantname"])

@@ -202,7 +202,7 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 				announcement.announcer = ID.assignment ? "[ID.assignment] [ID.registered_name]" : ID.registered_name
 			else
 				reset_message()
-				to_chat(user, SPAN_WARNING("You are not authorized to send announcements."))
+				to_chat(user, span_warning("You are not authorized to send announcements."))
 			SSnano.update_uis(src)
 		return TRUE
 

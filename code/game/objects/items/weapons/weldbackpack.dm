@@ -31,8 +31,8 @@
 	if(T.welding)
 		if(user.a_intent == I_HURT)
 			user.visible_message(
-				SPAN_DANGER("[user] holds [T] up to [src], causing an explosion!"),
-				SPAN_DANGER("You hold [T] up to [src], causing an explosion!")
+				span_danger("[user] holds [T] up to [src], causing an explosion!"),
+				span_danger("You hold [T] up to [src], causing an explosion!")
 			)
 			log_and_message_admins("triggered a fueltank explosion.", user)
 			explosion(get_turf(src), 4, EX_ACT_HEAVY)
@@ -40,7 +40,7 @@
 				qdel(src)
 			return
 		else
-			to_chat(user, SPAN_WARNING("You need to turn [T] off before you can refuel it. Or use harm intent if you're suicidal."))
+			to_chat(user, span_warning("You need to turn [T] off before you can refuel it. Or use harm intent if you're suicidal."))
 			return
 	if(!reagents.trans_to_obj(T.tank, T.tank.max_fuel))
 		balloon_alert(user, "баллон уже полон!")
@@ -52,12 +52,12 @@
 	if(istype(W, /obj/item/welder_tank))
 		var/obj/item/welder_tank/tank = W
 		if (!tank.can_refuel)
-			to_chat(user, SPAN_WARNING("[tank] does not have a refuelling port."))
+			to_chat(user, span_warning("[tank] does not have a refuelling port."))
 			return TRUE
 		if (!reagents.trans_to_obj(tank, tank.max_fuel))
-			to_chat(user, SPAN_WARNING("[tank] is already full."))
+			to_chat(user, span_warning("[tank] is already full."))
 			return TRUE
-		to_chat(user, SPAN_NOTICE("You refuel [tank] with [src]."))
+		to_chat(user, span_notice("You refuel [tank] with [src]."))
 		playsound(loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return TRUE
 
@@ -66,13 +66,13 @@
 /obj/item/storage/backpack/weldpack/use_after(obj/O, mob/living/user, click_parameters)
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && src.reagents.total_volume < max_fuel)
 		O.reagents.trans_to_obj(src, max_fuel)
-		to_chat(user, SPAN_NOTICE("You crack the cap off the top of [src] and fill it back up again from the tank."))
+		to_chat(user, span_notice("You crack the cap off the top of [src] and fill it back up again from the tank."))
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 		return TRUE
 	else if (istype(O, /obj/structure/reagent_dispensers/fueltank) && src.reagents.total_volume == max_fuel)
-		to_chat(user, SPAN_WARNING("The pack is already full!"))
+		to_chat(user, span_warning("The pack is already full!"))
 		return TRUE
 
 /obj/item/storage/backpack/weldpack/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE(text("[icon2html(src, user)] [] units of fuel left!", src.reagents.total_volume))
+	. += span_notice(text("[icon2html(src, user)] [] units of fuel left!", src.reagents.total_volume))

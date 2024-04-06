@@ -48,15 +48,15 @@
 /mob/living/simple_animal/hostile/commanded/rex/can_use_item(obj/item/O, mob/user)
 	if(istype(O, /obj/item/reagent_containers/food/snacks/meat) && stat != DEAD)
 		if(user != master)
-			visible_message(SPAN_WARNING("\The [src] started to growl"))
+			visible_message(span_warning("\The [src] started to growl"))
 		else
-			visible_message(SPAN_NOTICE("\The [user] start feeding the [src] [O]"))
+			visible_message(span_notice("\The [user] start feeding the [src] [O]"))
 			if(do_after(user, 30, src))
 				var/prev_AI_busy = ai_holder.busy
 				set_AI_busy(FALSE)
 				heal_overall_damage(10, 10)
 				qdel(O)
-				visible_message(SPAN_NOTICE("\The [src] ate [O]"))
+				visible_message(span_notice("\The [src] ate [O]"))
 				set_AI_busy(prev_AI_busy)
 
 	else
@@ -74,11 +74,11 @@
 				adjustBleedTicks(dealt_damage)
 
 		adjustBruteLoss(dealt_damage)
-		target.visible_message(SPAN_WARNING("[target] [harm_verb] \the [src]!"))
+		target.visible_message(span_warning("[target] [harm_verb] \the [src]!"))
 		target.do_attack_animation(src)
 
 		if((target == master) && prob(80))
-			visible_message(SPAN_WARNING("The [src]  whines"))
+			visible_message(span_warning("The [src]  whines"))
 			return TRUE
 
 		target_mob = target
@@ -97,7 +97,7 @@
 				say("Wuff!")
 			return TRUE
 
-		visible_message(SPAN_WARNING("\The [src] started to growl"))
+		visible_message(span_warning("\The [src] started to growl"))
 		if(prob(10))
 			attack_target(target)
 

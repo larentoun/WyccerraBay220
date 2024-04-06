@@ -6,25 +6,25 @@
 	if(requires_host_value)
 		if(!host)
 			if(!silent)
-				to_chat(src, SPAN_WARNING("You must be within a host body to use this action."))
+				to_chat(src, span_warning("You must be within a host body to use this action."))
 			return FALSE
 	else
 		if(host)
 			if(!silent)
-				to_chat(src, SPAN_WARNING("You cannot be within a host body when using this action."))
+				to_chat(src, span_warning("You cannot be within a host body when using this action."))
 			return FALSE
 
 	if(stat)
 		if(!silent)
-			to_chat(src, SPAN_WARNING("You cannot perform this action in your current state."))
+			to_chat(src, span_warning("You cannot perform this action in your current state."))
 		return FALSE
 	if(docile && !usable_while_docile)
 		if(!silent)
-			to_chat(src, SPAN_NOTICE("You are feeling far too docile to perform this action."))
+			to_chat(src, span_notice("You are feeling far too docile to perform this action."))
 		return FALSE
 	if(check_last_special && world.time < last_special)
 		if(!silent)
-			to_chat(src, SPAN_NOTICE("You cannot perform this action so soon after the last."))
+			to_chat(src, span_notice("You cannot perform this action so soon after the last."))
 		return FALSE
 	return TRUE
 
@@ -34,10 +34,10 @@
 	var/mob/living/carbon/human/H = host
 
 	if(!istype(host))
-		to_chat(src, SPAN_WARNING("This host does not have a suitable brain."))
+		to_chat(src, span_warning("This host does not have a suitable brain."))
 		return
 
-	to_chat(src, SPAN_DANGER("You settle into the empty brainpan and begin to expand, fusing inextricably with the dead flesh of [H]."))
+	to_chat(src, span_danger("You settle into the empty brainpan and begin to expand, fusing inextricably with the dead flesh of [H]."))
 
 	H.add_language(LANGUAGE_BORER_GLOBAL)
 
@@ -81,11 +81,11 @@
 	set desc = "Send a jolt of electricity through your host, reviving them."
 
 	if(stat != 2)
-		to_chat(usr, SPAN_WARNING("Your host is already alive."))
+		to_chat(usr, span_warning("Your host is already alive."))
 		return
 
 	verbs -= /mob/living/carbon/human/proc/jumpstart
-	visible_message(SPAN_DANGER("With a hideous, rattling moan, [src] shudders back to life!"))
+	visible_message(span_danger("With a hideous, rattling moan, [src] shudders back to life!"))
 
 	rejuvenate()
 	restore_blood()

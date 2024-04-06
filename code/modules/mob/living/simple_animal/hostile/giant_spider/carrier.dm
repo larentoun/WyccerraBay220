@@ -31,7 +31,7 @@
 	return ..()
 
 /mob/living/simple_animal/hostile/giant_spider/carrier/death()
-	visible_message(SPAN_WARNING("\The [src]'s abdomen splits as it rolls over, spiderlings crawling from the wound."))
+	visible_message(span_warning("\The [src]'s abdomen splits as it rolls over, spiderlings crawling from the wound."))
 	addtimer(CALLBACK(src, PROC_REF(spawn_swarmlings)), 1 SECOND)
 	return ..()
 

@@ -6,7 +6,7 @@
 	var/new_data = input(user, "Please type in one character.", "[src] char writing]") as text
 	new_data = sanitize(new_data, 1, trim=0)
 	if(holder.check_interactivity(user) )
-		to_chat(user, SPAN_NOTICE("You input [new_data ? "new_data" : "NULL"] into the pin."))
+		to_chat(user, span_notice("You input [new_data ? "new_data" : "NULL"] into the pin."))
 		write_data_to_pin(new_data)
 
 /datum/integrated_io/char/write_data_to_pin(new_data)

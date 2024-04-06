@@ -24,11 +24,11 @@
 	if(.)
 		if(nutrition <= 20)
 			if(!silent)
-				to_chat(src, SPAN_WARNING("You are too hungry to jump around."))
+				to_chat(src, span_warning("You are too hungry to jump around."))
 			return FALSE
 		if(hydration <= 20)
 			if(!silent)
-				to_chat(src, SPAN_WARNING("You are too thirsty to jump around."))
+				to_chat(src, span_warning("You are too thirsty to jump around."))
 			return FALSE
 
 
@@ -49,21 +49,21 @@
 		var/obj/item/organ/external/limb = pick(broken_limbs)
 		if (prob(broken_limb_fail_chance))
 			visible_message(
-				SPAN_WARNING("\The [src]'s [limb.name] buckles beneath them as they land!"),
-				SPAN_DANGER("Your [limb.name] buckles beneath you as you land!")
+				span_warning("\The [src]'s [limb.name] buckles beneath them as they land!"),
+				span_danger("Your [limb.name] buckles beneath you as you land!")
 			)
 			apply_effect(1, EFFECT_WEAKEN)
 			limb.add_pain(30)
 			limb.take_external_damage(5)
 		else
-			to_chat(src, SPAN_DANGER("You feel a sharp pain through your [limb.name] as you land!"))
+			to_chat(src, span_danger("You feel a sharp pain through your [limb.name] as you land!"))
 			apply_effect(1, EFFECT_STUN)
 			limb.add_pain(15)
 	if (missing_limb_fail_chance)
 		if (prob(missing_limb_fail_chance))
 			visible_message(
-				SPAN_WARNING("\The [src] lands unsteadily and topples over!"),
-				SPAN_DANGER("You land unsteadily, unused to jumping with your missing limb, and topple over!")
+				span_warning("\The [src] lands unsteadily and topples over!"),
+				span_danger("You land unsteadily, unused to jumping with your missing limb, and topple over!")
 			)
 			// Math should result in 1 missing limb = 2 seconds, 2 missing limbs = 4 seconds, etc.
 			// Note that a foot and a leg is a separate limb, and missing a leg also means you're missing a foot.

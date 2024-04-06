@@ -42,13 +42,13 @@
 	if (!can_unbuckle(user))
 		return
 	if(buckled_mob != user)
-		to_chat(user, SPAN_NOTICE("You try to free \the [buckled_mob] from \the [src]."))
+		to_chat(user, span_notice("You try to free \the [buckled_mob] from \the [src]."))
 		var/chance = round(100/(20*seed.get_trait(TRAIT_POTENCY)/100))
 		if(prob(chance))
 			buckled_mob.visible_message(
 				"\The [user] frees \the [buckled_mob] from \the [src].",
-				SPAN_NOTICE("\The [user] frees you from \the [src]."),
-				SPAN_WARNING("You hear shredding and ripping.")
+				span_notice("\The [user] frees you from \the [src]."),
+				span_warning("You hear shredding and ripping.")
 			)
 			unbuckle_mob()
 	else
@@ -57,14 +57,14 @@
 
 		user.visible_message(
 			"\The [user] attempts to get free from [src]!",
-			SPAN_NOTICE("You attempt to get free from [src].")
+			span_notice("You attempt to get free from [src].")
 		)
 
 		if (do_after(user, escapetime, src, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS, INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED) && can_unbuckle(user))
 			if(unbuckle_mob())
 				user.visible_message(
 					"\The [user] manages to escape [src]!",
-					SPAN_NOTICE("You successfully escape [src]!")
+					span_notice("You successfully escape [src]!")
 				)
 
 /obj/vine/proc/entangle(mob/living/victim)
@@ -79,8 +79,8 @@
 
 	if(victim.is_floating)
 		victim.visible_message(
-			SPAN_WARNING("Tendrils lash out towards \the [victim] but \the [src] can't quite reach them as they float above!"),
-			SPAN_WARNING("Tendrils lash out from \the [src] below but can't quite reach you!")
+			span_warning("Tendrils lash out towards \the [victim] but \the [src] can't quite reach them as they float above!"),
+			span_warning("Tendrils lash out from \the [src] below but can't quite reach you!")
 		)
 		return
 
@@ -90,20 +90,20 @@
 			return
 		if(victim.loc != loc && istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.item_flags & ITEM_FLAG_NOSLIP) || H.species.check_no_slip(H))
 			visible_message(
-				SPAN_WARNING("Tendrils lash to drag \the [victim] but \the [src] can't pull them across the ground!"),
-				SPAN_WARNING("Tendrils lash to drag you but \the [src] can't pull you across the ground!")
+				span_warning("Tendrils lash to drag \the [victim] but \the [src] can't pull them across the ground!"),
+				span_warning("Tendrils lash to drag you but \the [src] can't pull you across the ground!")
 			)
 			return
 
 	victim.visible_message(
-		SPAN_DANGER("Tendrils lash out from \the [src] and drag \the [victim] in!"),
-		SPAN_DANGER("Tendrils lash out from \the [src] and drag you in!"))
+		span_danger("Tendrils lash out from \the [src] and drag \the [victim] in!"),
+		span_danger("Tendrils lash out from \the [src] and drag you in!"))
 	victim.forceMove(loc)
 	if (victim.buckled)
 		victim.buckled.unbuckle_mob()
 	if (can_buckle(victim) && buckle_mob(victim))
 		victim.set_dir(pick(GLOB.cardinal))
-		to_chat(victim, SPAN_DANGER("The tendrils [pick("wind", "tangle", "tighten", "coil", "knot", "snag", "twist", "constrict", "squeeze", "clench", "tense")] around you!"))
+		to_chat(victim, span_danger("The tendrils [pick("wind", "tangle", "tighten", "coil", "knot", "snag", "twist", "constrict", "squeeze", "clench", "tense")] around you!"))
 
 /obj/vine/buckle_mob()
 	. = ..()

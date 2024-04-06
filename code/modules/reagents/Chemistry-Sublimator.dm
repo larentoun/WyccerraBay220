@@ -68,12 +68,12 @@
 
 	if(holding)
 		user.put_in_hands(holding)
-		user.visible_message(SPAN_NOTICE("\The [user] removes \the [holding] from \the [src]."))
+		user.visible_message(span_notice("\The [user] removes \the [holding] from \the [src]."))
 		holding = null
 		verbs -= /obj/machinery/portable_atmospherics/reagent_sublimator/proc/remove_tank
 		update_icon()
 	else
-		to_chat(user, SPAN_WARNING("\The [src] has no gas tank loaded."))
+		to_chat(user, span_warning("\The [src] has no gas tank loaded."))
 
 /obj/machinery/portable_atmospherics/reagent_sublimator/proc/remove_container()
 
@@ -87,32 +87,32 @@
 
 	if(container)
 		user.put_in_hands(container)
-		user.visible_message(SPAN_NOTICE("\The [user] removes \the [container] from \the [src]."))
+		user.visible_message(span_notice("\The [user] removes \the [container] from \the [src]."))
 		container = null
 		verbs -= /obj/machinery/portable_atmospherics/reagent_sublimator/proc/remove_container
 		if(use_power >= POWER_USE_ACTIVE)
 			update_use_power(POWER_USE_IDLE)
 		update_icon()
 	else
-		to_chat(user, SPAN_WARNING("\The [src] has no reagent container loaded."))
+		to_chat(user, span_warning("\The [src] has no reagent container loaded."))
 
 /obj/machinery/portable_atmospherics/reagent_sublimator/physical_attack_hand(mob/user)
 	update_use_power(use_power == POWER_USE_ACTIVE ? POWER_USE_IDLE : POWER_USE_ACTIVE)
-	user.visible_message(SPAN_NOTICE("\The [user] switches \the [src] [use_power == POWER_USE_ACTIVE ? "on" : "off"]."))
+	user.visible_message(span_notice("\The [user] switches \the [src] [use_power == POWER_USE_ACTIVE ? "on" : "off"]."))
 	update_icon()
 	return TRUE
 
 /obj/machinery/portable_atmospherics/reagent_sublimator/use_tool(obj/item/thing, mob/living/user, list/click_params)
 	if(istype(thing, /obj/item/tank))
-		to_chat(user, SPAN_WARNING("\The [src] has no socket for a gas tank."))
+		to_chat(user, span_warning("\The [src] has no socket for a gas tank."))
 		return TRUE
 
 	if (istype(thing, /obj/item/reagent_containers))
 		if(container)
-			to_chat(user, SPAN_WARNING("\The [src] is already loaded with \the [container]."))
+			to_chat(user, span_warning("\The [src] is already loaded with \the [container]."))
 		else if(user.unEquip(thing, src))
 			container = thing
-			user.visible_message(SPAN_NOTICE("\The [user] loads \the [thing] into \the [src]."))
+			user.visible_message(span_notice("\The [user] loads \the [thing] into \the [src]."))
 			verbs |= /obj/machinery/portable_atmospherics/reagent_sublimator/proc/remove_container
 		update_icon()
 		return TRUE
@@ -136,7 +136,7 @@
 		if(reagent_whitelist && length(reagent_whitelist))
 			for(var/datum/reagent/R in container.reagents.reagent_list)
 				if(!is_type_in_list(R, reagent_whitelist))
-					audible_message(SPAN_NOTICE("\The [src] pings rapidly and powers down, refusing to process the contents of \the [container]."))
+					audible_message(span_notice("\The [src] pings rapidly and powers down, refusing to process the contents of \the [container]."))
 					update_use_power(POWER_USE_OFF)
 					update_icon()
 					return
@@ -157,7 +157,7 @@
 			produced.temperature = output_temperature
 			air_contents.merge(produced)
 		else
-			visible_message(SPAN_NOTICE("\The [src] pings as it finishes processing the contents of \the [container]."))
+			visible_message(span_notice("\The [src] pings as it finishes processing the contents of \the [container]."))
 			update_use_power(POWER_USE_IDLE)
 			update_icon()
 
@@ -168,13 +168,13 @@
 	. = ..()
 	if(container)
 		if(container.reagents && container.reagents.total_volume)
-			. += SPAN_NOTICE("[src] has [container] loaded. It contains [container.reagents.total_volume]u of reagents.")
+			. += span_notice("[src] has [container] loaded. It contains [container.reagents.total_volume]u of reagents.")
 		else
-			. += SPAN_NOTICE("[src] has [container] loaded. It is empty.")
+			. += span_notice("[src] has [container] loaded. It is empty.")
 	if(holding)
-		. += SPAN_NOTICE("[src] has [holding] connected.")
+		. += span_notice("[src] has [holding] connected.")
 	if(reagent_whitelist)
-		. += SPAN_NOTICE("[src]'s safety light is on.")
+		. += span_notice("[src]'s safety light is on.")
 
 /obj/machinery/portable_atmospherics/reagent_sublimator/emag_act(remaining_charges, mob/user)
 	if(!emagged && length(reagent_whitelist))

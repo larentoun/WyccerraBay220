@@ -17,4 +17,4 @@
 		psi.owner.adjustBrainLoss(-1)
 		soothed = TRUE
 	if(soothed && prob(10))
-		to_chat(psi.owner, SPAN_NOTICE("<i>[pick(balm_messages)]</i>"))
+		to_chat(psi.owner, span_notice("<i>[pick(balm_messages)]</i>"))

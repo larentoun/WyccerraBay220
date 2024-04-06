@@ -32,26 +32,26 @@
 		return FALSE
 
 	if (!W.is_wall() || !isturf(user.loc))
-		to_chat(user, SPAN_WARNING("You can't place this here!"))
+		to_chat(user, span_warning("You can't place this here!"))
 		return TRUE
 
 	var/placement_dir = get_dir(user, W)
 	if (!(placement_dir in GLOB.cardinal))
-		to_chat(user, SPAN_WARNING("You must stand directly in front of the wall you wish to place that on."))
+		to_chat(user, span_warning("You must stand directly in front of the wall you wish to place that on."))
 		return TRUE
 
 	if (ArePostersOnWall(W))
-		to_chat(user, SPAN_NOTICE("There is already a poster there!"))
+		to_chat(user, span_notice("There is already a poster there!"))
 		return TRUE
 
-	user.visible_message(SPAN_NOTICE("\The [user] starts placing a poster on \the [W]."),SPAN_NOTICE("You start placing the poster on \the [W]."))
+	user.visible_message(span_notice("\The [user] starts placing a poster on \the [W]."),span_notice("You start placing the poster on \the [W]."))
 
 	var/obj/structure/sign/poster/P = new (user.loc, placement_dir, poster_type)
 	qdel(src)
 	flick("poster_being_set", P)
 	// Time to place is equal to the time needed to play the flick animation
 	if(do_after(user, 2.8 SECONDS, W, DO_PUBLIC_UNIQUE) && W.is_wall() && !ArePostersOnWall(W, P))
-		user.visible_message(SPAN_NOTICE("\The [user] has placed a poster on \the [W]."),SPAN_NOTICE("You have placed the poster on \the [W]."))
+		user.visible_message(span_notice("\The [user] has placed a poster on \the [W]."),span_notice("You have placed the poster on \the [W]."))
 	else
 		// We cannot rely on user being on the appropriate turf when placement fails
 		P.roll_and_drop(get_step(W, turn(placement_dir, 180)))

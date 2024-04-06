@@ -69,7 +69,7 @@
 
 /obj/item/device/syndiejaunter/examine(mob/user, distance)
 	. = ..()
-	. += SPAN_NOTICE("Display is [usable ? "online and shows number [usable]" : "offline"].")
+	. += span_notice("Display is [usable ? "online and shows number [usable]" : "offline"].")
 
 /obj/item/device/syndiejaunter/Initialize()
 	. = ..()
@@ -237,7 +237,7 @@
 		return
 
 	if(prob(2))
-		to_chat(M, SPAN_DANGER("My heart gonna break out from the chest!"))
+		to_chat(M, span_danger("My heart gonna break out from the chest!"))
 		M.stun_effect_act(0, 15, BP_CHEST, "heart damage") //a small pain without damage
 		if(prob(15))
 			for(var/obj/item/organ/internal/heart/H in M.internal_organs)
@@ -268,4 +268,4 @@
 /obj/item/device/scanner/health/syndie/examine(mob/user)
 	. = ..()
 	if(isobserver(user) || (user.mind && user.mind.special_role != null) || user.skill_check(SKILL_DEVICES, SKILL_MASTER) || user.skill_check(SKILL_MEDICAL, SKILL_MASTER))
-		. += SPAN_NOTICE("The scanner contacts do not look as they should.")
+		. += span_notice("The scanner contacts do not look as they should.")

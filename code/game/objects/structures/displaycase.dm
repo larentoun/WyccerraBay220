@@ -20,7 +20,7 @@
 /obj/structure/displaycase/examine(mob/user)
 	. = ..()
 	if(length(contents))
-		. += SPAN_NOTICE("Inside you see [english_list(contents)].")
+		. += span_notice("Inside you see [english_list(contents)].")
 
 /obj/structure/displaycase/ex_act(severity)
 	if (severity < EX_ACT_LIGHT)
@@ -67,6 +67,6 @@
 /obj/structure/displaycase/attack_hand(mob/user as mob)
 	add_fingerprint(user)
 	if(!health_dead())
-		to_chat(usr, text(SPAN_WARNING("You kick the display case.")))
-		visible_message(SPAN_WARNING("[usr] kicks the display case."))
+		to_chat(usr, text(span_warning("You kick the display case.")))
+		visible_message(span_warning("[usr] kicks the display case."))
 		damage_health(2, DAMAGE_BRUTE)

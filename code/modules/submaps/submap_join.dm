@@ -22,15 +22,15 @@
 		return FALSE
 
 	if(!available())
-		to_chat(joining, SPAN_WARNING("Unfortunately, that job is no longer available."))
+		to_chat(joining, span_warning("Unfortunately, that job is no longer available."))
 		return FALSE
 
 	if(jobban_isbanned(joining, "Offstation Roles"))
-		to_chat(joining, SPAN_WARNING("You are banned from playing offstation roles."))
+		to_chat(joining, span_warning("You are banned from playing offstation roles."))
 		return FALSE
 
 	if(job.is_semi_antagonist && jobban_isbanned(joining, MODE_MISC_AGITATOR))
-		to_chat(joining, SPAN_WARNING("You are banned from playing semi-antagonist roles."))
+		to_chat(joining, span_warning("You are banned from playing semi-antagonist roles."))
 		return FALSE
 
 	if(job.is_restricted(joining.client.prefs, joining))
@@ -44,7 +44,7 @@
 		return
 
 	if(!LAZYLEN(job.spawnpoints))
-		to_chat(joining, SPAN_WARNING("There are no available spawn points for that job."))
+		to_chat(joining, span_warning("There are no available spawn points for that job."))
 
 	var/turf/spawn_turf = get_turf(pick(job.spawnpoints))
 	if(!SSjobs.check_unsafe_spawn(joining, spawn_turf))

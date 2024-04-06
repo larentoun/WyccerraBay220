@@ -19,13 +19,13 @@
 
 /proc/roboscan(mob/living/M, mob/living/user)
 	if((MUTATION_CLUMSY in user.mutations) && prob(50))
-		to_chat(user, text(SPAN_WARNING("You try to analyze the floor's vitals!")))
+		to_chat(user, text(span_warning("You try to analyze the floor's vitals!")))
 		for(var/mob/O in viewers(M, null))
-			O.show_message(text(SPAN_WARNING("[user] has analyzed the floor's vitals!")), 1)
-		user.show_message(text(SPAN_NOTICE("Analyzing Results for The floor:\n\t Overall Status: Healthy")), 1)
-		user.show_message(text(SPAN_NOTICE("\t Damage Specifics: [0]-[0]-[0]-[0]")), 1)
-		user.show_message(SPAN_NOTICE("Key: Suffocation/Toxin/Burns/Brute"), 1)
-		user.show_message(SPAN_NOTICE("Body Temperature: ???"), 1)
+			O.show_message(text(span_warning("[user] has analyzed the floor's vitals!"), 1))
+		user.show_message(text(span_notice("Analyzing Results for The floor:\n\t Overall Status: Healthy"), 1))
+		user.show_message(text(span_notice("\t Damage Specifics: [0]-[0]-[0]-[0]"), 1))
+		user.show_message(span_notice("Key: Suffocation/Toxin/Burns/Brute"), 1)
+		user.show_message(span_notice("Body Temperature: ???"), 1)
 		return
 
 	var/scan_type
@@ -36,22 +36,22 @@
 	else if (istype(M, /mob/living/exosuit))
 		scan_type = "exosuit"
 	else
-		to_chat(user, SPAN_WARNING("You can't analyze non-robotic things!"))
+		to_chat(user, span_warning("You can't analyze non-robotic things!"))
 		return
 
-	user.visible_message(SPAN_NOTICE("\The [user] has analyzed [M]'s components."),SPAN_NOTICE("You have analyzed [M]'s components."))
+	user.visible_message(span_notice("\The [user] has analyzed [M]'s components."),span_notice("You have analyzed [M]'s components."))
 	switch(scan_type)
 		if("robot")
 			var/BU = M.getFireLoss() > 50 	? 	"<b>[M.getFireLoss()]</b>" 		: M.getFireLoss()
 			var/BR = M.getBruteLoss() > 50 	? 	"<b>[M.getBruteLoss()]</b>" 	: M.getBruteLoss()
-			user.show_message(SPAN_NOTICE("Analyzing Results for [M]:\n\t Overall Status: [M.stat > 1 ? "fully disabled" : "[M.health - M.getHalLoss()]% functional"]"))
+			user.show_message(span_notice("Analyzing Results for [M]:\n\t Overall Status: [M.stat > 1 ? "fully disabled" : "[M.health - M.getHalLoss()]% functional"]"))
 			user.show_message("\t Key: [SPAN_COLOR("#ffa500", "Electronics")]/[SPAN_COLOR("red", "Brute")]", 1)
 			user.show_message("\t Damage Specifics: [SPAN_COLOR("#ffa500", BU)] - [SPAN_COLOR("red", BR)]")
 			if(M.stat == DEAD)
-				user.show_message(SPAN_NOTICE("Time of Failure: [time2text(worldtime2stationtime(M.timeofdeath))]"))
+				user.show_message(span_notice("Time of Failure: [time2text(worldtime2stationtime(M.timeofdeath))]"))
 			var/mob/living/silicon/robot/H = M
 			var/list/damaged = H.get_damaged_components(1,1,1)
-			user.show_message(SPAN_NOTICE("Localized Damage:"),1)
+			user.show_message(span_notice("Localized Damage:"),1)
 			if(length(damaged)>0)
 				for(var/datum/robot_component/org in damaged)
 					var/message = "\t [capitalize(org.name)]: "
@@ -60,27 +60,27 @@
 					message += (org.brute_damage > 0) ? SPAN_COLOR("red", org.brute_damage) : "0"
 					message += org.toggled ? "Toggled ON" : SPAN_COLOR("red", "Toggled OFF")
 					message += org.powered ? "Power ON" : SPAN_COLOR("red", "Power OFF")
-					user.show_message(SPAN_NOTICE(message), VISIBLE_MESSAGE)
+					user.show_message(span_notice(message), VISIBLE_MESSAGE)
 			else
-				user.show_message(SPAN_NOTICE("\t Components are OK."),1)
+				user.show_message(span_notice("\t Components are OK."),1)
 			if(H.emagged && prob(5))
-				user.show_message(SPAN_WARNING("\t ERROR: INTERNAL SYSTEMS COMPROMISED"),1)
-			user.show_message(SPAN_NOTICE("Operating Temperature: [M.bodytemperature-T0C]&deg;C ([M.bodytemperature*1.8-459.67]&deg;F)"), 1)
+				user.show_message(span_warning("\t ERROR: INTERNAL SYSTEMS COMPROMISED"),1)
+			user.show_message(span_notice("Operating Temperature: [M.bodytemperature-T0C]&deg;C ([M.bodytemperature*1.8-459.67]&deg;F)"), 1)
 
 		if("prosthetics")
 
 			var/mob/living/carbon/human/H = M
-			to_chat(user, SPAN_NOTICE("Analyzing Results for \the [H]:"))
+			to_chat(user, span_notice("Analyzing Results for \the [H]:"))
 			to_chat(user, "Key: [SPAN_COLOR("#ffa500", "Electronics")]/[SPAN_COLOR("red", "Brute")]")
 			var/obj/item/organ/internal/cell/C = H.internal_organs_by_name[BP_CELL]
 			if(C)
-				to_chat(user, SPAN_NOTICE("Cell charge: [C.percent()] %"))
+				to_chat(user, span_notice("Cell charge: [C.percent()] %"))
 			else
-				to_chat(user, SPAN_NOTICE("Cell charge: ERROR - Cell not present"))
+				to_chat(user, span_notice("Cell charge: ERROR - Cell not present"))
 
 			to_chat(user, "<hr>")
 
-			to_chat(user, SPAN_NOTICE("Internal brain activity:"))
+			to_chat(user, span_notice("Internal brain activity:"))
 			var/obj/item/organ/internal/B = H.internal_organs_by_name[BP_BRAIN]
 			if(B)
 				to_chat(user, "[B.name]: [SPAN_COLOR("red", (B.status & ORGAN_DEAD) ? "NO ACTIVITY DETECTED - DAMAGED PAST POINT OF NO RETURN" : B.damage)]")
@@ -89,7 +89,7 @@
 
 			to_chat(user, "<hr>")
 
-			to_chat(user, SPAN_NOTICE("External prosthetics:"))
+			to_chat(user, span_notice("External prosthetics:"))
 
 			var/organ_found
 			for(var/obj/item/organ/external/E in H.organs)
@@ -102,7 +102,7 @@
 
 			to_chat(user, "<hr>")
 
-			to_chat(user, SPAN_NOTICE("Internal prosthetics:"))
+			to_chat(user, span_notice("Internal prosthetics:"))
 			organ_found = null
 			for(var/obj/item/organ/O in H.internal_organs)
 				if(!BP_IS_ROBOTIC(O))
@@ -114,7 +114,7 @@
 
 		if ("exosuit")
 			var/mob/living/exosuit/mech = M
-			to_chat(user, SPAN_INFO("Diagnostic Report for \the [M]:"))
+			to_chat(user, span_info("Diagnostic Report for \the [M]:"))
 			for (var/obj/item/mech_component/component in list(mech.arms, mech.legs, mech.body, mech.head))
 				if (component)
 					component.return_diagnostics(user)

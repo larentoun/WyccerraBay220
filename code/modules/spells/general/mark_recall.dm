@@ -79,8 +79,8 @@
 	// Null Rod or Spell Book - Remove mark
 	if (is_type_in_list(tool, list(/obj/item/nullrod, /obj/item/spellbook)))
 		user.visible_message(
-			SPAN_NOTICE("\The [user] waves \a [tool] over \the [src], and it fades away."),
-			SPAN_NOTICE("You wave \the [tool] over \the [src], and it fades away.")
+			span_notice("\The [user] waves \a [tool] over \the [src], and it fades away."),
+			span_notice("You wave \the [tool] over \the [src], and it fades away.")
 		)
 		qdel(src)
 		return TRUE

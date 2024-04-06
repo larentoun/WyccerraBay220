@@ -29,11 +29,11 @@
 
 	var/user_psi_leech = user.do_psionics_check(cost, user)
 	if(user_psi_leech)
-		to_chat(user, SPAN_WARNING("Your power is leeched away by \the [user_psi_leech] as fast as you can focus it..."))
+		to_chat(user, span_warning("Your power is leeched away by \the [user_psi_leech] as fast as you can focus it..."))
 		return FALSE
 
 	if(target.do_psionics_check(cost, user))
-		to_chat(user, SPAN_WARNING("Your power skates across \the [target], but cannot get a grip..."))
+		to_chat(user, span_warning("Your power skates across \the [target], but cannot get a grip..."))
 		return FALSE
 
 	return TRUE

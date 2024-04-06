@@ -24,7 +24,7 @@
 
 /obj/proc/HandleObjectHeating(obj/item/heated_by, mob/user, adjust_temp)
 	if(ATOM_IS_TEMPERATURE_SENSITIVE(src))
-		visible_message(SPAN_NOTICE("\The [user] carefully heats \the [src] with \the [heated_by]."))
+		visible_message(span_notice("\The [user] carefully heats \the [src] with \the [heated_by]."))
 		var/diff_temp = (adjust_temp - temperature)
 		if(diff_temp >= 0)
 			var/altered_temp = max(temperature + (ATOM_TEMPERATURE_EQUILIBRIUM_CONSTANT * temperature_coefficient * diff_temp), 0)

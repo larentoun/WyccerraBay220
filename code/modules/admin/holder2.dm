@@ -75,13 +75,13 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 		return FALSE
 	if (!C.holder)
 		if (show_msg)
-			to_chat(C, SPAN_WARNING("You are not a staff member."))
+			to_chat(C, span_warning("You are not a staff member."))
 		return FALSE
 	if (rights_required)
 		if (rights_required & C.holder.rights)
 			return TRUE
 		if (show_msg)
-			to_chat(C, SPAN_WARNING("You lack the rights to do that. You need one of: [rights2text(rights_required," ")]"))
+			to_chat(C, span_warning("You lack the rights to do that. You need one of: [rights2text(rights_required," ")]"))
 		return FALSE
 	return TRUE
 
@@ -134,14 +134,14 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 	set name = "Stealth Mode"
 
 	if(!holder)
-		to_chat(src, SPAN_WARNING("Error: You are not an admin."))
+		to_chat(src, span_warning("Error: You are not an admin."))
 		return
 
 	holder.stealthy_ = holder.stealthy_ == STEALTH_OFF ? STEALTH_MANUAL : STEALTH_OFF
 	if(holder.stealthy_)
-		to_chat(src, SPAN_NOTICE("You are now stealthed."))
+		to_chat(src, span_notice("You are now stealthed."))
 	else
-		to_chat(src, SPAN_NOTICE("You are no longer stealthed."))
+		to_chat(src, span_notice("You are no longer stealthed."))
 	log_and_message_admins("has turned stealth mode [holder.stealthy_ ? "ON" : "OFF"]")
 
 #undef STEALTH_OFF

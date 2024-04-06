@@ -15,7 +15,7 @@
 
 /obj/item/ship_tracker/attack_self(mob/user)
 	enabled = !enabled
-	to_chat(user, SPAN_NOTICE("You [enabled ? "enable" : "disable"] \the [src]"))
+	to_chat(user, span_notice("You [enabled ? "enable" : "disable"] \the [src]"))
 	update_icon()
 
 /obj/item/ship_tracker/on_update_icon()
@@ -24,4 +24,4 @@
 
 /obj/item/ship_tracker/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("It appears to be [enabled ? "enabled" : "disabled"]")
+	. += span_notice("It appears to be [enabled ? "enabled" : "disabled"]")

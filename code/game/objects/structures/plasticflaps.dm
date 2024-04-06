@@ -44,16 +44,16 @@
 		USE_FEEDBACK_FAILURE("[src] has to be unanchored before you can deconstruct it.")
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] starts deconstructing [src] with [tool]."),
-		SPAN_NOTICE("You start deconstructing [src] with [tool].")
+		span_notice("[user] starts deconstructing [src] with [tool]."),
+		span_notice("You start deconstructing [src] with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, 3 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT) || anchored)
 		return
 	var/obj/item/stack/material/plastic/stack = new(loc, 30)
 	transfer_fingerprints_to(stack)
 	user.visible_message(
-		SPAN_NOTICE("[user] deconstructs [src] with [tool]."),
-		SPAN_NOTICE("You deconstruct [src] with [tool].")
+		span_notice("[user] deconstructs [src] with [tool]."),
+		span_notice("You deconstruct [src] with [tool].")
 	)
 	qdel(src)
 
@@ -70,8 +70,8 @@
 	else
 		become_airtight()
 	user.visible_message(
-		SPAN_NOTICE("[user] adjusts [src] with [tool]."),
-		SPAN_NOTICE("You adjust [src] with [tool], [airtight ? "preventing" : "allowing"] air flow.")
+		span_notice("[user] adjusts [src] with [tool]."),
+		span_notice("You adjust [src] with [tool], [airtight ? "preventing" : "allowing"] air flow.")
 	)
 
 

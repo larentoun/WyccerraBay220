@@ -36,8 +36,8 @@
 			USE_FEEDBACK_STACK_NOT_ENOUGH(rods, 5, "to build a cheval de frise.")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts adding some [tool.name] to \the [src]."),
-			SPAN_NOTICE("You start adding some [tool.name] to \the [src].")
+			span_notice("\The [user] starts adding some [tool.name] to \the [src]."),
+			span_notice("You start adding some [tool.name] to \the [src].")
 		)
 		if (!user.do_skilled(4 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
@@ -51,8 +51,8 @@
 		CDF.set_dir(user.dir)
 		transfer_fingerprints_to(CDF)
 		user.visible_message(
-			SPAN_NOTICE("\The [user] adds some [tool.name] to \the [src]."),
-			SPAN_NOTICE("You add some [tool.name] to \the [src].")
+			span_notice("\The [user] adds some [tool.name] to \the [src]."),
+			span_notice("You add some [tool.name] to \the [src].")
 		)
 		qdel_self()
 		return TRUE
@@ -70,8 +70,8 @@
 			USE_FEEDBACK_STACK_NOT_ENOUGH(stack, 1, "to repair \the [src].")
 			return TRUE
 		user.visible_message(
-			SPAN_NOTICE("\The [user] starts repairing \the [src] with some [tool.name]."),
-			SPAN_NOTICE("You start repairing \the [src] with some [tool.name].")
+			span_notice("\The [user] starts repairing \the [src] with some [tool.name]."),
+			span_notice("You start repairing \the [src] with some [tool.name].")
 		)
 		if (!user.do_skilled(2 SECONDS, SKILL_CONSTRUCTION, src, do_flags = DO_REPAIR_CONSTRUCT) || !user.use_sanity_check(src, tool))
 			return TRUE
@@ -83,8 +83,8 @@
 			return TRUE
 		revive_health()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] repairs \the [src] with some [tool.name]."),
-			SPAN_NOTICE("You repair \the [src] with some [tool.name].")
+			span_notice("\The [user] repairs \the [src] with some [tool.name]."),
+			span_notice("You repair \the [src] with some [tool.name].")
 		)
 		return TRUE
 
@@ -95,7 +95,7 @@
 	dismantle()
 
 /obj/structure/barricade/proc/dismantle()
-	visible_message(SPAN_DANGER("The barricade is smashed apart!"))
+	visible_message(span_danger("The barricade is smashed apart!"))
 	material.place_dismantled_product(get_turf(src))
 	qdel(src)
 
@@ -146,4 +146,4 @@
 		damage_holder = (damage / 4)
 
 	victim.apply_damage(damage_holder, DAMAGE_BRUTE, target_zone, damage_flags = DAMAGE_FLAG_SHARP, used_weapon = src)
-	visible_message(SPAN_DANGER("\The [victim] is [pick(poke_description)] by \the [src]!"))
+	visible_message(span_danger("\The [victim] is [pick(poke_description)] by \the [src]!"))

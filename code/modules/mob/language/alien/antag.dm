@@ -40,7 +40,7 @@
 	if(B)
 		if(B.host)
 			if(B.host.nutrition < 50 || B.host.stat)
-				to_chat(speaker, SPAN_WARNING("Your host is too weak to relay your broadcast."))
+				to_chat(speaker, span_warning("Your host is too weak to relay your broadcast."))
 				return FALSE
 			B.host.nutrition -= rand(1, 3)
 		speaker_mask = B.truename
@@ -67,7 +67,7 @@
 	var/mob/living/carbon/human/H = speaker
 	var/obj/item/organ/internal/hindtongue/tongue = H.internal_organs_by_name[BP_HINDTONGUE]
 	if(!istype(tongue) || !tongue.is_usable())
-		to_chat(speaker, SPAN_WARNING("You are not capable of speaking [name]!"))
+		to_chat(speaker, span_warning("You are not capable of speaking [name]!"))
 		return FALSE
 	return TRUE
 

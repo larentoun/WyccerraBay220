@@ -52,18 +52,18 @@
 
 /obj/machinery/gibber/physical_attack_hand(mob/user)
 	if(operating)
-		to_chat(user, SPAN_WARNING("\The [src] is locked and running, wait for it to finish."))
+		to_chat(user, span_warning("\The [src] is locked and running, wait for it to finish."))
 		return TRUE
 	startgibbing(user)
 	return TRUE
 
 /obj/machinery/gibber/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("The safety guard is [emagged ? SPAN_DANGER("disabled") : "enabled"].")
+	. += span_notice("The safety guard is [emagged ? span_danger("disabled") : "enabled"].")
 
 /obj/machinery/gibber/emag_act(remaining_charges, mob/user)
 	emagged = !emagged
-	to_chat(user, SPAN_DANGER("You [emagged ? "disable" : "enable"] \the [src]'s safety guard."))
+	to_chat(user, span_danger("You [emagged ? "disable" : "enable"] \the [src]'s safety guard."))
 	return 1
 
 /obj/machinery/gibber/components_are_accessible(path)
@@ -71,7 +71,7 @@
 
 /obj/machinery/gibber/cannot_transition_to(state_path, mob/user)
 	if(operating)
-		return SPAN_NOTICE("You must wait for \the [src] to finish operating first!")
+		return span_notice("You must wait for \the [src] to finish operating first!")
 	return ..()
 
 /obj/machinery/gibber/use_tool(obj/item/W, mob/living/user, list/click_params)
@@ -82,23 +82,23 @@
 		if(!user.unEquip(W))
 			return TRUE
 		qdel(W)
-		user.visible_message(SPAN_DANGER("\The [user] feeds \the [W] into \the [src], obliterating it."))
+		user.visible_message(span_danger("\The [user] feeds \the [W] into \the [src], obliterating it."))
 		return TRUE
 
 	return ..()
 
 /obj/machinery/gibber/user_can_move_target_inside(mob/target, mob/user)
 	if (occupant)
-		to_chat(user, SPAN_WARNING("\The [src] is already occupied!"))
+		to_chat(user, span_warning("\The [src] is already occupied!"))
 		return FALSE
 	if (operating)
-		to_chat(user, SPAN_WARNING("\The [src] is locked and running, wait for it to finish."))
+		to_chat(user, span_warning("\The [src] is locked and running, wait for it to finish."))
 		return FALSE
 	if (!(istype(target, /mob/living/carbon)) && !(istype(target, /mob/living/simple_animal)) )
-		to_chat(user, SPAN_WARNING("\The [target] is not suitable for \the [src]!"))
+		to_chat(user, span_warning("\The [target] is not suitable for \the [src]!"))
 		return FALSE
 	if (istype(target,/mob/living/carbon/human) && !emagged)
-		to_chat(user, SPAN_WARNING("\The [src] safety guard is engaged!"))
+		to_chat(user, span_warning("\The [src] safety guard is engaged!"))
 		return FALSE
 	return ..()
 
@@ -106,7 +106,7 @@
 	if (!user_can_move_target_inside(grab.affecting, grab.assailant))
 		return TRUE
 	if (!grab.force_danger())
-		to_chat(grab.assailant, SPAN_WARNING("You need a better grip to do that!"))
+		to_chat(grab.assailant, span_warning("You need a better grip to do that!"))
 		return TRUE
 	move_into_gibber(grab.assailant, grab.affecting)
 	return TRUE
@@ -118,14 +118,14 @@
 		move_into_gibber(user, target)
 		return
 	else
-		to_chat(user, SPAN_WARNING("You need to grab \the [target] to be able to do that!"))
+		to_chat(user, span_warning("You need to grab \the [target] to be able to do that!"))
 		return
 
 /obj/machinery/gibber/proc/move_into_gibber(mob/user, mob/living/victim)
-	user.visible_message(SPAN_DANGER("\The [user] starts to put \the [victim] into \the [src]!"))
+	user.visible_message(span_danger("\The [user] starts to put \the [victim] into \the [src]!"))
 	add_fingerprint(user)
 	if(do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE) && victim.Adjacent(src) && user.Adjacent(src) && victim.Adjacent(user) && !occupant)
-		user.visible_message(SPAN_DANGER("\The [user] stuffs \the [victim] into \the [src]!"))
+		user.visible_message(span_danger("\The [user] stuffs \the [victim] into \the [src]!"))
 		if(victim.client)
 			victim.client.perspective = EYE_PERSPECTIVE
 			victim.client.eye = src
@@ -172,11 +172,11 @@
 	if (operating)
 		return
 	if (!occupant)
-		visible_message(SPAN_WARNING("You hear metallic gears click harmlessly."))
+		visible_message(span_warning("You hear metallic gears click harmlessly."))
 		return
 
 	use_power_oneoff(1000)
-	visible_message(SPAN_DANGER("You hear a loud [occupant.isSynthetic() ? "metallic" : "squelchy"] grinding sound."))
+	visible_message(span_danger("You hear a loud [occupant.isSynthetic() ? "metallic" : "squelchy"] grinding sound."))
 	src.operating = 1
 	update_icon()
 

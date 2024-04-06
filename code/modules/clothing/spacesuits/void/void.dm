@@ -109,9 +109,9 @@ else if(##equipment_var) {\
 	var/list/part_list = new
 	for(var/obj/item/I in list(helmet,boots,tank))
 		part_list += "[I]"
-	. += SPAN_NOTICE("[src] has [english_list(part_list)] installed.")
+	. += span_notice("[src] has [english_list(part_list)] installed.")
 	if(tank && distance <= 1)
-		. += SPAN_NOTICE("The wrist-mounted pressure gauge reads [max(round(tank.air_contents.return_pressure()),0)] kPa remaining in [tank].")
+		. += span_notice("The wrist-mounted pressure gauge reads [max(round(tank.air_contents.return_pressure()),0)] kPa remaining in [tank].")
 
 /obj/item/clothing/suit/space/void/refit_for_species(target_species)
 	..()
@@ -192,19 +192,19 @@ else if(##equipment_var) {\
 	if(H.wear_suit != src) return
 
 	if(H.head == helmet)
-		to_chat(H, SPAN_NOTICE("You retract your suit helmet."))
+		to_chat(H, span_notice("You retract your suit helmet."))
 		helmet.canremove = 1
 		playsound(loc, helmet_retract_sound, 30)
 		H.drop_from_inventory(helmet, src)
 	else
 		if(H.head)
-			to_chat(H, SPAN_DANGER("You cannot deploy your helmet while wearing [H.head]."))
+			to_chat(H, span_danger("You cannot deploy your helmet while wearing [H.head]."))
 			return
 		if(H.equip_to_slot_if_possible(helmet, slot_head))
 			helmet.pickup(H)
 			helmet.canremove = 0
 			playsound(loc, helmet_deploy_sound, 30)
-			to_chat(H, SPAN_INFO("You deploy your suit helmet, sealing you off from the world."))
+			to_chat(H, span_info("You deploy your suit helmet, sealing you off from the world."))
 	helmet.update_light(H)
 
 /obj/item/clothing/suit/space/void/verb/eject_tank()
@@ -227,7 +227,7 @@ else if(##equipment_var) {\
 	if(slot != slot_wear_suit && slot != slot_l_hand && slot != slot_r_hand) return// let them eject those tanks when they're in hand or stuff for ease of use
 
 
-	to_chat(H, SPAN_INFO("You press the emergency release, ejecting [tank] from your suit."))
+	to_chat(H, span_info("You press the emergency release, ejecting [tank] from your suit."))
 	tank.canremove = 1
 	H.drop_from_inventory(tank, src)
 	H.put_in_hands(tank)
@@ -269,7 +269,7 @@ else if(##equipment_var) {\
 
 	if(istype(W,/obj/item/clothing/head/helmet/space))
 		if(user.get_inventory_slot(src) == slot_wear_suit)
-			to_chat(user, SPAN_WARNING("You cannot modify [src] while it is being worn."))
+			to_chat(user, span_warning("You cannot modify [src] while it is being worn."))
 			return
 		if(helmet)
 			to_chat(user, "[src] already has a helmet installed.")
@@ -282,7 +282,7 @@ else if(##equipment_var) {\
 		return
 	else if(istype(W,/obj/item/clothing/shoes/magboots))
 		if(user.get_inventory_slot(src) == slot_wear_suit)
-			to_chat(user, SPAN_WARNING("You cannot modify [src] while it is being worn."))
+			to_chat(user, span_warning("You cannot modify [src] while it is being worn."))
 			return
 		if(boots)
 			to_chat(user, "[src] already has magboots installed.")
@@ -295,13 +295,13 @@ else if(##equipment_var) {\
 		return
 	else if(istype(W,/obj/item/tank))
 		if(user.get_inventory_slot(src) == slot_wear_suit)
-			to_chat(user, SPAN_WARNING("You cannot modify [src] while it is being worn."))
+			to_chat(user, span_warning("You cannot modify [src] while it is being worn."))
 			return
 		if(tank)
 			to_chat(user, "[src] already has an airtank installed.")
 			return
 		if (istype(W, /obj/item/tank/scrubber))
-			to_chat(user, SPAN_WARNING("[W] is far too large to attach to [src]."))
+			to_chat(user, span_warning("[W] is far too large to attach to [src]."))
 			return
 		else
 			if(!user.unEquip(W, src))

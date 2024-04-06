@@ -18,9 +18,9 @@
 /obj/item/device/dna_sampler/examine(mob/user)
 	. = ..()
 	if(loaded == TRUE)
-		. += SPAN_WARNING("[src] is currently loaded with a DNA sample of [src_name]")
+		. += span_warning("[src] is currently loaded with a DNA sample of [src_name]")
 	else
-		. += SPAN_WARNING("[src] is currently empty")
+		. += span_warning("[src] is currently empty")
 
 /obj/item/device/dna_sampler/attack_self(mob/user)
 	if(loaded == TRUE && alert("Are you sure you wish to flush the current DNA sequence?",,"Yes","No") == "Yes")

@@ -33,7 +33,7 @@
 
 	//snap pop
 	playsound(src, 'sound/effects/snap.ogg', 50, 1)
-	src.visible_message(SPAN_WARNING("\The [src] explodes in a bright flash!"))
+	src.visible_message(span_warning("\The [src] explodes in a bright flash!"))
 
 	var/datum/effect/spark_spread/sparks = new /datum/effect/spark_spread()
 	sparks.set_up(2, 1, T)
@@ -73,7 +73,7 @@
 		for(var/mob/living/mob in GLOB.alive_mobs)
 			var/turf/T = get_turf(mob)
 			if(T && (T != TO) && (TO.z == T.z) && !mob.blinded)
-				to_chat(mob, SPAN_DANGER("You see a bright light to \the [dir2text(get_dir(T,TO))]!"))
+				to_chat(mob, span_danger("You see a bright light to \the [dir2text(get_dir(T,TO))]!"))
 			CHECK_TICK
 
 /obj/item/projectile/energy/electrode	//has more pain than a beam because it's harder to hit
@@ -160,7 +160,7 @@
 	if(!istype(M))
 		return
 
-	to_chat(M, SPAN_DANGER("You hear a loud roar!"))
+	to_chat(M, span_danger("You hear a loud roar!"))
 
 	var/ear_safety = 0
 	if(M.get_sound_volume_multiplier() < 0.2)
@@ -180,13 +180,13 @@
 		M.make_dizzy(med_dizziness_amt)
 
 	if(M.ear_damage >= 15)
-		to_chat(M, SPAN_DANGER("Your ears start to ring badly!"))
+		to_chat(M, span_danger("Your ears start to ring badly!"))
 		if(prob(M.ear_damage - 5))
-			to_chat(M, SPAN_DANGER("You can't hear anything!"))
+			to_chat(M, span_danger("You can't hear anything!"))
 			M.set_sdisability(DEAFENED)
 	else
 		if(M.ear_damage >= 5)
-			to_chat(M, SPAN_DANGER("Your ears start to ring!"))
+			to_chat(M, span_danger("Your ears start to ring!"))
 
 /obj/item/projectile/energy/plasmastun/on_hit(atom/target)
 	bang(target)

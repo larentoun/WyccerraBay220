@@ -9,7 +9,7 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 	set name = "View Variables"
 
 	if(!istype(D, /datum))
-		to_chat(usr, SPAN_WARNING("Not a viewable datum."))
+		to_chat(usr, span_warning("Not a viewable datum."))
 		return
 
 	if(!check_rights())

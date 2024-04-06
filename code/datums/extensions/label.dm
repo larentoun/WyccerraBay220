@@ -23,8 +23,8 @@
 	LAZYADD(labels, label)
 	if (user)
 		user.visible_message(
-			SPAN_ITALIC("\The [user] attaches a label to \a [atom_holder]."),
-			SPAN_ITALIC("You label \the [atom_holder] with \"[label]\".")
+			span_italic("\The [user] attaches a label to \a [atom_holder]."),
+			span_italic("You label \the [atom_holder] with \"[label]\".")
 		)
 	var/old_name = atom_holder.name
 	atom_holder.name = "[atom_holder.name] ([label])"
@@ -43,8 +43,8 @@
 		return
 	if (user)
 		user.visible_message(
-			SPAN_ITALIC("\The [user] removes a label from \a [atom_holder]."),
-			SPAN_ITALIC("You remove the \"[label]\" label from \the [atom_holder].")
+			span_italic("\The [user] removes a label from \a [atom_holder]."),
+			span_italic("You remove the \"[label]\" label from \the [atom_holder].")
 		)
 	var/old_name = atom_holder.name
 	atom_holder.name = replacetext_char(atom_holder.name, full_label, "", index, index + length_char(full_label))
@@ -66,7 +66,7 @@
 		free_length -= length_char(entry) + 3
 	if (free_length < label_length + 3)
 		if (user)
-			to_chat(user, SPAN_WARNING("That won't fit. There is space for [max(free_length - 3, 0)] more letters."))
+			to_chat(user, span_warning("That won't fit. There is space for [max(free_length - 3, 0)] more letters."))
 		return FALSE
 	return TRUE
 
@@ -100,7 +100,7 @@
 /// Convenience shortcut for user labelling attempts. Overrides provide behavior.
 /atom/proc/AddLabel(label, mob/user)
 	if (user)
-		to_chat(user, SPAN_NOTICE("The label refuses to stick to \the [src]."))
+		to_chat(user, span_notice("The label refuses to stick to \the [src]."))
 
 
 /obj/AddLabel(label, mob/user)
@@ -112,4 +112,4 @@
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/AddLabel(label, mob/user)
 	if (user)
-		to_chat(user, SPAN_WARNING("The label refuses to stick to \the [src]."))
+		to_chat(user, span_warning("The label refuses to stick to \the [src]."))

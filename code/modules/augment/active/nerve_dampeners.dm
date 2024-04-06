@@ -10,7 +10,7 @@
 
 /obj/item/organ/internal/augment/active/nerve_dampeners/can_activate()
 	if (ticks_remaining)
-		to_chat(owner, SPAN_WARNING("Your [name] is already active."))
+		to_chat(owner, span_warning("Your [name] is already active."))
 		return
 	. = ..()
 
@@ -18,12 +18,12 @@
 /obj/item/organ/internal/augment/active/nerve_dampeners/activate()
 	if (!can_activate())
 		return
-	to_chat(owner, SPAN_NOTICE("You activate your [name], and feel a wave of numbness wash over you!"))
+	to_chat(owner, span_notice("You activate your [name], and feel a wave of numbness wash over you!"))
 	ticks_remaining = 15
 	if (owner.drowsyness)
-		to_chat(owner, SPAN_DANGER("Your body slackens as you lose sensation."))
+		to_chat(owner, span_danger("Your body slackens as you lose sensation."))
 		if (prob(owner.getBrainLoss()))
-			to_chat(owner, SPAN_DANGER("You slump to the ground and black out."))
+			to_chat(owner, span_danger("You slump to the ground and black out."))
 			owner.Paralyse(10)
 		owner.adjustBrainLoss(owner.drowsyness)
 
@@ -35,7 +35,7 @@
 		ticks_remaining--
 		owner.add_chemical_effect(CE_PAINKILLER, 160) // About twice as strong as tramadol at full strength
 		if (!ticks_remaining) // ...but comes at a price. Brief short term benefit for a long-term comedown
-			to_chat(owner, SPAN_WARNING("You abruptly feel intensely exhausted as sensation returns."))
+			to_chat(owner, span_warning("You abruptly feel intensely exhausted as sensation returns."))
 			owner.drowsyness = max(owner.drowsyness, 15)
 			owner.set_confused(15)
 			owner.slurring = max(owner.slurring, 30)

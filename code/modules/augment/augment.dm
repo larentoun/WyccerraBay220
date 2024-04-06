@@ -110,7 +110,7 @@
 		if (BP_HEAD)
 			found = augment_slots & (AUGMENT_HEAD | AUGMENT_FLUFF)
 	if (!found)
-		to_chat(user, SPAN_WARNING("\The [src] can't be installed in \the [parent]."))
+		to_chat(user, span_warning("\The [src] can't be installed in \the [parent]."))
 		parent_organ = null
 		organ_tag = null
 		return 1
@@ -196,7 +196,7 @@
 			message += " It can be discovered by [english_list(discovery)]."
 		else
 			message += " It is undetectable."
-	. += SPAN_NOTICE("[message]")
+	. += span_notice("[message]")
 
 
 /datum/codex_entry/augment

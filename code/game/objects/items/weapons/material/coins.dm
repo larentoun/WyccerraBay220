@@ -46,22 +46,22 @@
 	if (ismob(target))
 		if (user.a_intent == I_HURT)
 			user.visible_message(
-				SPAN_WARNING("[user] menaces [target] with [src]."),
-				SPAN_WARNING("You menace [target] with [src]."),
+				span_warning("[user] menaces [target] with [src]."),
+				span_warning("You menace [target] with [src]."),
 				range = 5
 			)
 			return TRUE
 		user.visible_message(
-			SPAN_ITALIC("[user] presents [src] to [target]."),
-			SPAN_ITALIC("You present [src] to [target]."),
+			span_italic("[user] presents [src] to [target]."),
+			span_italic("You present [src] to [target]."),
 			range = 5
 		)
 		return TRUE
 	if (isobj(target) && user.a_intent == I_HURT)
 		playsound(user.loc, 'sound/effects/coin_flip.ogg', 75, TRUE)
 		user.visible_message(
-			SPAN_ITALIC("[user] taps [src] against [target]."),
-			SPAN_ITALIC("You tap [src] against [target]."),
+			span_italic("[user] taps [src] against [target]."),
+			span_italic("You tap [src] against [target]."),
 			range = 5
 		)
 		return TRUE
@@ -74,8 +74,8 @@
 	playsound(user.loc, 'sound/effects/coin_flip.ogg', 75, 1)
 	var/result = pick("front", "back")
 	user.visible_message(
-		SPAN_ITALIC("[user] flips [src], landing [result] side up."),
-		SPAN_ITALIC("You flip [src], landing [result] side up."),
+		span_italic("[user] flips [src], landing [result] side up."),
+		span_italic("You flip [src], landing [result] side up."),
 		range = 5
 	)
 
@@ -87,8 +87,8 @@
 		return
 	new /obj/item/stack/cable_coil (get_turf(user), 1, string_color)
 	user.visible_message(
-		SPAN_ITALIC("[user] removes a wire from [src]."),
-		SPAN_ITALIC("You remove the wire from [src]."),
+		span_italic("[user] removes a wire from [src]."),
+		span_italic("You remove the wire from [src]."),
 		range = 5
 	)
 	string_color = null
@@ -98,11 +98,11 @@
 	if (isCoil(item) && isnull(string_color))
 		var/obj/item/stack/cable_coil/coil = item
 		if (!coil.use(1))
-			to_chat(user, SPAN_WARNING("Your cable coil is a bug. Your action fails."))
+			to_chat(user, span_warning("Your cable coil is a bug. Your action fails."))
 			return TRUE
 		user.visible_message(
-			SPAN_ITALIC("[user] attaches some wire to [src]."),
-			SPAN_ITALIC("You attach some wire to [src]."),
+			span_italic("[user] attaches some wire to [src]."),
+			span_italic("You attach some wire to [src]."),
 			range = 5
 		)
 		string_color = coil.color
@@ -131,7 +131,7 @@
 		return
 	playsound(loc, 'sound/effects/coin_flip.ogg', 75, 1)
 	visible_message(
-		SPAN_WARNING("[src] clatters to [get_turf(src)]!")
+		span_warning("[src] clatters to [get_turf(src)]!")
 	)
 
 /obj/item/material/coin/challenge/verb/drop_coin()
@@ -142,14 +142,14 @@
 	if (!isturf(turf))
 		return
 	if (!usr.IsHolding(src))
-		to_chat(usr, SPAN_WARNING("You must hold [src] in your hands."))
+		to_chat(usr, span_warning("You must hold [src] in your hands."))
 		return
 	if (!usr.unEquip(src, turf))
 		return
 	playsound(turf, 'sound/effects/coin_flip.ogg', 75, 1)
 	usr.visible_message(
-		SPAN_WARNING("[usr] flicks [src] onto the ground!"),
-		SPAN_WARNING("You flick [src] onto the ground!")
+		span_warning("[usr] flicks [src] onto the ground!"),
+		span_warning("You flick [src] onto the ground!")
 	)
 
 ///Antag challenge coins, used to hack vendors.

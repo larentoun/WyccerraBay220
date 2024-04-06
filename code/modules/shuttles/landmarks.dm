@@ -207,9 +207,9 @@
 /obj/item/shuttle_beacon/attack_self(mob/user)
 	if (activate(user))
 		user.visible_message(
-			SPAN_NOTICE("\The [user] plants \the [src] and activates it."),
-			SPAN_NOTICE("You plant \the [src] and activate it."),
-			SPAN_ITALIC("You hear a soft hum.")
+			span_notice("\The [user] plants \the [src] and activates it."),
+			span_notice("You plant \the [src] and activate it."),
+			span_italic("You hear a soft hum.")
 		)
 
 
@@ -250,7 +250,7 @@
 	var/turf/T = get_turf(src)
 	if (isspaceturf(T) || isopenspace(T))
 		if (user)
-			to_chat(user, SPAN_WARNING("\The [src] needs to be activated on solid ground."))
+			to_chat(user, span_warning("\The [src] needs to be activated on solid ground."))
 		return FALSE
 	if (istype(user) && !user.unEquip(src, T))
 		log_debug(append_admin_tools("\A [src] attempted to activate but could not be unequipped by the mob.", user, get_turf(src)))
@@ -260,9 +260,9 @@
 		return FALSE
 	if (user)
 		user.visible_message(
-			SPAN_ITALIC("\The [user] starts setting up \a [src]."),
-			SPAN_ITALIC("You start setting up \a [src]."),
-			SPAN_ITALIC("You hear the clicking of metal and plastic.")
+			span_italic("\The [user] starts setting up \a [src]."),
+			span_italic("You start setting up \a [src]."),
+			span_italic("You hear the clicking of metal and plastic.")
 		)
 		playsound(src, 'sound/items/shuttle_beacon_prepare.ogg', 100)
 		if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
@@ -291,7 +291,7 @@
 	landmark = null
 	update_icon()
 	if (!silent)
-		visible_message(SPAN_WARNING("\The [src] deactivates, going dark."))
+		visible_message(span_warning("\The [src] deactivates, going dark."))
 	return TRUE
 
 

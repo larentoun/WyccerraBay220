@@ -42,12 +42,12 @@
 		return
 
 	if (inoperable())
-		to_chat(user, SPAN_WARNING("A small red light flashes on \the [src]."))
+		to_chat(user, span_warning("A small red light flashes on \the [src]."))
 		return
 
 	var/obj/overmap/visitable/O = map_sectors["[get_z(src)]"]
 	if(!O)
-		to_chat(user, SPAN_WARNING("You cannot deploy \the [src] here."))
+		to_chat(user, span_warning("You cannot deploy \the [src] here."))
 		return
 
 	var/toggle_prompt = alert(user, "Turn the beacon...", "[src] Options", "[signal || emergency_signal ? "Off" : "On"]", "Distress", "Cancel")
@@ -61,7 +61,7 @@
 	switch(toggle_prompt)
 		if ("On")
 			if (emergency_signal)
-				to_chat(user, SPAN_WARNING("Turn off the distress signal first!"))
+				to_chat(user, span_warning("Turn off the distress signal first!"))
 				return
 			else
 				activate()
@@ -69,11 +69,11 @@
 			deactivate()
 		if ("Distress")
 			if (signal)
-				to_chat(user, SPAN_WARNING("Turn off the radio broadcast first!"))
+				to_chat(user, span_warning("Turn off the radio broadcast first!"))
 				return
 
 			if (emergency_signal)
-				to_chat(user, SPAN_WARNING("This beacon is already broadcasting a distress signal!"))
+				to_chat(user, span_warning("This beacon is already broadcasting a distress signal!"))
 				return
 
 			activate_distress()
@@ -84,7 +84,7 @@
 	if(!message)
 		return
 
-	visible_message(SPAN_NOTICE("\The [src] whirrs to life, starting its radio broadcast."))
+	visible_message(span_notice("\The [src] whirrs to life, starting its radio broadcast."))
 
 	playsound(src, 'sound/machines/sensors/newcontact.ogg', 50, 3, 3)
 
@@ -101,7 +101,7 @@
 /obj/machinery/radio_beacon/proc/activate_distress()
 	var/obj/overmap/visitable/O = map_sectors["[get_z(src)]"]
 
-	visible_message(SPAN_WARNING("\The [src] beeps urgently as it whirrs to life, sending out intermittent tones."))
+	visible_message(span_warning("\The [src] beeps urgently as it whirrs to life, sending out intermittent tones."))
 
 	log_and_message_admins("A distress beacon was activated in [get_area(src)].", usr, get_turf(src))
 
@@ -118,7 +118,7 @@
 
 /obj/machinery/radio_beacon/proc/deactivate()
 
-	visible_message(SPAN_NOTICE("\The [src] winds down to a halt, cutting short it's radio broadcast."))
+	visible_message(span_notice("\The [src] winds down to a halt, cutting short it's radio broadcast."))
 
 	playsound(src, 'sound/machines/sensors/newcontact.ogg', 50, 3, 3)
 
@@ -198,5 +198,5 @@
 /obj/overmap/radio/distress/Initialize()
 	..()
 	for(var/obj/machinery/computer/ship/helm/H as anything in SSmachines.get_machinery_of_type(/obj/machinery/computer/ship/helm))
-		H.visible_message(SPAN_WARNING("\the [H] pings uneasily as it detects a distress signal."))
+		H.visible_message(span_warning("\the [H] pings uneasily as it detects a distress signal."))
 		playsound(H, 'sound/machines/sensors/newcontact.ogg', 50, 3, 3)

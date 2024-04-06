@@ -52,7 +52,7 @@
 
 /mob/living/silicon/robot/proc/power_down()
 	if (has_power)
-		visible_message("[src] beeps stridently as it begins to run on emergency backup power!", SPAN_WARNING("You beep stridently as you begin to run on emergency backup power!"))
+		visible_message("[src] beeps stridently as it begins to run on emergency backup power!", span_warning("You beep stridently as you begin to run on emergency backup power!"))
 		has_power = FALSE
 		set_stat(UNCONSCIOUS)
 	if(lights_on) // Light is on but there is no power!

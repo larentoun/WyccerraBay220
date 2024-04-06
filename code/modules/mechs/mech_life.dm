@@ -84,7 +84,7 @@
 		apply_damage(damage, DAMAGE_BURN)
 	//A possibility is to hook up interface icons here. But this works pretty well in my experience
 		if(prob(damage))
-			visible_message(SPAN_DANGER("\The [src]'s hull bends and buckles under the intense heat!"))
+			visible_message(span_danger("\The [src]'s hull bends and buckles under the intense heat!"))
 
 	hud_heat.Update()
 
@@ -148,7 +148,7 @@
 
 	if(sight & BLIND && !was_blind)
 		for(var/mob/pilot in pilots)
-			to_chat(pilot, SPAN_WARNING("The sensors are not operational and you cannot see a thing!"))
+			to_chat(pilot, span_warning("The sensors are not operational and you cannot see a thing!"))
 
 /mob/living/exosuit/additional_sight_flags()
 	return sight

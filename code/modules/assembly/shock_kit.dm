@@ -19,7 +19,7 @@
 	if(!tool.use_as_tool(src, user, volume = 50, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	status = !status
-	to_chat(user, SPAN_NOTICE("[src] is now [status ? "secured" : "unsecured"]!"))
+	to_chat(user, span_notice("[src] is now [status ? "secured" : "unsecured"]!"))
 	add_fingerprint(user)
 
 /obj/item/assembly/shock_kit/wrench_act(mob/living/user, obj/item/tool)

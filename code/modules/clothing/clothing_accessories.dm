@@ -1,26 +1,26 @@
 /obj/item/clothing/proc/can_attach_accessory(obj/item/clothing/accessory/A, mob/user)
 	if (!length(valid_accessory_slots))
 		if (user)
-			to_chat(user, SPAN_WARNING("\The [src] can't take any attachments."))
+			to_chat(user, span_warning("\The [src] can't take any attachments."))
 		return FALSE
 
 	if (!istype(A) || !(A.slot in valid_accessory_slots))
 		if (user)
-			to_chat(user, SPAN_WARNING("\The [A] can't attach to \the [src]."))
+			to_chat(user, span_warning("\The [A] can't attach to \the [src]."))
 		return FALSE
 
 	if (length(accessories) && restricted_accessory_slots && (A.slot in restricted_accessory_slots))
 		for (var/obj/item/clothing/accessory/AC in accessories)
 			if (AC.slot == A.slot)
 				if (user)
-					to_chat(user, SPAN_WARNING("\The [src] can't attach more accessories of that type."))
+					to_chat(user, span_warning("\The [src] can't attach more accessories of that type."))
 				return FALSE
 
 	var/bulky = A.get_bulky_coverage()
 	if (bulky)
 		if (bulky & get_bulky_coverage())
 			if (user)
-				to_chat(user, SPAN_WARNING("\The [src] is already too bulky to attach \the [A]."))
+				to_chat(user, span_warning("\The [src] is already too bulky to attach \the [A]."))
 			return FALSE
 
 		if (ishuman(loc))
@@ -29,7 +29,7 @@
 				for (var/obj/item/clothing/C in H.get_equipped_items())
 					if ((C != src) && (C.get_bulky_coverage() & bulky))
 						if (user)
-							to_chat(user, SPAN_WARNING("\The [A] is too bulky to wear with \the [C]."))
+							to_chat(user, span_warning("\The [A] is too bulky to wear with \the [C]."))
 						return FALSE
 	return TRUE
 
@@ -65,17 +65,17 @@
 	. = ..()
 	for(var/obj/item/clothing/accessory/A in accessories)
 		if (!(A.accessory_flags & ACCESSORY_HIDDEN))
-			. += SPAN_NOTICE("[icon2html(A, user)] \A [A] is attached to it.[istype(A, /obj/item/clothing/accessory/wristwatch) ? "  <a href='?src=\ref[A];check_watch=1'>\[Check Watch\]</a>" : ""]")
+			. += span_notice("[icon2html(A, user)] \A [A] is attached to it.[istype(A, /obj/item/clothing/accessory/wristwatch) ? "  <a href='?src=\ref[A];check_watch=1'>\[Check Watch\]</a>" : ""]")
 	switch(ironed_state)
 		if(WRINKLES_WRINKLY)
-			. += SPAN_BAD("It's wrinkly.")
+			. += span_bad("It's wrinkly.")
 		if(WRINKLES_NONE)
-			. += SPAN_NOTICE("It's completely wrinkle-free!")
+			. += span_notice("It's completely wrinkle-free!")
 	switch(smell_state)
 		if(SMELL_CLEAN)
-			. += SPAN_NOTICE("It smells clean!")
+			. += span_notice("It smells clean!")
 		if(SMELL_STINKY)
-			. += SPAN_BAD("It's quite stinky!")
+			. += span_bad("It's quite stinky!")
 
 
 /obj/item/clothing/proc/update_accessory_slowdown()

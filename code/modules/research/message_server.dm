@@ -113,12 +113,12 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	if (!istype(tool, /obj/item/stock_parts/circuitboard/message_monitor))
 		return ..()
 	if (spamfilter_limit >= initial(spamfilter_limit) * 2)
-		to_chat(user, SPAN_WARNING("\The [src] already has as many boards as it can hold."))
+		to_chat(user, span_warning("\The [src] already has as many boards as it can hold."))
 		return TRUE
 	spamfilter_limit += round(initial(spamfilter_limit) / 2)
 	user.visible_message(
-		SPAN_ITALIC("\The [user] installs \a [tool] into \a [src]."),
-		SPAN_ITALIC("You install \the [tool] into \the [src], improving its spam filtering capabilities."),
+		span_italic("\The [user] installs \a [tool] into \a [src]."),
+		span_italic("You install \the [tool] into \the [src], improving its spam filtering capabilities."),
 		range = 5
 	)
 	qdel(tool)
@@ -139,7 +139,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 			log_debug(append_admin_tools("MESSAGE SERVER: Mob has an invalid job, skipping. Mob: '[H]'. Rank: '[rank]'. Job: '[J]'."))
 			continue
 		if(J.department_flag & department)
-			to_chat(H, SPAN_NOTICE("Your [device.name] alerts you to the fact that somebody is requesting your presence at your department."))
+			to_chat(H, span_notice("Your [device.name] alerts you to the fact that somebody is requesting your presence at your department."))
 			reached++
 	return reached
 
@@ -166,11 +166,11 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 				Console.icon_state = "req_comp[priority]"
 			if(priority > 1)
 				playsound(Console.loc, 'sound/machines/chime.ogg', 80, 1)
-				Console.audible_message("[icon2html(Console, viewers(get_turf(Console)))][SPAN_WARNING("\The [Console] announces: 'High priority message received from [sender]!'")]", hearing_distance = 8)
+				Console.audible_message("[icon2html(Console, viewers(get_turf(Console)))][span_warning("\The [Console] announces: 'High priority message received from [sender]!'")]", hearing_distance = 8)
 				Console.message_log += "[SPAN_COLOR("red", "High Priority message from <A href='?src=\ref[Console];write=[sender]'>[sender]</A>")]<BR>[authmsg]"
 			else
 				if(!Console.silent)
 					playsound(Console.loc, 'sound/machines/twobeep.ogg', 50, 1)
-					Console.audible_message("[icon2html(Console, viewers(get_turf(Console)))][SPAN_NOTICE("\The [Console] announces: 'Message received from [sender].'")]", hearing_distance = 5)
+					Console.audible_message("[icon2html(Console, viewers(get_turf(Console)))][span_notice("\The [Console] announces: 'Message received from [sender].'")]", hearing_distance = 5)
 				Console.message_log += "<B>Message from <A href='?src=\ref[Console];write=[sender]'>[sender]</A></B><BR>[authmsg]"
 			Console.set_light(2, 0.5)

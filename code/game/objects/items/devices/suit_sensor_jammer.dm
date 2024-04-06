@@ -54,8 +54,8 @@
 	disable()
 	user.put_in_hands(bcell)
 	user.visible_message(
-		SPAN_NOTICE("[user] removes [bcell] from [src] with [tool]."),
-		SPAN_NOTICE("You remove [bcell] from [src] with [tool].")
+		span_notice("[user] removes [bcell] from [src] with [tool]."),
+		span_notice("You remove [bcell] from [src] with [tool].")
 	)
 	bcell = null
 
@@ -70,8 +70,8 @@
 			return TRUE
 		bcell = tool
 		user.visible_message(
-			SPAN_NOTICE("[user] installs [tool] into [src]."),
-			SPAN_NOTICE("you install [tool] into [src].")
+			span_notice("[user] installs [tool] into [src]."),
+			span_notice("you install [tool] into [src].")
 		)
 		return TRUE
 
@@ -121,11 +121,11 @@
 /obj/item/device/suit_sensor_jammer/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 3)
-		. += SPAN_NOTICE("This device appears to be [active ? "" : "in"]active and ")
+		. += span_notice("This device appears to be [active ? "" : "in"]active and ")
 		if(bcell)
-			. += SPAN_NOTICE("displays a charge level of [bcell.percent()]%.")
+			. += span_notice("displays a charge level of [bcell.percent()]%.")
 		else
-			. += SPAN_NOTICE("is lacking a cell.")
+			. += span_notice("is lacking a cell.")
 
 /obj/item/device/suit_sensor_jammer/CanUseTopic(user, state)
 	if(!bcell || bcell.charge <= 0)

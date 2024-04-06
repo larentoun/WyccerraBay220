@@ -23,7 +23,7 @@
 	if(displayed_name && displayed_name != name)
 		shown_label = " labeled '[displayed_name]'"
 
-	return SPAN_NOTICE("There is [src][shown_label], which displays [!isnull(stuff_to_display) ? "'[stuff_to_display]'" : "nothing"].")
+	return span_notice("There is [src][shown_label], which displays [!isnull(stuff_to_display) ? "'[stuff_to_display]'" : "nothing"].")
 
 /obj/item/integrated_circuit/output/screen/get_topic_data()
 	return stuff_to_display ? list(stuff_to_display) : list()
@@ -48,7 +48,7 @@
 	var/list/nearby_things = range(0, get_turf(src))
 	for(var/mob/M in nearby_things)
 		var/obj/O = assembly ? assembly : src
-		to_chat(M, SPAN_NOTICE("[icon2html(O, M)] [stuff_to_display]"))
+		to_chat(M, span_notice("[icon2html(O, M)] [stuff_to_display]"))
 
 /obj/item/integrated_circuit/output/screen/large
 	name = "large screen"
@@ -60,7 +60,7 @@
 /obj/item/integrated_circuit/output/screen/large/do_work()
 	..()
 	var/obj/O = assembly ? get_turf(assembly) : loc
-	O.visible_message(SPAN_NOTICE("[icon2html(O, viewers(get_turf(O)))]  [stuff_to_display]"))
+	O.visible_message(span_notice("[icon2html(O, viewers(get_turf(O)))]  [stuff_to_display]"))
 
 /obj/item/integrated_circuit/output/light
 	name = "light"

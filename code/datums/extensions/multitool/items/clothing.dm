@@ -3,7 +3,7 @@
 		return
 	var/obj/item/clothing/under/u = holder
 	if(u.has_sensor == SUIT_NO_SENSORS)
-		to_chat(user, SPAN_WARNING("\The [u] doesn't have suit sensors."))
+		to_chat(user, span_warning("\The [u] doesn't have suit sensors."))
 		return
 	u.has_sensor = u.has_sensor == SUIT_LOCKED_SENSORS ? SUIT_HAS_SENSORS : SUIT_LOCKED_SENSORS
-	user.visible_message(SPAN_NOTICE("\The [user] [u.has_sensor == SUIT_LOCKED_SENSORS ? "" : "un"]locks \the [u]'s suit sensor controls."), range = 2)
+	user.visible_message(span_notice("\The [user] [u.has_sensor == SUIT_LOCKED_SENSORS ? "" : "un"]locks \the [u]'s suit sensor controls."), range = 2)

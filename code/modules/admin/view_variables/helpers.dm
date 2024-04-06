@@ -199,7 +199,7 @@
 		return 1
 	if (!(var_to_edit in vars))
 		if (!silent)
-			to_chat(user, SPAN_WARNING("\The [src] does not have a var '[var_to_edit]'"))
+			to_chat(user, span_warning("\The [src] does not have a var '[var_to_edit]'"))
 		return 2
 	if (var_to_edit in VV_static())
 		return 3

@@ -73,20 +73,20 @@
 /obj/machinery/gravity_generator/main/examine(mob/user)
 	. = ..()
 	if(panel_open)
-		. += SPAN_NOTICE("The maintenance hatch is open.")
+		. += span_notice("The maintenance hatch is open.")
 	. += show_broken_info(user)
 
 /obj/machinery/gravity_generator/main/show_broken_info(mob/user)
 	. = list()
 	switch(broken_state)
 		if(GRAV_NEEDS_PLASTEEL)
-			. += SPAN_NOTICE("It requires ten plasteel to repair.")
+			. += span_notice("It requires ten plasteel to repair.")
 		if(GRAV_NEEDS_WELDING)
-			. += SPAN_NOTICE("It requires a welder to repair.")
+			. += span_notice("It requires a welder to repair.")
 		if(GRAV_NEEDS_WRENCH)
-			. += SPAN_NOTICE("It requires a wrench to repair.")
+			. += span_notice("It requires a wrench to repair.")
 		if(GRAV_NEEDS_SCREWDRIVER)
-			. += SPAN_NOTICE("It requires a screwdriver to repair.")
+			. += span_notice("It requires a screwdriver to repair.")
 
 /obj/machinery/gravity_generator/main/ex_act(severity)
 	switch(severity)
@@ -137,7 +137,7 @@
 		if(0)
 			charge_count = 0
 			enabled = FALSE
-			visible_message(SPAN_WARNING("[src] breaks apart!"))
+			visible_message(span_warning("[src] breaks apart!"))
 			set_broken_state(GRAV_NEEDS_PLASTEEL)
 			set_broken(MACHINE_BROKEN_GENERIC, TRUE)
 			set_state(FALSE)
@@ -177,7 +177,7 @@
 		return
 	panel_open = !panel_open
 	update_icon()
-	to_chat(user, SPAN_NOTICE("You [panel_open ? "open" : "close"] the maintenance hatch."))
+	to_chat(user, span_notice("You [panel_open ? "open" : "close"] the maintenance hatch."))
 
 // Fixing the gravity generator.
 /obj/machinery/gravity_generator/main/screwdriver_act(mob/living/user, obj/item/tool)
@@ -185,15 +185,15 @@
 		return
 	. = ITEM_INTERACT_SUCCESS
 	user.visible_message(
-		SPAN_NOTICE("[user] begins to attach the details in the desired order."),
-		SPAN_NOTICE("You begin to attach the details in the desired order.")
+		span_notice("[user] begins to attach the details in the desired order."),
+		span_notice("You begin to attach the details in the desired order.")
 	)
 	if(!tool.use_as_tool(middle, user, 15 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT) || broken_state != GRAV_NEEDS_SCREWDRIVER)
 		return
 	health += max(initial(health), health + 250)
 	user.visible_message(
-		SPAN_NOTICE("[user] attached the details."),
-		SPAN_NOTICE("You have attached the details.")
+		span_notice("[user] attached the details."),
+		span_notice("You have attached the details.")
 	)
 	stat &= ~MACHINE_BROKEN_GENERIC
 	set_broken_state(0)
@@ -204,15 +204,15 @@
 		return
 	. = ITEM_INTERACT_SUCCESS
 	user.visible_message(
-		SPAN_NOTICE("[user] screws the parts back."),
-		SPAN_NOTICE("You begin to screw the parts back.")
+		span_notice("[user] screws the parts back."),
+		span_notice("You begin to screw the parts back.")
 	)
 	if(!tool.use_as_tool(middle, user, 15 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT) || broken_state != GRAV_NEEDS_WRENCH)
 		return
 	health += 250
 	user.visible_message(
-		SPAN_NOTICE("[user] screwed the parts back."),
-		SPAN_NOTICE("You screwed the parts back.")
+		span_notice("[user] screwed the parts back."),
+		span_notice("You screwed the parts back.")
 	)
 	set_broken_state(GRAV_NEEDS_SCREWDRIVER)
 	update_icon()
@@ -236,12 +236,12 @@
 		if(istype(tool, /obj/item/stack/material/plasteel) || broken_state != GRAV_NEEDS_PLASTEEL)
 			var/obj/item/stack/material/plasteel/PS = tool
 			if(PS.amount < 10)
-				to_chat(user, SPAN_WARNING("You need 10 sheets of plasteel."))
+				to_chat(user, span_warning("You need 10 sheets of plasteel."))
 				return TRUE
 
 			user.visible_message(
-				SPAN_NOTICE("[user] begins to add plasteel to the destroyed frame."),
-				SPAN_NOTICE("You begin to add plasteel to the destroyed frame.")
+				span_notice("[user] begins to add plasteel to the destroyed frame."),
+				span_notice("You begin to add plasteel to the destroyed frame.")
 			)
 			playsound(loc, 'sound/machines/click.ogg', 75, 1)
 
@@ -251,8 +251,8 @@
 			PS.use(10)
 			health += 250
 			user.visible_message(
-				SPAN_NOTICE("[user] replaced the destroyed frame."),
-				SPAN_NOTICE("You replaced the destroyed frame.")
+				span_notice("[user] replaced the destroyed frame."),
+				span_notice("You replaced the destroyed frame.")
 			)
 			playsound(loc, 'sound/machines/click.ogg', 75, 1)
 			set_broken_state(GRAV_NEEDS_WELDING)
@@ -271,7 +271,7 @@
 
 /obj/machinery/gravity_generator/main/attack_hand(mob/user)
 	if(reason_broken)
-		to_chat(user, SPAN_WARNING("[src] is broken!"))
+		to_chat(user, span_warning("[src] is broken!"))
 		return
 
 	if(wires && panel_open)
@@ -310,7 +310,7 @@
 /obj/machinery/gravity_generator/main/OnTopic(mob/user, href_list, datum/topic_state/state)
 	if(href_list["gentoggle"])
 		if(!can_toggle_breaker || !power_supply || !is_powered())
-			to_chat(user, SPAN_WARNING("You pressed a button, but it doesn’t seem to respond."))
+			to_chat(user, span_warning("You pressed a button, but it doesn’t seem to respond."))
 			return
 		set_state(breaker ? FALSE : TRUE)
 
@@ -318,12 +318,12 @@
 		if(!emergency_shutoff_button)
 			return
 		if(!charge_count)
-			to_chat(user, SPAN_WARNING("[middle] discharged!"))
+			to_chat(user, span_warning("[middle] discharged!"))
 			return
 
 		user.visible_message(
-			SPAN_WARNING("[user] starts to press a lot of buttons on [src]!"),
-			SPAN_NOTICE("You start to press many buttons on [src], as if you know what you are doing.")
+			span_warning("[user] starts to press a lot of buttons on [src]!"),
+			span_notice("You start to press many buttons on [src], as if you know what you are doing.")
 		)
 		if(do_after(user, 15 SECONDS, src))
 			emergency_shutoff()
@@ -340,7 +340,7 @@
 	breaker = FALSE
 	charging_state = POWER_IDLE
 	update_use_power(POWER_USE_IDLE)
-	visible_message(SPAN_DANGER("[src] makes a large whirring noise!"))
+	visible_message(span_danger("[src] makes a large whirring noise!"))
 
 	for(var/i = 0, i <= 3, i++)
 		switch(i)

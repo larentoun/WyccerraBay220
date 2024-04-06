@@ -80,7 +80,7 @@
 			var/obj/temporary/temp_effect = new (turf, 1 SECONDS, 'icons/effects/effects.dmi', effect_state)
 			temp_effect.set_light(1, 1, 2, 3, COLOR_CYAN_BLUE)
 			if (prob(mob_spawn_chance) && length(mobs) < maximum_mobs && !turf.is_dense())
-				turf.visible_message(SPAN_DANGER("A sudden burst of energy gives birth to some sort of ghost-like entity!"))
+				turf.visible_message(span_danger("A sudden burst of energy gives birth to some sort of ghost-like entity!"))
 				playsound(turf, "sound/effects/supermatter.ogg", 75, TRUE)
 				var/mob/living/simple_animal/hostile/bluespace/bluespace_ghost = new (turf)
 				mobs += bluespace_ghost

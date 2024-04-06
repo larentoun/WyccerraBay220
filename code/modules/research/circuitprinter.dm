@@ -53,7 +53,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 		update_icon()
 	else
 		if(busy)
-			visible_message(SPAN_NOTICE("[icon2html(src, viewers(get_turf(src)))] [src] flashes: insufficient materials: [getLackingMaterials(D)]."))
+			visible_message(span_notice("[icon2html(src, viewers(get_turf(src)))] [src] flashes: insufficient materials: [getLackingMaterials(D)]."))
 			busy = 0
 			update_icon()
 
@@ -96,17 +96,17 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 
 /obj/machinery/r_n_d/circuit_imprinter/cannot_transition_to(state_path)
 	if(busy)
-		return SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation.")
+		return span_notice("\The [src] is busy. Please wait for completion of previous operation.")
 	return ..()
 
 /obj/machinery/r_n_d/circuit_imprinter/use_tool(obj/item/O, mob/living/user, list/click_params)
 	if(busy)
-		to_chat(user, SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation."))
+		to_chat(user, span_notice("\The [src] is busy. Please wait for completion of previous operation."))
 		return TRUE
 	if ((. = ..()))
 		return
 	if(panel_open)
-		to_chat(user, SPAN_NOTICE("You can't load \the [src] while it's opened."))
+		to_chat(user, span_notice("You can't load \the [src] while it's opened."))
 		return TRUE
 	if(!linked_console)
 		to_chat(user, "\The [src] must be linked to an R&D console first.")
@@ -116,14 +116,14 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	if(is_robot_module(O))
 		return FALSE
 	if(!istype(O, /obj/item/stack/material))
-		to_chat(user, SPAN_WARNING("You cannot insert this item into \the [src]!"))
+		to_chat(user, span_warning("You cannot insert this item into \the [src]!"))
 		return TRUE
 	if(inoperable())
-		to_chat(user, SPAN_WARNING("\The [src] is not working properly."))
+		to_chat(user, span_warning("\The [src] is not working properly."))
 		return TRUE
 
 	if(TotalMaterials() + SHEET_MATERIAL_AMOUNT > max_material_storage)
-		to_chat(user, SPAN_WARNING("\The [src]'s material bin is full. Please remove material before adding more."))
+		to_chat(user, span_warning("\The [src]'s material bin is full. Please remove material before adding more."))
 		return TRUE
 
 	var/obj/item/stack/material/stack = O
@@ -136,7 +136,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	if(t)
 		if(do_after(usr, 1.6 SECONDS, src, DO_PUBLIC_UNIQUE))
 			if(stack.use(amount))
-				to_chat(user, SPAN_NOTICE("You add [amount] sheet\s to \the [src]."))
+				to_chat(user, span_notice("You add [amount] sheet\s to \the [src]."))
 				materials[t] += amount * SHEET_MATERIAL_AMOUNT
 	busy = 0
 	updateUsrDialog()

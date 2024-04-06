@@ -18,11 +18,11 @@
 	if(istype(A, /turf/simulated/open))         //Place into open space
 		var/turf/below_loc = GetBelow(A)
 		if(!below_loc || (istype(/turf/space, below_loc)))
-			to_chat(user, SPAN_NOTICE("Why would you do that?! There is only infinite space there..."))
+			to_chat(user, span_notice("Why would you do that?! There is only infinite space there..."))
 			return
 		user.visible_message(
-			SPAN_WARNING("[user] begins to lower \the [src] into \the [A]."),
-			SPAN_WARNING("You begin to lower \the [src] into \the [A].")
+			span_warning("[user] begins to lower \the [src] into \the [A]."),
+			span_warning("You begin to lower \the [src] into \the [A].")
 		)
 		if(!handle_action(A, user))
 			return
@@ -39,11 +39,11 @@
 	else if (istype(A, /turf/simulated/floor))        //Place onto Floor
 		var/turf/upper_loc = GetAbove(A)
 		if(!upper_loc || !istype(upper_loc,/turf/simulated/open))
-			to_chat(user, SPAN_NOTICE("There is something above. You can't deploy!"))
+			to_chat(user, span_notice("There is something above. You can't deploy!"))
 			return
 		user.visible_message(
-			SPAN_WARNING("[user] begins deploying \the [src] on \the [A]."),
-			SPAN_WARNING("You begin to deploy \the [src] on \the [A].")
+			span_warning("[user] begins deploying \the [src] on \the [A]."),
+			span_warning("You begin to deploy \the [src] on \the [A].")
 		)
 		if(!handle_action(A, user))
 			return
@@ -91,8 +91,8 @@
 	var/mob/living/carbon/human/H = usr
 
 	H.visible_message(
-		SPAN_NOTICE("[H] starts folding up [src]."),
-		SPAN_NOTICE("You start folding up [src].")
+		span_notice("[H] starts folding up [src]."),
+		span_notice("You start folding up [src].")
 	)
 
 	if(!do_after(H, 30, src))
@@ -106,8 +106,8 @@
 	transfer_fingerprints_to(R)
 
 	H.visible_message(
-		SPAN_NOTICE("[H] folds [src] up into [R]!"),
-		SPAN_NOTICE("You fold [src] up into [R]!")
+		span_notice("[H] folds [src] up into [R]!"),
+		span_notice("You fold [src] up into [R]!")
 	)
 
 	if(target_down)

@@ -54,12 +54,12 @@
 	. = ..()
 	if (distance < 5)
 		if (is_processing)
-			. += SPAN_NOTICE("It is[is_processing ? "" : " not"] running.")
+			. += span_notice("It is[is_processing ? "" : " not"] running.")
 		if (distance < 3)
 			if (length(cooking))
-				. += SPAN_NOTICE("You can see \an [english_list(cooking)] inside.")
+				. += span_notice("You can see \an [english_list(cooking)] inside.")
 			else
-				. += SPAN_NOTICE("It is empty.")
+				. += span_notice("It is empty.")
 
 
 /obj/machinery/cooker/components_are_accessible(path)
@@ -68,7 +68,7 @@
 
 /obj/machinery/cooker/cannot_transition_to(state_path, mob/user)
 	if(is_processing)
-		return SPAN_WARNING("Turn off \the [src] first.")
+		return span_warning("Turn off \the [src] first.")
 	return ..()
 
 
@@ -97,38 +97,38 @@
 	if (.)
 		return
 	if (stat)
-		to_chat(user, SPAN_WARNING("\The [src] is in no condition to operate."))
+		to_chat(user, span_warning("\The [src] is in no condition to operate."))
 		return
 	var/option = alert(user, "", "[src] Options", "Empty", "Turn [is_processing ? "Off" : "On"]", length(cook_modes) > 1 ? "Cook Mode" : null)
 	if (!option || QDELETED(src) || stat)
 		return
 	if (!Adjacent(user) || user.stat)
-		to_chat(user, SPAN_WARNING("You're not able to do that to \the [src] right now."))
+		to_chat(user, span_warning("You're not able to do that to \the [src] right now."))
 		return
 	switch (option)
 		if ("Empty")
 			if (is_processing)
-				to_chat(user, SPAN_WARNING("Turn off \the [src] first."))
+				to_chat(user, span_warning("Turn off \the [src] first."))
 				return
 			if (!length(cooking))
-				to_chat(user, SPAN_WARNING("\The [src] is already empty."))
+				to_chat(user, span_warning("\The [src] is already empty."))
 				return
 			empty()
 		if ("Turn Off")
 			disable()
-			visible_message(SPAN_NOTICE("\The [user] turns off \the [src]."), SPAN_NOTICE("You turn off \the [src]."), range = 5)
+			visible_message(span_notice("\The [user] turns off \the [src]."), span_notice("You turn off \the [src]."), range = 5)
 		if ("Turn On")
 			enable()
-			visible_message(SPAN_NOTICE("\The [user] turns on \the [src]."), SPAN_NOTICE("You turn on \the [src]."), range = 5)
+			visible_message(span_notice("\The [user] turns on \the [src]."), span_notice("You turn on \the [src]."), range = 5)
 		if ("Cook Mode")
 			if (is_processing)
-				to_chat(user, SPAN_WARNING("Turn off \the [src] first."))
+				to_chat(user, span_warning("Turn off \the [src] first."))
 				return
 			var/mode = input(user, "", "[src] Cook Modes") as null|anything in cook_modes
 			if (!mode || QDELETED(src) || stat)
 				return
 			if (!Adjacent(user) || user.stat)
-				to_chat(user, SPAN_WARNING("You're not able to do that to \the [src] right now."))
+				to_chat(user, span_warning("You're not able to do that to \the [src] right now."))
 				return
 			cook_mode = mode
 			to_chat(user, "The contents of \the [src] will now be [cook_modes[mode]["desc"]].")
@@ -136,22 +136,22 @@
 
 /obj/machinery/cooker/use_tool(obj/item/I, mob/living/user, list/click_params)
 	if (is_processing)
-		to_chat(user, SPAN_WARNING("Turn off \the [src] first."))
+		to_chat(user, span_warning("Turn off \the [src] first."))
 		return TRUE
 	if ((. = ..()))
 		return
 	if (stat)
-		to_chat(user, SPAN_WARNING("\The [src] is in no condition to operate."))
+		to_chat(user, span_warning("\The [src] is in no condition to operate."))
 		return TRUE
 	if (!istype(I, /obj/item/reagent_containers/food/snacks))
-		to_chat(user, SPAN_WARNING("Cooking \a [I] wouldn't be very tasty."))
+		to_chat(user, span_warning("Cooking \a [I] wouldn't be very tasty."))
 		return TRUE
 	var/obj/item/reagent_containers/food/snacks/F = I
 	if (!F.can_use_cooker)
-		to_chat(user, SPAN_WARNING("Cooking \a [I] wouldn't be very tasty."))
+		to_chat(user, span_warning("Cooking \a [I] wouldn't be very tasty."))
 		return TRUE
 	if (length(cooking) >= capacity)
-		to_chat(user, SPAN_WARNING("\The [src] is already full up."))
+		to_chat(user, span_warning("\The [src] is already full up."))
 		return TRUE
 	if (!user.unEquip(I))
 		return TRUE
@@ -175,7 +175,7 @@
 			cooking += cook_item(source[index])
 			--index
 		QDEL_NULL_LIST(source)
-		audible_message(SPAN_ITALIC("\The [src] lets out a happy ding."))
+		audible_message(span_italic("\The [src] lets out a happy ding."))
 		playsound(src, 'sound/machines/ding.ogg', 70, frequency = 0.75)
 		threshold = 1
 	if (!burn_time)
@@ -194,10 +194,10 @@
 		QDEL_NULL_LIST(source)
 		threshold = 2
 	if (prob(15))
-		visible_message(SPAN_WARNING("\The [src] vomits a gout of rancid smoke!"))
+		visible_message(span_warning("\The [src] vomits a gout of rancid smoke!"))
 		smoke.start()
 	if (threshold < 3 && prob(10))
-		visible_message(SPAN_WARNING("\The [src] is on fire!"))
+		visible_message(span_warning("\The [src] is on fire!"))
 		var/turf/adjacent = get_step(src, dir)
 		adjacent.IgniteTurf(20)
 		threshold = 3
@@ -705,7 +705,7 @@
 /obj/item/material/chopping_board/attackby(obj/item/item, mob/living/user)
 	if (istype(item, /obj/item/reagent_containers/food/snacks))
 		if (istype(item, /obj/item/reagent_containers/food/snacks/variable))
-			to_chat(user, SPAN_WARNING("\The [item] is already combinable."))
+			to_chat(user, span_warning("\The [item] is already combinable."))
 			return TRUE
 		if (!user.unEquip(item, src))
 			return TRUE
@@ -739,14 +739,14 @@
 	var/combined_count = length(combined_names)
 	var/other_combined_count = length(other.combined_names)
 	if (combined_count + other_combined_count > 4)
-		to_chat(user, SPAN_WARNING("This food combination is too large."))
+		to_chat(user, span_warning("This food combination is too large."))
 	var/response
 	if (bitecount || other.bitecount)
 		if (user.a_intent == I_HELP)
-			to_chat(user, SPAN_WARNING("This food is partially eaten. Combining it would be disgusting."))
+			to_chat(user, span_warning("This food is partially eaten. Combining it would be disgusting."))
 			return FALSE
 		if (user.a_intent == I_HURT)
-			to_chat(user, SPAN_WARNING("This food is partially eaten.") + SPAN_NOTICE(" You combine it anyway."))
+			to_chat(user, span_warning("This food is partially eaten.") + span_notice(" You combine it anyway."))
 		else
 			response = alert(user, "Combine Food Scraps?", "Combine Food", "Yes", "No") == "Yes"
 			if (!response || !user.use_sanity_check(src, other))

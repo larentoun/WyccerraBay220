@@ -29,7 +29,7 @@
 	var/obj/item/device/assembly/signaler/signaler = get_active_hand()
 	if(istype(signaler) && signaler.deadman)
 		log_and_message_admins("has triggered a signaler deadman's switch")
-		visible_message(SPAN_WARNING("[src] triggers their deadman's switch"))
+		visible_message(span_warning("[src] triggers their deadman's switch"))
 		signaler.signal()
 
 	//Armor
@@ -154,7 +154,7 @@
 			Weaken(rand(3,5))
 		if(M.skill_fail_prob(SKILL_HAULING, 100))
 			M.Weaken(rand(4,8))
-		M.visible_message(SPAN_DANGER("\The [M] collides with \the [src]!"))
+		M.visible_message(span_danger("\The [M] collides with \the [src]!"))
 
 	if (!aura_check(AURA_TYPE_THROWN, AM, TT))
 		return
@@ -167,10 +167,10 @@
 		var/miss_chance = max(15*(TT.dist_travelled-2),0)
 
 		if (prob(miss_chance) || (istype(src, /mob/living/exosuit) && prob(miss_chance * 0.75)))
-			visible_message(SPAN_NOTICE("\The [O] misses [src] narrowly!"))
+			visible_message(span_notice("\The [O] misses [src] narrowly!"))
 			return
 
-		visible_message(SPAN_WARNING("\The [src] has been hit by \the [O]."))
+		visible_message(span_warning("\The [src] has been hit by \the [O]."))
 		apply_damage(throw_damage, dtype, null, O.damage_flags(), O)
 
 		if(TT.thrower)
@@ -198,7 +198,7 @@
 	if(power >= 0.75)		//snowflake to enable being pinned to walls
 		var/direction = TT.init_dir
 		throw_at(get_edge_target_turf(src, direction), min((TT.maxrange - TT.dist_travelled) * power, 10), throw_speed * min(power, 1.5), callback = CALLBACK(src, TYPE_PROC_REF(/mob/living, pin_to_wall), AM,direction))
-		visible_message(SPAN_DANGER("\The [src] staggers under the impact!"),SPAN_DANGER("You stagger under the impact!"))
+		visible_message(span_danger("\The [src] staggers under the impact!"),span_danger("You stagger under the impact!"))
 		return
 
 	. = ..()
@@ -211,7 +211,7 @@
 
 	if(T)
 		forceMove(T)
-		visible_message(SPAN_DANGER("[src] is pinned to the wall by [O]!"),SPAN_DANGER("You are pinned to the wall by [O]!"))
+		visible_message(span_danger("[src] is pinned to the wall by [O]!"),span_danger("You are pinned to the wall by [O]!"))
 		src.anchored = TRUE
 		src.pinned += O
 
@@ -222,7 +222,7 @@
 
 //This is called when the mob is thrown into a dense turf
 /mob/living/proc/turf_collision(turf/T, speed)
-	visible_message(SPAN_DANGER("[src] slams into \the [T]"))
+	visible_message(span_danger("[src] slams into \the [T]"))
 	playsound(T, 'sound/effects/bangtaper.ogg', 50, 1, 1)//so it plays sounds on the turf instead, makes for awesome carps to hull collision and such
 	apply_damage(speed * 2, DAMAGE_BRUTE)
 
@@ -250,7 +250,7 @@
 	adjustBruteLoss(damage)
 	admin_attack_log(user, src, "Attacked", "Was attacked", "attacked")
 
-	visible_message(SPAN_DANGER("\The [user] has [attack_message] \the [src]"))
+	visible_message(span_danger("\The [user] has [attack_message] \the [src]"))
 	user.do_attack_animation(src)
 	spawn(1) updatehealth()
 

@@ -170,7 +170,7 @@
 						   "rubs against [friend].",
 						   "purrs."))
 	else
-		to_chat(usr, SPAN_NOTICE("[src] ignores you."))
+		to_chat(usr, span_notice("[src] ignores you."))
 	return
 
 //RUNTIME IS ALIVE! SQUEEEEEEEE~

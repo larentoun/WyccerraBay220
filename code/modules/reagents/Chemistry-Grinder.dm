@@ -127,7 +127,7 @@
 
 	if (is_type_in_list(I, allowed_containers) && !is_type_in_list(I, banned_containers))
 		if (container)
-			to_chat(user, SPAN_WARNING("\The [src] already has \a [container]."))
+			to_chat(user, span_warning("\The [src] already has \a [container]."))
 		else if (user.unEquip(I, src))
 			container = I
 			update_icon()
@@ -137,9 +137,9 @@
 	if (is_type_in_list(I, storage_types))
 		var/obj/item/storage/S = I
 		if (!length(S.contents))
-			to_chat(user, SPAN_WARNING("\The [S] is empty."))
+			to_chat(user, span_warning("\The [S] is empty."))
 		else if (length(items) >= max_items)
-			to_chat(user, SPAN_WARNING("\The item hopper on \the [src] is full."))
+			to_chat(user, span_warning("\The item hopper on \the [src] is full."))
 		else
 			var/list/removed = list()
 			for (var/obj/item/G in S)
@@ -161,19 +161,19 @@
 				)
 				updateDialog()
 			else
-				to_chat(user, SPAN_WARNING("Nothing more in \the [S] will go into \the [src]."))
+				to_chat(user, span_warning("Nothing more in \the [S] will go into \the [src]."))
 		return TRUE
 
 	if (I.w_class > max_item_size)
-		to_chat(user, SPAN_WARNING("\The [I] is too large for \the [src]."))
+		to_chat(user, span_warning("\The [I] is too large for \the [src]."))
 		return TRUE
 
 	if (length(items) >= max_items)
-		to_chat(user, SPAN_WARNING("\The [src] is full."))
+		to_chat(user, span_warning("\The [src] is full."))
 		return TRUE
 
 	if (is_type_in_list(I, banned_items) || !grindable(I))
-		to_chat(user, SPAN_WARNING("\The [src] cannot grind \the [I]."))
+		to_chat(user, span_warning("\The [src] cannot grind \the [I]."))
 		return TRUE
 
 	if (user.unEquip(I, src))

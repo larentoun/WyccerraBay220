@@ -183,8 +183,8 @@
 		USE_FEEDBACK_FAILURE("[src] has no circuit to remove.")
 		return
 	user.visible_message(
-		SPAN_NOTICE("[user] starts removing [src]'s circuit with [tool]."),
-		SPAN_NOTICE("You start removing [src]'s circuit with [tool].")
+		span_notice("[user] starts removing [src]'s circuit with [tool]."),
+		span_notice("You start removing [src]'s circuit with [tool].")
 	)
 	if(!tool.use_as_tool(src, user, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT) || buildstage != 1)
 		return
@@ -192,8 +192,8 @@
 	buildstage = 0
 	update_icon()
 	user.visible_message(
-		SPAN_NOTICE("[user] removes [circuit] from [src] with [tool]."),
-		SPAN_NOTICE("You remove [circuit] from [src] with [tool].")
+		span_notice("[user] removes [circuit] from [src] with [tool]."),
+		span_notice("You remove [circuit] from [src] with [tool].")
 	)
 
 /obj/item/device/radio/intercom/screwdriver_act(mob/living/user, obj/item/tool)
@@ -214,8 +214,8 @@
 		return
 	new /obj/item/frame/intercom(get_turf(src))
 	user.visible_message(
-		SPAN_NOTICE("[user] removes [src] from the wall with [tool]."),
-		SPAN_NOTICE("You remove [src] from the wall with [tool].")
+		span_notice("[user] removes [src] from the wall with [tool]."),
+		span_notice("You remove [src] from the wall with [tool].")
 	)
 	qdel(src)
 
@@ -234,8 +234,8 @@
 	buildstage = 1
 	update_icon()
 	user.visible_message(
-		SPAN_NOTICE("[user] cuts [src]'s wiring with [tool]."),
-		SPAN_NOTICE("You cut [src]'s wiring with [tool].")
+		span_notice("[user] cuts [src]'s wiring with [tool]."),
+		span_notice("You cut [src]'s wiring with [tool].")
 	)
 
 /obj/item/device/radio/intercom/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -255,8 +255,8 @@
 		buildstage = 2
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] wires [src] with [cable.get_vague_name(TRUE)]."),
-			SPAN_NOTICE("You wire [src] with [cable.get_exact_name(5)].")
+			span_notice("[user] wires [src] with [cable.get_vague_name(TRUE)]."),
+			span_notice("You wire [src] with [cable.get_exact_name(5)].")
 		)
 		return TRUE
 
@@ -271,8 +271,8 @@
 		buildstage = 1
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] inserts [tool] into [src]."),
-			SPAN_NOTICE("You insert [tool] into [src].")
+			span_notice("[user] inserts [tool] into [src]."),
+			span_notice("You insert [tool] into [src].")
 		)
 		qdel(tool)
 		return TRUE

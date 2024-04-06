@@ -69,17 +69,17 @@
 /obj/item/storage/sheetsnatcher/examine(mob/user, distance)
 	. = ..()
 	if (distance < 2)
-		. += SPAN_NOTICE("It has a capacity of [max_sheets] sheets and current holds [cur_sheets].")
+		. += span_notice("It has a capacity of [max_sheets] sheets and current holds [cur_sheets].")
 
 
 /obj/item/storage/sheetsnatcher/can_be_inserted(obj/item/stack/material/stack, mob/user, silent)
 	if (!istype(stack))
 		if (!silent)
-			to_chat(user, SPAN_WARNING("The snatcher cannot hold \a [stack]."))
+			to_chat(user, span_warning("The snatcher cannot hold \a [stack]."))
 		return FALSE
 	if (stack.amount > (max_sheets - cur_sheets))
 		if (!silent)
-			to_chat(user, SPAN_WARNING("The snatcher cannot hold \a [stack]."))
+			to_chat(user, span_warning("The snatcher cannot hold \a [stack]."))
 		return FALSE
 	return TRUE
 
@@ -112,12 +112,12 @@
 
 /obj/item/storage/sheetsnatcher/attack_self(mob/user)
 	if (user.stat || !Adjacent(user) || user.restrained())
-		to_chat(user, SPAN_WARNING("You're in no condition to do that with \the [src]."))
+		to_chat(user, span_warning("You're in no condition to do that with \the [src]."))
 		return FALSE
 	if (cur_sheets < 1)
-		to_chat(user, SPAN_WARNING("\The [src] is empty."))
+		to_chat(user, span_warning("\The [src] is empty."))
 		return FALSE
-	to_chat(user, SPAN_ITALIC("You empty out \the [src]."))
+	to_chat(user, span_italic("You empty out \the [src]."))
 	empty()
 
 

@@ -151,16 +151,16 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 					var/colour = href_list["cut"]
 					var/message = ""
 					if (CutWireColour(colour))
-						message = SPAN_NOTICE("You mend the [colour] wire.")
+						message = span_notice("You mend the [colour] wire.")
 					else
-						message = SPAN_NOTICE("You cut the [colour] wire.")
+						message = span_notice("You cut the [colour] wire.")
 
 					if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 20, SKILL_TRAINED)))
 						RandomCut()
-						message = SPAN_DANGER("You accidentally nick another wire in addition to the [colour] wire!")
+						message = span_danger("You accidentally nick another wire in addition to the [colour] wire!")
 					else if(!L.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
 						RandomCutAll(10)
-						message = SPAN_DANGER("You think you might have nicked some of the other wires in addition to the [colour] wire!")
+						message = span_danger("You think you might have nicked some of the other wires in addition to the [colour] wire!")
 					to_chat(usr, message)
 					playsound(usr.loc, "sound/items/Wirecutter.ogg", 20)
 				else
@@ -170,16 +170,16 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 					var/colour = href_list["pulse"]
 					if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 30, SKILL_TRAINED)))
 						RandomPulse()
-						to_chat(L, SPAN_DANGER("You accidentally pulse another wire instead of the [colour] wire!"))
+						to_chat(L, span_danger("You accidentally pulse another wire instead of the [colour] wire!"))
 						if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 60, SKILL_BASIC)))
 							RandomPulse() //or two
 					else
 						PulseColour(colour)
-						to_chat(usr, SPAN_NOTICE("You pulse the [colour] wire."))
+						to_chat(usr, span_notice("You pulse the [colour] wire."))
 					playsound(usr.loc, "sound/effects/pop.ogg", 20)
 					if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 50, SKILL_BASIC)))
 						wires = shuffle(wires) //Leaves them in a different order for anyone else.
-						to_chat(L, SPAN_DANGER("You get the wires all tangled up!"))
+						to_chat(L, span_danger("You get the wires all tangled up!"))
 				else
 					to_chat(L, SPAN_CLASS("error", "You need a multitool!"))
 			else if(href_list["attach"])
@@ -187,14 +187,14 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 				var/failed = 0
 				if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 80, SKILL_EXPERIENCED)))
 					colour = pick(wires)
-					to_chat(L, SPAN_DANGER("Are you sure you got the right wire?"))
+					to_chat(L, span_danger("Are you sure you got the right wire?"))
 					failed = 1
 				// Detach
 				if(IsAttached(colour))
 					var/obj/item/O = Detach(colour)
 					if(O)
 						L.put_in_hands(O)
-						to_chat(usr, SPAN_NOTICE("You detach the signaller from the [colour] wire."))
+						to_chat(usr, span_notice("You detach the signaller from the [colour] wire."))
 
 				// Attach
 				else
@@ -202,7 +202,7 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 						if(L.unEquip(I))
 							Attach(colour, I)
 							if(!failed)
-								to_chat(usr, SPAN_NOTICE("You attach the signaller to the [colour] wire."))
+								to_chat(usr, span_notice("You attach the signaller to the [colour] wire."))
 					else
 						to_chat(L, SPAN_CLASS("error", "You need a remote signaller!"))
 			else if(href_list["examine"])

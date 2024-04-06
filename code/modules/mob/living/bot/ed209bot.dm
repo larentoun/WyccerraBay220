@@ -40,7 +40,7 @@
 	icon_state = "ed2090"
 
 /mob/living/bot/secbot/ed209/explode()
-	visible_message(SPAN_WARNING("[src] blows apart!"))
+	visible_message(span_warning("[src] blows apart!"))
 	var/turf/Tsec = get_turf(src)
 
 	var/obj/item/gun/energy/stunrevolver/G = new /obj/item/gun/energy/stunrevolver(Tsec)

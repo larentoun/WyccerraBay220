@@ -28,4 +28,4 @@ GLOBAL_DATUM_INIT(thralls, /datum/antagonist/thrall, new)
 	. = ..()
 	var/mob/living/controller = thrall_controllers["\ref[player]"]
 	if(controller)
-		to_chat(player, SPAN_DANGER("Your will has been subjugated by that of [controller.real_name]. Obey them in all things."))
+		to_chat(player, span_danger("Your will has been subjugated by that of [controller.real_name]. Obey them in all things."))

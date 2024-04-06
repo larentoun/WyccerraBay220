@@ -51,142 +51,142 @@
 			species_name += "[species.cyborg_noun] [species.get_bodytype(src)]"
 		else
 			species_name += "[species.name]"
-		name_and_species += ", <b>[SPAN_COLOR(species.get_flesh_colour(src), "\a [species_name]!")]</b>[(user.can_use_codex() && SScodex.get_codex_entry(get_codex_value())) ?  SPAN_NOTICE(" \[<a href='?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>?</a>\]") : ""]"
+		name_and_species += ", <b>[SPAN_COLOR(species.get_flesh_colour(src), "\a [species_name]!")]</b>[(user.can_use_codex() && SScodex.get_codex_entry(get_codex_value())) ?  span_notice(" \[<a href='?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>?</a>\]") : ""]"
 
 	var/extra_species_text = species.get_additional_examine_text(src)
 	if(extra_species_text)
 		name_and_species += "[extra_species_text]"
 
-	. += SPAN_NOTICE("[name_and_species]")
+	. += span_notice("[name_and_species]")
 
 	//uniform
 	if(w_uniform && !skipjumpsuit)
-		. += SPAN_NOTICE("[p_They()] [p_are()] wearing [w_uniform.get_examine_line()].")
+		. += span_notice("[p_They()] [p_are()] wearing [w_uniform.get_examine_line()].")
 
 	//head
 	if(head)
-		. += SPAN_NOTICE("[p_They()] [p_are()] wearing [head.get_examine_line()] on [p_their()] head.")
+		. += span_notice("[p_They()] [p_are()] wearing [head.get_examine_line()] on [p_their()] head.")
 
 	//suit/armour
 	if(wear_suit)
-		. += SPAN_NOTICE("[p_They()] [p_are()] wearing [wear_suit.get_examine_line()].")
+		. += span_notice("[p_They()] [p_are()] wearing [wear_suit.get_examine_line()].")
 		//suit/armour storage
 		if(s_store && !skipsuitstorage)
-			. += SPAN_NOTICE("[p_They()] [p_are()] carrying [s_store.get_examine_line()] on [p_their()] [wear_suit.name].")
+			. += span_notice("[p_They()] [p_are()] carrying [s_store.get_examine_line()] on [p_their()] [wear_suit.name].")
 
 	//back
 	if(back)
-		. += SPAN_NOTICE("[p_They()] [p_have()] [back.get_examine_line()] on [p_their()] back.")
+		. += span_notice("[p_They()] [p_have()] [back.get_examine_line()] on [p_their()] back.")
 
 	//left hand
 	if(l_hand)
-		. += SPAN_NOTICE("[p_They()] [p_are()] holding [l_hand.get_examine_line()] in [p_their()] left hand.")
+		. += span_notice("[p_They()] [p_are()] holding [l_hand.get_examine_line()] in [p_their()] left hand.")
 
 	//right hand
 	if(r_hand)
-		. += SPAN_NOTICE("[p_They()] [p_are()] holding [r_hand.get_examine_line()] in [p_their()] right hand.")
+		. += span_notice("[p_They()] [p_are()] holding [r_hand.get_examine_line()] in [p_their()] right hand.")
 
 	//gloves
 	if(gloves && !skipgloves)
-		. += SPAN_NOTICE("[p_They()] [p_have()] [gloves.get_examine_line()] on [p_their()] hands.")
+		. += span_notice("[p_They()] [p_have()] [gloves.get_examine_line()] on [p_their()] hands.")
 	else if(blood_DNA)
-		. += SPAN_WARNING("[p_They()] [p_have()] [(hand_blood_color != SYNTH_BLOOD_COLOUR) ? "blood" : "oil"]-stained hands!")
+		. += span_warning("[p_They()] [p_have()] [(hand_blood_color != SYNTH_BLOOD_COLOUR) ? "blood" : "oil"]-stained hands!")
 
 	//belt
 	if(belt)
-		. += SPAN_NOTICE("[p_They()] [p_have()] [belt.get_examine_line()] about [p_their()] waist.")
+		. += span_notice("[p_They()] [p_have()] [belt.get_examine_line()] about [p_their()] waist.")
 
 	//shoes
 	if(shoes && !skipshoes)
-		. += SPAN_NOTICE("[p_They()] [p_are()] wearing [shoes.get_examine_line()] on [p_their()] feet.")
+		. += span_notice("[p_They()] [p_are()] wearing [shoes.get_examine_line()] on [p_their()] feet.")
 	else if(feet_blood_color)
-		. += SPAN_WARNING("[p_They()] [p_have()] [(feet_blood_color != SYNTH_BLOOD_COLOUR) ? "blood" : "oil"]-stained feet!")
+		. += span_warning("[p_They()] [p_have()] [(feet_blood_color != SYNTH_BLOOD_COLOUR) ? "blood" : "oil"]-stained feet!")
 
 	//mask
 	if(wear_mask && !skipmask)
-		. += SPAN_NOTICE("[p_They()] [p_have()] [wear_mask.get_examine_line()] on [p_their()] face.")
+		. += span_notice("[p_They()] [p_have()] [wear_mask.get_examine_line()] on [p_their()] face.")
 
 	//eyes
 	if(glasses && !skipeyes)
-		. += SPAN_NOTICE("[p_They()] [p_have()] [glasses.get_examine_line()] covering [p_their()] eyes.")
+		. += span_notice("[p_They()] [p_have()] [glasses.get_examine_line()] covering [p_their()] eyes.")
 
 	//left ear
 	if(l_ear && !skipears)
-		. += SPAN_NOTICE("[p_They()] [p_have()] [l_ear.get_examine_line()] on [p_their()] left ear.")
+		. += span_notice("[p_They()] [p_have()] [l_ear.get_examine_line()] on [p_their()] left ear.")
 
 	//right ear
 	if(r_ear && !skipears)
-		. += SPAN_NOTICE("[p_They()] [p_have()] [r_ear.get_examine_line()] on [p_their()] right ear.")
+		. += span_notice("[p_They()] [p_have()] [r_ear.get_examine_line()] on [p_their()] right ear.")
 
 	//ID
 	if(wear_id)
-		. += SPAN_NOTICE("[p_They()] [p_are()] wearing [wear_id.get_examine_line()].")
+		. += span_notice("[p_They()] [p_are()] wearing [wear_id.get_examine_line()].")
 
 	//handcuffed?
 	if(handcuffed)
 		if(istype(handcuffed, /obj/item/handcuffs/cable))
-			. += SPAN_WARNING("[p_They()] [p_are()] [icon2html(handcuffed, user)] restrained with cable!")
+			. += span_warning("[p_They()] [p_are()] [icon2html(handcuffed, user)] restrained with cable!")
 		else
-			. += SPAN_WARNING("[p_They()] [p_are()] [icon2html(handcuffed, user)] handcuffed!")
+			. += span_warning("[p_They()] [p_are()] [icon2html(handcuffed, user)] handcuffed!")
 
 	//buckled
 	if(buckled)
-		. += SPAN_WARNING("[p_They()] [p_are()] [icon2html(buckled, user)] buckled to [buckled]!")
+		. += span_warning("[p_They()] [p_are()] [icon2html(buckled, user)] buckled to [buckled]!")
 
 	//Jitters
 	if(is_jittery)
 		if(jitteriness >= 300)
-			. += SPAN_WARNING("<B>[p_they()] [p_are()] convulsing violently!</B>")
+			. += span_warning("<B>[p_they()] [p_are()] convulsing violently!</B>")
 		else if(jitteriness >= 200)
-			. += SPAN_WARNING("[p_They()] [p_are()] extremely jittery.")
+			. += span_warning("[p_They()] [p_are()] extremely jittery.")
 		else if(jitteriness >= 100)
-			. += SPAN_WARNING("[p_They()] [p_are()] twitching ever so slightly.")
+			. += span_warning("[p_They()] [p_are()] twitching ever so slightly.")
 
 	//Disfigured face
 	if(!skipface) //Disfigurement only matters for the head currently.
 		var/obj/item/organ/external/head/E = get_organ(BP_HEAD)
 		if(E && (E.status & ORGAN_DISFIGURED)) //Check to see if we even have a head and if the head's disfigured.
 			if(E.species) //Check to make sure we have a species
-				. += SPAN_NOTICE("[E.species.disfigure_msg(src)]")
+				. += span_notice("[E.species.disfigure_msg(src)]")
 			else //Just in case they lack a species for whatever reason.
-				. += SPAN_WARNING("[p_their()] face is horribly mangled!")
+				. += span_warning("[p_their()] face is horribly mangled!")
 		var/datum/robolimb/robohead = all_robolimbs[E.model]
 		if(length(robohead?.display_text) && facial_hair_style == "Text")
-			. += SPAN_NOTICE("The message \"[robohead.display_text]\" is displayed on its screen.")
+			. += span_notice("The message \"[robohead.display_text]\" is displayed on its screen.")
 
 	//splints
 	for(var/organ in list(BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM))
 		var/obj/item/organ/external/o = get_organ(organ)
 		if(o && o.splinted && o.splinted.loc == o)
-			. += SPAN_WARNING("[p_They()] [p_have()] \a [o.splinted] on [p_their()] [o.name]!")
+			. += span_warning("[p_They()] [p_have()] \a [o.splinted] on [p_their()] [o.name]!")
 
 	if(mSmallsize in mutations)
-		. += SPAN_NOTICE("[p_They()] [p_are()] small halfling!")
+		. += span_notice("[p_They()] [p_are()] small halfling!")
 
 	if (src.stat)
-		. += SPAN_WARNING("[p_They()] [p_are()]n't responding to anything around [p_them()] and seems to be unconscious.")
+		. += span_warning("[p_They()] [p_are()]n't responding to anything around [p_them()] and seems to be unconscious.")
 		if((stat == DEAD || is_asystole() || losebreath || status_flags & FAKEDEATH) && distance <= 3)
-			. += SPAN_WARNING("[p_They()] [p_do()] not appear to be breathing.")
+			. += span_warning("[p_They()] [p_do()] not appear to be breathing.")
 	if (fire_stacks > 0)
-		. += SPAN_NOTICE("[p_They()] looks flammable.")
+		. += span_notice("[p_They()] looks flammable.")
 	else if (fire_stacks < 0)
-		. += SPAN_NOTICE("[p_They()] looks wet.")
+		. += span_notice("[p_They()] looks wet.")
 	if(on_fire)
-		. += SPAN_WARNING("[p_They()] [p_are()] on fire!.")
+		. += span_warning("[p_They()] [p_are()] on fire!.")
 
 	var/ssd_msg = species.get_ssd(src)
 	if(ssd_msg && (!should_have_organ(BP_BRAIN) || has_brain()) && stat != DEAD)
 		if(!key)
-			. += SPAN_DEBUG("[p_They()] [p_are()] [ssd_msg]. [p_they()] won't be recovering any time soon. (Ghosted)")
+			. += span_debug("[p_They()] [p_are()] [ssd_msg]. [p_they()] won't be recovering any time soon. (Ghosted)")
 		else if(!client)
-			. += SPAN_DEBUG("[p_They()] [p_are()] [ssd_msg]. (Disconnected)")
+			. += span_debug("[p_They()] [p_are()] [ssd_msg]. (Disconnected)")
 
 	if (admin_paralyzed)
-		. += SPAN_DEBUG("OOC: [p_they()] [p_have()] been paralyzed by staff. Please avoid interacting with [p_them()] unless cleared to do so by staff.")
+		. += span_debug("OOC: [p_they()] [p_have()] been paralyzed by staff. Please avoid interacting with [p_them()] unless cleared to do so by staff.")
 
 	var/obj/item/organ/external/head/H = organs_by_name[BP_HEAD]
 	if(istype(H) && H.forehead_graffiti && H.graffiti_style)
-		. += SPAN_NOTICE("[p_They()] [p_have()] \"[H.forehead_graffiti]\" written on [p_their()] [H.name] in [H.graffiti_style]!")
+		. += span_notice("[p_They()] [p_have()] \"[H.forehead_graffiti]\" written on [p_their()] [H.name] in [H.graffiti_style]!")
 
 	if (changed_age)
 		var/scale = abs(changed_age) / age
@@ -196,10 +196,10 @@
 			scale = ""
 		else
 			scale = "a little "
-		. += SPAN_NOTICE("[p_They()] looks [scale][changed_age > 0 ? "older" : "younger"] than you remember.")
+		. += span_notice("[p_They()] looks [scale][changed_age > 0 ? "older" : "younger"] than you remember.")
 
 	for (var/obj/aura/web/W in auras)
-		. += SPAN_WARNING("[p_They()] is covered in webs!")
+		. += span_warning("[p_They()] is covered in webs!")
 		break
 
 	var/list/wound_flavor_text = list()
@@ -220,7 +220,7 @@
 		wound_flavor_text[E.name] = ""
 
 		if(E.applied_pressure == src)
-			applying_pressure = "[SPAN_INFO("[p_They()] [p_are()] applying pressure to [p_their()] [E.name].")]<br>"
+			applying_pressure = "[span_info("[p_They()] [p_are()] applying pressure to [p_their()] [E.name].")]<br>"
 
 		var/obj/item/clothing/hidden
 		var/list/clothing_items = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes)
@@ -270,17 +270,17 @@
 	for(var/limb in wound_flavor_text)
 		wound_msg += wound_flavor_text[limb]
 	if(wound_msg)
-		. += SPAN_WARNING(wound_msg)
+		. += span_warning(wound_msg)
 
 	for(var/obj/implant in get_visible_implants(0))
 		if(implant in shown_objects)
 			continue
 		if(src.fake_name)
-			. += SPAN_DANGER("[src.fake_name] [p_have()] \a [implant.name] sticking out of [p_their()] flesh!")
+			. += span_danger("[src.fake_name] [p_have()] \a [implant.name] sticking out of [p_their()] flesh!")
 		else
-			. += SPAN_DANGER("[src] [p_have()] \a [implant.name] sticking out of [p_their()] flesh!")
+			. += span_danger("[src] [p_have()] \a [implant.name] sticking out of [p_their()] flesh!")
 	if(digitalcamo)
-		. += SPAN_NOTICE("[p_They()] [p_are()] repulsively uncanny!")
+		. += span_notice("[p_They()] [p_are()] repulsively uncanny!")
 
 	if(applying_pressure)
 		. += applying_pressure
@@ -327,12 +327,12 @@
 		. += "[SPAN_CLASS("deptradio", "Medical records:")] <a href='?src=\ref[src];medrecord=`'>\[View\]</a>"
 
 	if(print_flavor_text())
-		. += SPAN_NOTICE("[print_flavor_text()]")
+		. += span_notice("[print_flavor_text()]")
 
 	if(pose)
 		if(findtext(pose,".",length(pose)) == 0 && findtext(pose,"!",length(pose)) == 0 && findtext(pose,"?",length(pose)) == 0)
 			pose = addtext(pose,".") //Makes sure all emotes end with a period.
-		. += SPAN_NOTICE("[p_They()] [pose]")
+		. += span_notice("[p_They()] [pose]")
 
 	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE, user, .)
 

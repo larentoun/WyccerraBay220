@@ -339,7 +339,7 @@
 	pestlevel = 0
 	sampled = 0
 	update_icon()
-	visible_message(SPAN_NOTICE("[src] has been overtaken by [seed.display_name]."))
+	visible_message(span_notice("[src] has been overtaken by [seed.display_name]."))
 
 	return
 
@@ -410,7 +410,7 @@
 	weedlevel = 0
 
 	update_icon()
-	visible_message(SPAN_DANGER("The [previous_plant] has suddenly mutated into \a [seed.display_name]!"))
+	visible_message(span_danger("The [previous_plant] has suddenly mutated into \a [seed.display_name]!"))
 
 	return
 
@@ -434,20 +434,20 @@
 
 	if(O.edge && O.w_class < ITEM_SIZE_NORMAL && user.a_intent != I_HURT)
 		if(!seed)
-			to_chat(user, SPAN_WARNING("There is nothing to take a sample from in [src]."))
+			to_chat(user, span_warning("There is nothing to take a sample from in [src]."))
 			return TRUE
 
 		if(sampled)
-			to_chat(user, SPAN_WARNING("There's no bits that can be used for a sampling left."))
+			to_chat(user, span_warning("There's no bits that can be used for a sampling left."))
 			return TRUE
 
 		if(dead)
-			to_chat(user, SPAN_WARNING("The plant is dead."))
+			to_chat(user, span_warning("The plant is dead."))
 			return TRUE
 
 		var/needed_skill = seed.mysterious ? SKILL_TRAINED : SKILL_BASIC
 		if(prob(user.skill_fail_chance(SKILL_BOTANY, 90, needed_skill)))
-			to_chat(user, SPAN_WARNING("You failed to get a usable sample."))
+			to_chat(user, span_warning("You failed to get a usable sample."))
 		else
 			// Create a sample.
 			seed.harvest(user,yield_mod,1)
@@ -485,7 +485,7 @@
 
 	if (istype(O, /obj/item/material/minihoe))
 		if(weedlevel > 0)
-			user.visible_message(SPAN_NOTICE("[user] starts uprooting the weeds."), SPAN_NOTICE("You remove the weeds from the [src]."))
+			user.visible_message(span_notice("[user] starts uprooting the weeds."), span_notice("You remove the weeds from the [src]."))
 			weedlevel = 0
 			if(seed)
 				var/needed_skill = seed.mysterious ? SKILL_TRAINED : SKILL_BASIC
@@ -494,7 +494,7 @@
 					check_health(1)
 			return TRUE
 		else
-			to_chat(user, SPAN_NOTICE("This plot is completely devoid of weeds. It doesn't need uprooting."))
+			to_chat(user, span_notice("This plot is completely devoid of weeds. It doesn't need uprooting."))
 			return TRUE
 
 	if (istype(O, /obj/item/storage/plants))
@@ -530,7 +530,7 @@
 	if (weapon.force && seed)
 		user.setClickCooldown(user.get_attack_speed(weapon))
 		user.do_attack_animation(src)
-		user.visible_message(SPAN_DANGER("[seed.display_name] has been attacked by [user] with [weapon]!"))
+		user.visible_message(span_danger("[seed.display_name] has been attacked by [user] with [weapon]!"))
 		playsound(get_turf(src), weapon.hitsound, 100, 1)
 		if(!dead)
 			health -= weapon.force
@@ -541,7 +541,7 @@
 /obj/machinery/portable_atmospherics/hydroponics/proc/plant_seed(mob/user, obj/item/seeds/S)
 
 	if(seed)
-		to_chat(user, SPAN_WARNING("[src] already has seeds in it!"))
+		to_chat(user, span_warning("[src] already has seeds in it!"))
 		return
 
 	if(!S.seed)
@@ -581,21 +581,21 @@
 /obj/machinery/portable_atmospherics/hydroponics/examine(mob/user)
 	. = ..(user)
 	if(!seed)
-		. += SPAN_NOTICE("[src] is empty.")
+		. += span_notice("[src] is empty.")
 		return
 
-	. += SPAN_NOTICE("\An [seed.display_name] is growing here.")
+	. += span_notice("\An [seed.display_name] is growing here.")
 
 	if(user.skill_check(SKILL_BOTANY, SKILL_BASIC))
 		if(weedlevel >= 5)
-			. += SPAN_NOTICE("[src] is [SPAN_DANGER("infested with weeds")]!")
+			. += span_notice("[src] is [span_danger("infested with weeds")]!")
 		if(pestlevel >= 5)
-			. += SPAN_NOTICE("[src] is [SPAN_DANGER("infested with tiny worms")]!")
+			. += span_notice("[src] is [span_danger("infested with tiny worms")]!")
 
 		if(dead)
-			. += SPAN_DANGER("The [seed.display_name] is dead.")
+			. += span_danger("The [seed.display_name] is dead.")
 		else if(health <= (seed.get_trait(TRAIT_ENDURANCE)/ 2))
-			. += SPAN_NOTICE("The [seed.display_name] looks [SPAN_DANGER("unhealthy")].")
+			. += span_notice("The [seed.display_name] looks [span_danger("unhealthy")].")
 
 	if(mechanical && Adjacent(user))
 		var/turf/T = loc
@@ -618,9 +618,9 @@
 			var/light_available = T.get_lumcount() * 5
 			light_string = "a light level of [light_available] lumens"
 
-		. += SPAN_NOTICE("Water: [round(waterlevel,0.1)]/100")
-		. += SPAN_NOTICE("Nutrient: [round(nutrilevel,0.1)]/10")
-		. += SPAN_NOTICE("The tray's sensor suite is reporting [light_string] and a temperature of [environment.temperature]K.")
+		. += span_notice("Water: [round(waterlevel,0.1)]/100")
+		. += span_notice("Nutrient: [round(nutrilevel,0.1)]/10")
+		. += span_notice("The tray's sensor suite is reporting [light_string] and a temperature of [environment.temperature]K.")
 
 /obj/machinery/portable_atmospherics/hydroponics/verb/close_lid_verb()
 	set name = "Toggle Tray Lid"

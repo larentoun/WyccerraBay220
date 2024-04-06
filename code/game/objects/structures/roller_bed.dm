@@ -75,16 +75,16 @@
 	if (distance >= 2 && !isghost(user))
 		return
 	if (drip_active)
-		. += SPAN_NOTICE("[buckled_mob] is hooked up to it.")
+		. += span_notice("[buckled_mob] is hooked up to it.")
 	if (!iv_bag)
-		. += SPAN_NOTICE("It has no IV bag attached.")
+		. += span_notice("It has no IV bag attached.")
 		return
 	var/volume = floor(iv_bag.reagents.total_volume)
 	if (!volume)
-		. += SPAN_NOTICE("It has an empty [iv_bag.name] attached.")
+		. += span_notice("It has an empty [iv_bag.name] attached.")
 		return
-	. += SPAN_NOTICE("It has [iv_bag] attached with [volume] units of liquid inside.")
-	. += SPAN_NOTICE("It is set to inject [iv_bag.transfer_amount]u of fluid per cycle.")
+	. += span_notice("It has [iv_bag] attached with [volume] units of liquid inside.")
+	. += span_notice("It is set to inject [iv_bag.transfer_amount]u of fluid per cycle.")
 
 
 /obj/structure/roller_bed/CanPass(atom/movable/movable, turf/target, height, air_group)
@@ -115,8 +115,8 @@
 		last_reagent_color = iv_bag.reagents.get_color()
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] hangs \a [tool] from \the [src]."),
-			SPAN_NOTICE("You hang \the [tool] from \the [src]."),
+			span_notice("\The [user] hangs \a [tool] from \the [src]."),
+			span_notice("You hang \the [tool] from \the [src]."),
 		)
 		return TRUE
 
@@ -148,7 +148,7 @@
 		if (prob(15))
 			playsound(src, 'sound/effects/3beep.ogg', 50, TRUE)
 			audible_message(
-				SPAN_NOTICE("\The [src] pings."),
+				span_notice("\The [src] pings."),
 				hearing_distance = 5
 			)
 		return
@@ -201,7 +201,7 @@
 			else
 				AttachDrip(buckled_mob, user)
 			return
-		to_chat(user, SPAN_WARNING("\The [src] has no IV bag attached."))
+		to_chat(user, span_warning("\The [src] has no IV bag attached."))
 
 
 /obj/structure/roller_bed/CheckDexterity(mob/living/user)
@@ -210,11 +210,11 @@
 
 /obj/structure/roller_bed/proc/FoldBed(mob/living/user)
 	if (buckled_mob)
-		to_chat(user, SPAN_WARNING("\The [buckled_mob] is on \the [src]. Remove them first."))
+		to_chat(user, span_warning("\The [buckled_mob] is on \the [src]. Remove them first."))
 		return
 	user.visible_message(
-		SPAN_ITALIC("\The [user] begins folding \a [src]."),
-		SPAN_ITALIC("You begin folding \the [src]."),
+		span_italic("\The [user] begins folding \a [src]."),
+		span_italic("You begin folding \the [src]."),
 		range = 5
 	)
 	if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER) || density)
@@ -228,8 +228,8 @@
 
 /obj/structure/roller_bed/proc/RemoveBag(mob/living/user)
 	user.visible_message(
-		SPAN_ITALIC("\The [user] removes \a [iv_bag] from \a [src]."),
-		SPAN_ITALIC("You remove \the [iv_bag] from \the [src]."),
+		span_italic("\The [user] removes \a [iv_bag] from \a [src]."),
+		span_italic("You remove \the [iv_bag] from \the [src]."),
 		range = 5
 	)
 	drip_active = FALSE
@@ -242,8 +242,8 @@
 	if (!drip_active)
 		return
 	user.visible_message(
-		SPAN_ITALIC("\The [user] starts unhooking \the [buckled_mob] from \a [src]."),
-		SPAN_ITALIC("You start extracting \the [src]'s cannula from \the [buckled_mob]."),
+		span_italic("\The [user] starts unhooking \the [buckled_mob] from \a [src]."),
+		span_italic("You start extracting \the [src]'s cannula from \the [buckled_mob]."),
 		range = 5
 	)
 	if (!user.do_skilled(1.5 SECONDS, SKILL_MEDICAL, buckled_mob))
@@ -253,8 +253,8 @@
 		return
 	STOP_PROCESSING(SSobj, src)
 	user.visible_message(
-		SPAN_WARNING("\The [user] extracts \the [src]'s cannula from \the [buckled_mob]."),
-		SPAN_NOTICE("You successfully unhook \the [buckled_mob] from \the [src]."),
+		span_warning("\The [user] extracts \the [src]'s cannula from \the [buckled_mob]."),
+		span_notice("You successfully unhook \the [buckled_mob] from \the [src]."),
 		range = 1
 	)
 	drip_active = FALSE
@@ -266,8 +266,8 @@
 		return
 	STOP_PROCESSING(SSobj, src)
 	buckled_mob.visible_message(
-		SPAN_WARNING("\The cannula from \a [src] is ripped out of \the [buckled_mob][user ? " by \the [user]" : ""]!"),
-		SPAN_DANGER("\The cannula from \the [src] is ripped out of you[user ? " by \the [user]": ""]!"),
+		span_warning("\The cannula from \a [src] is ripped out of \the [buckled_mob][user ? " by \the [user]" : ""]!"),
+		span_danger("\The cannula from \the [src] is ripped out of you[user ? " by \the [user]": ""]!"),
 		range = 5
 	)
 	var/mob/living/carbon/human/human = buckled_mob
@@ -279,24 +279,24 @@
 
 /obj/structure/roller_bed/proc/AttachDrip(mob/living/carbon/human/target, mob/living/user)
 	user.visible_message(
-		SPAN_ITALIC("\The [user] starts to hook up \the [target] to \the [src]."),
-		SPAN_ITALIC("You start to hook up \the [target] to \the [src]."),
+		span_italic("\The [user] starts to hook up \the [target] to \the [src]."),
+		span_italic("You start to hook up \the [target] to \the [src]."),
 		range = 5
 	)
 	if (!user.do_skilled(3 SECONDS, SKILL_MEDICAL, target))
 		return
 	if (prob(user.skill_fail_chance(SKILL_MEDICAL, 50, SKILL_BASIC)))
 		user.visible_message(
-			SPAN_DANGER("\The [user] fishes for a vein on \the [target] and fails, stabbing them instead!"),
-			SPAN_DANGER("You fish inexpertly for a vein on \the [target] and stab them instead!"),
+			span_danger("\The [user] fishes for a vein on \the [target] and fails, stabbing them instead!"),
+			span_danger("You fish inexpertly for a vein on \the [target] and stab them instead!"),
 			range = 5
 		)
 		target.apply_damage(rand(2, 6), DAMAGE_BRUTE, pick(BP_R_ARM, BP_L_ARM), damage_flags = DAMAGE_FLAG_SHARP, armor_pen = 100)
 		return
 	START_PROCESSING(SSobj, src)
 	user.visible_message(
-		SPAN_ITALIC("\The [user] successfully inserts \a [src]'s cannula into \the [target]."),
-		SPAN_NOTICE("You successfully insert \the [src]'s cannula into \the [target]."),
+		span_italic("\The [user] successfully inserts \a [src]'s cannula into \the [target]."),
+		span_notice("You successfully insert \the [src]'s cannula into \the [target]."),
 		range = 1
 	)
 	drip_active = TRUE
@@ -311,10 +311,10 @@
 	if (!istype(user))
 		return
 	if (!Adjacent(user) || user.incapacitated())
-		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
+		to_chat(user, span_warning("You're in no condition to do that."))
 		return
 	if (!iv_bag)
-		to_chat(user, SPAN_WARNING("\The [src] does not have an attached IV bag."))
+		to_chat(user, span_warning("\The [src] does not have an attached IV bag."))
 		return
 	iv_bag.UpdateTransferAmount(user, src)
 
@@ -327,10 +327,10 @@
 	if (!istype(user))
 		return
 	if (!drip_active)
-		to_chat(user, SPAN_WARNING("\The [src] is not hooked up to anyone."))
+		to_chat(user, span_warning("\The [src] is not hooked up to anyone."))
 		return
 	if (!Adjacent(user) || user.incapacitated())
-		to_chat(user, SPAN_WARNING("You're in no condition do that."))
+		to_chat(user, span_warning("You're in no condition do that."))
 	RemoveDrip(user)
 
 
@@ -366,7 +366,7 @@
 
 /obj/item/roller_bed/attack_self(mob/living/user)
 	if (!isturf(user.loc))
-		to_chat(user, SPAN_WARNING("You don't have enough space to set up \the [src]."))
+		to_chat(user, span_warning("You don't have enough space to set up \the [src]."))
 		return
 	CreateStructure(user, user.loc, TRUE)
 
@@ -376,8 +376,8 @@
 		if (unequip && !user.unEquip(src, target))
 			return
 		user.visible_message(
-			SPAN_ITALIC("\The [user] starts setting up \a [src]."),
-			SPAN_ITALIC("You start setting up \the [src]."),
+			span_italic("\The [user] starts setting up \a [src]."),
+			span_italic("You start setting up \the [src]."),
 			range = 5
 		)
 	var/obj/structure/roller_bed/roller = new (target)
@@ -399,14 +399,14 @@
 	if (!target.Adjacent(user))
 		return TRUE
 	if (user.incapacitated())
-		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
+		to_chat(user, span_warning("You're in no condition to do that."))
 		return TRUE
 	if (!length(held))
 		if (istype(target, object_type))
 			user.visible_message(
-				SPAN_ITALIC("\The [user] scoops \a [target] into their [name]."),
-				SPAN_ITALIC("You scoop \the [target] into your [name]."),
-				SPAN_ITALIC("You hear metal clattering on metal.")
+				span_italic("\The [user] scoops \a [target] into their [name]."),
+				span_italic("You scoop \the [target] into your [name]."),
+				span_italic("You hear metal clattering on metal.")
 			)
 			contents += target
 			held += target
@@ -414,7 +414,7 @@
 			target.MouseDrop(src, over_loc = get_turf(target))
 		return TRUE
 	if (istype(target, object_type))
-		to_chat(user, SPAN_WARNING("You already have \a [target] in your [name]."))
+		to_chat(user, span_warning("You already have \a [target] in your [name]."))
 		return TRUE
 	if (!isturf(target))
 		return
@@ -422,7 +422,7 @@
 		return
 	var/blocking = target.turf_is_crowded()
 	if (blocking && !ismob(blocking))
-		to_chat(user, SPAN_WARNING("\The [blocking] is in the way."))
+		to_chat(user, span_warning("\The [blocking] is in the way."))
 		return TRUE
 	var/obj/item/roller_bed/roller = pop(held)
 	roller.dropInto(target)

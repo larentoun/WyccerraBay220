@@ -101,14 +101,14 @@
 /obj/machinery/uniform_vendor/use_tool(obj/item/tool, mob/living/user, list/click_params)
 	if(istype(tool, /obj/item/clothingbag))
 		if(length(tool.contents))
-			to_chat(user, SPAN_NOTICE("You must empty \the [tool] before you can put it in \the [src]."))
+			to_chat(user, span_notice("You must empty \the [tool] before you can put it in \the [src]."))
 			return TRUE
-		to_chat(user, SPAN_NOTICE("You put \the [tool] into \the [src]'s recycling slot."))
+		to_chat(user, span_notice("You put \the [tool] into \the [src]'s recycling slot."))
 		qdel(tool)
 		return TRUE
 
 	else if(istype(tool, /obj/item/card/id) && !ID && user.unEquip(tool, src))
-		to_chat(user, SPAN_NOTICE("You slide \the [tool] into \the [src]!"))
+		to_chat(user, span_notice("You slide \the [tool] into \the [src]!"))
 		ID = tool
 		attack_hand(user)
 		return TRUE

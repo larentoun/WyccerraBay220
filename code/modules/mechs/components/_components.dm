@@ -32,7 +32,7 @@
 /obj/item/mech_component/examine(mob/user)
 	. = ..()
 	if(ready_to_install())
-		. += SPAN_NOTICE("It is ready for installation.")
+		. += span_notice("It is ready for installation.")
 	else
 		. += show_missing_parts(user)
 
@@ -48,7 +48,7 @@
 
 /obj/item/mech_component/proc/install_component(obj/item/thing, mob/user)
 	if(user.unEquip(thing, src))
-		user.visible_message(SPAN_NOTICE("[user] installs [thing] in [src]."))
+		user.visible_message(span_notice("[user] installs [thing] in [src]."))
 		return 1
 
 /obj/item/mech_component/proc/update_health()
@@ -110,7 +110,7 @@
 		return
 	if(!tool.use_as_tool(src, user, do_flags = DO_REPAIR_CONSTRUCT))
 		return
-	user.visible_message(SPAN_NOTICE("[user] removes [removed] from [src]."))
+	user.visible_message(span_notice("[user] removes [removed] from [src]."))
 	removed.forceMove(user.loc)
 	playsound(user.loc, 'sound/effects/pop.ogg', 50, 0)
 	update_components()
@@ -124,7 +124,7 @@
 		repair_burn_generic(thing, user)
 		return
 	if(istype(thing, /obj/item/device/robotanalyzer))
-		to_chat(user, SPAN_NOTICE("Diagnostic Report for [src]:"))
+		to_chat(user, span_notice("Diagnostic Report for [src]:"))
 		return_diagnostics(user)
 		return
 
@@ -151,12 +151,12 @@
 	if(!istype(CC))
 		return
 	if(!burn_damage)
-		to_chat(user, SPAN_NOTICE("[src]'s wiring doesn't need replacing."))
+		to_chat(user, span_notice("[src]'s wiring doesn't need replacing."))
 		return
 
 	var/needed_amount = 6 - user.get_skill_value(SKILL_ELECTRICAL)
 	if(CC.get_amount() < needed_amount)
-		to_chat(user, SPAN_WARNING("You need at least [needed_amount] unit\s of cable to repair this section."))
+		to_chat(user, span_warning("You need at least [needed_amount] unit\s of cable to repair this section."))
 		return
 
 	user.visible_message("[user] begins replacing the wiring of [src]...")
@@ -166,7 +166,7 @@
 			return
 
 		repair_burn_damage(25)
-		to_chat(user, SPAN_NOTICE("You mend the damage to [src]'s wiring."))
+		to_chat(user, span_notice("You mend the damage to [src]'s wiring."))
 		playsound(user.loc, 'sound/items/Deconstruct.ogg', 25, 1)
 	return
 
@@ -183,5 +183,5 @@
 	return SPAN_COLOR(COLOR_RED, "destroyed")
 
 /obj/item/mech_component/proc/return_diagnostics(mob/user)
-	to_chat(user, SPAN_NOTICE("[capitalize(src.name)]:"))
-	to_chat(user, SPAN_NOTICE(" - Integrity: <b>[round((((max_damage - total_damage) / max_damage)) * 100)]%</b>" ))
+	to_chat(user, span_notice("[capitalize(src.name)]:"))
+	to_chat(user, span_notice(" - Integrity: <b>[round((((max_damage - total_damage) / max_damage)) * 100)]%</b>" ))

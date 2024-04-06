@@ -31,12 +31,12 @@
 /obj/item/psychic_power/use_before(mob/living/M, mob/living/user)
 	. = FALSE
 	if(M.do_psionics_check(max(force, maintain_cost), user))
-		to_chat(user, SPAN_DANGER("\The [src] flickers violently out of phase!"))
+		to_chat(user, span_danger("\The [src] flickers violently out of phase!"))
 		return TRUE
 
 /obj/item/psychic_power/afterattack(atom/target, mob/living/user, proximity)
 	if(target.do_psionics_check(max(force, maintain_cost), user))
-		to_chat(user, SPAN_DANGER("\The [src] flickers violently out of phase!"))
+		to_chat(user, span_danger("\The [src] flickers violently out of phase!"))
 		return
 	. = ..(target, user, proximity)
 

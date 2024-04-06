@@ -8,10 +8,10 @@
 /obj/item/organ/internal/augment/boost/reflex/buff()
 	. = ..()
 	if (.)
-		to_chat(owner, SPAN_NOTICE("Notice: AIM-4 finished reboot."))
+		to_chat(owner, span_notice("Notice: AIM-4 finished reboot."))
 
 
 /obj/item/organ/internal/augment/boost/reflex/debuff()
 	. = ..()
 	if (.)
-		to_chat(owner, SPAN_WARNING("Catastrophic damage detected: AIM-4 shutting down."))
+		to_chat(owner, span_warning("Catastrophic damage detected: AIM-4 shutting down."))

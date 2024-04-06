@@ -10,10 +10,10 @@
 		return
 	var/mob/M = C.mob ? C.mob.get_looc_mob() : null
 	if(!M)
-		to_chat(C, SPAN_DANGER("You cannot use [name] without a mob."))
+		to_chat(C, span_danger("You cannot use [name] without a mob."))
 		return FALSE
 	if(!get_turf(M))
-		to_chat(C, SPAN_DANGER("You cannot use [name] while in nullspace."))
+		to_chat(C, span_danger("You cannot use [name] while in nullspace."))
 		return FALSE
 
 /singleton/communication_channel/ooc/looc/do_communicate(client/C, message)

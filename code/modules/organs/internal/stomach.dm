@@ -91,8 +91,8 @@
 		return ..()
 	. = TRUE
 	user.visible_message(
-		SPAN_ITALIC("\The [user] begins cutting into \a [src] with \a [item]."),
-		SPAN_ITALIC("You start to cut open \the [src] with \the [item]."),
+		span_italic("\The [user] begins cutting into \a [src] with \a [item]."),
+		span_italic("You start to cut open \the [src] with \the [item]."),
 		range = 5
 	)
 	take_internal_damage(5)
@@ -110,8 +110,8 @@
 		else
 			removed_message = "Several things fall out."
 	user.visible_message(
-		SPAN_ITALIC("\The [user] finishes cutting \a [src] open. [removed_message]"),
-		SPAN_ITALIC("You finish cutting \the [src] open. [removed_message]"),
+		span_italic("\The [user] finishes cutting \a [src] open. [removed_message]"),
+		span_italic("You finish cutting \the [src] open. [removed_message]"),
 		range = 2
 	)
 	take_internal_damage(5)

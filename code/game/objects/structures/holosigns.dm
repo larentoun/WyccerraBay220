@@ -22,15 +22,15 @@
 	. =  ..()
 	if(.)
 		return
-	visible_message(SPAN_NOTICE("\The [user] waves through \the [src], causing it to dissipate."))
+	visible_message(span_notice("\The [user] waves through \the [src], causing it to dissipate."))
 	deactivate(user)
 
 
 /obj/structure/holosign/use_weapon(obj/item/weapon, mob/user, list/click_params)
 	SHOULD_CALL_PARENT(FALSE)
 	user.visible_message(
-		SPAN_WARNING("\The [user] swings \a [weapon] at \the [src], causing it to vanish."),
-		SPAN_WARNING("You swing \the [weapon] at \the [src], causing it to vanish.")
+		span_warning("\The [user] swings \a [weapon] at \the [src], causing it to vanish."),
+		span_warning("You swing \the [weapon] at \the [src], causing it to vanish.")
 	)
 	deactivate(user)
 	return TRUE
@@ -39,8 +39,8 @@
 /obj/structure/holosign/use_tool(obj/item/tool, mob/user, list/click_params)
 	SHOULD_CALL_PARENT(FALSE)
 	user.visible_message(
-		SPAN_NOTICE("\The [user] waves \a [tool] at \the [src], causing it to vanish."),
-		SPAN_NOTICE("You wave \the [tool] at \the [src], causing it to vanish.")
+		span_notice("\The [user] waves \a [tool] at \the [src], causing it to vanish."),
+		span_notice("You wave \the [tool] at \the [src], causing it to vanish.")
 	)
 	deactivate(user)
 	return TRUE

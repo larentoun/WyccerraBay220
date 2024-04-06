@@ -28,17 +28,17 @@
 	..()
 	if (result_type && is_type_in_list(W, allow_tool_types))
 		user.visible_message(
-			SPAN_ITALIC("\The [user] starts to carve \the [src] with \a [W]."),
-			blind_message = SPAN_ITALIC("You can hear quiet scraping."),
+			span_italic("\The [user] starts to carve \the [src] with \a [W]."),
+			blind_message = span_italic("You can hear quiet scraping."),
 			range = 5
 		)
 		if (!do_after(user, carve_time, src, DO_PUBLIC_UNIQUE))
-			to_chat(user, SPAN_ITALIC("You stop carving \the [src]."))
+			to_chat(user, span_italic("You stop carving \the [src]."))
 			return
 		var/result = new result_type()
 		user.put_in_hands(result)
 		user.visible_message(
-			SPAN_ITALIC("\The [user] finishes carving \a [result]."),
+			span_italic("\The [user] finishes carving \a [result]."),
 			range = 5
 		)
 		qdel(src)

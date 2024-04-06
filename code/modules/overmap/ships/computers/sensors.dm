@@ -64,7 +64,7 @@
 
 
 /obj/machinery/computer/ship/sensors/proc/state_visible(text)
-	visible_message(SPAN_NOTICE("<b>\The [src]</b> states, \"[text]\""))
+	visible_message(span_notice("<b>\The [src]</b> states, \"[text]\""))
 
 
 /obj/machinery/computer/ship/sensors/proc/alert_unknown_contact(contact_id, bearing, bearing_variability)
@@ -230,7 +230,7 @@
 				state_visible("Successfully scanned \the [O].")
 				return TOPIC_HANDLED
 
-		state_visible(SPAN_WARNING("Could not get a scan from \the [O]!"))
+		state_visible(span_warning("Could not get a scan from \the [O]!"))
 		return TOPIC_HANDLED
 
 	if (href_list["print"])
@@ -307,7 +307,7 @@
 		if (!in_vacuum())
 			toggle()
 		if (heat > critical_heat)
-			src.visible_message(SPAN_DANGER("\The [src] violently spews out sparks!"))
+			src.visible_message(span_danger("\The [src] violently spews out sparks!"))
 			var/datum/effect/spark_spread/s = new /datum/effect/spark_spread
 			s.set_up(3, 1, src)
 			s.start()

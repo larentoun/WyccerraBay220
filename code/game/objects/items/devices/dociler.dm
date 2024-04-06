@@ -29,7 +29,7 @@
 
 /obj/item/device/dociler/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("It is currently [loaded? "loaded": "recharging"].")
+	. += span_notice("It is currently [loaded? "loaded": "recharging"].")
 
 /obj/item/device/dociler/use_before(mob/living/L, mob/user)
 	. = FALSE
@@ -37,11 +37,11 @@
 		return FALSE
 	if (istype(L, /mob/living/simple_animal))
 		if (!loaded)
-			to_chat(user, SPAN_WARNING("\The [src] isn't loaded!"))
+			to_chat(user, span_warning("\The [src] isn't loaded!"))
 			return TRUE
 
 		user.visible_message("\The [user] thrusts \the [src] deep into \the [L]'s head, injecting something!")
-		to_chat(L, SPAN_NOTICE("You feel pain as \the [user] injects something into you. All of a sudden you feel as if \the [user] is the friendliest and nicest person you've ever known. You want to be friends with them and all their friends."))
+		to_chat(L, span_notice("You feel pain as \the [user] injects something into you. All of a sudden you feel as if \the [user] is the friendliest and nicest person you've ever known. You want to be friends with them and all their friends."))
 		L.faction = user.faction
 
 		if (istype(L,/mob/living/simple_animal/hostile))
@@ -50,7 +50,7 @@
 			H.attack_same = 0
 			H.friends += weakref(user)
 
-		L.desc += "<br>[SPAN_NOTICE("It looks especially docile.")]"
+		L.desc += "<br>[span_notice("It looks especially docile.")]"
 		var/name = input(user, "Would you like to rename \the [L]?", "Dociler", L.name) as text
 		if (length(name))
 			L.real_name = name
@@ -62,5 +62,5 @@
 		update_icon()
 		return TRUE
 	else
-		to_chat(user, SPAN_WARNING("\The [src] is not compatible with \the [L]"))
+		to_chat(user, span_warning("\The [src] is not compatible with \the [L]"))
 		return TRUE

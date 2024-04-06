@@ -80,10 +80,10 @@
 
 /obj/machinery/ship_map/attack_hand(mob/user)
 	if(watching_mob && (watching_mob != user))
-		to_chat(user, SPAN_WARNING("Someone else is currently watching the holomap."))
+		to_chat(user, span_warning("Someone else is currently watching the holomap."))
 		return
 	if(user.loc != loc)
-		to_chat(user, SPAN_WARNING("You need to stand in front of \the [src]."))
+		to_chat(user, span_warning("You need to stand in front of \the [src]."))
 		return
 	startWatching(user)
 
@@ -117,9 +117,9 @@
 			update_use_power(POWER_USE_ACTIVE)
 
 			if(bogus)
-				to_chat(user, SPAN_WARNING("The holomap failed to initialize. This area of space cannot be mapped."))
+				to_chat(user, span_warning("The holomap failed to initialize. This area of space cannot be mapped."))
 			else
-				to_chat(user, SPAN_NOTICE("A hologram of your current location appears before your eyes."))
+				to_chat(user, span_notice("A hologram of your current location appears before your eyes."))
 
 			START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 

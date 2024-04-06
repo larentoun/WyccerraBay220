@@ -137,7 +137,7 @@
 
 			// throw out vomit
 			if(H.reagents?.total_volume)
-				visible_message(SPAN_DANGER("Vomit spews out of the disposal pipe!"))
+				visible_message(span_danger("Vomit spews out of the disposal pipe!"))
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 				if(istype(src.loc, /turf/simulated))
 					var/obj/decal/cleanable/vomit/splat = new /obj/decal/cleanable/vomit(src.loc)
@@ -481,8 +481,8 @@
 		sort_type = tagger.currTag
 		playsound(src, 'sound/machines/twobeep.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] reconfigures [src] with [tool]."),
-			SPAN_NOTICE("You set [src]'s filter to '[sort_type]' with [tool].")
+			span_notice("[user] reconfigures [src] with [tool]."),
+			span_notice("You set [src]'s filter to '[sort_type]' with [tool].")
 		)
 		updatename()
 		updatedesc()
@@ -563,8 +563,8 @@
 		id_tag = construct.id_tag
 		playsound(src, 'sound/machines/twobeep.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] reconfigures [src] with [tool]."),
-			SPAN_NOTICE("You set [src]'s ID tag to '[id_tag]' with [tool]..")
+			span_notice("[user] reconfigures [src] with [tool]."),
+			span_notice("You set [src]'s ID tag to '[id_tag]' with [tool]..")
 		)
 		return TRUE
 
@@ -663,8 +663,8 @@
 		sort_type = tagger.currTag
 		playsound(src, 'sound/machines/twobeep.ogg', 50, TRUE)
 		user.visible_message(
-			SPAN_NOTICE("[user] reconfigures [src] with [tool]."),
-			SPAN_NOTICE("You set [src]'s filter to '[sort_type]' with [tool].")
+			span_notice("[user] reconfigures [src] with [tool]."),
+			span_notice("You set [src]'s filter to '[sort_type]' with [tool].")
 		)
 		updatename()
 		updatedesc()

@@ -62,7 +62,7 @@
 			build_mode.Selected()
 			host.current_build_mode = build_mode
 			icon_state = build_mode.icon_state
-			to_chat(usr, SPAN_NOTICE("Build mode '[host.current_build_mode]' selected."))
+			to_chat(usr, span_notice("Build mode '[host.current_build_mode]' selected."))
 	else if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		host.current_build_mode.Configurate()
 

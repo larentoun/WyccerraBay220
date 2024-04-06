@@ -38,7 +38,7 @@
 
 /obj/machinery/optable/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("The neural suppressors are switched [suppressing ? "on" : "off"].")
+	. += span_notice("The neural suppressors are switched [suppressing ? "on" : "off"].")
 
 /obj/machinery/optable/ex_act(severity)
 
@@ -63,21 +63,21 @@
 
 /obj/machinery/optable/physical_attack_hand(mob/user)
 	if(!victim)
-		to_chat(user, SPAN_WARNING("There is nobody on \the [src]. It would be pointless to turn the suppressor on."))
+		to_chat(user, span_warning("There is nobody on \the [src]. It would be pointless to turn the suppressor on."))
 		return TRUE
 
 	if(user != victim && !suppressing) // Skip checks if you're doing it to yourself or turning it off, this is an anti-griefing mechanic more than anything.
-		user.visible_message(SPAN_WARNING("\The [user] begins switching on \the [src]'s neural suppressor."))
+		user.visible_message(span_warning("\The [user] begins switching on \the [src]'s neural suppressor."))
 		if(!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE) || !user || !src || user.incapacitated() || !user.Adjacent(src))
 			return TRUE
 		if(!victim)
-			to_chat(user, SPAN_WARNING("There is nobody on \the [src]. It would be pointless to turn the suppressor on."))
+			to_chat(user, span_warning("There is nobody on \the [src]. It would be pointless to turn the suppressor on."))
 			return TRUE
 
 	suppressing = !suppressing
-	user.visible_message(SPAN_NOTICE("\The [user] switches [suppressing ? "on" : "off"] \the [src]'s neural suppressor."))
+	user.visible_message(span_notice("\The [user] switches [suppressing ? "on" : "off"] \the [src]'s neural suppressor."))
 	if (victim.stat == UNCONSCIOUS)
-		to_chat(victim, SPAN_NOTICE(SPAN_BOLD("... [pick("good feeling", "white light", "pain fades away", "safe now")] ...")))
+		to_chat(victim, span_notice(span_bold("... [pick("good feeling", "white light", "pain fades away", "safe now")] ...")))
 	return TRUE
 
 /obj/machinery/optable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
@@ -119,7 +119,7 @@
 		user.visible_message("[user] climbs on \the [src].","You climb on \the [src].")
 		add_fingerprint(user)
 	else
-		visible_message(SPAN_NOTICE("\The [C] has been laid on \the [src] by [user]."))
+		visible_message(span_notice("\The [C] has been laid on \the [src] by [user]."))
 		add_fingerprint(C)
 		add_fingerprint(user)
 	if (C.client)
@@ -165,9 +165,9 @@
 /obj/machinery/optable/proc/check_table(mob/living/carbon/patient as mob)
 	check_victim()
 	if(src.victim && get_turf(victim) == get_turf(src) && victim.lying)
-		to_chat(usr, SPAN_WARNING("\The [src] is already occupied!"))
+		to_chat(usr, span_warning("\The [src] is already occupied!"))
 		return 0
 	if(patient.buckled)
-		to_chat(usr, SPAN_NOTICE("Unbuckle \the [patient] first!"))
+		to_chat(usr, span_notice("Unbuckle \the [patient] first!"))
 		return 0
 	return 1

@@ -24,18 +24,18 @@
 /obj/item/gun/launcher/net/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 2 && chambered)
-		. += SPAN_NOTICE("[chambered] is chambered.")
+		. += span_notice("[chambered] is chambered.")
 
 /obj/item/gun/launcher/net/proc/can_load(obj/item/net_shell/S, mob/user)
 	if(chambered)
-		to_chat(user, SPAN_WARNING("\The [src] already has a shell loaded."))
+		to_chat(user, span_warning("\The [src] already has a shell loaded."))
 		return FALSE
 	return TRUE
 
 /obj/item/gun/launcher/net/proc/finish_loading(obj/item/net_shell/S, mob/user)
 	chambered = S
 	if(user)
-		user.visible_message("\The [user] inserts \a [S] into \the [src].", SPAN_NOTICE("You insert \a [S] into \the [src]."))
+		user.visible_message("\The [user] inserts \a [S] into \the [src].", span_notice("You insert \a [S] into \the [src]."))
 
 /obj/item/gun/launcher/net/proc/load(obj/item/net_shell/S, mob/user)
 	if(!can_load(S, user))
@@ -46,11 +46,11 @@
 
 /obj/item/gun/launcher/net/proc/unload(mob/user)
 	if(chambered)
-		user.visible_message("\The [user] removes \the [chambered] from \the [src].", SPAN_NOTICE("You remove \the [chambered] from \the [src]."))
+		user.visible_message("\The [user] removes \the [chambered] from \the [src].", span_notice("You remove \the [chambered] from \the [src]."))
 		user.put_in_hands(chambered)
 		chambered = null
 	else
-		to_chat(user, SPAN_WARNING("\The [src] is empty."))
+		to_chat(user, span_warning("\The [src] is empty."))
 
 
 /obj/item/gun/launcher/net/use_tool(obj/item/tool, mob/user, list/click_params)
@@ -87,7 +87,7 @@
 
 /obj/item/gun/launcher/net/borg/can_load(obj/item/net_shell/S, mob/user)
 	if(LAZYLEN(shells) >= max_shells)
-		to_chat(user, SPAN_WARNING("\The [src] already has the maximum number of shells loaded."))
+		to_chat(user, span_warning("\The [src] already has the maximum number of shells loaded."))
 		return FALSE
 	return TRUE
 
@@ -110,4 +110,4 @@
 
 /obj/item/gun/launcher/net/borg/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("There are [LAZYLEN(shells)] shell\s loaded.")
+	. += span_notice("There are [LAZYLEN(shells)] shell\s loaded.")

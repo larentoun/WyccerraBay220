@@ -12,7 +12,7 @@
 	if(!istype(A, /obj/decal/cleanable/ash))
 		return FALSE
 	if(length(contents))
-		to_chat(user, SPAN_WARNING("\The [src] is already full!"))
+		to_chat(user, span_warning("\The [src] is already full!"))
 		return TRUE
 
 	user.visible_message("\The [user] scoops \the [A] into \the [src], securing the lid.", "You scoop \the [A] into \the [src], securing the lid.")
@@ -21,7 +21,7 @@
 
 /obj/item/material/urn/attack_self(mob/user)
 	if(!length(contents))
-		to_chat(user, SPAN_WARNING("\The [src] is empty!"))
+		to_chat(user, span_warning("\The [src] is empty!"))
 		return
 	else
 		for(var/obj/decal/cleanable/ash/A in contents)
@@ -31,4 +31,4 @@
 /obj/item/material/urn/examine(mob/user)
 	. = ..()
 	if(length(contents))
-		. += SPAN_NOTICE("[src] is full.")
+		. += span_notice("[src] is full.")

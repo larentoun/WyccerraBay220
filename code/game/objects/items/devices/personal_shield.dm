@@ -41,10 +41,10 @@
 	. = ..()
 	if(open)
 		if(power_cell)
-			. += SPAN_NOTICE("There is \a [power_cell] in \the [src].")
+			. += span_notice("There is \a [power_cell] in \the [src].")
 		else
-			. += SPAN_NOTICE("There is no cell in \the [src].")
-	. += SPAN_NOTICE("The internal capacitor currently has [round(currently_stored_power/max_stored_power * 100)]% charge.")
+			. += span_notice("There is no cell in \the [src].")
+	. += span_notice("The internal capacitor currently has [round(currently_stored_power/max_stored_power * 100)]% charge.")
 
 /obj/item/device/personal_shield/screwdriver_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
@@ -70,8 +70,8 @@
 		START_PROCESSING(SSobj, src)
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("\The [user] installs \a [tool] into \a [src]."),
-			SPAN_NOTICE("You install \the [tool] into \the [src].")
+			span_notice("\The [user] installs \a [tool] into \a [src]."),
+			span_notice("You install \the [tool] into \the [src].")
 		)
 		return TRUE
 
@@ -79,7 +79,7 @@
 
 /obj/item/device/personal_shield/attack_self(mob/living/user)
 	if (open && power_cell)
-		user.visible_message("\The [user] shakes \the [power_cell] out of \the [src].", SPAN_NOTICE("You shake \the [power_cell] out of \the [src]."))
+		user.visible_message("\The [user] shakes \the [power_cell] out of \the [src].", span_notice("You shake \the [power_cell] out of \the [src]."))
 		turn_off()
 		power_cell.dropInto(user.loc)
 		on_remove_cell()
@@ -89,12 +89,12 @@
 /obj/item/device/personal_shield/attack_hand(mob/living/user)
 	if(open && (loc == user))
 		if(power_cell)
-			user.visible_message("\The [user] removes \the [power_cell] from \the [src].", SPAN_NOTICE("You remove \the [power_cell] from \the [src]."))
+			user.visible_message("\The [user] removes \the [power_cell] from \the [src].", span_notice("You remove \the [power_cell] from \the [src]."))
 			turn_off()
 			user.put_in_active_hand(power_cell)
 			on_remove_cell()
 		else
-			to_chat(user, SPAN_WARNING("There's no battery in \the [src]."))
+			to_chat(user, span_warning("There's no battery in \the [src]."))
 	else . = ..()
 
 /obj/item/device/personal_shield/proc/on_remove_cell()
@@ -116,7 +116,7 @@
 	if(power_cell)
 		power_cell.emp_act(severity)
 		if(shield)
-			visible_message(SPAN_DANGER("\The [src] explodes!"))
+			visible_message(span_danger("\The [src] explodes!"))
 			explosion(src, 1, EX_ACT_LIGHT)
 			qdel(src)
 	..()
@@ -127,10 +127,10 @@
 	if(shield || open || !user)
 		return
 	if(!power_cell)
-		to_chat(user, SPAN_WARNING("\The [src] doesn't have a power supply."))
+		to_chat(user, span_warning("\The [src] doesn't have a power supply."))
 		return
 	if(currently_stored_power < shield_power_cost)
-		to_chat(user, SPAN_WARNING("\The [src]'s internal capacitor does not have enough charge."))
+		to_chat(user, span_warning("\The [src]'s internal capacitor does not have enough charge."))
 		return
 	shield = new shield_type(user, src)
 	update_name()
@@ -228,7 +228,7 @@
 	if (shield || !H)
 		return FALSE
 	if (currently_stored_power < shield_power_cost)
-		to_chat(H, SPAN_WARNING("\The [src]'s internal capacitor does not have enough charge."))
+		to_chat(H, span_warning("\The [src]'s internal capacitor does not have enough charge."))
 		return FALSE
 	shield = new shield_type(H, src)
 	return TRUE

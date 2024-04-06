@@ -42,19 +42,19 @@
 				var/alert_result = alert(user, "[M] is a player-controlled mob. Confirm?", "Build Mode", "Yes, Delete", "Cancel")
 				if (alert_result != "Yes, Delete" || QDELETED(M))
 					return
-			to_chat(M, SPAN_DEBUG(FONT_LARGE("OOC: You have been deleted by an admin using build mode. If this seems to be in error, please adminhelp and let them know.")))
+			to_chat(M, span_debug(FONT_LARGE("OOC: You have been deleted by an admin using build mode. If this seems to be in error, please adminhelp and let them know.")))
 			M.ghostize()
 		qdel(target)
 	else if (LAZYACCESS(modifiers, LEFT_CLICK))
 		if (!build_type)
-			to_chat(user, SPAN_WARNING("Select a type to construct."))
+			to_chat(user, span_warning("Select a type to construct."))
 			return
 		if (!location)
 			return
 		else if (ispath(build_type, /turf))
 			location.ChangeTurf(build_type)
 		else if (ispath(build_type, /area))
-			to_chat(user, SPAN_WARNING("Do not use this to create or modify areas. Use the Area build mode category instead."))
+			to_chat(user, span_warning("Do not use this to create or modify areas. Use the Area build mode category instead."))
 			return
 		else
 			var/atom/instance = new build_type (location)

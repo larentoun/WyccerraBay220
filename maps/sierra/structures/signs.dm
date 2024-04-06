@@ -44,7 +44,7 @@
 
 /obj/structure/sign/memorial/sierra/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("You see a holographic sign: <A href='?src=\ref[src];show_info=1'>Read Sign</A>")
+	. += span_notice("You see a holographic sign: <A href='?src=\ref[src];show_info=1'>Read Sign</A>")
 
 /obj/structure/sign/memorial/sierra/CanUseTopic()
 	return STATUS_INTERACTIVE

@@ -12,7 +12,7 @@ Build Mode: Radiation - Visualizer for radiation sources & affected turfs.
 
 
 /datum/build_mode/radiation/Help()
-	to_chat(user, SPAN_NOTICE(help_text))
+	to_chat(user, span_notice(help_text))
 
 
 /datum/build_mode/radiation/Selected()
@@ -39,4 +39,3 @@ Build Mode: Radiation - Visualizer for radiation sources & affected turfs.
 		M.icon_state = "bm_rads_str_[rads]"
 	else
 		M.icon_state = ""
-

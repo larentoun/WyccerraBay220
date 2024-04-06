@@ -6,9 +6,9 @@
 		. += "<tr>"
 		. += "<td>[AH.category]</td>"
 		if(AH in SA.alarm_handlers)
-			. += "<td>[SPAN_GOOD("&#9724")]Active</td><td><a href='?src=\ref[src];remove=\ref[AH]'>Inactivate</a></td>"
+			. += "<td>[span_good("&#9724")]Active</td><td><a href='?src=\ref[src];remove=\ref[AH]'>Inactivate</a></td>"
 		else
-			. += "<td>[SPAN_BAD("&#9724")]Inactive</td><td><a href='?src=\ref[src];add=\ref[AH]'>Activate</a></td>"
+			. += "<td>[span_bad("&#9724")]Inactive</td><td><a href='?src=\ref[src];add=\ref[AH]'>Activate</a></td>"
 		. += "</tr>"
 	. += "</table>"
 

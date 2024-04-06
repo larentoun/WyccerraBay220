@@ -44,13 +44,13 @@
 
 /obj/item/storage/backpack/handle_item_insertion(obj/item/W, prevent_warning = FALSE, NoUpdate = 0)
 	if (!worn_access && usr?.isEquipped(src, slot_back))
-		to_chat(usr, SPAN_WARNING("You can't insert \the [W] while \the [src] is on your back."))
+		to_chat(usr, span_warning("You can't insert \the [W] while \the [src] is on your back."))
 		return
 	return ..()
 
 /obj/item/storage/backpack/open(mob/user)
 	if (!worn_access && user.isEquipped(src, slot_back))
-		to_chat(user, SPAN_WARNING("You can't open \the [src] while it is on your back."))
+		to_chat(user, span_warning("You can't open \the [src] while it is on your back."))
 		return
 	..()
 
@@ -75,7 +75,7 @@
 
 /obj/item/storage/backpack/holding/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(istype(W, /obj/item/storage/backpack/holding) || istype(W, /obj/item/storage/bag/trash/bluespace))
-		to_chat(user, SPAN_WARNING("The Bluespace interfaces of the two devices conflict and malfunction."))
+		to_chat(user, span_warning("The Bluespace interfaces of the two devices conflict and malfunction."))
 		qdel(W)
 		return TRUE
 	return ..()
@@ -479,7 +479,7 @@
 /obj/item/storage/backpack/satchel/flat/attackby(obj/item/W, mob/user)
 	var/turf/T = get_turf(src)
 	if(hides_under_flooring() && isturf(T) && !T.is_plating())
-		to_chat(user, SPAN_WARNING("You must remove the plating first."))
+		to_chat(user, span_warning("You must remove the plating first."))
 		return 1
 	return ..()
 

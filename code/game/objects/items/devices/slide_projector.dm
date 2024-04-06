@@ -42,7 +42,7 @@
 
 /obj/item/storage/slide_projector/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	if(!current_slide)
-		to_chat(user, SPAN_WARNING("\The [src] does not have a slide loaded."))
+		to_chat(user, span_warning("\The [src] does not have a slide loaded."))
 		return
 	project_at(get_turf(target))
 

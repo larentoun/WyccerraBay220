@@ -47,7 +47,7 @@ var/global/list/floor_light_cache = list()
 	. = ITEM_INTERACT_SUCCESS
 	if(!tool.use_as_tool(src, user, volume = 75, do_flags = DO_REPAIR_CONSTRUCT))
 		return
-	to_chat(user, SPAN_NOTICE("You dismantle the floor light."))
+	to_chat(user, span_notice("You dismantle the floor light."))
 	new /obj/item/stack/material/steel(src.loc, 1)
 	new /obj/item/stack/material/glass(src.loc, 1)
 	qdel(src)
@@ -65,18 +65,18 @@ var/global/list/floor_light_cache = list()
 /obj/machinery/floor_light/on_death()
 	..()
 	playsound(src, "shatter", 70, 1)
-	visible_message(SPAN_DANGER("[src] is smashed into many pieces!"))
+	visible_message(span_danger("[src] is smashed into many pieces!"))
 
 /obj/machinery/floor_light/interface_interact(mob/user)
 	if(!CanInteract(user, DefaultTopicState()))
 		return FALSE
 	if(!anchored)
-		to_chat(user, SPAN_WARNING("[src] must be screwed down first."))
+		to_chat(user, span_warning("[src] must be screwed down first."))
 		return TRUE
 
 	var/on = (use_power == POWER_USE_ACTIVE)
 	update_use_power(on ? POWER_USE_OFF : POWER_USE_ACTIVE)
-	visible_message(SPAN_NOTICE("[user] turns [src] [!on ? "on" : "off"]."))
+	visible_message(span_notice("[user] turns [src] [!on ? "on" : "off"]."))
 	queue_icon_update()
 	return TRUE
 

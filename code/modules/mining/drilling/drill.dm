@@ -149,7 +149,7 @@
 
 /obj/machinery/mining/drill/cannot_transition_to(state_path)
 	if(active)
-		return SPAN_NOTICE("You must turn \the [src] off first.")
+		return span_notice("You must turn \the [src] off first.")
 	return ..()
 
 /obj/machinery/mining/drill/components_are_accessible(path)
@@ -170,14 +170,14 @@
 		if(is_powered())
 			set_active(!active)
 			if(active)
-				visible_message(SPAN_NOTICE("\The [src] lurches downwards, grinding noisily."))
+				visible_message(span_notice("\The [src] lurches downwards, grinding noisily."))
 				need_update_field = 1
 			else
-				visible_message(SPAN_NOTICE("\The [src] shudders to a grinding halt."))
+				visible_message(span_notice("\The [src] shudders to a grinding halt."))
 		else
-			to_chat(user, SPAN_NOTICE("The drill is unpowered."))
+			to_chat(user, span_notice("The drill is unpowered."))
 	else
-		to_chat(user, SPAN_NOTICE("Turning on a piece of industrial machinery without sufficient bracing or wires exposed is a bad idea."))
+		to_chat(user, span_notice("Turning on a piece of industrial machinery without sufficient bracing or wires exposed is a bad idea."))
 
 	update_icon()
 	return TRUE
@@ -227,7 +227,7 @@
 /obj/machinery/mining/drill/proc/system_error(error)
 
 	if(error)
-		src.visible_message(SPAN_NOTICE("\The [src] flashes a '[error]' warning."))
+		src.visible_message(span_notice("\The [src] flashes a '[error]' warning."))
 	need_player_check = 1
 	set_active(FALSE)
 	update_icon()
@@ -254,9 +254,9 @@
 	if(B)
 		for(var/obj/item/ore/O in contents)
 			O.forceMove(B)
-		to_chat(usr, SPAN_NOTICE("You unload the drill's storage cache into the ore box."))
+		to_chat(usr, span_notice("You unload the drill's storage cache into the ore box."))
 	else
-		to_chat(usr, SPAN_NOTICE("You must move an ore box up to the drill before you can unload it."))
+		to_chat(usr, span_notice("You must move an ore box up to the drill before you can unload it."))
 
 
 /obj/machinery/mining/brace
@@ -273,12 +273,12 @@
 
 /obj/machinery/mining/brace/cannot_transition_to(state_path)
 	if(connected && connected.active)
-		return SPAN_NOTICE("You can't work with the brace of a running drill!")
+		return span_notice("You can't work with the brace of a running drill!")
 	return ..()
 
 /obj/machinery/mining/brace/use_tool(obj/item/W, mob/living/user, list/click_params)
 	if(connected && connected.active)
-		to_chat(user, SPAN_NOTICE("You can't work with the brace of a running drill!"))
+		to_chat(user, span_notice("You can't work with the brace of a running drill!"))
 		return TRUE
 
 	return ..()

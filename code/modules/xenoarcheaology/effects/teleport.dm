@@ -25,7 +25,7 @@
 
 	var/weakness = GetAnomalySusceptibility(M)
 	if(prob(100 * weakness))
-		to_chat(M, SPAN_WARNING("You feel strange and tingly as some sort of force gathers around you!"))
+		to_chat(M, span_warning("You feel strange and tingly as some sort of force gathers around you!"))
 		teleporting += M
 		spawn(rand(50, 100))
 			if (M.buckled)
@@ -42,6 +42,6 @@
 
 			teleporting -= M
 
-			to_chat(M, SPAN_WARNING("You are displaced by a strange force!"))
+			to_chat(M, span_warning("You are displaced by a strange force!"))
 	else
-		to_chat(M, SPAN_NOTICE("You feel some sort of force gather around you, before it quickly dissapates."))
+		to_chat(M, span_notice("You feel some sort of force gather around you, before it quickly dissapates."))

@@ -45,7 +45,7 @@
 	var/bad_arc = reverse_direction(user.dir) //arc of directions from which we cannot block
 	if(check_shield_arc(user, bad_arc, damage_source, attacker))
 		if(prob(get_block_chance(user, damage, damage_source, attacker)))
-			user.visible_message(SPAN_DANGER("\The [user] blocks [attack_text] with \the [src]!"))
+			user.visible_message(span_danger("\The [user] blocks [attack_text] with \the [src]!"))
 			return 1
 	return 0
 
@@ -92,7 +92,7 @@
 /obj/item/shield/riot/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/melee/baton))
 		if(cooldown < world.time - 25)
-			user.visible_message(SPAN_WARNING("[user] bashes [src] with [W]!"))
+			user.visible_message(span_warning("[user] bashes [src] with [W]!"))
 			playsound(user.loc, 'sound/effects/shieldbash.ogg', 50, 1)
 			cooldown = world.time
 	else
@@ -202,9 +202,9 @@
 	if (damaged)
 		if (world.time < disabled)
 			if (user)
-				user.show_message(SPAN_WARNING("\The [src] sputters. It's not going to work right now!"))
+				user.show_message(span_warning("\The [src] sputters. It's not going to work right now!"))
 			return
-		user.visible_message(SPAN_NOTICE("\The [src] resonates perfectly, once again."))
+		user.visible_message(span_notice("\The [src] resonates perfectly, once again."))
 		damaged = FALSE
 
 	next_action = time + 3 SECONDS
@@ -280,7 +280,7 @@
 	if (severity == EMP_ACT_HEAVY)
 		disabletime = 1 MINUTES
 
-	visible_message(SPAN_DANGER("\The [src] violently shudders!"))
+	visible_message(span_danger("\The [src] violently shudders!"))
 	new /obj/overlay/self_deleting/emppulse(get_turf(src))
 
 	disabled = world.time + disabletime

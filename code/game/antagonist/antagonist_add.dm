@@ -60,7 +60,7 @@
 		borg.emagged = TRUE
 
 	spawn(1 SECOND) //Added a delay so that this should pop up at the bottom and not the top of the text flood the new antag gets.
-		to_chat(player.current, SPAN_NOTICE("Once you decide on a goal to pursue, you can optionally display it to \
+		to_chat(player.current, span_notice("Once you decide on a goal to pursue, you can optionally display it to \
 			everyone at the end of the shift with the <b>Set Ambition</b> verb, located in the IC tab.  You can change this at any time, \
 			and it otherwise has no bearing on your round."))
 	player.current.verbs += /mob/living/proc/set_ambition
@@ -68,10 +68,10 @@
 	// Handle only adding a mind and not bothering with gear etc.
 	if(nonstandard_role_type)
 		faction_members |= player
-		to_chat(player.current, SPAN_DANGER(FONT_LARGE("You are \a [nonstandard_role_type]!")))
+		to_chat(player.current, span_danger(FONT_LARGE("You are \a [nonstandard_role_type]!")))
 		player.special_role = nonstandard_role_type
 		if(nonstandard_role_msg)
-			to_chat(player.current, SPAN_NOTICE("[nonstandard_role_msg]"))
+			to_chat(player.current, span_notice("[nonstandard_role_msg]"))
 		update_icons_added(player)
 	return 1
 
@@ -90,7 +90,7 @@
 				player.current.faction = player.current.last_faction
 			player.current.last_faction = faction
 	if(player in current_antagonists)
-		to_chat(player.current, SPAN_DANGER(FONT_LARGE("You are no longer a [role_text]!")))
+		to_chat(player.current, span_danger(FONT_LARGE("You are no longer a [role_text]!")))
 		current_antagonists -= player
 		faction_members -= player
 		player.special_role = null

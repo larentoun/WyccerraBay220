@@ -107,7 +107,7 @@
 		turn_off()
 	else
 		turn_on()
-	to_chat(user, SPAN_NOTICE("You switch [src] [on ? "on" : "off"]."))
+	to_chat(user, span_notice("You switch [src] [on ? "on" : "off"]."))
 
 /obj/item/device/suit_cooling_unit/screwdriver_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
@@ -132,8 +132,8 @@
 		cell = tool
 		update_icon()
 		user.visible_message(
-			SPAN_NOTICE("[user] installs [tool] into [src]."),
-			SPAN_NOTICE("You install [tool] into [src].")
+			span_notice("[user] installs [tool] into [src]."),
+			span_notice("You install [tool] into [src].")
 		)
 
 	return ..()
@@ -174,12 +174,12 @@
 		return
 
 	if (on)
-		. += SPAN_NOTICE("It's switched on and running.")
+		. += span_notice("It's switched on and running.")
 	else
-		. += SPAN_NOTICE("It is switched off.")
+		. += span_notice("It is switched off.")
 
 	if (cover_open)
-		. += SPAN_NOTICE("The panel is open.")
+		. += span_notice("The panel is open.")
 
 	if (cell)
-		. += SPAN_NOTICE("The charge meter reads [round(cell.percent())]%.")
+		. += span_notice("The charge meter reads [round(cell.percent())]%.")

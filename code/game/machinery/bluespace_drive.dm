@@ -60,14 +60,14 @@
 /obj/machinery/bluespacedrive/emp_act(severity)
 	..()
 	if (!(state & STATE_BROKEN))
-		visible_message(SPAN_WARNING("\The [src]'s field warps and buckles uneasily!"))
+		visible_message(span_warning("\The [src]'s field warps and buckles uneasily!"))
 		playsound(loc, damage_hitsound, 80)
 
 
 /obj/machinery/bluespacedrive/bullet_act(obj/item/projectile/projectile)
 	. = ..()
 	if (!(state & STATE_BROKEN))
-		visible_message(SPAN_WARNING("\The [src]'s field crackles disturbingly!"))
+		visible_message(span_warning("\The [src]'s field crackles disturbingly!"))
 		playsound(loc, damage_hitsound, 80)
 
 
@@ -84,14 +84,14 @@
 
 /obj/machinery/bluespacedrive/on_death()
 	playsound(loc, 'sound/machines/BSD_explosion.ogg', 100)
-	visible_message(SPAN_DANGER(FONT_LARGE("\The [src] begins emitting an ear-splitting, horrible shrill! Get back!")))
+	visible_message(span_danger(FONT_LARGE("\The [src] begins emitting an ear-splitting, horrible shrill! Get back!")))
 	addtimer(CALLBACK(src, PROC_REF(explode)), 5 SECONDS)
 	..()
 
 
 /// Final death act handler for the drive where it explodes. You really shouldn't call this directly or you'll make weird broken things regarding health tracking. Use `kill_health()` instead, the death handler calls this.
 /obj/machinery/bluespacedrive/proc/explode()
-	visible_message(SPAN_DANGER(FONT_LARGE("\The [src]'s containment field is wracked by a series of horrendous distortions, buckling and twisting like a living thing before bursting in a flash of light!")))
+	visible_message(span_danger(FONT_LARGE("\The [src]'s containment field is wracked by a series of horrendous distortions, buckling and twisting like a living thing before bursting in a flash of light!")))
 	explosion(get_turf(src), 15, EX_ACT_HEAVY)
 	empulse(get_turf(src), 7, 14)
 	state |= STATE_BROKEN
@@ -100,7 +100,7 @@
 	update_icon()
 
 /obj/machinery/bluespacedrive/use_grab(obj/item/grab/grab, list/click_params)
-	to_chat(grab.assailant, SPAN_WARNING("\The [src] pulls at \the [grab.affecting] but they're too heavy."))
+	to_chat(grab.assailant, span_warning("\The [src] pulls at \the [grab.affecting] but they're too heavy."))
 	return TRUE
 
 /obj/machinery/bluespacedrive/use_tool(obj/item/item, mob/living/user, list/click_params)
@@ -108,12 +108,12 @@
 		return
 
 	if (issilicon(user) || !user.unEquip(item, src))
-		to_chat(user, SPAN_WARNING("\The [src] pulls at \the [item] but it's attached to you."))
+		to_chat(user, span_warning("\The [src] pulls at \the [item] but it's attached to you."))
 		return TRUE
 	user.visible_message(
-		SPAN_WARNING("\The [user] reaches out \a [item] to \the [src], warping briefly as it disappears in a flash of blue light, scintillating motes left behind."),
-		SPAN_DANGER("You touch \the [src] with \the [item], the field buckling around it before retracting with a crackle as it leaves small, blue scintillas on your hand as you flinch away."),
-		SPAN_WARNING("You hear an otherwordly crackle, followed by humming.")
+		span_warning("\The [user] reaches out \a [item] to \the [src], warping briefly as it disappears in a flash of blue light, scintillating motes left behind."),
+		span_danger("You touch \the [src] with \the [item], the field buckling around it before retracting with a crackle as it leaves small, blue scintillas on your hand as you flinch away."),
+		span_warning("You hear an otherwordly crackle, followed by humming.")
 	)
 	qdel(item)
 	if (prob(5))
@@ -125,20 +125,20 @@
 
 /obj/machinery/bluespacedrive/examine_damage_state(mob/user)
 	if (health_dead())
-		to_chat(user, SPAN_DANGER("Its field is completely destroyed, the core revealed under the arcing debris."))
+		to_chat(user, span_danger("Its field is completely destroyed, the core revealed under the arcing debris."))
 		return
 	var/damage_percentage = get_damage_percentage()
 	switch (damage_percentage)
 		if (0)
-			to_chat(user, SPAN_NOTICE("At a glance, its field is peacefully humming without any alterations."))
+			to_chat(user, span_notice("At a glance, its field is peacefully humming without any alterations."))
 		if (1 to 32)
-			to_chat(user, SPAN_WARNING("Its field is crackling gently, with the occasional twitch."))
+			to_chat(user, span_warning("Its field is crackling gently, with the occasional twitch."))
 		if (33 to 65)
-			to_chat(user, SPAN_WARNING("Its damaged field is twitching and crackling dangerously!"))
+			to_chat(user, span_warning("Its damaged field is twitching and crackling dangerously!"))
 		else
-			to_chat(user, SPAN_DANGER("Its unstable field is cracking and shifting dangerously, revealing the core inside briefly!"))
+			to_chat(user, span_danger("Its unstable field is cracking and shifting dangerously, revealing the core inside briefly!"))
 	if (instability_event_active && !damage_percentage)
-		to_chat(user, SPAN_WARNING("The core seems to be pulsing and lashing out at the contaiment field, as if trying to break free."))
+		to_chat(user, span_warning("The core seems to be pulsing and lashing out at the contaiment field, as if trying to break free."))
 
 
 /// Creates an expanding bluespace pulse on all z-levels connected to the drive
@@ -157,7 +157,7 @@
 	get_mobs_and_objs_in_view_fast(loc, range, victims, objs)
 	for (var/mob/living/living in victims)
 		if (living.client)
-			to_chat(living, SPAN_DANGER(FONT_LARGE("The Drive's field cracks open briefly, emitting a blinding flash of blue light and a deafenening screech!")))
+			to_chat(living, span_danger(FONT_LARGE("The Drive's field cracks open briefly, emitting a blinding flash of blue light and a deafenening screech!")))
 		living.flash_eyes(FLASH_PROTECTION_MAJOR)
 		living.Stun(3)
 		living.mod_confused(15)
@@ -236,8 +236,8 @@
 				do_teleport(being, other_position)
 				mobs_to_switch -= mob
 				mobs_to_switch -= being
-				to_chat(mob, SPAN_DANGER("A wave of energy washes over you, and you find yourself somewhere else!"))
-				to_chat(being, SPAN_DANGER("A wave of energy washes over you, and you find yourself somewhere else!"))
+				to_chat(mob, span_danger("A wave of energy washes over you, and you find yourself somewhere else!"))
+				to_chat(being, span_danger("A wave of energy washes over you, and you find yourself somewhere else!"))
 				return
 	else
-		to_chat(being, SPAN_WARNING("A wave of energy washes over you, giving you a strange and uneasy feeling..."))
+		to_chat(being, span_warning("A wave of energy washes over you, giving you a strange and uneasy feeling..."))

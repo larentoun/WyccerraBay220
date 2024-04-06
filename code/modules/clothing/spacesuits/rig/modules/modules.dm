@@ -60,11 +60,11 @@
 	. = ..()
 	switch(damage)
 		if(0)
-			. += SPAN_NOTICE("It is undamaged.")
+			. += span_notice("It is undamaged.")
 		if(1)
-			. += SPAN_NOTICE("It is badly damaged.")
+			. += span_notice("It is badly damaged.")
 		if(2)
-			. += SPAN_NOTICE("It is almost completely destroyed.")
+			. += span_notice("It is almost completely destroyed.")
 
 /obj/item/rig_module/attackby(obj/item/W as obj, mob/user as mob)
 
@@ -157,22 +157,22 @@
 /obj/item/rig_module/proc/can_install(obj/item/rig/rig, mob/user = null)
 	if (is_type_in_list(src, rig.banned_modules))
 		if (user)
-			to_chat(user, SPAN_WARNING("\The [rig] cannot mount this type of module."))
+			to_chat(user, span_warning("\The [rig] cannot mount this type of module."))
 		return FALSE
 
 	if (LAZYLEN(rig.installed_modules))
 		for (var/obj/item/rig_module/installed_module as anything in rig.installed_modules)
 			if (!installed_module.redundant && installed_module.type == type)
 				if (user)
-					to_chat(user, SPAN_WARNING("\The [rig] already has \a [installed_module] installed."))
+					to_chat(user, span_warning("\The [rig] already has \a [installed_module] installed."))
 				return FALSE
 			if (LAZYLEN(banned_modules) && is_type_in_list(installed_module, banned_modules))
 				if (user)
-					to_chat(user, SPAN_WARNING("\The [installed_module] already installed in \the [rig] is not compatible with \the [src]."))
+					to_chat(user, span_warning("\The [installed_module] already installed in \the [rig] is not compatible with \the [src]."))
 				return FALSE
 			if (LAZYLEN(installed_module.banned_modules) && is_type_in_list(src, installed_module.banned_modules))
 				if (user)
-					to_chat(user, SPAN_WARNING("\The [installed_module] already installed in \the [rig] is not compatible with \the [src]."))
+					to_chat(user, span_warning("\The [installed_module] already installed in \the [rig] is not compatible with \the [src]."))
 				return FALSE
 
 	return TRUE
@@ -180,27 +180,27 @@
 /obj/item/rig_module/proc/check(charge = 50)
 
 	if(damage >= 2)
-		to_chat(usr, SPAN_WARNING("The [interface_name] is damaged beyond use!"))
+		to_chat(usr, span_warning("The [interface_name] is damaged beyond use!"))
 		return 0
 
 	if(world.time < next_use)
-		to_chat(usr, SPAN_WARNING("You cannot use the [interface_name] again so soon."))
+		to_chat(usr, span_warning("You cannot use the [interface_name] again so soon."))
 		return 0
 
 	if(!holder || holder.canremove)
-		to_chat(usr, SPAN_WARNING("The suit is not initialized."))
+		to_chat(usr, span_warning("The suit is not initialized."))
 		return 0
 
 	if(usr.lying || usr.stat || usr.stunned || usr.paralysis || usr.weakened)
-		to_chat(usr, SPAN_WARNING("You cannot use the suit in this state."))
+		to_chat(usr, span_warning("You cannot use the suit in this state."))
 		return 0
 
 	if(holder.wearer && holder.wearer.lying)
-		to_chat(usr, SPAN_WARNING("The suit cannot function while the wearer is prone."))
+		to_chat(usr, span_warning("The suit cannot function while the wearer is prone."))
 		return 0
 
 	if(holder.security_check_enabled && !holder.check_suit_access(usr))
-		to_chat(usr, SPAN_DANGER("Access denied."))
+		to_chat(usr, span_danger("Access denied."))
 		return 0
 
 	if(!holder.check_power_cost(usr, charge, 0, src, (istype(usr,/mob/living/silicon ? 1 : 0) ) ) )

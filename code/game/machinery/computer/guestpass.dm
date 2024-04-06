@@ -18,20 +18,20 @@
 /obj/item/card/id/guest/examine(mob/user)
 	. = ..()
 	if (!expired)
-		. += SPAN_NOTICE("This pass expires at [worldtime2stationtime(expiration_time)].")
+		. += span_notice("This pass expires at [worldtime2stationtime(expiration_time)].")
 	else
-		. += SPAN_WARNING("It expired at [worldtime2stationtime(expiration_time)].")
+		. += span_warning("It expired at [worldtime2stationtime(expiration_time)].")
 
 /obj/item/card/id/guest/read()
 	if (expired)
-		to_chat(usr, SPAN_NOTICE("This pass expired at [worldtime2stationtime(expiration_time)]."))
+		to_chat(usr, span_notice("This pass expired at [worldtime2stationtime(expiration_time)]."))
 	else
-		to_chat(usr, SPAN_NOTICE("This pass expires at [worldtime2stationtime(expiration_time)]."))
+		to_chat(usr, span_notice("This pass expires at [worldtime2stationtime(expiration_time)]."))
 
-	to_chat(usr, SPAN_NOTICE("It grants access to following areas:"))
+	to_chat(usr, span_notice("It grants access to following areas:"))
 	for (var/A in temp_access)
-		to_chat(usr, SPAN_NOTICE("[get_access_desc(A)]."))
-	to_chat(usr, SPAN_NOTICE("Issuing reason: [reason]."))
+		to_chat(usr, span_notice("[get_access_desc(A)]."))
+	to_chat(usr, span_notice("Issuing reason: [reason]."))
 
 /obj/item/card/id/guest/proc/expire()
 	color = COLOR_GRAY20
@@ -74,7 +74,7 @@
 			giver = O
 			updateUsrDialog()
 		else if(giver)
-			to_chat(user, SPAN_WARNING("There is already ID card inside."))
+			to_chat(user, span_warning("There is already ID card inside."))
 		return TRUE
 	return ..()
 
@@ -134,7 +134,7 @@
 				duration = dur
 				. = TOPIC_REFRESH
 			else
-				to_chat(user, SPAN_WARNING("Invalid duration."))
+				to_chat(user, span_warning("Invalid duration."))
 
 	else if (href_list["access"])
 		var/A = href_list["access"]
@@ -190,6 +190,6 @@
 			playsound(src.loc, 'sound/machines/ping.ogg', 25, 0)
 			. = TOPIC_REFRESH
 		else if(!giver)
-			to_chat(user, SPAN_WARNING("Cannot issue pass without issuing ID."))
+			to_chat(user, span_warning("Cannot issue pass without issuing ID."))
 		else if(!length(accesses))
-			to_chat(user, SPAN_WARNING("Cannot issue pass without at least one granted access permission."))
+			to_chat(user, span_warning("Cannot issue pass without at least one granted access permission."))

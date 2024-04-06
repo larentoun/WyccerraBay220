@@ -99,7 +99,7 @@
 		network_node2.update = 1
 
 	if (usr)
-		visible_message(SPAN_WARNING("[usr] opens [src]."), range = 5)
+		visible_message(span_warning("[usr] opens [src]."), range = 5)
 
 	return 1
 
@@ -118,7 +118,7 @@
 	build_network()
 
 	if (usr)
-		visible_message(SPAN_WARNING("[usr] closes [src]."), range = 5)
+		visible_message(span_warning("[usr] closes [src]."), range = 5)
 
 	return 1
 
@@ -220,21 +220,21 @@
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()
 	if((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-		to_chat(user, SPAN_WARNING("You cannot unwrench [src], it is too exerted due to internal pressure."))
+		to_chat(user, span_warning("You cannot unwrench [src], it is too exerted due to internal pressure."))
 		return
-	to_chat(user, SPAN_NOTICE("You begin to unfasten [src]..."))
+	to_chat(user, span_notice("You begin to unfasten [src]..."))
 	if(!tool.use_as_tool(src, user, 4 SECONDS, volume = 50, skill_path = SKILL_ATMOS, do_flags = DO_REPAIR_CONSTRUCT))
 		return
 	user.visible_message( \
-		SPAN_NOTICE("[user] unfastens [src]."), \
-		SPAN_NOTICE("You have unfastened [src]."), \
+		span_notice("[user] unfastens [src]."), \
+		span_notice("You have unfastened [src]."), \
 		"You hear a ratchet.")
 	new /obj/item/pipe(loc, src)
 	qdel(src)
 
 /obj/machinery/atmospherics/valve/examine(mob/user)
 	. = ..()
-	. += SPAN_NOTICE("It is [open ? "open" : "closed"].")
+	. += span_notice("It is [open ? "open" : "closed"].")
 
 /singleton/public_access/public_variable/valve_open
 	expected_type = /obj/machinery/atmospherics/valve

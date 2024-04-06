@@ -26,7 +26,7 @@
 					FEEDBACK_FAILURE(H, "\The [blocked] is in the way!")
 					return
 			if(reagents.total_volume > 30) // 30 equates to 3 SECONDS.
-				usr.visible_message(SPAN_NOTICE("[usr] prepares to gulp down [src]."), SPAN_NOTICE("You prepare to gulp down [src]."))
+				usr.visible_message(span_notice("[usr] prepares to gulp down [src]."), span_notice("You prepare to gulp down [src]."))
 			playsound(usr, 'packs/infinity/sound/items/drinking.ogg', reagents.total_volume, 1)
 			if(!do_after(usr, reagents.total_volume))
 				if(!Adjacent(usr))
@@ -35,8 +35,8 @@
 				return
 			if(!Adjacent(usr))
 				return
-			usr.visible_message(SPAN_NOTICE("[usr] gulped down the whole [src]!"),SPAN_NOTICE("You gulped down the whole [src]!"))
+			usr.visible_message(span_notice("[usr] gulped down the whole [src]!"),span_notice("You gulped down the whole [src]!"))
 			playsound(usr, 'packs/infinity/sound/items/drinking_after.ogg', reagents.total_volume, 1)
 			reagents.trans_to_mob(usr, reagents.total_volume, CHEM_INGEST)
 	else
-		to_chat(usr, SPAN_NOTICE("You need to open \the [src] first!"))
+		to_chat(usr, span_notice("You need to open \the [src] first!"))

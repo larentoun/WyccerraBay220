@@ -10,9 +10,9 @@
 		var/obj/thing = path
 		dat += "<tr>"
 		if(path == board.build_path)
-			dat += "<td>[SPAN_GOOD("&#9724")]</td><td>[initial(thing.name)]</td>"
+			dat += "<td>[span_good("&#9724")]</td><td>[initial(thing.name)]</td>"
 		else
-			dat += "<td>[SPAN_BAD("&#9724")]</td><td><a href='?src=\ref[src];choose=\ref[path]'>[initial(thing.name)]</a></td>"
+			dat += "<td>[span_bad("&#9724")]</td><td><a href='?src=\ref[src];choose=\ref[path]'>[initial(thing.name)]</a></td>"
 		dat += "</tr>"
 	dat += "</table>"
 	return JOINTEXT(dat)

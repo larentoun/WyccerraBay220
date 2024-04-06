@@ -52,9 +52,9 @@
 		var/list/material_names = list()
 		for(var/thing in storage_capacity)
 			material_names += "[storage_capacity[thing]] [stored_substances_to_names[thing]]"
-		. += SPAN_NOTICE("It can store [english_list(material_names)].")
+		. += span_notice("It can store [english_list(material_names)].")
 	if(has_recycler)
-		. += SPAN_NOTICE("It has a built-in shredder that can recycle most items, although any materials it cannot use will be wasted.")
+		. += span_notice("It has a built-in shredder that can recycle most items, although any materials it cannot use will be wasted.")
 
 /obj/machinery/fabricator/Initialize()
 	panel_image = image(icon, "[base_icon_state]_panel")
@@ -85,7 +85,7 @@
 
 /obj/machinery/fabricator/cannot_transition_to(state_path)
 	if(fab_status_flags & FAB_BUSY)
-		return SPAN_NOTICE("You must wait for \the [src] to finish first.")
+		return span_notice("You must wait for \the [src] to finish first.")
 	return ..()
 
 /obj/machinery/fabricator/proc/is_functioning()
