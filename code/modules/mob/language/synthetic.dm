@@ -36,7 +36,7 @@
 		else if (!S.binarycheck())
 			continue
 
-		S.show_message("<i>[SPAN_CLASS("game say", "[message_start] [message_body]")]</i>", 2)
+		S.show_message("<i>[span_gamesay("[message_start] [message_body]")]</i>", 2)
 
 	var/list/listening = hearers(1, src)
 	listening -= src
@@ -44,7 +44,7 @@
 	for (var/mob/living/M in listening)
 		if(istype(M, /mob/living/silicon) || M.binarycheck())
 			continue
-		M.show_message("<i>[SPAN_CLASS("game say", "[span_name("synthesised voice")] [SPAN_CLASS("message", "beeps, \"beep beep beep\"")]")]</i>",2)
+		M.show_message("<i>[span_gamesay("[span_name("synthesised voice")] [SPAN_CLASS("message", "beeps, \"beep beep beep\"")]")]</i>",2)
 
 	//robot binary xmitter component power usage
 	if (isrobot(speaker))

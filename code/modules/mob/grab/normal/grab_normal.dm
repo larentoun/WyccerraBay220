@@ -69,7 +69,7 @@
 		to_chat(assailant, span_warning("[affecting] is missing that body part!"))
 		return FALSE
 
-	assailant.visible_message(SPAN_CLASS("danger", "\The [assailant] begins to [pick("bend", "twist")] \the [affecting]'s [O.name] into a jointlock!"))
+	assailant.visible_message(span_danger("\The [assailant] begins to [pick("bend", "twist")] \the [affecting]'s [O.name] into a jointlock!"))
 	G.attacking = 1
 
 	if (do_after(assailant, action_cooldown - 1, affecting, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS) && assailant.use_sanity_check(affecting, G))
@@ -119,7 +119,7 @@
 			G.attacking = 0
 			G.action_used()
 			O.dislocate(1)
-			assailant.visible_message(SPAN_CLASS("danger", "[affecting]'s [O.joint] [pick("gives way","caves in","crumbles","collapses")]!"))
+			assailant.visible_message(span_danger("[affecting]'s [O.joint] [pick("gives way","caves in","crumbles","collapses")]!"))
 			playsound(assailant.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			return TRUE
 
@@ -187,7 +187,7 @@
 		damage_flags = hat.damage_flags()
 
 	if(damage_flags & DAMAGE_FLAG_SHARP)
-		attacker.visible_message(SPAN_CLASS("danger", "[attacker] gores [target][istype(hat)? " with \the [hat]" : ""]!"))
+		attacker.visible_message(span_danger("[attacker] gores [target][istype(hat)? " with \the [hat]" : ""]!"))
 	else
 		attacker.visible_message(span_danger("[attacker] thrusts \his head into [target]'s skull!"))
 

@@ -67,7 +67,7 @@
 /obj/item/implant/imprinting/disable(time)
 	. = ..()
 	if(. && brainwashing)//add deactivate and reactivate messages?
-		to_chat(imp_in, "[span_warning("A wave of nausea comes over you.")]<br>[SPAN_CLASS("good", "You are no longer so sure of those beliefs you've had...")]")
+		to_chat(imp_in, "[span_warning("A wave of nausea comes over you.")]<br>[span_good("You are no longer so sure of those beliefs you've had...")]")
 
 /obj/item/implant/imprinting/restore()
 	. = ..()
@@ -87,12 +87,12 @@
 
 /obj/item/implant/imprinting/removed()
 	if(brainwashing && !malfunction)
-		to_chat(imp_in, "[span_warning("A wave of nausea comes over you.")]<br>[SPAN_CLASS("good", "You are no longer so sure of those beliefs you've had...")]")
+		to_chat(imp_in, "[span_warning("A wave of nausea comes over you.")]<br>[span_good("You are no longer so sure of those beliefs you've had...")]")
 	..()
 
 /obj/item/implant/imprinting/meltdown()
 	if(brainwashing && !malfunction)//if it's already broken don't send the message again
-		to_chat(imp_in, "[span_warning("A wave of nausea comes over you.")]<br>[SPAN_CLASS("good", "You are no longer so sure of those beliefs you've had...")]")
+		to_chat(imp_in, "[span_warning("A wave of nausea comes over you.")]<br>[span_good("You are no longer so sure of those beliefs you've had...")]")
 	. = ..()
 
 /obj/item/implant/imprinting/can_implant(mob/M, mob/user, target_zone)

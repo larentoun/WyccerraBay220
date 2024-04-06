@@ -144,7 +144,7 @@
 
 /mob/proc/hear_broadcast(datum/language/language, mob/speaker, speaker_name, message)
 	if((language in languages) && language.check_special_condition(src))
-		var/msg = "<i>[SPAN_CLASS("game say", "[language.name], [span_name("[speaker_name]")] [message]")]</i>"
+		var/msg = "<i>[span_gamesay("[language.name], [span_name("[speaker_name]")] [message]")]</i>"
 		to_chat(src, msg)
 
 /mob/new_player/hear_broadcast(datum/language/language, mob/speaker, speaker_name, message)
@@ -152,9 +152,9 @@
 
 /mob/observer/ghost/hear_broadcast(datum/language/language, mob/speaker, speaker_name, message)
 	if(speaker.name == speaker_name || antagHUD)
-		to_chat(src, "<i>[SPAN_CLASS("game say", "[language.name], [span_name("[speaker_name]")] ([ghost_follow_link(speaker, src)]) [message]")]</i>")
+		to_chat(src, "<i>[span_gamesay("[language.name], [span_name("[speaker_name]")] ([ghost_follow_link(speaker, src)]) [message]")]</i>")
 	else
-		to_chat(src, "<i>[SPAN_CLASS("game say", "[language.name], [span_name("[speaker_name]")] [message]")]</i>")
+		to_chat(src, "<i>[span_gamesay("[language.name], [span_name("[speaker_name]")] [message]")]</i>")
 
 /datum/language/proc/check_special_condition(mob/other)
 	return 1

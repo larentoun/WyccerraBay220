@@ -236,7 +236,7 @@
 			// Sparks, Near - instantkill shock, Strong EMP, 25% light overload, 5% APC failure. 50% of SMES explosion. This is bad.
 			s.set_up(10,1,src)
 			s.start()
-			to_chat(h_user, span_warning("Massive electrical arc sparks between you and [src].<br>Last thing you can think about is [SPAN_CLASS("danger", "\"Oh shit...\"")]"))
+			to_chat(h_user, span_warning("Massive electrical arc sparks between you and [src].<br>Last thing you can think about is [span_danger("\"Oh shit...\"")]"))
 			// Remember, we have few gigajoules of electricity here.. Turn them into crispy toast.
 			h_user.electrocute_act(rand(170,210), src, def_zone = ran_zone(null))
 			h_user.Paralyse(8)

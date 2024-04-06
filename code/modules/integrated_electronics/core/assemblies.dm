@@ -819,7 +819,7 @@
 	playsound(loc, 'sound/machines/click.ogg', 75, 1)
 	user.visible_message("[user.name] attaches [src] to the wall.",
 		span_notice("You attach [src] to the wall."),
-		SPAN_CLASS("italics", "You hear clicking."))
+		span_italics("You hear clicking."))
 	if(user.unEquip(src,T))
 		var/rotation = 0
 		switch(ndir)

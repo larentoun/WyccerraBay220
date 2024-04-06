@@ -301,19 +301,19 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 
 /obj/machinery/hologram/holopad/proc/get_hear_message(name_used, text, verb, datum/language/speaking, prefix = "")
 	if(speaking)
-		return "<i>[SPAN_CLASS("game say", "Holopad received, [span_name(name_used)][prefix] [speaking.format_message(text, verb)]")]</i>"
-	return "<i>[SPAN_CLASS("game say", "Holopad received, [span_name(name_used)][prefix] [verb], [SPAN_CLASS("message", text)]")]</i>"
+		return "<i>[span_gamesay("Holopad received, [span_name(name_used)][prefix] [speaking.format_message(text, verb)]")]</i>"
+	return "<i>[span_gamesay("Holopad received, [span_name(name_used)][prefix] [verb], [SPAN_CLASS("message", text)]")]</i>"
 
 /obj/machinery/hologram/holopad/see_emote(mob/living/M, text)
 	if(M)
 		for(var/mob/living/silicon/ai/master in masters)
 			//var/name_used = M.GetVoice()
-			var/rendered = "<i>[SPAN_CLASS("game say", "Holopad received, [SPAN_CLASS("message", "[text]")]")]</i>"
+			var/rendered = "<i>[span_gamesay("Holopad received, [SPAN_CLASS("message", "[text]")]")]</i>"
 			//The lack of name_used is needed, because message already contains a name.  This is needed for simple mobs to emote properly.
 			master.show_message(rendered, 2)
 		for(var/mob/living/carbon/master in masters)
 			//var/name_used = M.GetVoice()
-			var/rendered = "<i>[SPAN_CLASS("game say", "Holopad received, [SPAN_CLASS("message", "[text]")]")]</i>"
+			var/rendered = "<i>[span_gamesay("Holopad received, [SPAN_CLASS("message", "[text]")]")]</i>"
 			//The lack of name_used is needed, because message already contains a name.  This is needed for simple mobs to emote properly.
 			master.show_message(rendered, 2)
 		if(targetpad)
@@ -321,16 +321,16 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 
 /obj/machinery/hologram/holopad/show_message(msg, type, alt, alt_type)
 	for(var/mob/living/silicon/ai/master in masters)
-		var/rendered = "<i>[SPAN_CLASS("game say", "The holographic image of [SPAN_CLASS("message", "[msg]")]")]</i>"
+		var/rendered = "<i>[span_gamesay("The holographic image of [SPAN_CLASS("message", "[msg]")]")]</i>"
 		master.show_message(rendered, type)
 	if(findtext(msg, "Holopad received,"))
 		return
 	for(var/mob/living/carbon/master in masters)
-		var/rendered = "<i>[SPAN_CLASS("game say", "The holographic image of [SPAN_CLASS("message", "[msg]")]")]</i>"
+		var/rendered = "<i>[span_gamesay("The holographic image of [SPAN_CLASS("message", "[msg]")]")]</i>"
 		master.show_message(rendered, type)
 	if(targetpad)
 		for(var/mob/living/carbon/master in view(targetpad))
-			var/rendered = "<i>[SPAN_CLASS("game say", "The holographic image of [SPAN_CLASS("message", "[msg]")]")]</i>"
+			var/rendered = "<i>[span_gamesay("The holographic image of [SPAN_CLASS("message", "[msg]")]")]</i>"
 			master.show_message(rendered, type)
 
 /obj/machinery/hologram/holopad/proc/create_holo(mob/living/silicon/ai/A, mob/living/carbon/caller_id, turf/T = loc)
@@ -394,7 +394,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		use_power_oneoff(power_per_hologram)
 	if(last_request + 200 < world.time&&incoming_connection==1)
 		if(sourcepad)
-			sourcepad.audible_message("<i>[SPAN_CLASS("game say", "The holopad connection timed out")]</i>")
+			sourcepad.audible_message("<i>[span_gamesay("The holopad connection timed out")]</i>")
 		incoming_connection = 0
 		end_call()
 	if (caller_id&&sourcepad)

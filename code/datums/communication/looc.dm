@@ -43,7 +43,7 @@
 	var/admin_stuff = holder ? "/([commkey])" : ""
 	if(prefix)
 		prefix = "\[[prefix]\] "
-	return span_ooc(SPAN_CLASS("looc", "[create_text_tag("looc", "LOOC:", src)] [SPAN_CLASS("prefix", prefix)]<em>[display_name][admin_stuff]:</em> [SPAN_CLASS("message", message)]"))
+	return span_ooc(span_looc("[create_text_tag("looc", "LOOC:", src)] [SPAN_CLASS("prefix", prefix)]<em>[display_name][admin_stuff]:</em> [SPAN_CLASS("message", message)]"))
 
 /mob/proc/looc_prefix()
 	return eyeobj ? "Body" : ""

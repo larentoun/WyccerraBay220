@@ -40,7 +40,7 @@ var/global/list/doppler_arrays = list()
 
 	var/message = "Explosive disturbance detected - Epicenter at: grid ([x0],[y0]). Epicenter radius: [devastation_range]. Outer radius: [heavy_impact_range]. Shockwave radius: [light_impact_range]. Temporal displacement of tachyons: [took] seconds."
 
-	audible_message(SPAN_CLASS("game say", "[span_name("\The [src]")] states coldly, \"[message]\""))
+	audible_message(span_gamesay("[span_name("\The [src]")] states coldly, \"[message]\""))
 
 /obj/machinery/doppler_array/on_update_icon()
 	ClearOverlays()

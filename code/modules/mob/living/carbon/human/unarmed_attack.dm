@@ -80,7 +80,7 @@ var/global/list/sparring_attack_cache = list()
 					var/turf/T = get_step(get_turf(target), get_dir(get_turf(user), get_turf(target)))
 					if(!T.density)
 						step(target, get_dir(get_turf(user), get_turf(target)))
-						target.visible_message(SPAN_CLASS("danger", "[pick("[target] was sent flying backward!", "[target] staggers back from the impact!")]"))
+						target.visible_message(span_danger("[pick("[target] was sent flying backward!", "[target] staggers back from the impact!")]"))
 					if(prob(50))
 						target.set_dir(GLOB.reverse_dir[target.dir])
 					target.apply_effect(attack_damage * 0.4, EFFECT_WEAKEN, armour)
@@ -96,7 +96,7 @@ var/global/list/sparring_attack_cache = list()
 					target.apply_effect(attack_damage * 3, EFFECT_PAIN, armour)
 	else if(attack_damage >= 5 && !(target == user) && (stun_chance + attack_damage * 5 >= 100) && armour < 1) // Chance to get the usual throwdown as well (25% standard chance)
 		if(!target.lying)
-			target.visible_message(SPAN_CLASS("danger", "[target] [pick("slumps", "falls", "drops")] down to the ground!"))
+			target.visible_message(span_danger("[target] [pick("slumps", "falls", "drops")] down to the ground!"))
 		else
 			target.visible_message(span_danger("[target] has been weakened!"))
 		target.apply_effect(3, EFFECT_WEAKEN, armour * 100)
@@ -115,7 +115,7 @@ var/global/list/sparring_attack_cache = list()
 		eyes.take_internal_damage(rand(3,4), 1)
 		user.visible_message(span_danger("[user] presses \his [eye_attack_text] into [target]'s [eyes.name]!"))
 		var/eye_pain = eyes.can_feel_pain()
-		to_chat(target, SPAN_CLASS("danger", "You experience[(eye_pain) ? "" : " immense pain as you feel" ] [eye_attack_text_victim] being pressed into your [eyes.name][(eye_pain)? "." : "!"]"))
+		to_chat(target, span_danger("You experience[(eye_pain) ? "" : " immense pain as you feel" ] [eye_attack_text_victim] being pressed into your [eyes.name][(eye_pain)? "." : "!"]"))
 		return
 	user.visible_message(span_danger("[user] attempts to press \his [eye_attack_text] into [target]'s eyes, but they don't have any!"))
 
@@ -175,13 +175,13 @@ var/global/list/sparring_attack_cache = list()
 					if(3 to 4)
 						user.visible_message(pick(
 							80; span_danger("[user] [pick(attack_verb)] [target] in the head!"),
-							20; SPAN_CLASS("danger", "[user] struck [target] in the head[pick("", " with a closed fist")]!"),
+							20; span_danger("[user] struck [target] in the head[pick("", " with a closed fist")]!"),
 							50; span_danger("[user] threw a hook against [target]'s head!")
 							))
 					if(5)
 						user.visible_message(pick(
 							10; span_danger("[user] gave [target] a solid slap across \his face!"),
-							90; SPAN_CLASS("danger", "[user] smashed \his [pick(attack_noun)] into [target]'s [pick("[organ]", "face", "jaw")]!")
+							90; span_danger("[user] smashed \his [pick(attack_noun)] into [target]'s [pick("[organ]", "face", "jaw")]!")
 							))
 			else
 				// ----- BODY ----- //
@@ -190,7 +190,7 @@ var/global/list/sparring_attack_cache = list()
 					if(1 to 4)	user.visible_message(span_danger("[user] [pick(attack_verb)] [target] in \his [organ]!"))
 					if(5)		user.visible_message(span_danger("[user] smashed \his [pick(attack_noun)] into [target]'s [organ]!"))
 	else
-		user.visible_message(SPAN_CLASS("danger", "[user] [pick("punched", "threw a punch at", "struck", "slammed their [pick(attack_noun)] into")] [target]'s [organ]!")) //why do we have a separate set of verbs for lying targets?
+		user.visible_message(span_danger("[user] [pick("punched", "threw a punch at", "struck", "slammed their [pick(attack_noun)] into")] [target]'s [organ]!")) //why do we have a separate set of verbs for lying targets?
 
 /datum/unarmed_attack/kick
 	attack_verb = list("kicked", "kicked", "kicked", "kneed")
@@ -269,11 +269,11 @@ var/global/list/sparring_attack_cache = list()
 	switch(attack_damage)
 		if(1 to 4)
 			user.visible_message(pick(
-				SPAN_CLASS("danger", "[user] stomped on [target]'s [organ][pick("", "with their [shoe_text]")]!"),
+				span_danger("[user] stomped on [target]'s [organ][pick("", "with their [shoe_text]")]!"),
 				span_danger("[user] stomped \his [shoe_text] down onto [target]'s [organ]!")))
 		if(5)
 			user.visible_message(pick(
-				SPAN_CLASS("danger", "[user] stomped down hard onto [target]'s [organ][pick("", "with their [shoe_text]")]!"),
+				span_danger("[user] stomped down hard onto [target]'s [organ][pick("", "with their [shoe_text]")]!"),
 				span_danger("[user] slammed \his [shoe_text] down onto [target]'s [organ]!")))
 
 /datum/unarmed_attack/light_strike

@@ -55,7 +55,7 @@
 		var/obj/item/organ/internal/cell/cell = locate() in owner.internal_organs
 		if(active && !(cell && cell.use(maintenance_cost)))
 			active = FALSE
-			to_chat(owner, SPAN_CLASS("danger", "Your [name] [gender == PLURAL ? "are" : "is"] out of power!"))
+			to_chat(owner, span_danger("Your [name] [gender == PLURAL ? "are" : "is"] out of power!"))
 			refresh_action_button()
 
 /obj/item/organ/internal/powered/refresh_action_button()

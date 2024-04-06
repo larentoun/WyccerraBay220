@@ -164,7 +164,7 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 					to_chat(usr, message)
 					playsound(usr.loc, "sound/items/Wirecutter.ogg", 20)
 				else
-					to_chat(L, SPAN_CLASS("error", "You need wirecutters!"))
+					to_chat(L, span_warning("You need wirecutters!"))
 			else if(href_list["pulse"])
 				if(I?.tool_behaviour == TOOL_MULTITOOL || offhand_item?.tool_behaviour == TOOL_MULTITOOL)
 					var/colour = href_list["pulse"]
@@ -181,7 +181,7 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 						wires = shuffle(wires) //Leaves them in a different order for anyone else.
 						to_chat(L, span_danger("You get the wires all tangled up!"))
 				else
-					to_chat(L, SPAN_CLASS("error", "You need a multitool!"))
+					to_chat(L, span_warning("You need a multitool!"))
 			else if(href_list["attach"])
 				var/colour = href_list["attach"]
 				var/failed = 0
@@ -204,7 +204,7 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 							if(!failed)
 								to_chat(usr, span_notice("You attach the signaller to the [colour] wire."))
 					else
-						to_chat(L, SPAN_CLASS("error", "You need a remote signaller!"))
+						to_chat(L, span_warning("You need a remote signaller!"))
 			else if(href_list["examine"])
 				var/colour = href_list["examine"]
 				to_chat(usr, ExamineWire(GetIndex(colour), usr))

@@ -159,10 +159,10 @@
 			if(holder.hallucination_power > 50)
 				phrases += list("What did you come here for[add]?","Don't touch me[add].","You're not getting out of here[add].", "You are a failure, [pick(names)].","Just leave already, [pick(names)]")
 			message = pick(phrases)
-			to_chat(holder,"[SPAN_CLASS("game say", "[span_name(display_name)] [holder.say_quote(message)], [SPAN_CLASS("message", "[SPAN_CLASS("body", "\"[message]\"")]")]")]")
+			to_chat(holder,"[span_gamesay("[span_name(display_name)] [holder.say_quote(message)], [SPAN_CLASS("message", "[SPAN_CLASS("body", "\"[message]\"")]")]")]")
 		else
 			to_chat(holder,"<B>[display_name]</B> points at [holder.name]")
-			to_chat(holder,"[SPAN_CLASS("game say", "[span_name(display_name)] says something softly.")]")
+			to_chat(holder,"[span_gamesay("[span_name(display_name)] says something softly.")]")
 		var/image/speech_bubble = image('icons/mob/talk.dmi',talker,"h[holder.say_test(message)]")
 		spawn(30) qdel(speech_bubble)
 		image_to(holder,speech_bubble)
@@ -253,7 +253,7 @@
 
 /datum/hallucination/fakeattack/start()
 	for(var/mob/living/M in oview(holder,1))
-		to_chat(holder, SPAN_CLASS("danger", "[M] has punched [holder]!"))
+		to_chat(holder, span_danger("[M] has punched [holder]!"))
 		holder.playsound_local(get_turf(holder),"punch",50)
 
 //Fake injection

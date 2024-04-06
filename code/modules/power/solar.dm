@@ -374,10 +374,10 @@ var/global/solar_gen_rate = 1500
 
 /obj/machinery/power/solar_control/interact(mob/user)
 
-	var/t = "<B>[SPAN_CLASS("highlight", "Generated power")]</B> : [round(lastgen)] W<BR>"
-	t += "<B>[SPAN_CLASS("highlight", "Star Orientation")]</B>: [GLOB.sun_angle]&deg ([angle2text(GLOB.sun_angle)])<BR>"
-	t += "<B>[SPAN_CLASS("highlight", "Array Orientation")]</B>: [rate_control(src,"cdir","[cdir]&deg",1,15)] ([angle2text(cdir)])<BR>"
-	t += "<B>[SPAN_CLASS("highlight", "Tracking:")]</B><div class='statusDisplay'>"
+	var/t = "<B>[span_highlight("Generated power")]</B> : [round(lastgen)] W<BR>"
+	t += "<B>[span_highlight("Star Orientation")]</B>: [GLOB.sun_angle]&deg ([angle2text(GLOB.sun_angle)])<BR>"
+	t += "<B>[span_highlight("Array Orientation")]</B>: [rate_control(src,"cdir","[cdir]&deg",1,15)] ([angle2text(cdir)])<BR>"
+	t += "<B>[span_highlight("Tracking:")]</B><div class='statusDisplay'>"
 	switch(track)
 		if(0)
 			t += "[span_linkon("Off")] <A href='?src=\ref[src];track=1'>Timed</A> <A href='?src=\ref[src];track=2'>Auto</A><BR>"
@@ -388,7 +388,7 @@ var/global/solar_gen_rate = 1500
 
 	t += "Tracking Rate: [rate_control(src,"tdir","[trackrate] deg/h ([trackrate<0 ? "CCW" : "CW"])",1,30,180)]</div><BR>"
 
-	t += "<B>[SPAN_CLASS("highlight", "Connected devices:")]</B><div class='statusDisplay'>"
+	t += "<B>[span_highlight("Connected devices:")]</B><div class='statusDisplay'>"
 
 	t += "<A href='?src=\ref[src];search_connected=1'>Search for devices</A><BR>"
 	t += "Solar panels : [length(connected_panels)] connected<BR>"

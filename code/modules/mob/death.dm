@@ -93,5 +93,5 @@
 
 	if(SSticker.mode)
 		SSticker.mode.check_win()
-	to_chat(src,SPAN_CLASS("deadsay", "[show_dead_message]"))
+	to_chat(src,span_deadsay("[show_dead_message]"))
 	return 1

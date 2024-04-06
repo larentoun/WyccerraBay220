@@ -1,7 +1,7 @@
 /mob/living/carbon/slime/examine(mob/user)
 	. = ..()
 	if (src.stat == DEAD)
-		. += SPAN_CLASS("deadsay", "It is limp and unresponsive.")
+		. += span_deadsay("It is limp and unresponsive.")
 	else
 		if (src.getBruteLoss())
 			if (src.getBruteLoss() < 40)

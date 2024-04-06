@@ -550,7 +550,7 @@
 		return
 	if (!message)
 		return
-	audible_message(SPAN_CLASS("game say", "[span_name("\The [src]")] beeps, \"[message]\""))
+	audible_message(span_gamesay("[span_name("\The [src]")] beeps, \"[message]\""))
 	return
 
 /obj/machinery/vending/proc/malfunction()

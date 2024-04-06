@@ -223,7 +223,7 @@
 	if (href_list["find"])
 		if(message_servers && length(message_servers) > 1)
 			src.linkedServer = input(usr,"Please select a server.", "Select a server.", null) as null|anything in message_servers
-			message = SPAN_CLASS("alert", "NOTICE: Server selected.")
+			message = span_alert("NOTICE: Server selected.")
 		else if(message_servers && length(message_servers) > 0)
 			linkedServer = message_servers[1]
 			message =  span_notice("NOTICE: Only Single Server Detected - Server selected.")

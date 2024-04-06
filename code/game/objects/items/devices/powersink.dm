@@ -105,7 +105,7 @@
 			user.visible_message( \
 				"[user] activates [src]!", \
 				span_notice("You activate [src]."),
-				SPAN_CLASS("italics", "You hear a click."))
+				span_italics("You hear a click."))
 			message_admins("Power sink activated by [key_name_admin(user)] at (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 			log_game("Power sink activated by [key_name(user)] at [get_area_name(src)]")
 			set_mode(OPERATING)
@@ -114,7 +114,7 @@
 			user.visible_message( \
 				"[user] deactivates [src]!", \
 				span_notice("You deactivate [src]."),
-				SPAN_CLASS("italics", "You hear a click."))
+				span_italics("You hear a click."))
 			set_mode(CLAMPED_OFF)
 
 /obj/item/device/powersink/pwr_drain()

@@ -187,7 +187,8 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		user.visible_message(span_warning("[user] starts climbing into [src]."), \
 							 span_notice("You start climbing into [src]."))
 	else
-		user.visible_message(SPAN_CLASS("[is_dangerous ? "warning" : "notice"]", "[user] starts stuffing [AM] into [src]."), \
+		var/message = "[user] starts stuffing [AM] into [src]."
+		user.visible_message(is_dangerous ? span_warning(message) : span_notice(message), \
 							 span_notice("You start stuffing [AM] into [src]."))
 
 	if(!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE))
@@ -207,7 +208,8 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 							 span_notice("You climb into [src]."))
 		admin_attack_log(user, null, "Stuffed themselves into [src].", null, "stuffed themselves into [src].")
 	else
-		user.visible_message(SPAN_CLASS("[is_dangerous ? "danger" : "notice"]", "[user] stuffs [AM] into [src][is_dangerous ? "!" : "."]"), \
+		var/message = "[user] stuffs [AM] into [src][is_dangerous ? "!" : "."]"
+		user.visible_message(is_dangerous ? span_danger(message) : span_notice(message)), \
 							 span_notice("You stuff [AM] into [src]."))
 		if(ismob(M))
 			admin_attack_log(user, M, "Placed the victim into [src].", "Was placed into [src] by the attacker.", "stuffed [src] with")

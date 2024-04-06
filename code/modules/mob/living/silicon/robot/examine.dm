@@ -27,7 +27,7 @@
 		if(UNCONSCIOUS)
 			. += span_warning("It doesn't seem to be responding.")
 		if(DEAD)
-			. += SPAN_CLASS("deadsay", "It looks completely unsalvageable.")
+			. += span_deadsay("It looks completely unsalvageable.")
 
 	if(print_flavor_text())
 		. += span_notice("[print_flavor_text()]")

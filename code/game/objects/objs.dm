@@ -169,7 +169,7 @@
 /*
 	var/mob/mo = locate(/mob) in src
 	if(mo)
-		var/rendered = SPAN_CLASS("game say", "[span_name("[M.name]: ")] [SPAN_CLASS("message", text))]"
+		var/rendered = span_gamesay("[span_name("[M.name]: ")] [SPAN_CLASS("message", text))]"
 		mo.show_message(rendered, 2)
 		*/
 	return

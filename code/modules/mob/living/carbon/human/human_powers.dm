@@ -81,8 +81,8 @@
 	var/msg = sanitize(input("Message:", "Psychic Whisper") as text|null)
 	if(msg)
 		log_say("PsychicWhisper: [key_name(src)]->[M.key] : [msg]")
-		to_chat(M, SPAN_CLASS("alium", "You hear a strange, alien voice in your head... <i>[msg]</i>"))
-		to_chat(src, SPAN_CLASS("alium", "You channel a message: \"[msg]\" to [M]"))
+		to_chat(M, span_alium("You hear a strange, alien voice in your head... <i>[msg]</i>"))
+		to_chat(src, span_alium("You channel a message: \"[msg]\" to [M]"))
 	return
 
 /***********
@@ -101,9 +101,9 @@
 		return
 	aura.toggle()
 	if (aura.innate_heal)
-		to_chat(src, SPAN_CLASS("alium", "You are now using nutrients to regenerate."))
+		to_chat(src, span_alium("You are now using nutrients to regenerate."))
 	else
-		to_chat(src, SPAN_CLASS("alium", "You are no longer using nutrients to regenerate."))
+		to_chat(src, span_alium("You are no longer using nutrients to regenerate."))
 
 /mob/living/carbon/human/proc/change_colour()
 	set category = "Abilities"

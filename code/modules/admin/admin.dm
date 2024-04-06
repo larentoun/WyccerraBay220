@@ -5,20 +5,20 @@ var/global/floorIsLava = 0
 
 ////////////////////////////////
 /proc/message_admins(msg)
-	msg = SPAN_CLASS("log_message", "[SPAN_CLASS("prefix", "ADMIN LOG:")] [SPAN_CLASS("message", msg)]")
+	msg = span_logmessage("[SPAN_CLASS("prefix", "ADMIN LOG:")] [SPAN_CLASS("message", msg)]")
 	log_adminwarn(msg)
 	for(var/client/C as anything in GLOB.admins)
 		if(R_ADMIN & C.holder.rights)
 			to_chat(C, msg)
 /proc/message_staff(msg)
-	msg = SPAN_CLASS("log_message", "[SPAN_CLASS("prefix", "STAFF LOG:")] [SPAN_CLASS("message", msg)]")
+	msg = span_logmessage("[SPAN_CLASS("prefix", "STAFF LOG:")] [SPAN_CLASS("message", msg)]")
 	log_adminwarn(msg)
 	for(var/client/C as anything in GLOB.admins)
 		if(C && C.holder && (R_INVESTIGATE & C.holder.rights))
 			to_chat(C, msg)
 /proc/msg_admin_attack(text) //Toggleable Attack Messages
 	log_attack(text)
-	var/rendered = SPAN_CLASS("log_message", "[SPAN_CLASS("prefix", "ATTACK:")] [SPAN_CLASS("message", text)]")
+	var/rendered = span_logmessage("[SPAN_CLASS("prefix", "ATTACK:")] [SPAN_CLASS("message", text)]")
 	for(var/client/C as anything in GLOB.admins)
 		if(check_rights(R_INVESTIGATE, 0, C))
 			if(C.get_preference_value(/datum/client_preference/staff/show_attack_logs) == GLOB.PREF_SHOW)
@@ -1602,12 +1602,12 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 			log_admin("[key_name(src.owner)] replied to a fax message from [key_name(P.sender)]")
 			for(var/client/C as anything in GLOB.admins)
 				if((R_INVESTIGATE) & C.holder.rights)
-					to_chat(C, SPAN_CLASS("log_message", "[SPAN_CLASS("prefix", "FAX LOG:")][key_name_admin(src.owner)] replied to a fax message from [key_name_admin(P.sender)] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)"))
+					to_chat(C, span_logmessage("[SPAN_CLASS("prefix", "FAX LOG:")][key_name_admin(src.owner)] replied to a fax message from [key_name_admin(P.sender)] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)"))
 		else
 			log_admin("[key_name(src.owner)] has sent a fax message to [P.department]")
 			for(var/client/C as anything in GLOB.admins)
 				if((R_INVESTIGATE) & C.holder.rights)
-					to_chat(C, SPAN_CLASS("log_message", "[SPAN_CLASS("prefix", "FAX LOG:")][key_name_admin(src.owner)] has sent a fax message to [P.department] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)"))
+					to_chat(C, span_logmessage("[SPAN_CLASS("prefix", "FAX LOG:")][key_name_admin(src.owner)] has sent a fax message to [P.department] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)"))
 	else
 		to_chat(src.owner, span_warning("Message reply failed."))
 

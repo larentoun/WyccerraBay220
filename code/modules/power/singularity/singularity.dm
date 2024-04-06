@@ -231,7 +231,7 @@
 			event_chance = 25 //Events will fire off more often.
 			if(chained)
 				SetOverlays("chain_s9")
-			visible_message(SPAN_CLASS("sinister", FONT_LARGE("You witness the creation of a destructive force that cannot possibly be stopped by human hands.")))
+			visible_message(span_sinister(FONT_LARGE("You witness the creation of a destructive force that cannot possibly be stopped by human hands.")))
 
 	if (current_size == allowed_size)
 		investigate_log(SPAN_COLOR("red", "grew to size [current_size]."), I_SINGULO)

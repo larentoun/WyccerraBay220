@@ -117,7 +117,7 @@
 				display_verb = "[verb] ([language.shorthand])"
 		display_message = language.format_message(display_message, display_verb)
 
-	on_hear_say({"[SPAN_CLASS("game say", "[display_controls][span_name(display_name)][alt_name] [display_message]")]"})
+	on_hear_say({"[span_gamesay("[display_controls][span_name(display_name)][alt_name] [display_message]")]"})
 
 	if (istype(language, /datum/language/noise))
 		create_chat_message(speaker, runechat_message, italics, list("emote"))

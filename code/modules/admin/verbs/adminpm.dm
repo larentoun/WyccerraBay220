@@ -102,7 +102,7 @@
 	var/recieve_message
 
 	if(holder && !C.holder)
-		recieve_message = "[SPAN_CLASS("pm", "[SPAN_CLASS("howto", "<b>-- Click the [recieve_pm_type]'s name to reply --</b>")]")]\n"
+		recieve_message = "[span_pm("[SPAN_CLASS("howto", "<b>-- Click the [recieve_pm_type]'s name to reply --</b>")]")]\n"
 		if(C.adminhelped)
 			to_chat(C, recieve_message)
 			C.adminhelped = 0
@@ -110,19 +110,19 @@
 	var/sender_message = "[create_text_tag("pm_out_alt", "PM", src)] to [span_name(get_options_bar(C, holder ? 1 : 0, holder ? 1 : 0, 1))]"
 	if(holder)
 		sender_message += " (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>)"
-		sender_message += ": [SPAN_CLASS("message linkify", generate_ahelp_key_words(mob, msg))]"
+		sender_message += ": [span_linkify(generate_ahelp_key_words(mob, msg))]"
 	else
-		sender_message += ": [SPAN_CLASS("message linkify", msg)]"
-	sender_message = SPAN_CLASS("pm", SPAN_CLASS("out", sender_message))
+		sender_message += ": [span_linkify(msg)]"
+	sender_message = span_pm(SPAN_CLASS("out", sender_message))
 	to_chat(src, sender_message)
 
 	var/receiver_message = create_text_tag("pm_in", "", C) + " <b>\[[recieve_pm_type] PM\]</b> [span_name(get_options_bar(src, C.holder ? 1 : 0, C.holder ? 1 : 0, 1))]"
 	if(C.holder)
 		receiver_message += " (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>)"
-		receiver_message += ": [SPAN_CLASS("message linkify", generate_ahelp_key_words(C.mob, msg))]"
+		receiver_message += ": [span_linkify(generate_ahelp_key_words(C.mob, msg))]"
 	else
-		receiver_message += ": [SPAN_CLASS("message linkify", msg)]"
-	receiver_message = SPAN_CLASS("pm", SPAN_CLASS("in", receiver_message))
+		receiver_message += ": [span_linkify(msg)]"
+	receiver_message = span_pm(SPAN_CLASS("in", receiver_message))
 	to_chat(C, receiver_message)
 
 	//play the receiving admin the adminhelp sound (if they have them enabled)
@@ -143,7 +143,7 @@
 		if(X == C || X == src)
 			continue
 		if(X.key != key && X.key != C.key && (X.holder.rights & R_ADMIN|R_MOD))
-			to_chat(X, "[SPAN_CLASS("pm", "[SPAN_CLASS("other", create_text_tag("pm_other", "PM:", X) + " [span_name(key_name(src, X, 0, ticket))] to [span_name(key_name(C, X, 0, ticket))] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [SPAN_CLASS("message linkify", msg)]")]")]")
+			to_chat(X, "[span_pm("[SPAN_CLASS("other", create_text_tag("pm_other", "PM:", X) + " [span_name(key_name(src, X, 0, ticket))] to [span_name(key_name(C, X, 0, ticket))] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [span_linkify(msg)]")]")]")
 
 /client/proc/cmd_admin_irc_pm(sender)
 	if(prefs.muted & MUTE_ADMINHELP)
@@ -166,9 +166,9 @@
 	log_admin("PM: [key_name(src)]->IRC-[sender]: [msg]")
 	admin_pm_repository.store_pm(src, "IRC-[sender]", msg)
 
-	to_chat(src, "[SPAN_CLASS("pm", "[SPAN_CLASS("out", create_text_tag("pm_out_alt", "PM", src) + " to [span_name(sender)]: [SPAN_CLASS("message linkify", msg)]")]")]")
+	to_chat(src, "[span_pm("[SPAN_CLASS("out", create_text_tag("pm_out_alt", "PM", src) + " to [span_name(sender)]: [span_linkify(msg)]")]")]")
 	for(var/client/X as anything in GLOB.admins)
 		if(X == src)
 			continue
 		if(X.holder.rights & R_ADMIN|R_MOD)
-			to_chat(X, "[SPAN_CLASS("pm", "[SPAN_CLASS("other", create_text_tag("pm_other", "PM:", X) + " [span_name(key_name(src, X, 0))] to [span_name(sender)]: [SPAN_CLASS("message linkify", msg)]")]")]")
+			to_chat(X, "[span_pm("[SPAN_CLASS("other", create_text_tag("pm_other", "PM:", X) + " [span_name(key_name(src, X, 0))] to [span_name(sender)]: [span_linkify(msg)]")]")]")

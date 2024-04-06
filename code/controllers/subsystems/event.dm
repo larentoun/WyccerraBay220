@@ -165,7 +165,7 @@ SUBSYSTEM_DEF(event)
 		html += "<div class='block'>"
 		html += "<h2>Available [severity_to_string[selected_event_container.severity]] Events (queued & running events will not be displayed)</h2>"
 		html += "<table[table_options]>"
-		html += "<tr><td[row_options2]>Name </td><td>Weight </td><td>MinWeight </td><td>MaxWeight </td><td>OneShot </td><td>Enabled </td><td>[SPAN_CLASS("alert", "CurrWeight ")]</td><td>Remove</td></tr>"
+		html += "<tr><td[row_options2]>Name </td><td>Weight </td><td>MinWeight </td><td>MaxWeight </td><td>OneShot </td><td>Enabled </td><td>[span_alert("CurrWeight ")]</td><td>Remove</td></tr>"
 		var/list/active_with_role = number_active_with_role()
 		for(var/datum/event_meta/EM in selected_event_container.available_events)
 			html += "<tr>"
@@ -175,7 +175,7 @@ SUBSYSTEM_DEF(event)
 			html += "<td>[EM.max_weight]</td>"
 			html += "<td><A align='right' href='?src=\ref[src];toggle_oneshot=\ref[EM]'>[EM.one_shot]</A></td>"
 			html += "<td><A align='right' href='?src=\ref[src];toggle_enabled=\ref[EM]'>[EM.enabled]</A></td>"
-			html += "<td>[SPAN_CLASS("alert", "[selected_event_container.get_weight(EM, active_with_role)]")]</td>"
+			html += "<td>[span_alert("[selected_event_container.get_weight(EM, active_with_role)]")]</td>"
 			html += "<td><A align='right' href='?src=\ref[src];remove=\ref[EM];EC=\ref[selected_event_container]'>Remove</A></td>"
 			html += "</tr>"
 		html += "</table>"

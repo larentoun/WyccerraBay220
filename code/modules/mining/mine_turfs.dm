@@ -330,7 +330,7 @@ var/global/list/mining_floors = list()
 	if(prob(F.prob_delicate))
 		var/obj/suspension_field/S = locate() in src
 		if(!S)
-			visible_message(SPAN_CLASS("danger", "[pick("An object in the rock crumbles away into dust.","Something falls out of the rock and shatters onto the ground.")]"))
+			visible_message(span_danger("[pick("An object in the rock crumbles away into dust.","Something falls out of the rock and shatters onto the ground.")]"))
 			finds.Remove(F)
 			return
 

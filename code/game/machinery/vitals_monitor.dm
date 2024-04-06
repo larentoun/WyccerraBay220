@@ -103,9 +103,9 @@
 				if (GET_FLAGS(organ.status, ORGAN_BROKEN | ORGAN_ARTERY_CUT))
 					dat += "[limb]: "
 				if (GET_FLAGS(organ.status, ORGAN_BROKEN))
-					dat += SPAN_CLASS("scan_warning", "Bone fracture. ")
+					dat += span_warning("Bone fracture. ")
 				if (GET_FLAGS(organ.status, ORGAN_ARTERY_CUT))
-					dat += SPAN_CLASS("scan_warning", "Arterial bleeding.")
+					dat += span_warning("Arterial bleeding.")
 				if (dat)
 					dat = capitalize(dat)
 					. += span_warning("[dat]")

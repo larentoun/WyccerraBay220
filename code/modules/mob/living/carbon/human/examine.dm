@@ -303,8 +303,8 @@
 			if(R)
 				criminal = R.get_criminalStatus()
 
-			. += "[SPAN_CLASS("deptradio", "Criminal status:")] <a href='?src=\ref[src];criminal=1'>\[[criminal]\]</a>"
-			. += "[SPAN_CLASS("deptradio", "Security records:")] <a href='?src=\ref[src];secrecord=`'>\[View\]</a>"
+			. += "[span_deptradio("Criminal status:")] <a href='?src=\ref[src];criminal=1'>\[[criminal]\]</a>"
+			. += "[span_deptradio("Security records:")] <a href='?src=\ref[src];secrecord=`'>\[View\]</a>"
 
 	if(hasHUD(user, HUD_MEDICAL))
 		var/perpname = "wot"
@@ -323,8 +323,8 @@
 		if(R)
 			medical = R.get_status()
 
-		. += "[SPAN_CLASS("deptradio", "Physical status:")] <a href='?src=\ref[src];medical=1'>\[[medical]\]</a>"
-		. += "[SPAN_CLASS("deptradio", "Medical records:")] <a href='?src=\ref[src];medrecord=`'>\[View\]</a>"
+		. += "[span_deptradio("Physical status:")] <a href='?src=\ref[src];medical=1'>\[[medical]\]</a>"
+		. += "[span_deptradio("Medical records:")] <a href='?src=\ref[src];medrecord=`'>\[View\]</a>"
 
 	if(print_flavor_text())
 		. += span_notice("[print_flavor_text()]")

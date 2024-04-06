@@ -119,11 +119,11 @@
 		var/list/t = list()
 
 		if(authenticated_account)
-			t += "[SPAN_CLASS("highlight", "Welcome <b>[authenticated_account.owner_name]</b>.")]<BR>"
+			t += "[span_highlight("Welcome <b>[authenticated_account.owner_name]</b>.")]<BR>"
 		else
-			t += "[SPAN_CLASS("highlight", "Welcome. Please login below.")]<BR>"
+			t += "[span_highlight("Welcome. Please login below.")]<BR>"
 
-		t += "<div class='statusDisplay'>[SPAN_CLASS("highlight", "<b>Card: </b>")]"
+		t += "<div class='statusDisplay'>[span_highlight("<b>Card: </b>")]"
 		if(emagged > 0)
 			t += "[span_bad("<b>LOCKED</b><br>Unauthorized terminal access detected!<br>This ATM has been locked down.")]</div><BR>"
 		else

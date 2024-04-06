@@ -1,7 +1,7 @@
 /mob/living/silicon/ai/examine(mob/user)
 	. = ..()
 	if (stat == DEAD)
-		. += "[SPAN_CLASS("deadsay", "It appears to be powered-down.")]"
+		. += "[span_deadsay("It appears to be powered-down.")]"
 	else
 		if (getBruteLoss())
 			if (getBruteLoss() < 30)

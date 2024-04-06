@@ -31,6 +31,6 @@
 				M.forceMove(destination)
 				if(M != user)
 					prey = 1
-		to_chat(user, SPAN_CLASS("sinister", "You warp back to Nar-Sie[prey ? " along with your prey":""]."))
+		to_chat(user, span_sinister("You warp back to Nar-Sie[prey ? " along with your prey":""]."))
 	else
 		to_chat(user, span_danger("...something's wrong!"))//There shouldn't be an instance of Harvesters when Nar-Sie isn't in the world.

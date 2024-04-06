@@ -55,24 +55,24 @@
 				if(1 to 2) user.visible_message(span_danger("[user] scratched [target] across \his cheek!"))
 				if(3 to 4)
 					user.visible_message(pick(
-						80; user.visible_message(SPAN_CLASS("danger", "[user] [pick(attack_verb)] [target]'s [pick("face", "neck", affecting.name)]!")),
-						20; user.visible_message(SPAN_CLASS("danger", "[user] [pick(attack_verb)] [pick("[target] in the [affecting.name]", "[target] across \his [pick("face", "neck", affecting.name)]")]!")),
+						80; user.visible_message(span_danger("[user] [pick(attack_verb)] [target]'s [pick("face", "neck", affecting.name)]!")),
+						20; user.visible_message(span_danger("[user] [pick(attack_verb)] [pick("[target] in the [affecting.name]", "[target] across \his [pick("face", "neck", affecting.name)]")]!")),
 						))
 				if(5)
 					user.visible_message(pick(
-						SPAN_CLASS("danger", "[user] rakes \his [pick(attack_noun)] across [target]'s [pick("face", "neck", affecting.name)]!"),
-						SPAN_CLASS("danger", "[user] tears \his [pick(attack_noun)] into [target]'s [pick("face", "neck", affecting.name)]!"),
+						span_danger("[user] rakes \his [pick(attack_noun)] across [target]'s [pick("face", "neck", affecting.name)]!"),
+						span_danger("[user] tears \his [pick(attack_noun)] into [target]'s [pick("face", "neck", affecting.name)]!"),
 						))
 		else
 			// ----- BODY ----- //
 			switch(attack_damage)
-				if(1 to 2)	user.visible_message(SPAN_CLASS("danger", "[user] [pick("scratched", "grazed")] [target]'s [affecting.name]!"))
+				if(1 to 2)	user.visible_message(span_danger("[user] [pick("scratched", "grazed")] [target]'s [affecting.name]!"))
 				if(3 to 4)
 					user.visible_message(pick(
 						80; user.visible_message(span_danger("[user] [pick(attack_verb)] [target]'s [affecting.name]!")),
-						20; user.visible_message(SPAN_CLASS("danger", "[user] [pick(attack_verb)] [pick("[target] in the [affecting.name]", "[target] across \his [affecting.name]")]!")),
+						20; user.visible_message(span_danger("[user] [pick(attack_verb)] [pick("[target] in the [affecting.name]", "[target] across \his [affecting.name]")]!")),
 						))
-				if(5)		user.visible_message(SPAN_CLASS("danger", "[user] tears \his [pick(attack_noun)] [pick("deep into", "into", "across")] [target]'s [affecting.name]!"))
+				if(5)		user.visible_message(span_danger("[user] tears \his [pick(attack_noun)] [pick("deep into", "into", "across")] [target]'s [affecting.name]!"))
 
 /datum/unarmed_attack/claws/strong
 	attack_verb = list("slashed")

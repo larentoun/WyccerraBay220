@@ -50,7 +50,7 @@
 	to_chat(user, span_good("Updating power settings.."))
 	if(do_after(user, 5 SECONDS, src))
 		set_state(!on)
-		to_chat(user, SPAN_CLASS("good", "Update Completed. New setting:[on ? "on": "off"]"))
+		to_chat(user, span_good("Update Completed. New setting:[on ? "on": "off"]"))
 		update_locked = 1
 		spawn(600)
 			update_locked = 0

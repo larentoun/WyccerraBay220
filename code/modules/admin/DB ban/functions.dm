@@ -11,7 +11,7 @@
 
 	establish_db_connection()
 	if(!dbcon.IsConnected())
-		to_chat(usr,SPAN_CLASS("error", "Failed adding StaffWarn: db error"))
+		to_chat(usr,span_warning("Failed adding StaffWarn: db error"))
 		return
 
 	var/DBQuery/query = dbcon.NewQuery("SELECT id FROM erro_player WHERE ckey = '[dbckey]'")
@@ -32,13 +32,13 @@
 
 	establish_db_connection()
 	if(!dbcon.IsConnected())
-		to_chat(usr,SPAN_CLASS("error", "Failed removing StaffWarn: db error"))
+		to_chat(usr,span_warning("Failed removing StaffWarn: db error"))
 		return 0
 
 	var/DBQuery/query = dbcon.NewQuery("UPDATE erro_player SET staffwarn=NULL WHERE ckey='[dbckey]'")
 	query.Execute()
 	if(query.RowsAffected() != 1)
-		to_chat(usr,SPAN_CLASS("error", "StaffWarn unable to be removed from DB"))
+		to_chat(usr,span_warning("StaffWarn unable to be removed from DB"))
 		return 0
 	to_chat(usr,span_notice("StaffWarn removed from DB"))
 	return 1

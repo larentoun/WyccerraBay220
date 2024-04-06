@@ -156,11 +156,11 @@
 		item_state = "[bis.base_icon_state]"
 
 /obj/item/flame/lighter/zippo/light_effects(mob/user)
-	user.visible_message(SPAN_CLASS("rose", "Without even breaking stride, [user] flips open and lights [src] in one smooth movement."))
+	user.visible_message(span_rose("Without even breaking stride, [user] flips open and lights [src] in one smooth movement."))
 	playsound(src.loc, 'sound/items/zippo_open.ogg', 100, 1, -4)
 
 /obj/item/flame/lighter/zippo/shutoff_effects(mob/user)
-	user.visible_message(SPAN_CLASS("rose", "You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing."))
+	user.visible_message(span_rose("You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing."))
 	playsound(src.loc, 'sound/items/zippo_close.ogg', 100, 1, -4)
 
 /obj/item/flame/lighter/zippo/use_after(atom/O, mob/living/user, click_parameters)

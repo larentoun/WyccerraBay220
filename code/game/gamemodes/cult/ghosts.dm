@@ -279,7 +279,7 @@
 	if(invisibility == 0)
 		ghost_magic_cd = world.time + 60 SECONDS
 		to_chat(src, span_info("You are now invisible."))
-		visible_message(SPAN_CLASS("emote", "It fades from sight..."))
+		visible_message(span_emote("It fades from sight..."))
 		set_invisibility(INVISIBILITY_OBSERVER)
 		mouse_opacity = 1
 	else

@@ -221,7 +221,7 @@ GLOBAL_LIST_INIT(localhost_addresses, list(
 	if (config.event)
 		to_chat(src, "<h1 class='alert'>Event</h1>")
 		to_chat(src, "<h2 class='alert'>An event is taking place. OOC Info:</h2>")
-		to_chat(src, SPAN_CLASS("alert", "[config.event]"))
+		to_chat(src, span_alert("[config.event]"))
 		to_chat(src, "<br>")
 
 	if(holder)

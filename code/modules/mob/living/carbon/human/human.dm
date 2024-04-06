@@ -1517,16 +1517,16 @@
 		fail_prob += U.skill_fail_chance(SKILL_MEDICAL, 20, SKILL_EXPERIENCED, 1)
 	if(prob(fail_prob))
 		visible_message( \
-		SPAN_CLASS("danger", "[U] pops [self ? "[p_their()]" : "[S]'s"] [current_limb.joint] in the WRONG place!"), \
-		SPAN_CLASS("danger", "[self ? "You pop" : "[U] pops"] your [current_limb.joint] in the WRONG place!") \
+		span_danger("[U] pops [self ? "[p_their()]" : "[S]'s"] [current_limb.joint] in the WRONG place!"), \
+		span_danger("[self ? "You pop" : "[U] pops"] your [current_limb.joint] in the WRONG place!") \
 		)
 		current_limb.add_pain(30)
 		current_limb.take_external_damage(5)
 		shock_stage += 20
 	else
 		visible_message( \
-		SPAN_CLASS("danger", "[U] pops [self ? "[p_their()]" : "[S]'s"] [current_limb.joint] back in!"), \
-		SPAN_CLASS("danger", "[self ? "You pop" : "[U] pops"] your [current_limb.joint] back in!") \
+		span_danger("[U] pops [self ? "[p_their()]" : "[S]'s"] [current_limb.joint] back in!"), \
+		span_danger("[self ? "You pop" : "[U] pops"] your [current_limb.joint] back in!") \
 		)
 		current_limb.undislocate()
 

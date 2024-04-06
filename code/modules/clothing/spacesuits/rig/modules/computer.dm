@@ -402,7 +402,7 @@
 	if(target.drain_power(1) <= 0)
 		return 0
 
-	to_chat(H, SPAN_CLASS("danger", "You begin draining power from [target]!"))
+	to_chat(H, span_danger("You begin draining power from [target]!"))
 	interfaced_with = target
 	drain_loc = interfaced_with.loc
 
@@ -434,7 +434,7 @@
 	playsound(H.loc, 'sound/effects/sparks2.ogg', 50, 1)
 
 	if(!holder.cell)
-		to_chat(H, SPAN_CLASS("danger", "Your power sink flashes an error; there is no cell in your rig."))
+		to_chat(H, span_danger("Your power sink flashes an error; there is no cell in your rig."))
 		drain_complete(H)
 		return
 
@@ -450,7 +450,7 @@
 
 	var/target_drained = interfaced_with.drain_power(0,0,max_draining_rate)
 	if(target_drained <= 0)
-		to_chat(H, SPAN_CLASS("danger", "Your power sink flashes a red light; there is no power left in [interfaced_with]."))
+		to_chat(H, span_danger("Your power sink flashes a red light; there is no power left in [interfaced_with]."))
 		drain_complete(H)
 		return
 

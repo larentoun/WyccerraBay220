@@ -77,7 +77,7 @@ var/global/datum/announcement/minor/minor_announcement = new(new_sound = ANNOUNC
 	GLOB.global_announcer.autosay(message, AUTO_ANNOUNCER_NAME)
 
 /datum/announcement/priority/Message(message as text, message_title as text)
-	GLOB.global_announcer.autosay(FONT_LARGE("[SPAN_CLASS("alert", "[message_title]:")] [message]"), announcer ? announcer : AUTO_ANNOUNCER_NAME)
+	GLOB.global_announcer.autosay(FONT_LARGE("[span_alert("[message_title]:")] [message]"), announcer ? announcer : AUTO_ANNOUNCER_NAME)
 
 /datum/announcement/priority/command/Message(message as text, message_title as text)
 	GLOB.global_announcer.autosay(FONT_LARGE("[span_warning("[GLOB.using_map.boss_name] [message_title]:")] [message]"), AUTO_ANNOUNCER_NAME)
