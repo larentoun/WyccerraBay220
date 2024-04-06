@@ -205,7 +205,7 @@
 	else if(scan["blood_o2"] <= 85)
 		dat += "([span_average("[scan["blood_o2"]]% blood oxygenation")])</td></tr>"
 	else if(scan["blood_o2"] <= 90)
-		dat += "([SPAN_CLASS("oxyloss", "[scan["blood_o2"]]% blood oxygenation")])</td></tr>"
+		dat += "([span_oxyloss("[scan["blood_o2"]]% blood oxygenation")])</td></tr>"
 	else
 		dat += "([scan["blood_o2"]]% blood oxygenation)</td></tr>"
 
@@ -298,7 +298,7 @@
 				<table class='block' border='1' width='95%'>
 					<tr><th colspan='3'>Body Status</th></tr>
 					<tr><th>Organ</th><th>Damage</th><th>Status</th></tr>
-					<tr><td>head</td><td>[SPAN_CLASS("brute", "Severe physical trauma")]<br>[SPAN_CLASS("burn", "Severe burns")]</td><td>[span_bad("Bleeding")]</td></td>
+					<tr><td>head</td><td>[span_brute("Severe physical trauma")]<br>[span_burn("Severe burns")]</td><td>[span_bad("Bleeding")]</td></td>
 					<tr><td>upper body</td><td>None</td><td></td></tr>
 					<tr><td>right arm</td><td>N/A</td><td>[span_bad("Missing")]</td></tr>
 	*/
@@ -367,7 +367,7 @@
 			else if(I["is_bruised"])
 				row += "<td>[span_average("Moderate")]</td>"
 			else if(I["is_damaged"])
-				row += "<td>[SPAN_CLASS("mild", "Minor")]</td>"
+				row += "<td>[span_mild("Minor")]</td>"
 			else
 				row += "<td>None</td>"
 			row += "<td>"
@@ -440,6 +440,6 @@
 			. = "moderate"
 	else
 		if (tag)
-			. = SPAN_CLASS("mild", "minor")
+			. = span_mild("minor")
 		else
 			. = "minor"

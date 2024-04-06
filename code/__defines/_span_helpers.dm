@@ -180,6 +180,20 @@
 #define span_gamesay(str) ("<span class='game say'>" + str + "</span>")
 #define span_alium(str) ("<span class='alium'>" + str + "</span>")
 #define span_pm(str) ("<span class='pm'>" + str + "</span>")
+#define span_mild(str) ("<span class='mild'>" + str + "</span>")
+
+/* Admin: Misc */
+#define span_whodead(str) ("<span class='who_dead'>" + str + "</span>")
+#define span_whoobserving(str) ("<span class='who_observing'>" + str + "</span>")
+#define span_whonewaccount(str) ("<span class='who_new_account'>" + str + "</span>")
+#define span_whonewishaccount(str) ("<span class='who_newish_account'>" + str + "</span>")
+#define span_whoantagonist(str) ("<span class='who_antagonist'>" + str + "</span>")
+
+/* Damage colors for crew monitoring computer */
+#define span_burn(str) ("<span class='burn'>" + str + "</span>")
+#define span_brute(str) ("<span class='brute'>" + str + "</span>")
+#define span_toxin(str) ("<span class='toxin'>" + str + "</span>")
+#define span_oxyloss(str) ("<span class='oxyloss'>" + str + "</span>")
 
 #define SPAN_COLOR(color, text) ("<span style=\"color: [color]\">[text]</span>")
 #define SPAN_SIZE(size, text) ("<span style=\"font-size: [size]\">[text]</span>")
