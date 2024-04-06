@@ -32,7 +32,7 @@
 	. = ..()
 	if(!locked)
 		. += span_notice("With the disk's classified contents unlocked, \
-		you peer into its preview screen and see [span_italic("[subject]")].")
+		you peer into its preview screen and see [span_italics("[subject]")].")
 	else
 		. += span_notice("The disk is locked, you cannot see its contents.")
 

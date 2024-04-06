@@ -30,7 +30,7 @@
 	user.visible_message(
 		span_notice("[user] pries [src] open with [tool]."),
 		span_notice("You pry [src] open with [tool]."),
-		span_italic("You hear splitting wood.")
+		span_italics("You hear splitting wood.")
 	)
 	qdel(src)
 

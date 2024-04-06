@@ -39,7 +39,7 @@
 	usr.visible_message(
 		span_notice("\The [usr] opens \the [src]."),
 		span_notice("You eject \the [initial(name)]'s occupant."),
-		span_italic("You hear a pressurized hiss, then a sound like glass creaking.")
+		span_italics("You hear a pressurized hiss, then a sound like glass creaking.")
 	)
 	go_out()
 	add_fingerprint(usr)
@@ -60,7 +60,7 @@
 	usr.visible_message(
 		span_notice("\The [usr] climbs into \the [src]."),
 		span_notice("You climb into \the [src]."),
-		span_italic("You hear footsteps on metal, cloth rustling, and then a pressurized hiss.")
+		span_italics("You hear footsteps on metal, cloth rustling, and then a pressurized hiss.")
 	)
 	move_target_inside(usr,usr)
 	usr.pulling = null
@@ -129,7 +129,7 @@
 		user.visible_message(
 			span_notice("\The [usr] climbs into \the [src]."),
 			span_notice("You climb into \the [src]."),
-			span_italic("You hear metal clanking, then a pressurized hiss.")
+			span_italics("You hear metal clanking, then a pressurized hiss.")
 		)
 		move_target_inside(target, user)
 	else

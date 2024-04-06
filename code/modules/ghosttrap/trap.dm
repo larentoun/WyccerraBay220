@@ -156,7 +156,7 @@ var/global/list/ghost_traps
 	var/obj/item/organ/internal/posibrain/P = target.loc
 	if (!istype(P))
 		return
-	P.visible_message(span_italic("The [P] chimes quietly."), range = 3)
+	P.visible_message(span_italics("The [P] chimes quietly."), range = 3)
 	deltimer(P.searching)
 	P.searching = null
 	P.update_icon()

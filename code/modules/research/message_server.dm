@@ -117,8 +117,8 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 		return TRUE
 	spamfilter_limit += round(initial(spamfilter_limit) / 2)
 	user.visible_message(
-		span_italic("\The [user] installs \a [tool] into \a [src]."),
-		span_italic("You install \the [tool] into \the [src], improving its spam filtering capabilities."),
+		span_italics("\The [user] installs \a [tool] into \a [src]."),
+		span_italics("You install \the [tool] into \the [src], improving its spam filtering capabilities."),
 		range = 5
 	)
 	qdel(tool)

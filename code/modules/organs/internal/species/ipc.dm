@@ -102,7 +102,7 @@
 	icon_state = "posibrain-searching"
 
 /obj/item/organ/internal/posibrain/proc/cancel_search()
-	visible_message(span_italic("\The [src] buzzes quietly and returns to an idle state."), range = 3)
+	visible_message(span_italics("\The [src] buzzes quietly and returns to an idle state."), range = 3)
 	if (searching)
 		deltimer(searching)
 	searching = null
@@ -145,37 +145,37 @@
 	if (isghost(user) || user.skill_check(SKILL_DEVICES, SKILL_TRAINED))
 		if ((status & ORGAN_DEAD) || damage)
 			if ((status & ORGAN_DEAD))
-				. += span_notice(span_italic("It is ruined and lifeless, damaged beyond hope of recovery."))
+				. += span_notice(span_italics("It is ruined and lifeless, damaged beyond hope of recovery."))
 			else if (damage > min_broken_damage)
-				. += span_notice(span_italic("It is seriously damaged and requires repair to work properly."))
+				. += span_notice(span_italics("It is seriously damaged and requires repair to work properly."))
 			else if (damage > min_bruised_damage)
-				. += span_notice(span_italic("It has taken some damage and is in need of repair."))
+				. += span_notice(span_italics("It has taken some damage and is in need of repair."))
 			else
-				. += span_notice(span_italic("It has superficial wear and should work normally."))
+				. += span_notice(span_italics("It has superficial wear and should work normally."))
 		if (!(status & ORGAN_DEAD))
 			if (brainmob && brainmob.key)
 				var/msg
-				msg += span_italic("It blinks with activity.")
+				msg += span_italics("It blinks with activity.")
 				if (brainmob.stat || !brainmob.client)
-					msg += span_italic(" The responsiveness fault indicator is lit.")
+					msg += span_italics(" The responsiveness fault indicator is lit.")
 				. += span_notice(msg)
 			else if (damage)
-				. += span_notice(span_italic("The red integrity fault indicator pulses slowly."))
+				. += span_notice(span_italics("The red integrity fault indicator pulses slowly."))
 			else
-				. += span_notice(span_italic("The golden ready indicator [searching ? "flickers quickly as it tries to generate a personality" : "pulses lazily"]."))
+				. += span_notice(span_italics("The golden ready indicator [searching ? "flickers quickly as it tries to generate a personality" : "pulses lazily"]."))
 	else
 		if ((status & ORGAN_DEAD) || damage > min_broken_damage)
-			. += span_notice(span_italic("It looks wrecked."))
+			. += span_notice(span_italics("It looks wrecked."))
 		else if (damage > min_bruised_damage)
-			. += span_notice(span_italic("It looks damaged."))
+			. += span_notice(span_italics("It looks damaged."))
 		if (!(status & ORGAN_DEAD))
 			if (brainmob && brainmob.key)
-				. += span_notice(span_italic("Little lights flicker on its surface."))
+				. += span_notice(span_italics("Little lights flicker on its surface."))
 			else
 				if (damage)
-					. += span_notice(span_italic("A lone red light pulses malevolently on its surface."))
+					. += span_notice(span_italics("A lone red light pulses malevolently on its surface."))
 				else
-					. += span_notice(span_italic("A lone golden light [searching ? "flickers quickly" : "pulses lazily"]."))
+					. += span_notice(span_italics("A lone golden light [searching ? "flickers quickly" : "pulses lazily"]."))
 
 /obj/item/organ/internal/posibrain/emp_act(severity)
 	damage += rand(15 - severity * 5, 20 - severity * 5)
@@ -245,13 +245,13 @@
 		if (damage > min_broken_damage)
 			if (prob(2))
 				if (prob(15) && owner.sleeping < 1)
-					owner.visible_message(span_italic("\The [owner] suddenly halts all activity."))
+					owner.visible_message(span_italics("\The [owner] suddenly halts all activity."))
 					owner.sleeping += 10
 				else if (owner.anchored || isspace(get_turf(owner)))
-					owner.visible_message(span_italic("\The [owner] seizes and twitches!"))
+					owner.visible_message(span_italics("\The [owner] seizes and twitches!"))
 					owner.Stun(2)
 				else
-					owner.visible_message(span_italic("\The [owner] seizes and clatters down in a heap!"), null, pick("Clang!", "Crash!", "Clunk!"))
+					owner.visible_message(span_italics("\The [owner] seizes and clatters down in a heap!"), null, pick("Clang!", "Crash!", "Clunk!"))
 					owner.Weaken(2)
 			if (prob(2))
 				var/obj/item/organ/internal/cell/C = owner.internal_organs_by_name[BP_CELL]

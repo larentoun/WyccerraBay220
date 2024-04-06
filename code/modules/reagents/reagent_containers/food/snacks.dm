@@ -34,8 +34,8 @@
 		return
 	if (consumer)
 		consumer.visible_message(
-			span_italic("\The [consumer] finishes eating \the [src]."),
-			span_italic("You finish eating \the [src].")
+			span_italics("\The [consumer] finishes eating \the [src]."),
+			span_italics("You finish eating \the [src].")
 		)
 		consumer.update_personal_goal(/datum/goal/achievement/specific_object/food, type)
 	if (feeder)

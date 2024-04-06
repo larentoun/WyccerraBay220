@@ -81,8 +81,8 @@
 			update_access()
 			if (check_access(item))
 				user.visible_message(
-					span_italic("[user] swipes [item] through [src]."),
-					span_italic("You swipe [item] through [src]."),
+					span_italics("[user] swipes [item] through [src]."),
+					span_italics("You swipe [item] through [src]."),
 				)
 				if (do_after(user, 1 SECOND, airlock, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 					to_chat(user, "[src] clicks and detaches from [airlock]!")
@@ -101,13 +101,13 @@
 		if (!airlock)
 			return TRUE
 		user.visible_message(
-			span_italic("[user] begins removing [src] with [item]."),
-			span_italic("You begin removing [src] with [item].")
+			span_italics("[user] begins removing [src] with [item]."),
+			span_italics("You begin removing [src] with [item].")
 		)
 		if (do_after(user, 20 SECONDS, airlock, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 			user.visible_message(
-				span_italic("[user] removes [src] with [item]."),
-				span_italic("You remove [src] with [item].")
+				span_italics("[user] removes [src] with [item]."),
+				span_italics("You remove [src] with [item].")
 			)
 			user.put_in_hands(src)
 			airlock.brace = null

@@ -12,7 +12,7 @@
 	if (!organ)
 		return TRUE
 	user.visible_message(
-		span_italic("\The [user] places \the [src] against \the [target]'s [organ.name]."),
+		span_italics("\The [user] places \the [src] against \the [target]'s [organ.name]."),
 		span_notice("You place \the [src] against \the [target]'s [organ.name]. You hear [english_list(organ.listen())].")
 	)
 	return TRUE

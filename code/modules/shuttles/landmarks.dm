@@ -209,7 +209,7 @@
 		user.visible_message(
 			span_notice("\The [user] plants \the [src] and activates it."),
 			span_notice("You plant \the [src] and activate it."),
-			span_italic("You hear a soft hum.")
+			span_italics("You hear a soft hum.")
 		)
 
 
@@ -260,9 +260,9 @@
 		return FALSE
 	if (user)
 		user.visible_message(
-			span_italic("\The [user] starts setting up \a [src]."),
-			span_italic("You start setting up \a [src]."),
-			span_italic("You hear the clicking of metal and plastic.")
+			span_italics("\The [user] starts setting up \a [src]."),
+			span_italics("You start setting up \a [src]."),
+			span_italics("You hear the clicking of metal and plastic.")
 		)
 		playsound(src, 'sound/items/shuttle_beacon_prepare.ogg', 100)
 		if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))

@@ -108,5 +108,5 @@
 		else
 			msg+="!"
 
-	holder_atom.audible_message(span_bold(holder_atom.name) + " reverberates, \"[msg]\"", span_italic("\The [holder_atom] vibrates and lights up for a moment, but you hear no sound..."))
+	holder_atom.audible_message(span_bold(holder_atom.name) + " reverberates, \"[msg]\"", span_italics("\The [holder_atom] vibrates and lights up for a moment, but you hear no sound..."))
 	last_talk_time = world.time

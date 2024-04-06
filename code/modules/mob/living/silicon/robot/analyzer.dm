@@ -19,11 +19,11 @@
 
 /proc/roboscan(mob/living/M, mob/living/user)
 	if((MUTATION_CLUMSY in user.mutations) && prob(50))
-		to_chat(user, text(span_warning("You try to analyze the floor's vitals!")))
+		to_chat(user, span_warning("You try to analyze the floor's vitals!"))
 		for(var/mob/O in viewers(M, null))
-			O.show_message(text(span_warning("[user] has analyzed the floor's vitals!"), 1))
-		user.show_message(text(span_notice("Analyzing Results for The floor:\n\t Overall Status: Healthy"), 1))
-		user.show_message(text(span_notice("\t Damage Specifics: [0]-[0]-[0]-[0]"), 1))
+			O.show_message(span_warning("[user] has analyzed the floor's vitals!"), 1)
+		user.show_message(span_notice("Analyzing Results for The floor:\n\t Overall Status: Healthy"), 1)
+		user.show_message(span_notice("\t Damage Specifics: [0]-[0]-[0]-[0]"), 1)
 		user.show_message(span_notice("Key: Suffocation/Toxin/Burns/Brute"), 1)
 		user.show_message(span_notice("Body Temperature: ???"), 1)
 		return

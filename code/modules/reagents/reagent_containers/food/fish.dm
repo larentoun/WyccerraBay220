@@ -34,7 +34,7 @@
 	for(var/i = 1 to 3)
 		var/obj/item/reagent_containers/food/snacks/sashimi/sashimi = new (turf, fish_type, color)
 		reagents.trans_to(sashimi, transfer)
-	user.visible_message(span_italic("\The [user] slices \the [src] into thin strips."))
+	user.visible_message(span_italics("\The [user] slices \the [src] into thin strips."))
 	qdel(src)
 	return TRUE
 

@@ -53,7 +53,7 @@
 			message += "[message?" ":""]It's broken."
 	if (!message)
 		return
-	. += span_italic(message)
+	. += span_italics(message)
 
 /obj/item/boombox/screwdriver_act_secondary(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
@@ -111,7 +111,7 @@
 			to_chat(user, span_warning("[paste] is empty."))
 			return TRUE
 		user.visible_message(
-			span_italic("[user] uses [item] to repair [src]."),
+			span_italics("[user] uses [item] to repair [src]."),
 			span_notice("You repair [src] with [item]."),
 			range = 3
 		)

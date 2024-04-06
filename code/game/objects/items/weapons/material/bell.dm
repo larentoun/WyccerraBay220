@@ -24,8 +24,8 @@
 		playsound(src, angry_sound, 60)
 	else
 		user.visible_message(
-			span_italic("\The [user] rings \a [src]."),
-			span_italic("You ring \the [src]."),
+			span_italics("\The [user] rings \a [src]."),
+			span_italics("You ring \the [src]."),
 			span_warning("You hear a bell sounding.")
 		)
 		playsound(src, normal_sound, 20)

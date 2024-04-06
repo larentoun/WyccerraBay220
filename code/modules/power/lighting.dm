@@ -77,7 +77,7 @@
 	user.visible_message(
 		span_notice("[user] closes [src]'s casing."),
 		span_notice("You close [src]'s casing."),
-		span_italic("You hear screws being tightened.")
+		span_italics("You hear screws being tightened.")
 	)
 	var/obj/machinery/light/newlight = new fixture_type(loc, src)
 	newlight.set_dir(dir)
@@ -95,7 +95,7 @@
 			user.visible_message(
 				span_notice("[user] deconstructs [src]."),
 				span_notice("You deconstruct [src]!"),
-				span_italic("You hear ratcheting and metal scraping.")
+				span_italics("You hear ratcheting and metal scraping.")
 			)
 			qdel(src)
 		if(LIGHT_STAGE_WIRED)
@@ -118,7 +118,7 @@
 	user.visible_message(
 		span_notice("[user] cuts the wires from [src]."),
 		span_notice("You cut [src]'s wires and remove them from the frame'."),
-		span_italic("You hear snipping and cables being cut.")
+		span_italics("You hear snipping and cables being cut.")
 	)
 
 /obj/machinery/light_construct/use_tool(obj/item/W, mob/living/user, list/click_params)
@@ -455,7 +455,7 @@
 	user.visible_message(
 		span_notice("[user] opens [src]'s casing."),
 		span_notice("You open up [src]'s casing."),
-		span_italic("You hear screws being loosened.")
+		span_italics("You hear screws being loosened.")
 	)
 	var/obj/machinery/light_construct/C = new construct_type(loc, dir, src)
 	C.stage = LIGHT_STAGE_WIRED
@@ -476,7 +476,7 @@
 		user.visible_message(
 			span_notice("[user] inserts \a [W] into [src]."),
 			span_notice("You insert [W] into [src]."),
-			span_italic("You hear something being screwed in.")
+			span_italics("You hear something being screwed in.")
 		)
 		insert_bulb(W)
 		return TRUE

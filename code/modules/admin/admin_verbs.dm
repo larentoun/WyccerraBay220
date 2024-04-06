@@ -361,7 +361,7 @@ var/global/list/admin_verbs_mod = list(
 	verbs.Remove(/client/proc/hide_most_verbs, admin_verbs_hideable)
 	verbs += /client/proc/show_verbs
 
-	to_chat(src, span_interface"Most of your adminverbs have been hidden."))
+	to_chat(src, span_interface("Most of your adminverbs have been hidden."))
 	return
 
 /client/proc/hide_verbs()
@@ -371,7 +371,7 @@ var/global/list/admin_verbs_mod = list(
 	remove_admin_verbs()
 	verbs += /client/proc/show_verbs
 
-	to_chat(src, span_interface"Almost all of your adminverbs have been hidden."))
+	to_chat(src, span_interface("Almost all of your adminverbs have been hidden."))
 	return
 
 /client/proc/show_verbs()
@@ -381,7 +381,7 @@ var/global/list/admin_verbs_mod = list(
 	verbs -= /client/proc/show_verbs
 	add_admin_verbs()
 
-	to_chat(src, span_interface"All of your adminverbs are now visible."))
+	to_chat(src, span_interface("All of your adminverbs are now visible."))
 
 
 
@@ -590,7 +590,7 @@ var/global/list/admin_verbs_mod = list(
 		deadmin_holder.reassociate()
 		log_admin("[src] re-admined themself.")
 		message_admins("[src] re-admined themself.", 1)
-		to_chat(src, span_interface"You now have the keys to control the planet, or at least [GLOB.using_map.full_name]."))
+		to_chat(src, span_interface("You now have the keys to control the planet, or at least [GLOB.using_map.full_name]."))
 		verbs -= /client/proc/readmin_self
 
 /client/proc/deadmin_self()
@@ -602,7 +602,7 @@ var/global/list/admin_verbs_mod = list(
 			log_admin("[src] deadmined themself.")
 			message_admins("[src] deadmined themself.", 1)
 			deadmin()
-			to_chat(src, span_interface"You are now a normal player."))
+			to_chat(src, span_interface("You are now a normal player."))
 			verbs |= /client/proc/readmin_self
 
 /client/proc/toggle_log_hrefs()

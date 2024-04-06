@@ -88,8 +88,8 @@
 
 /obj/item/card/operant_card/attack_self(mob/living/user)
 	user.visible_message(
-		span_italic("\The [user] examines \a [src]."),
-		span_italic("You examine \the [src]."),
+		span_italics("\The [user] examines \a [src]."),
+		span_italics("You examine \the [src]."),
 		3
 	)
 	to_chat(user, info || span_warning("\The [src] is completely blank!"))

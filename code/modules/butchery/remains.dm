@@ -10,15 +10,15 @@
 			to_chat(user, span_warning("You must put \the [src] down before carving it."))
 			return
 		user.visible_message(
-			span_italic("\The [user] begins carving \a [src] with \a [tool]."),
-			span_italic("You begin carving \the [src] into \a [initial(carve_product.name)] with \the [tool]."),
+			span_italics("\The [user] begins carving \a [src] with \a [tool]."),
+			span_italics("You begin carving \the [src] into \a [initial(carve_product.name)] with \the [tool]."),
 			range = 5
 		)
 		if (!do_after(user, 10 SECONDS, src))
 			return
 		user.visible_message(
-			span_italic("\The [user] finishes carving \a [src] into \a [initial(carve_product.name)]."),
-			span_italic("You finish carving \the [src]."),
+			span_italics("\The [user] finishes carving \a [src] into \a [initial(carve_product.name)]."),
+			span_italics("You finish carving \the [src]."),
 			range = 5
 		)
 		new carve_product (loc)
@@ -65,8 +65,8 @@
 		if (!user.unEquip(tool, src))
 			return
 		user.visible_message(
-			span_italic("\The [user] fits \a [tool] into \a [src]."),
-			span_italic("You fit \the [tool] into \the [src]."),
+			span_italics("\The [user] fits \a [tool] into \a [src]."),
+			span_italics("You fit \the [tool] into \the [src]."),
 			range = 5
 		)
 		eyeglow_source = tool

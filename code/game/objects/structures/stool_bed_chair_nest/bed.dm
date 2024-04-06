@@ -147,7 +147,7 @@
 	grab.assailant.visible_message(
 		span_warning("[grab.assailant] starts to buckle [grab.affecting] to [src]."),
 		span_danger("You start to buckle [grab.affecting] to [src]!"),
-		span_italic("You hear the sound of struggling."),
+		span_italics("You hear the sound of struggling."),
 		exclude_mobs = list(grab.affecting)
 	)
 	grab.affecting.show_message(
@@ -160,7 +160,7 @@
 	grab.assailant.visible_message(
 		span_warning("[grab.assailant] buckles [grab.affecting] to [src]."),
 		span_danger("You buckle [grab.affecting] to [src]!"),
-		span_italic("You hear the sound of buckling."),
+		span_italics("You hear the sound of buckling."),
 		exclude_mobs = list(grab.affecting)
 	)
 	grab.affecting.show_message(

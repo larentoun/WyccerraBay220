@@ -268,7 +268,7 @@
 		if (!emag_act(INFINITY, user,
 			span_warning("[user] slices [src] open with [weapon]!"),
 			span_danger("You slice [src] open with [weapon]!"),
-			span_italic("You hear metal being sliced and sparks flying.")
+			span_italics("You hear metal being sliced and sparks flying.")
 		))
 			return TRUE
 		var/datum/effect/spark_spread/spark_system = new /datum/effect/spark_spread()

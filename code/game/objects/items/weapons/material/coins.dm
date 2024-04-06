@@ -52,16 +52,16 @@
 			)
 			return TRUE
 		user.visible_message(
-			span_italic("[user] presents [src] to [target]."),
-			span_italic("You present [src] to [target]."),
+			span_italics("[user] presents [src] to [target]."),
+			span_italics("You present [src] to [target]."),
 			range = 5
 		)
 		return TRUE
 	if (isobj(target) && user.a_intent == I_HURT)
 		playsound(user.loc, 'sound/effects/coin_flip.ogg', 75, TRUE)
 		user.visible_message(
-			span_italic("[user] taps [src] against [target]."),
-			span_italic("You tap [src] against [target]."),
+			span_italics("[user] taps [src] against [target]."),
+			span_italics("You tap [src] against [target]."),
 			range = 5
 		)
 		return TRUE
@@ -74,8 +74,8 @@
 	playsound(user.loc, 'sound/effects/coin_flip.ogg', 75, 1)
 	var/result = pick("front", "back")
 	user.visible_message(
-		span_italic("[user] flips [src], landing [result] side up."),
-		span_italic("You flip [src], landing [result] side up."),
+		span_italics("[user] flips [src], landing [result] side up."),
+		span_italics("You flip [src], landing [result] side up."),
 		range = 5
 	)
 
@@ -87,8 +87,8 @@
 		return
 	new /obj/item/stack/cable_coil (get_turf(user), 1, string_color)
 	user.visible_message(
-		span_italic("[user] removes a wire from [src]."),
-		span_italic("You remove the wire from [src]."),
+		span_italics("[user] removes a wire from [src]."),
+		span_italics("You remove the wire from [src]."),
 		range = 5
 	)
 	string_color = null
@@ -101,8 +101,8 @@
 			to_chat(user, span_warning("Your cable coil is a bug. Your action fails."))
 			return TRUE
 		user.visible_message(
-			span_italic("[user] attaches some wire to [src]."),
-			span_italic("You attach some wire to [src]."),
+			span_italics("[user] attaches some wire to [src]."),
+			span_italics("You attach some wire to [src]."),
 			range = 5
 		)
 		string_color = coil.color

@@ -66,8 +66,8 @@
 /obj/structure/ironing_board/attack_hand(mob/living/user)
 	if (iron)
 		user.visible_message(
-			span_italic("\The [user] removes \a [iron] from \a [src]."),
-			span_italic("You remove \the [iron] from \the [src]."),
+			span_italics("\The [user] removes \a [iron] from \a [src]."),
+			span_italics("You remove \the [iron] from \the [src]."),
 			range = 5
 		)
 		user.put_in_hands(iron)
@@ -79,8 +79,8 @@
 		return
 	if (clothing)
 		user.visible_message(
-			span_italic("\The [user] removes \a [clothing] from \a [src]."),
-			span_italic("You remove \the [clothing] from \the [src]."),
+			span_italics("\The [user] removes \a [clothing] from \a [src]."),
+			span_italics("You remove \the [clothing] from \the [src]."),
 			range = 5
 		)
 		user.put_in_hands(clothing)
@@ -90,8 +90,8 @@
 		return
 	if (!density)
 		user.visible_message(
-			span_italic("\The [user] begins folding \a [src]."),
-			span_italic("You begin folding \the [src]."),
+			span_italics("\The [user] begins folding \a [src]."),
+			span_italics("You begin folding \the [src]."),
 			range = 5
 		)
 		if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER) || density)
@@ -238,8 +238,8 @@
 		to_chat(user, span_warning("You don't have enough space to set up \the [src]."))
 		return
 	user.visible_message(
-		span_italic("\The [user] starts setting up \a [src]."),
-		span_italic("You start setting up \the [src]."),
+		span_italics("\The [user] starts setting up \a [src]."),
+		span_italics("You start setting up \the [src]."),
 		range = 5
 	)
 	if (!do_after(user, 2 SECONDS, src, do_flags = DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER))
@@ -272,8 +272,8 @@
 /obj/item/ironing_iron/attack_self(mob/living/user)
 	iron_enabled = !iron_enabled
 	user.visible_message(
-		span_italic("\The [user] turns \a [name] [iron_enabled ? "on" : "off"]."),
-		span_italic("You turn \the [name] [iron_enabled ? "on" : "off"]."),
+		span_italics("\The [user] turns \a [name] [iron_enabled ? "on" : "off"]."),
+		span_italics("You turn \the [name] [iron_enabled ? "on" : "off"]."),
 		range = 3
 	)
 

@@ -288,13 +288,13 @@ GLOBAL_LIST_INIT(cable_default_colors, list(
 		to_chat(user, span_warning("You need at least 15 cable to make restraints."))
 		return
 	user.visible_message(
-		span_italic("[user] begins winding some cable together."),
-		span_italic("You begin to wind the cable into crude restraints.")
+		span_italics("[user] begins winding some cable together."),
+		span_italics("You begin to wind the cable into crude restraints.")
 	)
 	if (!do_after(user, 10 SECONDS, null, DO_DEFAULT | DO_PUBLIC_PROGRESS))
 		return
 	user.visible_message(
-		span_italic("[user] makes some crude cable restraints."),
+		span_italics("[user] makes some crude cable restraints."),
 		span_notice("You finish making the restraints.")
 	)
 	use(15)

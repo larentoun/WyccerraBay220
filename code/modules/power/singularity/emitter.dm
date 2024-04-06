@@ -98,7 +98,7 @@
 					user.visible_message(
 						span_notice("[user] turns off [src]."),
 						span_notice("You power down [src]."),
-						span_italic("You hear a switch being flicked.")
+						span_italics("You hear a switch being flicked.")
 					)
 				else
 					visible_message(span_notice("[src] turns off."))
@@ -113,7 +113,7 @@
 					user.visible_message(
 						span_notice("[user] turns on [src]."),
 						span_notice("You configure [src] and turn it on."), // Mention configuration to allude to operator skill playing into efficiency
-						span_italic("You hear a switch being flicked.")
+						span_italics("You hear a switch being flicked.")
 					)
 				else
 					visible_message(span_notice("[src] turns on."))

@@ -209,7 +209,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		admin_attack_log(user, null, "Stuffed themselves into [src].", null, "stuffed themselves into [src].")
 	else
 		var/message = "[user] stuffs [AM] into [src][is_dangerous ? "!" : "."]"
-		user.visible_message(is_dangerous ? span_danger(message) : span_notice(message)), \
+		user.visible_message(is_dangerous ? span_danger(message) : span_notice(message), \
 							 span_notice("You stuff [AM] into [src]."))
 		if(ismob(M))
 			admin_attack_log(user, M, "Placed the victim into [src].", "Was placed into [src] by the attacker.", "stuffed [src] with")

@@ -11,7 +11,7 @@
 	else
 		who = src
 		to_chat(who, span_bold("Obey the following laws."))
-		to_chat(who, span_italic("All laws have equal priority. Laws may override other laws if written specifically to do so. If laws conflict, break the least."))
+		to_chat(who, span_italics("All laws have equal priority. Laws may override other laws if written specifically to do so. If laws conflict, break the least."))
 
 	src.laws_sanity_check()
 	src.laws.show_laws(who)

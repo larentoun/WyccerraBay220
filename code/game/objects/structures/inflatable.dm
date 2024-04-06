@@ -22,9 +22,9 @@
 		to_chat(user, span_warning("\The [english_list(obstruction)] is blocking that spot."))
 		return TRUE
 	user.visible_message(
-		span_italic("\The [user] starts inflating \an [src]."),
-		span_italic("You start inflating \the [src]."),
-		span_italic("You can hear rushing air."),
+		span_italics("\The [user] starts inflating \an [src]."),
+		span_italics("You start inflating \the [src]."),
+		span_italics("You can hear rushing air."),
 		range = 5
 	)
 	if (!do_after(user, 1 SECOND, target, DO_PUBLIC_UNIQUE) || QDELETED(src))
@@ -34,7 +34,7 @@
 		to_chat(user, span_warning("\The [english_list(obstruction)] is blocking that spot."))
 		return TRUE
 	user.visible_message(
-		span_italic("\The [user] finishes inflating \an [src]."),
+		span_italics("\The [user] finishes inflating \an [src]."),
 		span_notice("You inflate \the [src]."),
 		range = 5
 	)

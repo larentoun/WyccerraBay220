@@ -67,6 +67,6 @@
 /obj/structure/displaycase/attack_hand(mob/user as mob)
 	add_fingerprint(user)
 	if(!health_dead())
-		to_chat(usr, text(span_warning("You kick the display case.")))
+		to_chat(usr, span_warning("You kick the display case."))
 		visible_message(span_warning("[usr] kicks the display case."))
 		damage_health(2, DAMAGE_BRUTE)

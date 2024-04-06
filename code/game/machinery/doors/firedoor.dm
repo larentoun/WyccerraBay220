@@ -174,7 +174,7 @@
 		user.visible_message(
 			span_notice("[src] [density ? "open" : "close"]s for [user]."),
 			span_notice("[src] [density ? "open" : "close"]s."),
-			span_italic("You hear a soft beep, and a door sliding [density ? "open" : "shut"].")
+			span_italics("You hear a soft beep, and a door sliding [density ? "open" : "shut"].")
 		)
 		playsound(loc, 'sound/piano/A#6.ogg', 50)
 
@@ -205,7 +205,7 @@
 			user.visible_message(
 				span_notice("[user] starts removing [src]'s electronics."),
 				span_notice("You start levering out [src]'s electronics."),
-				span_italic("You hear metal bumping against metal.")
+				span_italics("You hear metal bumping against metal.")
 			)
 			if(!tool.use_as_tool(src, user, 3 SECONDS, volume = 50, skill_path = SKILL_CONSTRUCTION, do_flags = DO_REPAIR_CONSTRUCT))
 				return
@@ -214,7 +214,7 @@
 				user.visible_message(
 					span_notice("[user] removes the electronics from [src]!"),
 					span_notice("You pry out [src]'s circuit board."),
-					span_italic("You hear metal coming loose and clattering.")
+					span_italics("You hear metal coming loose and clattering.")
 				)
 				deconstruct(user)
 		return

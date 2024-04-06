@@ -175,7 +175,7 @@
 			cooking += cook_item(source[index])
 			--index
 		QDEL_NULL_LIST(source)
-		audible_message(span_italic("\The [src] lets out a happy ding."))
+		audible_message(span_italics("\The [src] lets out a happy ding."))
 		playsound(src, 'sound/machines/ding.ogg', 70, frequency = 0.75)
 		threshold = 1
 	if (!burn_time)

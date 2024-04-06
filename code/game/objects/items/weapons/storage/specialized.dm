@@ -117,7 +117,7 @@
 	if (cur_sheets < 1)
 		to_chat(user, span_warning("\The [src] is empty."))
 		return FALSE
-	to_chat(user, span_italic("You empty out \the [src]."))
+	to_chat(user, span_italics("You empty out \the [src]."))
 	empty()
 
 

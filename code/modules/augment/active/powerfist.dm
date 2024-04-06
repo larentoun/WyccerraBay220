@@ -47,8 +47,8 @@
 		to_chat(user, span_warning("\The [src] already has \a [tank] installed."))
 		return
 	user.visible_message(
-		span_italic("\The [user] starts connecting \a [item] to \his [src]."),
-		span_italic("You start connecting \the [item] to \the [src]."),
+		span_italics("\The [user] starts connecting \a [item] to \his [src]."),
+		span_italics("You start connecting \the [item] to \the [src]."),
 		range = 5
 	)
 	if (!do_after(user, 3 SECONDS, item, DO_PUBLIC_UNIQUE))
@@ -56,7 +56,7 @@
 	if (!user.unEquip(item, src))
 		return
 	user.visible_message(
-		span_italic("\The [user] finishes connecting \a [item] to \his [src]."),
+		span_italics("\The [user] finishes connecting \a [item] to \his [src]."),
 		span_notice("You finish connecting \the [item] to \the [src]."),
 		range = 5
 	)
@@ -100,14 +100,14 @@
 		to_chat(user, span_warning("There's no tank in \the [src]."))
 		return
 	user.visible_message(
-		span_italic("\The [user] starts disconnecting \a [tank] from \his [src]."),
-		span_italic("You start disconnecting \the [tank] from \the [src]."),
+		span_italics("\The [user] starts disconnecting \a [tank] from \his [src]."),
+		span_italics("You start disconnecting \the [tank] from \the [src]."),
 		range = 5
 	)
 	if (!do_after(user, 3 SECONDS, src, DO_PUBLIC_UNIQUE))
 		return
 	user.visible_message(
-		span_italic("\The [user] finishes disconnecting \a [tank] from \his [src]."),
+		span_italics("\The [user] finishes disconnecting \a [tank] from \his [src]."),
 		span_notice("You finish disconnecting \the [tank] from \the [src]."),
 		range = 5
 	)

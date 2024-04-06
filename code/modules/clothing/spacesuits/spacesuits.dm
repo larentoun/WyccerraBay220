@@ -147,16 +147,16 @@
 /obj/item/clothing/suit/space/equip_delay_before(mob/user, slot, equip_flags)
 	user.setClickCooldown(1 SECOND)
 	user.visible_message(
-		span_italic("\The [user] begins to struggle into \the [src]."),
-		span_italic("You begin to struggle into \the [src]."),
-		span_italic("You can hear metal clicking and fabric rustling."),
+		span_italics("\The [user] begins to struggle into \the [src]."),
+		span_italics("You begin to struggle into \the [src]."),
+		span_italics("You can hear metal clicking and fabric rustling."),
 		range = 5
 	)
 
 
 /obj/item/clothing/suit/space/equip_delay_after(mob/user, slot, equip_flags)
 	user.visible_message(
-		span_italic("\The [user] finishes putting on \the [src]."),
+		span_italics("\The [user] finishes putting on \the [src]."),
 		span_notice("You finish putting on \the [src]."),
 		range = 5
 	)

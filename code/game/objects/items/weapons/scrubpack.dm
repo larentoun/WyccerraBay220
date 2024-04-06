@@ -102,9 +102,9 @@
 		removed = tank
 		tank = null
 	user.visible_message(
-		span_italic("[user] removes [removed] from [src]."),
-		span_italic("You remove the [selection] from [src]."),
-		span_italic("You can hear metal scratching on metal."),
+		span_italics("[user] removes [removed] from [src]."),
+		span_italics("You remove the [selection] from [src]."),
+		span_italics("You can hear metal scratching on metal."),
 		range = 5
 	)
 
@@ -119,9 +119,9 @@
 		if (!user.unEquip(W, src))
 			return
 		user.visible_message(
-			span_italic("[user] fits [W] to [src]."),
-			span_italic("You fit [W] to [src]."),
-			span_italic("You can hear metal scratching on metal."),
+			span_italics("[user] fits [W] to [src]."),
+			span_italics("You fit [W] to [src]."),
+			span_italics("You can hear metal scratching on metal."),
 			range = 5
 		)
 		cell = W
@@ -137,9 +137,9 @@
 		if (!user.unEquip(W, src))
 			return
 		user.visible_message(
-			span_italic("[user] fits [W] to [src]."),
-			span_italic("You fit [W] to [src]."),
-			span_italic("You can hear metal scratching on metal."),
+			span_italics("[user] fits [W] to [src]."),
+			span_italics("You fit [W] to [src]."),
+			span_italics("You can hear metal scratching on metal."),
 			range = 5
 		)
 		tank = W
@@ -173,12 +173,12 @@
 			to_chat(user, span_warning("You try to turn on [src], but it's out of charge."))
 			enabled = FALSE
 			return
-		to_chat(user, span_italic("You turn on [src]."))
+		to_chat(user, span_italics("You turn on [src]."))
 		START_PROCESSING(SSobj, src)
 		icon_state = "scrubpack_on"
 		set_sound_state(TRUE)
 	else
-		to_chat(user, span_italic("You turn off [src]."))
+		to_chat(user, span_italics("You turn off [src]."))
 		STOP_PROCESSING(SSobj, src)
 		icon_state = "scrubpack"
 		set_sound_state(FALSE)
@@ -186,7 +186,7 @@
 /obj/item/scrubpack/Process()
 	var/datum/gas_mixture/tank_air = tank.return_air()
 	if (tank_air.return_pressure() > TANK_LEAK_PRESSURE * 0.8)
-		audible_message(span_italic("[src] beeps stridently and stops working."))
+		audible_message(span_italics("[src] beeps stridently and stops working."))
 		STOP_PROCESSING(SSobj, src)
 		icon_state = "scrubpack"
 		set_sound_state(FALSE)
@@ -224,7 +224,7 @@
 
 	var/final_cost = max(charge_cost * 0.1, total_filter_moles / volume_rate)
 	if (!cell.checked_use(final_cost))
-		audible_message(span_italic("[src] beeps stridently and stops working."))
+		audible_message(span_italics("[src] beeps stridently and stops working."))
 		STOP_PROCESSING(SSobj, src)
 		icon_state = "scrubpack"
 		set_sound_state(FALSE)

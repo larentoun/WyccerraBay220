@@ -516,7 +516,7 @@
 		user.visible_message(
 			span_notice("[user] fills [tool] with some water from [src]."),
 			span_notice("You fill [tool] with some water from [src]."),
-			span_italic("You hear running water.")
+			span_italics("You hear running water.")
 		)
 		return TRUE
 
@@ -527,7 +527,7 @@
 		user.visible_message(
 			span_notice("[user] wets [tool] with [src]."),
 			span_notice("You wet [tool] with [src]."),
-			span_italic("You hear running water.")
+			span_italics("You hear running water.")
 		)
 		return TRUE
 
@@ -536,7 +536,7 @@
 	user.visible_message(
 		span_notice("[user] starts washing [tool] in [src]."),
 		span_notice("You start washing [tool] in [src]."),
-		span_italic("You hear running water.")
+		span_italics("You hear running water.")
 	)
 	if (!do_after(user, 4 SECONDS, src, DO_PUBLIC_UNIQUE) || !user.use_sanity_check(src, tool))
 		return TRUE

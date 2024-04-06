@@ -23,8 +23,8 @@
 	LAZYADD(labels, label)
 	if (user)
 		user.visible_message(
-			span_italic("\The [user] attaches a label to \a [atom_holder]."),
-			span_italic("You label \the [atom_holder] with \"[label]\".")
+			span_italics("\The [user] attaches a label to \a [atom_holder]."),
+			span_italics("You label \the [atom_holder] with \"[label]\".")
 		)
 	var/old_name = atom_holder.name
 	atom_holder.name = "[atom_holder.name] ([label])"
@@ -43,8 +43,8 @@
 		return
 	if (user)
 		user.visible_message(
-			span_italic("\The [user] removes a label from \a [atom_holder]."),
-			span_italic("You remove the \"[label]\" label from \the [atom_holder].")
+			span_italics("\The [user] removes a label from \a [atom_holder]."),
+			span_italics("You remove the \"[label]\" label from \the [atom_holder].")
 		)
 	var/old_name = atom_holder.name
 	atom_holder.name = replacetext_char(atom_holder.name, full_label, "", index, index + length_char(full_label))

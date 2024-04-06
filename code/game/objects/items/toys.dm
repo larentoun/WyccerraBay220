@@ -699,8 +699,8 @@
 	else if (user.a_intent == I_HURT)
 		action_word = "bop"
 	user.visible_message(
-		span_italic("\The [user] [action_word]s \the [src]."),
-		span_italic("You [action_word] \the [src].")
+		span_italics("\The [user] [action_word]s \the [src]."),
+		span_italics("You [action_word] \the [src].")
 	)
 	if (phrase)
 		audible_message(phrase, hearing_distance = 3)
@@ -755,8 +755,8 @@
 	else if (user.a_intent == I_HURT)
 		action_word = "bop"
 	user.visible_message(
-		span_italic("\The [user] [action_word]s \the [src]."),
-		span_italic("You [action_word] \the [src].")
+		span_italics("\The [user] [action_word]s \the [src]."),
+		span_italics("You [action_word] \the [src].")
 	)
 
 

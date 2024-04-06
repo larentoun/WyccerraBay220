@@ -17,7 +17,7 @@
 	obj = new obj (user.loc)
 	if (isitem(obj))
 		user.put_in_any_hand_if_possible(obj)
-	to_chat(user, span_italic("You take \the [obj] out of \the [src]."))
+	to_chat(user, span_italics("You take \the [obj] out of \the [src]."))
 	qdel(src)
 
 

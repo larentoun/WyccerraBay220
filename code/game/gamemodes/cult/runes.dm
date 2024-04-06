@@ -61,7 +61,7 @@
 		user.visible_message(
 			span_notice("\The [user] hits \the [src] with \a [tool], and it disappears, fizzling."),
 			span_notice("You disrupt \the [src]'s vile magic with the deadening field of \the [tool]."),
-			span_italic("You hear a fizzle.")
+			span_italics("You hear a fizzle.")
 		)
 		qdel(src)
 		return TRUE

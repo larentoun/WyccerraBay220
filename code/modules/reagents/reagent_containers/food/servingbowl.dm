@@ -65,7 +65,7 @@
 	var/response = sanitizeSafe(input(usr, "Enter a new name for \the [src]."), 32)
 	if (!response)
 		return
-	to_chat(usr, span_italic("You rename \the [src] to \"[response]\"."))
+	to_chat(usr, span_italics("You rename \the [src] to \"[response]\"."))
 	SetName("\improper [response]")
 	verbs -= /obj/item/reagent_containers/food/snacks/custombowl/verb/rename_bowl
 	renamed = TRUE
@@ -82,7 +82,7 @@
 	if (!user.unEquip(item, src))
 		return
 	user.visible_message(
-		span_italic("\The [user] adds \a [item] to \the [src]."),
+		span_italics("\The [user] adds \a [item] to \the [src]."),
 		span_notice("You add \the [item] to \the [src]."),
 		range = 3
 	)

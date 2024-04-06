@@ -220,8 +220,8 @@
 		to_chat(user, span_warning("\The [patient] is already hooked up to \the [src]."))
 		return
 	user.visible_message(
-		span_italic("\The [user] starts to hook up \the [target] to \the [src]."),
-		span_italic("You start to hook up \the [target] to \the [src]."),
+		span_italics("\The [user] starts to hook up \the [target] to \the [src]."),
+		span_italics("You start to hook up \the [target] to \the [src]."),
 		range = 5
 	)
 	if (!user.do_skilled(3 SECONDS, SKILL_MEDICAL, target))
@@ -236,7 +236,7 @@
 		return
 	START_PROCESSING(SSobj, src)
 	user.visible_message(
-		span_italic("\The [user] successfully inserts \a [src]'s cannula into \the [target]."),
+		span_italics("\The [user] successfully inserts \a [src]'s cannula into \the [target]."),
 		span_notice("You successfully insert \the [src]'s cannula into \the [target]."),
 		range = 1
 	)
@@ -248,8 +248,8 @@
 	if (!patient)
 		return
 	user.visible_message(
-		span_italic("\The [user] starts unhooking \the [patient] from \a [src]."),
-		span_italic("You start extracting \the [src]'s cannula from \the [patient]."),
+		span_italics("\The [user] starts unhooking \the [patient] from \a [src]."),
+		span_italics("You start extracting \the [src]'s cannula from \the [patient]."),
 		range = 5
 	)
 	if (!user.do_skilled(1.5 SECONDS, SKILL_MEDICAL, patient))
@@ -332,7 +332,7 @@
 			action_word = "extract"
 			drip_mode = MODE_EXTRACT
 	user.visible_message(
-		span_italic("\The [user] adjusts \a [src] to [action_word] fluids."),
-		span_italic("You adjust \the [src] to [action_word] fluids."),
+		span_italics("\The [user] adjusts \a [src] to [action_word] fluids."),
+		span_italics("You adjust \the [src] to [action_word] fluids."),
 		range = 3
 	)

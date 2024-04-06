@@ -151,9 +151,9 @@
 		P.hack_aborted = 0
 		P.cable = new (T)
 		P.visible_message(
-			span_italic("A port on [P] opens to reveal \a [P.cable], which promptly falls to the floor."),
-			span_italic("You open a port to reveal your [P.cable] and unspool it to the floor."),
-			span_italic("You hear the soft click something falling to the floor.")
+			span_italics("A port on [P] opens to reveal \a [P.cable], which promptly falls to the floor."),
+			span_italics("You open a port to reveal your [P.cable] and unspool it to the floor."),
+			span_italics("You hear the soft click something falling to the floor.")
 		)
 		return TRUE
 

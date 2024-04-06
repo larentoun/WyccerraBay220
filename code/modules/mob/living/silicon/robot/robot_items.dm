@@ -92,7 +92,7 @@
 	I.forceMove(src)
 	loaded_item = I
 	for(var/mob/M in viewers())
-		M.show_message(text(span_notice("[user] adds the [I] to the [src].")), 1)
+		M.show_message(span_notice("[user] adds the [I] to the [src]."), 1)
 	desc = initial(desc) + "<br>It is holding \the [loaded_item]."
 	flick("portable_analyzer_load", src)
 	icon_state = "portable_analyzer_full"
@@ -345,9 +345,9 @@
 			else
 				I = new /obj/item/inflatable/wall(T)
 		user.visible_message(
-			span_italic("\The [user] picks up \an [target] with \an [src]."),
+			span_italics("\The [user] picks up \an [target] with \an [src]."),
 			span_notice("You deflate \the [target] with \the [src]."),
-			span_italic("You can hear rushing air."),
+			span_italics("You can hear rushing air."),
 			range = 5
 		)
 		if (I)
@@ -368,8 +368,8 @@
 				collected = TRUE
 		if (collected)
 			user.visible_message(
-				span_italic("\The [user] picks up \an [target] with \an [src]."),
-				span_italic("You pick up \the [target] with \the [src]."),
+				span_italics("\The [user] picks up \an [target] with \an [src]."),
+				span_italics("You pick up \the [target] with \the [src]."),
 				range = 3
 			)
 			qdel(target)
@@ -400,7 +400,7 @@
 			placed = new /obj/structure/inflatable/wall(T)
 			--stored_walls
 		user.visible_message(
-			span_italic("\The [user] inflates \an [placed]."),
+			span_italics("\The [user] inflates \an [placed]."),
 			span_notice("You inflate \an [placed]."),
 			range = 5
 		)

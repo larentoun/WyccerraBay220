@@ -213,8 +213,8 @@
 		to_chat(user, span_warning("\The [buckled_mob] is on \the [src]. Remove them first."))
 		return
 	user.visible_message(
-		span_italic("\The [user] begins folding \a [src]."),
-		span_italic("You begin folding \the [src]."),
+		span_italics("\The [user] begins folding \a [src]."),
+		span_italics("You begin folding \the [src]."),
 		range = 5
 	)
 	if (!do_after(user, 2 SECONDS, src, DO_PUBLIC_UNIQUE | DO_BAR_OVER_USER) || density)
@@ -228,8 +228,8 @@
 
 /obj/structure/roller_bed/proc/RemoveBag(mob/living/user)
 	user.visible_message(
-		span_italic("\The [user] removes \a [iv_bag] from \a [src]."),
-		span_italic("You remove \the [iv_bag] from \the [src]."),
+		span_italics("\The [user] removes \a [iv_bag] from \a [src]."),
+		span_italics("You remove \the [iv_bag] from \the [src]."),
 		range = 5
 	)
 	drip_active = FALSE
@@ -242,8 +242,8 @@
 	if (!drip_active)
 		return
 	user.visible_message(
-		span_italic("\The [user] starts unhooking \the [buckled_mob] from \a [src]."),
-		span_italic("You start extracting \the [src]'s cannula from \the [buckled_mob]."),
+		span_italics("\The [user] starts unhooking \the [buckled_mob] from \a [src]."),
+		span_italics("You start extracting \the [src]'s cannula from \the [buckled_mob]."),
 		range = 5
 	)
 	if (!user.do_skilled(1.5 SECONDS, SKILL_MEDICAL, buckled_mob))
@@ -279,8 +279,8 @@
 
 /obj/structure/roller_bed/proc/AttachDrip(mob/living/carbon/human/target, mob/living/user)
 	user.visible_message(
-		span_italic("\The [user] starts to hook up \the [target] to \the [src]."),
-		span_italic("You start to hook up \the [target] to \the [src]."),
+		span_italics("\The [user] starts to hook up \the [target] to \the [src]."),
+		span_italics("You start to hook up \the [target] to \the [src]."),
 		range = 5
 	)
 	if (!user.do_skilled(3 SECONDS, SKILL_MEDICAL, target))
@@ -295,7 +295,7 @@
 		return
 	START_PROCESSING(SSobj, src)
 	user.visible_message(
-		span_italic("\The [user] successfully inserts \a [src]'s cannula into \the [target]."),
+		span_italics("\The [user] successfully inserts \a [src]'s cannula into \the [target]."),
 		span_notice("You successfully insert \the [src]'s cannula into \the [target]."),
 		range = 1
 	)
@@ -376,8 +376,8 @@
 		if (unequip && !user.unEquip(src, target))
 			return
 		user.visible_message(
-			span_italic("\The [user] starts setting up \a [src]."),
-			span_italic("You start setting up \the [src]."),
+			span_italics("\The [user] starts setting up \a [src]."),
+			span_italics("You start setting up \the [src]."),
 			range = 5
 		)
 	var/obj/structure/roller_bed/roller = new (target)
@@ -404,9 +404,9 @@
 	if (!length(held))
 		if (istype(target, object_type))
 			user.visible_message(
-				span_italic("\The [user] scoops \a [target] into their [name]."),
-				span_italic("You scoop \the [target] into your [name]."),
-				span_italic("You hear metal clattering on metal.")
+				span_italics("\The [user] scoops \a [target] into their [name]."),
+				span_italics("You scoop \the [target] into your [name]."),
+				span_italics("You hear metal clattering on metal.")
 			)
 			contents += target
 			held += target

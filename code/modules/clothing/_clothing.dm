@@ -642,9 +642,9 @@ BLIND     // can't see anything
 		. += span_warning("They are connected by [attached_cuffs].")
 	if (hidden_item)
 		if (loc == user)
-			. += span_notice(span_italic("\An [hidden_item] is inside."))
+			. += span_notice(span_italics("\An [hidden_item] is inside."))
 		else if (get_dist(src, user) == 1)
-			. += span_notice(span_italic("Something is hidden inside."))
+			. += span_notice(span_italics("Something is hidden inside."))
 
 /obj/item/clothing/shoes/attack_hand(mob/living/user)
 	if (remove_hidden(user))
@@ -675,7 +675,7 @@ BLIND     // can't see anything
 	if (do_after(user, 5 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 		if(!user.unEquip(cuffs, src))
 			return
-		user.visible_message(span_italic("\The [user] attaches \the [cuffs] to \the [src]."), range = 2)
+		user.visible_message(span_italics("\The [user] attaches \the [cuffs] to \the [src]."), range = 2)
 		verbs |= /obj/item/clothing/shoes/proc/remove_cuffs
 		slowdown_per_slot[slot_shoes] += cuffs.elastic ? 5 : 10
 		attached_cuffs = cuffs
@@ -697,7 +697,7 @@ BLIND     // can't see anything
 		if (!user.put_in_hands(attached_cuffs))
 			to_chat(usr, span_warning("You need an empty, unbroken hand to remove the [attached_cuffs] from the [src]."))
 			return
-		user.visible_message(span_italic("\The [user] removes \the [attached_cuffs] from \the [src]."), range = 2)
+		user.visible_message(span_italics("\The [user] removes \the [attached_cuffs] from \the [src]."), range = 2)
 		attached_cuffs.add_fingerprint(user)
 		slowdown_per_slot[slot_shoes] -= attached_cuffs.elastic ? 5 : 10
 		verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
@@ -719,7 +719,7 @@ BLIND     // can't see anything
 	if (do_after(user, 1 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 		if(!user.unEquip(I, src))
 			return
-		user.visible_message(span_italic("\The [user] shoves \the [I] into \the [src]."), range = 1)
+		user.visible_message(span_italics("\The [user] shoves \the [I] into \the [src]."), range = 1)
 		verbs |= /obj/item/clothing/shoes/proc/remove_hidden
 		hidden_item = I
 
@@ -742,7 +742,7 @@ BLIND     // can't see anything
 		if (!user.put_in_hands(hidden_item))
 			to_chat(usr, span_warning("You need an empty, unbroken hand to pull the [hidden_item] from the [src]."))
 			return TRUE
-		user.visible_message(span_italic("\The [user] pulls \the [hidden_item] from \the [src]."), range = 1)
+		user.visible_message(span_italics("\The [user] pulls \the [hidden_item] from \the [src]."), range = 1)
 		playsound(get_turf(src), 'sound/effects/holster/tactiholsterout.ogg', 25)
 		verbs -= /obj/item/clothing/shoes/proc/remove_hidden
 		hidden_item = null

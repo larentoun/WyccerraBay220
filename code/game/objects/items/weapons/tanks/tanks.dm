@@ -112,9 +112,9 @@ var/global/list/tank_gauge_cache = list()
 	. = ITEM_INTERACT_SUCCESS
 	add_fingerprint(user)
 	user.visible_message(
-		span_italic("[user] starts to use [tool] on [src]."),
-		span_italic("You start to force [src]'s emergency relief valve with [tool]."),
-		span_italic("You can hear metal scratching on metal."),
+		span_italics("[user] starts to use [tool] on [src]."),
+		span_italics("You start to force [src]'s emergency relief valve with [tool]."),
+		span_italics("You can hear metal scratching on metal."),
 		range = 5
 	)
 	if(GET_FLAGS(tank_flags, TANK_FLAG_WELDED))

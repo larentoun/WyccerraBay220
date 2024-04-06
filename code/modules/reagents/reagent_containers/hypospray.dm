@@ -150,10 +150,10 @@
 		if (!good_target)
 			return
 		if (!target.is_open_container())
-			to_chat(user, span_italic("\The [target] is closed."))
+			to_chat(user, span_italics("\The [target] is closed."))
 			return TRUE
 		if (!target.reagents?.total_volume)
-			to_chat(user, span_italic("\The [target] is empty."))
+			to_chat(user, span_italics("\The [target] is empty."))
 			return TRUE
 		var/trans = target.reagents.trans_to_obj(src, amount_per_transfer_from_this)
 		to_chat(user, span_notice("You fill \the [src] with [trans] units of the solution."))

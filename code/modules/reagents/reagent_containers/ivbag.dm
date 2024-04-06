@@ -122,7 +122,7 @@
 		patient.custom_pain("That's not comfortable...", 10)
 	user.visible_message(
 		span_warning("\The [user] squeezes \the [src]!"),
-		span_italic("You squeeze \the [src]."),
+		span_italics("You squeeze \the [src]."),
 		range = 3
 	)
 
@@ -150,8 +150,8 @@
 
 /obj/item/reagent_containers/ivbag/proc/AttachDrip(mob/living/carbon/human/target, mob/living/user)
 	user.visible_message(
-		span_italic("\The [user] starts to hook up \the [target] to \the [src]."),
-		span_italic("You start to hook up \the [target] to \the [src]."),
+		span_italics("\The [user] starts to hook up \the [target] to \the [src]."),
+		span_italics("You start to hook up \the [target] to \the [src]."),
 		range = 5
 	)
 	if (!user.do_skilled(5 SECONDS, SKILL_MEDICAL, target)) //slower than stands and beds
@@ -165,7 +165,7 @@
 		target.apply_damage(rand(2, 6), DAMAGE_BRUTE, pick(BP_R_ARM, BP_L_ARM), damage_flags = DAMAGE_FLAG_SHARP, armor_pen = 100)
 		return
 	user.visible_message(
-		span_italic("\The [user] successfully inserts \a [src]'s cannula into \the [target]."),
+		span_italics("\The [user] successfully inserts \a [src]'s cannula into \the [target]."),
 		span_notice("You successfully insert \the [src]'s cannula into \the [target]."),
 		range = 1
 	)
@@ -181,8 +181,8 @@
 		to_chat(user, span_warning("You're in no condition to do that!"))
 		return
 	user.visible_message(
-		span_italic("\The [user] starts unhooking \the [patient] from \a [src]."),
-		span_italic("You extract \the [src]'s cannula from \the [patient]."),
+		span_italics("\The [user] starts unhooking \the [patient] from \a [src]."),
+		span_italics("You extract \the [src]'s cannula from \the [patient]."),
 		range = 5
 	)
 	if (!user.skill_check(SKILL_MEDICAL, SKILL_BASIC))
@@ -234,8 +234,8 @@
 		to_chat(user, span_warning("You're in no condition to do that."))
 		return
 	user.visible_message(
-		span_italic("\The [user] adjusts the flow rate on \a [origin]'s IV bag."),
-		span_italic("You adjust the flow rate on \the [origin]'s IV bag to [response]u."),
+		span_italics("\The [user] adjusts the flow rate on \a [origin]'s IV bag."),
+		span_italics("You adjust the flow rate on \the [origin]'s IV bag to [response]u."),
 		range = 1
 	)
 	transfer_amount = response

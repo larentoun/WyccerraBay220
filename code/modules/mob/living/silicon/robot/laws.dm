@@ -28,7 +28,7 @@
 			lawupdate = FALSE
 
 	to_chat(who, span_bold("Obey the following laws."))
-	to_chat(who, span_italic("All laws have equal priority. Laws may override other laws if written specifically to do so. If laws conflict, break the least."))
+	to_chat(who, span_italics("All laws have equal priority. Laws may override other laws if written specifically to do so. If laws conflict, break the least."))
 	laws.show_laws(who)
 	// TODO: Update to new antagonist system.
 	if (mind && (mind.special_role == "traitor" && mind.original == src) && connected_ai)

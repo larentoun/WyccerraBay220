@@ -120,7 +120,7 @@
 		user.visible_message(
 			span_notice("\The [user] performs a scan of \the [connected.occupant] using \the [initial(connected.name)]."),
 			span_notice("You run a full-body diagnostic of \the [connected.occupant] using \the [initial(connected.name)]."),
-			span_italic("You hear a series of beeps, followed by a deep humming sound.")
+			span_italics("You hear a series of beeps, followed by a deep humming sound.")
 		)
 		playsound(connected.loc, 'sound/machines/medbayscanner.ogg', 50)
 		return TOPIC_REFRESH
@@ -142,7 +142,7 @@
 		user.visible_message(
 			span_notice("\The [user] keys a command into \the [src]."),
 			span_notice("The console beeps, confirming it has successfully sent the scan to the connected displays."),
-			span_italic("You hear someone typing on a terminal, then a beep.")
+			span_italics("You hear someone typing on a terminal, then a beep.")
 		)
 		return TOPIC_REFRESH
 

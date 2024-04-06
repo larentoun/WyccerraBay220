@@ -66,7 +66,7 @@
 		return
 
 	aipictures -= selection
-	to_chat(usr, SPAN_CLASS("unconscious", "Local image deleted"))
+	to_chat(usr, "unconscious", "Local image deleted")
 //Capture Proc for AI / Robot
 /mob/living/silicon/ai/can_capture_turf(turf/T)
 	var/mob/living/silicon/ai = src
@@ -86,7 +86,7 @@
 	to_chat(usr, "<B>Camera Mode activated</B>")
 /obj/item/device/camera/siliconcam/ai_camera/printpicture(mob/user, obj/item/photo/p)
 	injectaialbum(p)
-	to_chat(usr, SPAN_CLASS("unconscious", "Image recorded"))
+	to_chat(usr, "Image recorded")
 /obj/item/device/camera/siliconcam/robot_camera/printpicture(mob/user, obj/item/photo/p)
 	injectmasteralbum(p)
 

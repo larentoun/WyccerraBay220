@@ -23,9 +23,9 @@
 
 /obj/item/passport/attack_self(mob/user as mob)
 	user.visible_message(
-		span_italic("[user] opens and checks [src]."),
-		span_italic("You open [src] and check for some main information."),
-		span_italic("You hear the faint rustle of pages."),
+		span_italics("[user] opens and checks [src]."),
+		span_italics("You open [src] and check for some main information."),
+		span_italics("You hear the faint rustle of pages."),
 		5
 	)
 	to_chat(user, info || span_warning("[src] is completely blank!"))

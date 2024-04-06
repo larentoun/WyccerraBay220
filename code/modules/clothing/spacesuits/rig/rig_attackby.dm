@@ -73,9 +73,9 @@
 				return
 			chest.storage.DoQuickEmpty()
 			user.visible_message(
-				span_italic("[user] ejects the contents of [src]'s storage."),
-				span_italic("You eject the contents of [src]'s storage."),
-				span_italic("You hear things clatter to the floor."),
+				span_italics("[user] ejects the contents of [src]'s storage."),
+				span_italics("You eject the contents of [src]'s storage."),
+				span_italics("You hear things clatter to the floor."),
 				range = 5
 			)
 		if("system module")

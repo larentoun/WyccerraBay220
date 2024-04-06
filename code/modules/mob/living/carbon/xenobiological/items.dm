@@ -318,7 +318,7 @@
 		I.languages[lang.name] = 1
 
 	to_chat(G, FONT_LARGE(span_bold("You are a golem. Serve [user] and assist them at any cost.")))
-	to_chat(G, span_italic("You move slowly and are vulnerable to trauma, but are resistant to heat and cold."))
+	to_chat(G, span_italics("You move slowly and are vulnerable to trauma, but are resistant to heat and cold."))
 	qdel(src)
 
 

@@ -315,7 +315,7 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 		else
 			user_message = span_notice("[user_message] frying the access locks.")
 		user.visible_message(
-			span_italic("\The [user] swipes \an [emag_source] against \the [src]."),
+			span_italics("\The [user] swipes \an [emag_source] against \the [src]."),
 			user_message,
 			range = 5
 		)

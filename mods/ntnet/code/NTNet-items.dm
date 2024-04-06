@@ -25,23 +25,23 @@
 /obj/machinery/door/airlock/examine(mob/user)
 	. = ..()
 	if(hasHUD(user, HUD_IT) && arePowerSystemsOn())
-		. += span_info(span_italic("You may notice a small hologram that says: [NTNet_id]"))
+		. += span_info(span_italics("You may notice a small hologram that says: [NTNet_id]"))
 
 /obj/machinery/power/apc/examine(mob/user)
 	. = ..()
 	if(hasHUD(user, HUD_IT) && has_electronics && terminal())
-		. += span_info(span_italic("You may notice a small hologram that says: [NTNet_id]"))
+		. += span_info(span_italics("You may notice a small hologram that says: [NTNet_id]"))
 
 /obj/machinery/firealarm/examine(mob/user)
 	. = ..()
 	if(hasHUD(user, HUD_IT))
-		. += span_info(span_italic("You may notice a small hologram that says: [NTNet_id]"))
+		. += span_info(span_italics("You may notice a small hologram that says: [NTNet_id]"))
 
 /obj/item/modular_computer/examine(mob/user)
 	. = ..()
 	if(hasHUD(user, HUD_IT))
 		if(network_card && network_card.check_functionality() && enabled)
-			. += span_info(span_italic("You may notice a small hologram that says: [network_card.get_network_tag()]."))
+			. += span_info(span_italics("You may notice a small hologram that says: [network_card.get_network_tag()]."))
 
 /obj/machinery/computer/modular/examine(mob/user)
 	. = ..()
@@ -49,4 +49,4 @@
 		var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 		var/obj/item/stock_parts/computer/network_card/network_card = os.get_component(PART_NETWORK)
 		if(istype(network_card) && network_card.check_functionality() && os.on)
-			. += span_info(span_italic("You may notice a small hologram that says: [network_card.get_network_tag()]."))
+			. += span_info(span_italics("You may notice a small hologram that says: [network_card.get_network_tag()]."))

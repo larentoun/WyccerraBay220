@@ -48,9 +48,9 @@
 	if (can_self_heat)
 		if (feeder)
 			feeder.visible_message(
-				span_italic("\The [feeder] tears open \a [src], destroying the self-heating packaging."),
-				span_italic("You tear open \the [src], destroying the self-heating packaging."),
-				span_italic("You hear plastic packaging crinkling."),
+				span_italics("\The [feeder] tears open \a [src], destroying the self-heating packaging."),
+				span_italics("You tear open \the [src], destroying the self-heating packaging."),
+				span_italics("You hear plastic packaging crinkling."),
 				range = 3
 			)
 		can_self_heat = FALSE
@@ -99,7 +99,7 @@
 		return
 	is_hot = FALSE
 	SetName(initial(name))
-	visible_message(span_italic("\The [src] cools down."), range = 1)
+	visible_message(span_italics("\The [src] cools down."), range = 1)
 	for (var/reagent in hot_reagents)
 		reagents.del_reagent(reagent)
 

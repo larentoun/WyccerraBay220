@@ -521,9 +521,9 @@
 		var/transferred = item_reagents.trans_to_holder(reagents, container.amount_per_transfer_from_this)
 		if (transferred)
 			user.visible_message(
-				span_italic("[user] pours something from [item] into [src]."),
-				span_italic("You pour [transferred]u from [item] into [src]."),
-				span_italic("You hear a liquid gurgling.")
+				span_italics("[user] pours something from [item] into [src]."),
+				span_italics("You pour [transferred]u from [item] into [src]."),
+				span_italics("You hear a liquid gurgling.")
 			)
 		else
 			to_chat(user, span_warning("The [src] is full."))

@@ -102,7 +102,7 @@
 		if (flavor != 1)
 			user.custom_pain("Your [parent.name] feels like it's being shredded apart!", 160)
 		else
-			to_chat(user, span_italic("The access panel on your [parent.name] is torn open."))
+			to_chat(user, span_italics("The access panel on your [parent.name] is torn open."))
 			playsound(user, 'sound/items/electronic_assembly_emptying.ogg', 50, TRUE)
 		parent.createwound(INJURY_TYPE_CUT, parent.min_broken_damage / 2, 1)
 		parent.clamp_organ()
@@ -114,7 +114,7 @@
 		if (flavor != 1)
 			user.custom_pain("You feel something rooting around violently inside your [parent.name]!", 160)
 		else
-			to_chat(user, span_italic("Your [parent.name] shifts and twitches as [src] works."))
+			to_chat(user, span_italics("Your [parent.name] shifts and twitches as [src] works."))
 		if (!flavor)
 			playsound(user, 'sound/effects/squelch1.ogg', 25, TRUE)
 		else
