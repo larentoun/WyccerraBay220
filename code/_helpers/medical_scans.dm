@@ -149,13 +149,13 @@
 		if(0)
 			dat += "<td>[span_bad("none, patient is braindead")]</td></tr>"
 		if(-1)
-			dat += "<td>[SPAN_CLASS("average", "ERROR - Nonstandard biology")]</td></tr>"
+			dat += "<td>[span_average("ERROR - Nonstandard biology")]</td></tr>"
 		else
 			if(skill_level >= SKILL_BASIC)
 				if(scan["brain_activity"] <= 50)
 					dat += "<td>[span_bad("[scan["brain_activity"]]%")]</td></tr>"
 				else if(scan["brain_activity"] <= 80)
-					dat += "<td>[SPAN_CLASS("average", "[scan["brain_activity"]]%")]</td></tr>"
+					dat += "<td>[span_average("[scan["brain_activity"]]%")]</td></tr>"
 				else
 					dat += "<td>[scan["brain_activity"]]%</td></tr>"
 			else
@@ -167,14 +167,14 @@
 	//Circulatory System
 	/*
 		<tr><td><strong>Pulse Rate:</strong></td><td>75bpm</td></tr>
-		<tr><td colspan='2'>[SPAN_CLASS("average", "Patient is tachycardic.")]</td></tr>
+		<tr><td colspan='2'>[span_average("Patient is tachycardic.")]</td></tr>
 		<tr><td><strong>Blood Pressure:</strong></td><td>120/80 (100% oxygenation)</td></tr>
 		<tr><td><strong>Blood Volume:</strong></td><td>560u/560u</td></tr>
 		<tr><td colspan="2" align="center">[span_bad("Patient in Hypovolemic Shock. Transfusion highly recommended.")]</td></tr>
 	*/
 	dat += "<tr><td><strong>Pulse rate:</strong></td>"
 	if(scan["pulse"] == -1)
-		dat += "<td>[SPAN_CLASS("average", "ERROR - Nonstandard biology")]</td></tr>"
+		dat += "<td>[span_average("ERROR - Nonstandard biology")]</td></tr>"
 	else if(scan["pulse"] == -2)
 		dat += "<td>N/A</td></tr>"
 	else if(scan["pulse"] == -3)
@@ -184,18 +184,18 @@
 	else if(scan["pulse"] >= 140)
 		dat += "<td>[span_bad("[scan["pulse"]]bpm")]</td></tr>"
 	else if(scan["pulse"] >= 120)
-		dat += "<td>[SPAN_CLASS("average", "[scan["pulse"]]bpm")]</td></tr>"
+		dat += "<td>[span_average("[scan["pulse"]]bpm")]</td></tr>"
 	else
 		dat += "<td>[scan["pulse"]]bpm</td></tr>"
 	if(skill_level >= SKILL_TRAINED)
 		if((scan["pulse"] >= 140) || (scan["pulse"] == -3))
 			dat+= "<tr><td colspan='2'>[span_bad("Patient is tachycardic.")]</td></tr>"
 		else if(scan["pulse"] >= 120)
-			dat += "<tr><td colspan='2'>[SPAN_CLASS("average", "Patient is tachycardic.")]</td></tr>"
+			dat += "<tr><td colspan='2'>[span_average("Patient is tachycardic.")]</td></tr>"
 		else if(scan["pulse"] == 0)
 			dat+= "<tr><td colspan='2'>[span_bad("Patient's heart is stopped.")]</td></tr>"
 		else if((scan["pulse"] > 0) && (scan["pulse"] <= 40))
-			dat+= "<tr><td colspan='2'>[SPAN_CLASS("average", "Patient is bradycardic.")]</td></tr>"
+			dat+= "<tr><td colspan='2'>[span_average("Patient is bradycardic.")]</td></tr>"
 
 
 	var/ratio = scan["blood_volume"]/scan["blood_volume_max"]
@@ -203,7 +203,7 @@
 	if(scan["blood_o2"] <= 70)
 		dat += "([span_bad("[scan["blood_o2"]]% blood oxygenation")])</td></tr>"
 	else if(scan["blood_o2"] <= 85)
-		dat += "([SPAN_CLASS("average", "[scan["blood_o2"]]% blood oxygenation")])</td></tr>"
+		dat += "([span_average("[scan["blood_o2"]]% blood oxygenation")])</td></tr>"
 	else if(scan["blood_o2"] <= 90)
 		dat += "([SPAN_CLASS("oxyloss", "[scan["blood_o2"]]% blood oxygenation")])</td></tr>"
 	else
@@ -272,7 +272,7 @@
 			dat += "<tr><td colspan='2'>Beneficial reagents detected in subject's bloodstream:</td></tr>"
 			dat += subdat
 		if(other_reagent)
-			dat += "<tr><td colspan='2'>[SPAN_CLASS("average", "Warning: Unknown substance detected in subject's blood.")]</td></tr>"
+			dat += "<tr><td colspan='2'>[span_average("Warning: Unknown substance detected in subject's blood.")]</td></tr>"
 
 	//summary for the medically disinclined.
 	/*
@@ -352,7 +352,7 @@
 					<tr><td colspan='3'>[span_bad("No liver detected.")]</td></tr>
 					<tr><td colspan='3'>No appendix detected.</td></tr>
 					<tr><td colspan='3'>[span_bad("Cateracts detected.")]</td></tr>
-					<tr><td colspan='3'>[SPAN_CLASS("average", "Retinal misalignment detected.")]</td></tr>
+					<tr><td colspan='3'>[span_average("Retinal misalignment detected.")]</td></tr>
 				</table>
 			</center></td></tr>
 	*/
@@ -365,7 +365,7 @@
 			if(I["is_broken"])
 				row += "<td>[span_bad("Severe")]</td>"
 			else if(I["is_bruised"])
-				row += "<td>[SPAN_CLASS("average", "Moderate")]</td>"
+				row += "<td>[span_average("Moderate")]</td>"
 			else if(I["is_damaged"])
 				row += "<td>[SPAN_CLASS("mild", "Minor")]</td>"
 			else
@@ -388,7 +388,7 @@
 	if(scan["blind"])
 		dat += "<tr><td colspan='3'>[span_bad("Cataracts detected.")]</td></tr>"
 	else if(scan["nearsight"])
-		dat += "<tr><td colspan='3'>[SPAN_CLASS("average", "Retinal misalignment detected.")]</td></tr>"
+		dat += "<tr><td colspan='3'>[span_average("Retinal misalignment detected.")]</td></tr>"
 	dat += "</table></center></td></tr>"
 
 	dat = JOINTEXT(dat)
@@ -435,7 +435,7 @@
 			. = "significant"
 	else if(amount > 10)
 		if(tag)
-			. = SPAN_CLASS("average", "moderate")
+			. = span_average("moderate")
 		else
 			. = "moderate"
 	else

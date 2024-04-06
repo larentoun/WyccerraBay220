@@ -173,8 +173,8 @@
 	. = (Uptime() - start_uptime) / 10
 	var/msg = "Initialized [name] subsystem within [.] second[. == 1 ? "" : "s"]!"
 	// [SIERRA-EDIT] - LOBBYSCREEN
-	// to_chat(world, SPAN_CLASS("boldannounce", "[msg]")) // SIERRA-EDIT - ORIGINAL
-	admin_notice(SPAN_CLASS("boldannounce", "[msg]"))
+	// to_chat(world, span_boldannounce("[msg]")) // SIERRA-EDIT - ORIGINAL
+	admin_notice(span_boldannounce("[msg]"))
 	// [/SIERRA-EDIT]
 	log_world(msg)
 

@@ -1,4 +1,4 @@
-#define SPAN_AOOC(X) SPAN_CLASS("ooc", SPAN_CLASS("aooc", "[create_text_tag("aooc", "Antag-OOC:", target)] [X]"))
+#define SPAN_AOOC(X) span_ooc(SPAN_CLASS("aooc", "[create_text_tag("aooc", "Antag-OOC:", target)] [X]"))
 
 
 /singleton/communication_channel/aooc

@@ -111,13 +111,13 @@
 	. = list()
 	.+= "Location: [get_area(src)]."
 	if(!is_powered())
-		.+= SPAN_CLASS("average", "Insufficient power to operate.")
+		.+= span_average("Insufficient power to operate.")
 	if(!check_fuel())
-		.+= SPAN_CLASS("average", "Insufficient fuel for a burn.")
+		.+= span_average("Insufficient fuel for a burn.")
 	if(MACHINE_IS_BROKEN(src))
-		.+= SPAN_CLASS("average", "Inoperable engine configuration.")
+		.+= span_average("Inoperable engine configuration.")
 	if(blockage)
-		.+= SPAN_CLASS("average", "Obstruction of airflow detected.")
+		.+= span_average("Obstruction of airflow detected.")
 
 	.+= "Propellant total mass: [round(air_contents.get_mass(),0.01)] kg."
 	.+= "Propellant used per burn: [round(air_contents.specific_mass() * moles_per_burn * thrust_limit,0.01)] kg."

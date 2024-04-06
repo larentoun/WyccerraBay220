@@ -171,8 +171,9 @@
 #define span_staffwarn(str) ("<span class='staffwarn'>" + str + "</span>")
 #define span_mfauna(str) ("<span class='mfauna'>" + str + "</span>")
 #define span_antagdesc(str) ("<span class='antagdesc'>" + str + "</span>")
-#define span_subtle(X) ("<span class='subtle'>[X]</span>")
-#define span_linkon(X) ("<span class='linkOn'>[X]</span>")
+#define span_subtle(str) ("<span class='subtle'>" str "</span>")
+#define span_linkon(str) ("<span class='linkOn'>" + str + "</span>")
+#define span_average(str) ("<span class='average'>" + str + "</span>")
 
 #define SPAN_COLOR(color, text) ("<span style=\"color: [color]\">[text]</span>")
 #define SPAN_SIZE(size, text) ("<span style=\"font-size: [size]\">[text]</span>")

@@ -121,7 +121,7 @@ GLOBAL_LIST_EMPTY(overmap_helm_computers)
 		if(linked.get_speed() < SHIP_SPEED_SLOW)
 			speed = span_good("[speed]")
 		if(linked.get_speed() > SHIP_SPEED_FAST)
-			speed = SPAN_CLASS("average", "[speed]")
+			speed = span_average("[speed]")
 		data["speed"] = speed
 
 		if(linked.get_speed())

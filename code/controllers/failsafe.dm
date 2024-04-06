@@ -59,11 +59,11 @@ var/global/datum/controller/failsafe/Failsafe
 							to_chat(GLOB.admins, SPAN_CLASS("adminnotice", "Notice: DEFCON [defcon]. The Master Controller has not fired in the last [(5-defcon) * processing_interval] ticks."))
 							--defcon
 						if(2)
-							to_chat(GLOB.admins, SPAN_CLASS("boldannounce", "Warning: DEFCON [defcon]. The Master Controller has not fired in the last [(5-defcon) * processing_interval] ticks. Automatic restart in [processing_interval] ticks."))
+							to_chat(GLOB.admins, span_boldannounce("Warning: DEFCON [defcon]. The Master Controller has not fired in the last [(5-defcon) * processing_interval] ticks. Automatic restart in [processing_interval] ticks."))
 							--defcon
 						if(1)
 
-							to_chat(GLOB.admins, SPAN_CLASS("boldannounce", "Warning: DEFCON [defcon]. The Master Controller has still not fired within the last [(5-defcon) * processing_interval] ticks. Killing and restarting..."))
+							to_chat(GLOB.admins, span_boldannounce("Warning: DEFCON [defcon]. The Master Controller has still not fired within the last [(5-defcon) * processing_interval] ticks. Killing and restarting..."))
 							--defcon
 							var/rtn = Recreate_MC()
 							if(rtn > 0)
@@ -72,7 +72,7 @@ var/global/datum/controller/failsafe/Failsafe
 								to_chat(GLOB.admins, SPAN_CLASS("adminnotice", "MC restarted successfully"))
 							else if(rtn < 0)
 								log_game("FailSafe: Could not restart MC, runtime encountered. Entering defcon 0")
-								to_chat(GLOB.admins, SPAN_CLASS("boldannounce", "ERROR: DEFCON [defcon]. Could not restart MC, runtime encountered. I will silently keep retrying."))
+								to_chat(GLOB.admins, span_boldannounce("ERROR: DEFCON [defcon]. Could not restart MC, runtime encountered. I will silently keep retrying."))
 							//if the return number was 0, it just means the mc was restarted too recently, and it just needs some time before we try again
 							//no need to handle that specially when defcon 0 can handle it
 						if(0) //DEFCON 0! (mc failed to restart)

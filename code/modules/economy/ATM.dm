@@ -146,7 +146,7 @@
 							if(authenticated_account.security_level != 1)
 								t += "<A href='?src=\ref[src];choice=change_security_level;new_security_level=1'>Select Moderate Security</a><BR>"
 							else
-								t += "[SPAN_CLASS("average", "<b>Moderate Security set: </b>")]<BR>"
+								t += "[span_average("<b>Moderate Security set: </b>")]<BR>"
 							t += "An account number and pin must be manually entered to access this account and process transactions.<hr>"
 							if(authenticated_account.security_level != 2)
 								t += "<A href='?src=\ref[src];choice=change_security_level;new_security_level=2'>Select Maximum Security</a><BR>"

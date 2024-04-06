@@ -202,28 +202,28 @@
 
 	if (!is_species_whitelist_allowed(prefs.client, use_species_whitelist))
 		S = all_species[use_species_whitelist]
-		to_chat(feedback, SPAN_CLASS("boldannounce", "\An [S] species whitelist is required for [title]."))
+		to_chat(feedback, span_boldannounce("\An [S] species whitelist is required for [title]."))
 		return TRUE
 
 	if(!isnull(allowed_branches) && (!prefs.branches[title] || !is_branch_allowed(prefs.branches[title])))
-		to_chat(feedback, SPAN_CLASS("boldannounce", "Wrong branch of service for [title]. Valid branches are: [get_branches()]."))
+		to_chat(feedback, span_boldannounce("Wrong branch of service for [title]. Valid branches are: [get_branches()]."))
 		return TRUE
 
 	if(!isnull(allowed_ranks) && (!prefs.ranks[title] || !is_rank_allowed(prefs.branches[title], prefs.ranks[title])))
-		to_chat(feedback, SPAN_CLASS("boldannounce", "Wrong rank for [title]. Valid ranks in [prefs.branches[title]] are: [get_ranks(prefs.branches[title])]."))
+		to_chat(feedback, span_boldannounce("Wrong rank for [title]. Valid ranks in [prefs.branches[title]] are: [get_ranks(prefs.branches[title])]."))
 		return TRUE
 
 	S = all_species[prefs.species]
 	if(!is_species_allowed(S))
-		to_chat(feedback, SPAN_CLASS("boldannounce", "Restricted species, [S], for [title]."))
+		to_chat(feedback, span_boldannounce("Restricted species, [S], for [title]."))
 		return TRUE
 
 	if(LAZYACCESS(minimum_character_age, S.get_bodytype()) && (prefs.age < minimum_character_age[S.get_bodytype()]))
-		to_chat(feedback, SPAN_CLASS("boldannounce", "Not old enough. Minimum character age is [minimum_character_age[S.get_bodytype()]]."))
+		to_chat(feedback, span_boldannounce("Not old enough. Minimum character age is [minimum_character_age[S.get_bodytype()]]."))
 		return TRUE
 
 	if(!S.check_background(src, prefs))
-		to_chat(feedback, SPAN_CLASS("boldannounce", "Incompatible background for [title]."))
+		to_chat(feedback, span_boldannounce("Incompatible background for [title]."))
 		return TRUE
 
 	return FALSE
