@@ -237,9 +237,9 @@ var/global/list/DEPT_FREQS = list(AI_FREQ, COMM_FREQ, ENG_FREQ, MED_FREQ, SEC_FR
 	if(frequency == ENT_FREQ) //entertainment
 		return "entradio"
 	if(frequency == MED_I_FREQ) // Medical intercom
-		return "mediradio"
+		return "medradio"
 	if(frequency == SEC_I_FREQ) // Security intercom
-		return "seciradio"
+		return "secradio"
 	if (frequency == HAIL_FREQ) // Hailing frequency
 		return "hailradio"
 	if(frequency in DEPT_FREQS)
