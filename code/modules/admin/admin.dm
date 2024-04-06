@@ -885,7 +885,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		log_and_message_admins("has started the game.")
 		return 1
 	else
-		to_chat(usr, SPAN_CLASS("bigwarning", "Error: Start Now: Game has already started."))
+		to_chat(usr, span_warning("Error: Start Now: Game has already started."))
 		return 0
 
 /datum/admins/proc/endnow()
