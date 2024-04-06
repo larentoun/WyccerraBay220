@@ -42,4 +42,4 @@
 		if(can_badmin)
 			receive_communication(C, target, SPAN_COLOR(ooc_color, span_ooc(sent_message)))
 		else
-			receive_communication(C, target, span_ooc(SPAN_CLASS(ooc_style, sent_message)))
+			receive_communication(C, target, span_ooc("<span class='[ooc_style]'>[sent_message]</span>"))

@@ -68,13 +68,6 @@
 	var/dat = list()
 
 	if(skill_level >= SKILL_BASIC)
-		header += "<style> .scan_notice{color: #5f94af;}</style>"
-		header += "<style> .scan_warning{color: #ff0000; font-style: italic;}</style>"
-		header += "<style> .scan_danger{color: #ff0000; font-weight: bold;}</style>"
-		header += "<style> .scan_red{color:red}</style>"
-		header += "<style> .scan_green{color:green}</style>"
-		header += "<style> .scan_blue{color: #5f94af}</style>"
-		header += "<style> .scan_orange{color:#ffa500}</style>"
 		b		= "<b>"
 		endb	= "</b>"
 
@@ -178,13 +171,13 @@
 	// Other general warnings.
 	if(skill_level >= SKILL_BASIC)
 		if(H.getOxyLoss() > 50)
-			dat += SPAN_CLASS("scan_blue", "[b]Severe oxygen deprivation detected.[endb]")
+			dat += span_oxyloss("[b]Severe oxygen deprivation detected.[endb]")
 		if(H.getToxLoss() > 50)
-			dat += SPAN_CLASS("scan_green", "[b]Major systemic organ failure detected.[endb]")
+			dat += span_toxin("[b]Major systemic organ failure detected.[endb]")
 	if(H.getFireLoss() > 50)
-		dat += SPAN_CLASS("scan_orange", "[b]Severe burn damage detected.[endb]")
+		dat += span_burn("[b]Severe burn damage detected.[endb]")
 	if(H.getBruteLoss() > 50)
-		dat += SPAN_CLASS("scan_red", "[b]Severe anatomical damage detected.[endb]")
+		dat += span_brute("[b]Severe anatomical damage detected.[endb]")
 
 	if(skill_level >= SKILL_BASIC)
 		for(var/name in H.organs_by_name)
