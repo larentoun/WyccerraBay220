@@ -1,22 +1,4 @@
-#define span_italic(X) ("<span class='italic'>[X]</span>")
-#define span_mfauna(X) ("<span class='mfauna'>[X]</span>")
-#define span_subtle(X) ("<span class='subtle'>[X]</span>")
-#define span_linkon(X) ("<span class='linkOn'>[X]</span>")
-
-#define SPAN_COLOR(color, text) ("<span style=\"color: [color]\">[text]</span>")
-#define SPAN_SIZE(size, text) ("<span style=\"font-size: [size]\">[text]</span>")
-
-#define FONT_SMALL(X) ("<span style=\"font-size: 10px\">[X]</span>")
-#define FONT_NORMAL(X) ("<span style=\"font-size: 13px\">[X]</span>")
-#define FONT_LARGE(X) ("<span style=\"font-size: 16px\">[X]</span>")
-#define FONT_HUGE(X) ("<span style=\"font-size: 18px\">[X]</span>")
-#define FONT_GIANT(X) ("<span style=\"font-size: 24px\">[X]</span>")
-
-#define STYLE_SMALLFONTS(X, S, C1) ("<span style=\"font-family: 'Small Fonts'; color: [C1]; font-size: [S]px\">[X]</span>")
-#define STYLE_SMALLFONTS_OUTLINE(X, S, C1, C2) ("<span style=\"font-family: 'Small Fonts'; color: [C1]; -dm-text-outline: 1 [C2]; font-size: [S]px\">[X]</span>")
-
-// From 'goon\browserassets\css\browserOutput.css'
-#define span_darkmblue(str) ("<span class='darkmblue'>" + str + "</span>")
+// Paradise defines
 #define span_prefix(str) ("<span class='prefix'>" + str + "</span>")
 #define span_ooc(str) ("<span class='ooc'>" + str + "</span>")
 #define span_looc(str) ("<span class='looc'>" + str + "</span>")
@@ -182,3 +164,24 @@
 #define span_announcement(str) ("<span class='announcement'>" + str + "</span>")
 
 #define span_bolditalics(str) ("<span class='bolditalics'>" + str + "</span>")
+
+// Sierra defines
+#define span_adherent(str) ("<span class='adherent'>" + str + "</span>")
+#define span_cultannounce(str) ("<span class='cultannounce'>" + str + "</span>")
+#define span_staffwarn(str) ("<span class='staffwarn'>" + str + "</span>")
+#define span_mfauna(str) ("<span class='mfauna'>" + str + "</span>")
+#define span_antagdesc(str) ("<span class='antagdesc'>" + str + "</span>")
+#define span_subtle(X) ("<span class='subtle'>[X]</span>")
+#define span_linkon(X) ("<span class='linkOn'>[X]</span>")
+
+#define SPAN_COLOR(color, text) ("<span style=\"color: [color]\">[text]</span>")
+#define SPAN_SIZE(size, text) ("<span style=\"font-size: [size]\">[text]</span>")
+
+#define FONT_SMALL(X) ("<span style=\"font-size: 10px\">[X]</span>")
+#define FONT_NORMAL(X) ("<span style=\"font-size: 13px\">[X]</span>")
+#define FONT_LARGE(X) ("<span style=\"font-size: 16px\">[X]</span>")
+#define FONT_HUGE(X) ("<span style=\"font-size: 18px\">[X]</span>")
+#define FONT_GIANT(X) ("<span style=\"font-size: 24px\">[X]</span>")
+
+#define STYLE_SMALLFONTS(X, S, C1) ("<span style=\"font-family: 'Small Fonts'; color: [C1]; font-size: [S]px\">[X]</span>")
+#define STYLE_SMALLFONTS_OUTLINE(X, S, C1, C2) ("<span style=\"font-family: 'Small Fonts'; color: [C1]; -dm-text-outline: 1 [C2]; font-size: [S]px\">[X]</span>")
